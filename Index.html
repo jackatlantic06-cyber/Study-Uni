@@ -305,7 +305,15 @@
               <li><strong>Solutions & tips</strong> included</li>
               <li>Minimum term: <strong>3 months</strong> (billed €14.97)</li>
             </ul>
-            <p><a class="btn primary" href="#signup">Go Pro</a></p>
+            <p>
+  <button
+    class="btn primary"
+    data-checkout
+    data-mode="subscription"
+    data-price-id="prod_TG9IrZGSEsiu59 "> 
+    Go Pro
+  </button>
+</p>
           </div>
           <div class="card price-card">
             <span class="badge">One-time</span>
@@ -316,7 +324,16 @@
               <li>Includes its papers, solutions & tips</li>
               <li>One-time purchase</li>
             </ul>
-            <p><a class="btn" href="#signup">Buy module</a></p>
+           <p>
+  <button
+    class="btn"
+    data-checkout
+    data-mode="payment"
+    data-price-id="prod_TGTm2oiHxdH0z8"     
+    data-module-prompt="true">
+    Buy module
+  </button>
+</p>
           </div>
           <div class="card price-card">
             <span class="badge">For societies & groups</span>
@@ -328,7 +345,16 @@
               <li><strong>All solutions & tips</strong> unlocked</li>
               <li>Priority support</li>
             </ul>
-            <p><a class="btn" href="#signup">Get Team access</a></p>
+         <p>
+  <button
+    class="btn"
+    data-checkout
+    data-mode="subscription"
+    data-price-id="prod_TGTowU6A0twjph">      
+    Get Team access
+  </button>
+</p>
+
           </div>
         </div>
 
@@ -790,3 +816,45 @@
   </script>
 </body>
 </html>
+<script>
+  // This sends your user to Stripe Checkout via our /api/checkout
+  async function createCheckoutSession({ priceId, mode, moduleCode }) {
+    // Get current user id from Supabase (so webhook knows who to grant)
+    const { data: { user } } = await supabase.auth.getUser();
+    const supabaseUserId = user?.id || null;
+
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        priceId,
+        mode,
+        moduleCode,
+        supabaseUserId,
+        successUrl: location.origin + '#signup?paid=1',
+        cancelUrl: location.origin + '#pricing?canceled=1'
+      })
+    });
+
+    const json = await res.json();
+    if (json.error) { alert('Checkout error: ' + json.error); return; }
+    location.href = json.url; // go to Stripe Checkout
+  }
+
+  // Handle clicks on any [data-checkout] button
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-checkout]');
+    if (!btn) return;
+
+    const priceId = btn.getAttribute('data-price-id');
+    const mode    = btn.getAttribute('data-mode') || 'payment';
+
+    let moduleCode = null;
+    if (btn.getAttribute('data-module-prompt') === 'true') {
+      moduleCode = prompt('Enter the module code you want to buy (e.g., AC1103):')?.trim() || null;
+      if (!moduleCode) return; // user cancelled
+    }
+
+    createCheckoutSession({ priceId, mode, moduleCode });
+  });
+</script>
