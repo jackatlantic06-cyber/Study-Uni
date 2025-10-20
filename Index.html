@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Study-Uni — Like StudyClix but for college</title>
+  <meta name="description" content="Study-Uni helps first-year college students study smarter with past papers, worked solutions, and a guided revision flow." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <style>
+    :root{
+      --bg:#ffffff; --fg:#0b1220; --muted:#4b5563; --border:#e5e7eb;
+      --accent:#0ea5e9; --accent-2:#7c3aed; --card:#ffffff;
+      --shadow:0 10px 20px rgba(2,8,23,.04),0 2px 6px rgba(2,8,23,.06);
+      --radius:16px;
+    }
+    html,body{height:100%} html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--fg);background:var(--bg)}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    .container{max-width:1120px;margin:0 auto;padding:0 16px}
+
+    header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+    .logo{inline-size:34px;block-size:34px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;box-shadow:var(--shadow)}
+    .logo svg{width:22px;height:22px;opacity:.95;filter:drop-shadow(0 1px 1px rgba(0,0,0,.15))}
+    nav a{padding:10px 12px;border-radius:10px;font-weight:600;color:#111827}
+    nav a:hover{background:#f3f4f6} nav a.active{background:#e0f2fe;color:#0c4a6e}
+    .cta{display:flex;gap:10px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--card);box-shadow:var(--shadow);font-weight:700;cursor:pointer}
+    .btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
+
+    main{padding:32px 0 64px}
+    section[role="region"]{display:none;animation:fade .25s ease} section.active{display:block}
+    @keyframes fade{from{opacity:.001;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+    .hero{display:grid;gap:18px;grid-template-columns:1fr;align-items:start;max-width:920px;margin-inline:auto}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;border:1px solid var(--border);
+      background:#f8fafc;font-size:16px;font-weight:800;
+    }
+    .h1{font-size:clamp(28px,5vw,44px);line-height:1.1;margin:6px 0 10px}
+    .sub{color:var(--muted);font-size:18px}
+    .metrics{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
+    .metric{padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--card)}
+    .search{margin-top:18px;display:flex;gap:10px}
+    .search input{flex:1;padding:12px 14px;border:1px solid var(--border);border-radius:12px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .card{border:1px solid var(--border);border-radius:16px;padding:16px;background:var(--card);box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px} .muted{color:var(--muted)}
+    .tag{display:inline-block;padding:4px 8px;border:1px solid var(--border);border-radius:999px;font-size:12px;background:#f8fafc}
+
+    .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .price-card{position:relative}
+    .price{font-size:36px;font-weight:900;margin:10px 0}
+    .price small{font-weight:600;color:var(--muted)}
+    .badge{position:absolute;top:12px;right:12px;background:#ecfeff;color:#164e63;border:1px solid #a5f3fc;border-radius:999px;padding:4px 8px;font-weight:700;font-size:12px}
+
+    form{display:grid;gap:12px}
+    input[type="text"],input[type="email"],input[type="password"],input[type="tel"]{padding:12px 14px;border:1px solid var(--border);border-radius:12px}
+    label{font-weight:700}
+    footer{border-top:1px solid var(--border);padding:24px 0;color:var(--muted)}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+
+    /* Home bg */
+    #home{
+      background-image:linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.48) 35%, rgba(255,255,255,.50) 65%, rgba(255,255,255,.58) 100%),
+                       url('https://images.unsplash.com/photo-1589974695618-2d14014033db?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.1.0');
+      background-size:cover;background-position:center;border-radius:16px;padding:24px;min-height:60vh;
+    }
+    #home .hero.card, #home .card{background:rgba(255,255,255,.9);backdrop-filter:saturate(1.05) blur(1.5px);border-color:rgba(229,231,235,.75)}
+
+    /* Courses grid + detail */
+    .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:12px}
+    .course-box{
+      border:1px solid var(--border);border-radius:16px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.92));
+      box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;justify-content:space-between;
+      transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;cursor:pointer;
+    }
+    .course-box:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(2,8,23,.06),0 3px 8px rgba(2,8,23,.08);border-color:#dbeafe}
+    .course-icon{font-size:28px;line-height:1}
+    .course-title{font-size:18px;font-weight:800;margin:2px 0 0}
+    .course-sub{color:var(--muted);font-size:14px}
+    .course-cta{margin-top:8px;display:inline-flex;align-items:center;gap:8px;font-weight:700}
+    .course-cta .arrow{transition:transform .12s ease}
+    .course-box:hover .course-cta .arrow{transform:translateX(2px)}
+
+    /* Module + files */
+    .files{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:#f8fafc;font-size:12px}
+    .chip:hover{background:#eef2f7}
+    .coming{color:#9333ea;background:#faf5ff;border-color:#e9d5ff}
+
+    /* Testimonials & FAQ */
+    .section-title{font-size:clamp(22px,3.5vw,32px);line-height:1.15;margin:0 0 6px}
+    .kicker{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:#f8fafc;font-size:13px;color:#0c4a6e}
+    .testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .testimonial{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--shadow);padding:16px}
+    .avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;font-weight:800}
+
+    /* Sign Up bg */
+    #signup{
+      background-image:
+        linear-gradient(180deg, rgba(255,255,255,.65) 0%, rgba(255,255,255,.55) 40%, rgba(255,255,255,.65) 100%),
+        url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1126');
+      background-size:cover;background-position:center;border-radius:16px;padding:24px;min-height:60vh;
+    }
+    #signup > .card{background:rgba(255,255,255,.88);backdrop-filter:saturate(1.05) blur(1.5px);border-color:rgba(229,231,235,.7)}
+
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .hidden{display:none}
+    .divider{height:1px;background:var(--border);margin:8px 0}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Study-Uni home">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19a2 2 0 0 0 2 2h13"/><path d="M20 22V6a2 2 0 0 0-2-2H7a3 3 0 0 0-3 3v12"/><path d="M7 7h11"/>
+          </svg>
+        </span>
+        <span>Study-Uni</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#home" data-link>Home</a>
+        <a href="#how-it-works" data-link>How It Works</a>
+        <a href="#courses" data-link>Courses</a>
+        <a href="#pricing" data-link>Pricing</a>
+        <a href="#signup" data-link>Sign Up</a>
+      </nav>
+      <div class="cta">
+        <a class="btn" href="#courses">Browse</a>
+        <a class="btn primary" href="#signup">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ===== Home ===== -->
+    <section id="home" role="region" aria-labelledby="home-title" class="active">
+      <div class="hero card" style="box-shadow:none">
+        <div>
+          <span class="pill">✨ Like StudyClix but for college</span>
+          <h1 id="home-title" class="h1" style="margin-bottom:4px">First-year sorted — past papers, solutions, structure.</h1>
+          <p class="sub" style="margin-bottom:10px">Study-Uni gives you a clean, central place to prep for exams. Pick your modules, practise with real papers, and track <strong>confidence</strong> (Pro).</p>
+          <div class="metrics" style="gap:10px">
+            <div class="metric"><strong id="count-papers">0</strong><span class="muted"> papers</span></div>
+            <div class="metric"><strong id="count-solutions">0</strong><span class="muted"> solutions</span></div>
+            <div class="metric"><strong id="count-students">0</strong><span class="muted"> students</span></div>
+          </div>
+          <div class="search">
+            <input id="globalSearch" type="text" inputmode="search" placeholder="Search modules (e.g. AC1103, microeconomics)" />
+            <a class="btn" href="#courses">Search</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;box-shadow:none">
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+          <div class="card" style="box-shadow:var(--shadow)"><h3 style="margin:0 0 4px">Organised by module</h3><p class="muted" style="margin:0">Find papers fast by code or topic.</p></div>
+          <div class="card" style="box-shadow:var(--shadow)"><h3 style="margin:0 0 4px">Clear solutions</h3><p class="muted" style="margin:0">Step-by-step, tutor-checked answers.</p></div>
+          <div class="card" style="box-shadow:var(--shadow)"><h3 style="margin:0 0 4px">Guided flow</h3><p class="muted" style="margin:0">Pick → practise → track (Pro).</p></div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="card" style="margin-top:22px">
+        <span class="kicker">What students say</span>
+        <h2 class="section-title">Real results, less stress</h2>
+        <div class="testimonials">
+          <div class="testimonial">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span class="avatar">AM</span>
+              <div><strong>Aoife M.</strong><div class="muted">BComm Year 1</div></div>
+            </div>
+            <p class="muted" style="margin-top:8px">“Found AC1103 papers in seconds and finally saw where I was losing marks.”</p>
+          </div>
+          <div class="testimonial">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span class="avatar">DK</span>
+              <div><strong>Dan K.</strong><div class="muted">International student</div></div>
+            </div>
+            <p class="muted" style="margin-top:8px">“The guided flow made revision straightforward.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== How It Works ===== -->
+    <section id="how-it-works" role="region" aria-labelledby="how-title">
+      <div class="card">
+        <h2 id="how-title" class="h1">How it works</h2>
+        <p class="sub">From messy folders to a clear revision plan — here’s exactly how Study-Uni gets you exam-ready.</p>
+
+        <div class="grid" style="margin-top:12px">
+          <div class="card"><div style="display:flex; gap:14px; align-items:flex-start"><div class="tag" style="font-weight:800">1</div><div><h3>Create your free account</h3><p class="muted">Sign up to save modules, track practice history, and unlock Pro anytime.</p><ul class="muted" style="margin:8px 0 0 18px"><li>No card needed for Starter</li><li>Syncs on any device</li><li>Switch to Pro when you’re ready</li></ul><p style="margin-top:10px"><a class="btn" href="#signup">Create my account</a></p></div></div></div>
+          <div class="card"><div style="display:flex; gap:14px; align-items:flex-start"><div class="tag" style="font-weight:800">2</div><div><h3>Pick your modules</h3><p class="muted">Search by code or name — e.g. <strong>AC1103</strong>, <strong>Microeconomics</strong> — and open the module hub.</p><ul class="muted" style="margin:8px 0 0 18px"><li>All past papers grouped by <strong>year/semester</strong></li><li>Topic tags (calculations, theory, diagrams)</li><li>Fast open/preview of PDFs & docs</li></ul><p style="margin-top:10px"><a class="btn" href="#courses">Browse modules</a></p></div></div></div>
+          <div class="card"><div style="display:flex; gap:14px; align-items:flex-start"><div class="tag" style="font-weight:800">3</div><div><h3>Practise with real papers</h3><p class="muted">Work under light time pressure, then compare your attempt to the marking-style layout.</p><ul class="muted" style="margin:8px 0 0 18px"><li>Open a paper → try a question → then check the steps</li><li>Spot recurring formats and marking priorities</li><li>Download to annotate or print if you prefer</li></ul></div></div></div>
+          <div class="card"><div style="display:flex; gap:14px; align-items:flex-start"><div class="tag" style="font-weight:800">4</div><div><h3>Learn the method, not just the answer</h3><p class="muted">Solutions are written step-by-step so you see the method, common slips, and how marks are awarded.</p><ul class="muted" style="margin:8px 0 0 18px"><li>Why each step is needed</li><li>Where partial credit comes from</li><li>Quick notes on common traps</li></ul></div></div></div>
+          <div class="card"><div style="display:flex; gap:14px; align-items:flex-start"><div class="tag" style="font-weight:800">5</div><div><h3>Track confidence <span class="tag">Pro</span></h3><p class="muted">Mark topics complete, flag tricky ones, and watch your <strong>confidence score</strong> rise as you practise.</p><ul class="muted" style="margin:8px 0 0 18px"><li>Per-module progress & topic heatmap</li><li>Confidence score based on recent attempts</li><li>Smart nudges near exam time</li></ul></div></div></div>
+          <div class="card"><div style="display:flex; gap:14px; align-items:flex-start"><div class="tag" style="font-weight:800">6</div><div><h3>Finish with a one-page plan</h3><p class="muted">Export your focused revision plan so your last week is all execution, no faffing.</p><ul class="muted" style="margin:8px 0 0 18px"><li>Priority topics + time estimates</li><li>Links back to the exact papers</li><li>Printable, shareable PDF</li></ul></div></div></div>
+        </div>
+
+        <div class="card" style="margin-top:18px;border-left:4px solid #e0f2fe;background:#f0f9ff">
+          <h3 style="margin:0 0 6px">Quick start (2 minutes)</h3>
+          <ol class="muted" style="margin:6px 0 0 18px">
+            <li>Create a free account</li>
+            <li>Add your first-year modules</li>
+            <li>Open one recent paper and attempt Q1 for 10–12 minutes</li>
+            <li>Check the solution → note where you’d lose marks</li>
+            <li>Retry a similar question from another year</li>
+          </ol>
+          <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn" href="#signup">Create account</a>
+            <a class="btn" href="#courses">Find modules</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Courses (Four boxes + detail subview) ===== -->
+    <section id="courses" role="region" aria-labelledby="courses-title">
+      <div class="card">
+        <h2 id="courses-title" class="h1">Courses</h2>
+        <p class="sub">Pick your course to see its modules.</p>
+
+        <div id="courseRoot" class="course-grid" aria-live="polite">
+          <article class="course-box" data-cat="Commerce">
+            <div class="course-icon">🏷️</div>
+            <div class="course-title">Commerce</div>
+            <div class="course-sub"><span id="count-commerce">0</span> modules</div>
+            <span class="course-cta">View modules <span class="arrow">→</span></span>
+          </article>
+
+          <article class="course-box" data-cat="Applied Economics">
+            <div class="course-icon">📈</div>
+            <div class="course-title">Economics</div>
+            <div class="course-sub"><span id="count-econ">0</span> modules</div>
+            <span class="course-cta">View modules <span class="arrow">→</span></span>
+          </article>
+
+          <article class="course-box" data-cat="Accounting">
+            <div class="course-icon">📚</div>
+            <div class="course-title">Accounting</div>
+            <div class="course-sub"><span id="count-accounting">0</span> modules</div>
+            <span class="course-cta">View modules <span class="arrow">→</span></span>
+          </article>
+
+          <article class="course-box" data-cat="Finance">
+            <div class="course-icon">💶</div>
+            <div class="course-title">Finance</div>
+            <div class="course-sub"><span id="count-finance">0</span> modules</div>
+            <span class="course-cta">View modules <span class="arrow">→</span></span>
+          </article>
+        </div>
+
+        <div id="courseDetail" style="display:none">
+          <div style="display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <div>
+              <button class="btn" id="backToCourses" aria-label="Back to courses">← Back to courses</button>
+              <h3 id="detailTitle" class="h1" style="margin:10px 0 0">Course</h3>
+              <p id="detailSub" class="muted" style="margin:6px 0 0">Modules and files</p>
+            </div>
+            <div style="min-width:260px;flex:1">
+              <label class="muted" for="detailSearch">Search modules</label>
+              <input id="detailSearch" type="text" placeholder="Filter modules (e.g., AC1103)…" aria-label="Filter modules in this course" />
+            </div>
+          </div>
+
+          <div id="detailGrid" class="grid" style="margin-top:14px"></div>
+          <div id="detailEmpty" class="card" style="display:none;text-align:center">
+            <span class="muted">No modules match your search in this course.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Pricing ===== -->
+    <section id="pricing" role="region" aria-labelledby="pricing-title">
+      <div class="card">
+        <h2 id="pricing-title" class="h1">Pricing</h2>
+        <p class="sub">Pick the plan that fits how you study. No hidden fees.</p>
+        <div class="pricing" style="margin-top:10px">
+          <div class="card price-card">
+            <span class="badge">Most popular starter</span>
+            <h3>Free</h3>
+            <p class="price">€0 <small>/ forever</small></p>
+            <ul class="muted">
+              <li>Access to all <strong>free exam papers</strong></li>
+              <li><strong>No</strong> solutions or tips</li>
+              <li>Browse all courses & modules</li>
+            </ul>
+            <p><a class="btn" href="#signup">Get Free</a></p>
+          </div>
+          <div class="card price-card" style="outline:3px solid #e0f2fe">
+            <span class="badge">Best value</span>
+            <h3>Pro</h3>
+            <p class="price">€4.99 <small>/ month</small></p>
+            <ul class="muted">
+              <li>Access to <strong>one course</strong></li>
+              <li>All modules in that course</li>
+              <li><strong>Solutions & tips</strong> included</li>
+              <li>Minimum term: <strong>3 months</strong> (billed €14.97)</li>
+            </ul>
+            <p><a class="btn primary" href="#signup">Go Pro</a></p>
+          </div>
+          <div class="card price-card">
+            <span class="badge">One-time</span>
+            <h3>Once-off</h3>
+            <p class="price">€9.99 <small>/ module</small></p>
+            <ul class="muted">
+              <li>Access to <strong>one module</strong></li>
+              <li>Includes its papers, solutions & tips</li>
+              <li>One-time purchase</li>
+            </ul>
+            <p><a class="btn" href="#signup">Buy module</a></p>
+          </div>
+          <div class="card price-card">
+            <span class="badge">For societies & groups</span>
+            <h3>Team</h3>
+            <p class="price">€49.99 <small>/ 5 accounts</small></p>
+            <ul class="muted">
+              <li>Access to <strong>all courses</strong></li>
+              <li>5 individual accounts included</li>
+              <li><strong>All solutions & tips</strong> unlocked</li>
+              <li>Priority support</li>
+            </ul>
+            <p><a class="btn" href="#signup">Get Team access</a></p>
+          </div>
+        </div>
+
+        <p class="muted" style="margin-top:12px;font-size:14px">
+          Prices in EUR. Pro plan requires a 3-month minimum commitment (charged upfront). Team plan covers up to 5 users; contact us for larger groups.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Sign Up + Login + 2FA (Supabase) ===== -->
+    <section id="signup" role="region" aria-labelledby="signup-title">
+      <div class="card">
+        <h2 id="signup-title" class="h1">Create your free account</h2>
+        <p class="sub">Save progress, unlock plans, and personalise your dashboard.</p>
+
+        <!-- Sign Up -->
+        <form id="signupForm" novalidate>
+          <div class="row">
+            <div style="flex:1 1 280px">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Alex Murphy" />
+            </div>
+            <div style="flex:1 1 280px">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@ucc.ie" />
+            </div>
+          </div>
+          <div class="row">
+            <div style="flex:1 1 280px">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" minlength="8" required placeholder="At least 8 characters" />
+            </div>
+          </div>
+          <div class="row" style="align-items:center">
+            <button class="btn primary" type="submit">Create account</button>
+            <span id="signupMsg" class="muted" role="status" aria-live="polite" style="margin-left:10px"></span>
+          </div>
+        </form>
+
+        <div class="divider"></div>
+
+        <!-- Login -->
+        <h3 style="margin:10px 0 6px">Already have an account?</h3>
+        <form id="loginForm" novalidate>
+          <div class="row">
+            <div style="flex:1 1 260px">
+              <label for="loginEmail">Email</label>
+              <input id="loginEmail" type="email" placeholder="you@ucc.ie" required />
+            </div>
+            <div style="flex:1 1 200px">
+              <label for="loginPassword">Password</label>
+              <input id="loginPassword" type="password" required />
+            </div>
+            <div id="otpWrap" class="hidden" style="flex:1 1 160px">
+              <label for="loginOtp">2FA code</label>
+              <input id="loginOtp" inputmode="numeric" pattern="[0-9]*" placeholder="123456" />
+            </div>
+          </div>
+          <div class="row" style="align-items:center">
+            <button class="btn" type="submit">Log in</button>
+            <span id="loginMsg" class="muted" role="status" aria-live="polite" style="margin-left:10px"></span>
+          </div>
+        </form>
+
+        <!-- Account section shown when logged in -->
+        <div id="accountPanel" class="hidden" style="margin-top:14px">
+          <div class="divider"></div>
+          <h3 style="margin:10px 0 6px">Your account</h3>
+          <p class="muted" id="acctEmail"></p>
+          <div class="row">
+            <button class="btn" id="btnEnable2FA">Enable 2FA (TOTP)</button>
+            <button class="btn" id="btnLogout">Log out</button>
+          </div>
+
+          <div id="twofaSetup" class="hidden" style="margin-top:12px">
+            <div class="card">
+              <h4 style="margin:0 0 8px">Scan this QR in Google Authenticator / Authy</h4>
+              <img id="qrImg" alt="2FA QR code" style="max-width:180px;border:1px solid var(--border);border-radius:12px;padding:6px;background:#fff"/>
+              <p class="muted" id="otpauthText" style="word-break:break-all"></p>
+              <div class="row">
+                <div>
+                  <label for="confirm2fa">Enter 6-digit code to confirm</label>
+                  <input id="confirm2fa" inputmode="numeric" pattern="[0-9]*" placeholder="123456"/>
+                </div>
+                <button id="btnConfirm2FA" class="btn primary" type="button" style="align-self:end">Confirm 2FA</button>
+                <span id="twofaMsg" class="muted" style="margin-left:10px"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 404 -->
+    <section id="not-found" role="region" aria-labelledby="nf-title">
+      <div class="card">
+        <h2 id="nf-title">Page not found</h2>
+        <p class="muted">The page you’re after doesn’t exist. Try the <a href="#home">home page</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div class="brand"><span class="logo" aria-hidden="true"></span><span>Study-Uni</span></div>
+      <div class="muted">© <span id="year"></span> Study-Uni • Built for students, by students.</div>
+    </div>
+  </footer>
+
+  <!-- Supabase SDK -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <script>
+    // ---------------- Router & UI ----------------
+    const routes = ["home","how-it-works","courses","pricing","signup"];
+    const sections = Object.fromEntries(routes.map(id => [id, document.getElementById(id)]));
+    const notFound = document.getElementById('not-found');
+    const navLinks = Array.from(document.querySelectorAll('nav a[data-link]'));
+    function setActiveLink(hash){ navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === hash)); }
+    function show(page){
+      Object.values(sections).forEach(sec=>sec.classList.remove('active'));
+      (sections[page] || notFound).classList.add('active');
+      setActiveLink(`#${page}`);
+    }
+    function handleRoute(){ const page = (location.hash.replace('#','') || 'home').toLowerCase(); show(routes.includes(page)?page:'not-found'); }
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('load', handleRoute);
+
+    const targetCounts = { papers: 248, solutions: 132, students: 1043 };
+    function animateCount(id,end){ const el=document.getElementById(id); let n=0,steps=24,inc=Math.ceil(end/steps);
+      const t=setInterval(()=>{ n+=inc; if(n>=end){n=end;clearInterval(t);} el.textContent=n.toLocaleString(); },24);}
+    window.addEventListener('load', ()=>{
+      ['papers','solutions','students'].forEach(k=>animateCount('count-'+k,targetCounts[k]));
+      document.getElementById('year').textContent=new Date().getFullYear();
+    });
+
+    // ---------------- Files & Courses ----------------
+    const FILE_BASE = "/files";
+    const FILE_MAP = {
+      "AC1103Winter2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1103Winter2023_24.pdf?csf=1&web=1&e=kf5253",
+      "AC1103Winter2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1103Winter2022_23.pdf?csf=1&web=1&e=jyMSIa",
+      "AC1104Summer2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1104Summer2024_25.pdf?csf=1&web=1&e=bkr9jS",
+      "AC1104Summer2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1104Summer2023_24.pdf?csf=1&web=1&e=rTVizE",
+      "AC1104Autumn2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1104Autumn2023_24.pdf?csf=1&web=1&e=mPdGJf",
+      "AC1104Summer2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1104Summer2022_23.pdf?csf=1&web=1&e=ptsBDj",
+      "AC1104Summer2021_22.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1104Summer2021_22.pdf?csf=1&web=1&e=3fpJ4G",
+
+      "AC1107Winter2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1107Winter2024_25.pdf?csf=1&web=1&e=R20hgd",
+      "AC1107Winter2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1107Winter2023_24.pdf?csf=1&web=1&e=KVeacK",
+
+      "AC1108Summer2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1108Summer2024_25.pdf?csf=1&web=1&e=VjFG7q",
+      "AC1108Summer2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1108Summer2023_24.pdf?csf=1&web=1&e=vjH4EC",
+      "AC1108Autumn2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1108Autumn2023_24.pdf?csf=1&web=1&e=DN7RON",
+      "AC1108Summer2021_22.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1108Summer2021_22.pdf?csf=1&web=1&e=54J5RU",
+
+      "AC1109Winter2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1109Winter2023_24.pdf?csf=1&web=1&e=Drcadi",
+      "AC1109Winter2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1109Winter2022_23.pdf?csf=1&web=1&e=AnEQox",
+      "AC1109Winter2021_2022.docx":"https://uccireland.sharepoint.com/:w:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1109Winter2021_2022.docx?d=wb9299d1f02824c61889b782b8538187f&csf=1&web=1&e=Nit7ms",
+
+      "AC1115Autumn2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1115Autumn2022_23.pdf?csf=1&web=1&e=xuB66l",
+      "AC1115Summer2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1115Summer2022_23.pdf?csf=1&web=1&e=7CbveU",
+      "AC1115Autumn2021_22.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1115Autumn2021_22.pdf?csf=1&web=1&e=4wr6xi",
+      "AC1115Summer2021_22.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1115Summer2021_22.pdf?csf=1&web=1&e=bkgb9x",
+
+      "EC1202Winter2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1202Winter2024_25.pdf?csf=1&web=1&e=4k3hSj",
+      "EC1202Winter2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1202Winter2023_24.pdf?csf=1&web=1&e=WugVVE",
+      "EC1202Autumn2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1202Autumn2023_24.pdf?csf=1&web=1&e=2weMo0",
+      "EC1202Winter2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1202Winter2022_23.pdf?csf=1&web=1&e=PwcZgS",
+
+      "EC1203Autumn2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1203Autumn2019.pdf?csf=1&web=1&e=7fI8bC",
+      "EC1203Summer2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1203Summer2019.pdf?csf=1&web=1&e=GK901G",
+
+      "IS1106Winter2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1106Winter2024_25.pdf?csf=1&web=1&e=RaXONY",
+      "IS1106Winter2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1106Winter2023_24.pdf?csf=1&web=1&e=wpma4R",
+      "IS1106Autumn2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1106Autumn2023_24.pdf?csf=1&web=1&e=TQd7RB",
+      "IS1106Winter2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1106Winter2022_23.pdf?csf=1&web=1&e=f6OXNu",
+      "IS1106Aut2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1106Aut2019.pdf?csf=1&web=1&e=JBi0ZF",
+      "IS1106Win2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1106Win2019.pdf?csf=1&web=1&e=lcSj1Y",
+
+      "IS1107Summer2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1107Summer2024_25.pdf?csf=1&web=1&e=AZgR9f",
+      "IS1107Summer2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1107Summer2023_24.pdf?csf=1&web=1&e=TAC7E5",
+      "IS1107Autumn2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1107Autumn2023_24.pdf?csf=1&web=1&e=dKoiHp",
+      "IS1107Summer2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1107Summer2022_23.pdf?csf=1&web=1&e=XN2p3N",
+      "IS1107Sum2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1107Sum2019.pdf?csf=1&web=1&e=f1qc13",
+      "IS1107Autumn2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/BusinessInformationSystems/IS1107Autumn2019.pdf?csf=1&web=1&e=o2hrFJ",
+
+      "AC1105Winter2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1105Winter2024_25.pdf?csf=1&web=1&e=czNuZD",
+      "AC1105Winter2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1105Winter2023_24.pdf?csf=1&web=1&e=840naZ",
+
+      "AC1106Summer2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1106Summer2024_25.pdf?csf=1&web=1&e=FdCYaW",
+      "AC1106Summer2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1106Summer2023_24.pdf?csf=1&web=1&e=3mNngZ",
+      "AC1106Autumn2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1106Autumn2023_24.pdf?csf=1&web=1&e=CspdBN",
+      "AC1106Summer2021_22.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Accounting/AC1106Summer2021_22.pdf?csf=1&web=1&e=FuljhB",
+
+      "EC1200Winter2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1200Winter2024_25.pdf?csf=1&web=1&e=MzKM3Y",
+      "EC1200Winter2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1200Winter2023_24.pdf?csf=1&web=1&e=8f1kUA",
+      "EC1200Autumn2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1200Autumn2023_24.pdf?csf=1&web=1&e=o8K1Ze",
+      "EC1200Winter2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1200Winter2022_23.pdf?csf=1&web=1&e=h4aMnX",
+      "EC1200Autumn2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1200Autumn2019.pdf?csf=1&web=1&e=BQ3NoJ",
+
+      "EC1211Summer2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1211Summer2024_25.pdf?csf=1&web=1&e=W56U4p",
+      "EC1211Summer2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1211Summer2023_24.pdf?csf=1&web=1&e=lFWRH0",
+      "EC1211Summer2022_23.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1211Summer2022_23.pdf?csf=1&web=1&e=Sg4Wfb",
+      "EC1211Summer2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1211Summer2019.pdf?csf=1&web=1&e=ZbOHab",
+
+      "EC1213Winter2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1213Winter2024_25.pdf?csf=1&web=1&e=P7quWN",
+      "EC1213Winter2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1213Winter2023_24.pdf?csf=1&web=1&e=AF6YGM",
+      "EC1213Winter2022_23.docx":"https://uccireland.sharepoint.com/:w:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1213Winter2022_23.docx?d=w6afea058dcac42b994affc7991d6d5b7&csf=1&web=1&e=dscUrt",
+      "EC1213Aut2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1213Aut2019.pdf?csf=1&web=1&e=7nQ5MN",
+
+      "EC1214Summer2024_25.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1214Summer2024_25.pdf?csf=1&web=1&e=8MJJKP",
+      "EC1214Summer2023_24.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1214Summer2023_24.pdf?csf=1&web=1&e=xL7MUI",
+      "EC1214Aut2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1214Aut2019.pdf?csf=1&web=1&e=9SqleS",
+      "EC1214Sum2019.pdf":"https://uccireland.sharepoint.com/:b:/r/sites/PastExamPapers/Shared%20Documents/Economics/EC1214Sum2019.pdf?csf=1&web=1&e=Owsmid"
+    };
+    const fileUrl = (name) => FILE_MAP[name] || `${FILE_BASE}/${encodeURIComponent(name)}`;
+
+    const catalog = {
+      "Accounting": [
+        { code:"ST1023" }, { code:"MCQ" },
+        { code:"AC1103", files:["AC1103Winter2023_24.pdf","AC1103Winter2022_23.pdf"] },
+        { code:"AC1104", files:["AC1104Summer2024_25.pdf","AC1104Summer2023_24.pdf","AC1104Autumn2023_24.pdf","AC1104Summer2022_23.pdf","AC1104Summer2021_22.pdf"] },
+        { code:"AC1107", files:["AC1107Winter2024_25.pdf","AC1107Winter2023_24.pdf"] },
+        { code:"AC1108", files:["AC1108Summer2024_25.pdf","AC1108Summer2023_24.pdf","AC1108Autumn2023_24.pdf","AC1108Summer2021_22.pdf"] },
+        { code:"AC1109", files:["AC1109Winter2023_24.pdf","AC1109Winter2022_23.pdf","AC1109Winter2021_2022.docx"] },
+        { code:"AC1115", files:["AC1115Autumn2022_23.pdf","AC1115Summer2022_23.pdf","AC1115Autumn2021_22.pdf","AC1115Summer2021_22.pdf"] },
+        { code:"EC1202", files:["EC1202Winter2024_25.pdf","EC1202Winter2023_24.pdf","EC1202Autumn2023_24.pdf","EC1202Winter2022_23.pdf"] },
+        { code:"EC1203", files:["EC1203Autumn2019.pdf","EC1203Summer2019.pdf"] },
+        { code:"IS1106", files:["IS1106Winter2024_25.pdf","IS1106Winter2023_24.pdf","IS1106Autumn2023_24.pdf","IS1106Winter2022_23.pdf","IS1106Aut2019.pdf","IS1106Win2019.pdf"] },
+        { code:"IS1107", files:["IS1107Summer2024_25.pdf","IS1107Summer2023_24.pdf","IS1107Autumn2023_24.pdf","IS1107Summer2022_23.pdf","IS1107Sum2019.pdf","IS1107Autumn2019.pdf"] },
+        { code:"ST2200", files:["ST2200Autumn2019.pdf","ST2200Summer2019.pdf"] }
+      ],
+      "Finance": [
+        { code:"AC1105", files:["AC1105Winter2024_25.pdf","AC1105Winter2023_24.pdf"] },
+        { code:"AC1106", files:["AC1106Summer2024_25.pdf","AC1106Summer2023_24.pdf","AC1106Autumn2023_24.pdf","AC1106Summer2021_22.pdf"] },
+        { code:"EC1200", files:["EC1200Winter2024_25.pdf","EC1200Winter2023_24.pdf","EC1200Autumn2023_24.pdf","EC1200Winter2022_23.pdf","EC1200Autumn2019.pdf"] },
+        { code:"EC1211", files:["EC1211Summer2024_25.pdf","EC1211Summer2023_24.pdf","EC1211Summer2022_23.pdf","EC1211Summer2019.pdf"] },
+        { code:"EC1213", files:["EC1213Winter2024_25.pdf","EC1213Winter2023_24.pdf","EC1213Winter2022_23.docx","EC1213Aut2019.pdf"] },
+        { code:"EC1214", files:["EC1214Summer2024_25.pdf","EC1214Summer2023_24.pdf","EC1214Aut2019.pdf","EC1214Sum2019.pdf"] }
+      ],
+      "Applied Economics": [
+        { code:"EC1113", files:["EC1113Win2019.pdf","EC1113Autumn2019.pdf"] },
+        { code:"EC1114", files:["EC1114Summer2024_25.pdf","EC1114Summer2023_24.pdf","EC1114Autumn2023_24.pdf","EC1114Summer2019.pdf","EC1114Summer2022_23.pdf"] },
+        { code:"EC1115", files:["EC1115Winter2024_25.pdf","EC1115Autumn2023_24.pdf","EC1115Win2019.pdf","EC1115Autumn2019.pdf"] },
+        { code:"EC1107" }, { code:"EC1111" }, { code:"EC1112" }, { code:"EC1123" }, { code:"EC1124" }, { code:"EC1125" }
+      ],
+      "Commerce": [
+        { code:"AC1100" }, { code:"BU1000" }, { code:"EC1207" }, { code:"EC1208" },
+        { code:"FE1101" }, { code:"IS1105" }, { code:"LW1108" }, { code:"LW1109" },
+        { code:"MA1100" }, { code:"MG1000" }, { code:"MG1002" }, { code:"ST1023" }
+      ]
+    };
+
+    function fileChip(name){
+      const url = fileUrl(name);
+      const isDoc = /\.docx?$/i.test(name);
+      const icon = isDoc ? '📄' : '📕';
+      const label = `Open ${name} ${isDoc ? '(Word doc)' : '(PDF)'}`;
+      return `<a class="chip" href="${url}" target="_blank" rel="noopener" aria-label="${label}">${icon} <span>${name}</span></a>`;
+    }
+    function moduleCard(mod){
+      const has = Array.isArray(mod.files) && mod.files.length;
+      const files = has ? mod.files.map(fileChip).join('') : `<span class="chip coming">Coming soon</span>`;
+      const counts = has ? `<div class="grid" style="grid-template-columns:repeat(3,auto);gap:8px;margin:10px 0 12px">
+          <span class="tag">${mod.files.length} file${mod.files.length>1?'s':''}</span>
+          <span class="tag">Year 1</span>
+          <span class="tag">${/AC|EC|IS|ST|BU|FE|LW|MA|MG/.exec(mod.code)?.[0] || 'Module'}</span>
+        </div>` : '';
+      return `<article class="card">
+        <h3 style="margin:0">${mod.code}</h3>
+        ${counts}
+        <div class="files">${files}</div>
+      </article>`;
+    }
+
+    const courseRoot   = document.getElementById('courseRoot');
+    const courseDetail = document.getElementById('courseDetail');
+    const detailTitle  = document.getElementById('detailTitle');
+    const detailSub    = document.getElementById('detailSub');
+    const detailGrid   = document.getElementById('detailGrid');
+    const detailEmpty  = document.getElementById('detailEmpty');
+    const detailSearch = document.getElementById('detailSearch');
+    const backBtn      = document.getElementById('backToCourses');
+
+    function setCourseCounts(){
+      document.getElementById('count-accounting').textContent = (catalog["Accounting"]||[]).length;
+      document.getElementById('count-finance').textContent    = (catalog["Finance"]||[]).length;
+      document.getElementById('count-econ').textContent       = (catalog["Applied Economics"]||[]).length;
+      document.getElementById('count-commerce').textContent   = (catalog["Commerce"]||[]).length;
+    }
+    window.addEventListener('load', setCourseCounts);
+
+    let currentCourse = null;
+    const labelForCourse = (cat) => cat === 'Applied Economics' ? 'Economics' : cat;
+
+    function showCourseGrid(){
+      currentCourse = null;
+      detailSearch.value = '';
+      courseDetail.style.display = 'none';
+      courseRoot.style.display   = 'grid';
+    }
+    function openCourse(cat){
+      currentCourse = cat;
+      detailTitle.textContent = labelForCourse(cat);
+      const mods = (catalog[cat]||[]);
+      detailSub.textContent = `${mods.length} module${mods.length===1?'':'s'}`;
+      renderModules();
+      courseRoot.style.display   = 'none';
+      courseDetail.style.display = 'block';
+    }
+    function renderModules(){
+      const mods = (catalog[currentCourse]||[]);
+      const term = (detailSearch.value||'').trim().toLowerCase();
+      const filtered = term ? mods.filter(m => m.code.toLowerCase().includes(term)) : mods;
+      detailGrid.innerHTML = filtered.map(moduleCard).join('');
+      detailEmpty.style.display = filtered.length ? 'none' : 'block';
+    }
+
+    courseRoot.addEventListener('click', (e)=>{
+      const box = e.target.closest('.course-box');
+      if(!box) return;
+      openCourse(box.getAttribute('data-cat'));
+    });
+    backBtn.addEventListener('click', showCourseGrid);
+    detailSearch.addEventListener('input', renderModules);
+
+    const globalSearch = document.getElementById('globalSearch');
+    globalSearch?.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){ location.hash = '#courses'; }
+    });
+    if(!location.hash){ location.hash = '#home'; }
+
+    // ---------------- Supabase Auth Integration ----------------
+    const SUPABASE_URL = "https://jbdxtmkphyobkpikelaq.supabase.co";
+    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpiZHh0bWtwaHlvYmtwaWtlbGFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NzY3MzMsImV4cCI6MjA3NjA1MjczM30.vDtlDSZGLZGKRmKKS5lFHD-CD7PJ4FQDM4LQolW4MZc";
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    // Elements
+    const signupForm = document.getElementById('signupForm');
+    const signupMsg  = document.getElementById('signupMsg');
+    const loginForm  = document.getElementById('loginForm');
+    const loginMsg   = document.getElementById('loginMsg');
+    const otpWrap    = document.getElementById('otpWrap');
+    const loginOtp   = document.getElementById('loginOtp');
+
+    const accountPanel = document.getElementById('accountPanel');
+    const acctEmail    = document.getElementById('acctEmail');
+    const btnEnable2FA = document.getElementById('btnEnable2FA');
+    const btnLogout    = document.getElementById('btnLogout');
+
+    const twofaSetup   = document.getElementById('twofaSetup');
+    const qrImg        = document.getElementById('qrImg');
+    const otpauthText  = document.getElementById('otpauthText');
+    const confirm2fa   = document.getElementById('confirm2fa');
+    const btnConfirm2FA= document.getElementById('btnConfirm2FA');
+    const twofaMsg     = document.getElementById('twofaMsg');
+
+    // Helper: refresh auth UI
+    async function refreshAuthUI(){
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        accountPanel.classList.remove('hidden');
+        acctEmail.textContent = `Signed in as ${user.email}${user.email_confirmed_at ? ' (verified)' : ' (email not verified yet)'}`;
+      } else {
+        accountPanel.classList.add('hidden');
+      }
+    }
+    refreshAuthUI();
+
+    // Sign up (email verification handled by Supabase)
+    signupForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      signupMsg.textContent = "Creating account…";
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      const { error } = await supabase.auth.signUp({
+        email, password,
+        options: { emailRedirectTo: location.origin + "#signup?verified=1" }
+      });
+
+      signupMsg.textContent = error ? error.message : "Check your inbox to verify your email.";
+    });
+
+    // Login with optional TOTP
+    loginForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      loginMsg.textContent = "Signing in…";
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const otp = loginOtp.value.trim();
+
+      // Step 1: try password sign-in
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (error && !error.message.toLowerCase().includes('mfa')) {
+        loginMsg.textContent = error.message;
+        return;
+      }
+
+      // MFA flow:
+      // If factors exist or error indicates MFA, start a TOTP challenge.
+      let user = data?.user;
+      if (!user) {
+        const sessionCheck = await supabase.auth.getUser();
+        user = sessionCheck.data.user;
+      }
+
+      const factors = user?.factors || [];
+      if (factors.length) {
+        if (!otp) {
+          otpWrap.classList.remove('hidden');
+          loginMsg.textContent = "Enter your 6-digit 2FA code and press Log in again.";
+          return;
+        }
+        const { data: ch, error: chErr } = await supabase.auth.mfa.challenge({ factorId: factors[0].id });
+        if (chErr) { loginMsg.textContent = chErr.message; return; }
+
+        const { error: vErr } = await supabase.auth.mfa.verify({ factorId: ch.factorId, code: otp });
+        if (vErr) { loginMsg.textContent = vErr.message; return; }
+      }
+
+      loginMsg.textContent = "Signed in!";
+      otpWrap.classList.add('hidden'); loginOtp.value = "";
+      await refreshAuthUI();
+    });
+
+    // Enable 2FA (TOTP)
+    btnEnable2FA.addEventListener('click', async ()=>{
+      twofaMsg.textContent = ""; confirm2fa.value = "";
+      const { data, error } = await supabase.auth.mfa.enroll({ factorType: 'totp' });
+      if (error) { twofaMsg.textContent = error.message; return; }
+      const otpauth = data.totp.uri;
+      qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(otpauth);
+      otpauthText.textContent = otpauth;
+      twofaSetup.classList.remove('hidden');
+      btnConfirm2FA.dataset.factorId = data.id;
+    });
+
+    // Confirm 2FA code
+    btnConfirm2FA.addEventListener('click', async ()=>{
+      twofaMsg.textContent = "Verifying…";
+      const factorId = btnConfirm2FA.dataset.factorId;
+      const code = confirm2fa.value.trim();
+      const { error } = await supabase.auth.mfa.verify({ factorId, code });
+      twofaMsg.textContent = error ? error.message : "✅ 2FA enabled!";
+      if (!error) setTimeout(()=> twofaSetup.classList.add('hidden'), 800);
+    });
+
+    // Logout
+    btnLogout.addEventListener('click', async ()=>{
+      await supabase.auth.signOut();
+      await refreshAuthUI();
+    });
+
+    // Ensure initial hash
+    if(!location.hash){ location.hash = '#home'; }
+  </script>
+</body>
+</html>
