@@ -4,4 +4,7 @@
 window.SU_CONFIG = {
   SUPABASE_URL: 'YOUR_SUPABASE_URL',
   SUPABASE_ANON_KEY: 'YOUR_SUPABASE_ANON_KEY',
+  // Emails that bypass the paywall and the UCC-email restriction.
+  // Add your own email here so you can use the site for free.
+  OWNER_EMAILS: ['jackatlantic06@gmail.com'],
 };

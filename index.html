@@ -978,6 +978,9 @@
   function requirePro(fn, actionKey) {
     _pendingAction = fn;
     _pendingActionKey = actionKey || null;
+    // Owner bypass — emails listed in SU_CONFIG.OWNER_EMAILS get free access
+    const owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+    if (_currentUser && owners.includes(_currentUser.email)) { _pendingAction = null; fn(); return; }
     if (!_sbClient) { openProModal(); return; }
     if (_currentUser && _isSubscribed) { _pendingAction = null; fn(); return; }
     if (!_currentUser) { openAuthModal(); return; }
@@ -1024,7 +1027,8 @@
     const btn   = document.getElementById('authSubmitBtn');
     errEl.textContent = '';
 
-    if (!email.endsWith('@ucc.ie') && !email.endsWith('@student.ucc.ie')) {
+    const _owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+    if (!email.endsWith('@ucc.ie') && !email.endsWith('@student.ucc.ie') && !_owners.includes(email)) {
       errEl.textContent = 'Please use your UCC email (@ucc.ie or @student.ucc.ie)';
       return;
     }
