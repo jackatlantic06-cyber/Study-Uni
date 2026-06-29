@@ -403,7 +403,7 @@
     if (/BSc/.test(name))          return "BSc";
     if (/BPharm|MPharm/.test(name))return "BPharm";
     if (/BE\b/.test(name))         return "BE";
-    if (/BCL/.test(name))          return "BCL";
+    if (/BCL|^Law\s|Law & /.test(name)) return "BCL";
     if (/MB|BCh|BDS/.test(name))   return "MB BCh";
     if (/BEd/.test(name))          return "BEd";
     if (/BA\b/.test(name))         return "BA";

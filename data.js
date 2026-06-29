@@ -6844,6 +6844,8 @@
       desc:"Accounting and Finance" },
     { id:"BAEcon", label:"BAEcon", full:"Bachelor of Arts (Economics)",     icon:"📈", color:"#0d9488",
       desc:"Business Economics" },
+    { id:"BCL",   label:"Law",    full:"Bachelor of Civil Law",             icon:"⚖️",  color:"#b45309",
+      desc:"BCL, Law & Business, Law & French, Law & Irish" },
     { id:"BA",     label:"BA",     full:"Bachelor of Arts",                 icon:"🎭", color:"#9333ea",
       desc:"Arts, Humanities, Languages, Social Sciences, Law" },
     { id:"BSc",    label:"BSc",    full:"Bachelor of Science",              icon:"🔬", color:"#16a34a",
