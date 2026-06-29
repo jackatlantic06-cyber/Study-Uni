@@ -1283,14 +1283,22 @@
   function handleSearch(q) {
     const el = document.getElementById('searchResults');
     if (!q || q.length < 2) { el.classList.remove('visible'); el.innerHTML=''; return; }
+    const ql = q.toLowerCase();
     const results = [];
-    SCHOOLS.forEach(s => s.courses.forEach(c =>
+    SCHOOLS.forEach(s => s.courses.forEach(c => {
+      if (!c.hidden) {
+        const nameMatch = c.name.toLowerCase().includes(ql);
+        const codeMatch = (c.code || '').toLowerCase().includes(ql);
+        if (nameMatch || codeMatch) {
+          results.push({type:'course', id:c.id, name:c.name, school:s.name});
+        }
+      }
       allModules(c).forEach(m => {
-        if (m.code.toLowerCase().includes(q.toLowerCase()) || m.name.toLowerCase().includes(q.toLowerCase())) {
+        if (m.code.toLowerCase().includes(ql) || m.name.toLowerCase().includes(ql)) {
           results.push({code:m.code, name:m.name, course:c.name, courseId:c.id, papers:(m.files||[]).length});
         }
-      })
-    ));
+      });
+    }));
     if (!results.length) { el.innerHTML='<p style="color:var(--muted);text-align:center;padding:20px">No results found.</p>'; el.classList.add('visible'); return; }
     el.innerHTML = `<p style="color:var(--muted);font-size:13px;margin-bottom:10px">${results.length} result${results.length!==1?'s':''}</p>` +
       results.slice(0,20).map(r => {
