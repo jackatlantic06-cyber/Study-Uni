@@ -1021,6 +1021,8 @@
     document.getElementById('authSuccessMsg').style.display = 'none';
     const fp = document.getElementById('forgotPwdRow');
     if (fp) fp.style.display = mode === 'signin' ? 'block' : 'none';
+    const nf = document.getElementById('authNameFields');
+    if (nf) nf.style.display = mode === 'signup' ? 'block' : 'none';
   }
 
   async function submitAuth() {
@@ -1043,10 +1045,13 @@
 
     try {
       if (_authMode === 'signup') {
+        const firstName = document.getElementById('authFirstName').value.trim();
+        const lastName  = document.getElementById('authLastName').value.trim();
+        if (!firstName || !lastName) { errEl.textContent = 'Please enter your first and last name'; btn.disabled=false; btn.textContent='Create account'; return; }
         const conf = document.getElementById('authConfirm').value;
         if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters'; btn.disabled=false; btn.textContent='Create account'; return; }
         if (pass !== conf)   { errEl.textContent = 'Passwords do not match'; btn.disabled=false; btn.textContent='Create account'; return; }
-        const { error } = await _sbClient.auth.signUp({ email, password: pass });
+        const { error } = await _sbClient.auth.signUp({ email, password: pass, options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName } } });
         if (error) throw error;
         document.getElementById('authSuccessMsg').style.display = 'block';
         btn.textContent = '✓ Check your email';
@@ -1365,6 +1370,20 @@
     <label>Password</label>
     <input type="password" id="authPassword" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" autocomplete="current-password"
            onkeydown="if(event.key==='Enter')submitAuth()"/>
+  </div>
+  <div id="authNameFields" style="display:none">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="auth-field" style="margin-bottom:14px">
+        <label>First Name</label>
+        <input type="text" id="authFirstName" placeholder="Jane" autocomplete="given-name"
+               onkeydown="if(event.key==='Enter')submitAuth()"/>
+      </div>
+      <div class="auth-field" style="margin-bottom:14px">
+        <label>Last Name</label>
+        <input type="text" id="authLastName" placeholder="Smith" autocomplete="family-name"
+               onkeydown="if(event.key==='Enter')submitAuth()"/>
+      </div>
+    </div>
   </div>
   <div style="text-align:right;margin-top:-6px;margin-bottom:12px" id="forgotPwdRow">
     <a href="#" onclick="forgotPassword();return false" style="font-size:12px;color:#2563eb;text-decoration:none">Forgot password?</a>
