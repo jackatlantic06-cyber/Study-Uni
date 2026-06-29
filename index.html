@@ -981,7 +981,8 @@
     // Owner bypass — emails listed in SU_CONFIG.OWNER_EMAILS get free access
     const owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
     if (_currentUser && owners.includes(_currentUser.email)) { _pendingAction = null; fn(); return; }
-    if (!_sbClient) { openProModal(); return; }
+    // Supabase not configured yet — paywall is inactive, let everyone through
+    if (!_sbClient) { _pendingAction = null; fn(); return; }
     if (_currentUser && _isSubscribed) { _pendingAction = null; fn(); return; }
     if (!_currentUser) { openAuthModal(); return; }
     openProModal();
