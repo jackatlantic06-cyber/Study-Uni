@@ -1032,8 +1032,8 @@
     errEl.textContent = '';
 
     const _owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
-    if (!email.endsWith('@ucc.ie') && !email.endsWith('@student.ucc.ie') && !_owners.includes(email)) {
-      errEl.textContent = 'Please use your UCC email (@ucc.ie or @student.ucc.ie)';
+    if (!email.endsWith('@umail.ucc.ie') && !_owners.includes(email)) {
+      errEl.textContent = 'Please use your UCC student email (@umail.ucc.ie)';
       return;
     }
     if (!pass) { errEl.textContent = 'Please enter your password'; return; }
@@ -1358,7 +1358,7 @@
   </div>
   <div class="auth-field">
     <label>UCC Email</label>
-    <input type="email" id="authEmail" placeholder="your.name@ucc.ie" autocomplete="email"
+    <input type="email" id="authEmail" placeholder="your.name@umail.ucc.ie" autocomplete="email"
            onkeydown="if(event.key==='Enter')submitAuth()"/>
   </div>
   <div class="auth-field">
