@@ -645,7 +645,8 @@
 
     let moduleHTML = '';
     if (yearObj) {
-      if (yearObj.note) moduleHTML += `<div class="year-note">${yearObj.note}</div>`;
+      const _skipNoteRe = /^(Same as |Common (Year|first year)|See chosen pathway\.?|Papers coming soon\.?)/i;
+      if (yearObj.note && !_skipNoteRe.test(yearObj.note)) moduleHTML += `<div class="year-note">${yearObj.note}</div>`;
 
       if (yearObj.outlets && yearObj.outlets.length) {
         // Outlet navigation cards — clicking goes to that course
