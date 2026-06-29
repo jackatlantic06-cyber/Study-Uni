@@ -5620,7 +5620,7 @@
                   { code:"CH1001", name:"Chinese Language (Mandarin) I",               credits:10, files:[{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/ChineseStudies/CH1001Summer2024_25.pdf",label:"Summer 24/25"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/ChineseStudies/CH1001Summer2023_24.pdf",label:"Summer 23/24"}] }
                 ]}
               ]
-            } },
+            },
             {
               year:2, credits:60, note:"35 credits core + 25 credits electives (law or 15 law + 10 language/business).",
               sections:[
@@ -5701,7 +5701,7 @@
                   { code:"CH1001", name:"Chinese Language (Mandarin) I",               credits:10, files:[{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/ChineseStudies/CH1001Summer2024_25.pdf",label:"Summer 24/25"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/ChineseStudies/CH1001Summer2023_24.pdf",label:"Summer 23/24"}] }
                 ]}
               ]
-            } },
+            },
             {
               year:2, credits:60, note:"35 credits core (includes Legal Skills Clinical) + 25 credits electives. Electives should align with intended clinical placement area.",
               sections:[
@@ -5791,7 +5791,7 @@
                   { code:"CH1001", name:"Chinese Language (Mandarin) I",               credits:10, files:[{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/ChineseStudies/CH1001Summer2024_25.pdf",label:"Summer 24/25"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/ChineseStudies/CH1001Summer2023_24.pdf",label:"Summer 23/24"}] }
                 ]}
               ]
-            } },
+            },
             { year:2, credits:60, note:"35 credits core + 25 credits electives (law or 15 law + 10 language/business).",
               sections:[
                 { label:"Core (35 credits)", modules:[
@@ -5817,7 +5817,7 @@
                   { code:"LW3371", name:"Sources and Foundations of Environmental Law",credits:5, files:[{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Law/LW3371Winter2025_26.pdf",label:"Winter 25/26"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Law/LW3371Winter2024_25.pdf",label:"Winter 24/25"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Law/LW3371Autumn2024_25.pdf",label:"Autumn 24/25"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Law/LW3371Winter2023_24.pdf",label:"Winter 23/24"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Law/LW3371Winter2022_23.pdf",label:"Winter 22/23"}] }
                 ]}
               ]
-            } },
+            },
             {
               year:3, credits:60, note:"Path 1: Full year abroad at approved European/North American/Chinese law school. Path 2: One semester abroad + 30 credits UCC electives.",
               sections:[
