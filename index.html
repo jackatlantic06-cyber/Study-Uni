@@ -254,6 +254,10 @@
     .sri-meta{font-size:12px;color:var(--muted);margin-left:auto}
 
     footer{border-top:1px solid var(--border);padding:24px 20px;background:var(--surface);text-align:center;font-size:13px;color:var(--muted)}
+  .route-tabs-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .route-tab-btn{padding:7px 16px;font-size:13px;font-weight:600;border:1.5px solid var(--border);border-radius:8px;background:var(--card);color:var(--muted);cursor:pointer;font-family:inherit;transition:color .12s,border-color .12s,background .12s}
+  .route-tab-btn.active{background:#eff6ff;border-color:var(--accent);color:var(--accent)}
+  .route-tab-btn:hover:not(.active){border-color:var(--text);color:var(--text)}
   </style>
 </head>
 <body>
@@ -364,6 +368,8 @@
   let activeDegBucket = null;
   let activeCourse = null;
   let activeYear = 1;
+  let _activeSection = 0;
+  let _currentPathwayId = null;
 
   // ─── HELPERS ─────────────────────────────────────────────────────────────
   function getAllCourses() {
@@ -562,6 +568,7 @@
     if (!course) return;
     activeCourse = course;
     activeYear = course.years[0]?.year || 1;
+    _activeSection = 0;
     renderYearView(null);
     showPage('years');
   }
@@ -593,8 +600,19 @@
     return { total, withPapers };
   }
 
+  function _hasRouteSections(sections) {
+    return sections && sections.length >= 2 &&
+      sections.some(function(s){ return /^(Route\b|Path\s+\d|Option\s+\d|Major\s+\d|CK\d)/i.test(s.label); });
+  }
+
+  function switchSection(idx) {
+    _activeSection = idx;
+    renderYearView(_currentPathwayId);
+  }
+
   function renderYearView(activePathwayId) {
     const c = activeCourse;
+    _currentPathwayId = activePathwayId;
     const yearObj = c.years.find(y => y.year === activeYear) || c.years[0];
     const root = document.getElementById('yearViewRoot');
 
@@ -694,12 +712,29 @@
       } else if (yearObj.modules && yearObj.modules.length) {
         moduleHTML += renderModuleTable(yearObj.modules, '');
       } else if (yearObj.sections && yearObj.sections.length) {
-        yearObj.sections.forEach(sec => {
-          moduleHTML += `<div class="module-section">
-            <div class="section-label">${sec.label}</div>
-            ${renderModuleTable(sec.modules, '')}
-          </div>`;
-        });
+        const _routePat = /^(Route\b|Path\s+\d|Option\s+\d|Major\s+\d|CK\d)/i;
+        const _routeSecs = yearObj.sections.filter(s => _routePat.test(s.label));
+        const _fixedSecs = yearObj.sections.filter(s => !_routePat.test(s.label));
+        if (_routeSecs.length >= 2) {
+          _fixedSecs.forEach(sec => {
+            moduleHTML += `<div class="module-section">
+              <div class="section-label">${sec.label}</div>
+              ${renderModuleTable(sec.modules, '')}
+            </div>`;
+          });
+          const secIdx = Math.min(_activeSection, _routeSecs.length - 1);
+          moduleHTML += `<div class="route-tabs-bar">${_routeSecs.map((s, i) =>
+            `<button class="route-tab-btn${i===secIdx?' active':''}" onclick="switchSection(${i})">${s.label}</button>`
+          ).join('')}</div>`;
+          moduleHTML += renderModuleTable(_routeSecs[secIdx].modules, '');
+        } else {
+          yearObj.sections.forEach(sec => {
+            moduleHTML += `<div class="module-section">
+              <div class="section-label">${sec.label}</div>
+              ${renderModuleTable(sec.modules, '')}
+            </div>`;
+          });
+        }
       } else {
         moduleHTML += `<p style="color:var(--muted);font-style:italic;padding:16px 0">Module list coming soon.</p>`;
       }
@@ -1240,6 +1275,7 @@
 
   function switchYear(y) {
     activeYear = y;
+    _activeSection = 0;
     renderYearView(null);
   }
 
