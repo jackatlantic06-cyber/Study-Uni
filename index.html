@@ -667,7 +667,9 @@
       const modelBtn = hasModelAnswer
         ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">✦ Model Answer</button>`
         : '';
-      const quizBtn = `<button class="btn-quiz" onclick="openQuiz('${esc(m.code)}','${esc(m.name)}')">⚡ Quiz me</button>`;
+      const quizBtn = (QUIZ_BANK[m.code] && QUIZ_BANK[m.code].length > 0)
+        ? `<button class="btn-quiz" onclick="openQuiz('${esc(m.code)}','${esc(m.name)}')">⚡ Quiz me</button>`
+        : '';
 
       let paperRows = '';
       if (regularPapers.length) {
