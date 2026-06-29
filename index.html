@@ -269,14 +269,14 @@
     <a href="#" onclick="showPage('courses')" id="nl-courses">Courses</a>
     <a href="#" onclick="showPage('pricing')" id="nl-pricing">Pricing</a>
   </div>
-  <button class="nav-auth-btn btn-signin-nav" id="navAuthBtn" onclick="openAuthModal()">Sign in</button>
+  <button class="nav-auth-btn btn-signin-nav" id="navAuthBtn" onclick="openAuthModal()" style="display:none">Sign in</button>
 </nav>
 
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
     <h1>Every <span>UCC</span> Past Exam Paper.<br>One Place.</h1>
-    <p>Browse courses across UCC. Free access to past papers — forever.</p>
+    <p>Browse courses across UCC. Past papers are always free — Pro unlocks marking schemes and quiz practice.</p>
     <div class="stats-bar" id="statsBar">
       <div class="stat-item"><span class="stat-num" id="statPapers">—</span><span class="stat-label">exam papers</span></div>
       <div class="stat-divider"></div>
@@ -440,6 +440,7 @@
     if (id === 'home') history.replaceState(null, '', '#home');
     else if (id === 'courses') history.replaceState(null, '', '#courses');
     else if (id === 'pricing') history.replaceState(null, '', '#pricing');
+    else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); }
     window.scrollTo(0,0);
   }
 
@@ -933,7 +934,7 @@
 
   async function initAuth() {
     _initSupabase();
-    if (!_sbClient) return;
+    if (!_sbClient) { _updateNavAuth(); return; }
 
     const { data: { session } } = await _sbClient.auth.getSession();
     if (session) { _currentUser = session.user; await _refreshSub(); }
@@ -1018,6 +1019,8 @@
     document.getElementById('authPassword').placeholder = mode === 'signin' ? '••••••••' : 'Min 8 characters';
     document.getElementById('authErr').textContent = '';
     document.getElementById('authSuccessMsg').style.display = 'none';
+    const fp = document.getElementById('forgotPwdRow');
+    if (fp) fp.style.display = mode === 'signin' ? 'block' : 'none';
   }
 
   async function submitAuth() {
@@ -1104,16 +1107,103 @@
   function _updateNavAuth() {
     const btn = document.getElementById('navAuthBtn');
     if (!btn) return;
+    if (!_sbClient) { btn.style.display = 'none'; return; }
+    btn.style.display = '';
     if (_currentUser) {
       btn.textContent = _currentUser.email.split('@')[0];
       btn.className = 'nav-auth-btn btn-user-nav';
-      btn.onclick = function() {
-        if (confirm('Sign out of Study-Uni?')) _sbClient.auth.signOut();
-      };
+      btn.onclick = function() { showPage('account'); };
     } else {
       btn.textContent = 'Sign in';
       btn.className = 'nav-auth-btn btn-signin-nav';
       btn.onclick = openAuthModal;
+    }
+    _updatePricingPage();
+  }
+
+  // ── PRICING PAGE STATE ────────────────────────────────────────────────────────
+  function _updatePricingPage() {
+    const btn = document.getElementById('pricingProBtn');
+    if (!btn) return;
+    if (_isSubscribed) {
+      btn.textContent = 'You’re on Pro ✓';
+      btn.style.background = '#16a34a';
+      btn.style.cursor = 'default';
+      btn.onclick = null;
+    } else {
+      btn.textContent = 'Get Pro — €4.99/mo';
+      btn.style.background = '';
+      btn.style.cursor = '';
+      btn.onclick = openProModal;
+    }
+  }
+
+  // ── ACCOUNT PAGE ───────────────────────────────────────────────────────────────
+  function _updateAccountPage() {
+    if (!document.getElementById('page-account')) return;
+    if (!_currentUser) { showPage('home'); return; }
+
+    const emailEl = document.getElementById('acctEmail');
+    if (emailEl) emailEl.textContent = _currentUser.email;
+
+    const badge   = document.getElementById('acctSubBadge');
+    const desc    = document.getElementById('acctSubDesc');
+    const manBtn  = document.getElementById('acctManageBtn');
+    if (!badge || !desc || !manBtn) return;
+
+    if (_isSubscribed) {
+      badge.textContent = 'Pro ✓';
+      badge.style.cssText = 'background:#dcfce7;color:#16a34a;border-radius:999px;padding:3px 12px;font-size:12px;font-weight:700';
+      desc.textContent = 'You have full access to marking schemes and quiz practice.';
+      manBtn.textContent = 'Manage subscription →';
+      manBtn.style.cssText = 'padding:10px 20px;background:#f1f5f9;color:#374151;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit';
+      manBtn.onclick = openCustomerPortal;
+    } else {
+      badge.textContent = 'Free';
+      badge.style.cssText = 'background:#f1f5f9;color:#64748b;border-radius:999px;padding:3px 12px;font-size:12px;font-weight:700';
+      desc.textContent = 'Upgrade to unlock marking schemes and quiz practice.';
+      manBtn.textContent = 'Upgrade to Pro — €4.99/mo';
+      manBtn.style.cssText = 'padding:10px 20px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit';
+      manBtn.onclick = openProModal;
+    }
+  }
+
+  async function openCustomerPortal() {
+    if (!_currentUser) return;
+    const btn = document.getElementById('acctManageBtn');
+    const orig = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Loading…'; }
+    try {
+      const res = await fetch('/api/customer-portal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: _currentUser.id }),
+      });
+      const data = await res.json();
+      if (data.url) { window.location.href = data.url; }
+      else throw new Error(data.error || 'Could not open portal');
+    } catch(e) {
+      showToast('Error: ' + e.message);
+      if (btn) { btn.disabled = false; btn.textContent = orig; }
+    }
+  }
+
+  // ── FORGOT PASSWORD ────────────────────────────────────────────────────────────
+  async function forgotPassword() {
+    if (!_sbClient) return;
+    const email = document.getElementById('authEmail').value.trim().toLowerCase();
+    const errEl = document.getElementById('authErr');
+    if (!email) { errEl.textContent = 'Enter your email address first'; return; }
+    const { error } = await _sbClient.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/',
+    });
+    if (error) {
+      errEl.textContent = error.message;
+    } else {
+      const msg = document.getElementById('authSuccessMsg');
+      msg.textContent = '✓ Password reset email sent — check your inbox.';
+      msg.style.display = 'block';
+      errEl.textContent = '';
     }
   }
 
@@ -1201,7 +1291,7 @@
         }
       }
       // Handle other hash pages
-      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing' };
+      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account' };
       if (pageMap[hash]) { showPage(pageMap[hash]); return true; }
       return false;
     }
@@ -1231,6 +1321,31 @@
   <div id="quizBody"></div>
 </div>
 
+<!-- ACCOUNT PAGE -->
+<div class="page" id="page-account">
+  <div style="max-width:500px;margin:40px auto 0;padding:0 16px">
+    <h1 style="font-size:24px;font-weight:800;margin-bottom:4px;color:#0f172a">Your Account</h1>
+    <p id="acctEmail" style="color:#64748b;font-size:14px;margin-bottom:32px"></p>
+
+    <div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:24px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-weight:700;font-size:16px;color:#0f172a">Subscription</span>
+        <span id="acctSubBadge" style="background:#f1f5f9;color:#64748b;border-radius:999px;padding:3px 12px;font-size:12px;font-weight:700">Free</span>
+      </div>
+      <p id="acctSubDesc" style="color:#64748b;font-size:13px;margin-bottom:18px;line-height:1.5">Upgrade to unlock marking schemes and quiz practice.</p>
+      <button id="acctManageBtn" onclick="openProModal()"
+        style="padding:10px 20px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">
+        Upgrade to Pro &mdash; &euro;4.99/mo
+      </button>
+    </div>
+
+    <button onclick="if(confirm('Sign out of Study-Uni?'))_sbClient.auth.signOut().then(function(){showPage('home')})"
+      style="width:100%;padding:12px;background:#fff;color:#374151;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:4px">
+      Sign out
+    </button>
+  </div>
+</div>
+
 <!-- AUTH OVERLAY + MODAL -->
 <div class="auth-overlay" id="authOverlay" onclick="if(event.target===this)closeAuthModal()"></div>
 <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" style="position:fixed">
@@ -1250,6 +1365,9 @@
     <label>Password</label>
     <input type="password" id="authPassword" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" autocomplete="current-password"
            onkeydown="if(event.key==='Enter')submitAuth()"/>
+  </div>
+  <div style="text-align:right;margin-top:-6px;margin-bottom:12px" id="forgotPwdRow">
+    <a href="#" onclick="forgotPassword();return false" style="font-size:12px;color:#2563eb;text-decoration:none">Forgot password?</a>
   </div>
   <div class="auth-field" id="authConfirmField" style="display:none">
     <label>Confirm Password</label>
