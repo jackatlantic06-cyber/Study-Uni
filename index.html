@@ -392,22 +392,46 @@
   }
 
   function degreeType(name) {
-    if (/BAgrSc/.test(name))       return "BAgrSc";
-    if (/BAEcon/.test(name))       return "BAEcon";
-    if (/BAcc/.test(name))         return "BAcc";
-    if (/BFin|Finance BSc/.test(name)) return "BFin";
-    if (/BIS\b/.test(name))        return "BIS";
-    if (/BCom/.test(name))         return "BCom";
-    if (/BSocSc/.test(name))       return "BSocSc";
-    if (/BSW/.test(name))          return "BSW";
-    if (/BSc/.test(name))          return "BSc";
-    if (/BPharm|MPharm/.test(name))return "BPharm";
-    if (/BE\b/.test(name))         return "BE";
-    if (/BCL|^Law\s|Law & /.test(name)) return "BCL";
-    if (/MB|BCh|BDS/.test(name))   return "MB BCh";
-    if (/BEd/.test(name))          return "BEd";
-    if (/BA\b/.test(name))         return "BA";
-    return "Other";
+    // Engineering & Architecture
+    if (/\bBE\b/.test(name))                                            return "Engineering";
+    if (/Architecture/.test(name))                                        return "Engineering";
+    // Law
+    if (/BCL|^Law\s|Law &|Law \(/.test(name))                          return "Law";
+    // Medicine & Health
+    if (/\bMB\b|\bBCh\b|\bBDS\b|Medicine|Dentistry/.test(name))    return "MedHealth";
+    if (/BPharm|MPharm|Pharmacy/.test(name))                             return "MedHealth";
+    if (/Nursing|Midwifery/.test(name))                                  return "MedHealth";
+    if (/Occupational Therapy|Speech & Language|Paramedicine/.test(name))return "MedHealth";
+    if (/Public Health|Medical & Health/.test(name))                     return "MedHealth";
+    // Education
+    if (/\bBEd\b|Science Education/.test(name))                         return "Education";
+    // Business
+    if (/\bBCom\b|Commerce/.test(name))                                 return "Business";
+    if (/\bBFin\b|Finance BSc/.test(name))                              return "Business";
+    if (/\bBAcc\b|Accounting/.test(name))                               return "Business";
+    if (/\bBIS\b|Business Information/.test(name))                      return "Business";
+    if (/\bBAEcon\b|Applied Economics/.test(name))                      return "Business";
+    if (/Food Marketing|International Business/.test(name))              return "Business";
+    // Life Sciences (CK402 check FIRST so "Biological and Chemical Sciences" isn't caught by PhysSci)
+    if (/CK402|Biological and Chemical/.test(name))                      return "LifeSci";
+    if (/Biochemistry|Biotechnology|Microbiology|Neuroscience|Physiology/.test(name)) return "LifeSci";
+    if (/Biomedical|Genetics|Nutritional|Food Science/.test(name))       return "LifeSci";
+    // Physical Sciences
+    if (/Chemical Sciences|Chemical Physics/.test(name))                 return "PhysSci";
+    if (/\bChemistry\b/.test(name))                                      return "PhysSci";
+    if (/\bPhysics\b|Astrophysics/.test(name))                          return "PhysSci";
+    // Environmental & Earth Sciences
+    if (/Ecology|Environmental (Science|Biology)|Geoscience/.test(name)) return "EnvSci";
+    if (/Zoology|Sustainability|Agricultural/.test(name))                return "EnvSci";
+    if (/CK404|Biological, Environmental/.test(name))                    return "EnvSci";
+    // Maths & Computing
+    if (/Mathematical|Financial Mathematics|Actuarial/.test(name))       return "MathsCS";
+    if (/Computer Science|Data Science/.test(name))                      return "MathsCS";
+    // Arts & Humanities (social sciences fold in here)
+    if (/\bBSocSc\b|Social Science|Social Work|\bBSW\b/.test(name))   return "Arts";
+    if (/Government|Political Science|Criminology/.test(name))           return "Arts";
+    if (/\bBA\b/.test(name))                                            return "Arts";
+    return "Arts";
   }
 
   function countPapers(course) {
