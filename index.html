@@ -112,6 +112,25 @@
     .paper-chip:hover{background:#dbeafe}
     .paper-chip svg{width:10px;height:10px}
     .no-papers{font-size:12px;color:var(--muted);font-style:italic}
+    /* VIEWED STATE */
+    .paper-chip.viewed{background:#dcfce7;color:#15803d;border:1.5px solid #86efac}
+    .viewed-tick{font-size:9px;margin-left:3px;font-weight:700;opacity:.85}
+
+    /* MOBILE — collapse table into stacked cards below 620px */
+    @media(max-width:620px){
+      .module-table thead{display:none}
+      .module-table tbody,.module-table tr,.module-table td{display:block}
+      .module-table tr{padding:12px 0;border-bottom:1px solid var(--border)}
+      .module-table tr:last-child{border-bottom:none}
+      .module-table tr:hover td{background:transparent}
+      .module-table td{padding:2px 14px;border:none;font-size:13px}
+      .module-table td:nth-child(1){display:inline;padding-right:4px}
+      .module-table td:nth-child(2){display:inline;padding-left:0;font-weight:600}
+      .module-table td:nth-child(3){display:none}
+      .module-table td:nth-child(4){padding-top:8px}
+      .paper-row{flex-wrap:wrap;gap:5px;align-items:center}
+      .btn-model-answer,.btn-quiz{font-size:10px;padding:3px 8px}
+    }
     /* MODEL ANSWER & QUIZ BUTTONS */
     .btn-model-answer,.btn-quiz{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid;background:transparent;white-space:nowrap;transition:all .15s;font-family:inherit}
     .btn-model-answer{color:#2563eb;border-color:#2563eb}
@@ -676,7 +695,11 @@
         paperRows = regularPapers.map(f => {
           const url = typeof f === 'object' ? f.url : f;
           const lbl = typeof f === 'object' ? f.label : labelFromFilename(f);
-          return `<div class="paper-row"><a class="paper-chip" href="${url}" target="_blank" rel="noopener"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}</a>${modelBtn}${quizBtn}</div>`;
+          const safeUrl = url.replace(/'/g,"\'");
+          const viewed  = VIEWED[url];
+          const vClass  = viewed ? ' viewed' : '';
+          const vTick   = viewed ? '<span class="viewed-tick">&#10003;</span>' : '';
+          return `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${modelBtn}${quizBtn}</div>`;
         }).join('');
       } else {
         paperRows = `<div class="paper-row"><span class="no-papers">No papers yet</span>${modelBtn}${quizBtn}</div>`;
@@ -835,6 +858,17 @@
       '<p class="results-msg">' + info[1] + '</p>' +
       '<button class="quiz-retry" onclick="openQuiz(\'' + safeCode + '\',\'' + safeName + '\')">Try again ↺</button>' +
       '</div>';
+  }
+
+  // ── VIEWED STATE ──────────────────────────────────────────────────────────
+  const VIEWED = (function() {
+    try { return JSON.parse(localStorage.getItem('su_viewed') || '{}'); } catch(e) { return {}; }
+  })();
+
+  function markViewed(url, el) {
+    VIEWED[url] = true;
+    try { localStorage.setItem('su_viewed', JSON.stringify(VIEWED)); } catch(e) {}
+    if (el) el.classList.add('viewed');
   }
 
   function switchYear(y) {
