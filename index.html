@@ -7,6 +7,7 @@
   <meta name="description" content="Free UCC past exam papers. Browse by course and module."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
     :root{
       --bg:#f8fafc;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--muted:#64748b;
@@ -175,6 +176,50 @@
     .quiz-coming-soon .cs-icon{font-size:44px;margin-bottom:16px}
     .quiz-coming-soon h3{margin-bottom:8px;font-size:17px;color:#0f172a}
     .quiz-coming-soon p{color:#64748b;font-size:14px;line-height:1.6}
+    /* AUTH MODAL */
+    .auth-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;opacity:0;pointer-events:none;transition:opacity .2s}
+    .auth-overlay.active{opacity:1;pointer-events:all}
+    .auth-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(420px,95vw);background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:2001;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+    .auth-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+    .auth-title{font-size:20px;font-weight:800;margin-bottom:4px;color:#0f172a}
+    .auth-sub{font-size:13px;color:#64748b;margin-bottom:20px}
+    .auth-tabs{display:flex;border:1.5px solid #e2e8f0;border-radius:8px;margin-bottom:18px;overflow:hidden}
+    .auth-tab{flex:1;padding:9px;font-size:13px;font-weight:600;cursor:pointer;background:#f8fafc;border:none;color:#64748b;transition:all .15s}
+    .auth-tab.active{background:#2563eb;color:#fff}
+    .auth-field{margin-bottom:14px}
+    .auth-field label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+    .auth-field input{width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none;font-family:inherit;box-sizing:border-box}
+    .auth-field input:focus{border-color:#2563eb}
+    .auth-btn{width:100%;padding:12px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;font-family:inherit;transition:background .15s}
+    .auth-btn:hover{background:#1d4ed8}
+    .auth-btn:disabled{opacity:.6;cursor:not-allowed}
+    .auth-err{font-size:12px;color:#dc2626;margin-top:10px;min-height:16px;text-align:center}
+    .auth-msg{font-size:13px;color:#16a34a;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;margin-top:12px;text-align:center}
+    .auth-close{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;font-size:18px;color:#64748b;padding:4px 8px;border-radius:6px;line-height:1}
+    .auth-close:hover{background:#f1f5f9}
+    /* PRO MODAL */
+    .pro-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;opacity:0;pointer-events:none;transition:opacity .2s}
+    .pro-overlay.active{opacity:1;pointer-events:all}
+    .pro-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(440px,95vw);background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:2001;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+    .pro-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+    .pro-badge{display:inline-block;background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 12px;font-size:12px;font-weight:700;margin-bottom:12px}
+    .pro-features{list-style:none;margin:14px 0;display:flex;flex-direction:column;gap:8px;font-size:14px;padding:0}
+    .pro-features li{display:flex;align-items:flex-start;gap:8px;line-height:1.4}
+    .pro-features li::before{content:"\2713";color:#16a34a;font-weight:700;font-size:15px;flex-shrink:0;margin-top:1px}
+    .pro-cta{width:100%;padding:14px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:18px;font-family:inherit;transition:background .15s}
+    .pro-cta:hover{background:#1d4ed8}
+    .pro-cta:disabled{opacity:.6;cursor:not-allowed}
+    .pro-close{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;font-size:18px;color:#64748b;padding:4px 8px;border-radius:6px;line-height:1}
+    .pro-close:hover{background:#f1f5f9}
+    /* NAV AUTH BUTTON */
+    .nav-auth-btn{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;font-family:inherit;transition:all .15s;white-space:nowrap}
+    .btn-signin-nav{background:#2563eb;color:#fff;border-color:#2563eb}
+    .btn-signin-nav:hover{background:#1d4ed8}
+    .btn-user-nav{background:#f1f5f9;color:#374151;border-color:#e2e8f0}
+    .btn-user-nav:hover{background:#e2e8f0}
+    /* TOAST */
+    .su-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(70px);background:#0f172a;color:#fff;padding:12px 22px;border-radius:999px;font-size:14px;font-weight:500;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center}
+    .su-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
     .toggle-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
     .toggle-label{font-size:13px;color:var(--muted);cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px}
     .toggle-switch{position:relative;width:36px;height:20px;flex-shrink:0}
@@ -224,6 +269,7 @@
     <a href="#" onclick="showPage('courses')" id="nl-courses">Courses</a>
     <a href="#" onclick="showPage('pricing')" id="nl-pricing">Pricing</a>
   </div>
+  <button class="nav-auth-btn btn-signin-nav" id="navAuthBtn" onclick="openAuthModal()">Sign in</button>
 </nav>
 
 <!-- HOME -->
@@ -304,13 +350,14 @@
         <li>MCQ practice quizzes</li>
         <li>AI-powered exam hints</li>
       </ul>
-      <button class="pricing-cta" onclick="alert('Pro coming soon!')">Coming soon</button>
+      <button class="pricing-cta" id="pricingProBtn" onclick="openProModal()">Get Pro &mdash; &euro;4.99/mo</button>
     </div>
   </div>
 </div>
 
 <footer>© 2025 Study-Uni · UCC Past Exam Papers · Not affiliated with University College Cork</footer>
 
+<script src="config.js"></script>
 <script src="data.js"></script>
 <script>
 
@@ -750,6 +797,10 @@
   }
 
   function openModelAnswer(code) {
+    requirePro(function() { _doOpenModelAnswer(code); }, 'modelAnswer:' + code);
+  }
+
+  function _doOpenModelAnswer(code) {
     const val = MODEL_ANSWERS[code];
     if (!val) return;
     const docs = Array.isArray(val) ? val : [{ label: 'Model Answer', url: val }];
@@ -771,6 +822,10 @@
   }
 
   function openQuiz(code, name) {
+    requirePro(function() { _doOpenQuiz(code, name); }, 'quiz:' + code + ':' + name);
+  }
+
+  function _doOpenQuiz(code, name) {
     _qCode = code; _qName = name;
     document.getElementById('qhCode').textContent = code;
     document.getElementById('qhName').textContent = ' — ' + name;
@@ -860,6 +915,218 @@
       '</div>';
   }
 
+  // ── SUPABASE AUTH & PAYWALL ────────────────────────────────────────────────
+  let _sbClient = null;
+  let _currentUser = null;
+  let _isSubscribed = false;
+  let _pendingAction = null;
+  let _pendingActionKey = null;
+  let _authMode = 'signin';
+
+  function _initSupabase() {
+    const cfg = window.SU_CONFIG;
+    if (!cfg || !cfg.SUPABASE_URL || cfg.SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+    try {
+      _sbClient = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+    } catch(e) { console.warn('Supabase init failed', e); }
+  }
+
+  async function initAuth() {
+    _initSupabase();
+    if (!_sbClient) return;
+
+    const { data: { session } } = await _sbClient.auth.getSession();
+    if (session) { _currentUser = session.user; await _refreshSub(); }
+    _updateNavAuth();
+
+    _sbClient.auth.onAuthStateChange(async function(event, session) {
+      if (event === 'SIGNED_IN') {
+        _currentUser = session.user;
+        await _refreshSub();
+        _updateNavAuth();
+        closeAuthModal();
+        if (_pendingAction) {
+          const fn = _pendingAction; _pendingAction = null;
+          if (_isSubscribed) { fn(); } else { openProModal(); }
+        }
+      } else if (event === 'SIGNED_OUT') {
+        _currentUser = null; _isSubscribed = false; _updateNavAuth();
+      }
+    });
+
+    // Handle return from Stripe checkout (?sub=success)
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sub') === 'success') {
+      await _refreshSub();
+      history.replaceState(null, '', window.location.pathname + window.location.hash);
+      showToast('\u{1F389} Pro activated! You can now view marking schemes and quizzes.');
+      const key = (function() { try { return sessionStorage.getItem('su_pending'); } catch(e) { return null; } })();
+      if (key) { try { sessionStorage.removeItem('su_pending'); } catch(e) {} _runActionKey(key); }
+    }
+  }
+
+  async function _refreshSub() {
+    if (!_currentUser || !_sbClient) { _isSubscribed = false; return; }
+    try {
+      const { data } = await _sbClient.from('subscriptions')
+        .select('is_active,current_period_end').eq('id', _currentUser.id).maybeSingle();
+      _isSubscribed = !!(data && data.is_active &&
+        (!data.current_period_end || new Date(data.current_period_end) > new Date()));
+    } catch(e) { _isSubscribed = false; }
+  }
+
+  function requirePro(fn, actionKey) {
+    _pendingAction = fn;
+    _pendingActionKey = actionKey || null;
+    if (!_sbClient) { openProModal(); return; }
+    if (_currentUser && _isSubscribed) { _pendingAction = null; fn(); return; }
+    if (!_currentUser) { openAuthModal(); return; }
+    openProModal();
+  }
+
+  function _runActionKey(key) {
+    if (!key) return;
+    const parts = key.split(':');
+    if (parts[0] === 'modelAnswer' && parts[1]) _doOpenModelAnswer(parts[1]);
+    else if (parts[0] === 'quiz' && parts[1]) _doOpenQuiz(parts[1], parts.slice(2).join(':'));
+  }
+
+  // ── AUTH MODAL ─────────────────────────────────────────────────────────────
+  function openAuthModal() {
+    document.getElementById('authOverlay').classList.add('active');
+    document.getElementById('authModal').classList.add('active');
+    document.getElementById('authErr').textContent = '';
+    document.getElementById('authSuccessMsg').style.display = 'none';
+    setTimeout(function() { const e = document.getElementById('authEmail'); if(e) e.focus(); }, 150);
+  }
+
+  function closeAuthModal() {
+    document.getElementById('authOverlay').classList.remove('active');
+    document.getElementById('authModal').classList.remove('active');
+  }
+
+  function switchAuthTab(mode) {
+    _authMode = mode;
+    document.getElementById('tabSignin').classList.toggle('active', mode === 'signin');
+    document.getElementById('tabSignup').classList.toggle('active', mode === 'signup');
+    document.getElementById('authSubmitBtn').textContent = mode === 'signin' ? 'Sign in' : 'Create account';
+    document.getElementById('authConfirmField').style.display = mode === 'signup' ? 'block' : 'none';
+    document.getElementById('authPassword').placeholder = mode === 'signin' ? '••••••••' : 'Min 8 characters';
+    document.getElementById('authErr').textContent = '';
+    document.getElementById('authSuccessMsg').style.display = 'none';
+  }
+
+  async function submitAuth() {
+    if (!_sbClient) { showToast('Auth not configured yet.'); return; }
+    const email = document.getElementById('authEmail').value.trim().toLowerCase();
+    const pass  = document.getElementById('authPassword').value;
+    const errEl = document.getElementById('authErr');
+    const btn   = document.getElementById('authSubmitBtn');
+    errEl.textContent = '';
+
+    if (!email.endsWith('@ucc.ie') && !email.endsWith('@student.ucc.ie')) {
+      errEl.textContent = 'Please use your UCC email (@ucc.ie or @student.ucc.ie)';
+      return;
+    }
+    if (!pass) { errEl.textContent = 'Please enter your password'; return; }
+
+    btn.disabled = true;
+    btn.textContent = _authMode === 'signin' ? 'Signing in…' : 'Creating account…';
+
+    try {
+      if (_authMode === 'signup') {
+        const conf = document.getElementById('authConfirm').value;
+        if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters'; btn.disabled=false; btn.textContent='Create account'; return; }
+        if (pass !== conf)   { errEl.textContent = 'Passwords do not match'; btn.disabled=false; btn.textContent='Create account'; return; }
+        const { error } = await _sbClient.auth.signUp({ email, password: pass });
+        if (error) throw error;
+        document.getElementById('authSuccessMsg').style.display = 'block';
+        btn.textContent = '✓ Check your email';
+        return;
+      } else {
+        const { error } = await _sbClient.auth.signInWithPassword({ email, password: pass });
+        if (error) throw error;
+        // onAuthStateChange fires SIGNED_IN, handles the rest
+      }
+    } catch(e) {
+      errEl.textContent = e.message || 'Something went wrong, please try again';
+      btn.disabled = false;
+      btn.textContent = _authMode === 'signin' ? 'Sign in' : 'Create account';
+    }
+  }
+
+  // ── PRO MODAL ──────────────────────────────────────────────────────────────
+  function openProModal() {
+    document.getElementById('proOverlay').classList.add('active');
+    document.getElementById('proModal').classList.add('active');
+  }
+
+  function closeProModal() {
+    document.getElementById('proOverlay').classList.remove('active');
+    document.getElementById('proModal').classList.remove('active');
+  }
+
+  async function startCheckout() {
+    if (!_currentUser) { closeProModal(); openAuthModal(); return; }
+    const cfg = window.SU_CONFIG;
+    if (!cfg || cfg.SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+      showToast('Payments not yet configured — coming soon!');
+      return;
+    }
+    const btn = document.getElementById('proCheckoutBtn');
+    btn.disabled = true;
+    btn.textContent = 'Redirecting to checkout…';
+    try {
+      if (_pendingActionKey) {
+        try { sessionStorage.setItem('su_pending', _pendingActionKey); } catch(e) {}
+      }
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: _currentUser.id, email: _currentUser.email }),
+      });
+      const data = await res.json();
+      if (data.url) { window.location.href = data.url; }
+      else throw new Error(data.error || 'Checkout session could not be created');
+    } catch(e) {
+      showToast('Error: ' + e.message);
+      btn.disabled = false;
+      btn.textContent = 'Subscribe now — €4.99/mo';
+    }
+  }
+
+  // ── NAV AUTH STATE ─────────────────────────────────────────────────────────
+  function _updateNavAuth() {
+    const btn = document.getElementById('navAuthBtn');
+    if (!btn) return;
+    if (_currentUser) {
+      btn.textContent = _currentUser.email.split('@')[0];
+      btn.className = 'nav-auth-btn btn-user-nav';
+      btn.onclick = function() {
+        if (confirm('Sign out of Study-Uni?')) _sbClient.auth.signOut();
+      };
+    } else {
+      btn.textContent = 'Sign in';
+      btn.className = 'nav-auth-btn btn-signin-nav';
+      btn.onclick = openAuthModal;
+    }
+  }
+
+  // ── TOAST ──────────────────────────────────────────────────────────────────
+  function showToast(msg) {
+    let t = document.getElementById('suToast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'suToast';
+      t.className = 'su-toast';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._tid);
+    t._tid = setTimeout(function() { t.classList.remove('show'); }, 3500);
+  }
+
   // ── VIEWED STATE ──────────────────────────────────────────────────────────
   const VIEWED = (function() {
     try { return JSON.parse(localStorage.getItem('su_viewed') || '{}'); } catch(e) { return {}; }
@@ -910,6 +1177,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     buildHome();
     buildDegBuckets();
+    initAuth();
 
     // ── Deep link handler ──────────────────────────────────────────────────
     function loadFromHash(hash) {
@@ -956,6 +1224,57 @@
     <button class="quiz-close" onclick="closeQuiz()" aria-label="Close">✕</button>
   </div>
   <div id="quizBody"></div>
+</div>
+
+<!-- AUTH OVERLAY + MODAL -->
+<div class="auth-overlay" id="authOverlay" onclick="if(event.target===this)closeAuthModal()"></div>
+<div class="auth-modal" id="authModal" role="dialog" aria-modal="true" style="position:fixed">
+  <button class="auth-close" onclick="closeAuthModal()">&#x2715;</button>
+  <div class="auth-title">Welcome to Study-Uni</div>
+  <div class="auth-sub">Use your UCC email to unlock Pro features</div>
+  <div class="auth-tabs">
+    <button class="auth-tab active" id="tabSignin" onclick="switchAuthTab('signin')">Sign in</button>
+    <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Create account</button>
+  </div>
+  <div class="auth-field">
+    <label>UCC Email</label>
+    <input type="email" id="authEmail" placeholder="your.name@ucc.ie" autocomplete="email"
+           onkeydown="if(event.key==='Enter')submitAuth()"/>
+  </div>
+  <div class="auth-field">
+    <label>Password</label>
+    <input type="password" id="authPassword" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" autocomplete="current-password"
+           onkeydown="if(event.key==='Enter')submitAuth()"/>
+  </div>
+  <div class="auth-field" id="authConfirmField" style="display:none">
+    <label>Confirm Password</label>
+    <input type="password" id="authConfirm" placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;" autocomplete="new-password"
+           onkeydown="if(event.key==='Enter')submitAuth()"/>
+  </div>
+  <button class="auth-btn" id="authSubmitBtn" onclick="submitAuth()">Sign in</button>
+  <div class="auth-err" id="authErr"></div>
+  <div class="auth-msg" id="authSuccessMsg" style="display:none">
+    &#x2713;&nbsp;Check your UCC inbox and click the confirmation link, then sign in here.
+  </div>
+</div>
+
+<!-- PRO OVERLAY + MODAL -->
+<div class="pro-overlay" id="proOverlay" onclick="if(event.target===this)closeProModal()"></div>
+<div class="pro-modal" id="proModal" role="dialog" aria-modal="true" style="position:fixed">
+  <button class="pro-close" onclick="closeProModal()">&#x2715;</button>
+  <div class="pro-badge">&#x26A1; Study-Uni Pro</div>
+  <div style="font-size:22px;font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:6px">Unlock marking schemes<br>&amp; practice quizzes</div>
+  <div style="color:#64748b;font-size:14px">One plan. Cancel anytime.</div>
+  <div style="font-size:40px;font-weight:800;color:#0f172a;margin:14px 0 4px">&euro;4.99<span style="font-size:18px;font-weight:500;color:#64748b">/month</span></div>
+  <ul class="pro-features">
+    <li>All past exam papers (always free)</li>
+    <li>Worked solutions &amp; marking schemes</li>
+    <li>MCQ practice quizzes with explanations</li>
+    <li>New content added every semester</li>
+    <li>Cancel anytime &mdash; no lock-in</li>
+  </ul>
+  <button class="pro-cta" id="proCheckoutBtn" onclick="startCheckout()">Subscribe now &mdash; &euro;4.99/mo</button>
+  <div style="text-align:center;margin-top:10px;font-size:11px;color:#94a3b8">Secured by Stripe &middot; UCC students only</div>
 </div>
 
 </body>
