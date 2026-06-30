@@ -1039,9 +1039,10 @@
   function requirePro(fn, actionKey) {
     _pendingAction = fn;
     _pendingActionKey = actionKey || null;
-    // Owner bypass — emails listed in SU_CONFIG.OWNER_EMAILS get free access
-    const owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
-    if (_currentUser && owners.includes(_currentUser.email)) { _pendingAction = null; fn(); return; }
+    // Owner / Pro bypass — emails listed in OWNER_EMAILS or PRO_EMAILS get free access
+    const owners   = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+    const proUsers = (window.SU_CONFIG && window.SU_CONFIG.PRO_EMAILS)   || [];
+    if (_currentUser && (owners.includes(_currentUser.email) || proUsers.includes(_currentUser.email))) { _pendingAction = null; fn(); return; }
     // Supabase not configured yet — paywall is inactive, let everyone through
     if (!_sbClient) { _pendingAction = null; fn(); return; }
     if (_currentUser && _isSubscribed) { _pendingAction = null; fn(); return; }
@@ -1093,8 +1094,9 @@
     const btn   = document.getElementById('authSubmitBtn');
     errEl.textContent = '';
 
-    const _owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
-    if (!email.endsWith('@umail.ucc.ie') && !_owners.includes(email)) {
+    const _owners   = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+    const _proUsers = (window.SU_CONFIG && window.SU_CONFIG.PRO_EMAILS)   || [];
+    if (!email.endsWith('@umail.ucc.ie') && !_owners.includes(email) && !_proUsers.includes(email)) {
       errEl.textContent = 'Please use your UCC student email (@umail.ucc.ie)';
       return;
     }
