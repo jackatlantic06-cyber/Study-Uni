@@ -1030,7 +1030,7 @@
                   { code:"AN1006", name:"Topographical Anatomy",                            credits:10, files:[] },
                 ]},
                 { label:"Biochemistry", modules:[
-                  { code:"BC1024", name:"Introduction to Biomolecules and Metabolic Pathways", credits:10, files:[] },
+                  { code:"BC1024", name:"Introduction to Biomolecules and Metabolic Pathways", credits:10, files:[{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/_layouts/15/Doc.aspx?sourcedoc=%7BCDEA0F73-D1F8-44B2-B9CA-7263021BC972%7D&file=BC1024Summer2022_23.docx&action=default&mobileredirect=true&DefaultItemOpen=1",label:"Summer 22/23"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/_layouts/15/Doc.aspx?sourcedoc=%7B000B9F7F-4235-4EDD-8B42-21107E2C7CB7%7D&file=BC1024Autumn2021_22.docx&action=default&mobileredirect=true&DefaultItemOpen=1",label:"Autumn 21/22"}] },
                 ]},
                 { label:"Physiology", modules:[
                   { code:"PL1001", name:"Introduction to Physiology for Dentistry I",       credits:5, files:[{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Physiology/PL1001Winter2022_23.pdf",label:"Winter 22/23"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Physiology/PL1001Autumn2022_23.pdf",label:"Autumn 22/23"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Physiology/PL1001Winter2021_22.pdf",label:"Winter 21/22"},{url:"https://uccireland.sharepoint.com/sites/PastExamPapers/Shared%20Documents/Physiology/PL1001Autumn2021_22.pdf",label:"Autumn 21/22"}] },
