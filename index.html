@@ -21,7 +21,7 @@
 
     /* NAV */
     nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;gap:32px;height:56px;position:sticky;top:0;z-index:100}
-    .nav-logo{font-weight:800;font-size:18px;color:var(--accent)}
+    .nav-logo{height:36px;width:auto;display:block}
     .nav-links{display:flex;gap:24px;margin-left:auto}
     .nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}
     .nav-links a:hover,.nav-links a.active{color:var(--accent)}
@@ -265,7 +265,7 @@
 <body>
 
 <nav id="mainNav">
-  <span class="nav-logo">Study-Uni</span>
+  <img class="nav-logo" src="./logo.png" alt="Study-Uni"/>
   <button class="nav-back" id="navBack" onclick="goBack()">
     <svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3L2 8l4.5 5M2 8h12"/></svg>
     Back
