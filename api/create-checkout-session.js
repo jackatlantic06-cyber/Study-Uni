@@ -1,6 +1,13 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { createClient } = require('@supabase/supabase-js');
 
+const ALLOWED_PRICES = () => new Set([
+  process.env.STRIPE_PRICE_MONTHLY,
+  process.env.STRIPE_PRICE_SEMESTER,
+  process.env.STRIPE_PRICE_ANNUAL,
+  process.env.STRIPE_PRICE_ID, // legacy fallback
+].filter(Boolean));
+
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -8,8 +15,16 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { userId, email } = req.body || {};
+  const { userId, email, priceId } = req.body || {};
   if (!userId || !email) return res.status(400).json({ error: 'Missing userId or email' });
+
+  // Validate priceId against allowed set; fall back to monthly
+  const allowed = ALLOWED_PRICES();
+  const selectedPrice = (priceId && allowed.has(priceId))
+    ? priceId
+    : (process.env.STRIPE_PRICE_MONTHLY || process.env.STRIPE_PRICE_ID);
+
+  if (!selectedPrice) return res.status(400).json({ error: 'No Stripe price configured — add STRIPE_PRICE_MONTHLY to Vercel env vars' });
 
   const sb = createClient(
     process.env.SUPABASE_URL,
@@ -37,7 +52,7 @@ module.exports = async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     customer: customerId,
     payment_method_types: ['card'],
-    line_items: [{ price: process.env.STRIPE_PRICE_ID, quantity: 1 }],
+    line_items: [{ price: selectedPrice, quantity: 1 }],
     mode: 'subscription',
     success_url: `${origin}/api/activate-subscription?session_id={CHECKOUT_SESSION_ID}&user_id=${userId}`,
     cancel_url: `${origin}/?sub=cancel`,

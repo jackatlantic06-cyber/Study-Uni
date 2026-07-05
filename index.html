@@ -213,6 +213,12 @@
     .pro-cta:disabled{opacity:.6;cursor:not-allowed}
     .pro-close{position:absolute;top:14px;right:14px;background:none;border:none;cursor:pointer;font-size:18px;color:#64748b;padding:4px 8px;border-radius:6px;line-height:1}
     .pro-close:hover{background:#f1f5f9}
+    /* ── PLAN CARDS ─────────────────────────────────────────────── */
+    .plan-card{border:2px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .15s;background:var(--surface);user-select:none}
+    .plan-card:hover{border-color:#93c5fd}
+    .plan-card.selected{border-color:#2563eb;background:#eff6ff;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+    .dark .plan-card.selected{background:rgba(37,99,235,.15)}
+    .plan-save{display:inline-block;border-radius:999px;padding:1px 7px;font-size:10px;font-weight:700;margin-left:6px;vertical-align:middle}
     /* NAV AUTH BUTTON */
     .nav-auth-btn{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;font-family:inherit;transition:all .15s;white-space:nowrap}
     .btn-signin-nav{background:#2563eb;color:#fff;border-color:#2563eb}
@@ -1274,6 +1280,24 @@
     document.getElementById('proModal').classList.remove('active');
   }
 
+  // ── PLAN SELECTION ─────────────────────────────────────────────────────────
+  const _planMeta = {
+    monthly:  { label: '€4.99/mo',   configKey: 'STRIPE_PRICE_MONTHLY' },
+    semester: { label: '€9.99/3 mo', configKey: 'STRIPE_PRICE_SEMESTER' },
+    annual:   { label: '€29.99/yr',  configKey: 'STRIPE_PRICE_ANNUAL' },
+  };
+  let _selectedPlan = 'monthly';
+
+  function selectPlan(plan) {
+    _selectedPlan = plan;
+    ['monthly','semester','annual'].forEach(p => {
+      const el = document.getElementById('plan-' + p);
+      if (el) el.classList.toggle('selected', p === plan);
+    });
+    const btn = document.getElementById('proCheckoutBtn');
+    if (btn) btn.textContent = `Subscribe now — ${_planMeta[plan].label}`;
+  }
+
   async function startCheckout() {
     if (!_currentUser) { closeProModal(); openAuthModal(); return; }
     const cfg = window.SU_CONFIG;
@@ -1288,10 +1312,11 @@
       if (_pendingActionKey) {
         try { sessionStorage.setItem('su_pending', _pendingActionKey); } catch(e) {}
       }
+      const priceId = cfg[_planMeta[_selectedPlan].configKey];
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: _currentUser.id, email: _currentUser.email }),
+        body: JSON.stringify({ userId: _currentUser.id, email: _currentUser.email, priceId }),
       });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; }
@@ -1299,7 +1324,7 @@
     } catch(e) {
       showToast('Error: ' + e.message);
       btn.disabled = false;
-      btn.textContent = 'Subscribe now — €4.99/mo';
+      btn.textContent = `Subscribe now — ${_planMeta[_selectedPlan].label}`;
     }
   }
 
@@ -1832,15 +1857,59 @@
 <div class="pro-modal" id="proModal" role="dialog" aria-modal="true" style="position:fixed">
   <button class="pro-close" onclick="closeProModal()">&#x2715;</button>
   <div class="pro-badge">&#x26A1; Study-Uni Pro</div>
-  <div style="font-size:22px;font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:6px">Unlock marking schemes<br>&amp; practice quizzes</div>
-  <div style="color:#64748b;font-size:14px">One plan. Cancel anytime.</div>
-  <div style="font-size:40px;font-weight:800;color:#0f172a;margin:14px 0 4px">&euro;4.99<span style="font-size:18px;font-weight:500;color:#64748b">/month</span></div>
+  <div style="font-size:21px;font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:4px">Unlock marking schemes<br>&amp; practice quizzes</div>
+  <div style="color:#64748b;font-size:13px;margin-bottom:16px">Pick a plan &mdash; cancel anytime.</div>
+
+  <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:16px">
+    <div class="plan-card selected" id="plan-monthly" onclick="selectPlan('monthly')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;font-size:14px;color:var(--text)">Monthly</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:1px">Flexible &mdash; cancel anytime</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;4.99</span>
+          <span style="font-size:11px;color:var(--muted)">/mo</span>
+        </div>
+      </div>
+    </div>
+    <div class="plan-card" id="plan-semester" onclick="selectPlan('semester')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;font-size:14px;color:var(--text)">
+            Semester
+            <span class="plan-save" style="background:#dbeafe;color:#1d4ed8">SAVE 33%</span>
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-top:1px">Billed every 3 months &mdash; &euro;3.33/mo</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;9.99</span>
+          <span style="font-size:11px;color:var(--muted)">/3 mo</span>
+        </div>
+      </div>
+    </div>
+    <div class="plan-card" id="plan-annual" onclick="selectPlan('annual')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;font-size:14px;color:var(--text)">
+            Annual
+            <span class="plan-save" style="background:#dcfce7;color:#15803d">BEST VALUE</span>
+          </div>
+          <div style="font-size:12px;color:var(--muted);margin-top:1px">Full academic year &mdash; &euro;2.50/mo</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;29.99</span>
+          <span style="font-size:11px;color:var(--muted)">/yr</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <ul class="pro-features">
     <li>All past exam papers (always free)</li>
     <li>Worked solutions &amp; marking schemes</li>
     <li>MCQ practice quizzes with explanations</li>
     <li>New content added every semester</li>
-    <li>Cancel anytime &mdash; no lock-in</li>
   </ul>
   <button class="pro-cta" id="proCheckoutBtn" onclick="startCheckout()">Subscribe now &mdash; &euro;4.99/mo</button>
   <div style="text-align:center;margin-top:10px;font-size:11px;color:#94a3b8">Secured by Stripe &middot; UCC students only</div>
