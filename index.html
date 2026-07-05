@@ -260,7 +260,56 @@
   .route-tab-btn{padding:7px 16px;font-size:13px;font-weight:600;border:1.5px solid var(--border);border-radius:8px;background:var(--card);color:var(--muted);cursor:pointer;font-family:inherit;transition:color .12s,border-color .12s,background .12s}
   .route-tab-btn.active{background:#eff6ff;border-color:var(--accent);color:var(--accent)}
   .route-tab-btn:hover:not(.active){border-color:var(--text);color:var(--text)}
+
+  /* ── DARK MODE ─────────────────────────────────────────────────────── */
+  :root.dark{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#60a5fa;--accent-light:rgba(96,165,250,.15);--shadow:0 1px 3px rgba(0,0,0,.35)}
+  .dark .quiz-modal,.dark .auth-modal,.dark .pro-modal{background:#1e293b;color:#e2e8f0}
+  .dark .quiz-q,.dark .quiz-progress{color:#e2e8f0}
+  .dark .quiz-opt{background:#1e293b;border-color:#334155;color:#e2e8f0}
+  .dark .quiz-opt:hover:not(:disabled){background:rgba(96,165,250,.12);border-color:#60a5fa}
+  .dark .quiz-opt.correct{background:#14532d;border-color:#16a34a}.dark .quiz-opt.correct .opt-letter{background:#16a34a}
+  .dark .quiz-opt.wrong{background:#7f1d1d;border-color:#dc2626}.dark .quiz-opt.wrong .opt-letter{background:#dc2626}
+  .dark .quiz-exp.correct{background:#14532d;color:#bbf7d0;border-color:#166534}
+  .dark .quiz-exp.wrong{background:#7f1d1d;color:#fecaca;border-color:#991b1b}
+  .dark .opt-letter{background:#334155;color:#94a3b8}
+  .dark .quiz-header{border-color:#334155}
+  .dark .quiz-close:hover,.dark .auth-close:hover,.dark .pro-close:hover{background:#334155}
+  .dark .auth-field input{background:#0f172a;border-color:#334155;color:#e2e8f0}
+  .dark .auth-tabs{border-color:#334155}.dark .auth-tab{background:#0f172a;color:#94a3b8}.dark .auth-tab.active{background:#3b82f6;color:#fff}
+  .dark .module-table th{background:#0f172a;color:#94a3b8}.dark .module-table tr:hover td{background:#0f172a}
+  .dark .paper-chip{background:rgba(96,165,250,.2);color:#93c5fd}.dark .paper-chip:hover{background:rgba(96,165,250,.3)}
+  .dark .paper-chip.viewed{background:rgba(22,163,74,.2);color:#86efac;border-color:#166534}
+  .dark .btn-model-answer{color:#93c5fd;border-color:#3b82f6}.dark .btn-model-answer:hover{background:rgba(96,165,250,.15)}
+  .dark .btn-quiz{color:#86efac;border-color:#16a34a}.dark .btn-quiz:hover{background:rgba(134,239,172,.15)}
+  .dark .toggle-slider{background:#334155}
+  .dark .year-note{background:#1c1917;border-color:#92400e;color:#fcd34d}
+  .dark .pathway-card,.dark .deg-card,.dark .cat-card,.dark .course-btn{background:#1e293b;border-color:#334155}
+  .dark .pathway-card:hover,.dark .cat-card:hover,.dark .course-btn:hover{border-color:#60a5fa;background:rgba(96,165,250,.08)}
+  .dark .deg-card:hover{border-color:#60a5fa;box-shadow:0 4px 20px rgba(96,165,250,.15)}
+  .dark .pricing-card{background:#1e293b;border-color:#334155}.dark .pricing-card.featured{border-color:#60a5fa}
+  .dark .search-result-item{background:#1e293b;border-color:#334155}.dark .search-result-item:hover{background:rgba(96,165,250,.12);border-color:#60a5fa}
+  .dark .route-tab-btn{background:#1e293b;color:#94a3b8;border-color:#334155}.dark .route-tab-btn.active{background:rgba(96,165,250,.15);border-color:#60a5fa;color:#93c5fd}
+  .dark .deg-badge,.dark .cat-badge,.dark .cb-papers{background:rgba(96,165,250,.15);color:#93c5fd}
+  .dark .stats-bar{background:#1e293b;border-color:#334155}
+  .dark .hero-search input{background:#1e293b;border-color:#334155;color:#e2e8f0}.dark .hero-search input:focus{border-color:#60a5fa}
+  .dark .pro-badge{background:#292524;color:#fcd34d}
+  .dark .quiz-modal a[style]{background:#1e293b!important;color:#e2e8f0!important;border-color:#334155!important}
+  .dark .quiz-next,.dark .quiz-retry{background:#3b82f6}.dark .quiz-next:hover,.dark .quiz-retry:hover{background:#2563eb}
+  .dark .tab{background:#1e293b;border-color:#334155;color:#94a3b8}.dark .tab.active{background:#3b82f6;color:#fff;border-color:#3b82f6}
+  .dark .tab:hover:not(.active){border-color:#60a5fa;color:#93c5fd}
+  .dark .degree-group h2{border-color:#334155}
+  .dark-toggle{background:none;border:1.5px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:16px;color:var(--muted);transition:all .15s;line-height:1;flex-shrink:0}
+  .dark-toggle:hover{border-color:var(--accent);color:var(--accent)}
+  /* ── BOOKMARKS ─────────────────────────────────────────────────────── */
+  .bm-btn{background:none;border:none;cursor:pointer;font-size:15px;padding:2px 4px;line-height:1;opacity:.4;transition:opacity .15s;flex-shrink:0}
+  .bm-btn:hover,.bm-btn.saved{opacity:1}
+  .my-modules-section{margin-bottom:8px;text-align:left}
+  .my-modules-section h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
+  /* ── NEW BADGE ─────────────────────────────────────────────────────── */
+  .badge-new{display:inline-block;background:#dcfce7;color:#15803d;border-radius:999px;padding:1px 6px;font-size:9px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.03em;text-transform:uppercase}
+  .dark .badge-new{background:rgba(22,163,74,.25);color:#86efac}
   </style>
+<script>try{if(localStorage.getItem('su_dark')==='1'||(localStorage.getItem('su_dark')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}</script>
 </head>
 <body>
 
@@ -275,6 +324,7 @@
     <a href="#" onclick="showPage('courses')" id="nl-courses">Courses</a>
     <a href="#" onclick="showPage('pricing')" id="nl-pricing">Pricing</a>
   </div>
+  <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   <button class="nav-auth-btn btn-signin-nav" id="navAuthBtn" onclick="openAuthModal()" style="display:none">Sign in</button>
 </nav>
 
@@ -300,6 +350,10 @@
     </div>
   </div>
   <div class="search-results" id="searchResults"></div>
+  <div id="myModulesSection" class="my-modules-section" style="display:none">
+    <h3>⭐ My Modules</h3>
+    <div id="myModulesGrid" class="course-grid"></div>
+  </div>
   <div id="categoriesRoot" class="categories"></div>
 </div>
 
@@ -521,6 +575,7 @@
     document.getElementById('statQuizzes').textContent = totalQuizzes.toLocaleString();
     document.getElementById('statCourses').textContent = totalCourses.toLocaleString();
     document.getElementById('statModules').textContent = totalModules.toLocaleString();
+    renderMyModules();
     const root = document.getElementById('categoriesRoot');
     root.innerHTML = DEG_BUCKETS.map(b => {
       const courses = getCoursesForBucket(b.id);
@@ -590,8 +645,12 @@
     }
     root.innerHTML = `<div class="course-grid">${courses.map(c => {
       const n = countPapers(c);
+      const saved = BOOKMARKS.has(c.id);
       return `<button class="course-btn" onclick="openCourse('${c.id}')">
-        <div class="cb-name">${c.name}</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div class="cb-name">${c.name}</div>
+          <button class="bm-btn${saved?' saved':''}" onclick="toggleBookmark('${c.id}',event)" title="${saved?'Remove bookmark':'Save to My Modules'}">${saved?'⭐':'☆'}</button>
+        </div>
         <div class="cb-meta">${c.years.length} year${c.years.length!==1?'s':''} · ${c.schoolName||''}</div>
         ${n > 0 ? `<span class="cb-papers">📄 ${n} papers</span>` : ''}
       </button>`;
@@ -803,8 +862,10 @@
         return !(lbl.toLowerCase().includes('marking') || lbl.toLowerCase().includes('model answer') || lbl.toLowerCase().includes('scheme'));
       });
       const hasModelAnswer = !!MODEL_ANSWERS[m.code];
+      const _maEntries = MODEL_ANSWERS[m.code];
+      const _hasNewMA = _maEntries && (Array.isArray(_maEntries) ? _maEntries.some(a => NEW_URLS.has(a.url)) : NEW_URLS.has(_maEntries));
       const modelBtn = hasModelAnswer
-        ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">✦ Model Answer</button>`
+        ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">✦ Model Answer${_hasNewMA ? ' <span class="badge-new">New</span>' : ''}</button>`
         : '';
       const quizBtn = (QUIZ_BANK[m.code] && QUIZ_BANK[m.code].length > 0)
         ? `<button class="btn-quiz" onclick="openQuiz('${esc(m.code)}','${esc(m.name)}')">⚡ Quiz me</button>`
@@ -884,11 +945,12 @@
     document.getElementById('qhName').textContent = '';
     document.getElementById('quizSubtitle').textContent = 'Available Model Answers';
     document.getElementById('quizBody').innerHTML = docs.map(function(d) {
+      const newBadge = NEW_URLS.has(d.url) ? '<span class="badge-new">New</span>' : '';
       return '<a class="paper-chip" href="' + d.url + '" target="_blank" rel="noopener" ' +
              'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
              'margin-bottom:8px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;' +
              'font-weight:500;color:#0f172a;text-decoration:none">' +
-             '<span style="font-size:18px">&#128196;</span>' + d.label + '</a>';
+             '<span style="font-size:18px">&#128196;</span>' + d.label + newBadge + '</a>';
     }).join('');
     document.getElementById('quizOverlay').classList.add('active');
     document.getElementById('quizModal').classList.add('active');
@@ -1301,6 +1363,81 @@
     t._tid = setTimeout(function() { t.classList.remove('show'); }, 3500);
   }
 
+  // ── DARK MODE ─────────────────────────────────────────────────────────────
+  function toggleDark() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    const btn = document.getElementById('darkToggle');
+    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+    try { localStorage.setItem('su_dark', isDark ? '1' : '0'); } catch(e) {}
+  }
+
+  // ── BOOKMARKS ─────────────────────────────────────────────────────────────
+  const BOOKMARKS = (function() {
+    try { return new Set(JSON.parse(localStorage.getItem('su_bookmarks') || '[]')); } catch(e) { return new Set(); }
+  })();
+
+  function toggleBookmark(courseId, event) {
+    event.stopPropagation();
+    if (BOOKMARKS.has(courseId)) {
+      BOOKMARKS.delete(courseId);
+      showToast('Removed from My Modules');
+    } else {
+      BOOKMARKS.add(courseId);
+      showToast('⭐ Saved to My Modules');
+    }
+    try { localStorage.setItem('su_bookmarks', JSON.stringify([...BOOKMARKS])); } catch(e) {}
+    renderMyModules();
+    const q = document.getElementById('courseSearch');
+    if (activeDegBucket) filterCoursesInBucket(q ? q.value : '');
+  }
+
+  function renderMyModules() {
+    const section = document.getElementById('myModulesSection');
+    const grid = document.getElementById('myModulesGrid');
+    if (!section || !grid) return;
+    if (BOOKMARKS.size === 0) { section.style.display = 'none'; return; }
+    const courses = [...BOOKMARKS].map(id => findCourseById(id)).filter(Boolean);
+    if (!courses.length) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+    grid.innerHTML = courses.map(c =>
+      `<button class="course-btn" onclick="openCourse('${c.id}')">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div class="cb-name">${c.name}</div>
+          <button class="bm-btn saved" onclick="toggleBookmark('${c.id}',event)" title="Remove">⭐</button>
+        </div>
+        <div class="cb-meta">${c.years.length} year${c.years.length!==1?'s':''} · ${c.schoolName||''}</div>
+      </button>`
+    ).join('');
+  }
+
+  // ── NEW CONTENT (update this set when adding new marking schemes) ──────────
+  const NEW_URLS = new Set([
+    './marking-schemes/AC4408_Summer2025_Marking_Scheme.pdf',
+    './marking-schemes/AC4408_Summer2024_Marking_Scheme.pdf',
+    './marking-schemes/AC4408_Summer2023_Marking_Scheme.pdf',
+    './marking-schemes/AC4408_Summer2022_Marking_Scheme.pdf',
+    './marking-schemes/AC4408_Autumn2025_Marking_Scheme.pdf',
+    './marking-schemes/AC4408_Autumn2024_Marking_Scheme.pdf',
+    './marking-schemes/AC4409_Winter2025_Marking_Scheme.pdf',
+    './marking-schemes/AC4409_Winter2024_Marking_Scheme.pdf',
+    './marking-schemes/AC4409_Winter2023_Marking_Scheme.pdf',
+    './marking-schemes/AC4409_Winter2022_Marking_Scheme.pdf',
+    './marking-schemes/AC4100_Winter2022_Marking_Scheme.pdf',
+    './marking-schemes/AC4407_Winter2025_Marking_Scheme.pdf',
+    './marking-schemes/AC4407_Autumn2023_Marking_Scheme.pdf',
+    './marking-schemes/AC4407_Winter2022_Marking_Scheme.pdf',
+    './marking-schemes/AC4407_Winter2021_Marking_Scheme.pdf',
+    './marking-schemes/AC4407_Autumn2020_Marking_Scheme.pdf',
+    './marking-schemes/AC4407_Winter2019_Marking_Scheme.pdf',
+    './marking-schemes/AC3303_AC3304_Spring2024_Marking_Scheme.pdf',
+    './marking-schemes/AC3303_AC3304_Autumn2023_Marking_Scheme.pdf',
+    './marking-schemes/AC3303_AC3304_Spring2023_Marking_Scheme.pdf',
+    './marking-schemes/AC2206_AC3302_Winter2025_Marking_Scheme.pdf',
+    './marking-schemes/AC2206_AC3302_Winter2024_Marking_Scheme.pdf',
+    './marking-schemes/AC2206_AC3302_Winter2023_Marking_Scheme.pdf',
+    './marking-schemes/AC2206_AC3302_Autumn2021_Marking_Scheme.pdf',
+  ]);
+
   // ── VIEWED STATE ──────────────────────────────────────────────────────────
   const VIEWED = (function() {
     try { return JSON.parse(localStorage.getItem('su_viewed') || '{}'); } catch(e) { return {}; }
@@ -1358,6 +1495,8 @@
 
   // ─── INIT ─────────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
+    const _dtBtn = document.getElementById('darkToggle');
+    if (_dtBtn) _dtBtn.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
     buildHome();
     buildDegBuckets();
     initAuth();
