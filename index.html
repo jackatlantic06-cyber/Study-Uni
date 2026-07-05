@@ -645,12 +645,8 @@
     }
     root.innerHTML = `<div class="course-grid">${courses.map(c => {
       const n = countPapers(c);
-      const saved = BOOKMARKS.has(c.id);
       return `<button class="course-btn" onclick="openCourse('${c.id}')">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
-          <div class="cb-name">${c.name}</div>
-          <button class="bm-btn${saved?' saved':''}" onclick="toggleBookmark('${c.id}',event)" title="${saved?'Remove bookmark':'Save to My Modules'}">${saved?'⭐':'☆'}</button>
-        </div>
+        <div class="cb-name">${c.name}</div>
         <div class="cb-meta">${c.years.length} year${c.years.length!==1?'s':''} · ${c.schoolName||''}</div>
         ${n > 0 ? `<span class="cb-papers">📄 ${n} papers</span>` : ''}
       </button>`;
@@ -836,9 +832,13 @@
       }
     }
 
+    const _bmSaved = BOOKMARKS.has(c.id);
     root.innerHTML = `
       <div class="breadcrumb"><span onclick="goBack()">← Back</span> / ${c.name}</div>
-      <h1>${c.name}</h1>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <h1 style="margin:0">${c.name}</h1>
+        <button class="bm-btn${_bmSaved?' saved':''}" onclick="toggleBookmark('${c.id}',event)" title="${_bmSaved?'Remove from My Modules':'Save to My Modules'}" style="font-size:20px;padding:4px">${_bmSaved?'⭐':'☆'}</button>
+      </div>
       <p class="course-meta">${c.years.length}-year programme</p>
       <div class="year-tabs">${yearTabs}</div>
       ${toggleBar}
