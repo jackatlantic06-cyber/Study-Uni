@@ -308,6 +308,26 @@
   /* ── NEW BADGE ─────────────────────────────────────────────────────── */
   .badge-new{display:inline-block;background:#dcfce7;color:#15803d;border-radius:999px;padding:1px 6px;font-size:9px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.03em;text-transform:uppercase}
   .dark .badge-new{background:rgba(22,163,74,.25);color:#86efac}
+  /* ── PROGRESS TRACKER ──────────────────────────────────────────── */
+  .done-btn{background:none;border:1.5px solid var(--border);border-radius:999px;cursor:pointer;font-size:10px;font-weight:700;padding:2px 8px;color:var(--muted);transition:all .15s;font-family:inherit;white-space:nowrap;line-height:1.4}
+  .done-btn:hover{border-color:#16a34a;color:#16a34a}
+  .done-btn.done{background:#dcfce7;border-color:#16a34a;color:#15803d}
+  .dark .done-btn.done{background:rgba(22,163,74,.2);border-color:#16a34a;color:#86efac}
+  .year-progress{margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+  .progress-bar-track{flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden;max-width:200px}
+  .progress-bar-fill{height:100%;background:#16a34a;border-radius:999px;transition:width .3s}
+  /* ── STREAK ─────────────────────────────────────────────────────── */
+  .streak-pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:600;color:var(--text)}
+  /* ── NOTIFY BELL ────────────────────────────────────────────────── */
+  .notify-btn{background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;opacity:.35;transition:opacity .15s;line-height:1;vertical-align:middle}
+  .notify-btn:hover,.notify-btn.notified{opacity:1}
+  /* ── NOTIFICATION MODAL ─────────────────────────────────────────── */
+  .notif-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;opacity:0;pointer-events:none;transition:opacity .2s}
+  .notif-overlay.active{opacity:1;pointer-events:all}
+  .notif-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(380px,92vw);background:var(--surface);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:2001;padding:28px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+  .notif-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+  .dark .notif-modal{background:#1e293b}
+  .notif-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);font-family:inherit}
   </style>
 <script>try{if(localStorage.getItem('su_dark')==='1'||(localStorage.getItem('su_dark')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}</script>
 </head>
@@ -348,11 +368,16 @@
       <input type="text" id="heroSearch" placeholder="Search module code or name…" oninput="handleSearch(this.value)"/>
       <button onclick="handleSearch(document.getElementById('heroSearch').value)">Search</button>
     </div>
+    <div id="streakBar" style="display:none;text-align:center;margin-top:16px"></div>
   </div>
   <div class="search-results" id="searchResults"></div>
   <div id="myModulesSection" class="my-modules-section" style="display:none">
     <h3>⭐ My Modules</h3>
     <div id="myModulesGrid" class="course-grid"></div>
+  </div>
+  <div id="trendingSection" style="display:none;margin-bottom:8px;text-align:left">
+    <h3 style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">🔥 Your Most Visited</h3>
+    <div id="trendingGrid" class="course-grid"></div>
   </div>
   <div id="categoriesRoot" class="categories"></div>
 </div>
@@ -576,6 +601,8 @@
     document.getElementById('statCourses').textContent = totalCourses.toLocaleString();
     document.getElementById('statModules').textContent = totalModules.toLocaleString();
     renderMyModules();
+    renderStreak();
+    renderTrending();
     const root = document.getElementById('categoriesRoot');
     root.innerHTML = DEG_BUCKETS.map(b => {
       const courses = getCoursesForBucket(b.id);
@@ -660,6 +687,7 @@
     activeCourse = course;
     activeYear = course.years[0]?.year || 1;
     _activeSection = 0;
+    trackView(courseId);
     renderYearView(null);
     showPage('years');
   }
@@ -832,6 +860,20 @@
       }
     }
 
+    // Compute progress bar for this year
+    let _yp = 0, _yd = 0;
+    const _ym = [];
+    if (yearObj) {
+      (yearObj.modules||[]).forEach(m => _ym.push(m));
+      (yearObj.sections||[]).forEach(s => (s.modules||[]).forEach(m => _ym.push(m)));
+      (yearObj.pathways||[]).forEach(pw => { (pw.modules||[]).forEach(m => _ym.push(m)); (pw.sections||[]).forEach(s => (s.modules||[]).forEach(m => _ym.push(m))); });
+    }
+    _ym.forEach(m => {
+      (m.files||[]).filter(f => { const l=typeof f==='object'?f.label:''; return !(l.toLowerCase().includes('marking')||l.toLowerCase().includes('model answer')||l.toLowerCase().includes('scheme')); })
+        .forEach(f => { const u=typeof f==='object'?f.url:f; _yp++; if(PRACTICED.has(u)) _yd++; });
+    });
+    const _ypct = _yp > 0 ? Math.round(_yd/_yp*100) : 0;
+    const progressBar = _yp > 0 ? `<div class="year-progress" id="_yearProgressBar"><span id="_yearProgressLabel">${_yd}/${_yp} papers practiced · ${_ypct}%</span><div class="progress-bar-track"><div class="progress-bar-fill" id="_yearProgressFill" style="width:${_ypct}%"></div></div></div>` : '';
     const _bmSaved = BOOKMARKS.has(c.id);
     root.innerHTML = `
       <div class="breadcrumb"><span onclick="goBack()">← Back</span> / ${c.name}</div>
@@ -841,6 +883,7 @@
       </div>
       <p class="course-meta">${c.years.length}-year programme</p>
       <div class="year-tabs">${yearTabs}</div>
+      ${progressBar}
       ${toggleBar}
       ${moduleHTML}`;
 
@@ -880,14 +923,17 @@
           const viewed  = VIEWED[url];
           const vClass  = viewed ? ' viewed' : '';
           const vTick   = viewed ? '<span class="viewed-tick">&#10003;</span>' : '';
-          return `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${modelBtn}${quizBtn}</div>`;
+          const practiced = PRACTICED.has(url);
+          const doneBtn = `<button class="done-btn${practiced?' done':''}" onclick="togglePracticed('${safeUrl}',this)">${practiced?'✓ Done':'Mark done'}</button>`;
+          return `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${doneBtn}${modelBtn}${quizBtn}</div>`;
         }).join('');
       } else {
         paperRows = `<div class="paper-row"><span class="no-papers">No papers yet</span>${modelBtn}${quizBtn}</div>`;
       }
+      const notifyBtn = `<button class="notify-btn${NOTIFIED[m.code]?' notified':''}" data-code="${esc(m.code)}" onclick="openNotifModal('${esc(m.code)}','${esc(m.name)}')" title="Notify me when new content is added">🔔</button>`;
       const paperCell = `<div class="papers-cell">${paperRows}</div>`;
       return `<tr class="${isEmpty ? 'row-empty' : ''}">
-        <td><span class="mod-code">${m.code}</span></td>
+        <td><span class="mod-code">${m.code}</span>${notifyBtn}</td>
         <td>${m.name}</td>
         <td style="text-align:center;color:var(--muted)">${m.credits || ''}</td>
         <td>${paperCell}</td>
@@ -1120,6 +1166,19 @@
     // Supabase not configured yet — paywall is inactive, let everyone through
     if (!_sbClient) { _pendingAction = null; fn(); return; }
     if (_currentUser && _isSubscribed) { _pendingAction = null; fn(); return; }
+    // ── Free trial: 1 quiz + 1 model answer for everyone ─────────────────
+    const isQuiz = actionKey && actionKey.startsWith('quiz:');
+    const isMS   = actionKey && actionKey.startsWith('modelAnswer:');
+    if (isQuiz && TRIAL.quiz < 1) {
+      TRIAL.quiz++; _saveTrial(); _pendingAction = null;
+      _showTrialToast('Free trial quiz used — subscribe for unlimited access ⚡');
+      fn(); return;
+    }
+    if (isMS && TRIAL.ms < 1) {
+      TRIAL.ms++; _saveTrial(); _pendingAction = null;
+      _showTrialToast('Free trial model answer used — subscribe for unlimited access ✦');
+      fn(); return;
+    }
     if (!_currentUser) { openAuthModal(); return; }
     openProModal();
   }
@@ -1438,6 +1497,140 @@
     './marking-schemes/AC2206_AC3302_Autumn2021_Marking_Scheme.pdf',
   ]);
 
+  // ── FREE TRIAL ────────────────────────────────────────────────────────────
+  const TRIAL = (function() {
+    try { return JSON.parse(localStorage.getItem('su_trial')||'{"quiz":0,"ms":0}'); } catch(e) { return {quiz:0,ms:0}; }
+  })();
+  function _saveTrial() { try { localStorage.setItem('su_trial', JSON.stringify(TRIAL)); } catch(e) {} }
+  function _showTrialToast(msg) {
+    let t = document.getElementById('_trialToast');
+    if (!t) {
+      t = document.createElement('div'); t.id = '_trialToast';
+      t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:10px 22px;border-radius:999px;font-size:13px;font-weight:600;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg; t.style.opacity = '1';
+    clearTimeout(t._to); t._to = setTimeout(() => { t.style.opacity = '0'; }, 3000);
+  }
+
+  // ── STUDY STREAK ──────────────────────────────────────────────────────────
+  function updateStreak() {
+    try {
+      const today = new Date().toISOString().slice(0,10);
+      const s = JSON.parse(localStorage.getItem('su_streak')||'{"count":0,"last":""}');
+      const diff = s.last ? Math.round((new Date(today) - new Date(s.last)) / 86400000) : 999;
+      if (diff === 0) return;
+      s.count = diff === 1 ? s.count + 1 : 1;
+      s.last = today;
+      localStorage.setItem('su_streak', JSON.stringify(s));
+    } catch(e) {}
+  }
+  function renderStreak() {
+    const el = document.getElementById('streakBar');
+    if (!el) return;
+    try {
+      const s = JSON.parse(localStorage.getItem('su_streak')||'{"count":0}');
+      if (s.count >= 2) {
+        el.style.display = 'block';
+        el.innerHTML = `<span class="streak-pill">🔥 ${s.count}-day streak — keep it up!</span>`;
+      } else { el.style.display = 'none'; }
+    } catch(e) {}
+  }
+
+  // ── PROGRESS TRACKER ──────────────────────────────────────────────────────
+  const PRACTICED = (function() {
+    try { return new Set(JSON.parse(localStorage.getItem('su_practiced')||'[]')); } catch(e) { return new Set(); }
+  })();
+  function togglePracticed(url, btn) {
+    if (PRACTICED.has(url)) { PRACTICED.delete(url); btn.classList.remove('done'); btn.textContent = 'Mark done'; }
+    else { PRACTICED.add(url); btn.classList.add('done'); btn.textContent = '✓ Done'; }
+    try { localStorage.setItem('su_practiced', JSON.stringify([...PRACTICED])); } catch(e) {}
+    _updateProgressBar();
+  }
+  function _updateProgressBar() {
+    if (!activeCourse) return;
+    const yo = activeCourse.years.find(y => y.year === activeYear);
+    if (!yo) return;
+    let _p = 0, _d = 0;
+    const _ms = [];
+    (yo.modules||[]).forEach(m => _ms.push(m));
+    (yo.sections||[]).forEach(s => (s.modules||[]).forEach(m => _ms.push(m)));
+    (yo.pathways||[]).forEach(pw => { (pw.modules||[]).forEach(m => _ms.push(m)); (pw.sections||[]).forEach(s => (s.modules||[]).forEach(m => _ms.push(m))); });
+    _ms.forEach(m => {
+      (m.files||[]).filter(f => { const l=typeof f==='object'?f.label:''; return !(l.toLowerCase().includes('marking')||l.toLowerCase().includes('model answer')||l.toLowerCase().includes('scheme')); })
+        .forEach(f => { const u=typeof f==='object'?f.url:f; _p++; if(PRACTICED.has(u)) _d++; });
+    });
+    const pb = document.getElementById('_yearProgressBar');
+    const fill = document.getElementById('_yearProgressFill');
+    const lbl = document.getElementById('_yearProgressLabel');
+    if (!pb) return;
+    if (_p === 0) { pb.style.display='none'; return; }
+    const pct = Math.round(_d/_p*100);
+    pb.style.display = 'flex';
+    if (fill) fill.style.width = pct + '%';
+    if (lbl) lbl.textContent = `${_d}/${_p} papers practiced · ${pct}%`;
+  }
+
+  // ── COURSE VIEWS / TRENDING ───────────────────────────────────────────────
+  const VIEWS = (function() {
+    try { return JSON.parse(localStorage.getItem('su_views')||'{}'); } catch(e) { return {}; }
+  })();
+  function trackView(courseId) {
+    VIEWS[courseId] = (VIEWS[courseId]||0) + 1;
+    try { localStorage.setItem('su_views', JSON.stringify(VIEWS)); } catch(e) {}
+  }
+  function renderTrending() {
+    const el = document.getElementById('trendingSection');
+    if (!el) return;
+    const sorted = Object.entries(VIEWS).sort((a,b) => b[1]-a[1]).slice(0,5);
+    if (!sorted.length) { el.style.display = 'none'; return; }
+    const courses = sorted.map(([id]) => findCourseById(id)).filter(Boolean);
+    if (!courses.length) { el.style.display = 'none'; return; }
+    el.style.display = 'block';
+    document.getElementById('trendingGrid').innerHTML = courses.map(c =>
+      `<button class="course-btn" onclick="openCourse('${c.id}')">
+        <div class="cb-name">${c.name}</div>
+        <div class="cb-meta">${c.years.length} year${c.years.length!==1?'s':''} · ${c.schoolName||''}</div>
+        <span class="cb-papers" style="margin-left:auto">🔥 ${VIEWS[c.id]} visit${VIEWS[c.id]!==1?'s':''}</span>
+      </button>`
+    ).join('');
+  }
+
+  // ── EMAIL NOTIFICATIONS ───────────────────────────────────────────────────
+  const NOTIFIED = (function() {
+    try { return JSON.parse(localStorage.getItem('su_notify')||'{}'); } catch(e) { return {}; }
+  })();
+  let _notifCode = '', _notifName = '';
+  function openNotifModal(code, name) {
+    _notifCode = code; _notifName = name;
+    const title = document.getElementById('notifModuleTitle');
+    if (title) title.textContent = name + ' — Notifications';
+    const inp = document.getElementById('notifEmail');
+    if (inp) inp.value = (_currentUser && _currentUser.email) || '';
+    const msg = document.getElementById('notifMsg');
+    if (msg) msg.textContent = NOTIFIED[code] ? '✓ Already subscribed for this module.' : '';
+    document.getElementById('notifOverlay').classList.add('active');
+    document.getElementById('notifModal').classList.add('active');
+    if (inp) setTimeout(() => inp.focus(), 100);
+  }
+  function closeNotifModal() {
+    document.getElementById('notifOverlay').classList.remove('active');
+    document.getElementById('notifModal').classList.remove('active');
+  }
+  async function submitNotif() {
+    const email = (document.getElementById('notifEmail').value||'').trim();
+    const msg = document.getElementById('notifMsg');
+    if (!email || !email.includes('@')) { if (msg) msg.textContent = 'Please enter a valid email.'; return; }
+    NOTIFIED[_notifCode] = email;
+    try { localStorage.setItem('su_notify', JSON.stringify(NOTIFIED)); } catch(e) {}
+    if (_sbClient) {
+      try { await _sbClient.from('notifications').upsert({email, module_code:_notifCode, module_name:_notifName}, {onConflict:'email,module_code'}); } catch(e) {}
+    }
+    if (msg) msg.textContent = '✓ Done! You\'ll be notified when new content is added.';
+    document.querySelectorAll(`.notify-btn[data-code="${_notifCode}"]`).forEach(b => b.classList.add('notified'));
+    setTimeout(closeNotifModal, 2200);
+  }
+
   // ── VIEWED STATE ──────────────────────────────────────────────────────────
   const VIEWED = (function() {
     try { return JSON.parse(localStorage.getItem('su_viewed') || '{}'); } catch(e) { return {}; }
@@ -1497,6 +1690,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const _dtBtn = document.getElementById('darkToggle');
     if (_dtBtn) _dtBtn.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+    updateStreak();
     buildHome();
     buildDegBuckets();
     initAuth();
@@ -1620,6 +1814,17 @@
   <div class="auth-msg" id="authSuccessMsg" style="display:none">
     &#x2713;&nbsp;Check your UCC inbox and click the confirmation link, then sign in here.
   </div>
+</div>
+
+<!-- NOTIFICATION OVERLAY + MODAL -->
+<div class="notif-overlay" id="notifOverlay" onclick="if(event.target===this)closeNotifModal()"></div>
+<div class="notif-modal" id="notifModal" role="dialog" aria-modal="true">
+  <button class="notif-close" onclick="closeNotifModal()">&#x2715;</button>
+  <div style="font-size:19px;font-weight:800;color:var(--text);margin-bottom:4px" id="notifModuleTitle">Get notified</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:18px">We'll email you when new content is added for this module.</p>
+  <input id="notifEmail" type="email" placeholder="your@ucc.ie" style="width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;background:var(--bg);color:var(--text);margin-bottom:12px" onkeydown="if(event.key==='Enter')submitNotif()"/>
+  <button onclick="submitNotif()" style="width:100%;padding:11px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Notify me</button>
+  <div id="notifMsg" style="margin-top:10px;font-size:13px;text-align:center;color:#16a34a;min-height:18px"></div>
 </div>
 
 <!-- PRO OVERLAY + MODAL -->
