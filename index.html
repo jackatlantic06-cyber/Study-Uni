@@ -600,7 +600,10 @@
     let totalSchemes = 0;
     Object.values(MODEL_ANSWERS).forEach(v => { totalSchemes += Array.isArray(v) ? v.length : 1; });
     let totalQuizzes = 0;
-    Object.values(QUIZ_BANK).forEach(arr => { totalQuizzes += arr.length; });
+    Object.values(QUIZ_BANK).forEach(val => {
+      if (Array.isArray(val)) { totalQuizzes += val.length; }
+      else { Object.values(val).forEach(arr => { totalQuizzes += arr.length; }); }
+    });
     document.getElementById('statPapers').textContent  = totalPapers.toLocaleString();
     document.getElementById('statSchemes').textContent = totalSchemes.toLocaleString();
     document.getElementById('statQuizzes').textContent = totalQuizzes.toLocaleString();
@@ -916,7 +919,8 @@
       const modelBtn = hasModelAnswer
         ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">✦ Model Answer${_hasNewMA ? ' <span class="badge-new">New</span>' : ''}</button>`
         : '';
-      const quizBtn = (QUIZ_BANK[m.code] && QUIZ_BANK[m.code].length > 0)
+      const _qbEntry = QUIZ_BANK[m.code];
+      const quizBtn = (_qbEntry && (Array.isArray(_qbEntry) ? _qbEntry.length > 0 : Object.keys(_qbEntry).length > 0))
         ? `<button class="btn-quiz" onclick="openQuiz('${esc(m.code)}','${esc(m.name)}')">⚡ Quiz me</button>`
         : '';
 
@@ -970,7 +974,7 @@
   }
 
   // ── MODEL ANSWER & QUIZ LOGIC ──────────────────────────────────────────────
-  let _qCode = '', _qName = '';
+  let _qCode = '', _qName = '', _qTopic = '';
   let _qState = { questions:[], current:0, score:0, answered:false };
 
   function _shuffle(arr) {
@@ -1016,20 +1020,48 @@
     _qCode = code; _qName = name;
     document.getElementById('qhCode').textContent = code;
     document.getElementById('qhName').textContent = ' — ' + name;
-    const bank = QUIZ_BANK[code] || [];
-    if (bank.length === 0) {
+    const bank = QUIZ_BANK[code];
+    const empty = !bank || (Array.isArray(bank) ? bank.length === 0 : Object.keys(bank).length === 0);
+    if (empty) {
       document.getElementById('quizBody').innerHTML =
         '<div class="quiz-coming-soon">' +
         '<div class="cs-icon">📋</div>' +
         '<h3>Questions Coming Soon</h3>' +
         '<p>Quiz questions for <strong>' + name + '</strong> are being prepared.<br>Check back soon!</p>' +
         '</div>';
-    } else {
+    } else if (Array.isArray(bank)) {
+      _qTopic = '';
+      document.getElementById('quizSubtitle').textContent = 'Quick Quiz — 5 questions';
       _qState = { questions: _shuffle(bank).slice(0, 5), current: 0, score: 0, answered: false };
       _renderQ();
+    } else {
+      _renderTopicPicker(bank);
     }
     document.getElementById('quizOverlay').classList.add('active');
     document.getElementById('quizModal').classList.add('active');
+    document.getElementById('quizModal').scrollTop = 0;
+  }
+
+  function _renderTopicPicker(bank) {
+    _qTopic = '';
+    document.getElementById('quizSubtitle').textContent = 'Choose a topic';
+    const topics = Object.keys(bank);
+    document.getElementById('quizBody').innerHTML = topics.map(function(t) {
+      const safe = t.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+      return '<button onclick="_startTopicQuiz(\'' + safe + '\')" ' +
+             'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
+             'margin-bottom:8px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;' +
+             'font-weight:500;color:#0f172a;text-align:left;width:100%;cursor:pointer">' +
+             '<span style="font-size:18px">&#9889;</span>' + t + '</button>';
+    }).join('');
+  }
+
+  function _startTopicQuiz(topic) {
+    _qTopic = topic;
+    const questions = (QUIZ_BANK[_qCode] || {})[topic] || [];
+    document.getElementById('quizSubtitle').textContent = topic;
+    _qState = { questions: _shuffle(questions).slice(0, 5), current: 0, score: 0, answered: false };
+    _renderQ();
     document.getElementById('quizModal').scrollTop = 0;
   }
 
@@ -1092,13 +1124,18 @@
       : ['📚', "Keep studying — you'll get there!"];
     const safeCode = _qCode.replace(/'/g, "\\'");
     const safeName = _qName.replace(/'/g, "\\'");
+    const safeTopic = _qTopic.replace(/'/g, "\\'");
+    const retryBtn = _qTopic
+      ? '<button class="quiz-retry" onclick="_startTopicQuiz(\'' + safeTopic + '\')">Try again ↺</button>' +
+        '<button class="quiz-retry" style="margin-top:8px;background:#f1f5f9;color:#475569" onclick="_doOpenQuiz(\'' + safeCode + '\',\'' + safeName + '\')">&#8592; Change topic</button>'
+      : '<button class="quiz-retry" onclick="openQuiz(\'' + safeCode + '\',\'' + safeName + '\')">Try again ↺</button>';
     document.getElementById('quizBody').innerHTML =
       '<div class="quiz-results">' +
       '<div class="results-emoji">' + info[0] + '</div>' +
       '<div class="results-score">' + score + '/' + total + '</div>' +
       '<div class="results-pct">' + pct + '%</div>' +
       '<p class="results-msg">' + info[1] + '</p>' +
-      '<button class="quiz-retry" onclick="openQuiz(\'' + safeCode + '\',\'' + safeName + '\')">Try again ↺</button>' +
+      retryBtn +
       '</div>';
   }
 
