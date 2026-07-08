@@ -997,7 +997,9 @@
       const j = Math.floor(Math.random() * (i + 1));
       [idxs[i], idxs[j]] = [idxs[j], idxs[i]];
     }
-    return { q: q.q, options: idxs.map(function(i){ return q.options[i]; }), correct: idxs.indexOf(q.correct), explanation: q.explanation };
+    const out = { q: q.q, options: idxs.map(function(i){ return q.options[i]; }), correct: idxs.indexOf(q.correct), explanation: q.explanation };
+    if (q.img) out.img = q.img;
+    return out;
   }
 
   // ── History helpers (localStorage) ─────────────────────────────────────────
@@ -1182,6 +1184,7 @@
     }
     let html = '<div class="quiz-progress">Question ' + (_qState.current+1) + ' of ' + n + '</div>';
     html += timerHtml;
+    if (q.img) html += '<img src="' + q.img + '" alt="Anatomy diagram" style="width:100%;max-width:520px;border-radius:10px;margin:0 auto 14px;display:block;border:1px solid #e2e8f0">';
     html += '<div class="quiz-q">' + q.q + '</div><div class="quiz-options">';
     q.options.forEach(function(opt,i) {
       html += '<button class="quiz-opt" onclick="_ansQ('+i+')">' +
