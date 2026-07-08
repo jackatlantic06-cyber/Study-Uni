@@ -975,7 +975,11 @@
 
   // ── MODEL ANSWER & QUIZ LOGIC ──────────────────────────────────────────────
   let _qCode = '', _qName = '', _qTopic = '';
-  let _qState = { questions:[], current:0, score:0, answered:false };
+  let _qState = { questions:[], current:0, score:0, answered:false, incomplete:0 };
+  let _qCount = 5;
+  let _qTimerSecs = 0;
+  let _qTimeLeft = 0;
+  let _qTimerInterval = null;
 
   function _shuffle(arr) {
     const a = [...arr];
@@ -984,6 +988,47 @@
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
+  }
+
+  function _shuffleOptions(q) {
+    const idxs = [0,1,2,3];
+    for (let i = 3; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [idxs[i], idxs[j]] = [idxs[j], idxs[i]];
+    }
+    return { q: q.q, options: idxs.map(function(i){ return q.options[i]; }), correct: idxs.indexOf(q.correct), explanation: q.explanation };
+  }
+
+  // ── History helpers (localStorage) ─────────────────────────────────────────
+  function _getHistory(code, topic) {
+    try { return ((JSON.parse(localStorage.getItem('quizHistory')||'{}')[code]||{})[topic])||[]; }
+    catch(e) { return []; }
+  }
+  function _saveHistory(code, topic, score, total, incomplete) {
+    try {
+      const h = JSON.parse(localStorage.getItem('quizHistory')||'{}');
+      if (!h[code]) h[code] = {};
+      if (!h[code][topic]) h[code][topic] = [];
+      h[code][topic].unshift({ date: new Date().toLocaleDateString('en-IE',{day:'numeric',month:'short'}), score, total, incomplete });
+      h[code][topic] = h[code][topic].slice(0,10);
+      localStorage.setItem('quizHistory', JSON.stringify(h));
+    } catch(e) {}
+  }
+  function _getOverallHistory(code) {
+    try {
+      const codeH = JSON.parse(localStorage.getItem('quizHistory')||'{}')[code]||{};
+      const all = [];
+      Object.entries(codeH).forEach(function(e){ e[1].forEach(function(s){ all.push(Object.assign({},s,{topic:e[0]})); }); });
+      return all.slice(0,10);
+    } catch(e) { return []; }
+  }
+  function _historyRow(h) {
+    const pct = Math.round(h.score/h.total*100);
+    const inc = h.incomplete ? ' <span style="color:#94a3b8">· '+h.incomplete+' unanswered</span>' : '';
+    const topicTag = h.topic ? ' <span style="color:#94a3b8">· '+h.topic.split(':')[0].trim()+'</span>' : '';
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:13px;border-bottom:1px solid #f1f5f9">' +
+      '<span style="color:#0f172a;font-weight:500">'+h.score+'/'+h.total+' ('+pct+'%)'+inc+'</span>' +
+      '<span style="color:#94a3b8;font-size:12px">'+h.date+topicTag+'</span></div>';
   }
 
   function openModelAnswer(code) {
@@ -995,8 +1040,6 @@
     if (!val) return;
     const docs = Array.isArray(val) ? val : [{ label: 'Model Answer', url: val }];
     if (docs.length === 1) { window.open(docs[0].url, '_blank'); return; }
-    // Multiple docs — show a picker inside the shared modal
-    document.getElementById('quizSubtitle').textContent = 'Quick Quiz — 5 questions';
     document.getElementById('qhCode').textContent = code;
     document.getElementById('qhName').textContent = '';
     document.getElementById('quizSubtitle').textContent = 'Available Model Answers';
@@ -1024,15 +1067,13 @@
     const empty = !bank || (Array.isArray(bank) ? bank.length === 0 : Object.keys(bank).length === 0);
     if (empty) {
       document.getElementById('quizBody').innerHTML =
-        '<div class="quiz-coming-soon">' +
-        '<div class="cs-icon">📋</div>' +
+        '<div class="quiz-coming-soon"><div class="cs-icon">📋</div>' +
         '<h3>Questions Coming Soon</h3>' +
-        '<p>Quiz questions for <strong>' + name + '</strong> are being prepared.<br>Check back soon!</p>' +
-        '</div>';
+        '<p>Quiz questions for <strong>' + name + '</strong> are being prepared.<br>Check back soon!</p></div>';
     } else if (Array.isArray(bank)) {
       _qTopic = '';
-      document.getElementById('quizSubtitle').textContent = 'Quick Quiz — 5 questions';
-      _qState = { questions: _shuffle(bank).slice(0, 5), current: 0, score: 0, answered: false };
+      document.getElementById('quizSubtitle').textContent = 'Quick Quiz';
+      _qState = { questions: _shuffle(bank).slice(0,5).map(_shuffleOptions), current:0, score:0, answered:false, incomplete:0 };
       _renderQ();
     } else {
       _renderTopicPicker(bank);
@@ -1046,55 +1087,146 @@
     _qTopic = '';
     document.getElementById('quizSubtitle').textContent = 'Choose a topic';
     const topics = Object.keys(bank);
+    const overall = _getOverallHistory(_qCode);
+    const overallHtml = overall.length
+      ? '<div style="margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0">' +
+        '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">'+_qCode+' overall history</div>' +
+        overall.slice(0,5).map(_historyRow).join('') + '</div>'
+      : '';
     document.getElementById('quizBody').innerHTML = topics.map(function(t) {
-      const safe = t.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-      return '<button onclick="_startTopicQuiz(\'' + safe + '\')" ' +
+      const safe = t.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      const last = _getHistory(_qCode, t)[0];
+      const badge = last ? '<span style="margin-left:auto;font-size:12px;color:#64748b;font-weight:400">'+last.score+'/'+last.total+'</span>' : '';
+      return '<button onclick="_renderTopicSetup(\''+safe+'\')" ' +
              'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
              'margin-bottom:8px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;' +
              'font-weight:500;color:#0f172a;text-align:left;width:100%;cursor:pointer">' +
-             '<span style="font-size:18px">&#9889;</span>' + t + '</button>';
-    }).join('');
+             '<span style="font-size:18px">&#9889;</span>'+t+badge+'</button>';
+    }).join('') + overallHtml;
   }
 
-  function _startTopicQuiz(topic) {
+  function _renderTopicSetup(topic) {
     _qTopic = topic;
-    const questions = (QUIZ_BANK[_qCode] || {})[topic] || [];
+    const available = ((QUIZ_BANK[_qCode]||{})[topic]||[]).length;
+    const countOpts = [5,10,20].filter(function(n){ return n <= available; });
+    if (available < 20 && !countOpts.includes(available)) countOpts.push(available);
+    countOpts.sort(function(a,b){return a-b;});
+    _qCount = countOpts[0];
+    const history = _getHistory(_qCode, topic);
+    const histHtml = history.length
+      ? '<div style="margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0">' +
+        '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Your scores — this topic</div>' +
+        history.slice(0,5).map(_historyRow).join('') + '</div>'
+      : '';
     document.getElementById('quizSubtitle').textContent = topic;
-    _qState = { questions: _shuffle(questions).slice(0, 5), current: 0, score: 0, answered: false };
+    document.getElementById('quizBody').innerHTML =
+      '<div>' +
+      '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Questions</div>' +
+      '<div id="qCountRow" style="display:flex;gap:8px;margin-bottom:20px">' +
+      countOpts.map(function(n,i){
+        return '<button onclick="document.getElementById(\'qCountRow\').querySelectorAll(\'button\').forEach(function(b){b.style.background=\'#fff\';b.style.borderColor=\'#e2e8f0\';b.style.color=\'#0f172a\'});this.style.background=\'#eff6ff\';this.style.borderColor=\'#2563eb\';this.style.color=\'#2563eb\';_qCount='+n+'" ' +
+               'style="flex:1;padding:10px 0;border:1.5px solid '+(i===0?'#2563eb':'#e2e8f0')+';border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;background:'+(i===0?'#eff6ff':'#fff')+';color:'+(i===0?'#2563eb':'#0f172a')+'">'+n+'</button>';
+      }).join('') +
+      '</div>' +
+      '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Timer per question (optional)</div>' +
+      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:20px">' +
+      '<input id="qTimerInput" type="number" min="10" max="600" placeholder="e.g. 60" ' +
+      'style="width:90px;padding:10px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:15px;text-align:center;outline:none" />' +
+      '<span style="font-size:14px;color:#64748b">seconds</span>' +
+      '<button onclick="document.getElementById(\'qTimerInput\').value=\'\'" ' +
+      'style="margin-left:auto;padding:8px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;background:#fff;cursor:pointer;font-weight:500;color:#475569">No timer</button>' +
+      '</div>' +
+      '<button onclick="_launchQuiz()" style="width:100%;padding:13px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer">Start quiz &#8594;</button>' +
+      '<button onclick="_renderTopicPicker(QUIZ_BANK[_qCode])" style="width:100%;margin-top:8px;padding:11px;background:#f1f5f9;color:#475569;border:none;border-radius:10px;font-size:14px;cursor:pointer">&#8592; Back to topics</button>' +
+      histHtml +
+      '</div>';
+    document.getElementById('quizModal').scrollTop = 0;
+  }
+
+  function _launchQuiz() {
+    const inp = document.getElementById('qTimerInput');
+    _qTimerSecs = (inp && inp.value && parseInt(inp.value) >= 10) ? parseInt(inp.value) : 0;
+    const questions = ((QUIZ_BANK[_qCode]||{})[_qTopic]||[]);
+    const selected = _shuffle(questions).slice(0, _qCount).map(_shuffleOptions);
+    document.getElementById('quizSubtitle').textContent = _qTopic;
+    _qState = { questions: selected, current:0, score:0, answered:false, incomplete:0 };
     _renderQ();
     document.getElementById('quizModal').scrollTop = 0;
   }
 
   function closeQuiz() {
+    if (_qTimerInterval) { clearInterval(_qTimerInterval); _qTimerInterval = null; }
     document.getElementById('quizOverlay').classList.remove('active');
     document.getElementById('quizModal').classList.remove('active');
   }
 
   function _renderQ() {
+    if (_qTimerInterval) { clearInterval(_qTimerInterval); _qTimerInterval = null; }
+    _qTimeLeft = _qTimerSecs;
     const q = _qState.questions[_qState.current];
     const n = _qState.questions.length;
-    const letters = ['A', 'B', 'C', 'D'];
+    const letters = ['A','B','C','D'];
     const isLast = _qState.current === n - 1;
-    let html = '<div class="quiz-progress">Question ' + (_qState.current + 1) + ' of ' + n + '</div>';
-    html += '<div class="quiz-q">' + q.q + '</div>';
-    html += '<div class="quiz-options">';
-    q.options.forEach(function(opt, i) {
-      html += '<button class="quiz-opt" onclick="_ansQ(' + i + ')">' +
-              '<span class="opt-letter">' + letters[i] + '</span>' +
-              '<span>' + opt + '</span></button>';
+    let timerHtml = '';
+    if (_qTimerSecs > 0) {
+      timerHtml =
+        '<div style="margin-bottom:10px">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">' +
+        '<span id="quizTimerText" style="font-size:13px;font-weight:600;color:#64748b">&#9201; '+_qTimerSecs+'s</span>' +
+        '</div>' +
+        '<div style="height:5px;background:#e2e8f0;border-radius:3px;overflow:hidden">' +
+        '<div id="quizTimerFill" style="height:100%;background:#2563eb;width:100%;transition:width 1s linear;border-radius:3px"></div>' +
+        '</div></div>';
+    }
+    let html = '<div class="quiz-progress">Question ' + (_qState.current+1) + ' of ' + n + '</div>';
+    html += timerHtml;
+    html += '<div class="quiz-q">' + q.q + '</div><div class="quiz-options">';
+    q.options.forEach(function(opt,i) {
+      html += '<button class="quiz-opt" onclick="_ansQ('+i+')">' +
+              '<span class="opt-letter">'+letters[i]+'</span><span>'+opt+'</span></button>';
     });
-    html += '</div>';
-    html += '<div id="quizExp" class="quiz-exp"></div>';
-    html += '<button class="quiz-next" id="quizNext" onclick="_nextQ()">' +
-            (isLast ? 'See results →' : 'Next question →') + '</button>';
+    html += '</div><div id="quizExp" class="quiz-exp"></div>';
+    html += '<button class="quiz-next" id="quizNext" onclick="_nextQ()" style="display:none">' +
+            (isLast ? 'See results &#8594;' : 'Next question &#8594;') + '</button>';
     document.getElementById('quizBody').innerHTML = html;
+    if (_qTimerSecs > 0) _startTimer();
+  }
+
+  function _startTimer() {
+    _qTimerInterval = setInterval(function() {
+      _qTimeLeft--;
+      const fill = document.getElementById('quizTimerFill');
+      const text = document.getElementById('quizTimerText');
+      if (fill) fill.style.width = (_qTimeLeft / _qTimerSecs * 100) + '%';
+      if (text) text.textContent = '⏱ ' + _qTimeLeft + 's';
+      if (_qTimeLeft <= 5 && fill) fill.style.background = '#ef4444';
+      if (_qTimeLeft <= 5 && text) text.style.color = '#ef4444';
+      if (_qTimeLeft <= 0) { clearInterval(_qTimerInterval); _qTimerInterval = null; _timeUp(); }
+    }, 1000);
+  }
+
+  function _timeUp() {
+    if (_qState.answered) return;
+    _qState.answered = true;
+    _qState.incomplete++;
+    const q = _qState.questions[_qState.current];
+    document.querySelectorAll('.quiz-opt').forEach(function(btn,i) {
+      btn.disabled = true;
+      if (i === q.correct) btn.classList.add('correct');
+    });
+    const exp = document.getElementById('quizExp');
+    exp.className = 'quiz-exp wrong';
+    exp.innerHTML = '&#9200; Time\'s up! Correct answer: <strong>' + ['A','B','C','D'][q.correct] + '</strong>. ' + q.explanation;
+    exp.style.display = 'block';
+    document.getElementById('quizNext').style.display = 'block';
   }
 
   function _ansQ(idx) {
     if (_qState.answered) return;
+    if (_qTimerInterval) { clearInterval(_qTimerInterval); _qTimerInterval = null; }
     _qState.answered = true;
     const q = _qState.questions[_qState.current];
-    document.querySelectorAll('.quiz-opt').forEach(function(btn, i) {
+    document.querySelectorAll('.quiz-opt').forEach(function(btn,i) {
       btn.disabled = true;
       if (i === q.correct) btn.classList.add('correct');
       else if (i === idx) btn.classList.add('wrong');
@@ -1116,26 +1248,41 @@
   }
 
   function _showResults() {
-    const score = _qState.score, total = _qState.questions.length;
+    const score = _qState.score, total = _qState.questions.length, incomplete = _qState.incomplete || 0;
     const pct = Math.round(score / total * 100);
     const info = pct === 100 ? ['🏆', "Perfect score! You're exam ready."]
       : pct >= 80 ? ['⭐', 'Excellent work — keep it up!']
       : pct >= 60 ? ['👍', 'Good effort. Review your weaker areas.']
       : ['📚', "Keep studying — you'll get there!"];
-    const safeCode = _qCode.replace(/'/g, "\\'");
-    const safeName = _qName.replace(/'/g, "\\'");
-    const safeTopic = _qTopic.replace(/'/g, "\\'");
+    if (_qTopic) _saveHistory(_qCode, _qTopic, score, total, incomplete);
+    const safeCode = _qCode.replace(/'/g,"\\'"), safeName = _qName.replace(/'/g,"\\'"), safeTopic = _qTopic.replace(/'/g,"\\'");
+    const incNote = incomplete > 0
+      ? '<p style="font-size:13px;color:#94a3b8;margin:2px 0 0">'+incomplete+' question'+(incomplete>1?'s':'')+' ran out of time</p>'
+      : '';
     const retryBtn = _qTopic
-      ? '<button class="quiz-retry" onclick="_startTopicQuiz(\'' + safeTopic + '\')">Try again ↺</button>' +
-        '<button class="quiz-retry" style="margin-top:8px;background:#f1f5f9;color:#475569" onclick="_doOpenQuiz(\'' + safeCode + '\',\'' + safeName + '\')">&#8592; Change topic</button>'
-      : '<button class="quiz-retry" onclick="openQuiz(\'' + safeCode + '\',\'' + safeName + '\')">Try again ↺</button>';
+      ? '<button class="quiz-retry" onclick="_renderTopicSetup(\''+safeTopic+'\')">Try again &#8635;</button>' +
+        '<button class="quiz-retry" style="margin-top:8px;background:#f1f5f9;color:#475569" onclick="_doOpenQuiz(\''+safeCode+'\',\''+safeName+'\')">&#8592; Change topic</button>'
+      : '<button class="quiz-retry" onclick="openQuiz(\''+safeCode+'\',\''+safeName+'\')">Try again &#8635;</button>';
+    const topicHistory = _qTopic ? _getHistory(_qCode, _qTopic) : [];
+    const overallHistory = _getOverallHistory(_qCode);
+    const topicHistHtml = topicHistory.length > 1
+      ? '<div style="margin-top:16px;padding-top:16px;border-top:1px solid #e2e8f0;text-align:left">' +
+        '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">This topic — recent scores</div>' +
+        topicHistory.slice(0,5).map(_historyRow).join('') + '</div>'
+      : '';
+    const overallHistHtml = overallHistory.length > 1
+      ? '<div style="margin-top:16px;padding-top:16px;border-top:1px solid #e2e8f0;text-align:left">' +
+        '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">'+_qCode+' overall history</div>' +
+        overallHistory.slice(0,5).map(_historyRow).join('') + '</div>'
+      : '';
     document.getElementById('quizBody').innerHTML =
       '<div class="quiz-results">' +
-      '<div class="results-emoji">' + info[0] + '</div>' +
-      '<div class="results-score">' + score + '/' + total + '</div>' +
-      '<div class="results-pct">' + pct + '%</div>' +
-      '<p class="results-msg">' + info[1] + '</p>' +
-      retryBtn +
+      '<div class="results-emoji">'+info[0]+'</div>' +
+      '<div class="results-score">'+score+'/'+total+'</div>' +
+      '<div class="results-pct">'+pct+'%</div>' +
+      incNote +
+      '<p class="results-msg">'+info[1]+'</p>' +
+      retryBtn + topicHistHtml + overallHistHtml +
       '</div>';
   }
 
