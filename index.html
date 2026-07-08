@@ -1151,9 +1151,9 @@
     const inp = document.getElementById('qTimerInput');
     _qTimerSecs = (inp && inp.value && parseInt(inp.value) >= 10) ? parseInt(inp.value) : 0;
     const questions = ((QUIZ_BANK[_qCode]||{})[_qTopic]||[]);
-    const selected = _shuffle(questions).slice(0, _qCount).map(_shuffleOptions);
+    const selected = _shuffle(questions).slice(0, _qCount).map(function(q) { return q.type === 'fill' ? q : _shuffleOptions(q); });
     document.getElementById('quizSubtitle').textContent = _qTopic;
-    _qState = { questions: selected, current:0, score:0, answered:false, incomplete:0, times:[] };
+    _qState = { questions: selected, current:0, score:0, answered:false, incomplete:0, times:[], fillReviewed:0 };
     _renderQ();
     document.getElementById('quizModal').scrollTop = 0;
   }
@@ -1171,6 +1171,37 @@
     const n = _qState.questions.length;
     const letters = ['A','B','C','D'];
     const isLast = _qState.current === n - 1;
+
+    if (q.type === 'fill') {
+      let fTimerHtml = '';
+      if (_qTimerSecs > 0) {
+        fTimerHtml = '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span id="quizTimerText" style="font-size:13px;font-weight:600;color:#64748b">&#9201; '+_qTimerSecs+'s</span></div><div style="height:5px;background:#e2e8f0;border-radius:3px;overflow:hidden"><div id="quizTimerFill" style="height:100%;background:#2563eb;width:100%;transition:width 1s linear;border-radius:3px"></div></div></div>';
+      }
+      let fHtml = '<div class="quiz-progress">Question '+(_qState.current+1)+' of '+n+' <span style="font-size:11px;padding:2px 8px;background:#eff6ff;color:#2563eb;border-radius:20px;font-weight:700;margin-left:6px">Fill-in</span></div>';
+      fHtml += fTimerHtml;
+      if (q.img) fHtml += '<img src="'+q.img+'" alt="Anatomy diagram" style="width:100%;max-width:520px;border-radius:10px;margin:0 auto 14px;display:block;border:1px solid #e2e8f0">';
+      fHtml += '<div class="quiz-q">'+q.q+'</div><div style="margin:14px 0">';
+      q.fields.forEach(function(field) {
+        fHtml += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'+
+                 '<span style="font-weight:700;font-size:15px;min-width:22px;color:#2563eb">'+field+'</span>'+
+                 '<span style="color:#94a3b8;font-size:14px;margin:0 2px">=</span>'+
+                 '<input id="fillin_'+field+'" type="text" placeholder="Type your answer…" autocomplete="off" '+
+                 'style="flex:1;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;outline:none" '+
+                 'onfocus="this.style.borderColor=\'#2563eb\'" onblur="this.style.borderColor=\'#e2e8f0\'" '+
+                 'onkeydown="if(event.key===\'Enter\'){var nb=document.getElementById(\'fillCheckBtn\');if(nb)nb.click()}">'+
+                 '</div>'+
+                 '<div id="fillanswer_'+field+'" style="display:none;margin:-2px 0 10px 30px;font-size:13px;color:#16a34a;font-weight:600"></div>';
+      });
+      fHtml += '</div>';
+      fHtml += '<button id="fillCheckBtn" onclick="_checkFill()" style="width:100%;padding:12px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer">Check Answers</button>';
+      fHtml += '<div id="quizExp" class="quiz-exp"></div>';
+      fHtml += '<button class="quiz-next" id="quizNext" onclick="_nextQ()" style="display:none">'+(isLast?'See results &#8594;':'Next question &#8594;')+'</button>';
+      document.getElementById('quizBody').innerHTML = fHtml;
+      _qQuestionStart = Date.now();
+      if (_qTimerSecs > 0) _startTimer();
+      return;
+    }
+
     let timerHtml = '';
     if (_qTimerSecs > 0) {
       timerHtml =
@@ -1198,6 +1229,30 @@
     if (_qTimerSecs > 0) _startTimer();
   }
 
+  function _checkFill() {
+    if (_qState.answered) return;
+    if (_qTimerInterval) { clearInterval(_qTimerInterval); _qTimerInterval = null; }
+    _qState.answered = true;
+    _qState.times.push(Math.round((Date.now() - _qQuestionStart) / 1000));
+    _qState.fillReviewed = (_qState.fillReviewed || 0) + 1;
+    const q = _qState.questions[_qState.current];
+    const btn = document.getElementById('fillCheckBtn');
+    if (btn) btn.style.display = 'none';
+    q.fields.forEach(function(field, i) {
+      const input = document.getElementById('fillin_' + field);
+      const ansDiv = document.getElementById('fillanswer_' + field);
+      if (input) input.disabled = true;
+      if (ansDiv) { ansDiv.textContent = '✓ ' + q.answers[i]; ansDiv.style.display = 'block'; }
+    });
+    const exp = document.getElementById('quizExp');
+    if (q.explanation) {
+      exp.className = 'quiz-exp correct';
+      exp.innerHTML = '💡 ' + q.explanation;
+      exp.style.display = 'block';
+    }
+    document.getElementById('quizNext').style.display = 'block';
+  }
+
   function _startTimer() {
     _qTimerInterval = setInterval(function() {
       _qTimeLeft--;
@@ -1213,10 +1268,11 @@
 
   function _timeUp() {
     if (_qState.answered) return;
+    const q = _qState.questions[_qState.current];
+    if (q.type === 'fill') { _checkFill(); return; }
     _qState.answered = true;
     _qState.incomplete++;
     _qState.times.push(_qTimerSecs);
-    const q = _qState.questions[_qState.current];
     document.querySelectorAll('.quiz-opt').forEach(function(btn,i) {
       btn.disabled = true;
       if (i === q.correct) btn.classList.add('correct');
@@ -1256,21 +1312,27 @@
   }
 
   function _showResults() {
-    const score = _qState.score, total = _qState.questions.length, incomplete = _qState.incomplete || 0;
+    const fillCount = _qState.fillReviewed || 0;
+    const mcqTotal = _qState.questions.filter(function(q) { return q.type !== 'fill'; }).length;
+    const score = _qState.score, incomplete = _qState.incomplete || 0;
     const times = _qState.times || [];
     const avgTime = times.length > 0 ? Math.round(times.reduce(function(a,b){return a+b;},0) / times.length) : null;
-    const pct = Math.round(score / total * 100);
-    const info = pct === 100 ? ['🏆', "Perfect score! You're exam ready."]
+    const pct = mcqTotal > 0 ? Math.round(score / mcqTotal * 100) : null;
+    const info = pct === null ? ['📖', 'Review complete!']
+      : pct === 100 ? ['🏆', "Perfect score! You're exam ready."]
       : pct >= 80 ? ['⭐', 'Excellent work — keep it up!']
       : pct >= 60 ? ['👍', 'Good effort. Review your weaker areas.']
       : ['📚', "Keep studying — you'll get there!"];
-    if (_qTopic) _saveHistory(_qCode, _qTopic, score, total, incomplete, avgTime);
+    if (_qTopic && mcqTotal > 0) _saveHistory(_qCode, _qTopic, score, mcqTotal, incomplete, avgTime);
     const safeCode = _qCode.replace(/'/g,"\\'"), safeName = _qName.replace(/'/g,"\\'"), safeTopic = _qTopic.replace(/'/g,"\\'");
     const incNote = incomplete > 0
       ? '<p style="font-size:13px;color:#94a3b8;margin:2px 0 0">'+incomplete+' question'+(incomplete>1?'s':'')+' ran out of time</p>'
       : '';
     const avgNote = avgTime != null
       ? '<p style="font-size:13px;color:#64748b;margin:4px 0 0">&#9201; avg '+avgTime+'s per question</p>'
+      : '';
+    const fillNote = fillCount > 0
+      ? '<p style="font-size:13px;color:#64748b;margin:4px 0 0">📝 '+fillCount+' fill-in question'+(fillCount>1?'s':'')+' reviewed</p>'
       : '';
     const retryBtn = _qTopic
       ? '<button class="quiz-retry" onclick="_renderTopicSetup(\''+safeTopic+'\')">Try again &#8635;</button>' +
@@ -1288,13 +1350,14 @@
         '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">'+_qCode+' overall history</div>' +
         overallHistory.slice(0,5).map(_historyRow).join('') + '</div>'
       : '';
+    const scoreDisplay = mcqTotal > 0 ? score+'/'+mcqTotal : '—';
+    const pctDisplay = pct !== null ? '<div class="results-pct">'+pct+'%</div>' : '';
     document.getElementById('quizBody').innerHTML =
       '<div class="quiz-results">' +
       '<div class="results-emoji">'+info[0]+'</div>' +
-      '<div class="results-score">'+score+'/'+total+'</div>' +
-      '<div class="results-pct">'+pct+'%</div>' +
-      incNote +
-      avgNote +
+      '<div class="results-score">'+scoreDisplay+'</div>' +
+      pctDisplay +
+      incNote + avgNote + fillNote +
       '<p class="results-msg">'+info[1]+'</p>' +
       retryBtn + topicHistHtml + overallHistHtml +
       '</div>';
