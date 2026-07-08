@@ -4,6 +4,13 @@
     "EC1207": [
       { label: "Marking Scheme — Winter 25/26", url: "./marking-schemes/EC1207_Marking_Scheme_Final_v5_1.pdf" },
       { label: "Marking Scheme — Winter 24/25", url: "./marking-schemes/EC1207_Winter2024_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 23/24", url: "./marking-schemes/EC1207_Winter2023_Marking_Scheme.pdf" },
+    ],
+    "EC1208": [
+      { label: "Marking Scheme — Summer 24/25", url: "./marking-schemes/EC1208_Summer2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/EC1208_Summer2024_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 22/23", url: "./marking-schemes/EC1208_Summer2023_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 21/22", url: "./marking-schemes/EC1208_Summer2022_Marking_Scheme.pdf" },
     ],
     "AC4101": [
       { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/AC4101_Summer2024_Marking_Scheme.pdf" },
