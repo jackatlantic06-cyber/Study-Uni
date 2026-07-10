@@ -882,6 +882,294 @@
           correct: 0,
           explanation: "The greater palatine nerve descends through the greater palatine canal to emerge at the greater palatine foramen and supply the hard palate." },
       ],
+    "Past Paper MCQs (Summer 2020)": [
+      { q: "The stylohyoid muscle is innervated by a branch of which cranial nerve?",
+        options: ["A) V", "B) VII", "C) IX", "D) X", "E) XI"],
+        correct: 1,
+        explanation: "Stylohyoid is innervated by the FACIAL NERVE (CN VII), specifically by a branch given off before the stylomastoid foramen. This is clinically important as facial nerve injuries above this level may affect stylohyoid. The posterior belly of digastric (also CN VII) is its anatomical neighbour. Most suprahyoid muscles receive V3 (mylohyoid, anterior belly of digastric) or C1 (geniohyoid), making stylohyoid and posterior digastric the two CN VII suprahyoid muscles." },
+
+      { q: "Which muscle is mainly responsible for protrusion of the tongue and deviates its tip to the contralateral side?",
+        options: ["A) Genioglossus", "B) Geniohyoid", "C) Hyoglossus", "D) Palatoglossus", "E) Styloglossus"],
+        correct: 0,
+        explanation: "GENIOGLOSSUS is the large fan-shaped extrinsic tongue muscle originating from the superior mental spine (genial tubercle) of the mandible. It protrudes the tongue and when one side contracts, the tongue tip deviates to the CONTRALATERAL side. Motor supply: CN XII (hypoglossal). Clinical test: ask patient to protrude tongue - if one hypoglossal is paralysed, the tongue deviates TOWARDS the side of the lesion (the paralysed side) because the intact contralateral genioglossus pushes unopposed." },
+
+      { q: "A man is found bleeding from a wound on the left side of his neck. Examination reveals a posterior branch of the external carotid artery was severed. Which artery was injured?",
+        options: ["A) Facial artery", "B) Lingual artery", "C) Occipital artery", "D) Superficial temporal artery", "E) Superior thyroid artery"],
+        correct: 2,
+        explanation: "The OCCIPITAL ARTERY is a POSTERIOR branch of the external carotid artery (ECA). The mnemonic for ECA branches is 'Some Anatomists Like Freaking Out Poor Medical Students' (Superior thyroid, Ascending pharyngeal, Lingual, Facial, Occipital, Posterior auricular, Maxillary, Superficial temporal). The three POSTERIOR branches are: Occipital, Posterior auricular, and Ascending pharyngeal. The Facial and Lingual are ANTERIOR branches. The Maxillary and Superficial temporal are TERMINAL branches." },
+
+      { q: "Which of the following nerves is derived from the trigeminal nerve (CN V)?",
+        options: ["A) Ansa cervicalis", "B) Cervical branch of facial nerve", "C) Mental nerve", "D) Recurrent laryngeal nerve", "E) Zygomatic branch of facial nerve"],
+        correct: 2,
+        explanation: "The MENTAL NERVE is a branch of the inferior alveolar nerve, which is a branch of the mandibular division (V3) of the trigeminal nerve. It exits through the mental foramen to supply sensory innervation to the chin and lower lip. The ansa cervicalis comes from C1-C3 cervical plexus; the recurrent laryngeal comes from CN X (vagus); the cervical and zygomatic branches are branches of CN VII (facial). Note: 'zygomatic nerve' is both a branch of V2 (sensory) and a branch of CN VII (motor facial expression) - but in the context of this question, the motor zygomatic branch of CN VII is implied." },
+
+      { q: "The lacrimal bone contributes to the medial wall of the orbit. Which of the following bones does NOT articulate with the lacrimal bone?",
+        options: ["A) Ethmoid bone", "B) Frontal bone", "C) Inferior nasal concha", "D) Maxilla", "E) Sphenoid bone"],
+        correct: 4,
+        explanation: "The LACRIMAL BONE is the smallest and most fragile facial bone. It articulates with: frontal bone (superiorly), ethmoid bone (posteriorly), maxilla (anteriorly and inferiorly), and inferior nasal concha (inferiorly). It does NOT directly articulate with the SPHENOID BONE. The lacrimal bone contains the lacrimal groove which, with the maxilla, forms the nasolacrimal canal. Dental relevance: lacrimal bone fractures may complicate nasolacrimal duct drainage." },
+
+      { q: "On which bone is the foramen rotundum located?",
+        options: ["A) Frontal bone", "B) Maxilla", "C) Sphenoid bone", "D) Temporal bone", "E) Zygomatic bone"],
+        correct: 2,
+        explanation: "The foramen rotundum is located in the GREATER WING of the SPHENOID BONE, at the floor of the middle cranial fossa. It transmits the MAXILLARY NERVE (V2), the second division of the trigeminal nerve. V2 then passes into the pterygopalatine fossa and continues as the infraorbital nerve through the inferior orbital fissure into the orbit. Foramina of the sphenoid to remember: optic canal (V1 territory), superior orbital fissure (CN III, IV, V1, VI), foramen rotundum (V2), foramen ovale (V3), foramen spinosum (middle meningeal artery + meningeal branch of V3)." },
+
+      { q: "Where does the parotid duct (Stensen duct) open?",
+        options: ["A) In the floor of the mouth at the sublingual fold", "B) In the floor of the mouth at the sublingual papilla (caruncle)", "C) In the vestibule of the mouth opposite the second maxillary molar tooth", "D) In the vestibule opposite the second mandibular premolar tooth", "E) At the foramen cecum"],
+        correct: 2,
+        explanation: "The parotid duct (Stensen duct) pierces the buccinator muscle and opens into the VESTIBULE OF THE ORAL CAVITY at the level of the UPPER SECOND MOLAR (maxillary second molar). This is a key clinical landmark for salivary gland procedures. By contrast: the submandibular duct (Wharton duct) opens at the sublingual papilla (caruncle) on the floor of the mouth. The sublingual gland drains via multiple small ducts of Rivinus and sometimes a major sublingual duct." },
+
+      { q: "Which structures form the superior meatus of the nasal cavity?",
+        options: ["A) Ethmoid and sphenoid bones", "B) Ethmoid bone and superior concha", "C) Inferior concha and maxilla", "D) Inferior and middle conchae", "E) Middle and superior conchae"],
+        correct: 4,
+        explanation: "The SUPERIOR MEATUS is the space between the MIDDLE CONCHA (inferiorly) and the SUPERIOR CONCHA (superiorly). The nasal meatuses are named for the concha that forms their roof: inferior meatus = below inferior concha; middle meatus = between inferior and middle conchae; superior meatus = between middle and superior conchae. Clinically important: the posterior ethmoidal air cells drain into the superior meatus. The sphenoethmoidal recess (between superior concha and the anterior face of sphenoid) receives drainage from the sphenoidal sinus." },
+
+      { q: "Which of these pairs of bones contributes to the formation of the nasal septum?",
+        options: ["A) Ethmoid and nasal bones", "B) Ethmoid and sphenoid bones", "C) Ethmoid and vomer", "D) Lacrimal and nasal bones", "E) Nasal bones and vomer"],
+        correct: 2,
+        explanation: "The NASAL SEPTUM consists of: (1) the PERPENDICULAR PLATE OF ETHMOID (superior and posterior bony part), (2) the VOMER (inferior and posterior bony part), and (3) the SEPTAL CARTILAGE (anterior part). Together, ethmoid and vomer form the bony nasal septum. The nasal bones form the external bridge of the nose and the roof of the nasal cavity anteriorly - they do not form the septum itself. A deviated nasal septum (most commonly at the ethmoid-vomer junction) is a common clinical finding." },
+
+      { q: "How many unpaired bones are present in the viscerocranium (facial skeleton)?",
+        options: ["A) 2", "B) 4", "C) 6", "D) 8", "E) 10"],
+        correct: 0,
+        explanation: "The VISCEROCRANIUM (facial skeleton) consists of 14 bones: 6 paired bones (maxilla, zygomatic, nasal, lacrimal, palatine, inferior nasal concha = 12 bones) and 2 UNPAIRED bones: the MANDIBLE and the VOMER. The mandible is the only moveable bone of the skull (excluding the ossicles). The vomer forms the inferior part of the nasal septum. Note: the hyoid bone is sometimes counted separately as it is not strictly part of the skull." },
+
+      { q: "Which muscle receives its motor supply from 2 different nerve branches?",
+        options: ["A) Buccinator", "B) Occipitalis", "C) Orbicularis oculi", "D) Platysma", "E) Zygomaticus minor"],
+        correct: 2,
+        explanation: "ORBICULARIS OCULI receives motor supply from TWO branches of the facial nerve (CN VII): (1) the TEMPORAL branch, which innervates the upper/orbital part (forehead wrinkle and tight eye closure), and (2) the ZYGOMATIC branch, which innervates the palpebral part (gentle eyelid closure). All other muscles listed receive motor from a single named branch of CN VII: buccinator and zygomaticus minor from the buccal branch; occipitalis from the posterior auricular branch; platysma from the cervical branch. This dual innervation of orbicularis oculi explains why partial facial nerve injuries can selectively affect eye closure." },
+
+      { q: "Which muscle forms the supero-posterior border of the submental triangle?",
+        options: ["A) Anterior belly of digastric", "B) Geniohyoid", "C) Mylohyoid", "D) Posterior belly of digastric", "E) Superior belly of the omohyoid"],
+        correct: 0,
+        explanation: "The SUBMENTAL TRIANGLE is an unpaired midline triangle. Its boundaries are: lateral sides = ANTERIOR BELLIES OF THE DIGASTRIC muscles; inferior base = body of the hyoid bone; floor = mylohyoid. The anterior belly of digastric thus forms the lateral and supero-posterior borders when the submental triangle is viewed from below. The mylohyoid forms the floor (not the border) of the triangle. The submental triangle contains submental lymph nodes, which drain the tip of the tongue, lower incisors, and centre of the lower lip." },
+
+      { q: "Which nerve passes through the mandibular foramen?",
+        options: ["A) Inferior alveolar nerve", "B) Mandibular nerve (V3 trunk)", "C) Maxillary nerve", "D) Oculomotor nerve", "E) Zygomatic nerve"],
+        correct: 0,
+        explanation: "The INFERIOR ALVEOLAR NERVE (IAN) is the branch of V3 (mandibular division of trigeminal nerve) that passes through the mandibular foramen to enter the mandibular canal. Inside the canal it gives off branches to the mandibular teeth and exits as the MENTAL NERVE through the mental foramen to supply the chin and lower lip. The IAN is accompanied by the inferior alveolar artery and vein. The NERVE TO MYLOHYOID branches just before the mandibular foramen and runs in the mylohyoid groove. Blocking the IAN at the mandibular foramen is the basis of the inferior alveolar nerve block." },
+
+      { q: "The nerve passing through the foramen ovale is a branch of which cranial nerve?",
+        options: ["A) III", "B) V", "C) VII", "D) IX", "E) X"],
+        correct: 1,
+        explanation: "The FORAMEN OVALE transmits the MANDIBULAR NERVE (V3), the third and largest division of the TRIGEMINAL NERVE (CN V). V3 is the only mixed (motor AND sensory) division of the trigeminal nerve - it carries sensory fibres from the mandibular teeth, lower face, and anterior 2/3 of tongue, and motor fibres to the muscles of mastication (masseter, temporalis, medial and lateral pterygoids) plus mylohyoid, anterior belly of digastric, tensor tympani, and tensor veli palatini. The lesser petrosal nerve also passes through the foramen ovale." },
+
+      { q: "Which cranial nerve carries sensations of taste from the area of the tongue posterior to the row of vallate papillae?",
+        options: ["A) Cranial nerve V", "B) Cranial nerve VII", "C) Cranial nerve IX", "D) Cranial nerve X", "E) Cranial nerve XI"],
+        correct: 2,
+        explanation: "CRANIAL NERVE IX (GLOSSOPHARYNGEAL) carries taste from the POSTERIOR 1/3 of the tongue, including the region behind and including the circumvallate (vallate) papillae. CN VII (via chorda tympani) carries taste from the ANTERIOR 2/3 of the tongue (excluding vallate papillae). CN X (vagus) carries taste from the EPIGLOTTIS and scattered taste buds in the pharynx and larynx. The vallate papillae themselves are innervated by CN IX. This division of taste innervation at the sulcus terminalis reflects the embryological boundary between the anterior tongue (1st pharyngeal arch) and posterior tongue (3rd pharyngeal arch)." },
+
+      { q: "Through which of these openings does the inferior orbital nerve enter the orbit?",
+        options: ["A) Anterior ethmoidal foramen", "B) Inferior orbital fissure", "C) Optic canal", "D) Posterior ethmoidal foramen", "E) Superior orbital fissure"],
+        correct: 1,
+        explanation: "The INFRAORBITAL (inferior orbital) nerve, a branch of the MAXILLARY NERVE (V2), enters the orbit through the INFERIOR ORBITAL FISSURE. It then travels in the infraorbital groove on the floor of the orbit, passes through the infraorbital canal, and exits at the INFRAORBITAL FORAMEN on the anterior face of the maxilla to supply the skin of the cheek, lower eyelid, lateral nose, and upper lip. Dental relevance: the infraorbital nerve also gives off the anterior and middle superior alveolar nerves supplying the maxillary anterior teeth. The superior orbital fissure transmits CN III, IV, V1, VI and ophthalmic veins." },
+
+      { q: "Which of the following has its origin superiorly to the hyoid bone?",
+        options: ["A) Mylohyoid", "B) Omohyoid", "C) Sternohyoid", "D) Sternothyroid", "E) Thyrohyoid"],
+        correct: 0,
+        explanation: "MYLOHYOID originates from the MYLOHYOID LINE on the internal surface of the MANDIBLE, which is SUPERIOR to the hyoid bone. The other options are all INFRAHYOID muscles with origins BELOW the hyoid: omohyoid originates from the superior border of the scapula; sternohyoid from the posterior surface of the manubrium; sternothyroid from the posterior manubrium; thyrohyoid from the oblique line of the thyroid cartilage. Mylohyoid is a SUPRAHYOID muscle forming the floor of the mouth." },
+
+      { q: "Which of the following applies to the superior orbital fissure?",
+        options: ["A) It lies directly inferior to the greater wing of the sphenoid", "B) It lies directly above the posterior portion of the maxilla", "C) It lies directly between the orbit and the infratemporal fossa", "D) It transmits cranial nerves III, IV, and VI", "E) It transmits the maxillary nerve"],
+        correct: 3,
+        explanation: "The SUPERIOR ORBITAL FISSURE transmits: CN III (oculomotor), CN IV (trochlear), CN VI (abducens), the OPHTHALMIC DIVISION of V (V1) via its three branches (lacrimal, frontal, nasociliary nerves), the ophthalmic veins, and sympathetic fibres. It lies between the LESSER WING (superiorly) and GREATER WING (inferiorly) of the sphenoid. The MAXILLARY NERVE (V2) passes through foramen ROTUNDUM, not the SOF. The INFERIOR orbital fissure lies between the orbit and the infratemporal/pterygopalatine fossae and transmits V2 (infraorbital nerve) and the zygomatic nerve." },
+
+      { q: "Which of the following pairs of muscles receives motor input from spinal nerves C1, C2 and C3?",
+        options: ["A) Geniohyoid and sternohyoid", "B) Geniohyoid and thyrohyoid", "C) Omohyoid and thyrohyoid", "D) Sternohyoid and sternothyroid", "E) Sternohyoid and thyrohyoid"],
+        correct: 3,
+        explanation: "STERNOHYOID and STERNOTHYROID are both infrahyoid muscles innervated by the ANSA CERVICALIS (C1, C2, C3). The ansa cervicalis is a nerve loop formed from the cervical plexus supplying all infrahyoid muscles EXCEPT thyrohyoid. Thyrohyoid is innervated by C1 fibres travelling with CN XII (not by the ansa). Geniohyoid is also C1 (via CN XII) only. Omohyoid is innervated by ansa cervicalis (C1, C2, C3) but thyrohyoid is not, making option C incorrect. The ansa cervicalis is commonly identified during carotid endarterectomy." },
+
+      { q: "Which of the following cartilages provides an insertion point for the vocalis muscle?",
+        options: ["A) Arytenoid", "B) Corniculate", "C) Cricoid", "D) Cuneiform", "E) Epiglottis"],
+        correct: 0,
+        explanation: "The VOCALIS MUSCLE (medial part of the thyroarytenoid) inserts into the VOCAL PROCESS of the ARYTENOID CARTILAGE. The vocal cords (vocal ligaments) extend from the posterior angle of the thyroid cartilage (anteriorly) to the vocal process of the arytenoid (posteriorly). The arytenoids are paired pyramidal cartilages that sit on the posterior surface of the cricoid lamina. Their movements (rotation and gliding) control vocal cord tension and abduction/adduction. Muscles acting on the arytenoids include the posterior and lateral cricoarytenoids, and transverse/oblique arytenoids." },
+
+      { q: "Which of the following functions to retract the mandible?",
+        options: ["A) Anterior portion of temporalis", "B) Posterior portion of buccinator", "C) Posterior portion of temporalis", "D) Superficial head of medial pterygoid muscle", "E) Upper head of the lateral pterygoid"],
+        correct: 2,
+        explanation: "The POSTERIOR PORTION (HORIZONTAL FIBRES) of TEMPORALIS MUSCLE retracts the mandible (pulls the condyle posteriorly). The ANTERIOR fibres of temporalis elevate the mandible (close the jaw). The MEDIAL PTERYGOID and MASSETER elevate and stabilise the mandible. The LATERAL PTERYGOID (especially the lower head) PROTRUDES the mandible and opens the jaw. The buccinator is not a jaw-moving muscle - it compresses the cheek. Understanding these actions is critical for treating TMJ disorders and for understanding mandibular movements during chewing." },
+
+      { q: "Which lymph node(s) first receive the lymph drainage from the posterior third of the tongue?",
+        options: ["A) Jugulo-digastric nodes", "B) Jugulo-omohyoid nodes", "C) Parotid nodes", "D) Submandibular nodes", "E) Submental nodes"],
+        correct: 0,
+        explanation: "The POSTERIOR 1/3 of the tongue drains directly to the JUGULO-DIGASTRIC NODES (also known as jugulodigastric or tonsillar nodes), which are large lymph nodes at the junction of the internal jugular vein and posterior belly of digastric. The ANTERIOR 2/3 of the tongue: tip drains to submental nodes; lateral margins to submandibular nodes; central body to jugulo-omohyoid nodes. The jugulo-digastric node is clinically significant as it is commonly enlarged in TONSILLAR infections and TONGUE CANCER (posterior 1/3 squamous cell carcinoma has a poor prognosis partly due to early nodal spread)." },
+
+      { q: "The carotid sheath and its contents may be safely retracted during neck surgery. Which of the following is NOT part of the contents of the carotid sheath?",
+        options: ["A) Common carotid artery", "B) Internal carotid artery", "C) Internal jugular vein", "D) Sympathetic trunk", "E) Vagus nerve"],
+        correct: 3,
+        explanation: "The SYMPATHETIC TRUNK lies POSTERIOR and DEEP to the carotid sheath - it is NOT enclosed within the sheath. The carotid sheath contains: (1) Common carotid artery (below bifurcation) / Internal carotid artery (above bifurcation), (2) Internal jugular vein (lateral), (3) Vagus nerve (CN X) between the artery and vein, and (4) Ansa cervicalis (embedded in anterior wall). The external carotid artery is NOT in the carotid sheath - it leaves after the bifurcation. Understanding carotid sheath contents is essential for safe neck dissection and central venous access procedures." },
+
+      { q: "The pterygomandibular raphe is a clinical landmark indicating the plane of interconnection between which muscles?",
+        options: ["A) Buccinator and palatoglossal muscles", "B) Buccinator and palatopharyngeal muscles", "C) Buccinator and inferior pharyngeal constrictor muscles", "D) Buccinator and middle pharyngeal constrictor muscles", "E) Buccinator and superior pharyngeal constrictor muscles"],
+        correct: 4,
+        explanation: "The PTERYGOMANDIBULAR RAPHE is a tendinous band extending from the PTERYGOID HAMULUS (medially) to the POSTERIOR MANDIBLE (at the retromolar triangle). It serves as the insertion of the BUCCINATOR (anteriorly) and the origin of the SUPERIOR PHARYNGEAL CONSTRICTOR (posteriorly). This raphe is visible intra-orally as a pale fold behind the last molar when the mouth is wide open. It is a critical landmark for the INFERIOR ALVEOLAR NERVE BLOCK - the needle is inserted just lateral to the raphe and directed towards the mandibular foramen." },
+
+      { q: "Following clinical investigation, a woman suffering from double vision is diagnosed with abducens nerve palsy on her right side. How is the movement of her right eye likely to be affected?",
+        options: ["A) Right eye cannot look inferiorly", "B) Right eye cannot look laterally", "C) Right eye cannot look medially", "D) Right eye cannot look superiorly", "E) Right eye cannot move at all"],
+        correct: 1,
+        explanation: "CN VI (ABDUCENS) innervates the LATERAL RECTUS muscle, which ABDUCTS the eye (moves it laterally). With RIGHT abducens palsy, the right lateral rectus is paralysed, so the right eye CANNOT LOOK LATERALLY (cannot abduct). The eye will be deviated medially at rest (due to unopposed action of the medial rectus). This causes HORIZONTAL DIPLOPIA (double vision) when attempting to look to the right. CN III palsies cause inability to look up/medially/inferiorly. CN IV palsies cause inability to look inferoinferiorly. Abducens palsy is the most common isolated ocular motor nerve palsy and can indicate raised intracranial pressure." },
+
+      { q: "Which of the following statements applies best to the sublingual papilla (caruncle)?",
+        options: ["A) It receives the parotid duct", "B) It receives the sublingual duct", "C) It receives the submandibular duct", "D) It is formed by the sublingual gland", "E) It is formed by the submandibular gland"],
+        correct: 2,
+        explanation: "The SUBLINGUAL PAPILLA (caruncle) is a small mucosal elevation on each side of the lingual frenum at the floor of the mouth, and it receives the SUBMANDIBULAR DUCT (Wharton duct). The parotid duct (Stensen duct) opens in the buccal vestibule opposite the upper second molar. The sublingual gland drains via multiple small ducts (ducts of Rivinus) along the sublingual fold, and sometimes via a major sublingual duct that joins the submandibular duct. Clinically: a blocked submandibular duct can cause a ranula (mucocele on floor of mouth). Submandibular gland calculi (sialoliths) are common due to the upward-flowing ductal anatomy." },
+
+      { q: "Which cranial nerve provides innervation to the posterior belly of the digastric muscle?",
+        options: ["A) Cranial nerve V", "B) Cranial nerve VII", "C) Cranial nerve IX", "D) Cranial nerve X", "E) Cranial nerve XI"],
+        correct: 1,
+        explanation: "The POSTERIOR BELLY OF DIGASTRIC is innervated by the FACIAL NERVE (CN VII), specifically the digastric branch given off before the stylomastoid foramen. This is one of the key motor branches of CN VII in the neck region. By contrast, the ANTERIOR belly of digastric is innervated by the MYLOHYOID NERVE, a branch of V3 (trigeminal). This dual innervation reflects the different embryological origins of the two bellies (1st and 2nd pharyngeal arches respectively). The intermediate tendon of the digastric is anchored to the hyoid bone by a fibrous sling." },
+
+      { q: "The neck may be divided into triangles. In which cervical triangle does the common carotid artery usually divide into external and internal carotid arteries?",
+        options: ["A) Carotid triangle", "B) Muscular triangle", "C) Posterior triangle", "D) Submandibular triangle", "E) Submental triangle"],
+        correct: 0,
+        explanation: "The common carotid BIFURCATES into the external and internal carotid arteries within the CAROTID TRIANGLE (part of the anterior triangle of the neck). This bifurcation typically occurs at the level of the SUPERIOR BORDER OF THYROID CARTILAGE (C4 vertebra level). The carotid triangle is bounded by: sternocleidomastoid (posteriorly), posterior belly of digastric (superiorly), and superior belly of omohyoid (inferiorly). The CAROTID SINUS (baroreceptor) and CAROTID BODY (chemoreceptor) are located at this bifurcation. This region is surgically important for carotid endarterectomy." },
+
+      { q: "Which of these bones contributes to the ANTERIOR boundary of the pterygopalatine fossa?",
+        options: ["A) Maxilla", "B) Palatine bone", "C) Sphenoid bone", "D) Temporal bone", "E) Vomer"],
+        correct: 0,
+        explanation: "The PTERYGOPALATINE FOSSA (PPF) is a small pyramidal space deep to the infratemporal fossa. Its boundaries are: ANTERIOR = posterior surface of the MAXILLA (maxillary tuberosity); POSTERIOR = pterygoid process and greater wing of SPHENOID; MEDIAL = perpendicular plate of PALATINE bone; LATERAL = opens as the PTERYGOMAXILLARY FISSURE (into the infratemporal fossa). The PPF is clinically significant as it contains the maxillary nerve (V2), the maxillary artery terminal branches, and the pterygopalatine ganglion. It communicates with the orbit, nasal cavity, oral cavity, and middle cranial fossa via various foramina." },
+
+      { q: "All of the following nerves share the same cranial nerve as their origin EXCEPT one. Which of the following has a DIFFERENT cranial nerve as its origin?",
+        options: ["A) Buccal branch", "B) Cervical branch", "C) Mental nerve", "D) Temporal branch", "E) Zygomatic branch"],
+        correct: 2,
+        explanation: "The MENTAL NERVE is a terminal branch of the INFERIOR ALVEOLAR NERVE (V3 division of CN V TRIGEMINAL), and it is the odd one out. The other four are all branches of the FACIAL NERVE (CN VII): buccal branch, cervical branch, temporal branch, and zygomatic branch are all extracranial branches of CN VII leaving via the parotid gland. This question tests whether students can distinguish between the buccal nerve (sensory, CN V3) and the buccal branch of the facial nerve (motor, CN VII). The mental nerve provides sensory supply to the chin, lower lip, and buccal gingiva of lower incisors/premolars." },
+    ],
+
+    "Spot Exam Prep: Thoracic Anatomy": [
+      { q: "In this diagram of the thorax, the labeled structure shows the air passage descending in the midline from the larynx, dividing at the carina. What is this structure?",
+        img: "./quiz-images/ana1006-p362-i0.jpg",
+        options: ["A) Oesophagus", "B) Trachea", "C) Bronchial tree", "D) Superior vena cava", "E) Thoracic duct"],
+        correct: 1,
+        explanation: "The TRACHEA is the cartilaginous and fibromuscular tube extending from the larynx (at C6) to the CARINA at the T4/T5 level where it bifurcates into the left and right main bronchi. It is approximately 12 cm long and 2.5 cm wide, supported by 16-20 C-shaped cartilage rings (open posteriorly where the trachealis muscle is found). The CARINA is the last tracheal cartilage, forming an inverted V shape. It is an important landmark visible on bronchoscopy, and widening of the carina angle (normally under 70 degrees) suggests mediastinal lymphadenopathy." },
+
+      { q: "This labeled diagram of the lungs shows the right lung divided into three lobes by two fissures. What are the fissures separating the three right lung lobes?",
+        img: "./quiz-images/ana1006-p364-i0.jpg",
+        options: ["A) Two oblique fissures", "B) One horizontal and one oblique fissure", "C) Two horizontal fissures", "D) One vertical and one horizontal fissure", "E) The right lung has only one fissure"],
+        correct: 1,
+        explanation: "The RIGHT LUNG has THREE LOBES: upper (superior), middle, and lower (inferior). They are separated by TWO FISSURES: (1) the OBLIQUE FISSURE separates the lower lobe from the upper and middle lobes; (2) the HORIZONTAL FISSURE (also called transverse fissure) separates the upper lobe from the middle lobe. The LEFT LUNG has only TWO LOBES (upper and lower) separated by a single OBLIQUE FISSURE. The left upper lobe has a LINGULA (tongue-like projection) that corresponds to the right middle lobe. Clinical note: consolidation confined to the right middle lobe suggests middle lobe syndrome." },
+
+      { q: "This labeled diagram shows the LEFT LUNG. Which border is indicated by the arrow pointing to the notch on the anterior inferior aspect of the upper lobe?",
+        img: "./quiz-images/ana1006-p408-i0.jpg",
+        options: ["A) Cardiac notch", "B) Lingula", "C) Oblique fissure", "D) Pulmonary ligament", "E) Inferior border"],
+        correct: 0,
+        explanation: "The CARDIAC NOTCH is the concavity on the ANTEROMEDIAL surface of the LEFT LUNG upper lobe, created by the heart (specifically the left ventricle and pericardium). Below the cardiac notch is the LINGULA, a tongue-shaped projection of the left upper lobe that corresponds functionally to the right middle lobe. The left lung is smaller than the right due to the cardiac notch and the fact that the left hilum is slightly higher. Clinical relevance: the cardiac notch can be used in clinical percussion - a dull note here may indicate pleural effusion displacing the lung medially." },
+
+      { q: "The image shows the sternum with its three named parts. What is the name of the MOST SUPERIOR part of the sternum?",
+        img: "./quiz-images/ana1006-p370-i0.jpg",
+        options: ["A) Body (gladiolus)", "B) Manubrium", "C) Xiphoid process", "D) Sternal angle", "E) Costal notch"],
+        correct: 1,
+        explanation: "The MANUBRIUM is the broad, upper portion of the sternum. The STERNAL ANGLE (Angle of Louis) is the junction between the manubrium and the body, felt as a horizontal ridge on the anterior chest wall. It is a vital clinical landmark: it corresponds to the T4/T5 intervertebral level, marks the bifurcation of the trachea, the arch of the aorta, and the second costal cartilage. The BODY (gladiolus) is the long central portion. The XIPHOID PROCESS is the small inferior projection, largely cartilaginous in young adults. The xiphoid serves as the inferior boundary for CPR chest compressions." },
+
+      { q: "This diagram shows the HILUM of the lung, where major structures enter and exit. Which of the following does NOT pass through the hilum?",
+        img: "./quiz-images/ana1006-p364-i0.jpg",
+        options: ["A) Main bronchus", "B) Pulmonary artery", "C) Pulmonary veins", "D) Bronchial arteries", "E) Phrenic nerve"],
+        correct: 4,
+        explanation: "The PHRENIC NERVE does NOT pass through the hilum. Structures at the HILUM include: main bronchus (most posterior), pulmonary artery (most superior), two pulmonary veins (anterior and inferior), bronchial arteries and veins, lymphatic vessels, and autonomic nerves. The phrenic nerve (C3, C4, C5 - 'C3,4,5 keeps the diaphragm alive') descends in the mediastinum and passes ANTERIOR to the lung root (hilum) on its way to the diaphragm. The vagus nerve passes POSTERIOR to the lung root. This anatomical relationship is important in thoracic surgery." },
+
+      { q: "In this diagram showing the arterial circle at the base of the brain, the labeled vessels form an anastomotic ring. What is the NAME of this structure?",
+        img: "./quiz-images/ana1006-p366-i0.jpg",
+        options: ["A) Vertebrobasilar system", "B) Circle of Willis (circulus arteriosus)", "C) Dural venous sinuses", "D) Cerebral aqueduct", "E) Internal carotid plexus"],
+        correct: 1,
+        explanation: "The CIRCLE OF WILLIS (circulus arteriosus cerebri) is the anastomotic arterial ring at the base of the brain. It is formed by: the two ANTERIOR CEREBRAL ARTERIES joined by the ANTERIOR COMMUNICATING ARTERY; the two INTERNAL CAROTID ARTERIES; the two POSTERIOR CEREBRAL ARTERIES joined to the internal carotid system via the POSTERIOR COMMUNICATING ARTERIES. This arrangement allows collateral circulation if one vessel is blocked. Approximately 50% of people have an anatomically complete circle. BERRY ANEURYSMS most commonly occur at the junctions of this circle (especially the anterior communicating artery) and may rupture causing subarachnoid haemorrhage." },
+
+      { q: "This cross-sectional diagram of the heart shows its four chambers. Which chamber occupies the MOST ANTERIOR position in the chest?",
+        img: "./quiz-images/ana1006-p382-i0.jpg",
+        options: ["A) Right atrium", "B) Left atrium", "C) Right ventricle", "D) Left ventricle", "E) Interventricular septum"],
+        correct: 2,
+        explanation: "The RIGHT VENTRICLE is the MOST ANTERIORLY POSITIONED cardiac chamber - it forms most of the ANTERIOR (sternocostal) surface of the heart. This is clinically important: a direct blow to the sternum (e.g., in a car accident with the steering wheel) most commonly injures the right ventricle (cardiac contusion). The LEFT ATRIUM is the MOST POSTERIOR chamber (forms the posterior surface) and is in close relation to the oesophagus - left atrial enlargement can cause dysphagia. The LEFT VENTRICLE forms most of the LEFT and INFERIOR (diaphragmatic) surfaces of the heart." },
+
+      { q: "This image shows a cadaveric dissection of the anterior chest wall. The muscle highlighted forms the floor of the thoracic cavity. What is this structure?",
+        img: "./quiz-images/ana1006-p362-i0.jpg",
+        options: ["A) Diaphragm", "B) Transversus thoracis", "C) Intercostal muscle", "D) Serratus anterior", "E) Pectoralis minor"],
+        correct: 0,
+        explanation: "The DIAPHRAGM is the dome-shaped musculotendinous partition separating the thoracic and abdominal cavities. It is the PRIMARY MUSCLE OF BREATHING, responsible for approximately 70-80% of tidal volume during quiet respiration. The diaphragm has three main openings: the AORTIC HIATUS at T12 (aorta, thoracic duct, azygos vein); the OESOPHAGEAL HIATUS at T10 (oesophagus, vagal trunks, left gastric vessels); and the CAVAL OPENING at T8 (inferior vena cava). Motor supply: PHRENIC NERVE (C3, C4, C5). Sensory: phrenic nerve (central diaphragm) and lower intercostals (peripheral). Hiatus hernia occurs at the oesophageal hiatus." },
+
+      { q: "On this image, the structure labelled with an arrow is running along the posterior mediastinum, carrying venous blood from the body wall to the superior vena cava. What is this vessel?",
+        img: "./quiz-images/ana1006-p382-i0.jpg",
+        options: ["A) Thoracic duct", "B) Azygos vein", "C) Hemiazygos vein", "D) Internal thoracic vein", "E) Inferior vena cava"],
+        correct: 1,
+        explanation: "The AZYGOS VEIN ascends on the RIGHT side of the vertebral column in the posterior mediastinum and arches over the right lung root to drain into the SUPERIOR VENA CAVA (SVC) at T4. It drains most of the posterior intercostal veins from both sides (via the hemiazygos and accessory hemiazygos on the LEFT), the oesophageal veins, pericardial veins, and mediastinal veins. Clinical significance: if the SVC is obstructed (e.g., by lung cancer or thrombosis), the azygos system provides a collateral venous pathway. The THORACIC DUCT runs alongside the azygos system carrying lymph." },
+
+      { q: "This diagram labels the right side of the thorax. The structure shown has C-shaped cartilaginous rings incomplete posteriorly, with a smooth muscle closing the gap. What structure is this?",
+        img: "./quiz-images/ana1006-p362-i0.jpg",
+        options: ["A) Bronchus", "B) Trachea", "C) Oesophagus", "D) Common carotid artery", "E) Internal jugular vein"],
+        correct: 1,
+        explanation: "The TRACHEA has 16-20 C-SHAPED CARTILAGINOUS RINGS that are INCOMPLETE POSTERIORLY. The gap is bridged by the TRACHEALIS MUSCLE (smooth muscle), which allows the oesophagus to expand during swallowing. The cartilaginous rings prevent collapse of the trachea during forced inspiration (negative intrathoracic pressure). Bronchi also have cartilaginous support but in irregular plates (not complete C-rings). Small bronchioles (below 1mm diameter) have NO cartilage and rely on radial traction from surrounding lung tissue to remain patent - this is why airway obstruction in small airways causes air trapping." },
+    ],
+
+    "Spot Exam Prep: Head & Neck Anatomy": [
+      { q: "In this labeled diagram of the external carotid artery branches, the mnemonic 'Some Anatomists Like Freaking Out Poor Medical Students' is shown. Which of the following is a POSTERIOR branch of the external carotid artery?",
+        img: "./quiz-images/ana1006-p403-i0.jpg",
+        options: ["A) Superior thyroid artery", "B) Lingual artery", "C) Facial artery", "D) Occipital artery", "E) Maxillary artery"],
+        correct: 3,
+        explanation: "The OCCIPITAL ARTERY is a POSTERIOR branch of the external carotid artery (ECA). Using the mnemonic 'Some Anatomists Like Freaking Out Poor Medical Students': Superior thyroid (Anterior), Ascending pharyngeal (Medial), Lingual (Anterior), Facial (Anterior), Occipital (Posterior), Posterior auricular (Posterior), Maxillary (Terminal), Superficial temporal (Terminal). The THREE POSTERIOR branches are: Occipital, Posterior auricular, and Ascending pharyngeal (medial in some classifications). The occipital artery supplies the posterior scalp and muscles of the suboccipital triangle. It can be palpated medial to the mastoid process." },
+
+      { q: "This diagram shows the extrinsic tongue muscles. The large fan-shaped muscle arising from the superior mental spine of the mandible and forming most of the substance of the tongue is labeled. What is this muscle?",
+        img: "./quiz-images/ana1006-p405-i0.jpg",
+        options: ["A) Hyoglossus", "B) Styloglossus", "C) Palatoglossus", "D) Genioglossus", "E) Geniohyoid"],
+        correct: 3,
+        explanation: "GENIOGLOSSUS is the largest extrinsic muscle of the tongue, forming most of its bulk. It arises from the SUPERIOR MENTAL SPINE (superior genial tubercle) on the inner aspect of the symphysis menti and fans out to insert into the entire length of the tongue and hyoid bone. It PROTRUDES the tongue and each muscle deviates the tongue tip to the CONTRALATERAL side. The HYOGLOSSUS (visible in this image) arises from the greater horn and body of the hyoid and DEPRESSES and RETRACTS the tongue. All extrinsic tongue muscles are supplied by CN XII except PALATOGLOSSUS (CN X via pharyngeal plexus)." },
+
+      { q: "This diagram of the neck shows a paired hyoid muscle with one label blacked out. The visible label shows 'Omohyoid'. The blacked-out muscle runs vertically in the midline from the sternum/manubrium to the hyoid bone. What is this muscle?",
+        img: "./quiz-images/ana1006-p416-i0.jpg",
+        options: ["A) Sternothyroid", "B) Thyrohyoid", "C) Sternohyoid", "D) Geniohyoid", "E) Mylohyoid"],
+        correct: 2,
+        explanation: "STERNOHYOID is the most superficial infrahyoid muscle, running from the POSTERIOR SURFACE OF THE MANUBRIUM and medial end of clavicle upward to the BODY OF THE HYOID BONE. Its action is to DEPRESS the hyoid and larynx after they have been elevated during swallowing. It is innervated by the ANSA CERVICALIS (C1, C2, C3). The OMOHYOID has two bellies (superior and inferior) connected by an intermediate tendon anchored to the clavicle by fascia - it runs from the scapula to the hyoid and also depresses the hyoid. Both sternohyoid and omohyoid are superficial infrahyoid muscles; sternothyroid and thyrohyoid are the deeper infrahyoid muscles." },
+
+      { q: "This diagram of the oral cavity shows the labeled palatine tonsils and surrounding structures. The blacked-out label points to the fold of mucosa running from the soft palate to the tongue. What is this structure?",
+        img: "./quiz-images/ana1006-p417-i0.jpg",
+        options: ["A) Palatopharyngeal arch", "B) Palatoglossal arch", "C) Uvula", "D) Pterygomandibular raphe", "E) Lingual tonsil"],
+        correct: 1,
+        explanation: "The PALATOGLOSSAL ARCH (anterior pillar of fauces or anterior tonsillar pillar) is the fold of mucosa overlying the PALATOGLOSSUS MUSCLE, running from the soft palate down to the side of the tongue. It forms the ANTERIOR boundary of the tonsillar fossa (containing the palatine tonsil). The PALATOPHARYNGEAL ARCH (posterior pillar) lies behind the tonsil and overlies the palatopharyngeus muscle. Together they form the ISTHMUS OF FAUCES (the boundary between the oral cavity and oropharynx). The palatoglossus muscle depresses the soft palate and elevates the posterior tongue, playing a role in initiating swallowing." },
+
+      { q: "In this diagram of the anterior skull, the arrow points to a small foramen on the anterior face of the ZYGOMATIC BONE at the orbital rim. What foramen is indicated?",
+        img: "./quiz-images/ana1006-p412-i0.jpg",
+        options: ["A) Infraorbital foramen", "B) Zygomaticofacial foramen", "C) Mental foramen", "D) Supraorbital foramen", "E) Anterior nasal spine"],
+        correct: 1,
+        explanation: "The ZYGOMATICOFACIAL FORAMEN is a small opening on the ANTEROLATERAL surface of the ZYGOMATIC BONE that transmits the zygomaticofacial nerve (a branch of the zygomatic nerve from V2) and accompanying vessels to the skin of the cheek over the zygomatic eminence. The INFRAORBITAL FORAMEN is on the MAXILLA (below the orbit), and the SUPRAORBITAL FORAMEN/NOTCH is on the FRONTAL BONE (above the orbit). These three foramina lie roughly in a vertical line, each carrying a branch of the trigeminal nerve: V1 (supraorbital), V2 (infraorbital), and V3 (mental). The zygomatic bone also has a zygomaticotemporal foramen on its posterior temporal surface." },
+
+      { q: "This image shows the mandible in a superior (occlusal) view. Both condylar processes are highlighted in red. What is the function of the mandibular condyle?",
+        img: "./quiz-images/ana1006-p413-i0.jpg",
+        options: ["A) It is the insertion of the masseter muscle", "B) It articulates with the temporal bone at the temporomandibular joint", "C) It provides attachment for the sphenomandibular ligament", "D) It is the origin of the medial pterygoid muscle", "E) It contains the mandibular foramen"],
+        correct: 1,
+        explanation: "The MANDIBULAR CONDYLE (condylar process) is the posterior superior projection of the ramus of the mandible that ARTICULATES WITH THE TEMPORAL BONE at the TEMPOROMANDIBULAR JOINT (TMJ). The TMJ is a synovial joint where the condyle articulates with the mandibular fossa and articular eminence of the temporal bone, separated by an articular disc (fibrocartilage). The TMJ allows hinge (rotation) and gliding (translation) movements. The SPHENOMANDIBULAR LIGAMENT attaches to the LINGULA on the medial surface of the ramus (near the mandibular foramen). The masseter inserts on the lateral ramus/angle, not the condyle. The condylar neck is a common site of mandibular fracture." },
+
+      { q: "This head and neck diagram labels the major venous drainage. The large vein descending in the neck lateral to the carotid artery, draining most of the intracranial venous blood, is visible. What is this vessel?",
+        img: "./quiz-images/ana1006-p395-i0.jpg",
+        options: ["A) External jugular vein", "B) Internal jugular vein", "C) Anterior jugular vein", "D) Facial vein", "E) Retromandibular vein"],
+        correct: 1,
+        explanation: "The INTERNAL JUGULAR VEIN (IJV) is the main venous drainage of the INTRACRANIAL contents. It begins at the JUGULAR FORAMEN as a continuation of the sigmoid sinus, descends lateral to the carotid artery within the CAROTID SHEATH, and drains into the BRACHIOCEPHALIC VEIN (subclavian + IJV) behind the sternoclavicular joint. The IJV drains: sigmoid sinus, inferior petrosal sinus, facial vein, lingual vein, pharyngeal veins, and thyroid veins. The EXTERNAL JUGULAR VEIN (EJV) drains the superficial face and scalp, running over the sternocleidomastoid muscle - it is a useful clinical landmark for estimating venous pressure." },
+
+      { q: "This labeled diagram shows the facial muscles. The muscle circled in the image has a circular arrangement around the mouth and acts as an oral sphincter. What is this muscle?",
+        img: "./quiz-images/ana1006-p397-i0.jpg",
+        options: ["A) Risorius", "B) Buccinator", "C) Orbicularis oris", "D) Levator labii superioris", "E) Zygomaticus minor"],
+        correct: 2,
+        explanation: "ORBICULARIS ORIS is the circular muscle of the lips acting as an ORAL SPHINCTER. It has no bony origin - it consists of fibres from other facial muscles (particularly buccinator) that form a continuous ring around the oral fissure. Its functions include: CLOSING the mouth, PURSING/PROTRUDING the lips (kissing), PRESSING the lips against the teeth, and articulation of labial sounds (b, p, m, w). Motor supply: BUCCAL and MARGINAL MANDIBULAR branches of CN VII. Dental relevance: orbicularis oris exerts a constant labial force on the anterior teeth, contributing to dentoalveolar positioning. Weakness in Bell's palsy causes drooling and difficulty with lip seal." },
+
+      { q: "This diagram of the neck shows the fascial layers and muscles. In the anterior neck, the strap muscles are visible. Which infrahyoid muscle directly COVERS the thyroid gland?",
+        img: "./quiz-images/ana1006-p416-i0.jpg",
+        options: ["A) Sternohyoid", "B) Omohyoid", "C) Sternothyroid", "D) Thyrohyoid", "E) Platysma"],
+        correct: 2,
+        explanation: "STERNOTHYROID is the infrahyoid muscle that lies DEEP to the sternohyoid and DIRECTLY overlies the THYROID GLAND. It runs from the posterior surface of the manubrium and first costal cartilage to the OBLIQUE LINE OF THE THYROID CARTILAGE. During thyroidectomy, the surgeon must retract or divide the sternothyroid to access the thyroid gland. THYROHYOID (running from the thyroid cartilage up to the hyoid) lies even more superficially over the larynx but does not cover the thyroid gland itself. All four strap muscles (sternothyroid, sternohyoid, thyrohyoid, omohyoid) are innervated by the ansa cervicalis except thyrohyoid (C1 via CN XII)." },
+
+      { q: "This labeled skull base image shows the foramen ovale highlighted with green dots. The arrow indicates the nerve passing through this foramen. Which nerve is transmit through foramen ovale?",
+        img: "./quiz-images/ana1006-p407-i0.jpg",
+        options: ["A) Maxillary nerve (V2)", "B) Mandibular nerve (V3)", "C) Lesser petrosal nerve only", "D) Facial nerve (CN VII)", "E) Glossopharyngeal nerve (CN IX)"],
+        correct: 1,
+        explanation: "The MANDIBULAR NERVE (V3) is the main structure transmitted through the FORAMEN OVALE in the greater wing of the sphenoid. V3 is the ONLY MIXED division of the trigeminal nerve (sensory AND motor). It provides: sensory supply to the lower face, mandibular teeth, floor of mouth, anterior 2/3 tongue (general sensation via lingual nerve), and meninges; motor supply to all four muscles of mastication (masseter, temporalis, medial and lateral pterygoids), plus mylohyoid, anterior digastric, tensor tympani, and tensor veli palatini. The LESSER PETROSAL NERVE (carrying parasympathetic fibres for the parotid gland) may also pass through or near the foramen ovale." },
+
+      { q: "This Kenhub diagram highlights a muscle at the corner of the mouth in green. The muscle appears to draw the corner of the mouth superolaterally. Based on this action, which muscle is most likely highlighted?",
+        img: "./quiz-images/ana1006-p406-i0.jpg",
+        options: ["A) Risorius", "B) Depressor anguli oris", "C) Zygomaticus major", "D) Buccinator", "E) Levator anguli oris"],
+        correct: 2,
+        explanation: "ZYGOMATICUS MAJOR is the primary muscle responsible for ELEVATING the corners of the mouth SUPEROLATERALLY, creating the 'smiling' expression. It originates from the lateral surface of the ZYGOMATIC BONE and inserts into the modiolus (fibromuscular node at the corner of the mouth). Motor supply: ZYGOMATIC and BUCCAL branches of CN VII. RISORIUS pulls the corner of the mouth directly LATERALLY (grimace). DEPRESSOR ANGULI ORIS depresses the corners (frown expression). LEVATOR ANGULI ORIS (levator anguli) elevates the corner, but from below the infraorbital foramen - it is distinct from zygomaticus major which acts from more superolaterally." },
+
+      { q: "This diagram labels the tongue and floor of mouth region. The muscle running from the hyoid bone upwards and inserting into the lateral tongue, overlying the genioglossus, is labeled. What is this muscle?",
+        img: "./quiz-images/ana1006-p405-i0.jpg",
+        options: ["A) Genioglossus", "B) Hyoglossus", "C) Styloglossus", "D) Palatoglossus", "E) Superior longitudinal"],
+        correct: 1,
+        explanation: "HYOGLOSSUS is the QUADRILATERAL flat extrinsic tongue muscle arising from the GREATER HORN and BODY of the HYOID BONE and inserting into the lateral part of the tongue. It DEPRESSES and RETRACTS the tongue. It lies lateral to genioglossus and is a key landmark in the floor of the mouth because important structures pass deep and superficial to it: DEEP to hyoglossus = hypoglossal nerve (CN XII), lingual artery; SUPERFICIAL to hyoglossus = lingual nerve (V3), submandibular ganglion, and submandibular duct. Motor supply: CN XII (hypoglossal). Clinical: the lingual artery is ligated deep to hyoglossus in tongue cancer surgery." },
+    ],
+
     },
     "AN2006": {
       "Topic 3: Cranial Nerves": [
@@ -1097,6 +1385,241 @@
         explanation: "The mandibular first molar is the first permanent tooth to erupt (‘6-year molar’). It has 2 roots (mesial & distal) and typically 5 cusps (3 buccal, 2 lingual). FDI: 46 (lower right) or 36 (lower left). Non-succedaneous — it does not replace a primary tooth." },
     ],
   },
+
+  "OH1002": {
+    "Dental Restorative Materials": [
+      { q: "What is the main organic matrix component of modern dental composite resin restoratives?",
+        options: ["A) Bis-GMA (bisphenol A glycidyl methacrylate)", "B) Zinc oxide eugenol", "C) Calcium hydroxide", "D) Polycarboxylate", "E) Hydroxyapatite"],
+        correct: 0,
+        explanation: "BIS-GMA (Bowen's resin, named after its inventor Dr Rafael Bowen) is the main organic matrix component of dental composite resins. It is a high-molecular-weight aromatic dimethacrylate monomer with double bonds at each end (allowing polymerisation). Its high molecular weight results in REDUCED POLYMERISATION SHRINKAGE. However, Bis-GMA is highly VISCOUS due to its large molecular size, making it difficult to incorporate sufficient filler particles. To overcome this, lower-viscosity DILUENT monomers are added: TEGDMA (triethylene glycol dimethacrylate), EGDMA, and MMA (methyl methacrylate, though MMA has significant shrinkage)." },
+
+      { q: "A patient presents with a failing composite restoration showing rough surface texture and pigmentation. This is most likely due to which property of traditional macrofilled composites?",
+        options: ["A) High filler particle content", "B) Selective abrasion of the resin matrix exposing filler particles", "C) Excess moisture during setting", "D) Insufficient curing light intensity", "E) Improper acid-etching technique"],
+        correct: 1,
+        explanation: "Traditional MACROFILLED composites (particle size 20-30 microns) had several disadvantages: (1) DIFFICULT TO POLISH - large particles created rough surfaces; (2) SELECTIVE MATRIX ABRASION - the resin matrix wears away faster than hard filler particles, leaving protruding filler which then DISLODGES, creating pits; (3) SURFACE ROUGHNESS redevelops over time; (4) POOR RESISTANCE TO OCCLUSAL WEAR; (5) TENDENCY TO DISCOLOUR. These limitations led to the development of MICROFILLED composites (0.04-0.4 micron particles) which are more polishable, and HYBRID composites combining both particle sizes." },
+
+      { q: "What is the primary function of the SILANE COUPLING AGENT in dental composite resins?",
+        options: ["A) To initiate the polymerisation reaction when exposed to light", "B) To bond the inorganic filler particles to the organic resin matrix", "C) To increase the translucency of the restoration", "D) To prevent bacterial contamination during setting", "E) To reduce polymerisation shrinkage"],
+        correct: 1,
+        explanation: "The SILANE COUPLING AGENT (organosilane) forms a CHEMICAL BOND between the INORGANIC FILLER particles and the ORGANIC RESIN MATRIX. Without silane coating, filler particles would simply be dispersed in the matrix without chemical adhesion, leading to poor mechanical properties and water sorption at the filler-matrix interface. Silane molecules have two reactive ends: one reacts with the GLASS FILLER surface (Si-O bonds) and the other COPOLYMERISES with the resin matrix monomers. This creates an effective stress transfer between hard filler and matrix. Broken silane bonds at the filler-matrix interface is a key mechanism of composite wear and fatigue failure." },
+
+      { q: "What is the C-FACTOR in restorative dentistry and why is it important?",
+        options: ["A) The coefficient of thermal expansion of the composite", "B) The ratio of bonded tooth surfaces to unbonded (free) surfaces in a cavity", "C) The carbon content of the composite resin", "D) The degree of monomer conversion during polymerisation", "E) The compressive strength relative to tensile strength"],
+        correct: 1,
+        explanation: "The C-FACTOR (Configuration Factor) is the RATIO OF BONDED TO UNBONDED SURFACES in a prepared cavity. As composite polymerises, it SHRINKS (approximately 1-3% volumetrically). With bonded surfaces, this shrinkage creates STRESS at the bonded interfaces. A HIGH C-FACTOR (more bonded surfaces relative to free surfaces) means less free surface to accommodate shrinkage, resulting in GREATER POLYMERISATION STRESS and higher risk of marginal gap formation, cuspal deflection, or post-operative sensitivity. Example: a class I pit cavity (bonded on 5 walls, 1 free surface) has C-factor = 5, whereas a class V erosion (2 bonded, 2 free) has C-factor = 1. Dentists mitigate this by incremental placement." },
+
+      { q: "Which dental restorative material is composed of silver, tin, copper and zinc alloyed with mercury?",
+        options: ["A) Gold alloy", "B) Dental amalgam", "C) Glass ionomer cement", "D) Zinc phosphate cement", "E) Composite resin"],
+        correct: 1,
+        explanation: "DENTAL AMALGAM is an alloy formed by mixing MERCURY with a silver-tin alloy (with smaller amounts of copper and zinc). The traditional amalgam alloy composition is: Silver (Ag) ~65-70%, Tin (Sn) ~25-29%, Copper (Cu) ~6%, Zinc (Zn) <2%. When mixed with mercury (Hg), three crystalline PHASES form: GAMMA (Ag3Sn, unreacted alloy), GAMMA-1 (Ag2Hg3, silver-mercury), and GAMMA-2 (Sn7-8Hg, tin-mercury). The gamma-2 phase is the WEAKEST and most CORROSION-PRONE phase, prone to creep and corrosion. HIGH-COPPER amalgams (Cu >13%) eliminate gamma-2 by forming a copper-tin phase instead, giving superior mechanical properties." },
+
+      { q: "Why were high-copper amalgams introduced as an improvement over traditional (low-copper) amalgams?",
+        options: ["A) They set faster and allow earlier polishing", "B) They have greater radiopacity for X-ray diagnosis", "C) They eliminate the weak gamma-2 phase, improving strength and corrosion resistance", "D) They contain less mercury, reducing toxicity", "E) They bond chemically to tooth structure"],
+        correct: 2,
+        explanation: "HIGH-COPPER AMALGAMS (Cu content >13%, compared to <6% in traditional low-copper amalgams) were introduced to ELIMINATE the GAMMA-2 PHASE (Sn7-8Hg). Instead, copper reacts preferentially with tin to form Cu6Sn5 (eta phase), which replaces the weak gamma-2. The GAMMA-2 phase is problematic because it: (1) is WEAK - reduces strength of the restoration; (2) CORRODES rapidly in oral fluids - releasing tin and causing grey/black corrosion products; (3) is subject to CREEP under masticatory loads. High-copper amalgams show LESS CREEP, GREATER CORROSION RESISTANCE, and BETTER LONG-TERM CLINICAL PERFORMANCE. They can be dispersed-phase or unicomposition (admixed or lathe-cut)." },
+
+      { q: "Glass ionomer cement (GIC) differs from composite resin in that it bonds to tooth structure through which mechanism?",
+        options: ["A) Micromechanical retention after acid etching", "B) Chemical adhesion via ionic bonds with calcium in hydroxyapatite", "C) Photopolymerisation of dimethacrylate monomers", "D) Thermally activated polymerisation", "E) Zinc chelation with collagen fibres"],
+        correct: 1,
+        explanation: "GLASS IONOMER CEMENT bonds to tooth structure through CHEMICAL ADHESION - specifically IONIC BONDS between the polyalkenoic acid (polyacrylic acid) chains and CALCIUM ions in the HYDROXYAPATITE of enamel and dentine. This is termed CHELATION of calcium. This gives GIC a genuine chemical bond to tooth structure without requiring separate acid-etching steps or bonding agents. By contrast, composite resin bonds via MICROMECHANICAL retention after acid-etching creates a resin-infiltrated hybrid layer. GIC also has the unique property of FLUORIDE RELEASE, which inhibits secondary caries around the restoration. The setting reaction is an ACID-BASE reaction between the polyacrylic acid and the glass powder." },
+
+      { q: "A patient has a class II cavity in a mandibular premolar. The dentist recommends placing composite in INCREMENTS. What is the primary reason for incremental placement technique?",
+        options: ["A) To improve the colour matching of the composite", "B) To reduce the C-factor and minimise polymerisation shrinkage stress", "C) To allow moisture control between layers", "D) To increase the depth of cure", "E) To reduce chair time for the dentist"],
+        correct: 1,
+        explanation: "INCREMENTAL PLACEMENT reduces POLYMERISATION SHRINKAGE STRESS by reducing the C-FACTOR with each increment. By placing small increments (2mm or less) rather than one large bulk fill: (1) each increment has a lower C-factor (fewer bonded walls proportionally); (2) each increment can shrink partially toward the unset composite below, rather than stressing the tooth-composite bond; (3) adequate DEPTH OF CURE is ensured (light penetration falls off exponentially with depth); (4) voids can be condensed out between increments. Modern BULK-FILL composites use modified chemistry (stress-relieving additives, higher translucency, slow-reacting photoinitiators) to allow placement in up to 4mm increments with acceptable shrinkage." },
+
+      { q: "Which of the following is the PHOTOINITIATOR used in most visible light-cured composite resins?",
+        options: ["A) Benzoyl peroxide", "B) Camphorquinone", "C) Azobisisobutyronitrile (AIBN)", "D) Di-camphorquinone", "E) Titanium dioxide"],
+        correct: 1,
+        explanation: "CAMPHORQUINONE (CQ) is the most widely used PHOTOINITIATOR in visible light-cured composites. It absorbs light in the BLUE REGION of the visible spectrum (peak absorption ~470 nm, which explains why LED curing lights emit blue light). When activated, camphorquinone initiates free radical polymerisation of the dimethacrylate monomers. It requires a CO-INITIATOR (amine, typically ethyl-4-dimethylaminobenzoate or EDMAB) to generate free radicals effectively. One limitation: camphorquinone is yellow-coloured, which can affect shade in high-translucency restorations. Some modern composites use alternative photoinitiators (phenylpropanedione, Ivocerin) to avoid this yellowing effect." },
+
+      { q: "The SMEAR LAYER is produced when preparing a tooth cavity with a bur. What is the clinical significance of the smear layer for adhesive restorations?",
+        options: ["A) It improves adhesion by creating a rough surface for mechanical retention", "B) It must be removed or modified to allow resin penetration and adhesive bonding", "C) It prevents sensitivity by sealing dentinal tubules naturally", "D) It promotes remineralisation of the cavity floor", "E) It has no effect on bonding of modern adhesive systems"],
+        correct: 1,
+        explanation: "The SMEAR LAYER is a 1-5 micron thick amorphous layer of cutting debris (ground enamel, dentine, organic material) covering the cavity surface after instrumentation. For ADHESIVE RESTORATIONS, the smear layer is problematic because it BLOCKS DENTINAL TUBULES and the intertubular dentine surface, PREVENTING RESIN PENETRATION and adhesive bonding. It must be: REMOVED (total-etch/acid-etch technique using 35-37% phosphoric acid for 15s dentine, 30s enamel) or MODIFIED (self-etch primers partially dissolve and incorporate the smear layer). Total etch exposes collagen network; after rinsing, adhesive monomers infiltrate to form the HYBRID LAYER (resin-infiltrated dentine). Removing too much smear layer can cause post-operative sensitivity." },
+
+      { q: "Which property of dental amalgam makes it CLINICALLY USEFUL in high-stress posterior occlusal areas compared to composite resin?",
+        options: ["A) Its ability to bond chemically to tooth structure", "B) Its fluoride-releasing properties", "C) Its superior compressive strength and resistance to fracture under occlusal loading", "D) Its excellent aesthetics", "E) Its biocompatibility and non-toxicity"],
+        correct: 2,
+        explanation: "DENTAL AMALGAM has SUPERIOR COMPRESSIVE STRENGTH (approx. 350-500 MPa set amalgam) compared to composite resin (approx. 250-350 MPa). Under OCCLUSAL LOADING in posterior teeth, compressive forces are dominant, and amalgam withstands these well. Additionally, amalgam: (1) is SELF-SEALING over time (corrosion products form at margins reducing microleakage); (2) is TECHNIQUE-INSENSITIVE (less affected by moisture than composites); (3) is DURABLE for 10-15+ years in posterior teeth. However, amalgam is NOT ADHESIVE (requires mechanical retention from undercuts) and has POOR AESTHETICS. Composite resins have improved in strength but remain more technique-sensitive in posterior class I and II restorations." },
+
+      { q: "What is the role of FLUORIDE release in glass ionomer cements (GIC)?",
+        options: ["A) It accelerates the setting reaction of the cement", "B) It acts as a photoinitiator for light activation", "C) It provides an antimicrobial effect and inhibits secondary caries formation", "D) It bonds the cement to the enamel surface", "E) It increases the translucency of the restoration"],
+        correct: 2,
+        explanation: "FLUORIDE RELEASE from GIC provides a CARIOSTATIC (anti-caries) effect through two mechanisms: (1) DIRECT ANTIMICROBIAL EFFECT - fluoride inhibits bacterial enzymes (enolase), reducing acid production by Streptococcus mutans; (2) REMINERALISATION - released fluoride ions incorporate into tooth mineral forming FLUORAPATITE, which is less soluble in acid than hydroxyapatite. GIC not only releases fluoride initially but also acts as a FLUORIDE RESERVOIR, taking up fluoride from dietary sources (fluoride toothpaste, mouthwash) and releasing it back into the oral environment (fluoride recharge). This makes GIC particularly valuable for HIGH CARIES RISK patients and for lining/basing under composite restorations." },
+
+      { q: "A dentist notices that a 5-year-old patient's primary molars show extensive caries. Which restorative material is most suitable for restoring these teeth due to its ability to bond WITHOUT ETCHING, release fluoride, and tolerate a moist environment?",
+        options: ["A) Composite resin", "B) Dental amalgam", "C) Glass ionomer cement", "D) Zinc oxide eugenol", "E) Calcium hydroxide liner"],
+        correct: 2,
+        explanation: "GLASS IONOMER CEMENT (GIC) is the material of choice for PAEDIATRIC and HIGH CARIES RISK patients because: (1) SELF-ADHESIVE - bonds chemically to wet tooth structure without separate etching, making it ideal for uncooperative children where moisture control is difficult; (2) FLUORIDE RELEASE - inhibits secondary caries and remineralises adjacent tooth structure; (3) BIOCOMPATIBLE - has low pulp irritancy; (4) COEFFICIENT OF THERMAL EXPANSION similar to tooth structure. Limitations: lower strength and wear resistance than composite, opaque appearance. RESIN-MODIFIED GIC (RMGIC) adds light-cured resin for improved strength and handling. The ART (Atraumatic Restorative Treatment) technique uses GIC without dental drills, making it suitable for community settings." },
+
+      { q: "Polymerisation shrinkage in composite resins occurs due to which molecular change during setting?",
+        options: ["A) Water absorption causing swelling then shrinkage", "B) Monomer molecules moving closer together as C=C double bonds convert to C-C single bonds during polymerisation", "C) Mercury release reducing volume", "D) Thermal expansion then contraction as the composite cools", "E) Acid-base reaction producing CO2 gas which escapes"],
+        correct: 1,
+        explanation: "POLYMERISATION SHRINKAGE occurs because during free-radical polymerisation, the C=C double bonds in the methacrylate monomers are converted to C-C single bonds. The INTERMOLECULAR DISTANCE between monomers in liquid form (held apart by van der Waals forces ~3.5 Angstroms) is greater than the COVALENT BOND LENGTH in the polymer chain (~1.5 Angstroms). As monomers link into polymer chains, they approach each other, causing an overall VOLUME REDUCTION of 1-3% (commercial composites). This creates INTERNAL STRESS at bonded interfaces. Higher DEGREE OF CONVERSION = better mechanical properties but more shrinkage. Factors reducing shrinkage: high filler loading (reduces resin content), ring-opening monomers (siloranes, Filtek LS), stress-relieving monomers." },
+    ],
+
+    "Oral Cavity & Salivary Glands": [
+      { q: "A patient presents with a dry, swollen floor of the mouth and pain on eating. Imaging reveals a calculus in the submandibular duct near its opening. Why is the submandibular duct especially prone to calculus formation?",
+        options: ["A) The submandibular gland produces the most acidic saliva", "B) The duct travels upwards against gravity, and submandibular saliva is relatively high in calcium and mucous", "C) The duct passes over the lingual nerve, causing compression", "D) The submandibular gland is the smallest major salivary gland", "E) The duct opening is the widest, allowing calculi to enter"],
+        correct: 1,
+        explanation: "SUBMANDIBULAR DUCT CALCULI (sialolithiasis) account for approximately 80-90% of all salivary calculi. The submandibular duct (Wharton duct) is prone to calculus formation because: (1) UPWARD FLOW - the duct courses anteriorly and upward from the gland (floor of mouth) to the sublingual papilla, so saliva flows against gravity, allowing stagnation; (2) HIGH CALCIUM AND PHOSPHATE content of submandibular saliva; (3) MUCOUS SECRETION - submandibular saliva is more mucous-rich (mixed serous/mucous) compared to parotid (purely serous), creating a more viscous medium for calculus precipitation. Symptoms: pain and swelling at mealtimes (gustatory pain) as saliva backs up. Treatment: removal via duct dilation or sialadenoscopy." },
+
+      { q: "The parotid gland is located anterior and inferior to the ear. Which nerve passes THROUGH the substance of the parotid gland, dividing it into superficial and deep lobes?",
+        options: ["A) Auriculotemporal nerve (V3)", "B) Facial nerve (CN VII)", "C) Great auricular nerve (C2, C3)", "D) Lingual nerve (V3)", "E) Glossopharyngeal nerve (CN IX)"],
+        correct: 1,
+        explanation: "The FACIAL NERVE (CN VII) exits the stylomastoid foramen and PASSES THROUGH the substance of the parotid gland, dividing it into SUPERFICIAL and DEEP LOBES. Within the gland, CN VII divides into five terminal branches (temporal, zygomatic, buccal, marginal mandibular, cervical) supplying muscles of facial expression. This is of enormous SURGICAL IMPORTANCE: parotidectomy requires meticulous identification and preservation of CN VII to avoid facial paralysis. The facial nerve does NOT lie in the capsule but within the gland tissue. Parotid tumours or surgical trauma can damage CN VII. The AURICULOTEMPORAL nerve (V3) carries sensory fibres to the parotid and also carries postganglionic parasympathetic fibres for salivation (from otic ganglion via lesser petrosal nerve)." },
+
+      { q: "A patient undergoing an inferior alveolar nerve block experiences temporary flushing and sweating of the cheek and jaw region when eating (Frey syndrome). What is the underlying mechanism?",
+        options: ["A) Allergic reaction to local anaesthetic", "B) Aberrant regeneration of parasympathetic nerve fibres along sympathetic pathways to sweat glands", "C) Damage to the lingual nerve causing taste disturbance", "D) Excessive vasoconstrictor in the anaesthetic causing ischaemia", "E) TMJ inflammation causing referred autonomic symptoms"],
+        correct: 1,
+        explanation: "FREY SYNDROME (auriculotemporal nerve syndrome, gustatory sweating) occurs when PARASYMPATHETIC nerve fibres originally supplying the PAROTID GLAND regenerate along the wrong pathways and aberrantly innervate SWEAT GLANDS and BLOOD VESSELS in the overlying skin. Normally, the parasympathetic fibres travel via the auriculotemporal nerve to stimulate parotid secretion during eating. After parotidectomy (most common cause) or trauma, these regenerating fibres may grow into nearby sympathetic pathways supplying skin - when stimulated during meals, SWEATING and FLUSHING occur in the preauricular region instead of salivation. Treatment includes botulinum toxin injection into the affected area." },
+
+      { q: "The SUBMANDIBULAR TRIANGLE is bounded by which structures?",
+        options: ["A) Anterior belly of digastric, posterior belly of digastric, and inferior border of mandible", "B) Sternocleidomastoid, trapezius, and clavicle", "C) Mylohyoid, hyoglossus, and genioglossus", "D) Hyoid bone and bilateral anterior bellies of digastric", "E) Omohyoid, sternothyroid, and sternohyoid"],
+        correct: 0,
+        explanation: "The SUBMANDIBULAR (DIGASTRIC) TRIANGLE is bounded by: (1) INFERIOR BORDER OF THE MANDIBLE (superiorly); (2) ANTERIOR BELLY OF DIGASTRIC (anteriorly and inferiorly); (3) POSTERIOR BELLY OF DIGASTRIC (posteriorly and inferiorly). Its floor is formed by the mylohyoid and hyoglossus muscles. CONTENTS include: submandibular salivary gland, submandibular lymph nodes, facial artery and vein, lingual nerve (V3), hypoglossal nerve (CN XII), and submandibular ganglion. The submandibular triangle is distinct from the SUBMENTAL TRIANGLE (paired bilateral anterior digastric bellies + hyoid bone) and the CAROTID TRIANGLE (posterior belly of digastric, omohyoid, sternocleidomastoid)." },
+    ],
+  },
+
+  "PL1002": {
+    "Renal Physiology": [
+      { q: "What is the FUNCTIONAL UNIT of the kidney?",
+        img: "./quiz-images/physio-p56-i0.jpg",
+        options: ["A) Glomerulus", "B) Nephron", "C) Collecting duct", "D) Loop of Henle", "E) Renal corpuscle"],
+        correct: 1,
+        explanation: "The NEPHRON is the functional unit of the kidney. There are over ONE MILLION nephrons in each human kidney. Each nephron consists of: the RENAL CORPUSCLE (glomerulus + Bowman's capsule) where filtration occurs, the PROXIMAL CONVOLUTED TUBULE (PCT) where approximately 65-70% of filtered sodium, water, and solutes are reabsorbed, the LOOP OF HENLE (creates a concentration gradient in the medulla), the DISTAL CONVOLUTED TUBULE (DCT) where aldosterone acts, and the COLLECTING DUCT where ADH acts to vary water reabsorption. Nephrons FILTER blood at ~125 mL/min (GFR), and tubules REABSORB ~124 mL/min, producing only ~1-2 mL/min of urine." },
+
+      { q: "A patient with DIABETES MELLITUS has glucose appearing in their urine (glycosuria). Which part of the nephron is primarily responsible for glucose reabsorption under normal conditions?",
+        options: ["A) Descending limb of the loop of Henle", "B) Proximal convoluted tubule", "C) Distal convoluted tubule", "D) Collecting duct", "E) Glomerulus"],
+        correct: 1,
+        explanation: "Glucose is reabsorbed almost ENTIRELY in the PROXIMAL CONVOLUTED TUBULE (PCT) via sodium-glucose cotransporters (SGLT2, with SGLT1 in later PCT). Under normal blood glucose levels, the transport maximum (Tm) for glucose is not exceeded, and NO glucose appears in urine. In diabetes mellitus, blood glucose EXCEEDS the RENAL THRESHOLD (~10 mmol/L), overwhelming the SGLT transporters - the Tm is exceeded and glucose appears in urine (GLYCOSURIA). This forms the basis of SGLT2 inhibitor drugs (e.g., dapagliflozin) which treat diabetes by blocking glucose reabsorption, causing glycosuria and reducing blood glucose. The glomerulus DOES filter glucose freely (not based on charge, only molecular size)." },
+
+      { q: "ALDOSTERONE acts on which part of the nephron to promote sodium reabsorption?",
+        options: ["A) Proximal convoluted tubule", "B) Descending limb of the loop of Henle", "C) Thick ascending limb", "D) Distal convoluted tubule and cortical collecting duct", "E) Glomerulus"],
+        correct: 3,
+        explanation: "ALDOSTERONE (a mineralocorticoid from the zona glomerulosa of the adrenal cortex) acts PRIMARILY on the DISTAL CONVOLUTED TUBULE (DCT) and CORTICAL COLLECTING DUCT. It promotes expression of EPITHELIAL SODIUM CHANNELS (ENaC) and Na+/K+ ATPase pumps on principal cells, increasing SODIUM REABSORPTION and POTASSIUM SECRETION. Aldosterone is released in response to: low blood pressure, high angiotensin II, high plasma K+. By retaining sodium, it promotes WATER RETENTION (osmotic), increasing blood volume and pressure. CONN SYNDROME (primary hyperaldosteronism - adrenal adenoma) causes hypertension, hypokalaemia, and metabolic alkalosis." },
+
+      { q: "Antidiuretic hormone (ADH/vasopressin) increases water reabsorption in the kidney by acting on which structure?",
+        options: ["A) Afferent arteriole", "B) Proximal convoluted tubule", "C) Loop of Henle thick ascending limb", "D) Collecting duct", "E) Macula densa"],
+        correct: 3,
+        explanation: "ADH (ANTIDIURETIC HORMONE/VASOPRESSIN) acts on the COLLECTING DUCT (and to a lesser extent the late DCT), inserting AQUAPORIN-2 (AQP2) channels into the apical membrane of principal cells. This increases water PERMEABILITY of the collecting duct, allowing water to follow the medullary osmotic gradient (created by the loop of Henle countercurrent mechanism) and be reabsorbed into the hypertonic medullary interstitium. Without ADH, the collecting duct remains IMPERMEABLE to water and large volumes of dilute urine are produced (DIABETES INSIPIDUS). ADH is released from the POSTERIOR PITUITARY in response to increased plasma osmolality (detected by hypothalamic osmoreceptors) or decreased blood volume." },
+
+      { q: "Atrial natriuretic peptide (ANP) is released in response to increased BLOOD VOLUME. What is its primary effect on the kidney?",
+        options: ["A) ANP retains sodium by increasing aldosterone secretion", "B) ANP promotes sodium and water EXCRETION by increasing GFR and inhibiting sodium reabsorption", "C) ANP stimulates ADH release from the posterior pituitary", "D) ANP constricts the efferent arteriole to increase GFR", "E) ANP promotes renin release from juxtaglomerular cells"],
+        correct: 1,
+        explanation: "ANP (ATRIAL NATRIURETIC PEPTIDE) is released from ATRIAL CARDIOMYOCYTES when atrial wall tension increases (i.e., high blood volume). It promotes SODIUM and WATER EXCRETION (NATRIURESIS and DIURESIS) by: (1) DILATING the AFFERENT arteriole and CONSTRICTING the EFFERENT arteriole, increasing GFR; (2) INHIBITING ALDOSTERONE secretion (directly from adrenal cortex and indirectly via renin inhibition); (3) INHIBITING ADH release; (4) INHIBITING sodium reabsorption in collecting duct. Net effect: reduces blood volume and blood pressure. ANP is the body's natural counter-regulatory mechanism to the renin-angiotensin-aldosterone system (RAAS). BNP (B-type, from ventricles) has similar effects and is used as a marker of heart failure." },
+
+      { q: "The RENIN-ANGIOTENSIN-ALDOSTERONE SYSTEM (RAAS) is activated when renal perfusion pressure falls. What triggers renin release?",
+        options: ["A) High blood pressure detected by the macula densa", "B) Low NaCl delivery to the macula densa and low afferent arteriole stretch (juxtaglomerular cells)", "C) High potassium concentration in the cortical collecting duct", "D) Increased ANP levels from the right atrium", "E) High angiotensin II levels signalling positive feedback"],
+        correct: 1,
+        explanation: "RENIN is released from JUXTAGLOMERULAR (JG) CELLS in the afferent arteriole wall in response to THREE STIMULI: (1) DECREASED STRETCH of the afferent arteriole (due to low blood pressure/perfusion); (2) LOW NaCl DELIVERY to the MACULA DENSA (a modified DCT epithelium that acts as a sensor); (3) SYMPATHETIC NERVOUS SYSTEM activation (beta-1 receptors on JG cells). Renin cleaves angiotensinogen (from liver) to angiotensin I, which is converted to ANGIOTENSIN II by ACE (mostly in the lungs). Angiotensin II then: constricts efferent arteriole (maintains GFR), constricts systemic vasculature (raises BP), stimulates ALDOSTERONE (sodium retention), stimulates ADH release, and stimulates thirst. ACE INHIBITORS (e.g., ramipril) block this cascade." },
+
+      { q: "A patient is found to have an elevated serum creatinine. CREATININE is used to estimate glomerular filtration rate (GFR) because it is which of the following?",
+        options: ["A) Freely filtered at the glomerulus and completely reabsorbed in the tubules", "B) Freely filtered at the glomerulus and neither significantly reabsorbed nor secreted", "C) Not filtered at the glomerulus but secreted into the tubule", "D) Bound to plasma proteins and not filtered", "E) Produced at a variable rate depending on diet"],
+        correct: 1,
+        explanation: "CREATININE is used to estimate GFR because it is: (1) FREELY FILTERED at the glomerulus (not bound to proteins, small molecule); (2) NOT SIGNIFICANTLY REABSORBED by the tubules; (3) PRODUCED AT A RELATIVELY CONSTANT RATE from muscle creatine phosphate metabolism (independent of diet, relatively stable). A small amount of creatinine is secreted in the PCT, which causes eGFR based on creatinine to slightly OVERESTIMATE true GFR. When GFR falls (kidney disease), creatinine accumulates in blood - SERUM CREATININE RISES. INULIN is the gold standard for measuring true GFR (freely filtered, not reabsorbed or secreted) but requires infusion. The COCKCROFT-GAULT equation uses serum creatinine, age, sex, and body weight to estimate GFR." },
+
+      { q: "Which substance is FREELY FILTERED at the glomerulus but is COMPLETELY REABSORBED in the proximal convoluted tubule under normal conditions?",
+        options: ["A) Urea", "B) Sodium chloride", "C) Glucose", "D) Potassium", "E) Creatinine"],
+        correct: 2,
+        explanation: "GLUCOSE is freely filtered at the glomerulus (as it is a small, uncharged molecule) but is COMPLETELY REABSORBED in the PROXIMAL CONVOLUTED TUBULE under normal blood glucose levels. Reabsorption occurs via SGLT2 (sodium-glucose cotransporter 2, reabsorbs ~90%) and SGLT1 (~10%) on the luminal membrane, followed by GLUT2 on the basolateral membrane. The RENAL THRESHOLD for glucose is approximately 10 mmol/L (180 mg/dL) - above this, the transport maximum (Tm) is exceeded and glucose appears in urine. Urea is filtered and PARTIALLY reabsorbed (approximately 50%). Sodium is filtered and approximately 99% reabsorbed. Creatinine is filtered and minimally secreted but NOT substantially reabsorbed." },
+    ],
+
+    "Respiratory Physiology": [
+      { q: "A patient with EMPHYSEMA (destruction of alveolar walls) is expected to have which pattern of pulmonary function test results?",
+        options: ["A) Reduced FEV1, normal FVC, increased FEV1/FVC ratio", "B) Reduced FEV1, reduced FVC, normal or increased FEV1/FVC ratio", "C) Reduced FEV1, increased FVC, reduced FEV1/FVC ratio", "D) Normal FEV1, reduced FVC, increased FEV1/FVC ratio", "E) Increased FEV1, normal FVC, normal FEV1/FVC ratio"],
+        correct: 2,
+        explanation: "EMPHYSEMA causes an OBSTRUCTIVE pattern (like asthma, chronic bronchitis): FEV1 is REDUCED (airflow obstruction), FVC is INCREASED or normal (air trapping - lungs hyperinflate), FEV1/FVC ratio is REDUCED (<0.7). In emphysema, destruction of alveolar walls means LOSS OF ELASTIC RECOIL and loss of radial traction on small airways - they COLLAPSE on forced expiration, air-trapping. This INCREASES residual volume (RV) and total lung capacity (TLC). RESTRICTIVE patterns (pulmonary fibrosis, chest wall disease): both FEV1 and FVC are REDUCED, but FEV1/FVC ratio is NORMAL or INCREASED. FEV1 is the volume exhaled in the FIRST SECOND of a forced expiration; FVC is the total volume exhaled forcefully. Normal FEV1/FVC is approximately 0.7-0.8." },
+
+      { q: "Carbon dioxide is transported in the blood primarily in which form?",
+        options: ["A) Dissolved as CO2 gas (approximately 70%)", "B) Bound to haemoglobin as carbaminohaemoglobin (approximately 70%)", "C) As bicarbonate ions (HCO3-) in the plasma (approximately 70%)", "D) Bound to plasma proteins (approximately 70%)", "E) As carbonic acid (H2CO3) in the plasma (approximately 70%)"],
+        correct: 2,
+        explanation: "CO2 is transported primarily as BICARBONATE IONS (HCO3-) dissolved in PLASMA, accounting for approximately 70% of total CO2 transport. Approximately 20-23% is carried as CARBAMINOHAEMOGLOBIN (CO2 bound to the globin chains of haemoglobin, not the haem iron). Approximately 7-10% is DISSOLVED as CO2 in solution. The process: in tissues, CO2 enters red blood cells, is hydrated to H2CO3 by CARBONIC ANHYDRASE, which rapidly dissociates into H+ and HCO3-. HCO3- is transported out of RBCs into plasma (chloride shift). H+ binds to haemoglobin (buffering). In the lungs, this process reverses. This is the Haldane effect: DEOXYGENATED haemoglobin has greater affinity for CO2 and H+ (promotes CO2 loading in tissues)." },
+
+      { q: "The OXYHAEMOGLOBIN DISSOCIATION CURVE shifts to the RIGHT in the presence of increased temperature, increased CO2, increased H+ (acidosis), and increased 2,3-DPG. What does a rightward shift mean clinically?",
+        options: ["A) Haemoglobin has increased affinity for oxygen (loads more oxygen in the lungs)", "B) Haemoglobin has decreased affinity for oxygen (releases more oxygen to tissues)", "C) The maximum oxygen-carrying capacity of haemoglobin increases", "D) Less 2,3-DPG is produced in red blood cells", "E) The P50 value decreases"],
+        correct: 1,
+        explanation: "A RIGHTWARD SHIFT of the oxyhaemoglobin dissociation curve indicates DECREASED AFFINITY of haemoglobin for O2 - haemoglobin releases MORE O2 at any given partial pressure. This is the BOHR EFFECT: in exercising muscle, increased CO2, H+ (lactic acid), temperature, and 2,3-DPG cause a rightward shift, promoting O2 DELIVERY to metabolically active tissues. The P50 (partial pressure of O2 at which Hb is 50% saturated) INCREASES with a rightward shift (from ~3.5 kPa to higher values). A LEFTWARD SHIFT indicates INCREASED O2 affinity (e.g., fetal haemoglobin HbF, CO poisoning, alkalosis) - useful for O2 loading in the lungs but reduced delivery to tissues. Fetal Hb has a higher O2 affinity (leftward shift) allowing it to extract O2 from maternal Hb across the placenta." },
+
+      { q: "Central chemoreceptors in the medulla oblongata are PRIMARILY sensitive to which stimulus?",
+        options: ["A) Arterial partial pressure of oxygen (PaO2)", "B) pH of the CEREBROSPINAL FLUID (CSF), which reflects arterial PCO2", "C) Blood glucose concentration", "D) Arterial blood pressure changes", "E) Temperature of the blood"],
+        correct: 1,
+        explanation: "CENTRAL CHEMORECEPTORS in the VENTRAL MEDULLA OBLONGATA are primarily sensitive to CHANGES IN pH OF THE CEREBROSPINAL FLUID (CSF). CO2 diffuses freely across the BLOOD-BRAIN BARRIER (BBB) and dissolves in CSF: CO2 + H2O -> H2CO3 -> H+ + HCO3-. The resulting DECREASE IN CSF pH stimulates the central chemoreceptors to increase ventilation. Importantly: H+ and HCO3- do NOT cross the BBB as readily as CO2. Therefore, central chemoreceptors respond primarily to ARTERIAL PCO2 changes (via CSF pH), NOT to arterial O2 levels (that is the role of PERIPHERAL chemoreceptors in the carotid and aortic bodies). This is why hypercapnia is the MAIN drive to breathe in normal individuals. In COPD patients with chronic CO2 retention, the drive shifts to peripheral chemoreceptors responding to low O2." },
+
+      { q: "The VENTILATION-PERFUSION (V/Q) ratio is NOT constant throughout the lung. What is the V/Q ratio at the APEX of the lung compared to the BASE in an upright person?",
+        options: ["A) The apex has a LOWER V/Q ratio than the base", "B) The apex has a HIGHER V/Q ratio than the base", "C) The V/Q ratio is equal throughout the lung", "D) The base has higher ventilation but lower perfusion", "E) Perfusion is zero at the apex due to gravity"],
+        correct: 1,
+        explanation: "In an upright person, the APEX of the lung has a HIGHER V/Q ratio than the BASE due to GRAVITY: PERFUSION (blood flow) increases from apex to base (gravity pulls blood down), creating a large GRADIENT. VENTILATION also increases from apex to base, but to a lesser degree (gravity affects lung expansion less than blood flow). At the apex: relatively high V, very low Q -> HIGH V/Q ratio (~3.3). At the base: relatively low V, high Q -> LOW V/Q ratio (~0.6). Normal overall V/Q ratio is approximately 0.8. A HIGH V/Q (apex) represents DEAD SPACE-like areas (ventilated but not perfused - common in pulmonary embolism). A LOW V/Q (base) represents SHUNT-like areas (perfused but not ventilated - common in pneumonia, atelectasis)." },
+
+      { q: "LUNG COMPLIANCE is defined as the change in lung volume per unit change in pressure. Which disease process INCREASES lung compliance?",
+        options: ["A) Pulmonary fibrosis", "B) Pulmonary oedema", "C) Emphysema", "D) Respiratory distress syndrome (RDS) of the newborn", "E) Asthma"],
+        correct: 2,
+        explanation: "EMPHYSEMA significantly INCREASES lung compliance. In emphysema, DESTRUCTION of alveolar walls eliminates ELASTIC TISSUE, reducing the elastic recoil of the lungs. Without elastic recoil, the lungs are 'floppier' and more easily distended per unit pressure (high compliance). However, this is clinically DETRIMENTAL: the lungs over-inflate (barrel chest), become unable to generate adequate recoil pressure to drive airflow, and airways collapse on expiration (dynamic airway collapse, air-trapping). PULMONARY FIBROSIS DECREASES compliance (stiff lungs - lots of collagen). PULMONARY OEDEMA decreases compliance (fluid replaces air). INFANT RDS (surfactant deficiency) severely decreases compliance (alveoli tend to collapse - SURFACTANT normally reduces surface tension and prevents alveolar collapse)." },
+
+      { q: "SURFACTANT is produced by type II pneumocytes and reduces surface tension in the alveoli. What is the CLINICAL SIGNIFICANCE of surfactant deficiency in premature infants?",
+        options: ["A) Causes obstructive lung disease with air trapping", "B) Causes alveolar collapse (atelectasis) leading to respiratory distress syndrome (RDS)", "C) Leads to excessive mucus production in the airways", "D) Causes pulmonary hypertension without alveolar disease", "E) Results in hyperventilation and respiratory alkalosis"],
+        correct: 1,
+        explanation: "SURFACTANT DEFICIENCY in premature infants (born before ~34-35 weeks gestation) causes INFANT RESPIRATORY DISTRESS SYNDROME (IRDS/neonatal RDS). Surfactant (mainly DPPC - dipalmitoylphosphatidylcholine) REDUCES SURFACE TENSION in alveoli, preventing alveolar COLLAPSE on expiration. Without surfactant: surface tension is high -> alveoli tend to COLLAPSE (ATELECTASIS) -> decreased lung compliance -> infant must generate enormous effort to re-expand alveoli with each breath -> respiratory failure. Treatment: ANTENATAL CORTICOSTEROIDS (betamethasone to mother) to accelerate fetal surfactant production; POSTNATAL EXOGENOUS SURFACTANT instilled into infant's trachea. CONTINUOUS POSITIVE AIRWAY PRESSURE (CPAP) helps maintain alveolar patency. Surfactant production begins around 24 weeks gestation but is insufficient until ~34 weeks." },
+    ],
+
+    "Gastrointestinal Physiology": [
+      { q: "The oesophagus has different muscle compositions in its three sections. What is the muscle composition of the MIDDLE THIRD of the oesophagus?",
+        img: "./quiz-images/physio-p66-i0.jpg",
+        options: ["A) Entirely skeletal (striated) muscle", "B) Mixture of skeletal and smooth muscle", "C) Entirely smooth muscle", "D) Cardiac muscle only", "E) No muscle (the oesophagus is a passive tube)"],
+        correct: 1,
+        explanation: "The OESOPHAGUS has three distinct zones: UPPER 1/3 = SKELETAL (striated) MUSCLE under voluntary reflex control, allowing initiation of swallowing; MIDDLE 1/3 = MIXED SKELETAL AND SMOOTH muscle (transition zone); LOWER 1/3 = ENTIRELY SMOOTH MUSCLE under autonomic control. This is an important EXAM QUESTION flagged in the lecture notes. The UPPER OESOPHAGEAL SPHINCTER (UOS) is the cricopharyngeus muscle (skeletal muscle) with resting pressure ~35 mmHg - prevents air entry. The LOWER OESOPHAGEAL SPHINCTER (LOS) is a thickening of the smooth muscle (NOT a true anatomical sphincter) with resting pressure ~30 mmHg under TONIC PARASYMPATHETIC CONTROL - prevents acid reflux. GERD occurs when LOS pressure falls." },
+
+      { q: "GASTRIN is a hormone produced by G-cells in the stomach. What is its PRIMARY function?",
+        options: ["A) Stimulates pancreatic enzyme secretion", "B) Stimulates GASTRIC ACID (HCl) secretion from parietal cells", "C) Inhibits gastric motility after fat ingestion", "D) Stimulates bile release from the gallbladder", "E) Promotes bicarbonate secretion from Brunner's glands"],
+        correct: 1,
+        explanation: "GASTRIN is produced by G-CELLS in the ANTRUM of the stomach (and proximal duodenum). Its PRIMARY function is to stimulate GASTRIC ACID (HCl) SECRETION from PARIETAL CELLS in the gastric body/fundus. It also stimulates pepsinogen secretion from CHIEF CELLS and promotes gastric motility. Gastrin release is triggered by: protein/amino acids in the stomach, stomach distension, vagal stimulation (acetylcholine). It acts via the gastrin/CCK-B receptor on parietal cells. PARIETAL CELLS secrete HCl (via H+/K+ ATPase proton pump) and INTRINSIC FACTOR (essential for vitamin B12 absorption). PROTON PUMP INHIBITORS (e.g., omeprazole) block H+/K+ ATPase. ZOLLINGER-ELLISON syndrome = gastrinoma (G-cell tumour) causing excessive HCl and duodenal ulcers." },
+
+      { q: "ENTEROPEPTIDASE (enterokinase) plays a critical role in activating pancreatic digestive enzymes. What specifically does enteropeptidase activate?",
+        options: ["A) Pepsinogen to pepsin", "B) Trypsinogen to trypsin", "C) Chymotrypsinogen to chymotrypsin", "D) Proelastase to elastase", "E) Lipase to active form"],
+        correct: 1,
+        explanation: "ENTEROPEPTIDASE (enterokinase) is a brush border enzyme of the DUODENUM that activates TRYPSINOGEN to TRYPSIN by cleaving a specific peptide bond. TRYPSIN then acts as the MASTER ACTIVATOR of other pancreatic zymogens (inactive enzyme precursors): chymotrypsinogen -> chymotrypsin, proelastase -> elastase, procarboxypeptidase -> carboxypeptidase, phospholipase A2 precursor -> phospholipase A2. This CASCADE ensures pancreatic enzymes are secreted as INACTIVE PRECURSORS (preventing autodigestion in the pancreas) and are only activated in the DUODENUM. TRYPSIN INHIBITORS in the pancreas provide extra protection. ACUTE PANCREATITIS occurs when this protection fails and pancreatic enzymes activate prematurely within the pancreas (autodigestion)." },
+
+      { q: "Bile is stored in the gallbladder and released into the duodenum when stimulated by CHOLECYSTOKININ (CCK). What is the PRIMARY function of bile in digestion?",
+        options: ["A) Hydrolyse triglycerides into fatty acids and monoglycerides", "B) EMULSIFY fats into small droplets, increasing surface area for lipase action", "C) Activate trypsinogen to trypsin", "D) Neutralise gastric acid entering the duodenum", "E) Break down carbohydrates into disaccharides"],
+        correct: 1,
+        explanation: "BILE (produced by HEPATOCYTES, stored and concentrated in the GALLBLADDER) primarily EMULSIFIES dietary FAT into small micelles, greatly increasing the surface area available for PANCREATIC LIPASE action. Bile SALTS (not enzymes) act as detergents - they are amphipathic molecules (hydrophobic steroid ring + hydrophilic side chain) that surround fat droplets. Bile also contains: cholesterol, bilirubin (from haemoglobin breakdown), phospholipids. After emulsification and hydrolysis by lipase, bile salts form MIXED MICELLES with fatty acids and monoglycerides, facilitating their absorption in the ileum. Bile salts are then REABSORBED in the TERMINAL ILEUM (enterohepatic circulation, ~95% recycled). CCK is released by I-cells in the duodenum in response to FAT and PROTEIN in the duodenum." },
+
+      { q: "CHOLECYSTOKININ (CCK) and SECRETIN are duodenal hormones. What specifically triggers SECRETIN release from S-cells in the duodenum?",
+        options: ["A) Protein and fat entering the duodenum", "B) ACID (low pH, H+) entering the duodenum from the stomach", "C) Glucose entering the duodenum", "D) Distension of the duodenal wall", "E) Vagal stimulation via the parasympathetic nervous system"],
+        correct: 1,
+        explanation: "SECRETIN is released from S-CELLS in the duodenal mucosa primarily in response to ACID (low pH/H+) entering the duodenum from the stomach. Its main action is to stimulate the PANCREAS to secrete BICARBONATE-RICH (alkaline) juice to NEUTRALISE the acid chyme. Secretin also stimulates bile production by the liver (choleresis) and inhibits gastric acid secretion and motility. CHOLECYSTOKININ (CCK) is different: released by I-cells in response to FAT and PROTEIN -> stimulates gallbladder contraction, pancreatic enzyme secretion, and inhibits gastric emptying. GASTRIC INHIBITORY PEPTIDE (GIP) is released in response to glucose and fat -> inhibits gastric acid + promotes insulin release (incretin effect). These hormones coordinate the cephalic, gastric, and intestinal phases of digestion." },
+    ],
+
+    "Endocrine & Cardiovascular Physiology": [
+      { q: "PARATHYROID HORMONE (PTH) is released in response to LOW blood calcium. Which of the following accurately describes PTH's effects?",
+        options: ["A) PTH DECREASES blood calcium by promoting calcium deposition in bone", "B) PTH INCREASES blood calcium by stimulating bone resorption, increasing renal calcium reabsorption, and activating vitamin D", "C) PTH directly stimulates the intestine to absorb more calcium", "D) PTH inhibits calcitriol (1,25-dihydroxyvitamin D3) production", "E) PTH promotes phosphate retention in the kidney"],
+        correct: 1,
+        explanation: "PTH is the primary regulator of blood calcium homeostasis. When blood Ca2+ FALLS, PTH is released and INCREASES blood calcium through: (1) BONE RESORPTION - PTH stimulates osteoclasts (via RANKL pathway on osteoblasts) to dissolve bone and release Ca2+ and phosphate into the bloodstream; (2) RENAL Ca2+ REABSORPTION - increases calcium reabsorption in the DCT; (3) RENAL PHOSPHATE EXCRETION - increases phosphate loss in urine (PHOSPHATURIA), preventing calcium-phosphate precipitation; (4) ACTIVATION OF VITAMIN D - PTH stimulates renal 1-alpha hydroxylase to convert 25-hydroxyvitamin D to CALCITRIOL (1,25-dihydroxyvitamin D3), which then DIRECTLY stimulates intestinal calcium absorption. CALCITONIN (from thyroid C-cells) has the OPPOSITE effect of PTH - it decreases blood calcium." },
+
+      { q: "LUTEINISING HORMONE (LH) acts on Leydig cells in the testis. What does this stimulate?",
+        options: ["A) Spermatogenesis (sperm production)", "B) TESTOSTERONE secretion", "C) Inhibin production", "D) Follicle-stimulating hormone (FSH) release", "E) Oestrogen production in males"],
+        correct: 1,
+        explanation: "LH acts on LEYDIG CELLS (interstitial cells of Leydig) in the testis to stimulate TESTOSTERONE SECRETION. Testosterone then has effects on spermatogenesis (supports Sertoli cells), secondary sexual characteristics, anabolic effects on muscle/bone, and exerts NEGATIVE FEEDBACK on the hypothalamus (inhibits GnRH) and pituitary (inhibits LH and FSH release). FSH acts on SERTOLI CELLS to promote spermatogenesis and produce INHIBIN (which selectively inhibits FSH). This axis is: Hypothalamus GnRH -> Anterior pituitary LH/FSH -> Gonads testosterone/oestrogen + inhibin -> Negative feedback. In ANABOLIC STEROID abuse, exogenous testosterone suppresses GnRH and LH/FSH, causing testicular atrophy and infertility." },
+
+      { q: "The CORPUS LUTEUM forms after ovulation and is the main source of which hormone during the luteal phase of the menstrual cycle?",
+        options: ["A) Oestrogen from granulosa cells", "B) PROGESTERONE", "C) Luteinising hormone (LH)", "D) Follicle-stimulating hormone (FSH)", "E) Human chorionic gonadotrophin (hCG)"],
+        correct: 1,
+        explanation: "The CORPUS LUTEUM (Latin: 'yellow body'), formed from the ruptured ovarian follicle after ovulation, primarily secretes PROGESTERONE (and some oestrogen). Progesterone has key effects: (1) makes the endometrium SECRETORY (rich in glycogen, ready to receive blastocyst); (2) RAISES basal body temperature (useful for fertility tracking); (3) promotes CERVICAL MUCUS thickening (prevents sperm entry after ovulation); (4) inhibits further GnRH pulses and LH surges (preventing further ovulation). If fertilisation occurs, the trophoblast produces hCG (basis of pregnancy tests), which MAINTAINS the corpus luteum. Without fertilisation, corpus luteum degenerates (luteolysis) after ~14 days, progesterone falls, and MENSTRUATION begins. In the TESTES, there is no corpus luteum - progesterone is an intermediate in testosterone synthesis." },
+
+      { q: "THYROXINE (T4) is produced by the thyroid gland and converted to the active TRIIODOTHYRONINE (T3) in peripheral tissues. What type of hormone is thyroxine, and where does it exert its effects?",
+        options: ["A) Peptide hormone acting on cell surface receptors", "B) LIPID-SOLUBLE hormone that enters cells and acts on NUCLEAR receptors", "C) Amine hormone acting on G-protein coupled receptors at the cell membrane", "D) Steroid hormone produced from cholesterol", "E) Catecholamine acting on adrenergic receptors"],
+        correct: 1,
+        explanation: "THYROID HORMONES (T3 and T4) are IODINATED AMINO ACID DERIVATIVES (tyrosine-based) that are LIPID-SOLUBLE and can cross the cell membrane to enter cells. They act on NUCLEAR THYROID HORMONE RECEPTORS (TR), binding to thyroid hormone response elements (TREs) on DNA to regulate gene expression. Effects of thyroid hormones: INCREASE BASAL METABOLIC RATE (BMR), increase heat production (calorigenic effect), stimulate cardiac output (positive chronotropic and inotropic effects), essential for normal BRAIN DEVELOPMENT in foetus/infant, regulate protein synthesis and growth. HYPERTHYROIDISM: heat intolerance, weight loss, tachycardia, anxiety, exophthalmos (Graves disease). HYPOTHYROIDISM: cold intolerance, weight gain, bradycardia, lethargy, myxoedema. TSH from the anterior pituitary stimulates T3/T4 production and secretion." },
+
+      { q: "The ECG image shows normal sinus rhythm and progressive changes at various potassium levels. HYPERKALAEMIA (high blood potassium) causes which EARLY ECG change?",
+        img: "./quiz-images/physio-p61-i0.jpg",
+        options: ["A) Prolonged QT interval", "B) ST elevation", "C) Tall, peaked (tented) T waves", "D) Widened QRS complex only", "E) Complete heart block"],
+        correct: 2,
+        explanation: "The EARLIEST ECG change in HYPERKALAEMIA is TALL, PEAKED (TENTED) T WAVES. As shown in the ECG progression, at potassium ~7 mEq/L (Panel A), tall T waves appear. Progressive hyperkalaemia causes: (1) early: PEAKED T WAVES; (2) moderate: PROLONGED PR interval, WIDENED P waves, then loss of P waves; (3) severe: WIDENED QRS complex, SINE WAVE pattern, and finally VENTRICULAR FIBRILLATION or asystole. Hyperkalaemia reduces the resting membrane potential less negative (K+ leaks out more slowly), reducing excitability. TREATMENT: calcium gluconate (stabilises cardiac membranes), insulin + glucose (shifts K+ into cells), sodium bicarbonate, and elimination (dialysis for severe cases). HYPOKALAEMIA causes U waves and T wave flattening." },
+    ],
+  },
+
   };
 
   const SCHOOLS = [
