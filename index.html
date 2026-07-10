@@ -1395,7 +1395,10 @@
         closeAuthModal();
         if (_pendingAction) {
           const fn = _pendingAction; _pendingAction = null;
-          if (_isSubscribed) { fn(); } else { openProModal(); }
+          const _ownersH  = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+          const _proUsersH = (window.SU_CONFIG && window.SU_CONFIG.PRO_EMAILS)  || [];
+          const _bypassH = _ownersH.includes(_currentUser.email) || _proUsersH.includes(_currentUser.email);
+          if (_isSubscribed || _bypassH) { fn(); } else { openProModal(); }
         }
       } else if (event === 'SIGNED_OUT') {
         _currentUser = null; _isSubscribed = false; _updateNavAuth();
