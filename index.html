@@ -334,6 +334,52 @@
   .notif-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
   .dark .notif-modal{background:#1e293b}
   .notif-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);font-family:inherit}
+
+  /* ── STUDY AI PAGE ──────────────────────────────────────────────────── */
+  .ai-page{max-width:720px;margin:0 auto}
+  .ai-hero{text-align:center;padding:28px 0 22px}
+  .ai-hero h2{font-size:26px;font-weight:800;margin-bottom:6px}
+  .ai-hero p{color:var(--muted);font-size:14px;line-height:1.5;max-width:480px;margin:0 auto 8px}
+  .ai-pro-pill{display:inline-flex;align-items:center;gap:5px;background:var(--accent-light);color:var(--accent);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;margin-top:6px}
+  .ai-input-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:22px;margin-bottom:24px}
+  .ai-tab-row{display:flex;gap:4px;background:var(--bg);border-radius:8px;padding:3px;margin-bottom:16px;width:fit-content}
+  .ai-tab{padding:6px 16px;border-radius:6px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;transition:all .18s;font-family:inherit}
+  .ai-tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+  .ai-textarea{width:100%;min-height:170px;padding:13px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;resize:vertical;outline:none;background:var(--bg);color:var(--text);line-height:1.5}
+  .ai-textarea:focus{border-color:var(--accent)}
+  .ai-url-input{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;outline:none;background:var(--bg);color:var(--text)}
+  .ai-url-input:focus{border-color:var(--accent)}
+  .ai-row{display:flex;align-items:center;justify-content:space-between;margin-top:11px;gap:12px;flex-wrap:wrap}
+  .ai-hint{font-size:12px;color:var(--muted);line-height:1.4}
+  .ai-gen-btn{padding:10px 24px;background:var(--accent);color:#fff;border:none;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:opacity .2s;white-space:nowrap;font-family:inherit;flex-shrink:0}
+  .ai-gen-btn:disabled{opacity:.5;cursor:not-allowed}
+  .ai-loading{text-align:center;padding:44px;color:var(--muted)}
+  .ai-spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:aiSpin .75s linear infinite;margin:0 auto 14px}
+  @keyframes aiSpin{to{transform:rotate(360deg)}}
+  .ai-results-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .ai-section-lbl{font-size:17px;font-weight:800}
+  .ai-regen-btn{padding:7px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);background:none;font-family:inherit;transition:all .18s}
+  .ai-regen-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:28px}
+  .fc{height:150px;cursor:pointer;perspective:1000px}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .38s}
+  .fc.flipped .fc-inner{transform:rotateY(180deg)}
+  .fc-front,.fc-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:13px;font-weight:600;line-height:1.4}
+  .fc-front{background:var(--accent);color:#fff}
+  .fc-back{background:var(--surface);color:var(--text);border:1.5px solid var(--border);transform:rotateY(180deg)}
+  .fc-tap{font-size:10px;position:absolute;bottom:8px;right:10px;opacity:.55;font-weight:400}
+  .ai-mcq-list{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+  .ai-mcq{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:18px}
+  .ai-mcq-q{font-size:14px;font-weight:700;margin-bottom:11px;line-height:1.4}
+  .ai-mcq-opts{display:flex;flex-direction:column;gap:7px}
+  .ai-mcq-opt{padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;cursor:pointer;text-align:left;background:var(--bg);color:var(--text);transition:all .15s;width:100%;font-family:inherit}
+  .ai-mcq-opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-light)}
+  .ai-mcq-opt.correct{background:#dcfce7;border-color:#16a34a;color:#15803d}
+  .ai-mcq-opt.wrong{background:#fee2e2;border-color:#dc2626;color:#b91c1c}
+  .ai-mcq-exp{margin-top:11px;padding:9px 13px;background:var(--accent-light);border-radius:8px;font-size:12px;color:var(--accent);display:none;line-height:1.5}
+  .ai-mcq-exp.show{display:block}
+  .dark .ai-mcq-opt.correct{background:#14532d;border-color:#16a34a;color:#bbf7d0}
+  .dark .ai-mcq-opt.wrong{background:#7f1d1d;border-color:#dc2626;color:#fecaca}
   </style>
 <script>try{if(localStorage.getItem('su_dark')==='1'||(localStorage.getItem('su_dark')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}</script>
 </head>
@@ -349,6 +395,7 @@
     <a href="#" onclick="showPage('home')" id="nl-home" class="active">Home</a>
     <a href="#" onclick="showPage('courses')" id="nl-courses">Courses</a>
     <a href="#" onclick="showPage('pricing')" id="nl-pricing">Pricing</a>
+    <a href="#" onclick="showPage('ai')" id="nl-ai">StudyAI ✨</a>
   </div>
   <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   <button class="nav-auth-btn btn-signin-nav" id="navAuthBtn" onclick="openAuthModal()" style="display:none">Sign in</button>
@@ -443,9 +490,61 @@
         <li>Everything in Free</li>
         <li>Worked solutions & marking schemes</li>
         <li>MCQ practice quizzes</li>
-        <li>AI-powered exam hints</li>
+        <li>StudyAI — flashcards &amp; MCQs from your notes</li>
       </ul>
       <button class="pricing-cta" id="pricingProBtn" onclick="openProModal()">Get Pro &mdash; &euro;4.99/mo</button>
+    </div>
+  </div>
+</div>
+
+<!-- STUDY AI -->
+<div class="page" id="page-ai">
+  <div class="ai-page">
+    <div class="ai-hero">
+      <h2>StudyAI</h2>
+      <p>Paste your lecture notes or drop in a YouTube link — get instant flashcards and practice questions.</p>
+      <span class="ai-pro-pill">✨ Pro feature</span>
+    </div>
+    <div class="ai-input-card">
+      <div class="ai-tab-row">
+        <button class="ai-tab active" id="aiTabNotes" onclick="aiSwitchTab('notes')">📝 Notes</button>
+        <button class="ai-tab" id="aiTabYT" onclick="aiSwitchTab('yt')">▶ YouTube</button>
+      </div>
+      <div id="aiNotePane">
+        <textarea class="ai-textarea" id="aiNoteText" placeholder="Paste your lecture notes, slides text, or any study material here…" oninput="aiCountChars()"></textarea>
+        <div class="ai-row">
+          <span class="ai-hint" id="aiCharCount">0 characters</span>
+          <button class="ai-gen-btn" onclick="aiGenerate()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Generate
+          </button>
+        </div>
+      </div>
+      <div id="aiYTPane" style="display:none">
+        <input class="ai-url-input" id="aiYTUrl" type="url" placeholder="https://www.youtube.com/watch?v=…"/>
+        <div class="ai-row" style="margin-top:11px">
+          <span class="ai-hint">Public videos with captions enabled only</span>
+          <button class="ai-gen-btn" onclick="aiGenerate()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Generate
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="aiLoading" style="display:none">
+      <div class="ai-loading">
+        <div class="ai-spinner"></div>
+        <p>Generating your study materials…</p>
+      </div>
+    </div>
+    <div id="aiResults" style="display:none">
+      <div class="ai-results-hdr">
+        <div class="ai-section-lbl">🃏 Flashcards <span style="font-size:13px;font-weight:500;color:var(--muted)">(click to flip)</span></div>
+        <button class="ai-regen-btn" onclick="aiGenerate()">↺ Regenerate</button>
+      </div>
+      <div class="fc-grid" id="aiFCGrid"></div>
+      <div class="ai-section-lbl" style="margin-bottom:14px">❓ Practice Questions</div>
+      <div class="ai-mcq-list" id="aiMCQList"></div>
     </div>
   </div>
 </div>
@@ -561,6 +660,7 @@
     if (id === 'home') history.replaceState(null, '', '#home');
     else if (id === 'courses') history.replaceState(null, '', '#courses');
     else if (id === 'pricing') history.replaceState(null, '', '#pricing');
+    else if (id === 'ai') history.replaceState(null, '', '#ai');
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); }
     window.scrollTo(0,0);
   }
@@ -1975,6 +2075,87 @@
     el.classList.add('visible');
   }
 
+  // ─── STUDY AI ─────────────────────────────────────────────────────────────
+  let _aiTab = 'notes';
+
+  function aiSwitchTab(tab) {
+    _aiTab = tab;
+    document.getElementById('aiTabNotes').classList.toggle('active', tab === 'notes');
+    document.getElementById('aiTabYT').classList.toggle('active', tab === 'yt');
+    document.getElementById('aiNotePane').style.display = tab === 'notes' ? 'block' : 'none';
+    document.getElementById('aiYTPane').style.display = tab === 'yt' ? 'block' : 'none';
+  }
+
+  function aiCountChars() {
+    const n = document.getElementById('aiNoteText').value.length;
+    document.getElementById('aiCharCount').textContent = n.toLocaleString() + ' characters';
+  }
+
+  function aiGenerate() {
+    requirePro(async function() {
+      const text     = _aiTab === 'notes' ? (document.getElementById('aiNoteText').value || '').trim() : '';
+      const ytUrl    = _aiTab === 'yt'    ? (document.getElementById('aiYTUrl').value    || '').trim() : '';
+      if (!text && !ytUrl) { showToast('Paste some notes or enter a YouTube URL first.'); return; }
+      if (text && text.length < 80) { showToast('Please add more content (at least 80 characters).'); return; }
+      if (!_sbClient) { showToast('Auth not configured.'); return; }
+      const { data: { session } } = await _sbClient.auth.getSession();
+      if (!session) { showToast('Please sign in to use StudyAI.'); return; }
+      document.getElementById('aiLoading').style.display = 'block';
+      document.getElementById('aiResults').style.display = 'none';
+      try {
+        const resp = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, youtubeUrl: ytUrl, accessToken: session.access_token })
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.error || 'Generation failed');
+        _aiRender(data);
+      } catch(e) {
+        showToast('Error: ' + e.message);
+      } finally {
+        document.getElementById('aiLoading').style.display = 'none';
+      }
+    });
+  }
+
+  function _aiRender(data) {
+    document.getElementById('aiFCGrid').innerHTML = (data.flashcards || []).map((fc, i) =>
+      `<div class="fc" id="afc${i}" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-front">${_aiEsc(fc.front)}<span class="fc-tap">tap to flip</span></div>
+          <div class="fc-back">${_aiEsc(fc.back)}</div>
+        </div>
+      </div>`).join('');
+    document.getElementById('aiMCQList').innerHTML = (data.mcqs || []).map((q, qi) =>
+      `<div class="ai-mcq">
+        <div class="ai-mcq-q">${qi+1}. ${_aiEsc(q.q)}</div>
+        <div class="ai-mcq-opts">
+          ${(q.options||[]).map((opt, oi) =>
+            `<button class="ai-mcq-opt" onclick="_aiAnswer(${qi},${oi},${q.correct},this.closest('.ai-mcq'))">${_aiEsc(opt)}</button>`
+          ).join('')}
+        </div>
+        <div class="ai-mcq-exp" id="aiexp${qi}">${_aiEsc(q.explanation||'')}</div>
+      </div>`).join('');
+    const res = document.getElementById('aiResults');
+    res.style.display = 'block';
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function _aiAnswer(qi, chosen, correct, mcqEl) {
+    mcqEl.querySelectorAll('.ai-mcq-opt').forEach(function(btn, i) {
+      btn.disabled = true;
+      if (i === correct) btn.classList.add('correct');
+      else if (i === chosen) btn.classList.add('wrong');
+    });
+    const exp = document.getElementById('aiexp' + qi);
+    if (exp) exp.classList.add('show');
+  }
+
+  function _aiEsc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
   // ─── INIT ─────────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
     const _dtBtn = document.getElementById('darkToggle');
@@ -2001,7 +2182,7 @@
         }
       }
       // Handle other hash pages
-      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account' };
+      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai' };
       if (pageMap[hash]) { showPage(pageMap[hash]); return true; }
       return false;
     }
@@ -2173,6 +2354,7 @@
     <li>All past exam papers (always free)</li>
     <li>Worked solutions &amp; marking schemes</li>
     <li>MCQ practice quizzes with explanations</li>
+    <li>StudyAI &mdash; flashcards &amp; MCQs from your notes</li>
     <li>New content added every semester</li>
   </ul>
   <button class="pro-cta" id="proCheckoutBtn" onclick="startCheckout()">Subscribe now &mdash; &euro;4.99/mo</button>
