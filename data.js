@@ -91,6 +91,12 @@
       { label: "Marking Scheme — Autumn 19/20", url: "./marking-schemes/AC4407_Autumn2020_Marking_Scheme.pdf" },
       { label: "Marking Scheme — Winter 19/20", url: "./marking-schemes/AC4407_Winter2019_Marking_Scheme.pdf" },
     ],
+    "EC2010": [
+      { label: "Marking Scheme — Summer 24/25", url: "./marking-schemes/EC2010_Summer2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/EC2010_Summer2024_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 22/23", url: "./marking-schemes/EC2010_Summer2023_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 21/22", url: "./marking-schemes/EC2010_Summer2022_Marking_Scheme.pdf" },
+    ],
   };
 
   // QUIZ BANK — EC1208 only, topic-based structure
