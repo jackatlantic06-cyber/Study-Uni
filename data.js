@@ -103,6 +103,26 @@
       { label: "Marking Scheme — Winter 23/24", url: "./marking-schemes/EC2200_Winter2023_Marking_Scheme.pdf" },
       { label: "Marking Scheme — Winter 22/23", url: "./marking-schemes/EC2200_Winter2022_Marking_Scheme.pdf" },
     ],
+    "EC3213": [
+      { label: "Marking Scheme — Winter 25/26", url: "./marking-schemes/EC3213_Winter2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 24/25", url: "./marking-schemes/EC3213_Winter2024_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 23/24", url: "./marking-schemes/EC3213_Winter2023_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 22/23", url: "./marking-schemes/EC3213_Winter2022_Marking_Scheme.pdf" },
+    ],
+    "EC3214": [
+      { label: "Marking Scheme — Summer 24/25", url: "./marking-schemes/EC3214_Summer2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/EC3214_Summer2024_Marking_Scheme.pdf" },
+      { label: "Complete Revision Pack",         url: "./marking-schemes/EC3214_Complete_Revision_Pack.pdf" },
+    ],
+    "EC3005": [
+      { label: "Marking Scheme — Winter 25/26", url: "./marking-schemes/EC3005_Winter2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 22/23", url: "./marking-schemes/EC3005_Winter2022_Marking_Scheme.pdf" },
+    ],
+    "EC3008": [
+      { label: "Marking Scheme — Winter 25/26", url: "./marking-schemes/EC3008_Winter2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 23/24", url: "./marking-schemes/EC3008_Winter2023_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 22/23", url: "./marking-schemes/EC3008_Winter2022_Marking_Scheme.pdf" },
+    ],
   };
 
   // QUIZ BANK — EC1208 only, topic-based structure
