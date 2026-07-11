@@ -380,6 +380,14 @@
   .ai-mcq-exp.show{display:block}
   .dark .ai-mcq-opt.correct{background:#14532d;border-color:#16a34a;color:#bbf7d0}
   .dark .ai-mcq-opt.wrong{background:#7f1d1d;border-color:#dc2626;color:#fecaca}
+  .ai-box-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px;display:block}
+  .ai-drop-zone{border:2px dashed var(--border);border-radius:10px;padding:18px 16px;text-align:center;cursor:pointer;transition:border-color .18s,background .18s;margin-top:10px}
+  .ai-drop-zone:hover,.ai-drop-zone.drag-over{border-color:var(--accent);background:var(--accent-light)}
+  .ai-drop-zone.has-file{border-color:#16a34a;background:#f0fdf4}
+  .dark .ai-drop-zone.has-file{background:rgba(22,163,74,.1)}
+  .ai-drop-icon{font-size:22px;margin-bottom:5px}
+  .ai-drop-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+  .ai-drop-sub{font-size:11px;color:var(--muted)}
   </style>
 <script>try{if(localStorage.getItem('su_dark')==='1'||(localStorage.getItem('su_dark')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}</script>
 </head>
@@ -511,7 +519,14 @@
         <button class="ai-tab" id="aiTabYT" onclick="aiSwitchTab('yt')">▶ YouTube</button>
       </div>
       <div id="aiNotePane">
-        <textarea class="ai-textarea" id="aiNoteText" placeholder="Paste your lecture notes, slides text, or any study material here…" oninput="aiCountChars()"></textarea>
+        <span class="ai-box-label">Type or paste notes</span>
+        <textarea class="ai-textarea" id="aiNoteText" placeholder="Type or paste your notes here…" oninput="aiCountChars()"></textarea>
+        <div id="aiDropZone" class="ai-drop-zone" ondragover="aiDragOver(event)" ondragleave="aiDragLeave(event)" ondrop="aiDrop(event)" onclick="document.getElementById('aiFileInput').click()">
+          <input type="file" id="aiFileInput" accept=".txt,.md" style="display:none" onchange="aiFileChosen(event)"/>
+          <div class="ai-drop-icon">📂</div>
+          <div class="ai-drop-label" id="aiDropLabel">Drop a notes file here, or click to browse</div>
+          <div class="ai-drop-sub">Supports .txt and .md files</div>
+        </div>
         <div class="ai-row">
           <span class="ai-hint" id="aiCharCount">0 characters</span>
           <button class="ai-gen-btn" onclick="aiGenerate()">
@@ -2077,6 +2092,7 @@
 
   // ─── STUDY AI ─────────────────────────────────────────────────────────────
   let _aiTab = 'notes';
+  let _aiDropContent = '';
 
   function aiSwitchTab(tab) {
     _aiTab = tab;
@@ -2087,13 +2103,47 @@
   }
 
   function aiCountChars() {
-    const n = document.getElementById('aiNoteText').value.length;
+    const n = (document.getElementById('aiNoteText').value || '').length + _aiDropContent.length;
     document.getElementById('aiCharCount').textContent = n.toLocaleString() + ' characters';
+  }
+
+  function aiDragOver(e) {
+    e.preventDefault();
+    document.getElementById('aiDropZone').classList.add('drag-over');
+  }
+
+  function aiDragLeave() {
+    document.getElementById('aiDropZone').classList.remove('drag-over');
+  }
+
+  function aiDrop(e) {
+    e.preventDefault();
+    document.getElementById('aiDropZone').classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) _aiLoadFile(file);
+  }
+
+  function aiFileChosen(e) {
+    const file = e.target.files[0];
+    if (file) _aiLoadFile(file);
+    e.target.value = '';
+  }
+
+  function _aiLoadFile(file) {
+    if (!file.name.match(/\.(txt|md)$/i)) { showToast('Only .txt and .md files are supported'); return; }
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      _aiDropContent = ev.target.result || '';
+      document.getElementById('aiDropLabel').textContent = '✓ ' + file.name;
+      document.getElementById('aiDropZone').classList.add('has-file');
+      aiCountChars();
+    };
+    reader.readAsText(file);
   }
 
   function aiGenerate() {
     requirePro(async function() {
-      const text     = _aiTab === 'notes' ? (document.getElementById('aiNoteText').value || '').trim() : '';
+      const text     = _aiTab === 'notes' ? ((document.getElementById('aiNoteText').value || '') + '\n\n' + _aiDropContent).trim() : '';
       const ytUrl    = _aiTab === 'yt'    ? (document.getElementById('aiYTUrl').value    || '').trim() : '';
       if (!text && !ytUrl) { showToast('Paste some notes or enter a YouTube URL first.'); return; }
       if (text && text.length < 80) { showToast('Please add more content (at least 80 characters).'); return; }
