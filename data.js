@@ -112,7 +112,6 @@
     "EC3214": [
       { label: "Marking Scheme — Summer 24/25", url: "./marking-schemes/EC3214_Summer2025_Marking_Scheme.pdf" },
       { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/EC3214_Summer2024_Marking_Scheme.pdf" },
-      { label: "Complete Revision Pack",         url: "./marking-schemes/EC3214_Complete_Revision_Pack.pdf" },
     ],
     "EC3005": [
       { label: "Marking Scheme — Winter 25/26", url: "./marking-schemes/EC3005_Winter2025_Marking_Scheme.pdf" },
