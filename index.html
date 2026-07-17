@@ -805,7 +805,15 @@
   }
 
   // ─── YEAR VIEW ────────────────────────────────────────────────────────────
+  let _pendingCourse = null;
+
   function openCourse(courseId) {
+    if (!_currentUser) {
+      _pendingCourse = courseId;
+      document.getElementById('authSub').textContent = 'Create a free account to access past papers and course content.';
+      openAuthModal();
+      return;
+    }
     const course = findCourseById(courseId);
     if (!course) return;
     activeCourse = course;
@@ -1508,7 +1516,11 @@
         await _refreshSub();
         _updateNavAuth();
         closeAuthModal();
-        if (_pendingAction) {
+        if (_pendingCourse) {
+          const cid = _pendingCourse; _pendingCourse = null;
+          document.getElementById('authSub').textContent = 'Sign in or create a free account to continue.';
+          openCourse(cid);
+        } else if (_pendingAction) {
           const fn = _pendingAction; _pendingAction = null;
           const _ownersH  = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
           const _proUsersH = (window.SU_CONFIG && window.SU_CONFIG.PRO_EMAILS)  || [];
@@ -2292,7 +2304,7 @@
 <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" style="position:fixed">
   <button class="auth-close" onclick="closeAuthModal()">&#x2715;</button>
   <div class="auth-title">Welcome to Study-Uni</div>
-  <div class="auth-sub">Use your UCC email to unlock Pro features</div>
+  <div class="auth-sub" id="authSub">Sign in or create a free account to continue.</div>
   <div class="auth-tabs">
     <button class="auth-tab active" id="tabSignin" onclick="switchAuthTab('signin')">Sign in</button>
     <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Create account</button>
