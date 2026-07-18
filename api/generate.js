@@ -37,6 +37,20 @@ module.exports = async (req, res) => {
     }
 
     let content = (text || '').trim();
+    const { pdfBase64 } = req.body || {};
+
+    // Extract text from PDF if provided
+    if (pdfBase64 && !content) {
+      try {
+        const pdfParse = require('pdf-parse');
+        const buffer = Buffer.from(pdfBase64, 'base64');
+        const parsed = await pdfParse(buffer);
+        content = (parsed.text || '').replace(/\s+/g, ' ').trim();
+        if (!content) return res.status(400).json({ error: 'Could not extract text from PDF. Try a text-based PDF rather than a scanned image.' });
+      } catch (e) {
+        return res.status(400).json({ error: 'PDF could not be read: ' + e.message });
+      }
+    }
 
     // Fetch YouTube transcript if URL provided and no text
     if (youtubeUrl && !content) {

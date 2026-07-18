@@ -388,6 +388,63 @@
   .ai-drop-icon{font-size:22px;margin-bottom:5px}
   .ai-drop-label{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
   .ai-drop-sub{font-size:11px;color:var(--muted)}
+
+  /* ── ADMIN DASHBOARD ───────────────────────────────────────────────────────── */
+  .admin-page{max-width:900px;margin:0 auto}
+  .admin-hdr{margin-bottom:24px}
+  .admin-hdr h1{font-size:24px;font-weight:800;margin-bottom:4px}
+  .admin-hdr p{font-size:14px;color:var(--muted)}
+  .admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:28px}
+  .admin-stat{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:18px;text-align:center}
+  .admin-stat-num{font-size:34px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:4px}
+  .admin-stat-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .admin-section{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px}
+  .admin-section-hdr{padding:14px 18px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text)}
+  .admin-table{width:100%;border-collapse:collapse}
+  .admin-table th{text-align:left;padding:9px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--border)}
+  .admin-table td{padding:11px 16px;font-size:14px;border-bottom:1px solid var(--border)}
+  .admin-table tr:last-child td{border-bottom:none}
+  .admin-refresh{padding:7px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);background:none;font-family:inherit;transition:all .18s}
+  .admin-refresh:hover{border-color:var(--accent);color:var(--accent)}
+  .admin-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}
+  .dark .admin-table th{background:#0f172a}
+
+  /* ── MOBILE RESPONSIVE ─────────────────────────────────────────────────────── */
+  .nav-hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px 6px;flex-direction:column;justify-content:center;gap:5px;flex-shrink:0}
+  .nav-hamburger span{display:block;width:22px;height:2px;background:var(--muted);border-radius:2px;transition:all .25s}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  @media(max-width:680px){
+    .nav-hamburger{display:flex}
+    .nav-links{display:none;position:fixed;top:72px;left:0;right:0;bottom:0;background:var(--surface);flex-direction:column;padding:0;z-index:99;border-top:1px solid var(--border);overflow-y:auto;gap:0;margin-left:0}
+    .nav-links.mobile-open{display:flex}
+    .nav-links a{padding:15px 24px;border-bottom:1px solid var(--border);font-size:15px;display:block;width:100%;box-sizing:border-box}
+    .nav-links a:last-child{border-bottom:none}
+    .page{padding:20px 14px}
+    .hero{padding:28px 12px 20px}
+    .hero h1{font-size:clamp(22px,7vw,34px)}
+    .stats-bar{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;padding:10px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .stats-bar::-webkit-scrollbar{display:none}
+    .stat-item{flex-shrink:0;padding:0 10px}
+    .stat-num{font-size:20px}
+    .hero-search{flex-direction:column;gap:8px}
+    .hero-search input{border-right:1.5px solid var(--border);border-radius:var(--radius);font-size:14px}
+    .hero-search button{border-radius:var(--radius);padding:12px}
+    .pricing-grid{grid-template-columns:1fr;max-width:360px}
+    .course-grid{grid-template-columns:1fr}
+    .deg-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+    .categories{grid-template-columns:repeat(2,1fr)}
+    .pathway-grid{grid-template-columns:1fr}
+    .fc-grid{grid-template-columns:1fr 1fr}
+    .admin-grid{grid-template-columns:repeat(3,1fr)}
+    .quiz-modal{width:min(560px,98vw);padding:18px}
+    .module-table td{font-size:13px}
+  }
+  @media(max-width:400px){
+    .admin-grid{grid-template-columns:repeat(2,1fr)}
+    .fc-grid{grid-template-columns:1fr}
+  }
   </style>
 <script>try{if(localStorage.getItem('su_dark')==='1'||(localStorage.getItem('su_dark')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}</script>
 </head>
@@ -399,14 +456,18 @@
     <svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3L2 8l4.5 5M2 8h12"/></svg>
     Back
   </button>
-  <div class="nav-links">
-    <a href="#" onclick="showPage('home')" id="nl-home" class="active">Home</a>
-    <a href="#" onclick="showPage('courses')" id="nl-courses">Courses</a>
-    <a href="#" onclick="showPage('pricing')" id="nl-pricing">Pricing</a>
-    <a href="#" onclick="showPage('ai')" id="nl-ai">StudyAI ✨</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#" onclick="showPage('home');closeMobileNav()" id="nl-home" class="active">Home</a>
+    <a href="#" onclick="showPage('courses');closeMobileNav()" id="nl-courses">Courses</a>
+    <a href="#" onclick="showPage('pricing');closeMobileNav()" id="nl-pricing">Pricing</a>
+    <a href="#" onclick="showPage('ai');closeMobileNav()" id="nl-ai">StudyAI ✨</a>
+    <a href="#" onclick="showPage('admin');closeMobileNav()" id="nl-admin" style="display:none">Admin</a>
   </div>
   <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   <button class="nav-auth-btn btn-signin-nav" id="navAuthBtn" onclick="openAuthModal()" style="display:none">Sign in</button>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HOME -->
@@ -522,10 +583,10 @@
         <span class="ai-box-label">Type or paste notes</span>
         <textarea class="ai-textarea" id="aiNoteText" placeholder="Type or paste your notes here…" oninput="aiCountChars()"></textarea>
         <div id="aiDropZone" class="ai-drop-zone" ondragover="aiDragOver(event)" ondragleave="aiDragLeave(event)" ondrop="aiDrop(event)" onclick="document.getElementById('aiFileInput').click()">
-          <input type="file" id="aiFileInput" accept=".txt,.md" style="display:none" onchange="aiFileChosen(event)"/>
+          <input type="file" id="aiFileInput" accept=".txt,.md,.pdf" style="display:none" onchange="aiFileChosen(event)"/>
           <div class="ai-drop-icon">📂</div>
-          <div class="ai-drop-label" id="aiDropLabel">Drop a notes file here, or click to browse</div>
-          <div class="ai-drop-sub">Supports .txt and .md files</div>
+          <div class="ai-drop-label" id="aiDropLabel">Drop a file here, or click to browse</div>
+          <div class="ai-drop-sub">Supports .pdf, .txt and .md files</div>
         </div>
         <div class="ai-row">
           <span class="ai-hint" id="aiCharCount">0 characters</span>
@@ -677,6 +738,7 @@
     else if (id === 'pricing') history.replaceState(null, '', '#pricing');
     else if (id === 'ai') history.replaceState(null, '', '#ai');
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); }
+    else if (id === 'admin') { history.replaceState(null, '', '#admin'); loadAdminStats(); }
     window.scrollTo(0,0);
   }
 
@@ -1139,6 +1201,24 @@
       h[code][topic] = h[code][topic].slice(0,10);
       localStorage.setItem('quizHistory', JSON.stringify(h));
     } catch(e) {}
+    // Also persist to Supabase for weekly email reports
+    if (_currentUser && _sbClient && total > 0) {
+      _sbClient.auth.getSession().then(function({ data: { session } }) {
+        if (!session) return;
+        fetch('/api/record-quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            accessToken: session.access_token,
+            module_code: code,
+            topic: topic,
+            score: score,
+            total: total,
+            pct: Math.round(score / total * 100)
+          })
+        }).catch(function() {});
+      }).catch(function() {});
+    }
   }
   function _getOverallHistory(code) {
     try {
@@ -1647,6 +1727,12 @@
         if (error) throw error;
         document.getElementById('authSuccessMsg').style.display = 'block';
         btn.textContent = '✓ Check your email';
+        // Send welcome email (fire-and-forget)
+        fetch('/api/send-welcome', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, firstName })
+        }).catch(function() {});
         return;
       } else {
         const { error } = await _sbClient.auth.signInWithPassword({ email, password: pass });
@@ -1733,6 +1819,12 @@
       btn.textContent = 'Sign in';
       btn.className = 'nav-auth-btn btn-signin-nav';
       btn.onclick = openAuthModal;
+    }
+    // Show Admin link only to owners
+    const adminLink = document.getElementById('nl-admin');
+    if (adminLink) {
+      const owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+      adminLink.style.display = (_currentUser && owners.includes(_currentUser.email)) ? '' : 'none';
     }
     _updatePricingPage();
   }
@@ -2105,6 +2197,7 @@
   // ─── STUDY AI ─────────────────────────────────────────────────────────────
   let _aiTab = 'notes';
   let _aiDropContent = '';
+  let _aiDropPdfBase64 = '';
 
   function aiSwitchTab(tab) {
     _aiTab = tab;
@@ -2115,8 +2208,13 @@
   }
 
   function aiCountChars() {
-    const n = (document.getElementById('aiNoteText').value || '').length + _aiDropContent.length;
-    document.getElementById('aiCharCount').textContent = n.toLocaleString() + ' characters';
+    if (_aiDropPdfBase64) {
+      const kb = Math.round(_aiDropPdfBase64.length * 0.75 / 1024);
+      document.getElementById('aiCharCount').textContent = kb + ' KB (PDF — text extracted server-side)';
+    } else {
+      const n = (document.getElementById('aiNoteText').value || '').length + _aiDropContent.length;
+      document.getElementById('aiCharCount').textContent = n.toLocaleString() + ' characters';
+    }
   }
 
   function aiDragOver(e) {
@@ -2142,23 +2240,42 @@
   }
 
   function _aiLoadFile(file) {
-    if (!file.name.match(/\.(txt|md)$/i)) { showToast('Only .txt and .md files are supported'); return; }
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      _aiDropContent = ev.target.result || '';
-      document.getElementById('aiDropLabel').textContent = '✓ ' + file.name;
-      document.getElementById('aiDropZone').classList.add('has-file');
-      aiCountChars();
-    };
-    reader.readAsText(file);
+    if (!file.name.match(/\.(txt|md|pdf)$/i)) { showToast('Only .pdf, .txt and .md files are supported'); return; }
+    const zone = document.getElementById('aiDropZone');
+    if (file.name.match(/\.pdf$/i)) {
+      _aiDropContent = '';
+      _aiDropPdfBase64 = '';
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const bytes = new Uint8Array(ev.target.result);
+        let binary = '';
+        for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+        _aiDropPdfBase64 = btoa(binary);
+        document.getElementById('aiDropLabel').textContent = '✓ ' + file.name;
+        zone.classList.add('has-file');
+        aiCountChars();
+      };
+      reader.readAsArrayBuffer(file);
+    } else {
+      _aiDropPdfBase64 = '';
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        _aiDropContent = ev.target.result || '';
+        document.getElementById('aiDropLabel').textContent = '✓ ' + file.name;
+        zone.classList.add('has-file');
+        aiCountChars();
+      };
+      reader.readAsText(file);
+    }
   }
 
   function aiGenerate() {
     requirePro(async function() {
       const text     = _aiTab === 'notes' ? ((document.getElementById('aiNoteText').value || '') + '\n\n' + _aiDropContent).trim() : '';
       const ytUrl    = _aiTab === 'yt'    ? (document.getElementById('aiYTUrl').value    || '').trim() : '';
-      if (!text && !ytUrl) { showToast('Paste some notes or enter a YouTube URL first.'); return; }
-      if (text && text.length < 80) { showToast('Please add more content (at least 80 characters).'); return; }
+      const pdfB64   = _aiTab === 'notes' ? _aiDropPdfBase64 : '';
+      if (!text && !ytUrl && !pdfB64) { showToast('Paste some notes, drop a file, or enter a YouTube URL first.'); return; }
+      if (text && !pdfB64 && text.length < 80) { showToast('Please add more content (at least 80 characters).'); return; }
       if (!_sbClient) { showToast('Auth not configured.'); return; }
       const { data: { session } } = await _sbClient.auth.getSession();
       if (!session) { showToast('Please sign in to use StudyAI.'); return; }
@@ -2168,7 +2285,7 @@
         const resp = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, youtubeUrl: ytUrl, accessToken: session.access_token })
+          body: JSON.stringify({ text, youtubeUrl: ytUrl, pdfBase64: pdfB64, accessToken: session.access_token })
         });
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || 'Generation failed');
@@ -2218,6 +2335,71 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
+  // ── MOBILE NAV ────────────────────────────────────────────────────────────
+  function toggleMobileNav() {
+    const links = document.getElementById('navLinks');
+    const btn   = document.getElementById('navHamburger');
+    const open  = links.classList.toggle('mobile-open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  function closeMobileNav() {
+    const links = document.getElementById('navLinks');
+    const btn   = document.getElementById('navHamburger');
+    links.classList.remove('mobile-open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  // ── ADMIN DASHBOARD ───────────────────────────────────────────────────────
+  async function loadAdminStats() {
+    if (!_sbClient || !_currentUser) return;
+    const owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+    if (!owners.includes(_currentUser.email)) return;
+    try {
+      const { data: { session } } = await _sbClient.auth.getSession();
+      if (!session) return;
+      const resp = await fetch('/api/admin-stats', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accessToken: session.access_token })
+      });
+      if (!resp.ok) return;
+      const d = await resp.json();
+      const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      set('asTotalUsers', (d.totalUsers||0).toLocaleString());
+      set('asWeekly',     '+' + (d.weeklySignups||0));
+      set('asPro',        (d.proCount||0).toLocaleString());
+      set('asFree',       (d.freeCount||0).toLocaleString());
+      set('asConv',       (d.conversionRate||'0.0') + '%');
+      set('asQuizzes',    (d.quizStats && d.quizStats.total ? d.quizStats.total + (d.quizStats.avgPct ? ' · avg ' + d.quizStats.avgPct + '%' : '') : '0'));
+      // Most viewed courses table
+      const courseBody = document.getElementById('adminCourseBody');
+      if (courseBody) {
+        if (!d.topCourses || d.topCourses.length === 0) {
+          courseBody.innerHTML = '<div class="admin-empty">No view data yet — tracking starts once the course_views table is created.</div>';
+        } else {
+          courseBody.innerHTML = '<table class="admin-table"><thead><tr><th>#</th><th>Course ID</th><th>Views</th></tr></thead><tbody>' +
+            d.topCourses.map((c, i) => `<tr><td style="color:var(--muted)">${i+1}</td><td style="font-family:monospace;font-weight:600;color:var(--accent)">${c.id}</td><td>${c.count.toLocaleString()}</td></tr>`).join('') +
+            '</tbody></table>';
+        }
+      }
+      // Quiz stats
+      const quizBody = document.getElementById('adminQuizBody');
+      if (quizBody) {
+        if (!d.quizStats || d.quizStats.total === 0) {
+          quizBody.innerHTML = '<div class="admin-empty">No quiz attempts this week yet — data appears once the quiz_attempts table is created.</div>';
+        } else {
+          quizBody.innerHTML = `<div style="padding:16px 18px;font-size:14px;color:var(--text)">
+            <strong>${d.quizStats.total}</strong> quiz attempt${d.quizStats.total!==1?'s':''} this week · Average score: <strong>${d.quizStats.avgPct}%</strong>
+          </div>`;
+        }
+      }
+    } catch(e) {
+      console.warn('Admin stats error:', e.message);
+    }
+  }
+
   // ─── INIT ─────────────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
     const _dtBtn = document.getElementById('darkToggle');
@@ -2244,7 +2426,7 @@
         }
       }
       // Handle other hash pages
-      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai' };
+      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai', '#admin':'admin' };
       if (pageMap[hash]) { showPage(pageMap[hash]); return true; }
       return false;
     }
@@ -2260,6 +2442,68 @@
     });
   });
 </script>
+
+<!-- ADMIN DASHBOARD -->
+<div class="page" id="page-admin">
+  <div class="admin-page">
+    <div class="admin-hdr" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <h1>Admin Dashboard</h1>
+        <p>Live stats from Supabase — owner access only.</p>
+      </div>
+      <button class="admin-refresh" onclick="loadAdminStats()">↺ Refresh</button>
+    </div>
+    <div class="admin-grid" id="adminStatGrid">
+      <div class="admin-stat"><div class="admin-stat-num" id="asTotalUsers">—</div><div class="admin-stat-label">Total users</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asWeekly">—</div><div class="admin-stat-label">New this week</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asPro">—</div><div class="admin-stat-label">Pro subscribers</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asFree">—</div><div class="admin-stat-label">Free users</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asConv">—</div><div class="admin-stat-label">Conversion rate</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asQuizzes">—</div><div class="admin-stat-label">Quizzes this week</div></div>
+    </div>
+    <div class="admin-section">
+      <div class="admin-section-hdr">🔥 Most Viewed Courses</div>
+      <div id="adminCourseBody"><div class="admin-empty">Click Refresh to load data.</div></div>
+    </div>
+    <div class="admin-section">
+      <div class="admin-section-hdr">📊 Quiz Activity (this week)</div>
+      <div id="adminQuizBody"><div class="admin-empty">Click Refresh to load data.</div></div>
+    </div>
+    <div class="admin-section">
+      <div class="admin-section-hdr" style="display:flex;align-items:center;justify-content:space-between">
+        <span>⚙️ Supabase Tables Required</span>
+      </div>
+      <div style="padding:16px 18px;font-size:13px;color:var(--muted);line-height:1.7">
+        Run these once in Supabase SQL Editor to enable course view tracking and quiz score history:
+        <pre style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;overflow-x:auto;margin-top:10px;line-height:1.5">-- Course views (for Most Viewed)
+CREATE TABLE IF NOT EXISTS course_views (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  course_id TEXT NOT NULL,
+  user_id UUID REFERENCES auth.users(id) ON DELETE SET NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE course_views ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "insert_views" ON course_views FOR INSERT WITH CHECK (true);
+CREATE POLICY "owner_read_views" ON course_views FOR SELECT USING (true);
+
+-- Quiz attempts (for weekly email + analytics)
+CREATE TABLE IF NOT EXISTS quiz_attempts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  module_code TEXT NOT NULL,
+  topic TEXT NOT NULL,
+  score INTEGER NOT NULL,
+  total INTEGER NOT NULL,
+  pct INTEGER NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE quiz_attempts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "insert_own" ON quiz_attempts FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_id);</pre>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- QUIZ MODAL -->
 <div class="quiz-overlay" id="quizOverlay" onclick="if(event.target===this)closeQuiz()"></div>
