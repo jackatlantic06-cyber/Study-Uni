@@ -58,17 +58,18 @@ module.exports = async (req, res) => {
       const firstName = user.user_metadata?.first_name || user.email.split('@')[0];
 
       try {
+        const from = process.env.RESEND_FROM || 'Study-Uni <onboarding@resend.dev>';
         if (isPro) {
           const attempts = weeklyAttempts[user.id] || [];
           await resend.emails.send({
-            from: 'Study-Uni <hello@study-uni.ie>',
+            from,
             to: user.email,
             subject: attempts.length > 0 ? 'Your Study-Uni weekly recap 🏆' : 'Study tip of the week 📚',
             html: proWeeklyHTML(firstName, attempts, tip),
           });
         } else {
           await resend.emails.send({
-            from: 'Study-Uni <hello@study-uni.ie>',
+            from,
             to: user.email,
             subject: 'Unlock Pro this week — marking schemes & quizzes 📖',
             html: freeWeeklyHTML(firstName),

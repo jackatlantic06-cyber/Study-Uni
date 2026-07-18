@@ -14,8 +14,9 @@ module.exports = async (req, res) => {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const name = firstName || email.split('@')[0];
 
+    const from = process.env.RESEND_FROM || 'Study-Uni <onboarding@resend.dev>';
     await resend.emails.send({
-      from: 'Study-Uni <hello@study-uni.ie>',
+      from,
       to: email,
       subject: 'Welcome to Study-Uni 🎓',
       html: welcomeHTML(name),
