@@ -578,14 +578,14 @@
     </div>
     <div class="pricing-card featured">
       <h3>Pro</h3>
-      <div class="price">€4.99<span>/mo</span></div>
+      <div class="price">€7.99<span>/mo</span></div>
       <ul>
         <li>Everything in Free</li>
         <li>Worked solutions & marking schemes</li>
         <li>MCQ practice quizzes</li>
         <li>StudyAI — flashcards &amp; MCQs from your notes</li>
       </ul>
-      <button class="pricing-cta" id="pricingProBtn" onclick="openProModal()">Get Pro &mdash; &euro;4.99/mo</button>
+      <button class="pricing-cta" id="pricingProBtn" onclick="openProModal()">Get Pro &mdash; &euro;7.99/mo</button>
     </div>
   </div>
 </div>
@@ -1803,9 +1803,9 @@
 
   // ── PLAN SELECTION ─────────────────────────────────────────────────────────
   const _planMeta = {
-    monthly:  { label: '€4.99/mo',   configKey: 'STRIPE_PRICE_MONTHLY' },
-    semester: { label: '€9.99/3 mo', configKey: 'STRIPE_PRICE_SEMESTER' },
-    annual:   { label: '€29.99/yr',  configKey: 'STRIPE_PRICE_ANNUAL' },
+    monthly:  { label: '€7.99/mo',   configKey: 'STRIPE_PRICE_MONTHLY' },
+    semester: { label: '€17.99/3 mo', configKey: 'STRIPE_PRICE_SEMESTER' },
+    annual:   { label: '€49.99/yr',  configKey: 'STRIPE_PRICE_ANNUAL' },
   };
   let _selectedPlan = 'monthly';
 
@@ -1883,7 +1883,7 @@
       btn.style.cursor = 'default';
       btn.onclick = null;
     } else {
-      btn.textContent = 'Get Pro — €4.99/mo';
+      btn.textContent = 'Get Pro — €7.99/mo';
       btn.style.background = '';
       btn.style.cursor = '';
       btn.onclick = openProModal;
@@ -1914,7 +1914,7 @@
       badge.textContent = 'Free';
       badge.style.cssText = 'background:#f1f5f9;color:#64748b;border-radius:999px;padding:3px 12px;font-size:12px;font-weight:700';
       desc.textContent = 'Upgrade to unlock marking schemes and quiz practice.';
-      manBtn.textContent = 'Upgrade to Pro — €4.99/mo';
+      manBtn.textContent = 'Upgrade to Pro — €7.99/mo';
       manBtn.style.cssText = 'padding:10px 20px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit';
       manBtn.onclick = openProModal;
     }
@@ -2743,7 +2743,7 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
       <p id="acctSubDesc" style="color:#64748b;font-size:13px;margin-bottom:18px;line-height:1.5">Upgrade to unlock marking schemes and quiz practice.</p>
       <button id="acctManageBtn" onclick="openProModal()"
         style="padding:10px 20px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">
-        Upgrade to Pro &mdash; &euro;4.99/mo
+        Upgrade to Pro &mdash; &euro;7.99/mo
       </button>
     </div>
 
@@ -2845,7 +2845,7 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
           <div style="font-size:12px;color:var(--muted);margin-top:1px">Flexible &mdash; cancel anytime</div>
         </div>
         <div style="text-align:right;flex-shrink:0">
-          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;4.99</span>
+          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;7.99</span>
           <span style="font-size:11px;color:var(--muted)">/mo</span>
         </div>
       </div>
@@ -2857,10 +2857,10 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
             Semester
             <span class="plan-save" style="background:#dbeafe;color:#1d4ed8">SAVE 33%</span>
           </div>
-          <div style="font-size:12px;color:var(--muted);margin-top:1px">Billed every 3 months &mdash; &euro;3.33/mo</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:1px">Billed every 3 months &mdash; &euro;5.99/mo</div>
         </div>
         <div style="text-align:right;flex-shrink:0">
-          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;9.99</span>
+          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;17.99</span>
           <span style="font-size:11px;color:var(--muted)">/3 mo</span>
         </div>
       </div>
@@ -2872,10 +2872,10 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
             Annual
             <span class="plan-save" style="background:#dcfce7;color:#15803d">BEST VALUE</span>
           </div>
-          <div style="font-size:12px;color:var(--muted);margin-top:1px">Full academic year &mdash; &euro;2.50/mo</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:1px">Full academic year &mdash; &euro;4.17/mo</div>
         </div>
         <div style="text-align:right;flex-shrink:0">
-          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;29.99</span>
+          <span style="font-weight:800;font-size:17px;color:var(--text)">&euro;49.99</span>
           <span style="font-size:11px;color:var(--muted)">/yr</span>
         </div>
       </div>
@@ -2889,7 +2889,7 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
     <li>StudyAI &mdash; flashcards &amp; MCQs from your notes</li>
     <li>New content added every semester</li>
   </ul>
-  <button class="pro-cta" id="proCheckoutBtn" onclick="startCheckout()">Subscribe now &mdash; &euro;4.99/mo</button>
+  <button class="pro-cta" id="proCheckoutBtn" onclick="startCheckout()">Subscribe now &mdash; &euro;7.99/mo</button>
   <div style="text-align:center;margin-top:10px;font-size:11px;color:#94a3b8">Secured by Stripe &middot; UCC students only</div>
 </div>
 
