@@ -619,20 +619,20 @@
         </div>
         <div class="ai-row">
           <span class="ai-hint" id="aiCharCount">0 characters</span>
-          <button class="ai-gen-btn" onclick="aiGenerate()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Generate
-          </button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="ai-gen-btn" style="background:#16a34a" onclick="aiGenerate('flashcards')">🃏 Generate Flashcards</button>
+            <button class="ai-gen-btn" onclick="aiGenerate('mcqs')">❓ Generate MCQs</button>
+          </div>
         </div>
       </div>
       <div id="aiYTPane" style="display:none">
         <input class="ai-url-input" id="aiYTUrl" type="url" placeholder="https://www.youtube.com/watch?v=…"/>
         <div class="ai-row" style="margin-top:11px">
           <span class="ai-hint">Public videos with captions enabled only</span>
-          <button class="ai-gen-btn" onclick="aiGenerate()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            Generate
-          </button>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="ai-gen-btn" style="background:#16a34a" onclick="aiGenerate('flashcards')">🃏 Generate Flashcards</button>
+            <button class="ai-gen-btn" onclick="aiGenerate('mcqs')">❓ Generate MCQs</button>
+          </div>
         </div>
       </div>
     </div>
@@ -643,13 +643,20 @@
       </div>
     </div>
     <div id="aiResults" style="display:none">
-      <div class="ai-results-hdr">
-        <div class="ai-section-lbl">🃏 Flashcards <span style="font-size:13px;font-weight:500;color:var(--muted)">(click to flip)</span></div>
-        <button class="ai-regen-btn" onclick="aiGenerate()">↺ Regenerate</button>
+      <div id="aiFCSection">
+        <div class="ai-results-hdr">
+          <div class="ai-section-lbl">🃏 Flashcards <span style="font-size:13px;font-weight:500;color:var(--muted)">(click to flip)</span></div>
+          <button class="ai-regen-btn" onclick="aiGenerate('flashcards')">↺ Regenerate</button>
+        </div>
+        <div class="fc-grid" id="aiFCGrid"></div>
       </div>
-      <div class="fc-grid" id="aiFCGrid"></div>
-      <div class="ai-section-lbl" style="margin-bottom:14px">❓ Practice Questions</div>
-      <div class="ai-mcq-list" id="aiMCQList"></div>
+      <div id="aiMCQSection">
+        <div class="ai-results-hdr" style="margin-top:24px">
+          <div class="ai-section-lbl">❓ MCQ Practice Questions</div>
+          <button class="ai-regen-btn" onclick="aiGenerate('mcqs')">↺ Regenerate</button>
+        </div>
+        <div class="ai-mcq-list" id="aiMCQList"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -2235,6 +2242,7 @@
   let _aiTab = 'notes';
   let _aiDropContent = '';
   let _aiDropPdfBase64 = '';
+  let _aiMode = 'flashcards';
 
   function aiSwitchTab(tab) {
     _aiTab = tab;
@@ -2306,27 +2314,30 @@
     }
   }
 
-  function aiGenerate() {
+  function aiGenerate(mode) {
+    _aiMode = mode || 'flashcards';
     requirePro(async function() {
-      const text     = _aiTab === 'notes' ? ((document.getElementById('aiNoteText').value || '') + '\n\n' + _aiDropContent).trim() : '';
-      const ytUrl    = _aiTab === 'yt'    ? (document.getElementById('aiYTUrl').value    || '').trim() : '';
-      const pdfB64   = _aiTab === 'notes' ? _aiDropPdfBase64 : '';
+      const text   = _aiTab === 'notes' ? ((document.getElementById('aiNoteText').value || '') + '\n\n' + _aiDropContent).trim() : '';
+      const ytUrl  = _aiTab === 'yt'    ? (document.getElementById('aiYTUrl').value    || '').trim() : '';
+      const pdfB64 = _aiTab === 'notes' ? _aiDropPdfBase64 : '';
       if (!text && !ytUrl && !pdfB64) { showToast('Paste some notes, drop a file, or enter a YouTube URL first.'); return; }
       if (text && !pdfB64 && text.length < 80) { showToast('Please add more content (at least 80 characters).'); return; }
       if (!_sbClient) { showToast('Auth not configured.'); return; }
       const { data: { session } } = await _sbClient.auth.getSession();
       if (!session) { showToast('Please sign in to use StudyAI.'); return; }
+      const loadingMsg = document.querySelector('#aiLoading p');
+      if (loadingMsg) loadingMsg.textContent = _aiMode === 'mcqs' ? 'Generating your MCQs…' : 'Generating your flashcards…';
       document.getElementById('aiLoading').style.display = 'block';
       document.getElementById('aiResults').style.display = 'none';
       try {
         const resp = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, youtubeUrl: ytUrl, pdfBase64: pdfB64, accessToken: session.access_token })
+          body: JSON.stringify({ text, youtubeUrl: ytUrl, pdfBase64: pdfB64, accessToken: session.access_token, mode: _aiMode })
         });
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || 'Generation failed');
-        _aiRender(data);
+        _aiRender(data, _aiMode);
       } catch(e) {
         showToast('Error: ' + e.message);
       } finally {
@@ -2335,7 +2346,9 @@
     });
   }
 
-  function _aiRender(data) {
+  function _aiRender(data, mode) {
+    document.getElementById('aiFCSection').style.display  = mode === 'mcqs'       ? 'none' : 'block';
+    document.getElementById('aiMCQSection').style.display = mode === 'flashcards' ? 'none' : 'block';
     document.getElementById('aiFCGrid').innerHTML = (data.flashcards || []).map((fc, i) =>
       `<div class="fc" id="afc${i}" onclick="this.classList.toggle('flipped')">
         <div class="fc-inner">
