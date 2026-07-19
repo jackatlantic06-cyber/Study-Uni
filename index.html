@@ -445,6 +445,30 @@
     .admin-grid{grid-template-columns:repeat(2,1fr)}
     .fc-grid{grid-template-columns:1fr}
   }
+  /* COOKIE BANNER */
+  #cookieBanner{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f1f5f9;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;z-index:9999;font-size:13px;line-height:1.5}
+  #cookieBanner p{flex:1;min-width:200px;margin:0}
+  #cookieBanner a{color:#93c5fd;text-decoration:underline;cursor:pointer}
+  .cookie-btns{display:flex;gap:8px;flex-shrink:0}
+  .cookie-btn{padding:8px 16px;border-radius:6px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+  .cookie-btn-accept{background:#2563eb;color:#fff}
+  .cookie-btn-essential{background:transparent;color:#94a3b8;border:1.5px solid #334155}
+  .cookie-btn-essential:hover{color:#f1f5f9;border-color:#64748b}
+  /* LEGAL PAGES */
+  .legal-page{max-width:720px;margin:0 auto;padding:40px 24px 80px}
+  .legal-page h1{font-size:26px;font-weight:800;margin-bottom:6px;color:var(--text)}
+  .legal-date{font-size:13px;color:var(--muted);margin-bottom:36px}
+  .legal-page h2{font-size:16px;font-weight:700;margin:28px 0 10px;color:var(--text)}
+  .legal-page p,.legal-page li{font-size:14px;line-height:1.75;color:#374151}
+  .legal-page ul{padding-left:20px;margin-bottom:12px}
+  .legal-page a{color:var(--accent);text-decoration:underline}
+  /* DELETE ACCOUNT */
+  .danger-section{border:1.5px solid #fecaca;border-radius:12px;padding:20px 24px;margin-top:16px;background:#fff}
+  .danger-section h3{font-size:14px;font-weight:700;color:#dc2626;margin-bottom:6px}
+  .danger-section p{font-size:13px;color:#64748b;margin-bottom:14px}
+  .btn-danger{padding:10px 18px;background:#dc2626;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+  .btn-danger:hover{background:#b91c1c}
+  footer a{color:inherit;text-decoration:underline;cursor:pointer}
   </style>
 <script>try{if(localStorage.getItem('su_dark')==='1'||(localStorage.getItem('su_dark')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}</script>
 </head>
@@ -625,7 +649,10 @@
   </div>
 </div>
 
-<footer>© 2025 Study-Uni · UCC Past Exam Papers · Not affiliated with University College Cork</footer>
+<footer>© 2026 Study-Uni · UCC Past Exam Papers · Not affiliated with University College Cork ·
+  <a onclick="showPage('privacy');return false" href="#">Privacy Policy</a> ·
+  <a onclick="showPage('terms');return false" href="#">Terms of Service</a>
+</footer>
 
 <script src="config.js?v=3"></script>
 <script src="data.js?v=3"></script>
@@ -739,6 +766,8 @@
     else if (id === 'ai') history.replaceState(null, '', '#ai');
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); }
     else if (id === 'admin') { history.replaceState(null, '', '#admin'); loadAdminStats(); }
+    else if (id === 'privacy') history.replaceState(null, '', '#privacy');
+    else if (id === 'terms') history.replaceState(null, '', '#terms');
     window.scrollTo(0,0);
   }
 
@@ -1079,7 +1108,8 @@
       <div class="year-tabs">${yearTabs}</div>
       ${progressBar}
       ${toggleBar}
-      ${moduleHTML}`;
+      ${moduleHTML}
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:24px;padding-top:14px;border-top:1px solid var(--border)">Exam papers &amp; marking schemes are &copy; University College Cork. Reproduced for personal study only under fair dealing. Study-Uni is not affiliated with UCC. &middot; <a onclick="showPage('privacy');return false" href="#" style="color:var(--accent)">Privacy Policy</a> &middot; <a onclick="showPage('terms');return false" href="#" style="color:var(--accent)">Terms</a></p>`;
 
     // Apply current toggle state to newly rendered tables
     document.querySelectorAll('.module-table').forEach(t => {
@@ -1694,6 +1724,8 @@
     if (fp) fp.style.display = mode === 'signin' ? 'block' : 'none';
     const nf = document.getElementById('authNameFields');
     if (nf) nf.style.display = mode === 'signup' ? 'block' : 'none';
+    const tn = document.getElementById('authTosNote');
+    if (tn) tn.style.display = mode === 'signup' ? 'block' : 'none';
   }
 
   async function submitAuth() {
@@ -2408,6 +2440,7 @@
     buildHome();
     buildDegBuckets();
     initAuth();
+    initCookieConsent();
 
     // ── Deep link handler ──────────────────────────────────────────────────
     function loadFromHash(hash) {
@@ -2426,7 +2459,7 @@
         }
       }
       // Handle other hash pages
-      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai', '#admin':'admin' };
+      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai', '#admin':'admin', '#privacy':'privacy', '#terms':'terms' };
       if (pageMap[hash]) { showPage(pageMap[hash]); return true; }
       return false;
     }
@@ -2441,7 +2474,167 @@
       loadFromHash(window.location.hash);
     });
   });
+
+  // ─── COOKIE CONSENT ──────────────────────────────────────────────────────
+  function initCookieConsent() {
+    if (localStorage.getItem('su_cookie_consent')) return;
+    document.getElementById('cookieBanner').style.display = 'flex';
+  }
+  function acceptCookies() {
+    localStorage.setItem('su_cookie_consent', 'all');
+    document.getElementById('cookieBanner').style.display = 'none';
+  }
+  function declineCookies() {
+    localStorage.setItem('su_cookie_consent', 'essential');
+    document.getElementById('cookieBanner').style.display = 'none';
+  }
+
+  // ─── DELETE ACCOUNT ───────────────────────────────────────────────────────
+  async function deleteAccount() {
+    if (!_sbClient) return;
+    if (!confirm('Permanently delete your account and all data? This cannot be undone.')) return;
+    const msg = document.getElementById('deleteAcctMsg');
+    if (msg) msg.textContent = 'Deleting…';
+    try {
+      const { data: { session } } = await _sbClient.auth.getSession();
+      if (!session) throw new Error('Not signed in');
+      const res = await fetch('/api/delete-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accessToken: session.access_token })
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Delete failed');
+      await _sbClient.auth.signOut();
+      showPage('home');
+      showToast('Account deleted.');
+    } catch (err) {
+      if (msg) msg.textContent = err.message;
+    }
+  }
 </script>
+
+<!-- PRIVACY POLICY PAGE -->
+<div class="page" id="page-privacy">
+  <div class="legal-page">
+    <h1>Privacy Policy</h1>
+    <p class="legal-date">Last updated: 19 July 2026</p>
+
+    <h2>1. Who we are</h2>
+    <p>Study-Uni is operated as a sole trader from Ireland. We provide a platform for UCC students to access past exam papers and study resources. For privacy queries, contact us at <a href="mailto:jackatlantic06@gmail.com">jackatlantic06@gmail.com</a>.</p>
+
+    <h2>2. What data we collect</h2>
+    <ul>
+      <li><strong>Account data:</strong> your UCC email address, first and last name, and password (stored as a secure hash by Supabase).</li>
+      <li><strong>Usage data:</strong> which courses and modules you view, quiz attempts and scores, and bookmarks/progress you save.</li>
+      <li><strong>Payment data:</strong> if you subscribe to Pro, Stripe processes your payment details directly. We receive only your subscription status — we never see or store your card number.</li>
+      <li><strong>Technical data:</strong> IP address, browser type, and pages visited, collected by our hosting provider (Vercel) in server logs.</li>
+    </ul>
+
+    <h2>3. Legal basis for processing (GDPR Art. 6)</h2>
+    <ul>
+      <li><strong>Contract (Art. 6(1)(b)):</strong> account management, delivering subscription content, processing payments.</li>
+      <li><strong>Legitimate interests (Art. 6(1)(f)):</strong> service improvement, fraud prevention, security monitoring.</li>
+      <li><strong>Consent (Art. 6(1)(a)):</strong> analytics cookies (Google Analytics) — only if you accept in the cookie banner.</li>
+    </ul>
+
+    <h2>4. Third-party processors</h2>
+    <ul>
+      <li><strong>Supabase</strong> (Supabase Inc., USA) — authentication and database. Data is stored in EU data centres. Supabase is certified under EU Standard Contractual Clauses.</li>
+      <li><strong>Stripe</strong> (Stripe Payments Europe Ltd., Ireland) — payment processing. Stripe is a PCI-DSS Level 1 certified payment processor.</li>
+      <li><strong>Resend</strong> (Resend Inc., USA) — transactional email delivery. Used only to send account confirmation and notification emails.</li>
+      <li><strong>Vercel</strong> (Vercel Inc., USA) — website hosting and serverless functions. EU region deployments are used where available.</li>
+      <li><strong>Google Analytics</strong> (Google Ireland Ltd.) — website analytics, only activated if you accept analytics cookies.</li>
+    </ul>
+
+    <h2>5. Cookies</h2>
+    <p>We use two categories of cookies:</p>
+    <ul>
+      <li><strong>Essential cookies:</strong> required for the site to function (session management, dark mode preference, cookie consent preference). These cannot be declined.</li>
+      <li><strong>Analytics cookies:</strong> Google Analytics collects anonymised usage data to help us improve the site. These are only set after you click "Accept all" in the cookie banner.</li>
+    </ul>
+
+    <h2>6. How long we keep your data</h2>
+    <p>We retain your data for as long as your account is active. You can delete your account at any time from the Account page, which permanently erases your profile, quiz history, and subscription record. Payment records may be retained for up to 7 years as required by Irish tax law.</p>
+
+    <h2>7. Your rights under GDPR</h2>
+    <ul>
+      <li><strong>Access:</strong> request a copy of the data we hold about you.</li>
+      <li><strong>Rectification:</strong> ask us to correct inaccurate data.</li>
+      <li><strong>Erasure:</strong> request deletion of your account and personal data.</li>
+      <li><strong>Portability:</strong> receive your data in a machine-readable format.</li>
+      <li><strong>Objection:</strong> object to processing based on legitimate interests.</li>
+      <li><strong>Withdraw consent:</strong> withdraw analytics consent at any time by clearing cookies or using your browser settings.</li>
+    </ul>
+    <p>To exercise any of these rights, email <a href="mailto:jackatlantic06@gmail.com">jackatlantic06@gmail.com</a>. We will respond within 30 days.</p>
+
+    <h2>8. Data security</h2>
+    <p>Passwords are hashed using bcrypt and never stored in plain text. All data is transmitted over HTTPS. Access to the Supabase database is restricted by Row-Level Security policies so that each user can only access their own data. In the event of a data breach affecting your rights and freedoms, we will notify you and the Irish Data Protection Commission (DPC) within 72 hours as required by GDPR Art. 33.</p>
+
+    <h2>9. Children</h2>
+    <p>Study-Uni is intended for UCC university students aged 18 or older. We do not knowingly collect data from children under 16. If you believe a child has provided us with their data, please contact us immediately.</p>
+
+    <h2>10. Supervisory authority</h2>
+    <p>If you have a complaint about how we handle your data, you have the right to lodge a complaint with the Irish Data Protection Commission: <a href="https://www.dataprotection.ie" target="_blank" rel="noopener">dataprotection.ie</a>.</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this policy from time to time. We will notify registered users by email of any material changes. Continued use of the service after changes constitutes acceptance of the updated policy.</p>
+
+    <p style="margin-top:32px"><a onclick="history.back();return false" href="#" style="color:var(--accent)">← Back</a></p>
+  </div>
+</div>
+
+<!-- TERMS OF SERVICE PAGE -->
+<div class="page" id="page-terms">
+  <div class="legal-page">
+    <h1>Terms of Service</h1>
+    <p class="legal-date">Last updated: 19 July 2026</p>
+
+    <h2>1. Agreement</h2>
+    <p>By creating a Study-Uni account or using this website, you agree to these Terms of Service ("Terms"). If you do not agree, do not use the service. These Terms are governed by the laws of Ireland.</p>
+
+    <h2>2. Eligibility</h2>
+    <p>Study-Uni is intended for students enrolled at University College Cork (UCC). You must be aged 18 or over to register. By using a @umail.ucc.ie email address to create an account, you confirm you are a current or former UCC student.</p>
+
+    <h2>3. Intellectual property &amp; fair use disclaimer</h2>
+    <p>Exam papers and marking schemes available on Study-Uni are the copyright of University College Cork. Study-Uni is not affiliated with, endorsed by, or sponsored by UCC. Past papers are reproduced under fair dealing provisions of the Copyright and Related Rights Act 2000 (Ireland), solely for the purpose of research and private study. You may not redistribute, sell, or publish these materials.</p>
+    <p>Study-Uni's own content (website code, design, summaries, and quiz questions) is the property of Study-Uni.</p>
+
+    <h2>4. Pro subscription</h2>
+    <p>Pro access is billed monthly at the advertised price via Stripe. You may cancel at any time from your Account page; cancellation takes effect at the end of the current billing period.</p>
+    <p><strong>14-day cancellation right (EU/Irish Consumer Rights):</strong> As a consumer, you have the right to withdraw from a digital subscription within 14 days of purchase without giving any reason, unless you have already begun to use the digital content. By clicking "Subscribe now" and immediately accessing Pro content, you expressly request immediate performance of the contract and acknowledge that your right of withdrawal is thereby waived in accordance with Directive 2011/83/EU Art. 16(m) and the European Union (Consumer Information, Cancellation and Other Rights) Regulations 2013.</p>
+
+    <h2>5. Acceptable use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Share your account credentials or allow others to use your account.</li>
+      <li>Scrape, copy, or redistribute exam papers or site content.</li>
+      <li>Attempt to circumvent subscription gating or access controls.</li>
+      <li>Use the service in any way that violates Irish or EU law.</li>
+      <li>Upload, submit, or transmit any unlawful, harmful, or infringing content.</li>
+    </ul>
+
+    <h2>6. Account termination</h2>
+    <p>We reserve the right to suspend or terminate accounts that violate these Terms, without prior notice. You may delete your account at any time from the Account page. Upon termination, your access to Pro content ceases immediately. No refund is issued for partial billing periods unless required by law.</p>
+
+    <h2>7. Disclaimer of warranties</h2>
+    <p>Study-Uni is provided "as is" and "as available." We make no warranty that the service will be uninterrupted, error-free, or that any exam papers are complete or accurate. Past papers and marking schemes are provided for study purposes only and should not be relied upon as definitive academic guidance.</p>
+
+    <h2>8. Limitation of liability</h2>
+    <p>To the maximum extent permitted by Irish and EU law, Study-Uni's total liability for any claim arising out of or relating to these Terms or the service shall not exceed the amount you paid to Study-Uni in the 12 months preceding the claim. We are not liable for indirect, incidental, or consequential damages. Nothing in these Terms limits liability for death or personal injury caused by negligence, or for fraud or fraudulent misrepresentation.</p>
+
+    <h2>9. Data protection</h2>
+    <p>Your use of Study-Uni is also governed by our <a onclick="showPage('privacy');return false" href="#">Privacy Policy</a>, which forms part of these Terms.</p>
+
+    <h2>10. Changes to these Terms</h2>
+    <p>We may update these Terms at any time. We will notify you by email at least 14 days before material changes take effect. Continued use of the service after that date constitutes acceptance of the new Terms.</p>
+
+    <h2>11. Contact</h2>
+    <p>Questions about these Terms: <a href="mailto:jackatlantic06@gmail.com">jackatlantic06@gmail.com</a></p>
+
+    <p style="margin-top:32px"><a onclick="history.back();return false" href="#" style="color:var(--accent)">← Back</a></p>
+  </div>
+</div>
 
 <!-- ADMIN DASHBOARD -->
 <div class="page" id="page-admin">
@@ -2540,6 +2733,18 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
       style="width:100%;padding:12px;background:#fff;color:#374151;border:1.5px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:4px">
       Sign out
     </button>
+
+    <div class="danger-section">
+      <h3>Delete account</h3>
+      <p>Permanently deletes your account, quiz history, and all associated data. This cannot be undone.</p>
+      <button class="btn-danger" onclick="deleteAccount()">Delete my account</button>
+      <div id="deleteAcctMsg" style="margin-top:8px;font-size:13px;color:#dc2626;min-height:16px"></div>
+    </div>
+
+    <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:20px;line-height:1.6">
+      <a onclick="showPage('privacy');return false" href="#" style="color:var(--accent)">Privacy Policy</a> ·
+      <a onclick="showPage('terms');return false" href="#" style="color:var(--accent)">Terms of Service</a>
+    </p>
   </div>
 </div>
 
@@ -2586,6 +2791,9 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
            onkeydown="if(event.key==='Enter')submitAuth()"/>
   </div>
   <button class="auth-btn" id="authSubmitBtn" onclick="submitAuth()">Sign in</button>
+  <div id="authTosNote" style="display:none;font-size:11px;color:#94a3b8;text-align:center;margin-top:8px;line-height:1.6">
+    By creating an account you agree to our <a onclick="closeAuthModal();showPage('terms');return false" href="#" style="color:#60a5fa">Terms of Service</a> and <a onclick="closeAuthModal();showPage('privacy');return false" href="#" style="color:#60a5fa">Privacy Policy</a>.
+  </div>
   <div class="auth-err" id="authErr"></div>
   <div class="auth-msg" id="authSuccessMsg" style="display:none">
     &#x2713;&nbsp;Check your UCC inbox and click the confirmation link, then sign in here.
@@ -2665,6 +2873,17 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
   </ul>
   <button class="pro-cta" id="proCheckoutBtn" onclick="startCheckout()">Subscribe now &mdash; &euro;4.99/mo</button>
   <div style="text-align:center;margin-top:10px;font-size:11px;color:#94a3b8">Secured by Stripe &middot; UCC students only</div>
+</div>
+
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookieBanner" style="display:none" role="dialog" aria-label="Cookie consent">
+  <p>We use essential cookies to run the site and, with your consent, analytics cookies (Google Analytics) to improve it.
+    <a onclick="showPage('privacy');return false" href="#">Privacy Policy</a>
+  </p>
+  <div class="cookie-btns">
+    <button class="cookie-btn cookie-btn-essential" onclick="declineCookies()">Essential only</button>
+    <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Accept all</button>
+  </div>
 </div>
 
 </body>
