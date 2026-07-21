@@ -2640,16 +2640,14 @@
     btn.classList.add('open');
     panel.classList.add('open');
     if (_predCache[code]) { _renderPred(panel, _predCache[code]); return; }
-    requirePro(async function() {
-      panel.innerHTML = '<div class="pred-loading">⏳ Analysing past papers…</div>';
+    panel.innerHTML = '<div class="pred-loading">⏳ Analysing past papers…</div>';
+    (async function() {
       try {
-        const { data: { session } } = await _sbClient.auth.getSession();
-        if (!session) throw new Error('Not signed in');
         const mod = _modData[code] || {};
         const resp = await fetch('/api/predict', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ moduleCode: code, moduleName: mod.name || code, years: mod.years || [], accessToken: session.access_token })
+          body: JSON.stringify({ moduleCode: code, moduleName: mod.name || code, years: mod.years || [] })
         });
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || 'Prediction failed');
@@ -2658,7 +2656,7 @@
       } catch(e) {
         panel.innerHTML = '<div class="pred-loading">⚠️ ' + e.message + '</div>';
       }
-    });
+    })();
   }
 
   function _renderPred(panel, data) {

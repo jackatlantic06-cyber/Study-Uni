@@ -9,27 +9,8 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { moduleCode, moduleName, years, accessToken } = req.body || {};
-    if (!accessToken) return res.status(401).json({ error: 'Not authenticated' });
-    if (!moduleCode)  return res.status(400).json({ error: 'moduleCode required' });
-
-    const sb = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-    const { data: { user }, error: authError } = await sb.auth.getUser(accessToken);
-    if (authError || !user) return res.status(401).json({ error: 'Invalid session — please sign in again' });
-
-    const owners    = (process.env.OWNER_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean);
-    const proEmails = (process.env.PRO_EMAILS   || '').split(',').map(e => e.trim()).filter(Boolean);
-    const bypass    = owners.includes(user.email) || proEmails.includes(user.email);
-
-    if (!bypass) {
-      const { data: sub } = await sb.from('subscriptions')
-        .select('is_active,current_period_end')
-        .eq('id', user.id)
-        .maybeSingle();
-      const isPro = !!(sub && sub.is_active &&
-        (!sub.current_period_end || new Date(sub.current_period_end) > new Date()));
-      if (!isPro) return res.status(403).json({ error: 'Pro subscription required' });
-    }
+    const { moduleCode, moduleName, years } = req.body || {};
+    if (!moduleCode) return res.status(400).json({ error: 'moduleCode required' });
 
     const yearList = Array.isArray(years) && years.length
       ? years.join(', ')
