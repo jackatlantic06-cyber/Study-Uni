@@ -1,0 +1,1 @@
+{"version":"0.0.1","configurations":[{"name":"study-uni","runtimeExecutable":"python","runtimeArgs":["-m","http.server","3333","--directory","C:/Users/jacka/Documents/study-uni"],"port":3333}]}
