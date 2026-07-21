@@ -1772,28 +1772,33 @@
   var _allowedCourse = null;
   var _moduleCourseMap = null;
 
-  function _getModuleCourse(moduleCode) {
-    if (!_moduleCourseMap) {
-      _moduleCourseMap = {};
-      if (typeof SCHOOLS !== 'undefined') {
-        function indexMods(courseId, mods) {
-          (mods || []).forEach(function(m) { if (m.code) _moduleCourseMap[m.code] = courseId; });
-        }
-        function indexCourse(course) {
-          (course.years || []).forEach(function(year) {
-            indexMods(course.id, year.modules);
-            (year.sections || []).forEach(function(sec) { indexMods(course.id, sec.modules); });
-            (year.outlets || []).forEach(function(outlet) {
-              (outlet.courses || []).forEach(function(oc) { indexCourse(oc); });
-            });
-          });
-        }
-        SCHOOLS.forEach(function(school) {
-          (school.courses || []).forEach(indexCourse);
-        });
-      }
+  // Maps courseId → Set of module codes in that course
+  function _buildCourseModules() {
+    if (_moduleCourseMap) return;
+    _moduleCourseMap = {};
+    if (typeof SCHOOLS === 'undefined') return;
+    function addMods(courseId, mods) {
+      if (!mods) return;
+      if (!_moduleCourseMap[courseId]) _moduleCourseMap[courseId] = {};
+      mods.forEach(function(m) { if (m.code) _moduleCourseMap[courseId][m.code] = true; });
     }
-    return _moduleCourseMap[moduleCode] || null;
+    function indexCourse(course) {
+      (course.years || []).forEach(function(year) {
+        addMods(course.id, year.modules);
+        (year.sections || []).forEach(function(sec) { addMods(course.id, sec.modules); });
+        (year.outlets || []).forEach(function(outlet) {
+          (outlet.courses || []).forEach(function(oc) { indexCourse(oc); });
+        });
+      });
+    }
+    SCHOOLS.forEach(function(school) { (school.courses || []).forEach(indexCourse); });
+  }
+
+  function _userCanAccessModule(moduleCode) {
+    if (!_allowedCourse) return true;
+    _buildCourseModules();
+    var courseMods = _moduleCourseMap[_allowedCourse];
+    return !!(courseMods && courseMods[moduleCode]);
   }
 
   async function _refreshSub() {
@@ -1817,19 +1822,14 @@
     // Supabase not configured yet — paywall is inactive, let everyone through
     if (!_sbClient) { _pendingAction = null; fn(); return; }
     if (_currentUser && _isSubscribed) {
-      // Course restriction: if the user has an allowed_course set, they can only
-      // access content belonging to that course
       if (_allowedCourse && actionKey) {
         var moduleCode = null;
         if (actionKey.startsWith('modelAnswer:')) moduleCode = actionKey.slice(12);
         else if (actionKey.startsWith('quiz:'))     moduleCode = actionKey.split(':')[1];
-        if (moduleCode) {
-          var moduleCourse = _getModuleCourse(moduleCode);
-          if (moduleCourse && moduleCourse !== _allowedCourse) {
-            _pendingAction = null;
-            showToast('Your Pro plan covers a different course — this content is not included.');
-            return;
-          }
+        if (moduleCode && !_userCanAccessModule(moduleCode)) {
+          _pendingAction = null;
+          showToast('Your Pro plan covers a different course — this content is not included.');
+          return;
         }
       }
       _pendingAction = null; fn(); return;
