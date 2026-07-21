@@ -1,4 +1,3 @@
-const { createClient } = require('@supabase/supabase-js');
 const Anthropic = require('@anthropic-ai/sdk');
 
 module.exports = async (req, res) => {
