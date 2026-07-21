@@ -517,6 +517,44 @@
   .btn-danger{padding:10px 18px;background:#dc2626;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
   .btn-danger:hover{background:#b91c1c}
   footer a{color:inherit;text-decoration:underline;cursor:pointer}
+  /* === PRICING TABS === */
+  .ptab-row{display:flex;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:4px;max-width:260px;margin:24px auto 0;gap:4px}
+  .ptab{flex:1;padding:9px 0;font-size:14px;font-weight:700;border-radius:8px;border:none;background:none;cursor:pointer;color:var(--muted);transition:all .18s;font-family:inherit}
+  .ptab.active{background:var(--accent);color:#fff}
+  .team-badge{display:inline-block;background:#ecfdf5;color:#059669;border-radius:999px;padding:2px 11px;font-size:11px;font-weight:700;margin-bottom:6px;letter-spacing:.03em}
+  .team-saving{font-size:12px;color:#059669;font-weight:600;margin:3px 0 6px}
+  /* === COURSE PICKER === */
+  .cpick{position:relative;margin:14px 0 4px}
+  .cpick-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:5px;display:block}
+  .cpick-input{width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;background:var(--bg);color:var(--text);cursor:pointer;box-sizing:border-box}
+  .cpick-input:focus{border-color:var(--accent)}
+  .cpick-dd{position:absolute;left:0;right:0;top:calc(100% + 3px);background:var(--surface);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:3200;max-height:200px;overflow-y:auto;display:none}
+  .cpick-dd.open{display:block}
+  .cpick-opt{padding:9px 13px;font-size:13px;cursor:pointer;color:var(--text)}
+  .cpick-opt:hover,.cpick-opt.sel{background:var(--accent-light);color:var(--accent)}
+  .cpick-chosen{font-size:12px;font-weight:600;color:var(--accent);margin-top:4px;display:none}
+  /* === TEAM MODAL === */
+  .tm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2600;opacity:0;pointer-events:none;transition:opacity .2s}
+  .tm-overlay.active{opacity:1;pointer-events:all}
+  .tm-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(540px,96vw);max-height:92vh;overflow-y:auto;background:var(--surface);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:2601;padding:28px 28px 24px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+  .tm-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+  .tm-step{display:none}.tm-step.active{display:block}
+  .tm-heading{font-size:18px;font-weight:800;margin-bottom:4px}
+  .tm-sub{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .tm-field{margin-bottom:9px}
+  .tm-field label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);display:block;margin-bottom:4px}
+  .tm-input{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;background:var(--bg);color:var(--text);box-sizing:border-box}
+  .tm-input:focus{border-color:var(--accent)}
+  .tm-member{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px}
+  .tm-member-label{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
+  .tm-divider{border:none;border-top:1px solid var(--border);margin:14px 0}
+  .tm-nav{display:flex;gap:10px;margin-top:18px}
+  .tm-back{flex:1;padding:11px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--text);font-family:inherit}
+  .tm-next{flex:2;padding:11px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;border:none;background:var(--accent);color:#fff;font-family:inherit}
+  .tm-next:disabled{opacity:.5;cursor:default}
+  .dark .tm-modal{background:#1e293b;color:#e2e8f0}
+  .dark .tm-input,.dark .cpick-input{background:#0f172a;border-color:#334155;color:#e2e8f0}
+  .dark .tm-member,.dark .cpick-dd{background:#0f172a;border-color:#334155}
   </style>
 <script>try{if(localStorage.getItem('su_dark')==='1'||(localStorage.getItem('su_dark')===null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')}catch(e){}</script>
 </head>
@@ -614,27 +652,67 @@
     <h1 style="font-size:32px;font-weight:800">Simple pricing</h1>
     <p style="color:var(--muted);margin-top:8px">Past papers are always free. Pro unlocks everything else.</p>
   </div>
-  <div class="pricing-grid">
-    <div class="pricing-card">
-      <h3>Free</h3>
-      <div class="price">€0<span>/mo</span></div>
-      <ul>
-        <li>All past exam papers</li>
-        <li>Every module across 100+ courses</li>
-        <li>No account required</li>
-      </ul>
-      <button class="pricing-cta">Get started</button>
+  <div class="ptab-row">
+    <button class="ptab active" id="ptabInd" onclick="switchPricingTab('ind')">Individual</button>
+    <button class="ptab" id="ptabTeam" onclick="switchPricingTab('team')">Team</button>
+  </div>
+
+  <div id="pricingInd">
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Free</h3>
+        <div class="price">€0<span>/mo</span></div>
+        <ul>
+          <li>All past exam papers</li>
+          <li>Every module across 100+ courses</li>
+          <li>No account required</li>
+        </ul>
+        <button class="pricing-cta">Get started</button>
+      </div>
+      <div class="pricing-card featured">
+        <h3>Pro</h3>
+        <div class="price">€7.99<span>/mo</span></div>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Worked solutions &amp; marking schemes</li>
+          <li>MCQ practice quizzes</li>
+          <li>StudyAI — flashcards &amp; MCQs from your notes</li>
+          <li>Access to <strong>1 course</strong> of your choice</li>
+        </ul>
+        <button class="pricing-cta" id="pricingProBtn" onclick="openProModal()">Get Pro &mdash; &euro;7.99/mo</button>
+      </div>
     </div>
-    <div class="pricing-card featured">
-      <h3>Pro</h3>
-      <div class="price">€7.99<span>/mo</span></div>
-      <ul>
-        <li>Everything in Free</li>
-        <li>Worked solutions & marking schemes</li>
-        <li>MCQ practice quizzes</li>
-        <li>StudyAI — flashcards &amp; MCQs from your notes</li>
-      </ul>
-      <button class="pricing-cta" id="pricingProBtn" onclick="openProModal()">Get Pro &mdash; &euro;7.99/mo</button>
+  </div>
+
+  <div id="pricingTeam" style="display:none">
+    <p style="text-align:center;color:var(--muted);font-size:14px;margin-top:16px">Each member picks their own course. One shared password for the whole group.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="team-badge">👥 Duo</div>
+        <h3>2 People</h3>
+        <div class="price">€80<span>/yr</span></div>
+        <div class="team-saving">€40 per person &mdash; save vs annual</div>
+        <ul>
+          <li>2 Pro accounts included</li>
+          <li>Each member picks their own course</li>
+          <li>Marking schemes &amp; practice quizzes</li>
+          <li>StudyAI for both members</li>
+        </ul>
+        <button class="pricing-cta" onclick="openTeamModal('duo')">Buy Duo Plan</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="team-badge">👥 Team of 5</div>
+        <h3>5 People</h3>
+        <div class="price">€225<span>/yr</span></div>
+        <div class="team-saving">€45 per person &mdash; save vs annual</div>
+        <ul>
+          <li>5 Pro accounts included</li>
+          <li>Each member picks their own course</li>
+          <li>Marking schemes &amp; practice quizzes</li>
+          <li>StudyAI for all 5 members</li>
+        </ul>
+        <button class="pricing-cta" onclick="openTeamModal('team5')">Buy Team Plan</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1855,8 +1933,81 @@
     }
   }
 
+  // ── PRICING TABS ───────────────────────────────────────────────────────────
+  function switchPricingTab(tab) {
+    document.getElementById('pricingInd').style.display  = tab === 'ind'  ? '' : 'none';
+    document.getElementById('pricingTeam').style.display = tab === 'team' ? '' : 'none';
+    document.getElementById('ptabInd').classList.toggle('active',  tab === 'ind');
+    document.getElementById('ptabTeam').classList.toggle('active', tab === 'team');
+  }
+
+  // ── COURSE PICKER (individual) ─────────────────────────────────────────────
+  var _selectedCourse = null;
+  var _allCourses = [];
+
+  function _cpickLoadCourses() {
+    if (_allCourses.length) return;
+    if (typeof SCHOOLS !== 'undefined') {
+      SCHOOLS.forEach(function(s) {
+        (s.courses || []).forEach(function(c) {
+          if (!c.hidden) _allCourses.push({ id: c.id, name: c.name });
+        });
+      });
+    }
+  }
+
+  function _cpickRenderDd(q) {
+    var dd = document.getElementById('cpickDd');
+    if (!dd) return;
+    var matches = q ? _allCourses.filter(function(c) {
+      return c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q);
+    }) : _allCourses;
+    dd.innerHTML = matches.slice(0, 80).map(function(c) {
+      var sel = _selectedCourse && _selectedCourse.id === c.id;
+      var eid = c.id.replace(/'/g,"\\'"), en = c.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+      return '<div class="cpick-opt' + (sel?' sel':'') + '" onmousedown="_cpickSelect(\'' + eid + '\',\'' + en + '\')">' + c.name + '</div>';
+    }).join('') || '<div class="cpick-opt" style="color:var(--muted);cursor:default">No courses found</div>';
+  }
+
+  function _cpickOpen() {
+    _cpickLoadCourses();
+    _cpickRenderDd(document.getElementById('cpickInput').value.trim().toLowerCase());
+    document.getElementById('cpickDd').classList.add('open');
+  }
+
+  function _cpickFilter() {
+    _cpickLoadCourses();
+    _cpickRenderDd(document.getElementById('cpickInput').value.trim().toLowerCase());
+    document.getElementById('cpickDd').classList.add('open');
+  }
+
+  function _cpickBlur() {
+    setTimeout(function() {
+      var dd = document.getElementById('cpickDd');
+      if (dd) dd.classList.remove('open');
+    }, 180);
+  }
+
+  function _cpickSelect(id, name) {
+    _selectedCourse = { id: id, name: name };
+    document.getElementById('cpickInput').value = name;
+    document.getElementById('cpickDd').classList.remove('open');
+    var ch = document.getElementById('cpickChosen');
+    ch.textContent = '✓ ' + name;
+    ch.style.display = 'block';
+  }
+
   // ── PRO MODAL ──────────────────────────────────────────────────────────────
   function openProModal() {
+    _selectedCourse = null;
+    var inp = document.getElementById('cpickInput');
+    var ch = document.getElementById('cpickChosen');
+    var dd = document.getElementById('cpickDd');
+    if (inp) inp.value = '';
+    if (ch)  { ch.textContent = ''; ch.style.display = 'none'; }
+    if (dd)  dd.classList.remove('open');
+    _cpickLoadCourses();
+    _cpickRenderDd('');
     document.getElementById('proOverlay').classList.add('active');
     document.getElementById('proModal').classList.add('active');
   }
@@ -1864,6 +2015,140 @@
   function closeProModal() {
     document.getElementById('proOverlay').classList.remove('active');
     document.getElementById('proModal').classList.remove('active');
+  }
+
+  // ── TEAM MODAL ─────────────────────────────────────────────────────────────
+  var _teamPlan = 'duo';
+  var _teamCount = 2;
+  var _tmCourses = [];
+
+  function openTeamModal(plan) {
+    _teamPlan = plan;
+    _teamCount = plan === 'duo' ? 2 : 5;
+    _tmCourses = new Array(_teamCount).fill(null);
+    _cpickLoadCourses();
+
+    document.getElementById('tmHeading').textContent =
+      plan === 'duo' ? 'Set up your Duo Plan' : 'Set up your Team of 5 Plan';
+
+    var ef = document.getElementById('tmEmailFields');
+    ef.innerHTML = Array.from({length: _teamCount}, function(_, i) {
+      return '<div class="tm-field"><label>Member ' + (i+1) + ' Email</label>' +
+             '<input class="tm-input" id="tmEmail' + i + '" type="email" placeholder="member' + (i+1) + '@example.com"></div>';
+    }).join('');
+
+    document.getElementById('tmPassword').value = '';
+    document.getElementById('tmPasswordConfirm').value = '';
+    _tmGoStep(1);
+    document.getElementById('tmOverlay').classList.add('active');
+    document.getElementById('tmModal').classList.add('active');
+  }
+
+  function closeTeamModal() {
+    document.getElementById('tmOverlay').classList.remove('active');
+    document.getElementById('tmModal').classList.remove('active');
+  }
+
+  function _tmGoStep(n) {
+    document.querySelectorAll('.tm-step').forEach(function(el, i) {
+      el.classList.toggle('active', i + 1 === n);
+    });
+  }
+
+  function _tmStep1Next() {
+    var emails = [];
+    for (var i = 0; i < _teamCount; i++) {
+      var val = document.getElementById('tmEmail' + i).value.trim();
+      if (!val || !val.includes('@')) { showToast('Enter a valid email for member ' + (i+1)); return; }
+      emails.push(val.toLowerCase());
+    }
+    if (new Set(emails).size !== emails.length) { showToast('All email addresses must be unique'); return; }
+    var pw = document.getElementById('tmPassword').value;
+    var pw2 = document.getElementById('tmPasswordConfirm').value;
+    if (!pw || pw.length < 6) { showToast('Password must be at least 6 characters'); return; }
+    if (pw !== pw2) { showToast('Passwords do not match'); return; }
+
+    var cf = document.getElementById('tmCourseFields');
+    cf.innerHTML = Array.from({length: _teamCount}, function(_, i) {
+      var email = document.getElementById('tmEmail' + i).value.trim();
+      return '<div class="tm-member">' +
+        '<div class="tm-member-label">Member ' + (i+1) + ' &mdash; ' + email + '</div>' +
+        '<div class="cpick" id="tmCp' + i + '">' +
+          '<span class="cpick-label">Choose a course</span>' +
+          '<input class="cpick-input" id="tmCpI' + i + '" type="text" placeholder="Search for your course…" autocomplete="off"' +
+            ' onclick="_tmCpOpen(' + i + ')" oninput="_tmCpFilter(' + i + ')" onblur="_tmCpBlur(' + i + ')">' +
+          '<div class="cpick-dd" id="tmCpD' + i + '"></div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    for (var j = 0; j < _teamCount; j++) _tmCpRender(j, '');
+    _tmGoStep(2);
+  }
+
+  function _tmCpRender(i, q) {
+    var dd = document.getElementById('tmCpD' + i);
+    if (!dd) return;
+    var matches = q ? _allCourses.filter(function(c) {
+      return c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q);
+    }) : _allCourses;
+    dd.innerHTML = matches.slice(0, 80).map(function(c) {
+      var sel = _tmCourses[i] && _tmCourses[i].id === c.id;
+      var eid = c.id.replace(/'/g,"\\'"), en = c.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+      return '<div class="cpick-opt' + (sel?' sel':'') + '" onmousedown="_tmCpSel(' + i + ',\'' + eid + '\',\'' + en + '\')">' + c.name + '</div>';
+    }).join('') || '<div class="cpick-opt" style="color:var(--muted);cursor:default">No courses found</div>';
+  }
+
+  function _tmCpOpen(i) {
+    _tmCpRender(i, document.getElementById('tmCpI' + i).value.trim().toLowerCase());
+    document.getElementById('tmCpD' + i).classList.add('open');
+  }
+  function _tmCpFilter(i) {
+    _tmCpRender(i, document.getElementById('tmCpI' + i).value.trim().toLowerCase());
+    document.getElementById('tmCpD' + i).classList.add('open');
+  }
+  function _tmCpBlur(i) {
+    setTimeout(function() {
+      var dd = document.getElementById('tmCpD' + i);
+      if (dd) dd.classList.remove('open');
+    }, 180);
+  }
+  function _tmCpSel(i, id, name) {
+    _tmCourses[i] = { id: id, name: name };
+    document.getElementById('tmCpI' + i).value = name;
+    document.getElementById('tmCpD' + i).classList.remove('open');
+  }
+
+  async function startTeamCheckout() {
+    for (var i = 0; i < _teamCount; i++) {
+      if (!_tmCourses[i]) { showToast('Please select a course for member ' + (i+1)); return; }
+    }
+    var cfg = window.SU_CONFIG;
+    if (!cfg || cfg.SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+      showToast('Payments not yet configured — coming soon!');
+      return;
+    }
+    var btn = document.getElementById('tmPayBtn');
+    btn.disabled = true;
+    btn.textContent = 'Redirecting…';
+    try {
+      var members = Array.from({length: _teamCount}, function(_, i) {
+        return { email: document.getElementById('tmEmail' + i).value.trim(), course: _tmCourses[i] };
+      });
+      var password = document.getElementById('tmPassword').value;
+      var res = await fetch('/api/team-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: _teamPlan, members: members, password: password }),
+      });
+      var data = await res.json();
+      if (data.url) { window.location.href = data.url; }
+      else throw new Error(data.error || 'Could not create checkout session');
+    } catch(e) {
+      showToast('Error: ' + e.message);
+      btn.disabled = false;
+      btn.textContent = 'Proceed to Payment';
+    }
   }
 
   // ── PLAN SELECTION ─────────────────────────────────────────────────────────
@@ -1886,6 +2171,11 @@
 
   async function startCheckout() {
     if (!_currentUser) { closeProModal(); openAuthModal(); return; }
+    if (!_selectedCourse) {
+      showToast('Please choose your course before subscribing');
+      document.getElementById('cpickInput').focus();
+      return;
+    }
     const cfg = window.SU_CONFIG;
     if (!cfg || cfg.SUPABASE_URL === 'YOUR_SUPABASE_URL') {
       showToast('Payments not yet configured — coming soon!');
@@ -1902,7 +2192,7 @@
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: _currentUser.id, email: _currentUser.email, priceId }),
+        body: JSON.stringify({ userId: _currentUser.id, email: _currentUser.email, priceId, courseId: _selectedCourse.id }),
       });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; }
@@ -3070,6 +3360,44 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
   <div id="notifMsg" style="margin-top:10px;font-size:13px;text-align:center;color:#16a34a;min-height:18px"></div>
 </div>
 
+<!-- TEAM MODAL -->
+<div class="tm-overlay" id="tmOverlay" onclick="if(event.target===this)closeTeamModal()"></div>
+<div class="tm-modal" id="tmModal" role="dialog" aria-modal="true">
+  <button class="pro-close" onclick="closeTeamModal()">&#x2715;</button>
+
+  <!-- Step 1: Emails + shared password -->
+  <div class="tm-step active" id="tmStep1">
+    <div class="tm-heading" id="tmHeading">Set up your Duo Plan</div>
+    <div class="tm-sub">Enter the email addresses and a shared password for all members.</div>
+    <div id="tmEmailFields"></div>
+    <hr class="tm-divider">
+    <div class="tm-field">
+      <label>Shared Password</label>
+      <input class="tm-input" id="tmPassword" type="password" placeholder="At least 6 characters">
+    </div>
+    <div class="tm-field">
+      <label>Confirm Password</label>
+      <input class="tm-input" id="tmPasswordConfirm" type="password" placeholder="Confirm password">
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:4px">All members sign in with their own email and this shared password.</p>
+    <div class="tm-nav">
+      <button class="tm-back" onclick="closeTeamModal()">Cancel</button>
+      <button class="tm-next" onclick="_tmStep1Next()">Choose Courses &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Course selection per member -->
+  <div class="tm-step" id="tmStep2">
+    <div class="tm-heading">Choose your courses</div>
+    <div class="tm-sub">Each member selects the course they want Pro access to.</div>
+    <div id="tmCourseFields"></div>
+    <div class="tm-nav">
+      <button class="tm-back" onclick="_tmGoStep(1)">&larr; Back</button>
+      <button class="tm-next" id="tmPayBtn" onclick="startTeamCheckout()">Proceed to Payment</button>
+    </div>
+  </div>
+</div>
+
 <!-- PRO OVERLAY + MODAL -->
 <div class="pro-overlay" id="proOverlay" onclick="if(event.target===this)closeProModal()"></div>
 <div class="pro-modal" id="proModal" role="dialog" aria-modal="true" style="position:fixed">
@@ -3123,12 +3451,20 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
     </div>
   </div>
 
+  <!-- Course picker -->
+  <div class="cpick" id="proCoursePick">
+    <span class="cpick-label">Choose your course</span>
+    <input class="cpick-input" id="cpickInput" type="text" placeholder="Search for your course&hellip;" autocomplete="off" onclick="_cpickOpen()" oninput="_cpickFilter()" onblur="_cpickBlur()">
+    <div class="cpick-dd" id="cpickDd"></div>
+    <div class="cpick-chosen" id="cpickChosen"></div>
+  </div>
+
   <ul class="pro-features">
     <li>All past exam papers (always free)</li>
     <li>Worked solutions &amp; marking schemes</li>
     <li>MCQ practice quizzes with explanations</li>
     <li>StudyAI &mdash; flashcards &amp; MCQs from your notes</li>
-    <li>New content added every semester</li>
+    <li>Access to <strong>1 course</strong> of your choice</li>
   </ul>
   <button class="pro-cta" id="proCheckoutBtn" onclick="startCheckout()">Subscribe now &mdash; &euro;7.99/mo</button>
   <div style="text-align:center;margin-top:10px;font-size:11px;color:#94a3b8">Secured by Stripe &middot; UCC students only</div>

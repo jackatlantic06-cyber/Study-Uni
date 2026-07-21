@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { userId, email, priceId } = req.body || {};
+    const { userId, email, priceId, courseId } = req.body || {};
     if (!userId || !email) return res.status(400).json({ error: 'Missing userId or email' });
 
     const allowed = ALLOWED_PRICES();
@@ -55,6 +55,7 @@ module.exports = async (req, res) => {
       payment_method_types: ['card'],
       line_items: [{ price: selectedPrice, quantity: 1 }],
       mode: 'subscription',
+      metadata: { course_id: courseId || '' },
       success_url: `${origin}/api/activate-subscription?session_id={CHECKOUT_SESSION_ID}&user_id=${userId}`,
       cancel_url: `${origin}/?sub=cancel`,
     });
