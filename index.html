@@ -131,8 +131,10 @@
       .module-table td:nth-child(2){display:inline;padding-left:0;font-weight:600}
       .module-table td:nth-child(3){display:none}
       .module-table td:nth-child(4){padding-top:8px}
+      .module-table td:nth-child(5){padding-top:6px}
       .paper-row{flex-wrap:wrap;gap:5px;align-items:center}
       .btn-model-answer,.btn-quiz{font-size:10px;padding:3px 8px}
+      .pred-panel{right:auto;left:0;min-width:240px}
     }
     /* MODEL ANSWER & QUIZ BUTTONS */
     .btn-model-answer,.btn-quiz{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid;background:transparent;white-space:nowrap;transition:all .15s;font-family:inherit}
@@ -140,6 +142,19 @@
     .btn-model-answer:hover{background:#eff6ff}
     .btn-quiz{color:#16a34a;border-color:#16a34a}
     .btn-quiz:hover{background:#f0fdf4}
+    /* PREDICTIONS */
+    .btn-predict{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid #7c3aed;color:#7c3aed;background:transparent;white-space:nowrap;transition:all .15s;font-family:inherit}
+    .btn-predict:hover,.btn-predict.open{background:#f5f3ff}
+    .pred-wrap{position:relative;display:inline-block}
+    .pred-panel{position:absolute;top:calc(100% + 6px);right:0;min-width:260px;max-width:320px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.14);z-index:200;padding:16px;display:none}
+    .pred-panel.open{display:block}
+    .pred-loading{font-size:13px;color:var(--muted);text-align:center;padding:8px 0}
+    .pred-hdr{font-size:12px;font-weight:800;margin-bottom:10px;color:var(--text)}
+    .pred-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 5px;padding-top:10px;border-top:1px solid var(--border)}
+    .pred-cat:first-of-type{margin-top:0;padding-top:0;border-top:none}
+    .pred-topic{font-size:13px;padding:3px 0;display:flex;align-items:flex-start;gap:7px;line-height:1.4;color:var(--text)}
+    .pred-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+    .pred-note{font-size:11px;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px solid var(--border);line-height:1.5}
     /* QUIZ MODAL */
     .quiz-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .2s}
     .quiz-overlay.active{opacity:1;pointer-events:all}
@@ -287,6 +302,8 @@
   .dark .paper-chip.viewed{background:rgba(22,163,74,.2);color:#86efac;border-color:#166534}
   .dark .btn-model-answer{color:#93c5fd;border-color:#3b82f6}.dark .btn-model-answer:hover{background:rgba(96,165,250,.15)}
   .dark .btn-quiz{color:#86efac;border-color:#16a34a}.dark .btn-quiz:hover{background:rgba(134,239,172,.15)}
+  .dark .btn-predict{color:#c4b5fd;border-color:#7c3aed}.dark .btn-predict:hover,.dark .btn-predict.open{background:rgba(124,58,237,.15)}
+  .dark .pred-panel{background:#1e293b;border-color:#334155}
   .dark .toggle-slider{background:#334155}
   .dark .year-note{background:#1c1917;border-color:#92400e;color:#fcd34d}
   .dark .pathway-card,.dark .deg-card,.dark .cat-card,.dark .course-btn{background:#1e293b;border-color:#334155}
@@ -1214,15 +1231,18 @@
       }
       const notifyBtn = `<button class="notify-btn${NOTIFIED[m.code]?' notified':''}" data-code="${esc(m.code)}" onclick="openNotifModal('${esc(m.code)}','${esc(m.name)}')" title="Notify me when new content is added">🔔</button>`;
       const paperCell = `<div class="papers-cell">${paperRows}</div>`;
+      _modData[m.code] = { name: m.name, years: regularPapers.map(f => typeof f === 'object' ? f.label : labelFromFilename(f)) };
+      const predictCell = `<div class="pred-wrap"><button class="btn-predict" onclick="togglePredict('${esc(m.code)}',this)">📊 Predict</button><div class="pred-panel"></div></div>`;
       return `<tr class="${isEmpty ? 'row-empty' : ''}">
         <td><span class="mod-code">${m.code}</span>${notifyBtn}</td>
         <td>${m.name}</td>
         <td style="text-align:center;color:var(--muted)">${m.credits || ''}</td>
         <td>${paperCell}</td>
+        <td>${predictCell}</td>
       </tr>`;
     }).join('');
     return `<table class="module-table">
-      <thead><tr><th>Code</th><th>Module</th><th>Credits</th><th>Papers</th></tr></thead>
+      <thead><tr><th>Code</th><th>Module</th><th>Credits</th><th>Papers</th><th>Predictions</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
   }
@@ -2530,6 +2550,10 @@
       var dd = document.getElementById('snDropdown');
       var row = document.getElementById('snRow');
       if (dd && row && !row.contains(e.target)) dd.classList.remove('open');
+      if (!e.target.closest('.pred-wrap')) {
+        document.querySelectorAll('.pred-panel.open').forEach(function(p) { p.classList.remove('open'); });
+        document.querySelectorAll('.btn-predict.open').forEach(function(b) { b.classList.remove('open'); });
+      }
     });
 
     // ── Deep link handler ──────────────────────────────────────────────────
@@ -2600,6 +2624,59 @@
 
     _tick();
     setInterval(_tick, 1000);
+  }
+
+  // ─── PREDICTIONS ─────────────────────────────────────────────────────────
+  var _predCache = {};
+  var _modData = {};
+
+  function togglePredict(code, btn) {
+    var wrap = btn.closest('.pred-wrap');
+    var panel = wrap.querySelector('.pred-panel');
+    var isOpen = panel.classList.contains('open');
+    document.querySelectorAll('.pred-panel.open').forEach(function(p) { p.classList.remove('open'); });
+    document.querySelectorAll('.btn-predict.open').forEach(function(b) { b.classList.remove('open'); });
+    if (isOpen) return;
+    btn.classList.add('open');
+    panel.classList.add('open');
+    if (_predCache[code]) { _renderPred(panel, _predCache[code]); return; }
+    requirePro(async function() {
+      panel.innerHTML = '<div class="pred-loading">⏳ Analysing past papers…</div>';
+      try {
+        const { data: { session } } = await _sbClient.auth.getSession();
+        if (!session) throw new Error('Not signed in');
+        const mod = _modData[code] || {};
+        const resp = await fetch('/api/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ moduleCode: code, moduleName: mod.name || code, years: mod.years || [], accessToken: session.access_token })
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.error || 'Prediction failed');
+        _predCache[code] = data;
+        _renderPred(panel, data);
+      } catch(e) {
+        panel.innerHTML = '<div class="pred-loading">⚠️ ' + e.message + '</div>';
+      }
+    });
+  }
+
+  function _renderPred(panel, data) {
+    var html = '<div class="pred-hdr">📊 Predicted Topics</div>';
+    var cats = [
+      { key: 'certain',   label: 'Almost Certain', color: '#16a34a' },
+      { key: 'likely',    label: 'Very Likely',     color: '#d97706' },
+      { key: 'watchlist', label: 'Worth Revising',  color: '#7c3aed' },
+    ];
+    cats.forEach(function(c) {
+      if (!data[c.key] || !data[c.key].length) return;
+      html += '<div class="pred-cat" style="color:' + c.color + '">' + c.label + '</div>';
+      data[c.key].forEach(function(t) {
+        html += '<div class="pred-topic"><span class="pred-dot" style="background:' + c.color + '"></span>' + t + '</div>';
+      });
+    });
+    html += '<div class="pred-note">⚠️ AI predictions only — always study the full syllabus</div>';
+    panel.innerHTML = html;
   }
 
   // ─── SAVED NOTES ─────────────────────────────────────────────────────────
