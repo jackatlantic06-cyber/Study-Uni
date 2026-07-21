@@ -445,6 +445,36 @@
     .admin-grid{grid-template-columns:repeat(2,1fr)}
     .fc-grid{grid-template-columns:1fr}
   }
+  /* EXAM COUNTDOWN */
+  .exam-cd{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;border-radius:14px;padding:14px 22px;max-width:780px;margin:0 auto 20px;flex-wrap:wrap}
+  .exam-cd-left{display:flex;flex-direction:column;min-width:70px}
+  .exam-cd-days{font-size:34px;font-weight:800;line-height:1}
+  .exam-cd-period{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.75;margin-top:2px}
+  .exam-cd-divider{width:1px;height:44px;background:rgba(255,255,255,.25);flex-shrink:0}
+  .exam-cd-right strong{font-size:15px;font-weight:700;display:block;margin-bottom:3px}
+  .exam-cd-right{font-size:13px;line-height:1.5;opacity:.9}
+
+  /* SAVED NOTES */
+  .saved-notes-row{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;position:relative}
+  .sn-btn{padding:6px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--muted);font-family:inherit;transition:all .15s}
+  .sn-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .sn-dropdown{position:absolute;top:calc(100% + 4px);left:0;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:60;min-width:260px;display:none;overflow:hidden}
+  .sn-dropdown.open{display:block}
+  .sn-empty{padding:12px 14px;font-size:13px;color:var(--muted);text-align:center}
+  .sn-item{display:flex;align-items:center;padding:9px 14px;gap:8px;border-top:1px solid var(--border)}
+  .sn-item:first-child{border-top:none}
+  .sn-item:hover{background:var(--accent-light)}
+  .sn-item-title{flex:1;font-size:13px;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+  .sn-item-del{font-size:12px;color:var(--muted);padding:2px 7px;border-radius:5px;flex-shrink:0;cursor:pointer;transition:all .15s}
+  .sn-item-del:hover{background:#fee2e2;color:#dc2626}
+
+  /* MCQ SCORE BAR */
+  .mcq-score-bar{display:flex;align-items:center;gap:16px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:12px 18px;margin-bottom:14px}
+  .mcq-score-num{font-size:24px;font-weight:800;color:var(--accent);white-space:nowrap}
+  .mcq-score-label{font-size:13px;font-weight:600;color:var(--text)}
+  .mcq-score-sub{font-size:11px;color:var(--muted);margin-top:1px}
+  .mcq-score-pct{margin-left:auto;font-size:18px;font-weight:800}
+
   /* COOKIE BANNER */
   #cookieBanner{position:fixed;bottom:0;left:0;right:0;background:#0f172a;color:#f1f5f9;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;z-index:9999;font-size:13px;line-height:1.5}
   #cookieBanner p{flex:1;min-width:200px;margin:0}
@@ -515,6 +545,7 @@
       <button onclick="handleSearch(document.getElementById('heroSearch').value)">Search</button>
     </div>
     <div id="streakBar" style="display:none;text-align:center;margin-top:16px"></div>
+    <div id="examCountdown" style="display:none;margin-top:16px"></div>
   </div>
   <div class="search-results" id="searchResults"></div>
   <div id="myModulesSection" class="my-modules-section" style="display:none">
@@ -617,6 +648,11 @@
           <div class="ai-drop-label" id="aiDropLabel">Drop a file here, or click to browse</div>
           <div class="ai-drop-sub">Supports .pdf, .txt and .md files</div>
         </div>
+        <div class="saved-notes-row" id="snRow">
+          <button class="sn-btn" onclick="snSave()">💾 Save Note</button>
+          <button class="sn-btn" onclick="snToggle(event)">📂 My Notes <span id="snCount"></span></button>
+          <div class="sn-dropdown" id="snDropdown"></div>
+        </div>
         <div class="ai-row">
           <span class="ai-hint" id="aiCharCount">0 characters</span>
           <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
@@ -654,6 +690,14 @@
         <div class="ai-results-hdr" style="margin-top:24px">
           <div class="ai-section-lbl">❓ MCQ Practice Questions</div>
           <button class="ai-regen-btn" onclick="aiGenerate('mcqs')">↺ Regenerate</button>
+        </div>
+        <div class="mcq-score-bar" id="mcqScoreBar" style="display:none">
+          <div>
+            <div class="mcq-score-num"><span id="mcqScoreNum">0</span>/<span id="mcqScoreTotal">0</span></div>
+            <div class="mcq-score-sub">correct so far</div>
+          </div>
+          <div style="flex:1"></div>
+          <div class="mcq-score-pct" id="mcqScorePct"></div>
         </div>
         <div class="ai-mcq-list" id="aiMCQList"></div>
       </div>
@@ -2243,6 +2287,8 @@
   let _aiDropContent = '';
   let _aiDropPdfBase64 = '';
   let _aiMode = 'flashcards';
+  let _mcqScore = 0;
+  let _mcqTotal = 0;
 
   function aiSwitchTab(tab) {
     _aiTab = tab;
@@ -2349,6 +2395,11 @@
   function _aiRender(data, mode) {
     document.getElementById('aiFCSection').style.display  = mode === 'mcqs'       ? 'none' : 'block';
     document.getElementById('aiMCQSection').style.display = mode === 'flashcards' ? 'none' : 'block';
+    if (mode === 'mcqs') {
+      _mcqScore = 0; _mcqTotal = 0;
+      var bar = document.getElementById('mcqScoreBar');
+      if (bar) bar.style.display = 'none';
+    }
     document.getElementById('aiFCGrid').innerHTML = (data.flashcards || []).map((fc, i) =>
       `<div class="fc" id="afc${i}" onclick="this.classList.toggle('flipped')">
         <div class="fc-inner">
@@ -2377,6 +2428,18 @@
       if (i === correct) btn.classList.add('correct');
       else if (i === chosen) btn.classList.add('wrong');
     });
+    _mcqTotal++;
+    if (chosen === correct) _mcqScore++;
+    var bar = document.getElementById('mcqScoreBar');
+    if (bar) {
+      bar.style.display = 'flex';
+      document.getElementById('mcqScoreNum').textContent = _mcqScore;
+      document.getElementById('mcqScoreTotal').textContent = _mcqTotal;
+      var pct = Math.round((_mcqScore / _mcqTotal) * 100);
+      var pctEl = document.getElementById('mcqScorePct');
+      pctEl.textContent = pct + '%';
+      pctEl.style.color = pct >= 70 ? '#16a34a' : pct >= 50 ? '#d97706' : '#dc2626';
+    }
     const exp = document.getElementById('aiexp' + qi);
     if (exp) exp.classList.add('show');
   }
@@ -2459,6 +2522,14 @@
     buildDegBuckets();
     initAuth();
     initCookieConsent();
+    initExamCountdown();
+    _snRefresh();
+
+    document.addEventListener('click', function(e) {
+      var dd = document.getElementById('snDropdown');
+      var row = document.getElementById('snRow');
+      if (dd && row && !row.contains(e.target)) dd.classList.remove('open');
+    });
 
     // ── Deep link handler ──────────────────────────────────────────────────
     function loadFromHash(hash) {
@@ -2492,6 +2563,91 @@
       loadFromHash(window.location.hash);
     });
   });
+
+  // ─── EXAM COUNTDOWN ──────────────────────────────────────────────────────
+  function initExamCountdown() {
+    var periods = [
+      { name: 'Autumn Exams (Christmas)', start: new Date('2026-11-23'), end: new Date('2026-12-12') },
+      { name: 'Summer Exams',             start: new Date('2027-05-04'), end: new Date('2027-05-23') },
+      { name: 'Autumn Supplemental',      start: new Date('2027-08-09'), end: new Date('2027-08-27') },
+      { name: 'Autumn Exams (Christmas)', start: new Date('2027-11-22'), end: new Date('2027-12-11') },
+    ];
+    var now = new Date();
+    var target = null, label = '', inProgress = false;
+    for (var i = 0; i < periods.length; i++) {
+      var p = periods[i];
+      if (now >= p.start && now <= p.end) { target = p.end; label = p.name; inProgress = true; break; }
+      if (now < p.start) { target = p.start; label = p.name; break; }
+    }
+    if (!target) return;
+    var days = Math.ceil((target - now) / 864e5);
+    var cd = document.getElementById('examCountdown');
+    if (!cd) return;
+    var dateStr = target.toLocaleDateString('en-IE', { day: 'numeric', month: 'long', year: 'numeric' });
+    cd.innerHTML = '<div class="exam-cd">'
+      + '<div class="exam-cd-left"><span class="exam-cd-days">' + days + '</span><span class="exam-cd-period">days to go</span></div>'
+      + '<div class="exam-cd-divider"></div>'
+      + '<div class="exam-cd-right"><strong>' + label + '</strong>' + (inProgress ? 'Ends ' : 'Starts ') + dateStr + '</div>'
+      + '</div>';
+    cd.style.display = 'block';
+  }
+
+  // ─── SAVED NOTES ─────────────────────────────────────────────────────────
+  function _snKey() { return 'sn_' + (_currentUser ? _currentUser.id : 'guest'); }
+  function _snLoad() { try { return JSON.parse(localStorage.getItem(_snKey()) || '[]'); } catch(e) { return []; } }
+  function _snSave(notes) { localStorage.setItem(_snKey(), JSON.stringify(notes)); }
+
+  function snSave() {
+    var text = (document.getElementById('aiNoteText').value || '').trim();
+    if (!text) { showToast('No notes to save — type or paste something first.'); return; }
+    var title = prompt('Save note as:', 'My Notes ' + new Date().toLocaleDateString('en-IE'));
+    if (!title) return;
+    var notes = _snLoad();
+    notes.unshift({ id: Date.now(), title: title, content: text, saved: new Date().toISOString() });
+    _snSave(notes);
+    _snRefresh();
+    showToast('Note saved!');
+  }
+
+  function snToggle(e) {
+    e.stopPropagation();
+    var dd = document.getElementById('snDropdown');
+    if (!dd) return;
+    if (dd.classList.contains('open')) { dd.classList.remove('open'); return; }
+    _snRefresh();
+    dd.classList.add('open');
+  }
+
+  function _snRefresh() {
+    var dd = document.getElementById('snDropdown');
+    var countEl = document.getElementById('snCount');
+    if (!dd) return;
+    var notes = _snLoad();
+    if (countEl) countEl.textContent = notes.length ? '(' + notes.length + ')' : '';
+    if (!notes.length) { dd.innerHTML = '<div class="sn-empty">No saved notes yet</div>'; return; }
+    dd.innerHTML = notes.map(function(n) {
+      return '<div class="sn-item">'
+        + '<span class="sn-item-title" onclick="snLoad(' + n.id + ')">' + n.title + '</span>'
+        + '<span class="sn-item-del" onclick="snDelete(' + n.id + ')">✕</span>'
+        + '</div>';
+    }).join('');
+  }
+
+  function snLoad(id) {
+    var notes = _snLoad();
+    var n = notes.find(function(x) { return x.id === id; });
+    if (!n) return;
+    document.getElementById('aiNoteText').value = n.content;
+    aiCountChars();
+    document.getElementById('snDropdown').classList.remove('open');
+    showToast('Note loaded!');
+  }
+
+  function snDelete(id) {
+    if (!confirm('Delete this saved note?')) return;
+    _snSave(_snLoad().filter(function(x) { return x.id !== id; }));
+    _snRefresh();
+  }
 
   // ─── COOKIE CONSENT ──────────────────────────────────────────────────────
   function initCookieConsent() {
