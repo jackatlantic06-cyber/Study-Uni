@@ -18,6 +18,8 @@ module.exports = async (req, res) => {
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
 
+    const courseId = session.metadata?.course_id || null;
+
     await sb.from('subscriptions').upsert({
       id: user_id,
       email: session.customer_details?.email,
@@ -29,6 +31,7 @@ module.exports = async (req, res) => {
       current_period_end: sub?.current_period_end
         ? new Date(sub.current_period_end * 1000).toISOString()
         : null,
+      allowed_course: courseId,
     });
 
     res.redirect(302, '/?sub=success');

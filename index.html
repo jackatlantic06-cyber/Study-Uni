@@ -1769,14 +1769,36 @@
     }
   }
 
+  var _allowedCourse = null;
+  var _moduleCourseMap = null;
+
+  function _getModuleCourse(moduleCode) {
+    if (!_moduleCourseMap) {
+      _moduleCourseMap = {};
+      if (typeof SCHOOLS !== 'undefined') {
+        SCHOOLS.forEach(function(school) {
+          (school.courses || []).forEach(function(course) {
+            (course.years || []).forEach(function(year) {
+              (year.modules || []).forEach(function(mod) {
+                _moduleCourseMap[mod.code] = course.id;
+              });
+            });
+          });
+        });
+      }
+    }
+    return _moduleCourseMap[moduleCode] || null;
+  }
+
   async function _refreshSub() {
-    if (!_currentUser || !_sbClient) { _isSubscribed = false; return; }
+    if (!_currentUser || !_sbClient) { _isSubscribed = false; _allowedCourse = null; return; }
     try {
       const { data } = await _sbClient.from('subscriptions')
-        .select('is_active,current_period_end').eq('id', _currentUser.id).maybeSingle();
+        .select('is_active,current_period_end,allowed_course').eq('id', _currentUser.id).maybeSingle();
       _isSubscribed = !!(data && data.is_active &&
         (!data.current_period_end || new Date(data.current_period_end) > new Date()));
-    } catch(e) { _isSubscribed = false; }
+      _allowedCourse = data?.allowed_course || null;
+    } catch(e) { _isSubscribed = false; _allowedCourse = null; }
   }
 
   function requirePro(fn, actionKey) {
@@ -1788,7 +1810,24 @@
     if (_currentUser && (owners.includes(_currentUser.email) || proUsers.includes(_currentUser.email))) { _pendingAction = null; fn(); return; }
     // Supabase not configured yet — paywall is inactive, let everyone through
     if (!_sbClient) { _pendingAction = null; fn(); return; }
-    if (_currentUser && _isSubscribed) { _pendingAction = null; fn(); return; }
+    if (_currentUser && _isSubscribed) {
+      // Course restriction: if the user has an allowed_course set, they can only
+      // access content belonging to that course
+      if (_allowedCourse && actionKey) {
+        var moduleCode = null;
+        if (actionKey.startsWith('modelAnswer:')) moduleCode = actionKey.slice(12);
+        else if (actionKey.startsWith('quiz:'))     moduleCode = actionKey.split(':')[1];
+        if (moduleCode) {
+          var moduleCourse = _getModuleCourse(moduleCode);
+          if (moduleCourse && moduleCourse !== _allowedCourse) {
+            _pendingAction = null;
+            showToast('Your Pro plan covers a different course — this content is not included.');
+            return;
+          }
+        }
+      }
+      _pendingAction = null; fn(); return;
+    }
     // ── Free trial: 1 quiz + 1 model answer for everyone ─────────────────
     const isQuiz = actionKey && actionKey.startsWith('quiz:');
     const isMS   = actionKey && actionKey.startsWith('modelAnswer:');
