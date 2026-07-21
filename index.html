@@ -1776,14 +1776,20 @@
     if (!_moduleCourseMap) {
       _moduleCourseMap = {};
       if (typeof SCHOOLS !== 'undefined') {
-        SCHOOLS.forEach(function(school) {
-          (school.courses || []).forEach(function(course) {
-            (course.years || []).forEach(function(year) {
-              (year.modules || []).forEach(function(mod) {
-                _moduleCourseMap[mod.code] = course.id;
-              });
+        function indexMods(courseId, mods) {
+          (mods || []).forEach(function(m) { if (m.code) _moduleCourseMap[m.code] = courseId; });
+        }
+        function indexCourse(course) {
+          (course.years || []).forEach(function(year) {
+            indexMods(course.id, year.modules);
+            (year.sections || []).forEach(function(sec) { indexMods(course.id, sec.modules); });
+            (year.outlets || []).forEach(function(outlet) {
+              (outlet.courses || []).forEach(function(oc) { indexCourse(oc); });
             });
           });
+        }
+        SCHOOLS.forEach(function(school) {
+          (school.courses || []).forEach(indexCourse);
         });
       }
     }
