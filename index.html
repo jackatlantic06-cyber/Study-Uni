@@ -446,11 +446,12 @@
     .fc-grid{grid-template-columns:1fr}
   }
   /* EXAM COUNTDOWN */
-  .exam-cd{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;border-radius:14px;padding:14px 22px;max-width:780px;margin:0 auto 20px;flex-wrap:wrap}
-  .exam-cd-left{display:flex;flex-direction:column;min-width:70px}
-  .exam-cd-days{font-size:34px;font-weight:800;line-height:1}
-  .exam-cd-period{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.75;margin-top:2px}
-  .exam-cd-divider{width:1px;height:44px;background:rgba(255,255,255,.25);flex-shrink:0}
+  .exam-cd{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;border-radius:14px;padding:16px 22px;max-width:780px;margin:0 auto 20px;flex-wrap:wrap}
+  .exam-cd-unit{display:flex;flex-direction:column;align-items:center;min-width:52px}
+  .exam-cd-num{font-size:32px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+  .exam-cd-period{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.7;margin-top:3px}
+  .exam-cd-colon{font-size:28px;font-weight:800;opacity:.5;margin-bottom:12px;align-self:flex-end}
+  .exam-cd-divider{width:1px;height:52px;background:rgba(255,255,255,.25);flex-shrink:0;margin:0 6px}
   .exam-cd-right strong{font-size:15px;font-weight:700;display:block;margin-bottom:3px}
   .exam-cd-right{font-size:13px;line-height:1.5;opacity:.9}
 
@@ -2566,30 +2567,39 @@
 
   // ─── EXAM COUNTDOWN ──────────────────────────────────────────────────────
   function initExamCountdown() {
-    var periods = [
-      { name: 'Autumn Exams (Christmas)', start: new Date('2026-11-23'), end: new Date('2026-12-12') },
-      { name: 'Summer Exams',             start: new Date('2027-05-04'), end: new Date('2027-05-23') },
-      { name: 'Autumn Supplemental',      start: new Date('2027-08-09'), end: new Date('2027-08-27') },
-      { name: 'Autumn Exams (Christmas)', start: new Date('2027-11-22'), end: new Date('2027-12-11') },
-    ];
-    var now = new Date();
-    var target = null, label = '', inProgress = false;
-    for (var i = 0; i < periods.length; i++) {
-      var p = periods[i];
-      if (now >= p.start && now <= p.end) { target = p.end; label = p.name; inProgress = true; break; }
-      if (now < p.start) { target = p.start; label = p.name; break; }
-    }
-    if (!target) return;
-    var days = Math.ceil((target - now) / 864e5);
+    var target = new Date('2026-12-08T09:00:00');
     var cd = document.getElementById('examCountdown');
     if (!cd) return;
-    var dateStr = target.toLocaleDateString('en-IE', { day: 'numeric', month: 'long', year: 'numeric' });
-    cd.innerHTML = '<div class="exam-cd">'
-      + '<div class="exam-cd-left"><span class="exam-cd-days">' + days + '</span><span class="exam-cd-period">days to go</span></div>'
-      + '<div class="exam-cd-divider"></div>'
-      + '<div class="exam-cd-right"><strong>' + label + '</strong>' + (inProgress ? 'Ends ' : 'Starts ') + dateStr + '</div>'
-      + '</div>';
-    cd.style.display = 'block';
+
+    function _pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function _tick() {
+      var now = new Date();
+      var diff = target - now;
+      if (diff <= 0) {
+        cd.innerHTML = '<div class="exam-cd"><div class="exam-cd-right"><strong>Christmas Exams — Good luck! 🍀</strong></div></div>';
+        return;
+      }
+      var days    = Math.floor(diff / 864e5);
+      var hours   = Math.floor((diff % 864e5) / 36e5);
+      var minutes = Math.floor((diff % 36e5) / 6e4);
+      var seconds = Math.floor((diff % 6e4) / 1e3);
+      cd.innerHTML = '<div class="exam-cd">'
+        + '<div class="exam-cd-unit"><span class="exam-cd-num">' + days + '</span><span class="exam-cd-period">days</span></div>'
+        + '<span class="exam-cd-colon">:</span>'
+        + '<div class="exam-cd-unit"><span class="exam-cd-num">' + _pad(hours) + '</span><span class="exam-cd-period">hours</span></div>'
+        + '<span class="exam-cd-colon">:</span>'
+        + '<div class="exam-cd-unit"><span class="exam-cd-num">' + _pad(minutes) + '</span><span class="exam-cd-period">mins</span></div>'
+        + '<span class="exam-cd-colon">:</span>'
+        + '<div class="exam-cd-unit"><span class="exam-cd-num">' + _pad(seconds) + '</span><span class="exam-cd-period">secs</span></div>'
+        + '<div class="exam-cd-divider"></div>'
+        + '<div class="exam-cd-right"><strong>Christmas Exams 2026</strong>Starting 8 December at 9:00am</div>'
+        + '</div>';
+      cd.style.display = 'block';
+    }
+
+    _tick();
+    setInterval(_tick, 1000);
   }
 
   // ─── SAVED NOTES ─────────────────────────────────────────────────────────
