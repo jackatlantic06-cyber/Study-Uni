@@ -137,6 +137,20 @@
       { label: "Marking Scheme — Winter 24/25", url: "./marking-schemes/EC4215_Winter2024_Marking_Scheme.pdf" },
       { label: "Marking Scheme — Winter 23/24", url: "./marking-schemes/EC4215_Winter2023_Marking_Scheme.pdf" },
     ],
+    "IS1105": [
+      { label: "Marking Scheme — Winter 25/26 (Section 1)", url: "./marking-schemes/IS1105_Winter2025_Section1_MarkingScheme.pdf" },
+      { label: "Marking Scheme — Winter 24/25 (Section A)", url: "./marking-schemes/IS1105_Winter2024_SectionA_MarkingScheme.pdf" },
+    ],
+    "LW1108": [
+      { label: "Marking Scheme — Winter 24/25 (Section B)", url: "./marking-schemes/LW1108_Winter2024_SectionB_MarkingScheme.pdf" },
+      { label: "Marking Scheme — Winter 23/24 (Section B)", url: "./marking-schemes/LW1108_Winter2023-24_SectionB_MarkingScheme.pdf" },
+      { label: "Marking Scheme — Winter 22/23 (Section B)", url: "./marking-schemes/LW1108_Winter2022-23_SectionB_MarkingScheme.pdf" },
+      { label: "Marking Scheme — Autumn 22/23 (Section B)", url: "./marking-schemes/LW1108_Autumn2022-23_SectionB_MarkingScheme.pdf" },
+    ],
+    "FE1101": [
+      { label: "Marking Scheme — Summer 24/25 (Paper 1)", url: "./marking-schemes/FE1101_Summer2025_Paper1_Full_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 23/24 (Paper 1)", url: "./marking-schemes/FE1101_Summer2024_Paper1_Full_Marking_Scheme.pdf" },
+    ],
   };
 
   // QUIZ BANK — EC1208 only, topic-based structure
