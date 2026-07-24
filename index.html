@@ -1259,8 +1259,8 @@
           const lbl = typeof f === 'object' ? f.label : labelFromFilename(f);
           const safeUrl = url.replace(/'/g,"\'");
           const viewed  = VIEWED[url];
-          const vClass  = viewed ? ' viewed' : '';
-          const vTick   = viewed ? '<span class="viewed-tick">&#10003;</span>' : '';
+          const vClass  = ' viewed';
+          const vTick   = '<span class="viewed-tick">&#10003;</span>';
           const practiced = PRACTICED.has(url);
           const doneBtn = `<button class="done-btn${practiced?' done':''}" onclick="togglePracticed('${safeUrl}',this)">${practiced?'✓ Done':'Mark done'}</button>`;
           return `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${doneBtn}${modelBtn}${quizBtn}</div>`;
