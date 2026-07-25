@@ -149,11 +149,15 @@
     .pred-panel{position:absolute;top:calc(100% + 6px);right:0;min-width:260px;max-width:320px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.14);z-index:200;padding:16px;display:none}
     .pred-panel.open{display:block}
     .pred-loading{font-size:13px;color:var(--muted);text-align:center;padding:8px 0}
-    .pred-hdr{font-size:12px;font-weight:800;margin-bottom:10px;color:var(--text)}
+    .pred-hdr{font-size:12px;font-weight:800;margin-bottom:6px;color:var(--text)}
+    .pred-source{font-size:10px;color:var(--muted);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
     .pred-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin:10px 0 5px;padding-top:10px;border-top:1px solid var(--border)}
     .pred-cat:first-of-type{margin-top:0;padding-top:0;border-top:none}
-    .pred-topic{font-size:13px;padding:3px 0;display:flex;align-items:flex-start;gap:7px;line-height:1.4;color:var(--text)}
+    .pred-topic{padding:4px 0;display:flex;align-items:flex-start;gap:7px;line-height:1.4}
     .pred-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+    .pred-topic-body{display:flex;flex-direction:column;gap:2px}
+    .pred-topic-name{font-size:12px;color:var(--text)}
+    .pred-evidence{font-size:10px;font-weight:600;opacity:.75}
     .pred-note{font-size:11px;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px solid var(--border);line-height:1.5}
     /* QUIZ MODAL */
     .quiz-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .2s}
@@ -2816,6 +2820,10 @@
 
   function _renderPred(panel, data) {
     var html = '<div class="pred-hdr">📊 Predicted Topics</div>';
+    if (data.based_on) {
+      var icon = data.sources > 0 ? '📄' : '💡';
+      html += '<div class="pred-source">' + icon + ' ' + data.based_on + '</div>';
+    }
     var cats = [
       { key: 'certain',   label: 'Almost Certain', color: '#16a34a' },
       { key: 'likely',    label: 'Very Likely',     color: '#d97706' },
@@ -2825,7 +2833,14 @@
       if (!data[c.key] || !data[c.key].length) return;
       html += '<div class="pred-cat" style="color:' + c.color + '">' + c.label + '</div>';
       data[c.key].forEach(function(t) {
-        html += '<div class="pred-topic"><span class="pred-dot" style="background:' + c.color + '"></span>' + t + '</div>';
+        var topic = typeof t === 'string' ? t : (t.topic || t);
+        var note  = typeof t === 'object' ? (t.note || '') : '';
+        html += '<div class="pred-topic">'
+          + '<span class="pred-dot" style="background:' + c.color + '"></span>'
+          + '<div class="pred-topic-body">'
+          + '<span class="pred-topic-name">' + topic + '</span>'
+          + (note ? '<span class="pred-evidence" style="color:' + c.color + '">' + note + '</span>' : '')
+          + '</div></div>';
       });
     });
     html += '<div class="pred-note">⚠️ AI predictions only — always study the full syllabus</div>';
