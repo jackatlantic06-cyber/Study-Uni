@@ -401,6 +401,56 @@
   .ai-mcq-exp.show{display:block}
   .dark .ai-mcq-opt.correct{background:#14532d;border-color:#16a34a;color:#bbf7d0}
   .dark .ai-mcq-opt.wrong{background:#7f1d1d;border-color:#dc2626;color:#fecaca}
+  /* STUDY PAGE */
+  .study-pg{max-width:900px;margin:0 auto;padding:24px 20px}
+  .study-pg-hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+  .study-back-btn{padding:7px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text);background:none;font-family:inherit;transition:all .18s;flex-shrink:0}
+  .study-back-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .study-title{font-size:18px;font-weight:800;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .study-tabs{display:flex;gap:6px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:4px;flex-shrink:0}
+  .study-tab{padding:7px 18px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:none;color:var(--muted);font-family:inherit;transition:all .18s;white-space:nowrap}
+  .study-tab.active{background:var(--accent);color:#fff}
+  /* FLASHCARD V2 */
+  .fc2-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;padding-bottom:32px}
+  .fc2{height:190px;cursor:pointer;perspective:1000px;user-select:none}
+  .fc2-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .42s cubic-bezier(.4,0,.2,1)}
+  .fc2.flipped .fc2-inner{transform:rotateY(180deg)}
+  .fc2-front,.fc2-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px 22px}
+  .fc2-front{background:var(--accent);color:#fff}
+  .fc2-topic{font-size:17px;font-weight:800;line-height:1.3}
+  .fc2-flip-hint{font-size:10px;opacity:.55;margin-top:10px;font-weight:400}
+  .fc2-back{background:var(--surface);color:var(--text);border:1.5px solid var(--border);transform:rotateY(180deg)}
+  .fc2-explanation{font-size:12px;font-weight:500;line-height:1.6;overflow:hidden;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical}
+  .dark .fc2-back{background:#1e293b;border-color:#334155}
+  /* STUDY SCORE BAR */
+  .study-score-bar{display:flex;align-items:center;gap:14px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:12px 18px;margin-bottom:18px}
+  .study-score-num{font-size:22px;font-weight:800;color:var(--text)}
+  .study-score-sub{font-size:11px;color:var(--muted)}
+  .study-score-pct{font-size:20px;font-weight:800;margin-left:auto}
+  /* AI SETTINGS */
+  .ai-settings-row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;padding-top:12px;border-top:1px solid var(--border);margin-top:12px}
+  .ai-setting-group{display:flex;flex-direction:column;gap:5px}
+  .ai-setting-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .ai-count-row{display:flex;gap:5px}
+  .ai-count-btn{padding:5px 13px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;background:none;color:var(--muted);font-family:inherit;transition:all .15s}
+  .ai-count-btn.active{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+  .ai-keywords-input{padding:6px 11px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;background:var(--bg);color:var(--text);font-family:inherit;width:210px;outline:none;transition:border-color .15s}
+  .ai-keywords-input:focus{border-color:var(--accent)}
+  .ai-gen-row{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:12px}
+  /* MY SETS */
+  .my-sets-section{max-width:680px;margin:36px auto 0;padding:0 20px 40px}
+  .my-sets-hdr{font-size:15px;font-weight:800;color:var(--text);margin-bottom:12px}
+  .set-list{display:flex;flex-direction:column;gap:8px}
+  .set-card{display:flex;align-items:center;gap:12px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;cursor:pointer;transition:border-color .15s;text-align:left}
+  .set-card:hover{border-color:var(--accent)}
+  .set-card-icon{font-size:24px;flex-shrink:0}
+  .set-card-body{flex:1;min-width:0}
+  .set-card-title{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .set-card-meta{font-size:11px;color:var(--muted);margin-top:2px}
+  .set-card-del{padding:4px 8px;border:none;background:none;color:var(--muted);cursor:pointer;font-size:16px;flex-shrink:0;border-radius:6px;transition:color .15s;line-height:1}
+  .set-card-del:hover{color:#dc2626}
+  .my-sets-empty{font-size:13px;color:var(--muted);text-align:center;padding:20px 0}
+  @media(max-width:600px){.fc2-grid{grid-template-columns:1fr 1fr}.ai-keywords-input{width:100%}}
   .ai-box-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:6px;display:block}
   .ai-drop-zone{border:2px dashed var(--border);border-radius:10px;padding:18px 16px;text-align:center;cursor:pointer;transition:border-color .18s,background .18s;margin-top:10px}
   .ai-drop-zone:hover,.ai-drop-zone.drag-over{border-color:var(--accent);background:var(--accent-light)}
@@ -714,23 +764,32 @@
           <button class="sn-btn" onclick="snToggle(event)">📂 My Notes <span id="snCount"></span></button>
           <div class="sn-dropdown" id="snDropdown"></div>
         </div>
-        <div class="ai-row">
-          <span class="ai-hint" id="aiCharCount">0 characters</span>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
-            <button class="ai-gen-btn" style="background:#16a34a" onclick="aiGenerate('flashcards')">🃏 Generate Flashcards</button>
-            <button class="ai-gen-btn" onclick="aiGenerate('mcqs')">❓ Generate MCQs</button>
-          </div>
-        </div>
+        <span class="ai-hint" id="aiCharCount" style="display:block;margin-top:6px">0 characters</span>
       </div>
       <div id="aiYTPane" style="display:none">
         <input class="ai-url-input" id="aiYTUrl" type="url" placeholder="https://www.youtube.com/watch?v=…"/>
-        <div class="ai-row" style="margin-top:11px">
-          <span class="ai-hint">Public videos with captions enabled only</span>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
-            <button class="ai-gen-btn" style="background:#16a34a" onclick="aiGenerate('flashcards')">🃏 Generate Flashcards</button>
-            <button class="ai-gen-btn" onclick="aiGenerate('mcqs')">❓ Generate MCQs</button>
+        <span class="ai-hint" style="display:block;margin-top:8px">Public videos with captions enabled only</span>
+      </div>
+      <!-- shared settings + generate -->
+      <div class="ai-settings-row">
+        <div class="ai-setting-group">
+          <span class="ai-setting-lbl">Cards / Questions</span>
+          <div class="ai-count-row">
+            <button class="ai-count-btn" onclick="_aiSetCount(6,this)">6</button>
+            <button class="ai-count-btn active" onclick="_aiSetCount(8,this)">8</button>
+            <button class="ai-count-btn" onclick="_aiSetCount(10,this)">10</button>
+            <button class="ai-count-btn" onclick="_aiSetCount(12,this)">12</button>
           </div>
         </div>
+        <div class="ai-setting-group" style="flex:1">
+          <span class="ai-setting-lbl">Focus keywords <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></span>
+          <input class="ai-keywords-input" id="aiKeywords" type="text" placeholder="e.g. elasticity, supply and demand" oninput="_aiKeywords=this.value" style="width:100%">
+        </div>
+      </div>
+      <div class="ai-gen-row">
+        <button class="ai-gen-btn" style="background:#16a34a" onclick="aiGenerate('fc')">🃏 Flashcards</button>
+        <button class="ai-gen-btn" onclick="aiGenerate('mcq')">❓ MCQs</button>
+        <button class="ai-gen-btn" style="background:#7c3aed" onclick="aiGenerate('both')">✨ Both</button>
       </div>
     </div>
     <div id="aiLoading" style="display:none">
@@ -739,29 +798,39 @@
         <p>Generating your study materials…</p>
       </div>
     </div>
-    <div id="aiResults" style="display:none">
-      <div id="aiFCSection">
-        <div class="ai-results-hdr">
-          <div class="ai-section-lbl">🃏 Flashcards <span style="font-size:13px;font-weight:500;color:var(--muted)">(click to flip)</span></div>
-          <button class="ai-regen-btn" onclick="aiGenerate('flashcards')">↺ Regenerate</button>
-        </div>
-        <div class="fc-grid" id="aiFCGrid"></div>
+  </div>
+  <!-- My Sets lives inside page-ai so it shows/hides with the page -->
+  <div id="mySetsRoot" style="display:none">
+    <div class="my-sets-section">
+      <div class="my-sets-hdr">My Study Sets</div>
+      <div class="set-list" id="setList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- STUDY PAGE -->
+<div class="page" id="page-study">
+  <div class="study-pg">
+    <div class="study-pg-hdr">
+      <button class="study-back-btn" onclick="showPage('ai')">← Back</button>
+      <span class="study-title" id="studyTitle">Study Set</span>
+      <div class="study-tabs">
+        <button class="study-tab active" id="studyTabFC" onclick="switchStudyTab('fc')">🃏 Flashcards</button>
+        <button class="study-tab" id="studyTabMCQ" onclick="switchStudyTab('mcq')">❓ MCQs</button>
       </div>
-      <div id="aiMCQSection">
-        <div class="ai-results-hdr" style="margin-top:24px">
-          <div class="ai-section-lbl">❓ MCQ Practice Questions</div>
-          <button class="ai-regen-btn" onclick="aiGenerate('mcqs')">↺ Regenerate</button>
+    </div>
+    <div id="studyFCPanel">
+      <div class="fc2-grid" id="studyFCGrid"></div>
+    </div>
+    <div id="studyMCQPanel" style="display:none">
+      <div class="study-score-bar" id="studyScoreBar" style="display:none">
+        <div>
+          <div class="study-score-num"><span id="studyScoreNum">0</span>/<span id="studyScoreTotal">0</span></div>
+          <div class="study-score-sub">correct</div>
         </div>
-        <div class="mcq-score-bar" id="mcqScoreBar" style="display:none">
-          <div>
-            <div class="mcq-score-num"><span id="mcqScoreNum">0</span>/<span id="mcqScoreTotal">0</span></div>
-            <div class="mcq-score-sub">correct so far</div>
-          </div>
-          <div style="flex:1"></div>
-          <div class="mcq-score-pct" id="mcqScorePct"></div>
-        </div>
-        <div class="ai-mcq-list" id="aiMCQList"></div>
+        <div class="study-score-pct" id="studyScorePct"></div>
       </div>
+      <div class="ai-mcq-list" id="studyMCQList"></div>
     </div>
   </div>
 </div>
@@ -880,7 +949,8 @@
     if (id === 'home') history.replaceState(null, '', '#home');
     else if (id === 'courses') history.replaceState(null, '', '#courses');
     else if (id === 'pricing') history.replaceState(null, '', '#pricing');
-    else if (id === 'ai') history.replaceState(null, '', '#ai');
+    else if (id === 'ai') { history.replaceState(null, '', '#ai'); _loadMySets(); }
+    else if (id === 'study') { /* no hash change for study */ }
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); }
     else if (id === 'admin') { history.replaceState(null, '', '#admin'); loadAdminStats(); }
     else if (id === 'privacy') history.replaceState(null, '', '#privacy');
@@ -2466,9 +2536,11 @@
   let _aiTab = 'notes';
   let _aiDropContent = '';
   let _aiDropPdfBase64 = '';
-  let _aiMode = 'flashcards';
-  let _mcqScore = 0;
-  let _mcqTotal = 0;
+  let _aiCount = 8;
+  let _aiKeywords = '';
+  let _studySet = null;
+  let _studyScoreNum = 0;
+  let _studyScoreTotal = 0;
 
   function aiSwitchTab(tab) {
     _aiTab = tab;
@@ -2540,8 +2612,13 @@
     }
   }
 
-  function aiGenerate(mode) {
-    _aiMode = mode || 'flashcards';
+  function _aiSetCount(n, btn) {
+    _aiCount = n;
+    document.querySelectorAll('.ai-count-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function aiGenerate(startTab) {
     requirePro(async function() {
       const text   = _aiTab === 'notes' ? ((document.getElementById('aiNoteText').value || '') + '\n\n' + _aiDropContent).trim() : '';
       const ytUrl  = _aiTab === 'yt'    ? (document.getElementById('aiYTUrl').value    || '').trim() : '';
@@ -2551,19 +2628,17 @@
       if (!_sbClient) { showToast('Auth not configured.'); return; }
       const { data: { session } } = await _sbClient.auth.getSession();
       if (!session) { showToast('Please sign in to use StudyAI.'); return; }
-      const loadingMsg = document.querySelector('#aiLoading p');
-      if (loadingMsg) loadingMsg.textContent = _aiMode === 'mcqs' ? 'Generating your MCQs…' : 'Generating your flashcards…';
       document.getElementById('aiLoading').style.display = 'block';
-      document.getElementById('aiResults').style.display = 'none';
       try {
         const resp = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, youtubeUrl: ytUrl, pdfBase64: pdfB64, accessToken: session.access_token, mode: _aiMode })
+          body: JSON.stringify({ text, youtubeUrl: ytUrl, pdfBase64: pdfB64, accessToken: session.access_token, count: _aiCount, keywords: _aiKeywords })
         });
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || 'Generation failed');
-        _aiRender(data, _aiMode);
+        await _saveStudySet(data);
+        _openStudySet(data, startTab === 'mcq' ? 'mcq' : 'fc');
       } catch(e) {
         showToast('Error: ' + e.message);
       } finally {
@@ -2572,56 +2647,125 @@
     });
   }
 
-  function _aiRender(data, mode) {
-    document.getElementById('aiFCSection').style.display  = mode === 'mcqs'       ? 'none' : 'block';
-    document.getElementById('aiMCQSection').style.display = mode === 'flashcards' ? 'none' : 'block';
-    if (mode === 'mcqs') {
-      _mcqScore = 0; _mcqTotal = 0;
-      var bar = document.getElementById('mcqScoreBar');
-      if (bar) bar.style.display = 'none';
-    }
-    document.getElementById('aiFCGrid').innerHTML = (data.flashcards || []).map((fc, i) =>
-      `<div class="fc" id="afc${i}" onclick="this.classList.toggle('flipped')">
-        <div class="fc-inner">
-          <div class="fc-front">${_aiEsc(fc.front)}<span class="fc-tap">tap to flip</span></div>
-          <div class="fc-back">${_aiEsc(fc.back)}</div>
+  function _openStudySet(data, tab) {
+    _studySet = data;
+    _studyScoreNum = 0; _studyScoreTotal = 0;
+    document.getElementById('studyTitle').textContent = data.title || 'Study Set';
+    // Render flashcards
+    document.getElementById('studyFCGrid').innerHTML = (data.flashcards || []).map((fc, i) =>
+      `<div class="fc2" onclick="this.classList.toggle('flipped')">
+        <div class="fc2-inner">
+          <div class="fc2-front">
+            <div class="fc2-topic">${_aiEsc(fc.front)}</div>
+            <div class="fc2-flip-hint">tap to reveal</div>
+          </div>
+          <div class="fc2-back">
+            <div class="fc2-explanation">${_aiEsc(fc.back)}</div>
+          </div>
         </div>
       </div>`).join('');
-    document.getElementById('aiMCQList').innerHTML = (data.mcqs || []).map((q, qi) =>
+    // Render MCQs
+    const scoreBar = document.getElementById('studyScoreBar');
+    if (scoreBar) scoreBar.style.display = 'none';
+    document.getElementById('studyMCQList').innerHTML = (data.mcqs || []).map((q, qi) =>
       `<div class="ai-mcq">
         <div class="ai-mcq-q">${qi+1}. ${_aiEsc(q.q)}</div>
         <div class="ai-mcq-opts">
           ${(q.options||[]).map((opt, oi) =>
-            `<button class="ai-mcq-opt" onclick="_aiAnswer(${qi},${oi},${q.correct},this.closest('.ai-mcq'))">${_aiEsc(opt)}</button>`
+            `<button class="ai-mcq-opt" onclick="_studyAnswer(${qi},${oi},${q.correct},this.closest('.ai-mcq'))">${_aiEsc(opt)}</button>`
           ).join('')}
         </div>
-        <div class="ai-mcq-exp" id="aiexp${qi}">${_aiEsc(q.explanation||'')}</div>
+        <div class="ai-mcq-exp" id="sexp${qi}">${_aiEsc(q.explanation||'')}</div>
       </div>`).join('');
-    const res = document.getElementById('aiResults');
-    res.style.display = 'block';
-    res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    switchStudyTab(tab || 'fc');
+    showPage('study');
   }
 
-  function _aiAnswer(qi, chosen, correct, mcqEl) {
+  function switchStudyTab(tab) {
+    document.getElementById('studyFCPanel').style.display  = tab === 'fc'  ? 'block' : 'none';
+    document.getElementById('studyMCQPanel').style.display = tab === 'mcq' ? 'block' : 'none';
+    document.getElementById('studyTabFC').classList.toggle('active',  tab === 'fc');
+    document.getElementById('studyTabMCQ').classList.toggle('active', tab === 'mcq');
+  }
+
+  function _studyAnswer(qi, chosen, correct, mcqEl) {
     mcqEl.querySelectorAll('.ai-mcq-opt').forEach(function(btn, i) {
       btn.disabled = true;
       if (i === correct) btn.classList.add('correct');
       else if (i === chosen) btn.classList.add('wrong');
     });
-    _mcqTotal++;
-    if (chosen === correct) _mcqScore++;
-    var bar = document.getElementById('mcqScoreBar');
+    _studyScoreTotal++;
+    if (chosen === correct) _studyScoreNum++;
+    const bar = document.getElementById('studyScoreBar');
     if (bar) {
       bar.style.display = 'flex';
-      document.getElementById('mcqScoreNum').textContent = _mcqScore;
-      document.getElementById('mcqScoreTotal').textContent = _mcqTotal;
-      var pct = Math.round((_mcqScore / _mcqTotal) * 100);
-      var pctEl = document.getElementById('mcqScorePct');
+      document.getElementById('studyScoreNum').textContent   = _studyScoreNum;
+      document.getElementById('studyScoreTotal').textContent = _studyScoreTotal;
+      const pct = Math.round((_studyScoreNum / _studyScoreTotal) * 100);
+      const pctEl = document.getElementById('studyScorePct');
       pctEl.textContent = pct + '%';
       pctEl.style.color = pct >= 70 ? '#16a34a' : pct >= 50 ? '#d97706' : '#dc2626';
     }
-    const exp = document.getElementById('aiexp' + qi);
+    const exp = document.getElementById('sexp' + qi);
     if (exp) exp.classList.add('show');
+  }
+
+  async function _saveStudySet(data) {
+    try {
+      if (!_sbClient || !_currentUser) return;
+      const { data: { session } } = await _sbClient.auth.getSession();
+      if (!session) return;
+      await _sbClient.from('study_sets').insert({
+        user_id:    _currentUser.id,
+        title:      data.title || 'Study Set',
+        flashcards: data.flashcards || [],
+        mcqs:       data.mcqs || []
+      });
+    } catch(e) { /* non-fatal */ }
+  }
+
+  async function _loadMySets() {
+    const root = document.getElementById('mySetsRoot');
+    if (!root) return;
+    if (!_sbClient || !_currentUser) { root.style.display = 'none'; return; }
+    try {
+      const { data: sets } = await _sbClient.from('study_sets')
+        .select('id,title,flashcards,mcqs,created_at')
+        .eq('user_id', _currentUser.id)
+        .order('created_at', { ascending: false })
+        .limit(20);
+      if (!sets || sets.length === 0) { root.style.display = 'none'; return; }
+      _renderMySets(sets);
+      root.style.display = 'block';
+    } catch(e) { root.style.display = 'none'; }
+  }
+
+  let _mySetsData = [];
+
+  function _renderMySets(sets) {
+    _mySetsData = sets;
+    document.getElementById('setList').innerHTML = sets.map((s, idx) => {
+      const fcLen  = (s.flashcards || []).length;
+      const mcqLen = (s.mcqs || []).length;
+      const date   = new Date(s.created_at).toLocaleDateString('en-IE', { day:'numeric', month:'short' });
+      return `<div class="set-card" onclick="_openStudySet(_mySetsData[${idx}])">
+        <div class="set-card-icon">🃏</div>
+        <div class="set-card-body">
+          <div class="set-card-title">${_aiEsc(s.title)}</div>
+          <div class="set-card-meta">${fcLen} flashcard${fcLen!==1?'s':''} · ${mcqLen} MCQ${mcqLen!==1?'s':''} · ${date}</div>
+        </div>
+        <button class="set-card-del" onclick="event.stopPropagation();_deleteStudySet('${s.id}',this.closest('.set-card'))">✕</button>
+      </div>`;
+    }).join('');
+  }
+
+  async function _deleteStudySet(id, el) {
+    if (!_sbClient) return;
+    el.style.opacity = '0.4';
+    await _sbClient.from('study_sets').delete().eq('id', id).eq('user_id', _currentUser.id);
+    el.remove();
+    const list = document.getElementById('setList');
+    if (list && !list.children.length) document.getElementById('mySetsRoot').style.display = 'none';
   }
 
   function _aiEsc(s) {
