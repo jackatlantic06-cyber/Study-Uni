@@ -164,6 +164,12 @@
       { label: "Marking Scheme — Autumn 23/24", url: "./marking-schemes/LW1109_Autumn2023_Marking_Scheme.pdf" },
       { label: "Marking Scheme — Summer 22/23", url: "./marking-schemes/LW1109_Summer2023_Marking_Scheme.pdf" },
     ],
+    "IS2200": [
+      { label: "Marking Scheme — Winter 24/25", url: "./marking-schemes/IS2200_Winter2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 23/24", url: "./marking-schemes/IS2200_Winter2024_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 22/23", url: "./marking-schemes/IS2200_Winter2023_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 21/22", url: "./marking-schemes/IS2200_Winter2022_Marking_Scheme.pdf" },
+    ],
   };
 
   // QUIZ BANK — EC1208 only, topic-based structure
