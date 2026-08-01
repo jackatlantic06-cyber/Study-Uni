@@ -172,14 +172,14 @@
     ],
     "MG2005": [
       { label: "Marking Scheme — Summer 24/25", url: "./marking-schemes/MG2005_Summer2025_Marking_Scheme.pdf" },
-      { label: "Marking Scheme — Summer 23/24 (Q1–2 only)", url: "./marking-schemes/MG2005_Summer2024_Marking_Scheme_PARTIAL_Q1-2only.pdf" },
-      { label: "Marking Scheme — Summer 22/23 (Part A only)", url: "./marking-schemes/MG2005_Summer2023_Marking_Scheme_PartA_ONLY.pdf" },
+      { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/MG2005_Summer2024_Marking_Scheme_PARTIAL_Q1-2only.pdf" },
+      { label: "Marking Scheme — Summer 22/23", url: "./marking-schemes/MG2005_Summer2023_Marking_Scheme_PartA_ONLY.pdf" },
       { label: "Marking Scheme — Summer 21/22", url: "./marking-schemes/MG2005_Summer2022_Marking_Scheme_COMPLETE.pdf" },
     ],
     "MG2007": [
-      { label: "Marking Scheme — Summer 24/25 (Paper 1)", url: "./marking-schemes/MG2007_Summer2025_Paper1_Marking_Scheme.pdf" },
-      { label: "Marking Scheme — Summer 23/24 (Paper 1)", url: "./marking-schemes/MG2007_Summer2024_Paper1_Marking_Scheme.pdf" },
-      { label: "Marking Scheme — Summer 22/23 (Paper 1)", url: "./marking-schemes/MG2007_Summer2023_Paper1_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 24/25", url: "./marking-schemes/MG2007_Summer2025_Paper1_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/MG2007_Summer2024_Paper1_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 22/23", url: "./marking-schemes/MG2007_Summer2023_Paper1_Marking_Scheme.pdf" },
     ],
   };
 
