@@ -181,6 +181,11 @@
       { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/MG2007_Summer2024_Paper1_Marking_Scheme.pdf" },
       { label: "Marking Scheme — Summer 22/23", url: "./marking-schemes/MG2007_Summer2023_Paper1_Marking_Scheme.pdf" },
     ],
+    "FE3020": [
+      { label: "Marking Scheme — Winter 24/25", url: "./marking-schemes/FE3020_Winter2025_Paper1_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 22/23", url: "./marking-schemes/FE3020_Winter2023_Paper1_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 21/22", url: "./marking-schemes/FE3020_Winter2022_Paper1_Marking_Scheme.pdf" },
+    ],
   };
 
   // QUIZ BANK — EC1208 only, topic-based structure
