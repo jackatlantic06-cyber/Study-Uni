@@ -2802,8 +2802,12 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accessToken: session.access_token })
       });
-      if (!resp.ok) return;
       const d = await resp.json();
+      if (!resp.ok) {
+        const grid = document.getElementById('adminStatGrid');
+        if (grid) grid.innerHTML = `<div style="grid-column:1/-1;padding:12px 0;color:#ef4444;font-size:13px;font-weight:600">Error: ${d.error || 'Server error — check Vercel logs'}</div>`;
+        return;
+      }
       const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
       set('asTotalUsers', (d.totalUsers||0).toLocaleString());
       set('asWeekly',     '+' + (d.weeklySignups||0));
@@ -2831,6 +2835,18 @@
           quizBody.innerHTML = `<div style="padding:16px 18px;font-size:14px;color:var(--text)">
             <strong>${d.quizStats.total}</strong> quiz attempt${d.quizStats.total!==1?'s':''} this week · Average score: <strong>${d.quizStats.avgPct}%</strong>
           </div>`;
+        }
+      }
+      // Recent sign-ups
+      const usersBody = document.getElementById('adminUsersBody');
+      if (usersBody) {
+        if (!d.recentUsers || d.recentUsers.length === 0) {
+          usersBody.innerHTML = '<div class="admin-empty">No users found.</div>';
+        } else {
+          const fmt = iso => iso ? new Date(iso).toLocaleDateString('en-IE', { day:'numeric', month:'short', year:'numeric' }) : '—';
+          usersBody.innerHTML = '<table class="admin-table"><thead><tr><th>Email</th><th>Signed up</th><th>Last seen</th></tr></thead><tbody>' +
+            d.recentUsers.map(u => `<tr><td style="font-weight:600">${u.email || '—'}</td><td style="color:var(--muted)">${fmt(u.created_at)}</td><td style="color:var(--muted)">${fmt(u.last_sign_in)}</td></tr>`).join('') +
+            '</tbody></table>';
         }
       }
     } catch(e) {
@@ -3235,6 +3251,10 @@
     <div class="admin-section">
       <div class="admin-section-hdr">📊 Quiz Activity (this week)</div>
       <div id="adminQuizBody"><div class="admin-empty">Click Refresh to load data.</div></div>
+    </div>
+    <div class="admin-section">
+      <div class="admin-section-hdr">👤 Recent Sign-ups (last 30)</div>
+      <div id="adminUsersBody"><div class="admin-empty">Click Refresh to load data.</div></div>
     </div>
     <div class="admin-section">
       <div class="admin-section-hdr" style="display:flex;align-items:center;justify-content:space-between">

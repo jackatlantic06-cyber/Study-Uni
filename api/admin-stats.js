@@ -25,10 +25,18 @@ module.exports = async (req, res) => {
     const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
 
     // All users (paginated — handles up to 10k)
-    const { data: { users } } = await sb.auth.admin.listUsers({ perPage: 10000 });
-    const allUsers = users || [];
+    const { data: usersPage, error: listErr } = await sb.auth.admin.listUsers({ perPage: 10000 });
+    if (listErr) throw new Error(`listUsers: ${listErr.message}`);
+    const allUsers = (usersPage && usersPage.users) || [];
     const totalUsers = allUsers.length;
     const weeklySignups = allUsers.filter(u => u.created_at > weekAgo).length;
+
+    // Recent sign-ups (newest first, last 30)
+    const recentUsers = allUsers
+      .slice()
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      .slice(0, 30)
+      .map(u => ({ email: u.email, created_at: u.created_at, last_sign_in: u.last_sign_in_at }));
 
     // Pro subscribers
     const { count: proCount } = await sb.from('subscriptions')
@@ -72,6 +80,7 @@ module.exports = async (req, res) => {
       conversionRate: totalUsers > 0 ? ((proCount || 0) / totalUsers * 100).toFixed(1) : '0.0',
       topCourses,
       quizStats,
+      recentUsers,
     });
 
   } catch (err) {
