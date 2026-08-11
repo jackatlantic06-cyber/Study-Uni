@@ -1081,16 +1081,16 @@
   function _getCourseCategory(name) {
     const n = name.toLowerCase();
     if (/\blaw\b|legal|crimin|justice/.test(n)) return 'Law';
-    if (/medicine|surgery|nursing|physiotherapy|midwifery|radiography|podiatric|occupational therapy|speech and lang|pharmacy|human nutrition|\bdental\b|radiation therapy|human health|clinical speech|paramedic|sport and exercise|exercise and health|health fitness/.test(n)) return 'MedHealth';
-    if (/(engineering|architecture|planning|construction management|landscape arch)/.test(n) && !/biomedical science/.test(n)) return 'Engineering';
-    if (/computer science|computer systems|computer games|information technology|information systems|business information systems|computational social|artificial intelligence|machine learning|cyber.security|interaction design/.test(n)) return 'MathsCS';
+    if (/medicine|surgery|nursing|physiotherapy|midwifery|radiography|podiatric|occupational therapy|speech and lang|pharmacy|human nutrition|\bdental\b|radiation therapy|human health|clinical speech|paramedic|sport and exercise|exercise and health|health fitness|\bnutrition\b|health and exercise/.test(n)) return 'MedHealth';
+    if (/(engineering|architecture|planning|construction management|landscape arch|nautical|quantity surveying)/.test(n) && !/biomedical science/.test(n)) return 'Engineering';
+    if (/computer science|computer systems|computer games|information technology|information systems|business information systems|computational social|artificial intelligence|machine learning|cyber.security|\bcybersecurity\b|interaction design|software development|\bcomputing\b/.test(n)) return 'MathsCS';
     if (/\bmathematics?\b|mathematical science|\bstatistics\b|actuarial|financial mathematics/.test(n) && !/education/.test(n)) return 'MathsCS';
     if (/\bphysics\b|theoretical physics|astronomy|space science|physical sciences|nanoscience/.test(n)) return 'PhysSci';
     if (/\bchemistry\b|biopharmaceut|chemical sciences/.test(n)) return 'PhysSci';
-    if (/biochemistry|molecular biology|genetics|genomics|microbiology|neuroscience|physiology|pharmacology|biotechnology|biomedical science|cell and molecular|biomedical, health|bioscience|biotherapeutic|immuno/.test(n)) return 'LifeSci';
-    if (/zoolog|equine|animal science|animal and crop|agri-environ|agricultural science|agricultural systems|crop science|dairy|forestry|horticulture|plant biology|marine science|earth and ocean|earth science|environmental science|geography|geoscience|geosystem|sustainability|sustainable food|food science|food and agribusiness|food business/.test(n)) return 'EnvSci';
+    if (/biochemistry|molecular biology|genetics|genomics|microbiology|neuroscience|physiology|pharmacology|biotechnology|biomedical science|cell and molecular|biomedical, health|bioscience|biotherapeutic|immuno|pharmaceutical science|animal bioscience|veterinary bioscience|wildlife biology|biological sciences/.test(n)) return 'LifeSci';
+    if (/zoolog|equine|animal science|animal and crop|agri-environ|agricultural science|agricultural systems|crop science|dairy|forestry|horticulture|plant biology|marine science|earth and ocean|earth science|environmental science|geography|geoscience|geosystem|sustainability|sustainable food|food science|food and agribusiness|food business|environmental studies|biological and environmental|\bagriculture\b/.test(n)) return 'EnvSci';
     if (/education/.test(n)) return 'Education';
-    if (/\bbusiness\b|commerce|economics|hotel management|accounting|financial math|global luxury|technology management/.test(n)) return 'Business';
+    if (/\bbusiness\b|commerce|economics|hotel management|accounting|financial math|global luxury|technology management|human resource management|hospitality management/.test(n)) return 'Business';
     return 'Arts';
   }
 
