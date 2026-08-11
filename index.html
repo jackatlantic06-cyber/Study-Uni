@@ -272,6 +272,29 @@
     .pricing-cta{display:block;margin-top:20px;padding:12px;background:var(--accent);color:#fff;border-radius:8px;font-weight:600;cursor:pointer;border:none;width:100%;font-size:15px}
     .pricing-card:not(.featured) .pricing-cta{background:var(--border);color:var(--text)}
 
+    /* UNIVERSITY PICKER */
+    .uni-picker{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+    .uni-tab{display:flex;align-items:center;gap:10px;padding:14px 20px;border:2px solid var(--border);border-radius:14px;cursor:pointer;background:var(--surface);transition:all .18s;text-align:left;min-width:200px;flex:1}
+    .uni-tab:hover{border-color:var(--accent);background:var(--accent-light)}
+    .uni-tab.active{border-color:var(--accent);background:var(--accent-light)}
+    .uni-tab-icon{font-size:28px;flex-shrink:0}
+    .uni-tab-body{}
+    .uni-tab-name{font-size:16px;font-weight:800;color:var(--text)}
+    .uni-tab.active .uni-tab-name{color:var(--accent)}
+    .uni-tab-sub{font-size:11px;color:var(--muted);margin-top:1px}
+    .uni-soon-badge{display:inline-block;font-size:10px;font-weight:700;background:#f1f5f9;color:#64748b;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+    .dark .uni-soon-badge{background:#1e293b;color:#94a3b8}
+    /* UCD COURSE GRID */
+    .ucd-section-letter{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:24px 0 10px;padding-bottom:6px;border-bottom:1.5px solid var(--border)}
+    .ucd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+    .ucd-card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:border-color .15s}
+    .ucd-card:hover{border-color:var(--accent)}
+    .ucd-card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.4}
+    .ucd-card-link{font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;text-decoration:none}
+    .ucd-card-link:hover{text-decoration:underline}
+    .ucd-coming-banner{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text)}
+    .dark .ucd-card{background:#1e293b;border-color:#334155}
+    .dark .uni-tab{background:#1e293b;border-color:#334155}
     /* SEARCH RESULTS */
     .search-results{display:none}
     .search-results.visible{display:block}
@@ -638,8 +661,8 @@
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <h1>Every <span>UCC</span> Past Exam Paper.<br>One Place.</h1>
-    <p>Browse courses across UCC. Past papers are always free — Pro unlocks marking schemes and quiz practice.</p>
+    <h1>Ireland's Student<br>Study Hub.</h1>
+    <p>Browse courses across Irish universities. Past papers are always free — Pro unlocks marking schemes and quiz practice.</p>
     <div class="stats-bar" id="statsBar">
       <div class="stat-item"><span class="stat-num" id="statPapers">—</span><span class="stat-label">exam papers</span></div>
       <div class="stat-divider"></div>
@@ -667,12 +690,15 @@
     <h3 style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">🔥 Your Most Visited</h3>
     <div id="trendingGrid" class="course-grid"></div>
   </div>
+  <div id="homeUniPicker" class="uni-picker"></div>
   <div id="categoriesRoot" class="categories"></div>
+  <div id="homeUCDView" style="display:none"></div>
 </div>
 
 <!-- COURSE LIST -->
 <div class="page" id="page-courses">
   <div class="course-list-page">
+    <div id="coursesUniPicker" class="uni-picker"></div>
     <!-- Degree bucket grid (shown when no bucket selected) -->
     <div id="degBucketView">
       <h2 style="font-size:22px;font-weight:800;margin-bottom:4px">Browse by Degree</h2>
@@ -693,6 +719,8 @@
       </div>
       <div id="courseListRoot"></div>
     </div>
+    <!-- UCD course browser -->
+    <div id="coursesUCDView" style="display:none"></div>
   </div>
 </div>
 
@@ -1034,6 +1062,74 @@
         <span class="deg-badge">${courses.length} course${courses.length!==1?'s':''}${papers>0?' · '+papers+' papers':''}</span>
       </div>`;
     }).join('');
+  }
+
+  // ─── UNIVERSITY PICKER ────────────────────────────────────────────────────
+  var _selectedUni = 'ucc';
+
+  function _uniTabsHTML(activeId) {
+    return (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).map(u => `
+      <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectUni('${u.id}')">
+        <span class="uni-tab-icon">${u.icon}</span>
+        <span class="uni-tab-body">
+          <span class="uni-tab-name">${u.name} — ${u.fullName}${!u.live ? '<span class="uni-soon-badge">Coming soon</span>' : ''}</span>
+          <span class="uni-tab-sub">${u.tagline}</span>
+        </span>
+      </button>`).join('');
+  }
+
+  function _buildUCDHTML() {
+    const ucd = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).find(u => u.id === 'ucd');
+    if (!ucd) return '';
+    const courses = (ucd.courses || []).slice().sort((a,b) => a.name.localeCompare(b.name));
+    const groups = {};
+    courses.forEach(c => {
+      const letter = c.name[0].toUpperCase();
+      if (!groups[letter]) groups[letter] = [];
+      groups[letter].push(c);
+    });
+    const banner = `<div class="ucd-coming-banner">
+      <span style="font-size:24px">🚀</span>
+      <span><strong>UCD content is coming soon!</strong> We're building out past papers, marking schemes, and quiz practice for all ${courses.length} UCD courses. Browse the full course list below and check back soon.</span>
+    </div>`;
+    const grid = Object.keys(groups).sort().map(letter => `
+      <div class="ucd-section-letter">${letter}</div>
+      <div class="ucd-grid">
+        ${groups[letter].map(c => `<div class="ucd-card">
+          <span class="ucd-card-name">${c.name}</span>
+          <a class="ucd-card-link" href="${c.url}" target="_blank" rel="noopener">UCD ↗</a>
+        </div>`).join('')}
+      </div>`).join('');
+    return banner + grid;
+  }
+
+  function selectUni(uniId) {
+    _selectedUni = uniId;
+    // Update all pickers
+    ['homeUniPicker','coursesUniPicker'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = _uniTabsHTML(uniId);
+    });
+    // Home page
+    const cats = document.getElementById('categoriesRoot');
+    const homeUCD = document.getElementById('homeUCDView');
+    if (cats) cats.style.display = uniId === 'ucc' ? '' : 'none';
+    if (homeUCD) { homeUCD.style.display = uniId === 'ucd' ? '' : 'none'; if (uniId === 'ucd') homeUCD.innerHTML = _buildUCDHTML(); }
+    // Courses page
+    const degView = document.getElementById('degBucketView');
+    const coursesUCD = document.getElementById('coursesUCDView');
+    const degCourse = document.getElementById('degCourseView');
+    if (degView) degView.style.display = uniId === 'ucc' ? '' : 'none';
+    if (degCourse && uniId === 'ucd') { degCourse.style.display = 'none'; }
+    if (coursesUCD) { coursesUCD.style.display = uniId === 'ucd' ? '' : 'none'; if (uniId === 'ucd') coursesUCD.innerHTML = _buildUCDHTML(); }
+  }
+
+  function _initUniPicker() {
+    const tabs = _uniTabsHTML(_selectedUni);
+    ['homeUniPicker','coursesUniPicker'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = tabs;
+    });
   }
 
   function openDegBucket(bucketId) {
@@ -2861,6 +2957,7 @@
     updateStreak();
     buildHome();
     buildDegBuckets();
+    _initUniPicker();
     initAuth();
     initCookieConsent();
     initExamCountdown();
