@@ -1081,15 +1081,17 @@
   function _buildMTUSubpickerHTML(activeId) {
     const unis = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => u.group === 'mtu');
     const back = `<button onclick="_showMainUniPicker()" style="display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--accent);margin-bottom:12px">← All universities</button>`;
-    const tabs = unis.map(u => `
-      <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectMTUCampus('${u.id}')">
-        <span class="uni-tab-icon">${u.icon}</span>
-        <span class="uni-tab-body">
-          <span class="uni-tab-name">${u.name}<span class="uni-soon-badge">Coming soon</span></span>
-          <span class="uni-tab-sub">${u.fullName}</span>
-        </span>
-      </button>`).join('');
-    return back + tabs;
+    const grid = `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">` +
+      unis.map(u => `
+        <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectMTUCampus('${u.id}')" style="min-width:0;flex:none;padding:12px 14px">
+          <span class="uni-tab-icon" style="font-size:22px">${u.icon}</span>
+          <span class="uni-tab-body">
+            <span class="uni-tab-name" style="font-size:13px">${u.name}<span class="uni-soon-badge">Coming soon</span></span>
+            <span class="uni-tab-sub">${u.fullName}</span>
+          </span>
+        </button>`).join('') +
+      `</div>`;
+    return back + grid;
   }
 
   function _showMainUniPicker() {

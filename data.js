@@ -10011,7 +10011,7 @@
     },
     {
       id:'ucd', name:'UCD', fullName:'University College Dublin',
-      location:'Dublin, Ireland', icon:'🏰', color:'#1d4ed8',
+      location:'Dublin, Ireland', icon:'📚', color:'#1d4ed8',
       tagline:'Course browser — full content launching soon',
       live: false,
       courses: [
@@ -10226,7 +10226,7 @@
         { name:'Bachelor of Midwifery Science',                                          cao:'GY517', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/' },
       ],
     },
-    { id:'tcd', name:'Trinity', fullName:'Trinity College Dublin', location:'Dublin, Ireland', icon:'📚', color:'#1e3a5f', tagline:'Course browser — full content launching soon', live: false,
+    { id:'tcd', name:'Trinity', fullName:'Trinity College Dublin', location:'Dublin, Ireland', icon:'🏰', color:'#1e3a5f', tagline:'Course browser — full content launching soon', live: false,
       courses: [
         { name:'Acting',                                                                     url:'https://www.tcd.ie/courses/undergraduate/' },
         { name:'Ancient and Medieval History and Culture',                                   url:'https://www.tcd.ie/courses/undergraduate/' },
