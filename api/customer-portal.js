@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'No billing account found for this user' });
   }
 
-  const origin = req.headers.origin || 'https://study-uni.vercel.app';
+  const origin = req.headers.origin || 'https://www.study-uni.ie';
   const session = await stripe.billingPortal.sessions.create({
     customer: data.stripe_customer_id,
     return_url: `${origin}/#account`,

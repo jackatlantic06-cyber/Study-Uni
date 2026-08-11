@@ -49,7 +49,7 @@ module.exports = async (req, res) => {
       await sb.from('subscriptions').upsert({ id: userId, email, stripe_customer_id: customerId });
     }
 
-    const origin = req.headers.origin || 'https://study-uni.vercel.app';
+    const origin = req.headers.origin || 'https://www.study-uni.ie';
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ['card'],
