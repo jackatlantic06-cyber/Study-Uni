@@ -1078,10 +1078,10 @@
       </button>`).join('');
   }
 
-  function _buildUCDHTML() {
-    const ucd = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).find(u => u.id === 'ucd');
-    if (!ucd) return '';
-    const courses = (ucd.courses || []).slice().sort((a,b) => a.name.localeCompare(b.name));
+  function _buildUniCoursesHTML(uniId) {
+    const uni = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).find(u => u.id === uniId);
+    if (!uni || !uni.courses) return '';
+    const courses = uni.courses.slice().sort((a,b) => a.name.localeCompare(b.name));
     const groups = {};
     courses.forEach(c => {
       const letter = c.name[0].toUpperCase();
@@ -1090,14 +1090,14 @@
     });
     const banner = `<div class="ucd-coming-banner">
       <span style="font-size:24px">🚀</span>
-      <span><strong>UCD content is coming soon!</strong> We're building out past papers, marking schemes, and quiz practice for all ${courses.length} UCD courses. Browse the full course list below and check back soon.</span>
+      <span><strong>${uni.name} content is coming soon!</strong> We're building out past papers, marking schemes, and quiz practice for all ${courses.length} ${uni.name} courses. Browse the full course list below and check back soon.</span>
     </div>`;
     const grid = Object.keys(groups).sort().map(letter => `
       <div class="ucd-section-letter">${letter}</div>
       <div class="ucd-grid">
         ${groups[letter].map(c => `<div class="ucd-card">
-          <span class="ucd-card-name">${c.name}</span>
-          <a class="ucd-card-link" href="${c.url}" target="_blank" rel="noopener">UCD ↗</a>
+          <span class="ucd-card-name">${c.name}${c.cao ? `<br><span style="font-size:11px;color:var(--muted);font-weight:500">${c.cao}${c.school ? ' · ' + c.school : ''}</span>` : ''}</span>
+          <a class="ucd-card-link" href="${c.url}" target="_blank" rel="noopener">${uni.name} ↗</a>
         </div>`).join('')}
       </div>`).join('');
     return banner + grid;
@@ -1105,6 +1105,7 @@
 
   function selectUni(uniId) {
     _selectedUni = uniId;
+    const isUCC = uniId === 'ucc';
     // Update all pickers
     ['homeUniPicker','coursesUniPicker'].forEach(id => {
       const el = document.getElementById(id);
@@ -1113,15 +1114,15 @@
     // Home page
     const cats = document.getElementById('categoriesRoot');
     const homeUCD = document.getElementById('homeUCDView');
-    if (cats) cats.style.display = uniId === 'ucc' ? '' : 'none';
-    if (homeUCD) { homeUCD.style.display = uniId === 'ucd' ? '' : 'none'; if (uniId === 'ucd') homeUCD.innerHTML = _buildUCDHTML(); }
+    if (cats) cats.style.display = isUCC ? '' : 'none';
+    if (homeUCD) { homeUCD.style.display = isUCC ? 'none' : ''; if (!isUCC) homeUCD.innerHTML = _buildUniCoursesHTML(uniId); }
     // Courses page
     const degView = document.getElementById('degBucketView');
     const coursesUCD = document.getElementById('coursesUCDView');
     const degCourse = document.getElementById('degCourseView');
-    if (degView) degView.style.display = uniId === 'ucc' ? '' : 'none';
-    if (degCourse && uniId === 'ucd') { degCourse.style.display = 'none'; }
-    if (coursesUCD) { coursesUCD.style.display = uniId === 'ucd' ? '' : 'none'; if (uniId === 'ucd') coursesUCD.innerHTML = _buildUCDHTML(); }
+    if (degView) degView.style.display = isUCC ? '' : 'none';
+    if (degCourse && !isUCC) degCourse.style.display = 'none';
+    if (coursesUCD) { coursesUCD.style.display = isUCC ? 'none' : ''; if (!isUCC) coursesUCD.innerHTML = _buildUniCoursesHTML(uniId); }
   }
 
   function _initUniPicker() {
