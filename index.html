@@ -1068,7 +1068,7 @@
   var _selectedUni = 'ucc';
 
   function _uniTabsHTML(activeId) {
-    return (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).map(u => `
+    return (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => !u.group).map(u => `
       <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectUni('${u.id}')">
         <span class="uni-tab-icon">${u.icon}</span>
         <span class="uni-tab-body">
@@ -1076,6 +1076,45 @@
           <span class="uni-tab-sub">${u.tagline}</span>
         </span>
       </button>`).join('');
+  }
+
+  function _buildMTUSubpickerHTML(activeId) {
+    const unis = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => u.group === 'mtu');
+    const back = `<button onclick="_showMainUniPicker()" style="display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--accent);margin-bottom:12px">← All universities</button>`;
+    const tabs = unis.map(u => `
+      <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectMTUCampus('${u.id}')">
+        <span class="uni-tab-icon">${u.icon}</span>
+        <span class="uni-tab-body">
+          <span class="uni-tab-name">${u.name}<span class="uni-soon-badge">Coming soon</span></span>
+          <span class="uni-tab-sub">${u.fullName}</span>
+        </span>
+      </button>`).join('');
+    return back + tabs;
+  }
+
+  function _showMainUniPicker() {
+    ['homeUniPicker','coursesUniPicker'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = _uniTabsHTML('mtu');
+    });
+    const placeholder = `<div class="ucd-coming-banner" style="text-align:center;padding:40px 20px">
+      <span style="font-size:40px">⚙️</span>
+      <p style="font-size:18px;font-weight:700;margin:12px 0 6px">Munster Technological University</p>
+      <p style="color:var(--muted);margin:0">Choose a campus from the list to browse courses.</p>
+    </div>`;
+    ['categoriesRoot','degBucketView','degCourseView'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+    ['homeUCDView','coursesUCDView'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = ''; el.innerHTML = placeholder; } });
+  }
+
+  function selectMTUCampus(campusId) {
+    _selectedUni = campusId;
+    ['homeUniPicker','coursesUniPicker'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = _buildMTUSubpickerHTML(campusId);
+    });
+    ['categoriesRoot','degBucketView','degCourseView'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+    const html = _buildUniCoursesHTML(campusId);
+    ['homeUCDView','coursesUCDView'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = ''; el.innerHTML = html; } });
   }
 
   function _getCourseCategory(name) {
@@ -1142,6 +1181,20 @@
 
   function selectUni(uniId) {
     _selectedUni = uniId;
+    if (uniId === 'mtu') {
+      ['homeUniPicker','coursesUniPicker'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = _buildMTUSubpickerHTML(null);
+      });
+      const placeholder = `<div class="ucd-coming-banner" style="text-align:center;padding:40px 20px">
+        <span style="font-size:40px">⚙️</span>
+        <p style="font-size:18px;font-weight:700;margin:12px 0 6px">Munster Technological University</p>
+        <p style="color:var(--muted);margin:0">Choose a campus above to browse courses.</p>
+      </div>`;
+      ['categoriesRoot','degBucketView','degCourseView'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+      ['homeUCDView','coursesUCDView'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = ''; el.innerHTML = placeholder; } });
+      return;
+    }
     const isUCC = uniId === 'ucc';
     // Update all pickers
     ['homeUniPicker','coursesUniPicker'].forEach(id => {

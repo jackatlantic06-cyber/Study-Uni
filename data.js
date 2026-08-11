@@ -10457,7 +10457,9 @@
       ],
     },
 
-    { id:'mtu-cork', name:'MTU Cork', fullName:'Munster Technological University — Cork (Bishopstown)', location:'Cork, Ireland', icon:'⚙️', color:'#c8102e', tagline:'Course browser — full content launching soon', live: false,
+    { id:'mtu', name:'MTU', fullName:'Munster Technological University', location:'Cork & Kerry, Ireland', icon:'⚙️', color:'#c8102e', tagline:'6 campuses — choose yours below', live: false },
+
+    { id:'mtu-cork', name:'MTU Cork', fullName:'Munster Technological University — Cork (Bishopstown)', location:'Cork, Ireland', icon:'⚙️', color:'#c8102e', tagline:'Course browser — full content launching soon', live: false, group:'mtu',
       courses: [
         { name:'Accounting', url:'https://www.mtu.ie/courses/' },
         { name:'Agri-Biosciences', url:'https://www.mtu.ie/courses/' },
@@ -10521,7 +10523,7 @@
       ],
     },
 
-    { id:'mtu-kerry', name:'MTU Kerry', fullName:'Munster Technological University — Kerry', location:'Kerry, Ireland', icon:'🌿', color:'#005f6b', tagline:'Course browser — full content launching soon', live: false,
+    { id:'mtu-kerry', name:'MTU Kerry', fullName:'Munster Technological University — Kerry', location:'Kerry, Ireland', icon:'🌿', color:'#005f6b', tagline:'Course browser — full content launching soon', live: false, group:'mtu',
       courses: [
         { name:'Agricultural Science', url:'https://www.mtu.ie/kerry/' },
         { name:'Animal Bioscience', url:'https://www.mtu.ie/kerry/' },
@@ -10554,7 +10556,7 @@
       ],
     },
 
-    { id:'mtu-crawford', name:'MTU Crawford', fullName:'MTU Crawford College of Art & Design', location:'Cork, Ireland', icon:'🎨', color:'#5c2d82', tagline:'Course browser — full content launching soon', live: false,
+    { id:'mtu-crawford', name:'MTU Crawford', fullName:'MTU Crawford College of Art & Design', location:'Cork, Ireland', icon:'🎨', color:'#5c2d82', tagline:'Course browser — full content launching soon', live: false, group:'mtu',
       courses: [
         { name:'Art and Textiles', url:'https://crawford.mtu.ie/' },
         { name:'Contemporary Applied Art', url:'https://crawford.mtu.ie/' },
@@ -10565,7 +10567,7 @@
       ],
     },
 
-    { id:'mtu-music', name:'MTU Cork School of Music', fullName:'MTU Cork School of Music', location:'Cork, Ireland', icon:'🎵', color:'#1a6b3a', tagline:'Course browser — full content launching soon', live: false,
+    { id:'mtu-music', name:'MTU Cork School of Music', fullName:'MTU Cork School of Music', location:'Cork, Ireland', icon:'🎵', color:'#1a6b3a', tagline:'Course browser — full content launching soon', live: false, group:'mtu',
       courses: [
         { name:'Music', url:'https://www.mtu.ie/cork-school-of-music/' },
         { name:'Musical Theatre', url:'https://www.mtu.ie/cork-school-of-music/' },
@@ -10578,7 +10580,7 @@
       ],
     },
 
-    { id:'mtu-nmci', name:'NMCI', fullName:'National Maritime College of Ireland', location:'Ringaskiddy, Cork', icon:'⚓', color:'#0a2d5e', tagline:'Course browser — full content launching soon', live: false,
+    { id:'mtu-nmci', name:'NMCI', fullName:'National Maritime College of Ireland', location:'Ringaskiddy, Cork', icon:'⚓', color:'#0a2d5e', tagline:'Course browser — full content launching soon', live: false, group:'mtu',
       courses: [
         { name:'Marine Electrotechnology', url:'https://www.nmci.ie/' },
         { name:'Marine Engineering', url:'https://www.nmci.ie/' },
@@ -10589,7 +10591,7 @@
       ],
     },
 
-    { id:'mtu-ccae', name:'CCAE', fullName:'Cork Centre for Architectural Education', location:'Cork, Ireland', icon:'🏛️', color:'#7a4a2e', tagline:'Course browser — full content launching soon', live: false,
+    { id:'mtu-ccae', name:'CCAE', fullName:'Cork Centre for Architectural Education', location:'Cork, Ireland', icon:'🏛️', color:'#7a4a2e', tagline:'Course browser — full content launching soon', live: false, group:'mtu',
       courses: [
         { name:'Architecture', url:'https://www.mtu.ie/ccae/' },
       ],
