@@ -1078,29 +1078,66 @@
       </button>`).join('');
   }
 
+  function _getCourseCategory(name) {
+    const n = name.toLowerCase();
+    if (/\blaw\b|legal|crimin|justice/.test(n)) return 'Law';
+    if (/medicine|surgery|nursing|physiotherapy|midwifery|radiography|podiatric|occupational therapy|speech and lang|pharmacy|human nutrition/.test(n)) return 'MedHealth';
+    if (/(engineering|architecture|planning|construction management|landscape arch)/.test(n) && !/biomedical science/.test(n)) return 'Engineering';
+    if (/computer science|information technology|information systems|business information systems|computational social/.test(n)) return 'MathsCS';
+    if (/\bmathematics?\b|mathematical science|\bstatistics\b|actuarial|financial mathematics/.test(n) && !/education/.test(n)) return 'MathsCS';
+    if (/\bphysics\b|theoretical physics|astronomy|space science/.test(n)) return 'PhysSci';
+    if (/\bchemistry\b|biopharmaceut/.test(n)) return 'PhysSci';
+    if (/biochemistry|molecular biology|genetics|genomics|microbiology|neuroscience|physiology|pharmacology|biotechnology|biomedical science|cell and molecular|biomedical, health/.test(n)) return 'LifeSci';
+    if (/zoolog|animal science|animal and crop|agri-environ|agricultural science|agricultural systems|crop science|dairy|forestry|horticulture|plant biology|marine science|earth and ocean|earth science|environmental science|geography|geosystem|sustainability|sustainable food|food science|food and agribusiness|food business/.test(n)) return 'EnvSci';
+    if (/education/.test(n)) return 'Education';
+    if (/commerce|bachelor of business|economics|hotel management|accounting|financial math|global luxury/.test(n)) return 'Business';
+    return 'Arts';
+  }
+
   function _buildUniCoursesHTML(uniId) {
     const uni = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).find(u => u.id === uniId);
     if (!uni || !uni.courses) return '';
     const courses = uni.courses.slice().sort((a,b) => a.name.localeCompare(b.name));
-    const groups = {};
-    courses.forEach(c => {
-      const letter = c.name[0].toUpperCase();
-      if (!groups[letter]) groups[letter] = [];
-      groups[letter].push(c);
-    });
-    const banner = `<div class="ucd-coming-banner">
+    const buckets = (typeof DEG_BUCKETS !== 'undefined') ? DEG_BUCKETS : [];
+    const counts = {};
+    courses.forEach(c => { const cat = _getCourseCategory(c.name); counts[cat] = (counts[cat]||0) + 1; });
+    const banner = `<div class="ucd-coming-banner" style="margin-bottom:20px">
       <span style="font-size:24px">🚀</span>
-      <span><strong>${uni.name} content is coming soon!</strong> We're building out past papers, marking schemes, and quiz practice for all ${courses.length} ${uni.name} courses. Browse the full course list below and check back soon.</span>
+      <span><strong>${uni.name} content is coming soon!</strong> We're building past papers, marking schemes, and quiz practice for all ${courses.length} ${uni.name} courses. Browse below — click a subject area to see courses.</span>
     </div>`;
-    const grid = Object.keys(groups).sort().map(letter => `
-      <div class="ucd-section-letter">${letter}</div>
+    const grid = `<div class="deg-grid">${buckets.filter(b => counts[b.id]).map(b => `
+      <div class="deg-card" style="--deg-color:${b.color}" onclick="_openUniCategory('${uniId}','${b.id}')">
+        <span class="deg-icon">${b.icon}</span>
+        <h3>${b.label}</h3>
+        <div class="deg-sub">${b.full}</div>
+        <span class="deg-badge">${counts[b.id]} course${counts[b.id]!==1?'s':''}</span>
+      </div>`).join('')}</div>`;
+    return banner + grid;
+  }
+
+  function _openUniCategory(uniId, bucketId) {
+    const uni = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).find(u => u.id === uniId);
+    const bucket = (typeof DEG_BUCKETS !== 'undefined') ? DEG_BUCKETS.find(b => b.id === bucketId) : null;
+    if (!uni || !bucket) return;
+    const courses = uni.courses.filter(c => _getCourseCategory(c.name) === bucketId).sort((a,b) => a.name.localeCompare(b.name));
+    const html = `
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <button onclick="${['homeUCDView','coursesUCDView'].map(id => `(document.getElementById('${id}')&&(document.getElementById('${id}').innerHTML=_buildUniCoursesHTML('${uniId}')))`).join(';')}" style="background:none;border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--accent)">← Back</button>
+        <div>
+          <h2 style="font-size:20px;font-weight:800;margin:0">${bucket.icon} ${bucket.full}</h2>
+          <p style="color:var(--muted);font-size:13px;margin:0">${uni.fullName} · ${courses.length} course${courses.length!==1?'s':''}</p>
+        </div>
+      </div>
       <div class="ucd-grid">
-        ${groups[letter].map(c => `<div class="ucd-card">
+        ${courses.map(c => `<div class="ucd-card">
           <span class="ucd-card-name">${c.name}${c.cao ? `<br><span style="font-size:11px;color:var(--muted);font-weight:500">${c.cao}${c.school ? ' · ' + c.school : ''}</span>` : ''}</span>
           <a class="ucd-card-link" href="${c.url}" target="_blank" rel="noopener">${uni.name} ↗</a>
         </div>`).join('')}
-      </div>`).join('');
-    return banner + grid;
+      </div>`;
+    ['homeUCDView','coursesUCDView'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.style.display !== 'none') el.innerHTML = html;
+    });
   }
 
   function selectUni(uniId) {
