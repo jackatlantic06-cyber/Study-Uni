@@ -2234,10 +2234,10 @@
         document.getElementById('authSuccessMsg').style.display = 'block';
         btn.textContent = '✓ Check your email';
         // Send welcome email (fire-and-forget)
-        fetch('/api/send-welcome', {
+        fetch('/api/account', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, firstName })
+          body: JSON.stringify({ action: 'send-welcome', email, firstName })
         }).catch(function() {});
         return;
       } else {
@@ -2755,10 +2755,10 @@
     const { data: { session } } = await _sbClient.auth.getSession();
     if (!session) return;
     try {
-      const r = await fetch('/api/discussion-fetch', {
+      const r = await fetch('/api/discussion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: session.access_token, moduleCode: _discCode }),
+        body: JSON.stringify({ action: 'fetch', accessToken: session.access_token, moduleCode: _discCode }),
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || 'Failed');
@@ -2839,10 +2839,10 @@
     btn.disabled = true;
     const { data: { session: _ps } } = await _sbClient.auth.getSession();
     try {
-      const r = await fetch('/api/discussion-post', {
+      const r = await fetch('/api/discussion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: _ps?.access_token, moduleCode: _discCode, content }),
+        body: JSON.stringify({ action: 'post', accessToken: _ps?.access_token, moduleCode: _discCode, content }),
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || 'Failed');
@@ -2870,10 +2870,10 @@
     btn.disabled = true;
     const { data: { session: _rs } } = await _sbClient.auth.getSession();
     try {
-      const r = await fetch('/api/discussion-reply', {
+      const r = await fetch('/api/discussion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: _rs?.access_token, postId, content }),
+        body: JSON.stringify({ action: 'reply', accessToken: _rs?.access_token, postId, content }),
       });
       const data = await r.json();
       if (!r.ok) throw new Error(data.error || 'Failed');
@@ -2904,10 +2904,10 @@
     if (!confirm('Delete this ' + type + '? This cannot be undone.')) return;
     const { data: { session: _ds } } = await _sbClient.auth.getSession();
     try {
-      const r = await fetch('/api/discussion-delete', {
+      const r = await fetch('/api/discussion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: _ds?.access_token, type, id }),
+        body: JSON.stringify({ action: 'delete', accessToken: _ds?.access_token, type, id }),
       });
       if (!r.ok) throw new Error((await r.json()).error || 'Failed');
       const el = document.getElementById('disc-' + type + '-' + id);
@@ -2921,10 +2921,10 @@
     if (!confirm('Report this content to the moderator?')) return;
     const { data: { session: _fs } } = await _sbClient.auth.getSession();
     try {
-      await fetch('/api/discussion-flag', {
+      await fetch('/api/discussion', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: _fs?.access_token, type, id }),
+        body: JSON.stringify({ action: 'flag', accessToken: _fs?.access_token, type, id }),
       });
       alert('Reported. Thank you.');
     } catch(e) {}
@@ -3541,10 +3541,10 @@
     try {
       const { data: { session } } = await _sbClient.auth.getSession();
       if (!session) throw new Error('Not signed in');
-      const res = await fetch('/api/delete-account', {
+      const res = await fetch('/api/account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: session.access_token })
+        body: JSON.stringify({ action: 'delete', accessToken: session.access_token })
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || 'Delete failed');
