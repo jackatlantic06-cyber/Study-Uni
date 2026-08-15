@@ -146,6 +146,8 @@
     /* PREDICTIONS */
     .btn-predict{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid #7c3aed;color:#7c3aed;background:transparent;white-space:nowrap;transition:all .15s;font-family:inherit}
     .btn-predict:hover,.btn-predict.open{background:#f5f3ff}
+    .btn-discuss{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid #2563eb;color:#2563eb;background:transparent;white-space:nowrap;transition:all .15s;font-family:inherit;margin-top:6px}
+    .btn-discuss:hover{background:#eff6ff}
     .pred-wrap{position:relative;display:inline-block}
     .pred-panel{position:absolute;top:calc(100% + 6px);right:0;min-width:260px;max-width:320px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.14);z-index:200;padding:16px;display:none}
     .pred-panel.open{display:block}
@@ -331,6 +333,7 @@
   .dark .btn-model-answer{color:#93c5fd;border-color:#3b82f6}.dark .btn-model-answer:hover{background:rgba(96,165,250,.15)}
   .dark .btn-quiz{color:#86efac;border-color:#16a34a}.dark .btn-quiz:hover{background:rgba(134,239,172,.15)}
   .dark .btn-predict{color:#c4b5fd;border-color:#7c3aed}.dark .btn-predict:hover,.dark .btn-predict.open{background:rgba(124,58,237,.15)}
+  .dark .btn-discuss{color:#93c5fd;border-color:#2563eb}.dark .btn-discuss:hover{background:rgba(37,99,235,.15)}
   .dark .pred-panel{background:#1e293b;border-color:#334155}
   .dark .toggle-slider{background:#334155}
   .dark .year-note{background:#1c1917;border-color:#92400e;color:#fcd34d}
@@ -1581,12 +1584,11 @@
         paperRows = `<div class="paper-row"><span class="no-papers">No papers yet</span>${modelBtn}${quizBtn}</div>`;
       }
       const notifyBtn = `<button class="notify-btn${NOTIFIED[m.code]?' notified':''}" data-code="${esc(m.code)}" onclick="openNotifModal('${esc(m.code)}','${esc(m.name)}')" title="Notify me when new content is added">🔔</button>`;
-      const discussBtn = `<button class="discuss-btn" onclick="openDiscussion('${esc(m.code)}','${esc(m.name)}')" title="Module discussion">💬</button>`;
       const paperCell = `<div class="papers-cell">${paperRows}</div>`;
       _modData[m.code] = { name: m.name, years: regularPapers.map(f => typeof f === 'object' ? f.label : labelFromFilename(f)) };
-      const predictCell = `<div class="pred-wrap"><button class="btn-predict" onclick="togglePredict('${esc(m.code)}',this)">📊 Predict</button><div class="pred-panel"></div></div>`;
+      const predictCell = `<div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px"><div class="pred-wrap"><button class="btn-predict" onclick="togglePredict('${esc(m.code)}',this)">📊 Predict</button><div class="pred-panel"></div></div><button class="btn-discuss" onclick="openDiscussion('${esc(m.code)}','${esc(m.name)}')">💬 Discuss</button></div>`;
       return `<tr class="${isEmpty ? 'row-empty' : ''}">
-        <td><span class="mod-code">${m.code}</span>${notifyBtn}${discussBtn}</td>
+        <td><span class="mod-code">${m.code}</span>${notifyBtn}</td>
         <td>${m.name}</td>
         <td style="text-align:center;color:var(--muted)">${m.credits || ''}</td>
         <td>${paperCell}</td>
