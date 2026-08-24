@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
       const firstName = user.user_metadata?.first_name || user.email.split('@')[0];
 
       try {
-        const from = process.env.RESEND_FROM || 'Study-Uni <onboarding@resend.dev>';
+        const from = `Study-Uni <hello@${process.env.RESEND_FROM || 'resend.dev'}>`;
         if (isPro) {
           const attempts = weeklyAttempts[user.id] || [];
           await resend.emails.send({

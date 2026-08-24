@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const name = firstName || email.split('@')[0];
 
-    const from = process.env.RESEND_FROM || 'Study-Uni <onboarding@resend.dev>';
+    const from = `Study-Uni <hello@${process.env.RESEND_FROM || 'resend.dev'}>`;
     await resend.emails.send({
       from,
       to: email,
