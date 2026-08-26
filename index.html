@@ -1760,72 +1760,146 @@
     showPage('quiz');
   }
 
+  let _qSelectedTopics = new Set();
+
   function _renderTopicPicker(bank) {
     _qTopic = '';
-    document.getElementById('quizSubtitle').textContent = 'Choose a topic';
+    _qSelectedTopics = new Set();
     const topics = Object.keys(bank);
+    document.getElementById('quizSubtitle').textContent = 'Choose topics';
     const overall = _getOverallHistory(_qCode);
     const overallHtml = overall.length
-      ? '<div style="margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0">' +
+      ? '<div style="margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0">' +
         '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">'+_qCode+' overall history</div>' +
         overall.slice(0,5).map(_historyRow).join('') + '</div>'
       : '';
-    document.getElementById('quizBody').innerHTML = topics.map(function(t) {
-      const safe = t.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      const last = _getHistory(_qCode, t)[0];
-      const badge = last ? '<span style="margin-left:auto;font-size:12px;color:#64748b;font-weight:400">'+last.score+'/'+last.total+'</span>' : '';
-      return '<button onclick="_renderTopicSetup(\''+safe+'\')" ' +
-             'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
-             'margin-bottom:8px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;' +
-             'font-weight:500;color:#0f172a;text-align:left;width:100%;cursor:pointer">' +
-             '<span style="font-size:18px">&#9889;</span>'+t+badge+'</button>';
-    }).join('') + overallHtml;
-  }
 
-  function _renderTopicSetup(topic) {
-    _qTopic = topic;
-    const available = ((QUIZ_BANK[_qCode]||{})[topic]||[]).length;
-    const countOpts = [5,10,20].filter(function(n){ return n <= available; });
-    if (available < 20 && !countOpts.includes(available)) countOpts.push(available);
-    countOpts.sort(function(a,b){return a-b;});
-    _qCount = countOpts[0];
-    const history = _getHistory(_qCode, topic);
-    const histHtml = history.length
-      ? '<div style="margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0">' +
-        '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Your scores — this topic</div>' +
-        history.slice(0,5).map(_historyRow).join('') + '</div>'
-      : '';
-    document.getElementById('quizSubtitle').textContent = topic;
     document.getElementById('quizBody').innerHTML =
       '<div>' +
-      '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Questions</div>' +
-      '<div id="qCountRow" style="display:flex;gap:8px;margin-bottom:20px">' +
-      countOpts.map(function(n,i){
-        return '<button onclick="document.getElementById(\'qCountRow\').querySelectorAll(\'button\').forEach(function(b){b.style.background=\'#fff\';b.style.borderColor=\'#e2e8f0\';b.style.color=\'#0f172a\'});this.style.background=\'#eff6ff\';this.style.borderColor=\'#2563eb\';this.style.color=\'#2563eb\';_qCount='+n+'" ' +
-               'style="flex:1;padding:10px 0;border:1.5px solid '+(i===0?'#2563eb':'#e2e8f0')+';border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;background:'+(i===0?'#eff6ff':'#fff')+';color:'+(i===0?'#2563eb':'#0f172a')+'">'+n+'</button>';
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">' +
+        '<div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em">Topics — select any mix</div>' +
+        '<div style="display:flex;gap:6px">' +
+          '<button onclick="_qTopicSelectAll()" style="font-size:12px;padding:4px 10px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;cursor:pointer;color:#475569;font-weight:600">All</button>' +
+          '<button onclick="_qTopicClearAll()" style="font-size:12px;padding:4px 10px;border:1px solid #e2e8f0;border-radius:6px;background:#fff;cursor:pointer;color:#475569;font-weight:600">None</button>' +
+        '</div>' +
+      '</div>' +
+      '<div id="qTopicBtns" style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">' +
+      topics.map(function(t) {
+        const safe = t.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        const last = _getHistory(_qCode, t)[0];
+        const badge = last ? '<span style="margin-left:auto;font-size:12px;color:#64748b;font-weight:400">'+last.score+'/'+last.total+'</span>' : '';
+        const qCount = ((bank[t])||[]).length;
+        return '<button id="qtbtn_'+btoa(t).replace(/=/g,'')+'" onclick="_qTopicToggle(\''+safe+'\')" ' +
+               'style="display:flex;align-items:center;gap:10px;padding:12px 16px;font-size:14px;' +
+               'border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;' +
+               'font-weight:500;color:#0f172a;text-align:left;width:100%;cursor:pointer;transition:all .15s">' +
+               '<span style="font-size:16px">⬜</span>'+t+
+               '<span style="margin-left:auto;display:flex;gap:8px;align-items:center">'+
+               (badge ? badge+'<span style="color:#cbd5e1">·</span>' : '')+
+               '<span style="font-size:12px;color:#94a3b8">'+qCount+' q</span></span></button>';
       }).join('') +
       '</div>' +
-      '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Timer per question (optional)</div>' +
-      '<div style="display:flex;gap:8px;align-items:center;margin-bottom:20px">' +
-      '<input id="qTimerInput" type="number" min="10" max="600" placeholder="e.g. 60" ' +
-      'style="width:90px;padding:10px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:15px;text-align:center;outline:none" />' +
-      '<span style="font-size:14px;color:#64748b">seconds</span>' +
-      '<button onclick="document.getElementById(\'qTimerInput\').value=\'\'" ' +
-      'style="margin-left:auto;padding:8px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;background:#fff;cursor:pointer;font-weight:500;color:#475569">No timer</button>' +
+      '<div id="qSetupSection" style="display:none">' +
+        '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Number of questions</div>' +
+        '<div id="qCountRow" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px"></div>' +
+        '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Timer per question (optional)</div>' +
+        '<div style="display:flex;gap:8px;align-items:center;margin-bottom:20px">' +
+          '<input id="qTimerInput" type="number" min="10" max="600" placeholder="e.g. 60" ' +
+          'style="width:90px;padding:10px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:15px;text-align:center;outline:none"/>' +
+          '<span style="font-size:14px;color:#64748b">seconds per question</span>' +
+          '<button onclick="document.getElementById(\'qTimerInput\').value=\'\'" ' +
+          'style="margin-left:auto;padding:8px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:13px;background:#fff;cursor:pointer;font-weight:500;color:#475569">No timer</button>' +
+        '</div>' +
+        '<button id="qStartBtn" onclick="_launchQuiz()" style="width:100%;padding:13px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer">Start Quiz →</button>' +
       '</div>' +
-      '<button onclick="_launchQuiz()" style="width:100%;padding:13px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer">Start quiz &#8594;</button>' +
-      '<button onclick="_renderTopicPicker(QUIZ_BANK[_qCode])" style="width:100%;margin-top:8px;padding:11px;background:#f1f5f9;color:#475569;border:none;border-radius:10px;font-size:14px;cursor:pointer">&#8592; Back to topics</button>' +
-      histHtml +
+      overallHtml +
       '</div>';
-    window.scrollTo(0, 0);
+  }
+
+  function _qTopicToggle(topic) {
+    const bank = QUIZ_BANK[_qCode];
+    if (_qSelectedTopics.has(topic)) {
+      _qSelectedTopics.delete(topic);
+    } else {
+      _qSelectedTopics.add(topic);
+    }
+    // Update button visuals
+    Object.keys(bank).forEach(function(t) {
+      const key = btoa(t).replace(/=/g,'');
+      const btn = document.getElementById('qtbtn_'+key);
+      if (!btn) return;
+      const sel = _qSelectedTopics.has(t);
+      btn.style.borderColor = sel ? '#2563eb' : '#e2e8f0';
+      btn.style.background = sel ? '#eff6ff' : '#fff';
+      btn.style.color = sel ? '#1d4ed8' : '#0f172a';
+      btn.querySelector('span').textContent = sel ? '✅' : '⬜';
+    });
+    _qUpdateSetupSection(bank);
+  }
+
+  function _qTopicSelectAll() {
+    const bank = QUIZ_BANK[_qCode];
+    Object.keys(bank).forEach(function(t) { _qSelectedTopics.add(t); });
+    Object.keys(bank).forEach(function(t) {
+      const key = btoa(t).replace(/=/g,'');
+      const btn = document.getElementById('qtbtn_'+key);
+      if (!btn) return;
+      btn.style.borderColor = '#2563eb'; btn.style.background = '#eff6ff'; btn.style.color = '#1d4ed8';
+      btn.querySelector('span').textContent = '✅';
+    });
+    _qUpdateSetupSection(bank);
+  }
+
+  function _qTopicClearAll() {
+    const bank = QUIZ_BANK[_qCode];
+    _qSelectedTopics.clear();
+    Object.keys(bank).forEach(function(t) {
+      const key = btoa(t).replace(/=/g,'');
+      const btn = document.getElementById('qtbtn_'+key);
+      if (!btn) return;
+      btn.style.borderColor = '#e2e8f0'; btn.style.background = '#fff'; btn.style.color = '#0f172a';
+      btn.querySelector('span').textContent = '⬜';
+    });
+    _qUpdateSetupSection(bank);
+  }
+
+  function _qUpdateSetupSection(bank) {
+    const setup = document.getElementById('qSetupSection');
+    if (!setup) return;
+    if (_qSelectedTopics.size === 0) { setup.style.display = 'none'; return; }
+    setup.style.display = 'block';
+    // Count available questions from selected topics
+    let available = 0;
+    _qSelectedTopics.forEach(function(t) { available += ((bank[t])||[]).length; });
+    const opts = [5,10,20,50].filter(function(n){ return n <= available; });
+    if (!opts.includes(available) && available <= 100) opts.push(available);
+    opts.sort(function(a,b){return a-b;});
+    if (!opts.includes(_qCount) || _qCount > available) _qCount = opts[0];
+    const row = document.getElementById('qCountRow');
+    if (row) {
+      row.innerHTML = opts.map(function(n) {
+        const sel = n === _qCount;
+        return '<button onclick="document.getElementById(\'qCountRow\').querySelectorAll(\'button\').forEach(function(b){b.style.background=\'#fff\';b.style.borderColor=\'#e2e8f0\';b.style.color=\'#0f172a\'});this.style.background=\'#eff6ff\';this.style.borderColor=\'#2563eb\';this.style.color=\'#2563eb\';_qCount='+n+'" ' +
+               'style="flex:1;min-width:52px;padding:10px 0;border:1.5px solid '+(sel?'#2563eb':'#e2e8f0')+';border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;background:'+(sel?'#eff6ff':'#fff')+';color:'+(sel?'#2563eb':'#0f172a')+'">'+n+'</button>';
+      }).join('');
+    }
+    const label = _qSelectedTopics.size === 1
+      ? Array.from(_qSelectedTopics)[0]
+      : _qSelectedTopics.size + ' topics · ' + available + ' questions available';
+    document.getElementById('quizSubtitle').textContent = label;
   }
 
   function _launchQuiz() {
     const inp = document.getElementById('qTimerInput');
     _qTimerSecs = (inp && inp.value && parseInt(inp.value) >= 10) ? parseInt(inp.value) : 0;
-    const questions = ((QUIZ_BANK[_qCode]||{})[_qTopic]||[]);
-    const selected = _shuffle(questions).slice(0, _qCount).map(function(q) { return q.type === 'fill' ? q : _shuffleOptions(q); });
-    document.getElementById('quizSubtitle').textContent = _qTopic;
+    const bank = QUIZ_BANK[_qCode] || {};
+    // Pool questions from all selected topics
+    const topics = _qSelectedTopics.size > 0 ? Array.from(_qSelectedTopics) : (_qTopic ? [_qTopic] : []);
+    const pool = [];
+    topics.forEach(function(t) { ((bank[t])||[]).forEach(function(q){ pool.push(q); }); });
+    const selected = _shuffle(pool).slice(0, _qCount).map(function(q) { return q.type === 'fill' ? q : _shuffleOptions(q); });
+    _qTopic = topics.length === 1 ? topics[0] : 'Mixed: ' + topics.join(', ');
+    document.getElementById('quizSubtitle').textContent = topics.length === 1 ? topics[0] : topics.length + ' topics';
     _qState = { questions: selected, current:0, score:0, answered:false, incomplete:0, times:[], fillReviewed:0 };
     _renderQ();
     window.scrollTo(0, 0);
