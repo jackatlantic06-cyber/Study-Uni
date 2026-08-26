@@ -2200,6 +2200,8 @@
     if (fp) fp.style.display = mode === 'signin' ? 'block' : 'none';
     const nf = document.getElementById('authNameFields');
     if (nf) nf.style.display = mode === 'signup' ? 'block' : 'none';
+    const cf = document.getElementById('authCourse');
+    if (cf) cf.value = '';
     const tn = document.getElementById('authTosNote');
     if (tn) tn.style.display = mode === 'signup' ? 'block' : 'none';
   }
@@ -2227,11 +2229,13 @@
       if (_authMode === 'signup') {
         const firstName = document.getElementById('authFirstName').value.trim();
         const lastName  = document.getElementById('authLastName').value.trim();
+        const course    = document.getElementById('authCourse')?.value.trim() || '';
         if (!firstName || !lastName) { errEl.textContent = 'Please enter your first and last name'; btn.disabled=false; btn.textContent='Create account'; return; }
+        if (!course) { errEl.textContent = 'Please enter your course / degree'; btn.disabled=false; btn.textContent='Create account'; return; }
         const conf = document.getElementById('authConfirm').value;
         if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters'; btn.disabled=false; btn.textContent='Create account'; return; }
         if (pass !== conf)   { errEl.textContent = 'Passwords do not match'; btn.disabled=false; btn.textContent='Create account'; return; }
-        const { error } = await _sbClient.auth.signUp({ email, password: pass, options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName } } });
+        const { error } = await _sbClient.auth.signUp({ email, password: pass, options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName, course } } });
         if (error) throw error;
         document.getElementById('authSuccessMsg').style.display = 'block';
         btn.textContent = '✓ Check your email';
@@ -3344,10 +3348,11 @@
       return `<span style="display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;background:${colors[plan]||'#64748b'}">${plan}</span>`;
     };
     body.innerHTML = `<div style="padding:8px 16px;font-size:12px;color:var(--muted)">${list.length} member${list.length!==1?'s':''}</div>
-      <table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Plan</th><th>Joined</th><th>Last seen</th></tr></thead><tbody>` +
+      <table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Course</th><th>Plan</th><th>Joined</th><th>Last seen</th></tr></thead><tbody>` +
       list.map(u => `<tr>
         <td style="font-weight:600">${u.name || '—'}</td>
         <td style="color:var(--muted);font-size:12px">${u.email || '—'}</td>
+        <td style="color:var(--muted);font-size:12px">${u.course || '—'}</td>
         <td>${badge(u.plan)}</td>
         <td style="color:var(--muted);font-size:12px">${fmt(u.created_at)}</td>
         <td style="color:var(--muted);font-size:12px">${fmt(u.last_sign_in)}</td>
@@ -3358,7 +3363,7 @@
   function filterMembers() {
     const q = (document.getElementById('adminMemberSearch')?.value || '').toLowerCase().trim();
     const list = window._adminMembers || [];
-    const filtered = q ? list.filter(u => (u.name||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q)) : list;
+    const filtered = q ? list.filter(u => (u.name||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q) || (u.course||'').toLowerCase().includes(q)) : list;
     renderMembers(filtered);
   }
 
@@ -3910,6 +3915,11 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
         <input type="text" id="authLastName" placeholder="Smith" autocomplete="family-name"
                onkeydown="if(event.key==='Enter')submitAuth()"/>
       </div>
+    </div>
+    <div class="auth-field" style="margin-bottom:14px">
+      <label>Course / Degree</label>
+      <input type="text" id="authCourse" placeholder="e.g. BCom, Medicine, Law, BSc Computer Science"
+             autocomplete="off" onkeydown="if(event.key==='Enter')submitAuth()"/>
     </div>
   </div>
   <div style="text-align:right;margin-top:-6px;margin-bottom:12px" id="forgotPwdRow">

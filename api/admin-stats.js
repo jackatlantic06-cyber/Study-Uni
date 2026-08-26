@@ -59,6 +59,7 @@ module.exports = async (req, res) => {
       .map(u => ({
         email: u.email,
         name: u.user_metadata?.full_name || [u.user_metadata?.first_name, u.user_metadata?.last_name].filter(Boolean).join(' ') || '',
+        course: u.user_metadata?.course || '',
         plan: ownerEmails.includes(u.email) ? 'Owner' : proIdSet.has(u.id) ? 'Pro' : 'Free',
         created_at: u.created_at,
         last_sign_in: u.last_sign_in_at,
