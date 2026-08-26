@@ -2890,9 +2890,40 @@
             '</tbody></table>';
         }
       }
+      // All members
+      window._adminMembers = d.allMembers || [];
+      renderMembers(window._adminMembers);
     } catch(e) {
       console.warn('Admin stats error:', e.message);
     }
+  }
+
+  function renderMembers(list) {
+    const body = document.getElementById('adminMembersBody');
+    if (!body) return;
+    if (!list || list.length === 0) { body.innerHTML = '<div class="admin-empty">No members found.</div>'; return; }
+    const fmt = iso => iso ? new Date(iso).toLocaleDateString('en-IE', { day:'numeric', month:'short', year:'2-digit' }) : '—';
+    const badge = plan => {
+      const colors = { Owner:'#7c3aed', Pro:'#2563eb', Free:'#64748b' };
+      return `<span style="display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;background:${colors[plan]||'#64748b'}">${plan}</span>`;
+    };
+    body.innerHTML = `<div style="padding:8px 16px;font-size:12px;color:var(--muted)">${list.length} member${list.length!==1?'s':''}</div>
+      <table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Plan</th><th>Joined</th><th>Last seen</th></tr></thead><tbody>` +
+      list.map(u => `<tr>
+        <td style="font-weight:600">${u.name || '—'}</td>
+        <td style="color:var(--muted);font-size:12px">${u.email || '—'}</td>
+        <td>${badge(u.plan)}</td>
+        <td style="color:var(--muted);font-size:12px">${fmt(u.created_at)}</td>
+        <td style="color:var(--muted);font-size:12px">${fmt(u.last_sign_in)}</td>
+      </tr>`).join('') +
+      '</tbody></table>';
+  }
+
+  function filterMembers() {
+    const q = (document.getElementById('adminMemberSearch')?.value || '').toLowerCase().trim();
+    const list = window._adminMembers || [];
+    const filtered = q ? list.filter(u => (u.name||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q)) : list;
+    renderMembers(filtered);
   }
 
   // ─── INIT ─────────────────────────────────────────────────────────────────
@@ -3292,6 +3323,13 @@
     <div class="admin-section">
       <div class="admin-section-hdr">📊 Quiz Activity (this week)</div>
       <div id="adminQuizBody"><div class="admin-empty">Click Refresh to load data.</div></div>
+    </div>
+    <div class="admin-section">
+      <div class="admin-section-hdr" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <span>👥 All Members</span>
+        <input id="adminMemberSearch" type="text" placeholder="Search by name or email…" oninput="filterMembers()" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);width:240px;outline:none">
+      </div>
+      <div id="adminMembersBody"><div class="admin-empty">Click Refresh to load data.</div></div>
     </div>
     <div class="admin-section">
       <div class="admin-section-hdr">👤 Recent Sign-ups (last 30)</div>
