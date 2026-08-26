@@ -43,10 +43,29 @@ module.exports = async (req, res) => {
         last_sign_in: u.last_sign_in_at,
       }));
 
+    // All subscriptions for plan lookup
+    const { data: allSubs } = await sb.from('subscriptions')
+      .select('id, is_active, current_period_end');
+    const proIdSet = new Set((allSubs || [])
+      .filter(s => s.is_active && (!s.current_period_end || new Date(s.current_period_end) > new Date()))
+      .map(s => s.id));
+
+    const ownerEmails = (process.env.OWNER_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean);
+
+    // Full member list (newest first)
+    const allMembers = allUsers
+      .slice()
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      .map(u => ({
+        email: u.email,
+        name: u.user_metadata?.first_name || u.user_metadata?.full_name || '',
+        plan: ownerEmails.includes(u.email) ? 'Owner' : proIdSet.has(u.id) ? 'Pro' : 'Free',
+        created_at: u.created_at,
+        last_sign_in: u.last_sign_in_at,
+      }));
+
     // Pro subscribers
-    const { count: proCount } = await sb.from('subscriptions')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_active', true);
+    const proCount = proIdSet.size;
 
     // Most viewed courses — graceful if table doesn't exist
     let topCourses = [];
@@ -86,6 +105,7 @@ module.exports = async (req, res) => {
       topCourses,
       quizStats,
       recentUsers,
+      allMembers,
     });
 
   } catch (err) {
