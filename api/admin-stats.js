@@ -36,7 +36,12 @@ module.exports = async (req, res) => {
       .slice()
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       .slice(0, 30)
-      .map(u => ({ email: u.email, created_at: u.created_at, last_sign_in: u.last_sign_in_at }));
+      .map(u => ({
+        email: u.email,
+        name: u.user_metadata?.first_name || u.user_metadata?.full_name || '',
+        created_at: u.created_at,
+        last_sign_in: u.last_sign_in_at,
+      }));
 
     // Pro subscribers
     const { count: proCount } = await sb.from('subscriptions')
