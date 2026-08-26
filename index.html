@@ -2885,8 +2885,8 @@
           usersBody.innerHTML = '<div class="admin-empty">No users found.</div>';
         } else {
           const fmt = iso => iso ? new Date(iso).toLocaleDateString('en-IE', { day:'numeric', month:'short', year:'numeric' }) : '—';
-          usersBody.innerHTML = '<table class="admin-table"><thead><tr><th>Email</th><th>Signed up</th><th>Last seen</th></tr></thead><tbody>' +
-            d.recentUsers.map(u => `<tr><td style="font-weight:600">${u.email || '—'}</td><td style="color:var(--muted)">${fmt(u.created_at)}</td><td style="color:var(--muted)">${fmt(u.last_sign_in)}</td></tr>`).join('') +
+          usersBody.innerHTML = '<table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Signed up</th><th>Last seen</th></tr></thead><tbody>' +
+            d.recentUsers.map(u => `<tr><td style="font-weight:600">${u.name || '—'}</td><td style="color:var(--muted)">${u.email || '—'}</td><td style="color:var(--muted)">${fmt(u.created_at)}</td><td style="color:var(--muted)">${fmt(u.last_sign_in)}</td></tr>`).join('') +
             '</tbody></table>';
         }
       }
