@@ -146,6 +146,8 @@
     /* PREDICTIONS */
     .btn-predict{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid #7c3aed;color:#7c3aed;background:transparent;white-space:nowrap;transition:all .15s;font-family:inherit}
     .btn-predict:hover,.btn-predict.open{background:#f5f3ff}
+    .btn-discuss{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid #2563eb;color:#2563eb;background:transparent;white-space:nowrap;transition:all .15s;font-family:inherit;margin-top:6px}
+    .btn-discuss:hover{background:#eff6ff}
     .pred-wrap{position:relative;display:inline-block}
     .pred-panel{position:absolute;top:calc(100% + 6px);right:0;min-width:260px;max-width:320px;background:var(--surface);border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.14);z-index:200;padding:16px;display:none}
     .pred-panel.open{display:block}
@@ -160,11 +162,15 @@
     .pred-topic-name{font-size:12px;color:var(--text)}
     .pred-evidence{font-size:10px;font-weight:600;opacity:.75}
     .pred-note{font-size:11px;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px solid var(--border);line-height:1.5}
-    /* QUIZ MODAL */
+    /* MODEL ANSWER MODAL (small overlay) */
     .quiz-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .2s}
     .quiz-overlay.active{opacity:1;pointer-events:all}
     .quiz-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(560px,95vw);max-height:85vh;overflow-y:auto;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.2);z-index:1000;padding:28px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
     .quiz-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+    /* QUIZ FULL PAGE */
+    .quiz-page-inner{max-width:620px;margin:0 auto;padding:32px 20px 60px}
+    .quiz-back-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+    .quiz-back-btn:hover{border-color:var(--accent);color:var(--accent)}
     .quiz-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #e2e8f0}
     .quiz-hdr-left .qh-code{font-family:monospace;color:#2563eb;font-weight:700;font-size:15px}
     .quiz-hdr-left .qh-name{font-weight:600;font-size:15px;color:#0f172a}
@@ -272,6 +278,29 @@
     .pricing-cta{display:block;margin-top:20px;padding:12px;background:var(--accent);color:#fff;border-radius:8px;font-weight:600;cursor:pointer;border:none;width:100%;font-size:15px}
     .pricing-card:not(.featured) .pricing-cta{background:var(--border);color:var(--text)}
 
+    /* UNIVERSITY PICKER */
+    .uni-picker{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+    .uni-tab{display:flex;align-items:center;gap:10px;padding:14px 20px;border:2px solid var(--border);border-radius:14px;cursor:pointer;background:var(--surface);transition:all .18s;text-align:left;min-width:200px;flex:1}
+    .uni-tab:hover{border-color:var(--accent);background:var(--accent-light)}
+    .uni-tab.active{border-color:var(--accent);background:var(--accent-light)}
+    .uni-tab-icon{font-size:28px;flex-shrink:0}
+    .uni-tab-body{}
+    .uni-tab-name{font-size:16px;font-weight:800;color:var(--text)}
+    .uni-tab.active .uni-tab-name{color:var(--accent)}
+    .uni-tab-sub{font-size:11px;color:var(--muted);margin-top:1px}
+    .uni-soon-badge{display:inline-block;font-size:10px;font-weight:700;background:#f1f5f9;color:#64748b;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+    .dark .uni-soon-badge{background:#1e293b;color:#94a3b8}
+    /* UCD COURSE GRID */
+    .ucd-section-letter{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:24px 0 10px;padding-bottom:6px;border-bottom:1.5px solid var(--border)}
+    .ucd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+    .ucd-card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:border-color .15s}
+    .ucd-card:hover{border-color:var(--accent)}
+    .ucd-card-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.4}
+    .ucd-card-link{font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0;text-decoration:none}
+    .ucd-card-link:hover{text-decoration:underline}
+    .ucd-coming-banner{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text)}
+    .dark .ucd-card{background:#1e293b;border-color:#334155}
+    .dark .uni-tab{background:#1e293b;border-color:#334155}
     /* SEARCH RESULTS */
     .search-results{display:none}
     .search-results.visible{display:block}
@@ -282,12 +311,6 @@
     .sri-meta{font-size:12px;color:var(--muted);margin-left:auto}
 
     footer{border-top:1px solid var(--border);padding:24px 20px;background:var(--surface);text-align:center;font-size:13px;color:var(--muted)}
-    .footer-social{display:flex;justify-content:center;gap:12px;margin-bottom:14px}
-    .footer-social a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);color:var(--muted);text-decoration:none;transition:border-color .15s,color .15s,background .15s}
-    .footer-social a:hover{border-color:currentColor;background:var(--surface);color:var(--text)}
-    .footer-social a.li:hover{color:#0a66c2}
-    .footer-social a.ig:hover{color:#e1306c}
-    .footer-social a.fb:hover{color:#1877f2}
   .route-tabs-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
   .route-tab-btn{padding:7px 16px;font-size:13px;font-weight:600;border:1.5px solid var(--border);border-radius:8px;background:var(--card);color:var(--muted);cursor:pointer;font-family:inherit;transition:color .12s,border-color .12s,background .12s}
   .route-tab-btn.active{background:#eff6ff;border-color:var(--accent);color:var(--accent)}
@@ -296,6 +319,8 @@
   /* ── DARK MODE ─────────────────────────────────────────────────────── */
   :root.dark{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#60a5fa;--accent-light:rgba(96,165,250,.15);--shadow:0 1px 3px rgba(0,0,0,.35)}
   .dark .quiz-modal,.dark .auth-modal,.dark .pro-modal{background:#1e293b;color:#e2e8f0}
+  .dark #page-quiz .quiz-header{border-color:#334155}
+  .dark #page-quiz .quiz-opt{background:#1e293b;border-color:#334155;color:#e2e8f0}
   .dark .quiz-q,.dark .quiz-progress{color:#e2e8f0}
   .dark .quiz-opt{background:#1e293b;border-color:#334155;color:#e2e8f0}
   .dark .quiz-opt:hover:not(:disabled){background:rgba(96,165,250,.12);border-color:#60a5fa}
@@ -314,6 +339,7 @@
   .dark .btn-model-answer{color:#93c5fd;border-color:#3b82f6}.dark .btn-model-answer:hover{background:rgba(96,165,250,.15)}
   .dark .btn-quiz{color:#86efac;border-color:#16a34a}.dark .btn-quiz:hover{background:rgba(134,239,172,.15)}
   .dark .btn-predict{color:#c4b5fd;border-color:#7c3aed}.dark .btn-predict:hover,.dark .btn-predict.open{background:rgba(124,58,237,.15)}
+  .dark .btn-discuss{color:#93c5fd;border-color:#2563eb}.dark .btn-discuss:hover{background:rgba(37,99,235,.15)}
   .dark .pred-panel{background:#1e293b;border-color:#334155}
   .dark .toggle-slider{background:#334155}
   .dark .year-note{background:#1c1917;border-color:#92400e;color:#fcd34d}
@@ -355,6 +381,54 @@
   /* ── NOTIFY BELL ────────────────────────────────────────────────── */
   .notify-btn{background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;opacity:.35;transition:opacity .15s;line-height:1;vertical-align:middle}
   .notify-btn:hover,.notify-btn.notified{opacity:1}
+  .discuss-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:2px 5px;opacity:.7;transition:opacity .15s;line-height:1;vertical-align:middle}
+  .discuss-btn:hover{opacity:1}
+  /* ── DISCUSSION MODAL ───────────────────────────────────────────── */
+  .disc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .2s}
+  .disc-overlay.active{opacity:1;pointer-events:all}
+  .disc-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(620px,95vw);height:80vh;display:flex;flex-direction:column;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.2);z-index:1000;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;overflow:hidden}
+  .disc-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+  .disc-header{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 24px 16px;border-bottom:1px solid #e2e8f0;flex-shrink:0}
+  .disc-close{background:none;border:none;cursor:pointer;font-size:18px;color:#64748b;padding:4px 8px;border-radius:6px}
+  .disc-close:hover{background:#f1f5f9}
+  .disc-compose{padding:16px 24px;border-bottom:1px solid #e2e8f0;flex-shrink:0}
+  .disc-compose textarea{width:100%;box-sizing:border-box;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;resize:none;background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
+  .disc-compose textarea:focus{border-color:var(--accent)}
+  .disc-compose-bar{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+  .disc-post-btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:7px 18px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;font-family:inherit}
+  .disc-post-btn:hover{opacity:.85}
+  .disc-post-btn:disabled{opacity:.4;cursor:default}
+  .disc-feed{flex:1;overflow-y:auto;padding:16px 24px;display:flex;flex-direction:column;gap:14px}
+  .disc-empty{text-align:center;padding:40px 20px;color:var(--muted)}
+  .disc-post{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+  .disc-post-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .disc-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .disc-post-author{font-size:13px;font-weight:600;color:var(--text)}
+  .disc-post-time{font-size:11px;color:var(--muted);margin-left:auto}
+  .disc-post-content{font-size:14px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+  .disc-post-actions{display:flex;align-items:center;gap:10px;margin-top:10px}
+  .disc-action-btn{background:none;border:none;cursor:pointer;font-size:12px;color:var(--muted);padding:3px 6px;border-radius:6px;font-family:inherit;transition:color .15s}
+  .disc-action-btn:hover{color:var(--accent)}
+  .disc-action-btn.danger:hover{color:#dc2626}
+  .disc-replies{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
+  .disc-reply{display:flex;gap:8px;align-items:flex-start}
+  .disc-reply-avatar{width:22px;height:22px;border-radius:50%;background:#94a3b8;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .disc-reply-body{flex:1;min-width:0}
+  .disc-reply-meta{display:flex;align-items:baseline;gap:6px;margin-bottom:3px}
+  .disc-reply-author{font-size:12px;font-weight:600;color:var(--text)}
+  .disc-reply-time{font-size:11px;color:var(--muted)}
+  .disc-reply-content{font-size:13px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+  .disc-reply-box{display:flex;gap:8px;align-items:flex-start;margin-top:10px}
+  .disc-reply-input{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;resize:none;transition:border-color .15s}
+  .disc-reply-input:focus{border-color:var(--accent)}
+  .disc-reply-send{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0}
+  .disc-reply-send:disabled{opacity:.4;cursor:default}
+  .dark .disc-modal{background:#1e293b;color:#e2e8f0}
+  .dark .disc-header{border-color:#334155}
+  .dark .disc-compose{border-color:#334155}
+  .dark .disc-post{background:#1e293b;border-color:#334155}
+  .dark .disc-close:hover{background:#334155}
+  .dark .disc-replies{border-color:#334155}
   /* ── NOTIFICATION MODAL ─────────────────────────────────────────── */
   .notif-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;opacity:0;pointer-events:none;transition:opacity .2s}
   .notif-overlay.active{opacity:1;pointer-events:all}
@@ -516,7 +590,7 @@
     .pathway-grid{grid-template-columns:1fr}
     .fc-grid{grid-template-columns:1fr 1fr}
     .admin-grid{grid-template-columns:repeat(3,1fr)}
-    .quiz-modal{width:min(560px,98vw);padding:18px}
+    .quiz-page-inner{padding:20px 14px 40px}
     .module-table td{font-size:13px}
   }
   @media(max-width:400px){
@@ -644,8 +718,8 @@
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <h1>Every <span>UCC</span> Past Exam Paper.<br>One Place.</h1>
-    <p>Browse courses across UCC. Past papers are always free — Pro unlocks marking schemes and quiz practice.</p>
+    <h1>Ireland's Student<br>Study Hub.</h1>
+    <p>Browse courses across Irish universities. Past papers are always free — Pro unlocks marking schemes and quiz practice.</p>
     <div class="stats-bar" id="statsBar">
       <div class="stat-item"><span class="stat-num" id="statPapers">—</span><span class="stat-label">exam papers</span></div>
       <div class="stat-divider"></div>
@@ -673,12 +747,15 @@
     <h3 style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">🔥 Your Most Visited</h3>
     <div id="trendingGrid" class="course-grid"></div>
   </div>
+  <div id="homeUniPicker" class="uni-picker"></div>
   <div id="categoriesRoot" class="categories"></div>
+  <div id="homeUCDView" style="display:none"></div>
 </div>
 
 <!-- COURSE LIST -->
 <div class="page" id="page-courses">
   <div class="course-list-page">
+    <div id="coursesUniPicker" class="uni-picker"></div>
     <!-- Degree bucket grid (shown when no bucket selected) -->
     <div id="degBucketView">
       <h2 style="font-size:22px;font-weight:800;margin-bottom:4px">Browse by Degree</h2>
@@ -699,6 +776,8 @@
       </div>
       <div id="courseListRoot"></div>
     </div>
+    <!-- UCD course browser -->
+    <div id="coursesUCDView" style="display:none"></div>
   </div>
 </div>
 
@@ -842,19 +921,7 @@
   </div>
 </div>
 
-<footer>
-  <div class="footer-social">
-    <a href="https://www.linkedin.com/in/study-uni" target="_blank" rel="noopener" class="li" title="LinkedIn" aria-label="Study-Uni on LinkedIn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45C23.21 24 24 23.23 24 22.27V1.73C24 .77 23.21 0 22.22 0z"/></svg>
-    </a>
-    <a href="https://www.instagram.com/studyuni" target="_blank" rel="noopener" class="ig" title="Instagram" aria-label="Study-Uni on Instagram">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-    </a>
-    <a href="https://www.facebook.com/studyuni" target="_blank" rel="noopener" class="fb" title="Facebook" aria-label="Study-Uni on Facebook">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-    </a>
-  </div>
-  © 2026 Study-Uni · UCC Past Exam Papers · Not affiliated with University College Cork ·
+<footer>© 2026 Study-Uni · UCC Past Exam Papers · Not affiliated with University College Cork ·
   <a onclick="showPage('privacy');return false" href="#">Privacy Policy</a> ·
   <a onclick="showPage('terms');return false" href="#">Terms of Service</a>
 </footer>
@@ -1052,6 +1119,167 @@
         <span class="deg-badge">${courses.length} course${courses.length!==1?'s':''}${papers>0?' · '+papers+' papers':''}</span>
       </div>`;
     }).join('');
+  }
+
+  // ─── UNIVERSITY PICKER ────────────────────────────────────────────────────
+  var _selectedUni = 'ucc';
+
+  function _uniTabsHTML(activeId) {
+    return (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => !u.group).map(u => `
+      <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectUni('${u.id}')">
+        <span class="uni-tab-icon">${u.icon}</span>
+        <span class="uni-tab-body">
+          <span class="uni-tab-name">${u.name} — ${u.fullName}${!u.live ? '<span class="uni-soon-badge">Coming soon</span>' : ''}</span>
+          <span class="uni-tab-sub">${u.tagline}</span>
+        </span>
+      </button>`).join('');
+  }
+
+  function _buildMTUSubpickerHTML(activeId) {
+    const unis = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => u.group === 'mtu');
+    const back = `<button onclick="_showMainUniPicker()" style="display:inline-flex;align-items:center;gap:6px;background:none;border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--accent);margin-bottom:12px">← All universities</button>`;
+    const grid = `<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">` +
+      unis.map(u => `
+        <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectMTUCampus('${u.id}')" style="min-width:0;flex:none;padding:12px 14px">
+          <span class="uni-tab-icon" style="font-size:22px">${u.icon}</span>
+          <span class="uni-tab-body">
+            <span class="uni-tab-name" style="font-size:13px">${u.name}<span class="uni-soon-badge">Coming soon</span></span>
+            <span class="uni-tab-sub">${u.fullName}</span>
+          </span>
+        </button>`).join('') +
+      `</div>`;
+    return back + grid;
+  }
+
+  function _showMainUniPicker() {
+    ['homeUniPicker','coursesUniPicker'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = _uniTabsHTML('mtu');
+    });
+    const placeholder = `<div class="ucd-coming-banner" style="text-align:center;padding:40px 20px">
+      <span style="font-size:40px">⚙️</span>
+      <p style="font-size:18px;font-weight:700;margin:12px 0 6px">Munster Technological University</p>
+      <p style="color:var(--muted);margin:0">Choose a campus from the list to browse courses.</p>
+    </div>`;
+    ['categoriesRoot','degBucketView','degCourseView'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+    ['homeUCDView','coursesUCDView'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = ''; el.innerHTML = placeholder; } });
+  }
+
+  function selectMTUCampus(campusId) {
+    _selectedUni = campusId;
+    ['homeUniPicker','coursesUniPicker'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = _buildMTUSubpickerHTML(campusId);
+    });
+    ['categoriesRoot','degBucketView','degCourseView'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+    const html = _buildUniCoursesHTML(campusId);
+    ['homeUCDView','coursesUCDView'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = ''; el.innerHTML = html; } });
+  }
+
+  function _getCourseCategory(name) {
+    const n = name.toLowerCase();
+    if (/\blaw\b|legal|crimin|justice/.test(n)) return 'Law';
+    if (/medicine|surgery|nursing|physiotherapy|midwifery|radiography|podiatric|occupational therapy|speech and lang|pharmacy|human nutrition|\bdental\b|radiation therapy|human health|clinical speech|paramedic|sport and exercise|exercise and health|health fitness|\bnutrition\b|health and exercise/.test(n)) return 'MedHealth';
+    if (/(engineering|architecture|planning|construction management|landscape arch|nautical|quantity surveying)/.test(n) && !/biomedical science/.test(n)) return 'Engineering';
+    if (/computer science|computer systems|computer games|information technology|information systems|business information systems|computational social|artificial intelligence|machine learning|cyber.security|\bcybersecurity\b|interaction design|software development|\bcomputing\b/.test(n)) return 'MathsCS';
+    if (/\bmathematics?\b|mathematical science|\bstatistics\b|actuarial|financial mathematics/.test(n) && !/education/.test(n)) return 'MathsCS';
+    if (/\bphysics\b|theoretical physics|astronomy|space science|physical sciences|nanoscience/.test(n)) return 'PhysSci';
+    if (/\bchemistry\b|biopharmaceut|chemical sciences/.test(n)) return 'PhysSci';
+    if (/biochemistry|molecular biology|genetics|genomics|microbiology|neuroscience|physiology|pharmacology|biotechnology|biomedical science|cell and molecular|biomedical, health|bioscience|biotherapeutic|immuno|pharmaceutical science|animal bioscience|veterinary bioscience|wildlife biology|biological sciences/.test(n)) return 'LifeSci';
+    if (/zoolog|equine|animal science|animal and crop|agri-environ|agricultural science|agricultural systems|crop science|dairy|forestry|horticulture|plant biology|marine science|earth and ocean|earth science|environmental science|geography|geoscience|geosystem|sustainability|sustainable food|food science|food and agribusiness|food business|environmental studies|biological and environmental|\bagriculture\b/.test(n)) return 'EnvSci';
+    if (/education/.test(n)) return 'Education';
+    if (/\bbusiness\b|commerce|economics|hotel management|accounting|financial math|global luxury|technology management|human resource management|hospitality management/.test(n)) return 'Business';
+    return 'Arts';
+  }
+
+  function _buildUniCoursesHTML(uniId) {
+    const uni = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).find(u => u.id === uniId);
+    if (!uni || !uni.courses) return '';
+    const courses = uni.courses.slice().sort((a,b) => a.name.localeCompare(b.name));
+    const buckets = (typeof DEG_BUCKETS !== 'undefined') ? DEG_BUCKETS : [];
+    const counts = {};
+    courses.forEach(c => { const cat = _getCourseCategory(c.name); counts[cat] = (counts[cat]||0) + 1; });
+    const banner = `<div class="ucd-coming-banner" style="margin-bottom:20px">
+      <span style="font-size:24px">🚀</span>
+      <span><strong>${uni.name} content is coming soon!</strong> We're building past papers, marking schemes, and quiz practice for all ${courses.length} ${uni.name} courses. Browse below — click a subject area to see courses.</span>
+    </div>`;
+    const grid = `<div class="deg-grid">${buckets.filter(b => counts[b.id]).map(b => `
+      <div class="deg-card" style="--deg-color:${b.color}" onclick="_openUniCategory('${uniId}','${b.id}')">
+        <span class="deg-icon">${b.icon}</span>
+        <h3>${b.label}</h3>
+        <div class="deg-sub">${b.full}</div>
+        <span class="deg-badge">${counts[b.id]} course${counts[b.id]!==1?'s':''}</span>
+      </div>`).join('')}</div>`;
+    return banner + grid;
+  }
+
+  function _openUniCategory(uniId, bucketId) {
+    const uni = (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).find(u => u.id === uniId);
+    const bucket = (typeof DEG_BUCKETS !== 'undefined') ? DEG_BUCKETS.find(b => b.id === bucketId) : null;
+    if (!uni || !bucket) return;
+    const courses = uni.courses.filter(c => _getCourseCategory(c.name) === bucketId).sort((a,b) => a.name.localeCompare(b.name));
+    const html = `
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+        <button onclick="${['homeUCDView','coursesUCDView'].map(id => `(document.getElementById('${id}')&&(document.getElementById('${id}').innerHTML=_buildUniCoursesHTML('${uniId}')))`).join(';')}" style="background:none;border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--accent)">← Back</button>
+        <div>
+          <h2 style="font-size:20px;font-weight:800;margin:0">${bucket.icon} ${bucket.full}</h2>
+          <p style="color:var(--muted);font-size:13px;margin:0">${uni.fullName} · ${courses.length} course${courses.length!==1?'s':''}</p>
+        </div>
+      </div>
+      <div class="ucd-grid">
+        ${courses.map(c => `<div class="ucd-card">
+          <span class="ucd-card-name">${c.name}${c.cao ? `<br><span style="font-size:11px;color:var(--muted);font-weight:500">${c.cao}${c.school ? ' · ' + c.school : ''}</span>` : ''}</span>
+          <a class="ucd-card-link" href="${c.url}" target="_blank" rel="noopener">${uni.name} ↗</a>
+        </div>`).join('')}
+      </div>`;
+    ['homeUCDView','coursesUCDView'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.style.display !== 'none') el.innerHTML = html;
+    });
+  }
+
+  function selectUni(uniId) {
+    _selectedUni = uniId;
+    if (uniId === 'mtu') {
+      ['homeUniPicker','coursesUniPicker'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = _buildMTUSubpickerHTML(null);
+      });
+      const placeholder = `<div class="ucd-coming-banner" style="text-align:center;padding:40px 20px">
+        <span style="font-size:40px">⚙️</span>
+        <p style="font-size:18px;font-weight:700;margin:12px 0 6px">Munster Technological University</p>
+        <p style="color:var(--muted);margin:0">Choose a campus above to browse courses.</p>
+      </div>`;
+      ['categoriesRoot','degBucketView','degCourseView'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
+      ['homeUCDView','coursesUCDView'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = ''; el.innerHTML = placeholder; } });
+      return;
+    }
+    const isUCC = uniId === 'ucc';
+    // Update all pickers
+    ['homeUniPicker','coursesUniPicker'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = _uniTabsHTML(uniId);
+    });
+    // Home page
+    const cats = document.getElementById('categoriesRoot');
+    const homeUCD = document.getElementById('homeUCDView');
+    if (cats) cats.style.display = isUCC ? '' : 'none';
+    if (homeUCD) { homeUCD.style.display = isUCC ? 'none' : ''; if (!isUCC) homeUCD.innerHTML = _buildUniCoursesHTML(uniId); }
+    // Courses page
+    const degView = document.getElementById('degBucketView');
+    const coursesUCD = document.getElementById('coursesUCDView');
+    const degCourse = document.getElementById('degCourseView');
+    if (degView) degView.style.display = isUCC ? '' : 'none';
+    if (degCourse && !isUCC) degCourse.style.display = 'none';
+    if (coursesUCD) { coursesUCD.style.display = isUCC ? 'none' : ''; if (!isUCC) coursesUCD.innerHTML = _buildUniCoursesHTML(uniId); }
+  }
+
+  function _initUniPicker() {
+    const tabs = _uniTabsHTML(_selectedUni);
+    ['homeUniPicker','coursesUniPicker'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = tabs;
+    });
   }
 
   function openDegBucket(bucketId) {
@@ -1364,7 +1592,7 @@
       const notifyBtn = `<button class="notify-btn${NOTIFIED[m.code]?' notified':''}" data-code="${esc(m.code)}" onclick="openNotifModal('${esc(m.code)}','${esc(m.name)}')" title="Notify me when new content is added">🔔</button>`;
       const paperCell = `<div class="papers-cell">${paperRows}</div>`;
       _modData[m.code] = { name: m.name, years: regularPapers.map(f => typeof f === 'object' ? f.label : labelFromFilename(f)) };
-      const predictCell = `<div class="pred-wrap"><button class="btn-predict" onclick="togglePredict('${esc(m.code)}',this)">📊 Predict</button><div class="pred-panel"></div></div>`;
+      const predictCell = `<div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px"><div class="pred-wrap"><button class="btn-predict" onclick="togglePredict('${esc(m.code)}',this)">📊 Predict</button><div class="pred-panel"></div></div><button class="btn-discuss" onclick="openDiscussion('${esc(m.code)}','${esc(m.name)}')">💬 Discuss</button></div>`;
       return `<tr class="${isEmpty ? 'row-empty' : ''}">
         <td><span class="mod-code">${m.code}</span>${notifyBtn}</td>
         <td>${m.name}</td>
@@ -1486,10 +1714,8 @@
     if (!val) return;
     const docs = Array.isArray(val) ? val : [{ label: 'Model Answer', url: val }];
     if (docs.length === 1) { window.open(docs[0].url, '_blank'); return; }
-    document.getElementById('qhCode').textContent = code;
-    document.getElementById('qhName').textContent = '';
-    document.getElementById('quizSubtitle').textContent = 'Available Model Answers';
-    document.getElementById('quizBody').innerHTML = docs.map(function(d) {
+    document.getElementById('maCode').textContent = code;
+    document.getElementById('maBody').innerHTML = docs.map(function(d) {
       const newBadge = NEW_URLS.has(d.url) ? '<span class="badge-new">New</span>' : '';
       return '<a class="paper-chip" href="' + d.url + '" target="_blank" rel="noopener" ' +
              'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
@@ -1497,16 +1723,23 @@
              'font-weight:500;color:#0f172a;text-decoration:none">' +
              '<span style="font-size:18px">&#128196;</span>' + d.label + newBadge + '</a>';
     }).join('');
-    document.getElementById('quizOverlay').classList.add('active');
-    document.getElementById('quizModal').classList.add('active');
+    document.getElementById('maOverlay').classList.add('active');
+    document.getElementById('maModal').classList.add('active');
+  }
+
+  function closeModelAnswer() {
+    document.getElementById('maOverlay').classList.remove('active');
+    document.getElementById('maModal').classList.remove('active');
   }
 
   function openQuiz(code, name) {
     requirePro(function() { _doOpenQuiz(code, name); }, 'quiz:' + code + ':' + name);
   }
 
+  let _qPrevPage = 'courses';
   function _doOpenQuiz(code, name) {
     _qCode = code; _qName = name;
+    _qPrevPage = (document.querySelector('.page.active') || {}).id?.replace('page-', '') || 'courses';
     document.getElementById('qhCode').textContent = code;
     document.getElementById('qhName').textContent = ' — ' + name;
     const bank = QUIZ_BANK[code];
@@ -1524,9 +1757,7 @@
     } else {
       _renderTopicPicker(bank);
     }
-    document.getElementById('quizOverlay').classList.add('active');
-    document.getElementById('quizModal').classList.add('active');
-    document.getElementById('quizModal').scrollTop = 0;
+    showPage('quiz');
   }
 
   function _renderTopicPicker(bank) {
@@ -1586,7 +1817,7 @@
       '<button onclick="_renderTopicPicker(QUIZ_BANK[_qCode])" style="width:100%;margin-top:8px;padding:11px;background:#f1f5f9;color:#475569;border:none;border-radius:10px;font-size:14px;cursor:pointer">&#8592; Back to topics</button>' +
       histHtml +
       '</div>';
-    document.getElementById('quizModal').scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   function _launchQuiz() {
@@ -1597,13 +1828,12 @@
     document.getElementById('quizSubtitle').textContent = _qTopic;
     _qState = { questions: selected, current:0, score:0, answered:false, incomplete:0, times:[], fillReviewed:0 };
     _renderQ();
-    document.getElementById('quizModal').scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   function closeQuiz() {
     if (_qTimerInterval) { clearInterval(_qTimerInterval); _qTimerInterval = null; }
-    document.getElementById('quizOverlay').classList.remove('active');
-    document.getElementById('quizModal').classList.remove('active');
+    showPage(_qPrevPage || 'courses');
   }
 
   function _renderQ() {
@@ -1750,7 +1980,7 @@
     _qState.answered = false;
     if (_qState.current >= _qState.questions.length) { _showResults(); return; }
     _renderQ();
-    document.getElementById('quizModal').scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   function _showResults() {
@@ -2018,10 +2248,10 @@
         document.getElementById('authSuccessMsg').style.display = 'block';
         btn.textContent = '✓ Check your email';
         // Send welcome email (fire-and-forget)
-        fetch('/api/send-welcome', {
+        fetch('/api/account', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, firstName })
+          body: JSON.stringify({ action: 'send-welcome', email, firstName })
         }).catch(function() {});
         return;
       } else {
@@ -2505,6 +2735,220 @@
     setTimeout(closeNotifModal, 2200);
   }
 
+  // ── DISCUSSION ────────────────────────────────────────────────────────────
+  var _discCode = '', _discName = '', _discCurrentUserId = '';
+
+  function _timeAgo(iso) {
+    const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
+    if (diff < 60) return 'just now';
+    if (diff < 3600) return Math.floor(diff/60) + 'm ago';
+    if (diff < 86400) return Math.floor(diff/3600) + 'h ago';
+    return Math.floor(diff/86400) + 'd ago';
+  }
+
+  function _discAvatar(name, size) {
+    const letter = (name || '?')[0].toUpperCase();
+    const colors = ['#3b82f6','#8b5cf6','#ec4899','#f59e0b','#10b981','#ef4444','#06b6d4'];
+    const color = colors[letter.charCodeAt(0) % colors.length];
+    return `<div class="disc-avatar" style="width:${size}px;height:${size}px;font-size:${Math.floor(size*0.43)}px;background:${color}">${letter}</div>`;
+  }
+
+  function openDiscussion(code, name) {
+    if (!_currentUser) { openAuthModal(); return; }
+    _discCode = code; _discName = name;
+    document.getElementById('discModuleLabel').textContent = code + ' · ' + name;
+    document.getElementById('discInput').value = '';
+    document.getElementById('discCharCount').textContent = '0 / 2000';
+    document.getElementById('discFeed').innerHTML = '<div class="disc-empty">Loading…</div>';
+    document.getElementById('discOverlay').classList.add('active');
+    document.getElementById('discModal').classList.add('active');
+    _loadDiscussion();
+  }
+
+  function closeDiscussion() {
+    document.getElementById('discOverlay').classList.remove('active');
+    document.getElementById('discModal').classList.remove('active');
+  }
+
+  async function _loadDiscussion() {
+    const { data: { session } } = await _sbClient.auth.getSession();
+    if (!session) return;
+    try {
+      const r = await fetch('/api/discussion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'fetch', accessToken: session.access_token, moduleCode: _discCode }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Failed');
+      _discCurrentUserId = data.currentUserId || '';
+      _renderDiscFeed(data.posts || []);
+    } catch(e) {
+      document.getElementById('discFeed').innerHTML = '<div class="disc-empty">Could not load — try again.</div>';
+    }
+  }
+
+  function _renderDiscFeed(posts) {
+    const feed = document.getElementById('discFeed');
+    if (!posts.length) {
+      feed.innerHTML = '<div class="disc-empty">No posts yet — be the first to start the conversation!</div>';
+      return;
+    }
+    feed.innerHTML = posts.map(p => _renderDiscPost(p)).join('');
+  }
+
+  function _renderDiscPost(p) {
+    const isOwn = p.user_id === _discCurrentUserId;
+    const name = p.user_name || p.user_email.split('@')[0];
+    const repliesHTML = p.replies && p.replies.length ? p.replies.map(r => _renderDiscReply(r)).join('') : '';
+    return `<div class="disc-post" id="disc-post-${p.id}">
+      <div class="disc-post-meta">
+        ${_discAvatar(name, 28)}
+        <span class="disc-post-author">${_esc(name)}</span>
+        <span class="disc-post-time">${_timeAgo(p.created_at)}</span>
+      </div>
+      <div class="disc-post-content">${_esc(p.content)}</div>
+      <div class="disc-post-actions">
+        <button class="disc-action-btn" onclick="_toggleReplyBox('${p.id}')">💬 Reply${p.replies&&p.replies.length?' ('+p.replies.length+')':''}</button>
+        <button class="disc-action-btn danger" onclick="_flagDisc('post','${p.id}')" title="Flag this post">🚩 Flag</button>
+        ${isOwn ? `<button class="disc-action-btn danger" onclick="_deleteDisc('post','${p.id}')">🗑️ Delete</button>` : ''}
+      </div>
+      ${repliesHTML ? `<div class="disc-replies">${repliesHTML}</div>` : '<div class="disc-replies" id="disc-replies-${p.id}"></div>'}
+      <div class="disc-reply-box" id="disc-reply-box-${p.id}" style="display:none">
+        <textarea class="disc-reply-input" id="disc-reply-input-${p.id}" rows="2" placeholder="Write a reply…" oninput="this.nextElementSibling.disabled=!this.value.trim()"></textarea>
+        <button class="disc-reply-send" disabled onclick="_submitReply('${p.id}')">Send</button>
+      </div>
+    </div>`;
+  }
+
+  function _renderDiscReply(r) {
+    const isOwn = r.user_id === _discCurrentUserId;
+    const name = r.user_name || r.user_email.split('@')[0];
+    return `<div class="disc-reply" id="disc-reply-${r.id}">
+      ${_discAvatar(name, 22)}
+      <div class="disc-reply-body">
+        <div class="disc-reply-meta">
+          <span class="disc-reply-author">${_esc(name)}</span>
+          <span class="disc-reply-time">${_timeAgo(r.created_at)}</span>
+          <button class="disc-action-btn danger" onclick="_flagDisc('reply','${r.id}')" style="margin-left:4px;font-size:11px" title="Flag">🚩</button>
+          ${isOwn ? `<button class="disc-action-btn danger" onclick="_deleteDisc('reply','${r.id}')" style="font-size:11px">🗑️</button>` : ''}
+        </div>
+        <div class="disc-reply-content">${_esc(r.content)}</div>
+      </div>
+    </div>`;
+  }
+
+  function _esc(s) {
+    return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function _toggleReplyBox(postId) {
+    const box = document.getElementById('disc-reply-box-' + postId);
+    if (!box) return;
+    const showing = box.style.display !== 'none';
+    box.style.display = showing ? 'none' : '';
+    if (!showing) box.querySelector('textarea').focus();
+  }
+
+  async function submitDiscussionPost() {
+    const input = document.getElementById('discInput');
+    const content = (input.value || '').trim();
+    if (!content) return;
+    const btn = document.getElementById('discPostBtn');
+    btn.disabled = true;
+    const { data: { session: _ps } } = await _sbClient.auth.getSession();
+    try {
+      const r = await fetch('/api/discussion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'post', accessToken: _ps?.access_token, moduleCode: _discCode, content }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Failed');
+      input.value = '';
+      document.getElementById('discCharCount').textContent = '0 / 2000';
+      // Prepend new post to feed
+      const feed = document.getElementById('discFeed');
+      const empty = feed.querySelector('.disc-empty');
+      if (empty) empty.remove();
+      const div = document.createElement('div');
+      div.innerHTML = _renderDiscPost(data.post);
+      feed.insertBefore(div.firstElementChild, feed.firstChild);
+    } catch(e) {
+      alert('Could not post: ' + e.message);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function _submitReply(postId) {
+    const input = document.getElementById('disc-reply-input-' + postId);
+    const content = (input.value || '').trim();
+    if (!content) return;
+    const btn = input.nextElementSibling;
+    btn.disabled = true;
+    const { data: { session: _rs } } = await _sbClient.auth.getSession();
+    try {
+      const r = await fetch('/api/discussion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'reply', accessToken: _rs?.access_token, postId, content }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || 'Failed');
+      input.value = '';
+      // Add reply to the replies section
+      let repliesDiv = document.querySelector('#disc-post-' + postId + ' .disc-replies');
+      if (!repliesDiv) {
+        repliesDiv = document.createElement('div');
+        repliesDiv.className = 'disc-replies';
+        repliesDiv.id = 'disc-replies-' + postId;
+        document.getElementById('disc-post-' + postId).insertBefore(repliesDiv, document.getElementById('disc-reply-box-' + postId));
+      }
+      const div = document.createElement('div');
+      div.innerHTML = _renderDiscReply(data.reply);
+      repliesDiv.appendChild(div.firstElementChild);
+      // Update reply count button
+      const replyBtn = document.querySelector('#disc-post-' + postId + ' .disc-action-btn');
+      const count = repliesDiv.querySelectorAll('.disc-reply').length;
+      if (replyBtn) replyBtn.textContent = '💬 Reply (' + count + ')';
+    } catch(e) {
+      alert('Could not send reply: ' + e.message);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function _deleteDisc(type, id) {
+    if (!confirm('Delete this ' + type + '? This cannot be undone.')) return;
+    const { data: { session: _ds } } = await _sbClient.auth.getSession();
+    try {
+      const r = await fetch('/api/discussion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete', accessToken: _ds?.access_token, type, id }),
+      });
+      if (!r.ok) throw new Error((await r.json()).error || 'Failed');
+      const el = document.getElementById('disc-' + type + '-' + id);
+      if (el) el.remove();
+    } catch(e) {
+      alert('Could not delete: ' + e.message);
+    }
+  }
+
+  async function _flagDisc(type, id) {
+    if (!confirm('Report this content to the moderator?')) return;
+    const { data: { session: _fs } } = await _sbClient.auth.getSession();
+    try {
+      await fetch('/api/discussion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'flag', accessToken: _fs?.access_token, type, id }),
+      });
+      alert('Reported. Thank you.');
+    } catch(e) {}
+  }
+
   // ── VIEWED STATE ──────────────────────────────────────────────────────────
   const VIEWED = (function() {
     try { return JSON.parse(localStorage.getItem('su_viewed') || '{}'); } catch(e) { return {}; }
@@ -2889,8 +3333,8 @@
           usersBody.innerHTML = '<div class="admin-empty">No users found.</div>';
         } else {
           const fmt = iso => iso ? new Date(iso).toLocaleDateString('en-IE', { day:'numeric', month:'short', year:'numeric' }) : '—';
-          usersBody.innerHTML = '<table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Signed up</th><th>Last seen</th></tr></thead><tbody>' +
-            d.recentUsers.map(u => `<tr><td style="font-weight:600">${u.name || '—'}</td><td style="color:var(--muted)">${u.email || '—'}</td><td style="color:var(--muted)">${fmt(u.created_at)}</td><td style="color:var(--muted)">${fmt(u.last_sign_in)}</td></tr>`).join('') +
+          usersBody.innerHTML = '<table class="admin-table"><thead><tr><th>Email</th><th>Signed up</th><th>Last seen</th></tr></thead><tbody>' +
+            d.recentUsers.map(u => `<tr><td style="font-weight:600">${u.email || '—'}</td><td style="color:var(--muted)">${fmt(u.created_at)}</td><td style="color:var(--muted)">${fmt(u.last_sign_in)}</td></tr>`).join('') +
             '</tbody></table>';
         }
       }
@@ -2938,6 +3382,7 @@
     updateStreak();
     buildHome();
     buildDegBuckets();
+    _initUniPicker();
     initAuth();
     initCookieConsent();
     initExamCountdown();
@@ -2970,7 +3415,7 @@
         }
       }
       // Handle other hash pages
-      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai', '#admin':'admin', '#privacy':'privacy', '#terms':'terms' };
+      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai', '#admin':'admin', '#privacy':'privacy', '#terms':'terms', '#quiz':'courses' };
       if (pageMap[hash]) { showPage(pageMap[hash]); return true; }
       return false;
     }
@@ -3165,10 +3610,10 @@
     try {
       const { data: { session } } = await _sbClient.auth.getSession();
       if (!session) throw new Error('Not signed in');
-      const res = await fetch('/api/delete-account', {
+      const res = await fetch('/api/account', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accessToken: session.access_token })
+        body: JSON.stringify({ action: 'delete', accessToken: session.access_token })
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || 'Delete failed');
@@ -3377,16 +3822,51 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
 </div>
 
 <!-- QUIZ MODAL -->
-<div class="quiz-overlay" id="quizOverlay" onclick="if(event.target===this)closeQuiz()"></div>
-<div class="quiz-modal" id="quizModal" role="dialog" aria-modal="true">
+<!-- DISCUSSION MODAL -->
+<div class="disc-overlay" id="discOverlay" onclick="if(event.target===this)closeDiscussion()"></div>
+<div class="disc-modal" id="discModal" role="dialog" aria-modal="true">
+  <div class="disc-header">
+    <div>
+      <div style="font-size:17px;font-weight:800">💬 Discussion</div>
+      <div id="discModuleLabel" style="font-size:12px;color:var(--muted);margin-top:2px"></div>
+    </div>
+    <button class="disc-close" onclick="closeDiscussion()">✕</button>
+  </div>
+  <div class="disc-compose">
+    <textarea id="discInput" rows="3" placeholder="Share a note, question, or resource for this module…" style="width:100%;box-sizing:border-box;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;resize:none;background:var(--surface);color:var(--text);outline:none" oninput="document.getElementById('discCharCount').textContent=Math.min(this.value.length,2000)+' / 2000';document.getElementById('discPostBtn').disabled=!this.value.trim()"></textarea>
+    <div class="disc-compose-bar">
+      <span id="discCharCount" style="font-size:12px;color:var(--muted)">0 / 2000</span>
+      <button id="discPostBtn" class="disc-post-btn" onclick="submitDiscussionPost()" disabled>Post</button>
+    </div>
+  </div>
+  <div class="disc-feed" id="discFeed"></div>
+</div>
+
+<!-- Model answer modal (PDF list only) -->
+<div class="quiz-overlay" id="maOverlay" onclick="if(event.target===this)closeModelAnswer()"></div>
+<div class="quiz-modal" id="maModal" role="dialog" aria-modal="true">
   <div class="quiz-header">
     <div class="quiz-hdr-left">
-      <div><span class="qh-code" id="qhCode"></span><span class="qh-name" id="qhName"></span></div>
-      <div class="quiz-subtitle" id="quizSubtitle">Quick Quiz — 5 questions</div>
+      <div><span class="qh-code" id="maCode"></span></div>
+      <div class="quiz-subtitle">Available Model Answers</div>
     </div>
-    <button class="quiz-close" onclick="closeQuiz()" aria-label="Close">✕</button>
+    <button class="quiz-close" onclick="closeModelAnswer()" aria-label="Close">✕</button>
   </div>
-  <div id="quizBody"></div>
+  <div id="maBody"></div>
+</div>
+
+<!-- Quiz full page -->
+<div class="page" id="page-quiz">
+  <div class="quiz-page-inner">
+    <button class="quiz-back-btn" onclick="closeQuiz()">← Back to Courses</button>
+    <div class="quiz-header">
+      <div class="quiz-hdr-left">
+        <div><span class="qh-code" id="qhCode"></span><span class="qh-name" id="qhName"></span></div>
+        <div class="quiz-subtitle" id="quizSubtitle">Quick Quiz — 5 questions</div>
+      </div>
+    </div>
+    <div id="quizBody"></div>
+  </div>
 </div>
 
 <!-- ACCOUNT PAGE -->
