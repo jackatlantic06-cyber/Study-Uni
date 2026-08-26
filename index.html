@@ -3250,12 +3250,23 @@
 
   // ── ADMIN DASHBOARD ───────────────────────────────────────────────────────
   async function loadAdminStats() {
-    if (!_sbClient || !_currentUser) return;
+    const grid = document.getElementById('adminStatGrid');
+    if (!_sbClient || !_currentUser) {
+      if (grid) grid.innerHTML = '<div style="grid-column:1/-1;padding:12px 0;color:#f59e0b;font-size:13px;font-weight:600">Not signed in — please sign in first.</div>';
+      return;
+    }
     const owners = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
-    if (!owners.includes(_currentUser.email)) return;
+    if (!owners.includes(_currentUser.email)) {
+      if (grid) grid.innerHTML = '<div style="grid-column:1/-1;padding:12px 0;color:#ef4444;font-size:13px;font-weight:600">Access denied — not in OWNER_EMAILS.</div>';
+      return;
+    }
+    if (grid) grid.innerHTML = '<div style="grid-column:1/-1;padding:12px 0;color:var(--muted);font-size:13px">Loading…</div>';
     try {
       const { data: { session } } = await _sbClient.auth.getSession();
-      if (!session) return;
+      if (!session) {
+        if (grid) grid.innerHTML = '<div style="grid-column:1/-1;padding:12px 0;color:#ef4444;font-size:13px;font-weight:600">No active session — please sign in again.</div>';
+        return;
+      }
       const resp = await fetch('/api/admin-stats', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -3267,6 +3278,13 @@
         if (grid) grid.innerHTML = `<div style="grid-column:1/-1;padding:12px 0;color:#ef4444;font-size:13px;font-weight:600">Error: ${d.error || 'Server error — check Vercel logs'}</div>`;
         return;
       }
+      if (grid) grid.innerHTML = `
+        <div class="admin-stat"><div class="admin-stat-num" id="asTotalUsers">—</div><div class="admin-stat-label">Total users</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asWeekly">—</div><div class="admin-stat-label">New this week</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asPro">—</div><div class="admin-stat-label">Pro subscribers</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asFree">—</div><div class="admin-stat-label">Free users</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asConv">—</div><div class="admin-stat-label">Conversion rate</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asQuizzes">—</div><div class="admin-stat-label">Quizzes this week</div></div>`;
       const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
       set('asTotalUsers', (d.totalUsers||0).toLocaleString());
       set('asWeekly',     '+' + (d.weeklySignups||0));
