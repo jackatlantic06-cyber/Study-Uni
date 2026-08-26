@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
       .slice(0, 30)
       .map(u => ({
         email: u.email,
-        name: u.user_metadata?.first_name || u.user_metadata?.full_name || '',
+        name: u.user_metadata?.full_name || [u.user_metadata?.first_name, u.user_metadata?.last_name].filter(Boolean).join(' ') || '',
         created_at: u.created_at,
         last_sign_in: u.last_sign_in_at,
       }));
@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       .map(u => ({
         email: u.email,
-        name: u.user_metadata?.first_name || u.user_metadata?.full_name || '',
+        name: u.user_metadata?.full_name || [u.user_metadata?.first_name, u.user_metadata?.last_name].filter(Boolean).join(' ') || '',
         plan: ownerEmails.includes(u.email) ? 'Owner' : proIdSet.has(u.id) ? 'Pro' : 'Free',
         created_at: u.created_at,
         last_sign_in: u.last_sign_in_at,
