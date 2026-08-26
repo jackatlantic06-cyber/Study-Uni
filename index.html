@@ -162,11 +162,15 @@
     .pred-topic-name{font-size:12px;color:var(--text)}
     .pred-evidence{font-size:10px;font-weight:600;opacity:.75}
     .pred-note{font-size:11px;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px solid var(--border);line-height:1.5}
-    /* QUIZ MODAL */
+    /* MODEL ANSWER MODAL (small overlay) */
     .quiz-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .2s}
     .quiz-overlay.active{opacity:1;pointer-events:all}
     .quiz-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(560px,95vw);max-height:85vh;overflow-y:auto;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.2);z-index:1000;padding:28px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
     .quiz-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+    /* QUIZ FULL PAGE */
+    .quiz-page-inner{max-width:620px;margin:0 auto;padding:32px 20px 60px}
+    .quiz-back-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;padding:8px 16px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
+    .quiz-back-btn:hover{border-color:var(--accent);color:var(--accent)}
     .quiz-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #e2e8f0}
     .quiz-hdr-left .qh-code{font-family:monospace;color:#2563eb;font-weight:700;font-size:15px}
     .quiz-hdr-left .qh-name{font-weight:600;font-size:15px;color:#0f172a}
@@ -315,6 +319,8 @@
   /* ── DARK MODE ─────────────────────────────────────────────────────── */
   :root.dark{--bg:#0f172a;--surface:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;--accent:#60a5fa;--accent-light:rgba(96,165,250,.15);--shadow:0 1px 3px rgba(0,0,0,.35)}
   .dark .quiz-modal,.dark .auth-modal,.dark .pro-modal{background:#1e293b;color:#e2e8f0}
+  .dark #page-quiz .quiz-header{border-color:#334155}
+  .dark #page-quiz .quiz-opt{background:#1e293b;border-color:#334155;color:#e2e8f0}
   .dark .quiz-q,.dark .quiz-progress{color:#e2e8f0}
   .dark .quiz-opt{background:#1e293b;border-color:#334155;color:#e2e8f0}
   .dark .quiz-opt:hover:not(:disabled){background:rgba(96,165,250,.12);border-color:#60a5fa}
@@ -584,7 +590,7 @@
     .pathway-grid{grid-template-columns:1fr}
     .fc-grid{grid-template-columns:1fr 1fr}
     .admin-grid{grid-template-columns:repeat(3,1fr)}
-    .quiz-modal{width:min(560px,98vw);padding:18px}
+    .quiz-page-inner{padding:20px 14px 40px}
     .module-table td{font-size:13px}
   }
   @media(max-width:400px){
@@ -1708,10 +1714,8 @@
     if (!val) return;
     const docs = Array.isArray(val) ? val : [{ label: 'Model Answer', url: val }];
     if (docs.length === 1) { window.open(docs[0].url, '_blank'); return; }
-    document.getElementById('qhCode').textContent = code;
-    document.getElementById('qhName').textContent = '';
-    document.getElementById('quizSubtitle').textContent = 'Available Model Answers';
-    document.getElementById('quizBody').innerHTML = docs.map(function(d) {
+    document.getElementById('maCode').textContent = code;
+    document.getElementById('maBody').innerHTML = docs.map(function(d) {
       const newBadge = NEW_URLS.has(d.url) ? '<span class="badge-new">New</span>' : '';
       return '<a class="paper-chip" href="' + d.url + '" target="_blank" rel="noopener" ' +
              'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
@@ -1719,16 +1723,23 @@
              'font-weight:500;color:#0f172a;text-decoration:none">' +
              '<span style="font-size:18px">&#128196;</span>' + d.label + newBadge + '</a>';
     }).join('');
-    document.getElementById('quizOverlay').classList.add('active');
-    document.getElementById('quizModal').classList.add('active');
+    document.getElementById('maOverlay').classList.add('active');
+    document.getElementById('maModal').classList.add('active');
+  }
+
+  function closeModelAnswer() {
+    document.getElementById('maOverlay').classList.remove('active');
+    document.getElementById('maModal').classList.remove('active');
   }
 
   function openQuiz(code, name) {
     requirePro(function() { _doOpenQuiz(code, name); }, 'quiz:' + code + ':' + name);
   }
 
+  let _qPrevPage = 'courses';
   function _doOpenQuiz(code, name) {
     _qCode = code; _qName = name;
+    _qPrevPage = (document.querySelector('.page.active') || {}).id?.replace('page-', '') || 'courses';
     document.getElementById('qhCode').textContent = code;
     document.getElementById('qhName').textContent = ' — ' + name;
     const bank = QUIZ_BANK[code];
@@ -1746,9 +1757,7 @@
     } else {
       _renderTopicPicker(bank);
     }
-    document.getElementById('quizOverlay').classList.add('active');
-    document.getElementById('quizModal').classList.add('active');
-    document.getElementById('quizModal').scrollTop = 0;
+    showPage('quiz');
   }
 
   function _renderTopicPicker(bank) {
@@ -1808,7 +1817,7 @@
       '<button onclick="_renderTopicPicker(QUIZ_BANK[_qCode])" style="width:100%;margin-top:8px;padding:11px;background:#f1f5f9;color:#475569;border:none;border-radius:10px;font-size:14px;cursor:pointer">&#8592; Back to topics</button>' +
       histHtml +
       '</div>';
-    document.getElementById('quizModal').scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   function _launchQuiz() {
@@ -1819,13 +1828,12 @@
     document.getElementById('quizSubtitle').textContent = _qTopic;
     _qState = { questions: selected, current:0, score:0, answered:false, incomplete:0, times:[], fillReviewed:0 };
     _renderQ();
-    document.getElementById('quizModal').scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   function closeQuiz() {
     if (_qTimerInterval) { clearInterval(_qTimerInterval); _qTimerInterval = null; }
-    document.getElementById('quizOverlay').classList.remove('active');
-    document.getElementById('quizModal').classList.remove('active');
+    showPage(_qPrevPage || 'courses');
   }
 
   function _renderQ() {
@@ -1972,7 +1980,7 @@
     _qState.answered = false;
     if (_qState.current >= _qState.questions.length) { _showResults(); return; }
     _renderQ();
-    document.getElementById('quizModal').scrollTop = 0;
+    window.scrollTo(0, 0);
   }
 
   function _showResults() {
@@ -3407,7 +3415,7 @@
         }
       }
       // Handle other hash pages
-      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai', '#admin':'admin', '#privacy':'privacy', '#terms':'terms' };
+      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai', '#admin':'admin', '#privacy':'privacy', '#terms':'terms', '#quiz':'courses' };
       if (pageMap[hash]) { showPage(pageMap[hash]); return true; }
       return false;
     }
@@ -3834,16 +3842,31 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
   <div class="disc-feed" id="discFeed"></div>
 </div>
 
-<div class="quiz-overlay" id="quizOverlay" onclick="if(event.target===this)closeQuiz()"></div>
-<div class="quiz-modal" id="quizModal" role="dialog" aria-modal="true">
+<!-- Model answer modal (PDF list only) -->
+<div class="quiz-overlay" id="maOverlay" onclick="if(event.target===this)closeModelAnswer()"></div>
+<div class="quiz-modal" id="maModal" role="dialog" aria-modal="true">
   <div class="quiz-header">
     <div class="quiz-hdr-left">
-      <div><span class="qh-code" id="qhCode"></span><span class="qh-name" id="qhName"></span></div>
-      <div class="quiz-subtitle" id="quizSubtitle">Quick Quiz — 5 questions</div>
+      <div><span class="qh-code" id="maCode"></span></div>
+      <div class="quiz-subtitle">Available Model Answers</div>
     </div>
-    <button class="quiz-close" onclick="closeQuiz()" aria-label="Close">✕</button>
+    <button class="quiz-close" onclick="closeModelAnswer()" aria-label="Close">✕</button>
   </div>
-  <div id="quizBody"></div>
+  <div id="maBody"></div>
+</div>
+
+<!-- Quiz full page -->
+<div class="page" id="page-quiz">
+  <div class="quiz-page-inner">
+    <button class="quiz-back-btn" onclick="closeQuiz()">← Back to Courses</button>
+    <div class="quiz-header">
+      <div class="quiz-hdr-left">
+        <div><span class="qh-code" id="qhCode"></span><span class="qh-name" id="qhName"></span></div>
+        <div class="quiz-subtitle" id="quizSubtitle">Quick Quiz — 5 questions</div>
+      </div>
+    </div>
+    <div id="quizBody"></div>
+  </div>
 </div>
 
 <!-- ACCOUNT PAGE -->
