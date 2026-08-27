@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin
+Disallow: /account
+Sitemap: https://www.study-uni.ie/sitemap.xml
