@@ -2342,10 +2342,10 @@
         }).catch(function() {});
         // Add to newsletter audience if consented (fire-and-forget)
         if (newsletter) {
-          fetch('/api/newsletter-subscribe', {
+          fetch('/api/account', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, firstName, lastName })
+            body: JSON.stringify({ action: 'newsletter-subscribe', email, firstName, lastName })
           }).catch(function() {});
         }
         return;

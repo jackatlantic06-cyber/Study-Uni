@@ -24,6 +24,21 @@ module.exports = async (req, res) => {
     }
   }
 
+  if (action === 'newsletter-subscribe') {
+    if (!email) return res.status(400).json({ error: 'Missing email' });
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    if (!audienceId) return res.status(500).json({ error: 'Newsletter not configured' });
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const { firstName: fn, lastName: ln } = req.body || {};
+      await resend.contacts.create({ email, firstName: fn || '', lastName: ln || '', unsubscribed: false, audienceId });
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('newsletter-subscribe error:', err.message);
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
   if (action === 'delete') {
     if (!accessToken) return res.status(401).json({ error: 'Not authenticated' });
     const sb = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
@@ -72,7 +87,7 @@ function welcomeHTML(name) {
     </div>
 
     <div style="background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:10px;padding:16px 20px;margin-bottom:22px">
-      <div style="font-size:12px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">⚡ Pro — unlock everything for €4.99/mo</div>
+      <div style="font-size:12px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">⚡ Pro — unlock everything from €7.99/mo</div>
       <ul style="margin:0;padding-left:18px;color:#1e3a8a;font-size:14px;line-height:2.1">
         <li>Official marking schemes &amp; worked solutions</li>
         <li>MCQ practice quizzes with explanations</li>
