@@ -1,3 +1,4 @@
+const { createClient } = require('@supabase/supabase-js');
 const { Resend } = require('resend');
 
 module.exports = async (req, res) => {
@@ -7,26 +8,41 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { email, firstName } = req.body || {};
-  if (!email) return res.status(400).json({ error: 'Missing email' });
+  const { action, email, firstName, accessToken } = req.body || {};
 
-  try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    const name = firstName || email.split('@')[0];
-
-    const from = `Study-Uni <hello@${process.env.RESEND_FROM || 'resend.dev'}>`;
-    await resend.emails.send({
-      from,
-      to: email,
-      subject: 'Welcome to Study-Uni 🎓',
-      html: welcomeHTML(name),
-    });
-
-    return res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('send-welcome error:', err.message);
-    return res.status(500).json({ error: err.message });
+  if (action === 'send-welcome') {
+    if (!email) return res.status(400).json({ error: 'Missing email' });
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const name = firstName || email.split('@')[0];
+      const from = `Study-Uni <hello@${process.env.RESEND_FROM || 'resend.dev'}>`;
+      await resend.emails.send({ from, to: email, subject: 'Welcome to Study-Uni 🎓', html: welcomeHTML(name) });
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('send-welcome error:', err.message);
+      return res.status(500).json({ error: err.message });
+    }
   }
+
+  if (action === 'delete') {
+    if (!accessToken) return res.status(401).json({ error: 'Not authenticated' });
+    const sb = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+    const { data: { user }, error: authError } = await sb.auth.getUser(accessToken);
+    if (authError || !user) return res.status(401).json({ error: 'Invalid session' });
+    try {
+      await sb.from('quiz_attempts').delete().eq('user_id', user.id);
+      await sb.from('course_views').delete().eq('user_id', user.id);
+      await sb.from('subscriptions').delete().eq('id', user.id);
+      const { error } = await sb.auth.admin.deleteUser(user.id);
+      if (error) throw error;
+      return res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('delete-account error:', err.message);
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
+  return res.status(400).json({ error: 'Unknown action' });
 };
 
 function welcomeHTML(name) {
