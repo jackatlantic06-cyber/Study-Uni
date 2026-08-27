@@ -2323,13 +2323,14 @@
       if (_authMode === 'signup') {
         const firstName = document.getElementById('authFirstName').value.trim();
         const lastName  = document.getElementById('authLastName').value.trim();
-        const course    = document.getElementById('authCourse')?.value.trim() || '';
+        const course      = document.getElementById('authCourse')?.value.trim() || '';
+        const newsletter  = document.getElementById('authNewsletter')?.checked || false;
         if (!firstName || !lastName) { errEl.textContent = 'Please enter your first and last name'; btn.disabled=false; btn.textContent='Create account'; return; }
         if (!course) { errEl.textContent = 'Please enter your course / degree'; btn.disabled=false; btn.textContent='Create account'; return; }
         const conf = document.getElementById('authConfirm').value;
         if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters'; btn.disabled=false; btn.textContent='Create account'; return; }
         if (pass !== conf)   { errEl.textContent = 'Passwords do not match'; btn.disabled=false; btn.textContent='Create account'; return; }
-        const { error } = await _sbClient.auth.signUp({ email, password: pass, options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName, course } } });
+        const { error } = await _sbClient.auth.signUp({ email, password: pass, options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName, course, newsletter_consent: newsletter } } });
         if (error) throw error;
         document.getElementById('authSuccessMsg').style.display = 'block';
         btn.textContent = '✓ Check your email';
@@ -2339,6 +2340,14 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'send-welcome', email, firstName })
         }).catch(function() {});
+        // Add to newsletter audience if consented (fire-and-forget)
+        if (newsletter) {
+          fetch('/api/newsletter-subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, firstName, lastName })
+          }).catch(function() {});
+        }
         return;
       } else {
         const { error } = await _sbClient.auth.signInWithPassword({ email, password: pass });
@@ -4029,6 +4038,12 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
       <label>Course / Degree</label>
       <input type="text" id="authCourse" placeholder="e.g. BCom, Medicine, Law, BSc Computer Science"
              autocomplete="off" onkeydown="if(event.key==='Enter')submitAuth()"/>
+    </div>
+    <div style="margin-bottom:14px">
+      <label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer;font-size:13px;color:#475569;font-weight:400;line-height:1.5">
+        <input type="checkbox" id="authNewsletter" style="margin-top:2px;accent-color:#2563eb;flex-shrink:0"/>
+        <span>Send me weekly study tips and Study-Uni updates (optional)</span>
+      </label>
     </div>
   </div>
   <div style="text-align:right;margin-top:-6px;margin-bottom:12px" id="forgotPwdRow">
