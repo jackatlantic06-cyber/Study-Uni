@@ -122,7 +122,7 @@ module.exports = async (req, res) => {
         const resend = new Resend(process.env.RESEND_API_KEY);
         await resend.emails.send({
           from: `Study-Uni <noreply@${process.env.RESEND_FROM || 'study-uni.ie'}>`,
-          to: 'jackatlantic06@gmail.com',
+          to: 'studyuni26@gmail.com',
           subject: `🚩 Flagged ${type} — ${item.module_code || ''}`,
           html: `<div style="font-family:sans-serif;max-width:480px">
             <h2 style="color:#dc2626">🚩 Content flagged on Study-Uni</h2>
