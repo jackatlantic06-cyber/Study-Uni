@@ -5,8 +5,8 @@ window.SU_CONFIG = {
   SUPABASE_ANON_KEY: 'sb_publishable_cQJKlMMxJYm4hyrQri2V1w_pGbHxzv2',
   STRIPE_PUBLISHABLE_KEY: 'pk_live_51SIVoD5nRvQshm57PqruaeqgweBHjrUU9X2hk7G9cFVhR9OtQXEKqsxgRFavWdKdetrg5IWIidm2SwaQ1awpr55200K7jSSK9M',
   // Stripe price IDs — fill in after creating prices in your Stripe dashboard
-  STRIPE_PRICE_MONTHLY:  'price_1Tptzd5nRvQshm57jjSWRYJG',
-  STRIPE_PRICE_SEMESTER: 'price_1Tptzy5nRvQshm57KALROrRF',
+  STRIPE_PRICE_MONTHLY:  'price_1U8wzm5nRvQshm57d9nY3jWe',
+  STRIPE_PRICE_SEMESTER: 'price_1U8x0s5nRvQshm57rXkQVjPr',
   STRIPE_PRICE_ANNUAL:   'price_1Tpu0T5nRvQshm57nUxvSkV3',
   // Emails that bypass the paywall and the UCC-email restriction.
   OWNER_EMAILS: ['jackatlantic06@gmail.com'],
