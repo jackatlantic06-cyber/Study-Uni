@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
       const start = new Date(startDate + 'T12:00:00');
       const end   = new Date(lastExamDate + 'T12:00:00');
       const daySpan = Math.round((end - start) / (1000 * 60 * 60 * 24));
-      if (daySpan > 45) return res.status(400).json({ error: `Your schedule spans ${daySpan} days — please set a start date within 45 days of your last exam so the plan stays detailed and useful.` });
+      if (daySpan > 14) return res.status(400).json({ error: `Your schedule spans ${daySpan} days — please set a start date within 14 days of your last exam for a focused two-week plan.` });
       const client     = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
       const message    = await client.messages.create({
         model: 'claude-haiku-4-5-20251001',
