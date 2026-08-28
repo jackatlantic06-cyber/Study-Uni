@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { text, youtubeUrl, accessToken, pdfBase64, count, keywords } = req.body || {};
+    const { text, youtubeUrl, accessToken, pdfBase64, count, keywords, action, exams, hoursPerDay, startDate, restDays } = req.body || {};
 
     if (!accessToken) return res.status(401).json({ error: 'Not authenticated' });
 
@@ -34,6 +34,63 @@ module.exports = async (req, res) => {
       const isPro = !!(sub && sub.is_active &&
         (!sub.current_period_end || new Date(sub.current_period_end) > new Date()));
       if (!isPro) return res.status(403).json({ error: 'Pro subscription required' });
+    }
+
+    // ── Study Planner ──────────────────────────────────────────────────────
+    if (action === 'planner') {
+      if (!exams || !exams.length) return res.status(400).json({ error: 'Please add at least one exam' });
+      const examList   = exams.map(e => `- ${e.subject}: ${e.date}`).join('\n');
+      const restList   = (restDays || []).join(', ') || 'None';
+      const hrs        = Math.min(Math.max(parseInt(hoursPerDay) || 4, 1), 12);
+      const client     = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+      const message    = await client.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 4000,
+        messages: [{ role: 'user', content:
+`You are a study planning expert. Create a day-by-day study schedule.
+
+Start date: ${startDate}
+Exams:
+${examList}
+Available study hours per day: ${hrs}
+Rest days (no studying): ${restList}
+
+Rules:
+- Schedule from start date up to and including the last exam date
+- On rest days: include the day in the schedule but with no sessions (empty sessions array, totalHours 0)
+- Day before each exam: light review only (max 1.5h for that subject only, note "Light review before exam")
+- Distribute study time proportionally — subjects with sooner exams get more time initially
+- Each session topic must be a specific, actionable task (e.g. "Practice past paper Q1-Q5", "Summarise Chapter 3 notes", "Flashcard review — key definitions")
+- Daily total hours must not exceed ${hrs}
+- Keep it realistic and motivating
+
+Respond with ONLY valid JSON (no markdown, no code fences):
+{
+  "summary": "One sentence overview of the full plan",
+  "schedule": [
+    {
+      "date": "YYYY-MM-DD",
+      "dayName": "Monday",
+      "sessions": [
+        {"subject": "Subject Name", "topic": "Specific study task", "hours": 2}
+      ],
+      "totalHours": 2,
+      "note": "Optional short tip or encouragement (omit if nothing useful to say)"
+    }
+  ]
+}` }]
+      });
+      const raw = message.content[0].text;
+      let result;
+      try {
+        const m = raw.match(/\{[\s\S]*\}/);
+        result = JSON.parse(m ? m[0] : raw);
+        if (!Array.isArray(result.schedule)) throw new Error('Invalid structure');
+      } catch(e) {
+        console.error('Planner parse error:', e.message, '| Raw:', raw.slice(0, 200));
+        return res.status(500).json({ error: 'Could not generate plan — please try again' });
+      }
+      return res.status(200).json(result);
     }
 
     const cardCount = Math.min(Math.max(parseInt(count) || 8, 4), 12);
