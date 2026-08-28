@@ -39,49 +39,66 @@ module.exports = async (req, res) => {
     // ── Study Planner ──────────────────────────────────────────────────────
     if (action === 'planner') {
       if (!exams || !exams.length) return res.status(400).json({ error: 'Please add at least one exam' });
-      const examList   = exams.map(e => `- ${e.subject}: ${e.date}`).join('\n');
-      const restList   = (restDays || []).join(', ') || 'None';
-      const hrs        = Math.min(Math.max(parseInt(hoursPerDay) || 4, 1), 12);
-      // Cap schedule at 45 days to stay within token limits
+      const restList = (restDays || []).join(', ') || 'None';
+      const hrs      = Math.min(Math.max(parseInt(hoursPerDay) || 4, 1), 12);
       const lastExamDate = exams.map(e => e.date).sort().pop();
       const start = new Date(startDate + 'T12:00:00');
       const end   = new Date(lastExamDate + 'T12:00:00');
       const daySpan = Math.round((end - start) / (1000 * 60 * 60 * 24));
       if (daySpan > 14) return res.status(400).json({ error: `Your schedule spans ${daySpan} days — please set a start date within 14 days of your last exam for a focused two-week plan.` });
-      const client     = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-      const message    = await client.messages.create({
+
+      const examDetails = exams.map(e =>
+        `- Module: ${e.subject}  |  Exam date: ${e.date}  |  Topics: ${(e.topics || []).join(', ')}`
+      ).join('\n');
+
+      const client  = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+      const message = await client.messages.create({
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 8000,
         messages: [{ role: 'user', content:
-`You are a study planning expert. Create a day-by-day study schedule.
+`You are a UCC study planning expert. Create a day-by-day study schedule using Study-Uni resources.
 
 Start date: ${startDate}
-Exams:
-${examList}
 Available study hours per day: ${hrs}
 Rest days (no studying): ${restList}
 
-Rules:
+Modules and topics:
+${examDetails}
+
+TASK TYPES — for each topic, cycle through these task types across different days:
+1. "quiz"     — "Do the Study-Uni quiz on [Topic]" (use this first for a topic)
+2. "paper"    — "Attempt past paper questions on [Topic]"
+3. "marking"  — "Review marking scheme for [Topic]"
+4. "revision" — "Consolidate notes on [Topic]" (for a final pass)
+
+RULES:
 - Schedule from start date up to and including the last exam date
-- On rest days: include the day in the schedule but with no sessions (empty sessions array, totalHours 0)
-- Day before each exam: light review only (max 1.5h for that subject only, note "Light review before exam")
-- Distribute study time proportionally — subjects with sooner exams get more time initially
-- Each session topic must be a specific, actionable task (e.g. "Practice past paper Q1-Q5", "Summarise Chapter 3 notes", "Flashcard review — key definitions")
-- Daily total hours must not exceed ${hrs}
-- Keep it realistic and motivating
+- Rest days: include in schedule with empty sessions array and totalHours 0
+- Day before each exam: sessions for THAT module only — type "revision", topic "Full timed past paper + marking scheme review", max 1.5h total
+- Spread topics across days; cover each topic at least twice with different task types
+- Prioritise modules whose exams are sooner
+- Sessions within a day can mix different modules and topics
+- Daily totalHours must not exceed ${hrs}; each session 0.5–2h
+- "topic" field = short label e.g. "Supply & Demand — Quiz". "detail" = action sentence
 
 Respond with ONLY valid JSON (no markdown, no code fences):
 {
-  "summary": "One sentence overview of the full plan",
+  "summary": "One sentence overview",
   "schedule": [
     {
       "date": "YYYY-MM-DD",
       "dayName": "Monday",
       "sessions": [
-        {"subject": "Subject Name", "topic": "Specific study task", "hours": 2}
+        {
+          "subject": "EC1208",
+          "topic": "Supply & Demand — Quiz",
+          "detail": "Do the Study-Uni quiz on Supply & Demand",
+          "type": "quiz",
+          "hours": 1
+        }
       ],
-      "totalHours": 2,
-      "note": "Optional short tip or encouragement (omit if nothing useful to say)"
+      "totalHours": 3,
+      "note": "Optional encouragement (omit if nothing useful)"
     }
   ]
 }` }]
