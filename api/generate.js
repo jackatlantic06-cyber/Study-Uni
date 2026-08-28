@@ -42,10 +42,16 @@ module.exports = async (req, res) => {
       const examList   = exams.map(e => `- ${e.subject}: ${e.date}`).join('\n');
       const restList   = (restDays || []).join(', ') || 'None';
       const hrs        = Math.min(Math.max(parseInt(hoursPerDay) || 4, 1), 12);
+      // Cap schedule at 45 days to stay within token limits
+      const lastExamDate = exams.map(e => e.date).sort().pop();
+      const start = new Date(startDate + 'T12:00:00');
+      const end   = new Date(lastExamDate + 'T12:00:00');
+      const daySpan = Math.round((end - start) / (1000 * 60 * 60 * 24));
+      if (daySpan > 45) return res.status(400).json({ error: `Your schedule spans ${daySpan} days — please set a start date within 45 days of your last exam so the plan stays detailed and useful.` });
       const client     = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
       const message    = await client.messages.create({
         model: 'claude-haiku-4-5-20251001',
-        max_tokens: 4000,
+        max_tokens: 8000,
         messages: [{ role: 'user', content:
 `You are a study planning expert. Create a day-by-day study schedule.
 
