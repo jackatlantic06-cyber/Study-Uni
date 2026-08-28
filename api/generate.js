@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { text, youtubeUrl, accessToken, pdfBase64, count, keywords, action, exams, hoursPerDay, startDate, restDays } = req.body || {};
+    const { text, youtubeUrl, accessToken, pdfBase64, count, keywords, action } = req.body || {};
 
     if (!accessToken) return res.status(401).json({ error: 'Not authenticated' });
 
@@ -34,86 +34,6 @@ module.exports = async (req, res) => {
       const isPro = !!(sub && sub.is_active &&
         (!sub.current_period_end || new Date(sub.current_period_end) > new Date()));
       if (!isPro) return res.status(403).json({ error: 'Pro subscription required' });
-    }
-
-    // ── Study Planner ──────────────────────────────────────────────────────
-    if (action === 'planner') {
-      if (!exams || !exams.length) return res.status(400).json({ error: 'Please add at least one exam' });
-      const restList = (restDays || []).join(', ') || 'None';
-      const hrs      = Math.min(Math.max(parseInt(hoursPerDay) || 4, 1), 12);
-      const lastExamDate = exams.map(e => e.date).sort().pop();
-      const start = new Date(startDate + 'T12:00:00');
-      const end   = new Date(lastExamDate + 'T12:00:00');
-      const daySpan = Math.round((end - start) / (1000 * 60 * 60 * 24));
-      if (daySpan > 14) return res.status(400).json({ error: `Your schedule spans ${daySpan} days — please set a start date within 14 days of your last exam for a focused two-week plan.` });
-
-      const examDetails = exams.map(e =>
-        `- Module: ${e.subject}  |  Exam date: ${e.date}  |  Topics: ${(e.topics || []).join(', ')}`
-      ).join('\n');
-
-      const client  = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-      const message = await client.messages.create({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 8000,
-        messages: [{ role: 'user', content:
-`You are a UCC study planning expert. Create a day-by-day study schedule using Study-Uni resources.
-
-Start date: ${startDate}
-Available study hours per day: ${hrs}
-Rest days (no studying): ${restList}
-
-Modules and topics:
-${examDetails}
-
-TASK TYPES — for each topic, cycle through these task types across different days:
-1. "quiz"     — "Do the Study-Uni quiz on [Topic]" (use this first for a topic)
-2. "paper"    — "Attempt past paper questions on [Topic]"
-3. "marking"  — "Review marking scheme for [Topic]"
-4. "revision" — "Consolidate notes on [Topic]" (for a final pass)
-
-RULES:
-- Schedule from start date up to and including the last exam date
-- Rest days: include in schedule with empty sessions array and totalHours 0
-- Day before each exam: sessions for THAT module only — type "revision", topic "Full timed past paper + marking scheme review", max 1.5h total
-- Spread topics across days; cover each topic at least twice with different task types
-- Prioritise modules whose exams are sooner
-- Sessions within a day can mix different modules and topics
-- Daily totalHours must not exceed ${hrs}; each session 0.5–2h
-- "topic" field = short label e.g. "Supply & Demand — Quiz". "detail" = action sentence
-
-Respond with ONLY valid JSON (no markdown, no code fences):
-{
-  "summary": "One sentence overview",
-  "schedule": [
-    {
-      "date": "YYYY-MM-DD",
-      "dayName": "Monday",
-      "sessions": [
-        {
-          "subject": "EC1208",
-          "topic": "Supply & Demand — Quiz",
-          "detail": "Do the Study-Uni quiz on Supply & Demand",
-          "type": "quiz",
-          "hours": 1
-        }
-      ],
-      "totalHours": 3,
-      "note": "Optional encouragement (omit if nothing useful)"
-    }
-  ]
-}` }]
-      });
-      const raw = message.content[0].text;
-      let result;
-      try {
-        const m = raw.match(/\{[\s\S]*\}/);
-        result = JSON.parse(m ? m[0] : raw);
-        if (!Array.isArray(result.schedule)) throw new Error('Invalid structure');
-      } catch(e) {
-        console.error('Planner parse error:', e.message, '| Raw:', raw.slice(0, 200));
-        return res.status(500).json({ error: 'Could not generate plan — please try again' });
-      }
-      return res.status(200).json(result);
     }
 
     const cardCount = Math.min(Math.max(parseInt(count) || 8, 4), 12);

@@ -455,32 +455,6 @@
   .ai-hero h2{font-size:26px;font-weight:800;margin-bottom:6px}
   .ai-hero p{color:var(--muted);font-size:14px;line-height:1.5;max-width:480px;margin:0 auto 8px}
   .ai-pro-pill{display:inline-flex;align-items:center;gap:5px;background:var(--accent-light);color:var(--accent);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;margin-top:6px}
-  /* STUDY PLANNER */
-  .planner-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:block}
-  .planner-exam-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-  .planner-exam-row input{flex:1;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;outline:none;background:var(--bg);color:var(--text)}
-  .planner-exam-row input:focus{border-color:var(--accent)}
-  .planner-exam-row input[type=date]{flex:0 0 150px}
-  .planner-rm-btn{padding:7px 10px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--muted);cursor:pointer;font-size:14px;flex-shrink:0;line-height:1}
-  .planner-rm-btn:hover{border-color:#ef4444;color:#ef4444}
-  .planner-add-btn{padding:8px 16px;border:1.5px dashed var(--border);border-radius:9px;background:none;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;width:100%;margin-top:2px;transition:all .15s}
-  .planner-add-btn:hover{border-color:var(--accent);color:var(--accent)}
-  .day-chips{display:flex;gap:6px;flex-wrap:wrap}
-  .day-chip{padding:7px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--muted);font-family:inherit;transition:all .15s;user-select:none}
-  .day-chip.selected{background:#fee2e2;border-color:#ef4444;color:#dc2626}
-  .schedule-summary{background:var(--accent-light);border:1.5px solid #bfdbfe;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:14px;color:#1e3a8a;font-weight:500;line-height:1.5}
-  .schedule-day{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px}
-  .schedule-day-hdr{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
-  .schedule-day-name{font-size:15px;font-weight:800;color:var(--text)}
-  .schedule-day-date{font-size:12px;color:var(--muted)}
-  .schedule-day-hrs{margin-left:auto;font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:2px 9px;border-radius:999px}
-  .schedule-session{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
-  .schedule-session:last-child{border-bottom:none;padding-bottom:0}
-  .session-subject{font-size:11px;font-weight:700;color:#fff;background:var(--accent);padding:2px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;margin-top:1px}
-  .session-topic{font-size:13px;color:var(--text);flex:1;line-height:1.4}
-  .session-hrs{font-size:12px;color:var(--muted);white-space:nowrap;flex-shrink:0}
-  .schedule-note{font-size:12px;color:var(--muted);margin-top:8px;font-style:italic}
-  .schedule-rest{background:var(--bg);border:1.5px dashed var(--border);border-radius:12px;padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
   .ai-input-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:22px;margin-bottom:24px}
   .ai-tab-row{display:flex;gap:4px;background:var(--bg);border-radius:8px;padding:3px;margin-bottom:16px;width:fit-content}
   .ai-tab{padding:6px 16px;border-radius:6px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;transition:all .18s;font-family:inherit}
@@ -744,7 +718,6 @@
     <a href="#" onclick="showPage('courses');closeMobileNav()" id="nl-courses">Courses</a>
     <a href="#" onclick="showPage('pricing');closeMobileNav()" id="nl-pricing">Pricing</a>
     <a href="#" onclick="showPage('ai');closeMobileNav()" id="nl-ai">StudyAI ✨</a>
-    <a href="#" onclick="showPage('planner');closeMobileNav()" id="nl-planner">Planner 📅</a>
     <a href="#" onclick="showPage('admin');closeMobileNav()" id="nl-admin" style="display:none">Admin</a>
   </div>
   <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
@@ -1075,7 +1048,6 @@
     else if (id === 'courses') history.replaceState(null, '', '#courses');
     else if (id === 'pricing') history.replaceState(null, '', '#pricing');
     else if (id === 'ai') { history.replaceState(null, '', '#ai'); _loadMySets(); }
-    else if (id === 'planner') { history.replaceState(null, '', '#planner'); _initPlannerPage(); }
     else if (id === 'study') { /* no hash change for study */ }
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); }
     else if (id === 'admin') { history.replaceState(null, '', '#admin'); loadAdminStats(); }
@@ -3383,138 +3355,6 @@
     btn.setAttribute('aria-expanded', 'false');
   }
 
-  // ── STUDY PLANNER ─────────────────────────────────────────────────────────
-  let _plannerExamId = 0;
-
-  function _initPlannerPage() {
-    const examsDiv = document.getElementById('plannerExams');
-    if (examsDiv && examsDiv.children.length === 0) addPlannerExam();
-    const sd = document.getElementById('plannerStartDate');
-    if (sd && !sd.value) sd.value = new Date().toISOString().split('T')[0];
-    document.getElementById('plannerOutput').style.display = 'none';
-  }
-
-  function addPlannerExam() {
-    const id = ++_plannerExamId;
-    const card = document.createElement('div');
-    card.id = 'examRow_' + id;
-    card.style.cssText = 'background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;position:relative';
-    card.innerHTML =
-      '<button class="planner-rm-btn" onclick="removePlannerExam('+id+')" title="Remove" style="position:absolute;top:10px;right:10px">✕</button>' +
-      '<div style="display:flex;gap:8px;margin-bottom:10px">' +
-        '<div style="flex:1">' +
-          '<span class="planner-label">Module code</span>' +
-          '<input type="text" id="examCode_'+id+'" placeholder="e.g. EC1208" style="width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;outline:none;background:var(--surface);color:var(--text)" />' +
-        '</div>' +
-        '<div style="flex:1">' +
-          '<span class="planner-label">Exam date</span>' +
-          '<input type="date" id="examDate_'+id+'" style="width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:inherit;outline:none;background:var(--surface);color:var(--text)" />' +
-        '</div>' +
-      '</div>' +
-      '<span class="planner-label">Topics to cover (one per line)</span>' +
-      '<textarea id="examTopics_'+id+'" rows="3" placeholder="e.g.\nSupply &amp; Demand\nMarket Failures\nConsumer Theory" style="width:100%;padding:9px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;resize:vertical;background:var(--surface);color:var(--text);line-height:1.5"></textarea>';
-    document.getElementById('plannerExams').appendChild(card);
-  }
-
-  function removePlannerExam(id) {
-    const all = document.getElementById('plannerExams').children;
-    if (all.length <= 1) { showToast('You need at least one module.'); return; }
-    const row = document.getElementById('examRow_' + id);
-    if (row) row.remove();
-  }
-
-  function toggleRestDay(btn) { btn.classList.toggle('selected'); }
-
-  async function generateStudyPlan() {
-    requirePro(async function() {
-      const errEl = document.getElementById('plannerErr');
-      const hide = function() { errEl.style.display='none'; };
-      const show = function(msg) { errEl.textContent=msg; errEl.style.display='block'; };
-      hide();
-
-      // Collect modules
-      const cards = document.getElementById('plannerExams').children;
-      const exams = [];
-      for (let i = 0; i < cards.length; i++) {
-        const card = cards[i];
-        const codeEl   = card.querySelector('input[type=text]');
-        const dateEl   = card.querySelector('input[type=date]');
-        const topicsEl = card.querySelector('textarea');
-        const code   = (codeEl   && codeEl.value.trim().toUpperCase())   || '';
-        const date   = (dateEl   && dateEl.value)                         || '';
-        const topics = (topicsEl && topicsEl.value.trim())
-          ? topicsEl.value.split('\n').map(function(t){ return t.trim(); }).filter(Boolean)
-          : [];
-        if (!code || !date) continue;
-        if (!topics.length) { show('Please enter at least one topic for ' + (code || 'each module') + '.'); return; }
-        exams.push({ subject: code, date: date, topics: topics });
-      }
-      if (!exams.length) { show('Please fill in at least one module with a code and exam date.'); return; }
-
-      const hoursPerDay = parseInt(document.getElementById('plannerHours').value) || 4;
-      const startDate   = document.getElementById('plannerStartDate').value;
-      if (!startDate) { show('Please set a start date.'); return; }
-      const restDays = Array.from(document.querySelectorAll('.day-chip.selected')).map(function(c){ return c.dataset.day; });
-
-      if (!_sbClient) { show('Auth not configured.'); return; }
-      const { data: { session } } = await _sbClient.auth.getSession();
-      if (!session) { showToast('Please sign in to use the Study Planner.'); return; }
-
-      const btn = document.getElementById('plannerBtn');
-      btn.disabled = true; btn.textContent = 'Generating your plan…';
-      try {
-        const resp = await fetch('/api/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'planner', exams, hoursPerDay, startDate, restDays, accessToken: session.access_token })
-        });
-        const data = await resp.json();
-        if (!resp.ok) { show(data.error || 'Something went wrong — please try again.'); return; }
-        _renderStudyPlan(data);
-      } catch(e) {
-        show('Network error — please try again.');
-      } finally {
-        btn.disabled = false; btn.textContent = 'Generate My Plan →';
-      }
-    }, 'study_planner');
-  }
-
-  function _renderStudyPlan(data) {
-    const out = document.getElementById('plannerOutput');
-    out.style.display = 'block';
-    const fmtDate = function(iso) {
-      return new Date(iso + 'T12:00:00').toLocaleDateString('en-IE', { weekday:'long', day:'numeric', month:'long' });
-    };
-    const typeIcons = { quiz:'❓', paper:'📄', marking:'✅', revision:'📖', review:'🔁' };
-    const subjectColors = ['#2563eb','#16a34a','#9333ea','#ea580c','#0891b2','#be185d'];
-    const colorMap = {}; let colorIdx = 0;
-    function subjectColor(sub) {
-      if (!colorMap[sub]) colorMap[sub] = subjectColors[colorIdx++ % subjectColors.length];
-      return colorMap[sub];
-    }
-    let html = '';
-    if (data.summary) html += '<div class="schedule-summary">📋 ' + data.summary + '</div>';
-    (data.schedule || []).forEach(function(day) {
-      if (!day.sessions || day.sessions.length === 0) {
-        html += '<div class="schedule-rest">😴 <span><strong>' + fmtDate(day.date) + '</strong> — Rest day</span></div>';
-        return;
-      }
-      html += '<div class="schedule-day"><div class="schedule-day-hdr"><span class="schedule-day-name">' + fmtDate(day.date) + '</span><span class="schedule-day-hrs">' + day.totalHours + 'h</span></div>';
-      day.sessions.forEach(function(s) {
-        const icon = typeIcons[s.type] || '📌';
-        html += '<div class="schedule-session">' +
-          '<span class="session-subject" style="background:' + subjectColor(s.subject) + '">' + s.subject + '</span>' +
-          '<span class="session-topic"><strong>' + icon + ' ' + s.topic + '</strong>' + (s.detail ? '<br><span style="font-size:12px;color:var(--muted)">' + s.detail + '</span>' : '') + '</span>' +
-          '<span class="session-hrs">' + s.hours + 'h</span>' +
-        '</div>';
-      });
-      if (day.note) html += '<div class="schedule-note">💡 ' + day.note + '</div>';
-      html += '</div>';
-    });
-    out.innerHTML = html;
-    window.scrollTo(0, out.offsetTop - 80);
-  }
-
   // ── ADMIN DASHBOARD ───────────────────────────────────────────────────────
   async function loadAdminStats() {
     const grid = document.getElementById('adminStatGrid');
@@ -4000,62 +3840,6 @@
     <p>Questions about these Terms: <a href="mailto:studyuni26@gmail.com">studyuni26@gmail.com</a></p>
 
     <p style="margin-top:32px"><a onclick="history.back();return false" href="#" style="color:var(--accent)">← Back</a></p>
-  </div>
-</div>
-
-<!-- STUDY PLANNER -->
-<div class="page" id="page-planner">
-  <div class="ai-page">
-    <div class="ai-hero">
-      <h2>📅 Personal Study Planner</h2>
-      <p>Enter your exams, available study time, and rest days — we'll build a detailed day-by-day schedule for the two weeks ahead.</p>
-      <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:12px 0 6px">
-        <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;color:#16a34a;border:1.5px solid #bbf7d0;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700">📅 Day-by-day</span>
-        <span style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#2563eb;border:1.5px solid #bfdbfe;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700">⏰ Time-aware</span>
-        <span style="display:inline-flex;align-items:center;gap:6px;background:#fdf4ff;color:#9333ea;border:1.5px solid #e9d5ff;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700">😴 Rest days</span>
-      </div>
-      <span class="ai-pro-pill">✨ Pro feature</span>
-    </div>
-
-    <div class="ai-input-card">
-      <!-- Exams -->
-      <div style="margin-bottom:20px">
-        <span class="planner-label">Your Modules &amp; Topics</span>
-        <div id="plannerExams"></div>
-        <button class="planner-add-btn" onclick="addPlannerExam()">+ Add another module</button>
-      </div>
-
-      <!-- Start date + Hours -->
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px">
-        <div style="flex:1;min-width:140px">
-          <span class="planner-label">Start studying from</span>
-          <input type="date" id="plannerStartDate" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;outline:none;background:var(--bg);color:var(--text)"/>
-        </div>
-        <div style="flex:1;min-width:120px">
-          <span class="planner-label">Study hours per day</span>
-          <input type="number" id="plannerHours" min="1" max="12" value="4" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;outline:none;background:var(--bg);color:var(--text)"/>
-        </div>
-      </div>
-
-      <!-- Rest days -->
-      <div style="margin-bottom:22px">
-        <span class="planner-label">Rest days — no studying</span>
-        <div class="day-chips" id="plannerRestDays">
-          <button class="day-chip" data-day="Monday" onclick="toggleRestDay(this)">Mon</button>
-          <button class="day-chip" data-day="Tuesday" onclick="toggleRestDay(this)">Tue</button>
-          <button class="day-chip" data-day="Wednesday" onclick="toggleRestDay(this)">Wed</button>
-          <button class="day-chip" data-day="Thursday" onclick="toggleRestDay(this)">Thu</button>
-          <button class="day-chip" data-day="Friday" onclick="toggleRestDay(this)">Fri</button>
-          <button class="day-chip" data-day="Saturday" onclick="toggleRestDay(this)">Sat</button>
-          <button class="day-chip" data-day="Sunday" onclick="toggleRestDay(this)">Sun</button>
-        </div>
-      </div>
-
-      <button onclick="generateStudyPlan()" id="plannerBtn" style="width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">Generate My Plan →</button>
-      <div id="plannerErr" style="display:none;color:#ef4444;font-size:13px;margin-top:10px;text-align:center"></div>
-    </div>
-
-    <div id="plannerOutput" style="display:none"></div>
   </div>
 </div>
 
