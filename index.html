@@ -1249,14 +1249,10 @@
       </div>
       <div class="ucd-grid">
         ${courses.map(c => {
-          const allSchoolCourses = SCHOOLS.filter(s => (s.uni||'ucc')==='ucd').flatMap(s => s.courses||[]);
-          const sc = allSchoolCourses.find(x => {
-            const xn = x.name.replace(/ —.*$/, '').trim();
-            return xn === c.name || x.name === c.name;
-          });
-          return `<div class="ucd-card"${sc ? ` onclick="openCourse('${sc.id}');showPage('courses')" style="cursor:pointer"` : ''}>
+          const sid = c.schoolsCourseId || null;
+          return `<div class="ucd-card"${sid ? ` onclick="openCourse('${sid}');showPage('courses')" style="cursor:pointer"` : ''}>
             <span class="ucd-card-name">${c.name}${c.cao ? `<br><span style="font-size:11px;color:var(--muted);font-weight:500">${c.cao}${c.school ? ' · ' + c.school : ''}</span>` : ''}</span>
-            ${sc
+            ${sid
               ? `<span class="ucd-card-link" style="color:var(--accent);font-weight:600">View modules →</span>`
               : `<a class="ucd-card-link" href="${c.url}" target="_blank" rel="noopener">${uni.name} ↗</a>`
             }
