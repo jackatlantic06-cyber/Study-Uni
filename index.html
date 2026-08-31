@@ -1239,6 +1239,7 @@
     const bucket = (typeof DEG_BUCKETS !== 'undefined') ? DEG_BUCKETS.find(b => b.id === bucketId) : null;
     if (!uni || !bucket) return;
     const courses = uni.courses.filter(c => _getCourseCategory(c.name) === bucketId).sort((a,b) => a.name.localeCompare(b.name));
+    const allSchoolCourses = (typeof SCHOOLS !== 'undefined' ? SCHOOLS : []).flatMap(s => s.courses);
     const html = `
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
         <button onclick="${['homeUCDView','coursesUCDView'].map(id => `(document.getElementById('${id}')&&(document.getElementById('${id}').innerHTML=_buildUniCoursesHTML('${uniId}')))`).join(';')}" style="background:none;border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--accent)">← Back</button>
@@ -1247,16 +1248,25 @@
           <p style="color:var(--muted);font-size:13px;margin:0">${uni.fullName} · ${courses.length} course${courses.length!==1?'s':''}</p>
         </div>
       </div>
-      <div class="ucd-grid">
+      <div class="course-grid">
         ${courses.map(c => {
           const sid = c.schoolsCourseId || null;
-          return `<div class="ucd-card"${sid ? ` onclick="openCourse('${sid}');showPage('courses')" style="cursor:pointer"` : ''}>
-            <span class="ucd-card-name">${c.name}${c.cao ? `<br><span style="font-size:11px;color:var(--muted);font-weight:500">${c.cao}${c.school ? ' · ' + c.school : ''}</span>` : ''}</span>
-            ${sid
-              ? `<span class="ucd-card-link" style="color:var(--accent);font-weight:600">View modules →</span>`
-              : `<a class="ucd-card-link" href="${c.url}" target="_blank" rel="noopener">${uni.name} ↗</a>`
-            }
-          </div>`;
+          if (sid) {
+            const sc = allSchoolCourses.find(x => x.id === sid);
+            const yrs = sc ? sc.years.length : null;
+            const n = sc ? countPapers(sc) : 0;
+            const caoTag = c.cao ? `<span style="font-size:11px;color:var(--muted);font-weight:500"> — ${c.cao}</span>` : '';
+            return `<button class="course-btn" onclick="openCourse('${sid}')">
+              <div class="cb-name">${c.name}${caoTag}</div>
+              <div class="cb-meta">${yrs ? yrs + ' year' + (yrs !== 1 ? 's' : '') + ' · ' : ''}University College Dublin</div>
+              ${n > 0 ? `<span class="cb-papers">📄 ${n} papers</span>` : '<span class="cb-papers" style="background:var(--accent-soft,#eff6ff);color:var(--accent)">📚 Modules available</span>'}
+            </button>`;
+          }
+          return `<button class="course-btn" onclick="window.open('${c.url}','_blank')" style="opacity:0.75">
+            <div class="cb-name">${c.name}${c.cao ? ` <span style="font-size:11px;color:var(--muted);font-weight:500">— ${c.cao}</span>` : ''}</div>
+            <div class="cb-meta">University College Dublin</div>
+            <span class="cb-papers" style="background:transparent;border:1.5px solid var(--border);color:var(--muted)">UCD website ↗</span>
+          </button>`;
         }).join('')}
       </div>`;
     ['homeUCDView','coursesUCDView'].forEach(id => {
