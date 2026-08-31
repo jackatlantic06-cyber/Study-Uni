@@ -10463,6 +10463,995 @@
               ]
             },
           ]
+        },
+
+        // ── BSc Business (non-EU applicants only) ────────────────────────────
+        {
+          id:"ucd-bsc-business", name:"BSc Business (non-EU) — UCD",
+          years:[
+            {
+              year:1, credits:55, note:"Stage 1: 6 core Autumn + 5 core Spring + optional Spring elective.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BMGT10170",  name:"Inside Organisations",                                                  credits:5, files:[] },
+                  { code:"BMGT10200",  name:"Foundations of Management",                                             credits:5, files:[] },
+                  { code:"HRM10730",   name:"Business in Society",                                                   credits:5, files:[] },
+                  { code:"LAW10400",   name:"Business Law 1: Transactions, Negotiations and Organisations",          credits:5, files:[] },
+                  { code:"MATH10030",  name:"Mathematics for Business",                                              credits:5, files:[] },
+                  { code:"SBUS10180",  name:"Intercultural Skills: Exploring Your Host Country",                     credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ACC10040",   name:"Financial Accounting 1",                                                credits:5, files:[] },
+                  { code:"BMGT10180",  name:"Business Management Simulation",                                        credits:5, files:[] },
+                  { code:"ECON10720",  name:"Microeconomics for Business",                                           credits:5, files:[] },
+                  { code:"MIS10050",   name:"Digital Technologies in Business",                                      credits:5, files:[] },
+                  { code:"MIS10090",   name:"Data Analysis for Decision Makers",                                     credits:5, files:[] },
+                ]},
+                { label:"Electives — Spring (optional, choose 1)", modules:[
+                  { code:"BMGT10140",  name:"Business Plan",                                                         credits:5, files:[] },
+                  { code:"BMGT20050",  name:"Business Across Borders",                                               credits:5, files:[] },
+                  { code:"BMGT10150",  name:"Project Management",                                                    credits:5, files:[] },
+                  { code:"BMGT20080",  name:"Consulting with NGOs",                                                  credits:5, files:[] },
+                  { code:"BMGT20100",  name:"Developing Future Leaders",                                             credits:5, files:[] },
+                  { code:"BMGT20130",  name:"Responsible and Sustainable Business Management",                       credits:5, files:[] },
+                  { code:"BMGT20180",  name:"Wellbeing and Work",                                                    credits:5, files:[] },
+                  { code:"BMGT20190",  name:"Introduction to Negotiations",                                          credits:5, files:[] },
+                  { code:"MIS10040",   name:"Web Design and Analytics",                                              credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:2, credits:55, note:"Stage 2: 10 core modules + optional electives.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"ACC20010",   name:"Financial Accounting 2",                                                credits:5, files:[] },
+                  { code:"FIN20010",   name:"Principles of Finance",                                                 credits:5, files:[] },
+                  { code:"MIS20070",   name:"Digital Society",                                                       credits:5, files:[] },
+                  { code:"MKT20020",   name:"Marketing: Firms, Customers & Society",                                 credits:5, files:[] },
+                  { code:"SBUS20110",  name:"Intercultural Competencies for a Global Workplace",                     credits:5, files:[] },
+                  { code:"ACC20020",   name:"Management Accounting",                                                 credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BMGT20140",  name:"Global Business",                                                       credits:5, files:[] },
+                  { code:"BMGT20150",  name:"Sustainable Operations & Supply Chain Management",                      credits:5, files:[] },
+                  { code:"BMGT20210",  name:"Business and the European Union",                                       credits:5, files:[] },
+                  { code:"MIS20010",   name:"Business Analytics",                                                    credits:5, files:[] },
+                ]},
+                { label:"Electives A (optional)", modules:[
+                  { code:"ACC20050",   name:"Sustainability Reporting and Analysis",                                 credits:5, files:[] },
+                  { code:"BMGT20220",  name:"High-tech Entrepreneurship",                                            credits:5, files:[] },
+                  { code:"BMGT10140",  name:"Business Plan",                                                         credits:5, files:[] },
+                  { code:"BMGT20050",  name:"Business Across Borders",                                               credits:5, files:[] },
+                  { code:"ACC20040",   name:"Business, Media & Corporate Communications",                            credits:5, files:[] },
+                  { code:"BMGT10150",  name:"Project Management",                                                    credits:5, files:[] },
+                  { code:"BMGT20080",  name:"Consulting with NGOs",                                                  credits:5, files:[] },
+                  { code:"BMGT20100",  name:"Developing Future Leaders",                                             credits:5, files:[] },
+                  { code:"BMGT20130",  name:"Responsible and Sustainable Business Management",                       credits:5, files:[] },
+                  { code:"BMGT20160",  name:"Business and Social Enterprise",                                        credits:5, files:[] },
+                  { code:"BMGT20180",  name:"Wellbeing and Work",                                                    credits:5, files:[] },
+                  { code:"BMGT20190",  name:"Introduction to Negotiations",                                          credits:5, files:[] },
+                  { code:"MATH20320",  name:"Quantitative Methods in Business",                                      credits:5, files:[] },
+                  { code:"MIS10040",   name:"Web Design and Analytics",                                              credits:5, files:[] },
+                  { code:"MIS20040",   name:"Digital Business and Social Media Strategy",                            credits:5, files:[] },
+                  { code:"MIS20060",   name:"Inside the Modern Crypto Industry",                                     credits:5, files:[] },
+                  { code:"MIS20090",   name:"Design Thinking",                                                       credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:3, credits:60, note:"Stage 3: 4 core modules + min 6 Option A modules + optional electives.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BMGT30300",  name:"Business Strategy",                                                     credits:5, files:[] },
+                  { code:"BMGT30460",  name:"Personal Development Portfolio",                                        credits:5, files:[] },
+                  { code:"BMGT30440",  name:"Cultural Intelligence in Management",                                   credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BMGT30340",  name:"New Venture Creation & Development",                                    credits:5, files:[] },
+                ]},
+                { label:"Options A — Autumn (choose min 6 total across Autumn/Spring)", modules:[
+                  { code:"ACC30010",   name:"Tax in Society",                                                        credits:5, files:[] },
+                  { code:"ACC30030",   name:"Cost Management",                                                       credits:5, files:[] },
+                  { code:"ACC30050",   name:"Corporate Governance, Company Law and Labour Law",                      credits:5, files:[] },
+                  { code:"BMGT30100",  name:"Leadership and Change Management",                                      credits:5, files:[] },
+                  { code:"BMGT30330",  name:"Governing International Trade, Finance, Climate and the Internet",      credits:5, files:[] },
+                  { code:"BMGT30430",  name:"Doing Business in the Global South",                                    credits:5, files:[] },
+                  { code:"ECON30160",  name:"International Trade Economics",                                         credits:5, files:[] },
+                  { code:"ECON30270",  name:"Behavioural Economics and Public Policy",                               credits:5, files:[] },
+                  { code:"ECON30290",  name:"Advanced Microeconomics",                                               credits:5, files:[] },
+                  { code:"FIN30030",   name:"International Financial Management",                                    credits:5, files:[] },
+                  { code:"FIN30170",   name:"Corporate Financial Management",                                        credits:5, files:[] },
+                  { code:"FIN30200",   name:"Econometrics of Financial Markets",                                     credits:5, files:[] },
+                  { code:"FIN30530",   name:"Sustainable Finance",                                                   credits:5, files:[] },
+                  { code:"HRM30020",   name:"European IR and HRM",                                                   credits:5, files:[] },
+                  { code:"HRM30070",   name:"HRM in Multinationals",                                                 credits:5, files:[] },
+                  { code:"MIS30150",   name:"Strategic Decision Making in the Digital World",                        credits:5, files:[] },
+                  { code:"MKT30040",   name:"Consumer Psychology",                                                   credits:5, files:[] },
+                  { code:"MKT30050",   name:"Consumer Insight: Research and Data Planning",                          credits:5, files:[] },
+                  { code:"MKT30060",   name:"Building Effective Marketing Plans",                                    credits:5, files:[] },
+                  { code:"MKT30150",   name:"Responsible Marketing",                                                 credits:5, files:[] },
+                  { code:"MKT30170",   name:"Brand Management",                                                      credits:5, files:[] },
+                  { code:"ECON30130",  name:"Econometrics: Applying Statistics to Economic Data",                    credits:5, files:[] },
+                  { code:"HRM30060",   name:"An Introduction to Equality, Diversity & Inclusion",                   credits:5, files:[] },
+                  { code:"MKT30140",   name:"Consultative Selling and Negotiations",                                 credits:5, files:[] },
+                ]},
+                { label:"Options A — Spring (choose min 6 total across Autumn/Spring)", modules:[
+                  { code:"ACC30020",   name:"Financial Accounting 3",                                                credits:5, files:[] },
+                  { code:"ACC30060",   name:"Financial Statement Analysis",                                          credits:5, files:[] },
+                  { code:"BMGT30090",  name:"Entrepreneurship in Action",                                            credits:5, files:[] },
+                  { code:"BMGT30130",  name:"Global Industry Analysis",                                              credits:5, files:[] },
+                  { code:"BMGT30220",  name:"Supply Chain Management",                                               credits:5, files:[] },
+                  { code:"BMGT30290",  name:"Developing International Market Entry Strategies",                      credits:5, files:[] },
+                  { code:"BMGT30350",  name:"The Human Side of Innovation",                                          credits:5, files:[] },
+                  { code:"BMGT30450",  name:"Groups and Teams",                                                      credits:5, files:[] },
+                  { code:"ECON30170",  name:"Intermediate Financial Economics",                                      credits:5, files:[] },
+                  { code:"ECON30190",  name:"Public Economics: Government Spending, Taxation and Public Choice",     credits:5, files:[] },
+                  { code:"FIN30080",   name:"Financial Institution Management",                                      credits:5, files:[] },
+                  { code:"FIN30090",   name:"Treasury and Risk Management",                                          credits:5, files:[] },
+                  { code:"FIN30100",   name:"Investment and Portfolio Management",                                   credits:5, files:[] },
+                  { code:"FIN30190",   name:"Behavioural Finance",                                                   credits:5, files:[] },
+                  { code:"HRM30010",   name:"Human Resource Management",                                             credits:5, files:[] },
+                  { code:"HRM30100",   name:"International HRM",                                                     credits:5, files:[] },
+                  { code:"HRM30140",   name:"Climate Change & Business Sustainability",                              credits:5, files:[] },
+                  { code:"MIS30010",   name:"Decision Analytics",                                                    credits:5, files:[] },
+                  { code:"MKT30080",   name:"Global Marketing",                                                      credits:5, files:[] },
+                  { code:"MKT30090",   name:"Marketing Communications: Content and Campaigns in the Digital Age",   credits:5, files:[] },
+                  { code:"MKT30120",   name:"Digital Marketing",                                                     credits:5, files:[] },
+                ]},
+                { label:"Electives B (optional, do not count towards min 6 Options)", modules:[
+                  { code:"ACC20050",   name:"Sustainability Reporting and Analysis",                                 credits:5, files:[] },
+                  { code:"BMGT20220",  name:"High-tech Entrepreneurship",                                            credits:5, files:[] },
+                  { code:"BMGT10140",  name:"Business Plan",                                                         credits:5, files:[] },
+                  { code:"ACC20040",   name:"Business, Media & Corporate Communications",                            credits:5, files:[] },
+                  { code:"BMGT10150",  name:"Project Management",                                                    credits:5, files:[] },
+                  { code:"BMGT20080",  name:"Consulting with NGOs",                                                  credits:5, files:[] },
+                  { code:"BMGT20100",  name:"Developing Future Leaders",                                             credits:5, files:[] },
+                  { code:"BMGT20130",  name:"Responsible and Sustainable Business Management",                       credits:5, files:[] },
+                  { code:"BMGT20160",  name:"Business and Social Enterprise",                                        credits:5, files:[] },
+                  { code:"BMGT20180",  name:"Wellbeing and Work",                                                    credits:5, files:[] },
+                  { code:"BMGT20190",  name:"Introduction to Negotiations",                                          credits:5, files:[] },
+                  { code:"MATH20320",  name:"Quantitative Methods in Business",                                      credits:5, files:[] },
+                  { code:"MIS10040",   name:"Web Design and Analytics",                                              credits:5, files:[] },
+                  { code:"MIS20060",   name:"Inside the Modern Crypto Industry",                                     credits:5, files:[] },
+                  { code:"MIS20090",   name:"Design Thinking",                                                       credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        }
+      ]
+    },
+
+    // ─── UCD School of Economics & Social Science ────────────────────────────
+    {
+      id:"ucd-economics", name:"UCD School of Economics & Social Science", icon:"📈", uni:"ucd",
+      sub:"University College Dublin",
+      courses:[
+
+        // ── Economics (BSc) ──────────────────────────────────────────────────
+        {
+          id:"ucd-economics-bsc", name:"Economics (BSc) — UCD",
+          years:[
+            {
+              year:1, credits:55, note:"Stage 1: 8 core modules + choose 3 from Options A (breadth requirement).",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"ECON10730",  name:"Data Analysis for Economists",                                          credits:5, files:[] },
+                  { code:"ECON10740",  name:"Exploring Economics",                                                   credits:5, files:[] },
+                  { code:"ECON10770",  name:"Introduction to Economics",                                             credits:5, files:[] },
+                  { code:"ECON10790",  name:"Mathematics for Economists",                                            credits:5, files:[] },
+                  { code:"ECON20040",  name:"Statistics for Economists",                                             credits:5, files:[] },
+                  { code:"ECON10010",  name:"Principles of Microeconomics",                                          credits:5, files:[] },
+                  { code:"ECON10020",  name:"Principles of Macroeconomics",                                          credits:5, files:[] },
+                  { code:"ECON20130",  name:"Economic History: From the Middle Ages to the Second World War",        credits:5, files:[] },
+                ]},
+                { label:"Options A (choose min 3 — breadth requirement)", modules:[
+                  { code:"GEOG10140",  name:"Mapping a Sustainable World",                                           credits:5, files:[] },
+                  { code:"MST10010",   name:"Calculus I",                                                            credits:5, files:[] },
+                  { code:"SOC10010",   name:"Theorising Society: Foundations of Sociological Thought",              credits:5, files:[] },
+                  { code:"SOC10020",   name:"Introduction to Sociology",                                             credits:5, files:[] },
+                  { code:"GEOG10080",  name:"Dynamic Earth",                                                         credits:5, files:[] },
+                  { code:"GEOG10100",  name:"People, Places, Regions",                                               credits:5, files:[] },
+                  { code:"MST10030",   name:"Linear Algebra I",                                                      credits:5, files:[] },
+                  { code:"POL10120",   name:"Foundations in Global Development",                                     credits:5, files:[] },
+                  { code:"POL10180",   name:"Foundations of Political Theory",                                       credits:5, files:[] },
+                  { code:"SOC10060",   name:"Ireland in Comparative Perspective",                                    credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:2, credits:45, note:"Stage 2: 6 core modules + choose min 4 from Options A.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"ECON20010",  name:"Intermediate Microeconomics I",                                         credits:5, files:[] },
+                  { code:"ECON20240",  name:"R for Economists",                                                      credits:5, files:[] },
+                  { code:"ECON20250",  name:"Optimisation for Economists",                                           credits:5, files:[] },
+                  { code:"ECON30130",  name:"Econometrics: Applying Statistics to Economic Data",                    credits:5, files:[] },
+                  { code:"ECON20020",  name:"Intermediate Macroeconomics",                                           credits:5, files:[] },
+                  { code:"ECON20180",  name:"Intermediate Microeconomics II",                                        credits:5, files:[] },
+                ]},
+                { label:"Options A (choose min 4)", modules:[
+                  { code:"ECON20060",  name:"Irish Economy: Policy Making in a Global Context",                     credits:5, files:[] },
+                  { code:"ECON20080",  name:"Economic Policy Analysis",                                              credits:5, files:[] },
+                  { code:"ECON20190",  name:"Introduction to Financial Economics",                                   credits:5, files:[] },
+                  { code:"ECON20100",  name:"Game Theory",                                                           credits:5, files:[] },
+                  { code:"ECON20120",  name:"The Economics of the European Union: Institutions, Policies & Crises", credits:5, files:[] },
+                  { code:"ECON20160",  name:"Economics of the Environment",                                          credits:5, files:[] },
+                  { code:"ECON20230",  name:"Economics, Organisation and Management",                                credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:3, credits:55, note:"Stage 3: Core (incl. 10cr research project) + min 1 Econometrics option + min 20cr from Options B.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"ECON30310",  name:"Economics Research Project",                                            credits:10, files:[] },
+                  { code:"ECON30290",  name:"Advanced Microeconomics",                                               credits:5, files:[] },
+                  { code:"ECON30120",  name:"Advanced Macroeconomics",                                               credits:5, files:[] },
+                ]},
+                { label:"Options A — Econometrics (choose min 1)", modules:[
+                  { code:"ECON30540",  name:"Advanced Econometrics: Time Series",                                    credits:5, files:[] },
+                  { code:"ECON30530",  name:"Advanced Econometrics: Microeconometrics",                              credits:5, files:[] },
+                ]},
+                { label:"Options B — Level 3 (choose min 20cr towards 25cr total)", modules:[
+                  { code:"CHN30060",   name:"Chinese Economy",                                                       credits:5, files:[] },
+                  { code:"ECON30100",  name:"The Economics of Health and Health Policy",                             credits:5, files:[] },
+                  { code:"ECON30150",  name:"International Money and Banking",                                       credits:5, files:[] },
+                  { code:"ECON30160",  name:"International Trade Economics",                                         credits:5, files:[] },
+                  { code:"ECON30180",  name:"Industrial Economics: Economics of Business Strategy",                  credits:5, files:[] },
+                  { code:"ECON30270",  name:"Behavioural Economics and Public Policy",                               credits:5, files:[] },
+                  { code:"ECON30360",  name:"Labour Economics",                                                      credits:5, files:[] },
+                  { code:"ECON30400",  name:"Political Economy",                                                     credits:5, files:[] },
+                  { code:"ECON30410",  name:"Development Economics",                                                 credits:5, files:[] },
+                  { code:"ECON30590",  name:"Economics of Gender",                                                   credits:5, files:[] },
+                  { code:"ECON30630",  name:"Economics of Corporate Finance",                                        credits:5, files:[] },
+                  { code:"FIN30200",   name:"Econometrics of Financial Markets",                                     credits:5, files:[] },
+                  { code:"ECON30170",  name:"Intermediate Financial Economics",                                      credits:5, files:[] },
+                  { code:"ECON30190",  name:"Public Economics: Government Spending, Taxation and Public Choice",     credits:5, files:[] },
+                  { code:"ECON30430",  name:"Economics of International Finance",                                    credits:5, files:[] },
+                  { code:"ECON30500",  name:"Field Experiments in Social Science",                                   credits:5, files:[] },
+                  { code:"ECON30580",  name:"Economics of Betting Markets",                                          credits:5, files:[] },
+                  { code:"ECON30600",  name:"Economics of Climate Change",                                           credits:5, files:[] },
+                  { code:"ECON30640",  name:"Machine Learning for Social Science",                                   credits:5, files:[] },
+                ]},
+                { label:"Options C — Level 2 (up to 5cr to count towards 25cr total)", modules:[
+                  { code:"DEV20130",   name:"Achieving the Sustainable Development Goals",                           credits:5, files:[] },
+                  { code:"ECON20060",  name:"Irish Economy: Policy Making in a Global Context",                     credits:5, files:[] },
+                  { code:"ECON20080",  name:"Economic Policy Analysis",                                              credits:5, files:[] },
+                  { code:"ECON20190",  name:"Introduction to Financial Economics",                                   credits:5, files:[] },
+                  { code:"ECON20100",  name:"Game Theory",                                                           credits:5, files:[] },
+                  { code:"ECON20120",  name:"The Economics of the European Union: Institutions, Policies & Crises", credits:5, files:[] },
+                  { code:"ECON20160",  name:"Economics of the Environment",                                          credits:5, files:[] },
+                  { code:"ECON20230",  name:"Economics, Organisation and Management",                                credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+
+        // ── Economics, Mathematics & Statistics (BSc) ────────────────────────
+        {
+          id:"ucd-econ-maths-stats", name:"Economics, Mathematics & Statistics (BSc) — UCD",
+          years:[
+            {
+              year:1, credits:55, note:"Stage 1: 10 core modules + choose 1 from Options A.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"COMP10010",  name:"Introduction to Programming I",                                         credits:5, files:[] },
+                  { code:"ECON10770",  name:"Introduction to Economics",                                             credits:5, files:[] },
+                  { code:"MST10010",   name:"Calculus I",                                                            credits:5, files:[] },
+                  { code:"MST10040",   name:"Combinatorics & Number Theory",                                         credits:5, files:[] },
+                  { code:"STAT10050",  name:"Practical Statistics",                                                  credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ECON10010",  name:"Principles of Microeconomics",                                          credits:5, files:[] },
+                  { code:"ECON10020",  name:"Principles of Macroeconomics",                                          credits:5, files:[] },
+                  { code:"MST10020",   name:"Calculus II",                                                           credits:5, files:[] },
+                  { code:"MST10030",   name:"Linear Algebra I",                                                      credits:5, files:[] },
+                  { code:"STAT10060",  name:"Statistical Modelling",                                                 credits:5, files:[] },
+                ]},
+                { label:"Options A (choose 1)", modules:[
+                  { code:"CSOC10010",  name:"Introduction to Computational Social Science",                          credits:5, files:[] },
+                  { code:"SPOL10010",  name:"Social Policy Theories and Concepts I",                                 credits:5, files:[] },
+                  { code:"SPOL10030",  name:"Understanding Social Problems and Policies",                            credits:5, files:[] },
+                  { code:"IS10040",    name:"Information, Society, and Culture",                                     credits:5, files:[] },
+                  { code:"IS10060",    name:"Digital Technology",                                                    credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:2, credits:55, note:"Stage 2: 10 core modules + choose min 1 from Options A.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"ECON20010",  name:"Intermediate Microeconomics I",                                         credits:5, files:[] },
+                  { code:"MST20010",   name:"Algebraic Structures",                                                  credits:5, files:[] },
+                  { code:"MST20070",   name:"Multivariable Calculus with Applications",                              credits:5, files:[] },
+                  { code:"STAT20110",  name:"Introduction to Probability",                                           credits:5, files:[] },
+                  { code:"STAT20240",  name:"Predictive Analytics",                                                  credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ECON20020",  name:"Intermediate Macroeconomics",                                           credits:5, files:[] },
+                  { code:"MST20040",   name:"Analysis",                                                              credits:5, files:[] },
+                  { code:"MST20050",   name:"Linear Algebra II",                                                     credits:5, files:[] },
+                  { code:"STAT20100",  name:"Inferential Statistics",                                                credits:5, files:[] },
+                  { code:"STAT20250",  name:"Data Programming with R",                                               credits:5, files:[] },
+                ]},
+                { label:"Options A (choose min 1)", modules:[
+                  { code:"DEV20130",   name:"Achieving the Sustainable Development Goals",                           credits:5, files:[] },
+                  { code:"ECON20190",  name:"Introduction to Financial Economics",                                   credits:5, files:[] },
+                  { code:"ECON20240",  name:"R for Economists",                                                      credits:5, files:[] },
+                  { code:"ECON20120",  name:"The Economics of the European Union: Institutions, Policies & Crises", credits:5, files:[] },
+                  { code:"ECON20130",  name:"Economic History: From the Middle Ages to the Second World War",        credits:5, files:[] },
+                  { code:"ECON20180",  name:"Intermediate Microeconomics II",                                        credits:5, files:[] },
+                  { code:"ECON20230",  name:"Economics, Organisation and Management",                                credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:3, credits:40, note:"Stage 3: 3 core modules + min 10cr Options A (Autumn) + min 25cr from Options A+C combined.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"MST30050",   name:"Complex Analysis",                                                      credits:5, files:[] },
+                  { code:"STAT30010",  name:"Time Series",                                                           credits:5, files:[] },
+                  { code:"ECON30130",  name:"Econometrics: Applying Statistics to Economic Data",                    credits:5, files:[] },
+                ]},
+                { label:"Options A — Autumn (choose min 10cr towards 25cr total)", modules:[
+                  { code:"ECON20190",  name:"Introduction to Financial Economics",                                   credits:5, files:[] },
+                  { code:"ECON20240",  name:"R for Economists",                                                      credits:5, files:[] },
+                  { code:"ECON30100",  name:"The Economics of Health and Health Policy",                             credits:5, files:[] },
+                  { code:"ECON30150",  name:"International Money and Banking",                                       credits:5, files:[] },
+                  { code:"ECON30180",  name:"Industrial Economics: Economics of Business Strategy",                  credits:5, files:[] },
+                  { code:"ECON30270",  name:"Behavioural Economics and Public Policy",                               credits:5, files:[] },
+                  { code:"ECON30360",  name:"Labour Economics",                                                      credits:5, files:[] },
+                  { code:"ECON30410",  name:"Development Economics",                                                 credits:5, files:[] },
+                  { code:"ECON30630",  name:"Economics of Corporate Finance",                                        credits:5, files:[] },
+                  { code:"MATH20150",  name:"Graphs and Networks",                                                   credits:5, files:[] },
+                  { code:"MST30010",   name:"Group Theory and Applications",                                         credits:5, files:[] },
+                  { code:"MST30020",   name:"History of Mathematics",                                                credits:5, files:[] },
+                  { code:"STAT30080",  name:"Models — Survival Models",                                              credits:5, files:[] },
+                  { code:"STAT30090",  name:"Models — Stochastic Models",                                            credits:5, files:[] },
+                  { code:"STAT30350",  name:"Introduction to Bayesian Analysis",                                     credits:5, files:[] },
+                  { code:"STAT40800",  name:"Data Programming with Python",                                          credits:5, files:[] },
+                ]},
+                { label:"Options C — Spring (min 20cr from this list to reach 25cr total)", modules:[
+                  { code:"ECON30160",  name:"International Trade Economics",                                         credits:5, files:[] },
+                  { code:"ECON20100",  name:"Game Theory",                                                           credits:5, files:[] },
+                  { code:"ECON30170",  name:"Intermediate Financial Economics",                                      credits:5, files:[] },
+                  { code:"ECON30190",  name:"Public Economics: Government Spending, Taxation and Public Choice",     credits:5, files:[] },
+                  { code:"ECON30500",  name:"Field Experiments in Social Science",                                   credits:5, files:[] },
+                  { code:"ECON30580",  name:"Economics of Betting Markets",                                          credits:5, files:[] },
+                  { code:"ECON30600",  name:"Economics of Climate Change",                                           credits:5, files:[] },
+                  { code:"ECON30640",  name:"Machine Learning for Social Science",                                   credits:5, files:[] },
+                  { code:"MATH20070",  name:"Optimisation in Finance",                                               credits:5, files:[] },
+                  { code:"MATH20270",  name:"Theory of Games",                                                       credits:5, files:[] },
+                  { code:"MATH30250",  name:"Cryptography: Theory & Practice",                                       credits:5, files:[] },
+                  { code:"MATH30370",  name:"Markov Chains",                                                         credits:5, files:[] },
+                  { code:"MATH30380",  name:"Financial Mathematics Foundations",                                     credits:5, files:[] },
+                  { code:"MST30040",   name:"Differential Equations",                                                credits:5, files:[] },
+                  { code:"MST30070",   name:"Differential Geometry",                                                 credits:5, files:[] },
+                  { code:"STAT30270",  name:"Statistical Machine Learning",                                          credits:5, files:[] },
+                  { code:"STAT40150",  name:"Multivariate Analysis",                                                 credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:4, credits:55, note:"Stage 4: 1 core module + min 5cr Options A + min 20cr Options B (must include ≥10cr MST or STAT).",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"STAT30250",  name:"Advanced Predictive Analytics",                                         credits:5, files:[] },
+                ]},
+                { label:"Options A (choose min 5cr)", modules:[
+                  { code:"MATH20150",  name:"Graphs and Networks",                                                   credits:5, files:[] },
+                  { code:"MATH40550",  name:"Applied Matrix Theory",                                                 credits:5, files:[] },
+                  { code:"MST30010",   name:"Group Theory and Applications",                                         credits:5, files:[] },
+                  { code:"MST30020",   name:"History of Mathematics",                                                credits:5, files:[] },
+                  { code:"MATH20070",  name:"Optimisation in Finance",                                               credits:5, files:[] },
+                  { code:"MATH20270",  name:"Theory of Games",                                                       credits:5, files:[] },
+                  { code:"MATH30250",  name:"Cryptography: Theory & Practice",                                       credits:5, files:[] },
+                  { code:"MATH30380",  name:"Financial Mathematics Foundations",                                     credits:5, files:[] },
+                  { code:"MST30040",   name:"Differential Equations",                                                credits:5, files:[] },
+                  { code:"MST30070",   name:"Differential Geometry",                                                 credits:5, files:[] },
+                ]},
+                { label:"Options B (choose min 20cr; must incl. ≥10cr MST or STAT)", modules:[
+                  { code:"ECON30150",  name:"International Money and Banking",                                       credits:5, files:[] },
+                  { code:"ECON30160",  name:"International Trade Economics",                                         credits:5, files:[] },
+                  { code:"ECON30270",  name:"Behavioural Economics and Public Policy",                               credits:5, files:[] },
+                  { code:"ECON30290",  name:"Advanced Microeconomics",                                               credits:5, files:[] },
+                  { code:"ECON30360",  name:"Labour Economics",                                                      credits:5, files:[] },
+                  { code:"ECON30410",  name:"Development Economics",                                                 credits:5, files:[] },
+                  { code:"ECON30590",  name:"Economics of Gender",                                                   credits:5, files:[] },
+                  { code:"STAT41020",  name:"Survey Sampling",                                                       credits:5, files:[] },
+                  { code:"ECON30120",  name:"Advanced Macroeconomics",                                               credits:5, files:[] },
+                  { code:"ECON30190",  name:"Public Economics: Government Spending, Taxation and Public Choice",     credits:5, files:[] },
+                  { code:"ECON30580",  name:"Economics of Betting Markets",                                          credits:5, files:[] },
+                  { code:"ECON30600",  name:"Economics of Climate Change",                                           credits:5, files:[] },
+                  { code:"ECON30640",  name:"Machine Learning for Social Science",                                   credits:5, files:[] },
+                  { code:"MST30080",   name:"Maths Research",                                                        credits:10, files:[] },
+                  { code:"STAT40510",  name:"Applied Statistical Modelling",                                         credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+
+        // ── Philosophy, Politics and Economics (BSc) ─────────────────────────
+        {
+          id:"ucd-ppe", name:"Philosophy, Politics and Economics (BSc) — UCD",
+          years:[
+            {
+              year:1, credits:60, note:"Stage 1: 11 core modules + choose 1 from Options A.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"ECON10030",  name:"Introduction to Quantitative Economics",                                credits:5, files:[] },
+                  { code:"ECON10770",  name:"Introduction to Economics",                                             credits:5, files:[] },
+                  { code:"PHIL10160",  name:"Critical Thinking",                                                     credits:5, files:[] },
+                  { code:"PHIL10190",  name:"Introducing PPE",                                                       credits:5, files:[] },
+                  { code:"POL10160",   name:"Foundations of Contemporary Politics",                                  credits:5, files:[] },
+                  { code:"POL10170",   name:"Foundations in Political Research",                                     credits:5, files:[] },
+                  { code:"PHIL10040",  name:"Introduction to Ethics",                                                credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ECON10010",  name:"Principles of Microeconomics",                                          credits:5, files:[] },
+                  { code:"ECON10020",  name:"Principles of Macroeconomics",                                          credits:5, files:[] },
+                  { code:"PHIL10020",  name:"Mind, Language and Meaning",                                            credits:5, files:[] },
+                  { code:"POL10180",   name:"Foundations of Political Theory",                                       credits:5, files:[] },
+                ]},
+                { label:"Options A (choose 1)", modules:[
+                  { code:"INRL10020",  name:"Foundations of International Relations",                                credits:5, files:[] },
+                  { code:"PHIL10030",  name:"Introduction to Modern Philosophy",                                     credits:5, files:[] },
+                  { code:"PHIL10070",  name:"The First Philosophers",                                                credits:5, files:[] },
+                  { code:"PHIL10100",  name:"Existentialism and Humanism: An Introduction to Continental Philosophy",credits:5, files:[] },
+                  { code:"PHIL10110",  name:"Buddhism and the West",                                                 credits:5, files:[] },
+                  { code:"POL10120",   name:"Foundations in Global Development",                                     credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:2, credits:55, note:"Stage 2: 7 core modules + min 1 Politics + min 1 Philosophy + min 1 general option.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"ECON20010",  name:"Intermediate Microeconomics I",                                         credits:5, files:[] },
+                  { code:"PHIL20490",  name:"Knowledge & Scepticism",                                                credits:5, files:[] },
+                  { code:"POL20010",   name:"Individuals and the State: The Idea of Freedom in the History of Political Thought", credits:5, files:[] },
+                  { code:"ECON20040",  name:"Statistics for Economists",                                             credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ECON20020",  name:"Intermediate Macroeconomics",                                           credits:5, files:[] },
+                  { code:"PHIL20620",  name:"Philosophy of Social Science",                                          credits:5, files:[] },
+                  { code:"POL20050",   name:"Research Methods in Political Science",                                 credits:5, files:[] },
+                ]},
+                { label:"Options A — Politics (choose min 1)", modules:[
+                  { code:"DEV20010",   name:"Topics in International Development",                                   credits:5, files:[] },
+                  { code:"INRL20040",  name:"International Relations: Introduction to Theories and Empirics",        credits:5, files:[] },
+                  { code:"POL20020",   name:"Comparative Politics",                                                  credits:5, files:[] },
+                  { code:"POL20280",   name:"Politics of the Welfare State",                                         credits:5, files:[] },
+                ]},
+                { label:"Options C — Philosophy (choose min 1)", modules:[
+                  { code:"PHIL20010",  name:"Rationalism and Empiricism",                                            credits:5, files:[] },
+                  { code:"PHIL20020",  name:"Logic",                                                                 credits:5, files:[] },
+                  { code:"PHIL20280",  name:"Metaphysics",                                                           credits:5, files:[] },
+                  { code:"PHIL20440",  name:"Feminism & Gender Justice",                                             credits:5, files:[] },
+                  { code:"PHIL20500",  name:"Phenomenology & Existentialism",                                        credits:5, files:[] },
+                  { code:"PHIL20630",  name:"Art and Society",                                                       credits:5, files:[] },
+                  { code:"PHIL20640",  name:"Philosophy of Mind and AI",                                             credits:5, files:[] },
+                  { code:"COMP20090",  name:"Introduction to Cognitive Science",                                     credits:5, files:[] },
+                  { code:"PHIL20240",  name:"Applied Ethics",                                                        credits:5, files:[] },
+                  { code:"PHIL20570",  name:"Philosophy & Literature",                                               credits:5, files:[] },
+                  { code:"PHIL20580",  name:"Plato's Republic",                                                      credits:5, files:[] },
+                  { code:"PHIL20700",  name:"The Philosophy of History",                                             credits:5, files:[] },
+                  { code:"PHIL20710",  name:"Body, Mind, World",                                                     credits:5, files:[] },
+                  { code:"PHIL20750",  name:"What was Philosophy? From Ancient Greece to Judaism, Islam and Christianity", credits:5, files:[] },
+                  { code:"PHIL20780",  name:"Wittgenstein",                                                          credits:5, files:[] },
+                  { code:"PHIL20790",  name:"Hegel and Heidegger",                                                   credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:3, credits:50, note:"Stage 3: Select min 50cr total across Philosophy (min 15cr L3), Economics (min 15cr), and Politics (min 15cr L3).",
+              sections:[
+                { label:"Philosophy — Level 3 (choose min 10cr from here)", modules:[
+                  { code:"PHIL31010",  name:"The Philosophy of Nietzsche",                                           credits:10, files:[] },
+                  { code:"PHIL31040",  name:"Philosophy of Interpretation",                                          credits:10, files:[] },
+                  { code:"PHIL31160",  name:"Medieval Metaphysics: John Scotus Eriugena",                            credits:10, files:[] },
+                  { code:"PHIL31170",  name:"Philosophy of Language",                                                credits:10, files:[] },
+                  { code:"PHIL31180",  name:"Topics in Early Modern Philosophy",                                     credits:10, files:[] },
+                  { code:"PHIL31200",  name:"Philosophy of Law",                                                     credits:10, files:[] },
+                  { code:"PHIL31240",  name:"Creation and Causation",                                                credits:10, files:[] },
+                  { code:"PHIL31030",  name:"Philosophy of Perception and the Senses",                               credits:10, files:[] },
+                  { code:"PHIL31080",  name:"History & Philosophy: Nazi Germany",                                    credits:10, files:[] },
+                  { code:"PHIL31110",  name:"Applied Epistemology",                                                  credits:10, files:[] },
+                  { code:"PHIL31190",  name:"Irish Enlightenment",                                                   credits:10, files:[] },
+                  { code:"PHIL31210",  name:"Philosophy of Religion",                                                credits:10, files:[] },
+                  { code:"PHIL31220",  name:"Hume and His Contemporaries",                                           credits:10, files:[] },
+                  { code:"PHIL31230",  name:"Kant's Critique of Pure Reason",                                        credits:10, files:[] },
+                  { code:"PHIL31250",  name:"Philosophy of Time",                                                    credits:10, files:[] },
+                ]},
+                { label:"Economics (choose min 15cr)", modules:[
+                  { code:"ECON30100",  name:"The Economics of Health and Health Policy",                             credits:5, files:[] },
+                  { code:"ECON30150",  name:"International Money and Banking",                                       credits:5, files:[] },
+                  { code:"ECON30160",  name:"International Trade Economics",                                         credits:5, files:[] },
+                  { code:"ECON30180",  name:"Industrial Economics: Economics of Business Strategy",                  credits:5, files:[] },
+                  { code:"ECON30270",  name:"Behavioural Economics and Public Policy",                               credits:5, files:[] },
+                  { code:"ECON30360",  name:"Labour Economics",                                                      credits:5, files:[] },
+                  { code:"ECON30400",  name:"Political Economy",                                                     credits:5, files:[] },
+                  { code:"ECON30410",  name:"Development Economics",                                                 credits:5, files:[] },
+                  { code:"ECON30590",  name:"Economics of Gender",                                                   credits:5, files:[] },
+                  { code:"ECON30630",  name:"Economics of Corporate Finance",                                        credits:5, files:[] },
+                  { code:"ECON30130",  name:"Econometrics: Applying Statistics to Economic Data",                    credits:5, files:[] },
+                  { code:"ECON30170",  name:"Intermediate Financial Economics",                                      credits:5, files:[] },
+                  { code:"ECON30190",  name:"Public Economics: Government Spending, Taxation and Public Choice",     credits:5, files:[] },
+                  { code:"ECON30430",  name:"Economics of International Finance",                                    credits:5, files:[] },
+                  { code:"ECON30500",  name:"Field Experiments in Social Science",                                   credits:5, files:[] },
+                  { code:"ECON30580",  name:"Economics of Betting Markets",                                          credits:5, files:[] },
+                  { code:"ECON30600",  name:"Economics of Climate Change",                                           credits:5, files:[] },
+                  { code:"ECON30640",  name:"Machine Learning for Social Science",                                   credits:5, files:[] },
+                ]},
+                { label:"Politics — Level 3 (choose min 10cr from here)", modules:[
+                  { code:"INRL30320",  name:"Gender in War & Peace",                                                 credits:10, files:[] },
+                  { code:"INRL30350",  name:"International Justice",                                                 credits:10, files:[] },
+                  { code:"INRL30370",  name:"Terrorism & Political Violence",                                        credits:10, files:[] },
+                  { code:"INRL30400",  name:"EU Foreign Policy",                                                     credits:10, files:[] },
+                  { code:"POL30640",   name:"Democratic Innovations and the Future of Democracy",                    credits:10, files:[] },
+                  { code:"POL30820",   name:"Political Risk and Foreign Direct Investment",                          credits:10, files:[] },
+                  { code:"POL36160",   name:"Northern Ireland Politics",                                             credits:10, files:[] },
+                  { code:"POL36200",   name:"Democracy, Elections and Campaigns",                                    credits:10, files:[] },
+                  { code:"POL36270",   name:"Understanding Government: Theory and Reality",                          credits:10, files:[] },
+                  { code:"POL36280",   name:"Politics of EU Social Policy",                                          credits:10, files:[] },
+                  { code:"POL36310",   name:"Global Health, Politics & Development",                                 credits:10, files:[] },
+                  { code:"POL30660",   name:"Data Analytics for Social Sciences",                                    credits:10, files:[] },
+                  { code:"POL30730",   name:"Political Activism in the Middle East",                                 credits:10, files:[] },
+                  { code:"POL30780",   name:"Justice in Education",                                                  credits:10, files:[] },
+                  { code:"POL30840",   name:"Electoral Systems and their Consequences",                              credits:10, files:[] },
+                  { code:"POL30880",   name:"Capitalism and Democracy",                                              credits:10, files:[] },
+                  { code:"POL36170",   name:"Respecting Diversity",                                                  credits:10, files:[] },
+                  { code:"POL36240",   name:"Diplomacy & International Organisation",                                credits:10, files:[] },
+                  { code:"POL36290",   name:"The World as One Democracy?",                                           credits:10, files:[] },
+                  { code:"POL36300",   name:"Politics of Climate Change",                                            credits:10, files:[] },
+                  { code:"POL36320",   name:"Political Institutions & Development",                                  credits:10, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+
+        // ── Law with Economics (BCL) ─────────────────────────────────────────
+        {
+          id:"ucd-law-economics", name:"Law with Economics (BCL) — UCD",
+          years:[
+            {
+              year:1, credits:55, note:"Stage 1: Core Law (9 modules) + Core Economics (2 modules) + optional LAW10260.",
+              sections:[
+                { label:"Core — Economics (Autumn)", modules:[
+                  { code:"ECON10760",  name:"Macroeconomics for Business",                                           credits:5, files:[] },
+                  { code:"MATH10030",  name:"Mathematics for Business",                                              credits:5, files:[] },
+                ]},
+                { label:"Core — Law (Autumn)", modules:[
+                  { code:"LAW10050",   name:"Constitutional Law: Institutional Framework of the Constitution of Ireland", credits:5, files:[] },
+                  { code:"LAW10190",   name:"Negligence and Related Matters",                                        credits:5, files:[] },
+                  { code:"LAW10340",   name:"Contract: Formation",                                                   credits:5, files:[] },
+                  { code:"LAW10420",   name:"Legal and Professional Skills",                                         credits:5, files:[] },
+                ]},
+                { label:"Core — Law & Economics (Spring)", modules:[
+                  { code:"ECON10720",  name:"Microeconomics for Business",                                           credits:5, files:[] },
+                  { code:"LAW10060",   name:"Constitutional Law: Fundamental Rights under the Constitution of Ireland", credits:5, files:[] },
+                  { code:"LAW10200",   name:"Nominate Torts",                                                        credits:5, files:[] },
+                  { code:"LAW10350",   name:"Contract: Vitiating Factors and Remedies",                             credits:5, files:[] },
+                  { code:"LAW10360",   name:"General Introduction to the Irish Legal System",                        credits:5, files:[] },
+                ]},
+                { label:"Option (elective)", modules:[
+                  { code:"LAW10260",   name:"Criminal Procedure",                                                    credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:2, credits:45, note:"Stage 2: Core Law (6) + Core Economics (2) + 2 Economics options + optional Company Law.",
+              sections:[
+                { label:"Core — Economics (Autumn)", modules:[
+                  { code:"ECON20200",  name:"Intermediate Microeconomics",                                           credits:5, files:[] },
+                  { code:"ECON20040",  name:"Statistics for Economists",                                             credits:5, files:[] },
+                ]},
+                { label:"Core — Law (Autumn)", modules:[
+                  { code:"LAW20330",   name:"EU Constitutional Law",                                                 credits:5, files:[] },
+                  { code:"LAW20370",   name:"Property Law I",                                                        credits:5, files:[] },
+                  { code:"LAW20390",   name:"Criminal Liability",                                                    credits:5, files:[] },
+                ]},
+                { label:"Core — Law (Spring)", modules:[
+                  { code:"LAW20340",   name:"EU Economic Law",                                                       credits:5, files:[] },
+                  { code:"LAW20380",   name:"Property Law II",                                                       credits:5, files:[] },
+                  { code:"LAW20400",   name:"Criminal Offences and Defences",                                        credits:5, files:[] },
+                ]},
+                { label:"Options — Economics (choose 2)", modules:[
+                  { code:"DEV20130",   name:"Achieving the Sustainable Development Goals",                           credits:5, files:[] },
+                  { code:"ECON20060",  name:"Irish Economy: Policy Making in a Global Context",                     credits:5, files:[] },
+                  { code:"ECON20080",  name:"Economic Policy Analysis",                                              credits:5, files:[] },
+                  { code:"ECON20190",  name:"Introduction to Financial Economics",                                   credits:5, files:[] },
+                  { code:"ECON20240",  name:"R for Economists",                                                      credits:5, files:[] },
+                  { code:"ECON20250",  name:"Optimisation for Economists",                                           credits:5, files:[] },
+                  { code:"ECON20100",  name:"Game Theory",                                                           credits:5, files:[] },
+                  { code:"ECON20120",  name:"The Economics of the European Union: Institutions, Policies & Crises", credits:5, files:[] },
+                  { code:"ECON20130",  name:"Economic History: From the Middle Ages to the Second World War",        credits:5, files:[] },
+                  { code:"ECON20160",  name:"Economics of the Environment",                                          credits:5, files:[] },
+                  { code:"ECON20230",  name:"Economics, Organisation and Management",                                credits:5, files:[] },
+                ]},
+                { label:"Options — Company Law (recommended for Irish legal bodies)", modules:[
+                  { code:"LAW20090",   name:"Company Law I",                                                         credits:5, files:[] },
+                  { code:"LAW20170",   name:"Company Law II",                                                        credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:3, credits:45, note:"Stage 3: Core Economics (2) + min 1 L3 Economics option + min 5 Law options.",
+              sections:[
+                { label:"Core — Economics", modules:[
+                  { code:"ECON30130",  name:"Econometrics: Applying Statistics to Economic Data",                    credits:5, files:[] },
+                  { code:"ECON20020",  name:"Intermediate Macroeconomics",                                           credits:5, files:[] },
+                ]},
+                { label:"Options — Economics Level 3 (choose min 1)", modules:[
+                  { code:"ECON30100",  name:"The Economics of Health and Health Policy",                             credits:5, files:[] },
+                  { code:"ECON30150",  name:"International Money and Banking",                                       credits:5, files:[] },
+                  { code:"ECON30160",  name:"International Trade Economics",                                         credits:5, files:[] },
+                  { code:"ECON30180",  name:"Industrial Economics: Economics of Business Strategy",                  credits:5, files:[] },
+                  { code:"ECON30270",  name:"Behavioural Economics and Public Policy",                               credits:5, files:[] },
+                  { code:"ECON30290",  name:"Advanced Microeconomics",                                               credits:5, files:[] },
+                  { code:"ECON30360",  name:"Labour Economics",                                                      credits:5, files:[] },
+                  { code:"ECON30400",  name:"Political Economy",                                                     credits:5, files:[] },
+                  { code:"ECON30410",  name:"Development Economics",                                                 credits:5, files:[] },
+                  { code:"ECON30540",  name:"Advanced Econometrics: Time Series",                                    credits:5, files:[] },
+                  { code:"ECON30590",  name:"Economics of Gender",                                                   credits:5, files:[] },
+                  { code:"ECON30630",  name:"Economics of Corporate Finance",                                        credits:5, files:[] },
+                  { code:"FIN30200",   name:"Econometrics of Financial Markets",                                     credits:5, files:[] },
+                  { code:"ECON30120",  name:"Advanced Macroeconomics",                                               credits:5, files:[] },
+                  { code:"ECON30170",  name:"Intermediate Financial Economics",                                      credits:5, files:[] },
+                  { code:"ECON30190",  name:"Public Economics: Government Spending, Taxation and Public Choice",     credits:5, files:[] },
+                  { code:"ECON30430",  name:"Economics of International Finance",                                    credits:5, files:[] },
+                  { code:"ECON30500",  name:"Field Experiments in Social Science",                                   credits:5, files:[] },
+                  { code:"ECON30530",  name:"Advanced Econometrics: Microeconometrics",                              credits:5, files:[] },
+                  { code:"ECON30580",  name:"Economics of Betting Markets",                                          credits:5, files:[] },
+                  { code:"ECON30600",  name:"Economics of Climate Change",                                           credits:5, files:[] },
+                  { code:"ECON30640",  name:"Machine Learning for Social Science",                                   credits:5, files:[] },
+                ]},
+                { label:"Options — Law (choose min 5 of the following)", modules:[
+                  { code:"LAW37580",   name:"Research Module (10 cr)",                                               credits:10, files:[] },
+                  { code:"LAW20090",   name:"Company Law I",                                                         credits:5, files:[] },
+                  { code:"LAW30060",   name:"Equity: History, Doctrines, Remedies",                                  credits:5, files:[] },
+                  { code:"LAW30070",   name:"Evidence — Foundations",                                                credits:5, files:[] },
+                  { code:"LAW30090",   name:"Revenue Law: Introduction to Revenue Law",                              credits:5, files:[] },
+                  { code:"LAW30170",   name:"Employment Law: the Contract of Employment",                            credits:5, files:[] },
+                  { code:"LAW30240",   name:"Administrative Law: Grounds of Review",                                 credits:5, files:[] },
+                  { code:"LAW30300",   name:"Punishment and Penal Policy",                                           credits:5, files:[] },
+                  { code:"LAW30360",   name:"Consumer Law",                                                          credits:5, files:[] },
+                  { code:"LAW30400",   name:"Matrimonial Law and Reliefs",                                           credits:5, files:[] },
+                  { code:"LAW30440",   name:"Environmental Law and Policy",                                          credits:5, files:[] },
+                  { code:"LAW30470",   name:"International Human Rights Law",                                        credits:5, files:[] },
+                  { code:"LAW30610",   name:"Commercial Law",                                                        credits:5, files:[] },
+                  { code:"LAW30690",   name:"Advocacy and Mooting",                                                  credits:5, files:[] },
+                  { code:"LAW30700",   name:"The Lawyer, Professional Ethics & Legal Practice",                      credits:5, files:[] },
+                  { code:"LAW30720",   name:"Theory of Court Practice",                                              credits:5, files:[] },
+                  { code:"LAW30730",   name:"Public International Law",                                              credits:5, files:[] },
+                  { code:"LAW30870",   name:"Patent and Trade Mark Law",                                             credits:5, files:[] },
+                  { code:"LAW37520",   name:"International Family Law",                                              credits:5, files:[] },
+                  { code:"LAW37530",   name:"Financial Law of the EU",                                               credits:5, files:[] },
+                  { code:"LAW37570",   name:"Insolvency Law",                                                        credits:5, files:[] },
+                  { code:"LAW37670",   name:"Copyright Law",                                                         credits:5, files:[] },
+                  { code:"LAW37700",   name:"Internet Law and Regulation",                                           credits:5, files:[] },
+                  { code:"LAW37760",   name:"International Refugee Law",                                             credits:5, files:[] },
+                  { code:"LAW20170",   name:"Company Law II",                                                        credits:5, files:[] },
+                  { code:"LAW30010",   name:"Banking Law",                                                           credits:5, files:[] },
+                  { code:"LAW30160",   name:"Evidence — Practice and Principles",                                    credits:5, files:[] },
+                  { code:"LAW30180",   name:"Jurisprudence",                                                         credits:5, files:[] },
+                  { code:"LAW30230",   name:"Overview of Law Relating to Creation and Administration of Trusts",     credits:5, files:[] },
+                  { code:"LAW30290",   name:"Administrative Law: Remedies for Unlawful Administrative Action",       credits:5, files:[] },
+                  { code:"LAW30310",   name:"Law of the ECHR",                                                       credits:5, files:[] },
+                  { code:"LAW30330",   name:"Employment Law: Employment Rights",                                     credits:5, files:[] },
+                  { code:"LAW30450",   name:"Family and Child Law",                                                  credits:5, files:[] },
+                  { code:"LAW30820",   name:"Private International Law",                                             credits:5, files:[] },
+                  { code:"LAW37430",   name:"Jury Trials",                                                           credits:5, files:[] },
+                  { code:"LAW37460",   name:"Planning Law",                                                          credits:5, files:[] },
+                  { code:"LAW37590",   name:"International Economic Law",                                            credits:5, files:[] },
+                  { code:"LAW37610",   name:"Medical Law",                                                           credits:5, files:[] },
+                  { code:"LAW37630",   name:"Law in the Classroom",                                                  credits:5, files:[] },
+                  { code:"LAW37680",   name:"BCL Internship",                                                        credits:30, files:[] },
+                  { code:"LAW37710",   name:"Applied Legal Skills",                                                  credits:5, files:[] },
+                  { code:"LAW37720",   name:"Advanced International Law: Current Issues",                            credits:5, files:[] },
+                  { code:"LAW37740",   name:"Victims and Victimology",                                               credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:4, credits:55, note:"Stage 4: Core Law (1) + 4 Economics options + min 4 Law options.",
+              sections:[
+                { label:"Core — Law", modules:[
+                  { code:"LAW30640",   name:"Competition Law in Practice",                                           credits:5, files:[] },
+                ]},
+                { label:"Options — Economics (choose 4)", modules:[
+                  { code:"ECON20250",  name:"Optimisation for Economists",                                           credits:5, files:[] },
+                  { code:"ECON30100",  name:"The Economics of Health and Health Policy",                             credits:5, files:[] },
+                  { code:"ECON30150",  name:"International Money and Banking",                                       credits:5, files:[] },
+                  { code:"ECON30160",  name:"International Trade Economics",                                         credits:5, files:[] },
+                  { code:"ECON30180",  name:"Industrial Economics: Economics of Business Strategy",                  credits:5, files:[] },
+                  { code:"ECON30270",  name:"Behavioural Economics and Public Policy",                               credits:5, files:[] },
+                  { code:"ECON30290",  name:"Advanced Microeconomics",                                               credits:5, files:[] },
+                  { code:"ECON30360",  name:"Labour Economics",                                                      credits:5, files:[] },
+                  { code:"ECON30400",  name:"Political Economy",                                                     credits:5, files:[] },
+                  { code:"ECON30410",  name:"Development Economics",                                                 credits:5, files:[] },
+                  { code:"ECON30540",  name:"Advanced Econometrics: Time Series",                                    credits:5, files:[] },
+                  { code:"ECON30590",  name:"Economics of Gender",                                                   credits:5, files:[] },
+                  { code:"ECON30630",  name:"Economics of Corporate Finance",                                        credits:5, files:[] },
+                  { code:"FIN30200",   name:"Econometrics of Financial Markets",                                     credits:5, files:[] },
+                  { code:"ECON30130",  name:"Econometrics: Applying Statistics to Economic Data",                    credits:5, files:[] },
+                  { code:"ECON20020",  name:"Intermediate Macroeconomics",                                           credits:5, files:[] },
+                  { code:"ECON30120",  name:"Advanced Macroeconomics",                                               credits:5, files:[] },
+                  { code:"ECON30170",  name:"Intermediate Financial Economics",                                      credits:5, files:[] },
+                  { code:"ECON30190",  name:"Public Economics: Government Spending, Taxation and Public Choice",     credits:5, files:[] },
+                  { code:"ECON30430",  name:"Economics of International Finance",                                    credits:5, files:[] },
+                  { code:"ECON30500",  name:"Field Experiments in Social Science",                                   credits:5, files:[] },
+                  { code:"ECON30530",  name:"Advanced Econometrics: Microeconometrics",                              credits:5, files:[] },
+                  { code:"ECON30580",  name:"Economics of Betting Markets",                                          credits:5, files:[] },
+                  { code:"ECON30600",  name:"Economics of Climate Change",                                           credits:5, files:[] },
+                  { code:"ECON30640",  name:"Machine Learning for Social Science",                                   credits:5, files:[] },
+                ]},
+                { label:"Options — Law (choose min 4 of the following)", modules:[
+                  { code:"LAW37580",   name:"Research Module (10 cr)",                                               credits:10, files:[] },
+                  { code:"LAW30060",   name:"Equity: History, Doctrines, Remedies",                                  credits:5, files:[] },
+                  { code:"LAW30070",   name:"Evidence — Foundations",                                                credits:5, files:[] },
+                  { code:"LAW30090",   name:"Revenue Law: Introduction to Revenue Law",                              credits:5, files:[] },
+                  { code:"LAW30170",   name:"Employment Law: the Contract of Employment",                            credits:5, files:[] },
+                  { code:"LAW30240",   name:"Administrative Law: Grounds of Review",                                 credits:5, files:[] },
+                  { code:"LAW30300",   name:"Punishment and Penal Policy",                                           credits:5, files:[] },
+                  { code:"LAW30360",   name:"Consumer Law",                                                          credits:5, files:[] },
+                  { code:"LAW30400",   name:"Matrimonial Law and Reliefs",                                           credits:5, files:[] },
+                  { code:"LAW30440",   name:"Environmental Law and Policy",                                          credits:5, files:[] },
+                  { code:"LAW30470",   name:"International Human Rights Law",                                        credits:5, files:[] },
+                  { code:"LAW30610",   name:"Commercial Law",                                                        credits:5, files:[] },
+                  { code:"LAW30690",   name:"Advocacy and Mooting",                                                  credits:5, files:[] },
+                  { code:"LAW30700",   name:"The Lawyer, Professional Ethics & Legal Practice",                      credits:5, files:[] },
+                  { code:"LAW30720",   name:"Theory of Court Practice",                                              credits:5, files:[] },
+                  { code:"LAW30730",   name:"Public International Law",                                              credits:5, files:[] },
+                  { code:"LAW30870",   name:"Patent and Trade Mark Law",                                             credits:5, files:[] },
+                  { code:"LAW37520",   name:"International Family Law",                                              credits:5, files:[] },
+                  { code:"LAW37530",   name:"Financial Law of the EU",                                               credits:5, files:[] },
+                  { code:"LAW37570",   name:"Insolvency Law",                                                        credits:5, files:[] },
+                  { code:"LAW37670",   name:"Copyright Law",                                                         credits:5, files:[] },
+                  { code:"LAW37700",   name:"Internet Law and Regulation",                                           credits:5, files:[] },
+                  { code:"LAW37760",   name:"International Refugee Law",                                             credits:5, files:[] },
+                  { code:"LAW30010",   name:"Banking Law",                                                           credits:5, files:[] },
+                  { code:"LAW30160",   name:"Evidence — Practice and Principles",                                    credits:5, files:[] },
+                  { code:"LAW30180",   name:"Jurisprudence",                                                         credits:5, files:[] },
+                  { code:"LAW30230",   name:"Overview of Law Relating to Creation and Administration of Trusts",     credits:5, files:[] },
+                  { code:"LAW30290",   name:"Administrative Law: Remedies for Unlawful Administrative Action",       credits:5, files:[] },
+                  { code:"LAW30310",   name:"Law of the ECHR",                                                       credits:5, files:[] },
+                  { code:"LAW30330",   name:"Employment Law: Employment Rights",                                     credits:5, files:[] },
+                  { code:"LAW30450",   name:"Family and Child Law",                                                  credits:5, files:[] },
+                  { code:"LAW30550",   name:"Legal History: The History of Public Law",                              credits:5, files:[] },
+                  { code:"LAW30570",   name:"Contemporary Issues in Law and Politics",                               credits:5, files:[] },
+                  { code:"LAW30820",   name:"Private International Law",                                             credits:5, files:[] },
+                  { code:"LAW37430",   name:"Jury Trials",                                                           credits:5, files:[] },
+                  { code:"LAW37460",   name:"Planning Law",                                                          credits:5, files:[] },
+                  { code:"LAW37590",   name:"International Economic Law",                                            credits:5, files:[] },
+                  { code:"LAW37610",   name:"Medical Law",                                                           credits:5, files:[] },
+                  { code:"LAW37630",   name:"Law in the Classroom",                                                  credits:5, files:[] },
+                  { code:"LAW37710",   name:"Applied Legal Skills",                                                  credits:5, files:[] },
+                  { code:"LAW37720",   name:"Advanced International Law: Current Issues",                            credits:5, files:[] },
+                  { code:"LAW37740",   name:"Victims and Victimology",                                               credits:5, files:[] },
+                  { code:"LAW37750",   name:"Financial Services in Ireland",                                         credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        }
+      ]
+    },
+
+    // ─── UCD School of Mathematics & Statistics ───────────────────────────────
+    {
+      id:"ucd-mathstats", name:"UCD School of Mathematics & Statistics", icon:"📐", uni:"ucd",
+      sub:"University College Dublin",
+      courses:[
+
+        // ── Actuarial & Financial Studies (BAFS) ─────────────────────────────
+        {
+          id:"ucd-bafs", name:"Actuarial & Financial Studies (BAFS) — UCD",
+          years:[
+            {
+              year:1, credits:55, note:"Stage 1: 6 core Autumn + 5 core Spring modules.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"COMP10010",  name:"Introduction to Programming I",                                         credits:5, files:[] },
+                  { code:"FIN20040",   name:"Foundations of Finance",                                                credits:5, files:[] },
+                  { code:"MATH10040",  name:"Numbers & Functions",                                                   credits:5, files:[] },
+                  { code:"MATH10120",  name:"Linear Algebra with Applications to Economics",                         credits:5, files:[] },
+                  { code:"MATH10130",  name:"Introduction to Analysis for Economics and Finance",                    credits:5, files:[] },
+                  { code:"STAT10420",  name:"Introduction to Actuarial & Financial Studies",                         credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ACC10040",   name:"Financial Accounting 1",                                                credits:5, files:[] },
+                  { code:"ACM10100",   name:"Differential & Difference Equations: Applications to Econ & Finance",  credits:5, files:[] },
+                  { code:"MATH10140",  name:"Advanced Calculus for Economics and Finance",                           credits:5, files:[] },
+                  { code:"STAT10060",  name:"Statistical Modelling",                                                 credits:5, files:[] },
+                  { code:"STAT10410",  name:"Fundamentals of Actuarial Business Theory",                             credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:2, credits:50, note:"Stage 2: 9 core modules + choose min 1 from Options.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"FIN30170",   name:"Corporate Financial Management",                                        credits:5, files:[] },
+                  { code:"MATH20130",  name:"Fundamentals of Actuarial and Financial Mathematics I",                 credits:5, files:[] },
+                  { code:"STAT20110",  name:"Introduction to Probability",                                           credits:5, files:[] },
+                  { code:"STAT20230",  name:"Modern Regression Analysis",                                            credits:5, files:[] },
+                  { code:"STAT30350",  name:"Introduction to Bayesian Analysis",                                     credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ECON20130",  name:"Economic History: From the Middle Ages to the Second World War",        credits:5, files:[] },
+                  { code:"MATH20210",  name:"Fundamentals of Actuarial and Financial Mathematics II",                credits:5, files:[] },
+                  { code:"STAT20100",  name:"Inferential Statistics",                                                credits:5, files:[] },
+                  { code:"STAT20250",  name:"Data Programming with R",                                               credits:5, files:[] },
+                ]},
+                { label:"Options (choose min 1)", modules:[
+                  { code:"ECON30290",  name:"Advanced Microeconomics",                                               credits:5, files:[] },
+                  { code:"ECON30190",  name:"Public Economics: Government Spending, Taxation and Public Choice",     credits:5, files:[] },
+                  { code:"MATH10320",  name:"Mathematical Analysis",                                                 credits:5, files:[] },
+                  { code:"MATH20260",  name:"The Mathematics of Google",                                             credits:5, files:[] },
+                  { code:"MATH20270",  name:"Theory of Games",                                                       credits:5, files:[] },
+                  { code:"MST30070",   name:"Differential Geometry",                                                 credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:3, credits:60, note:"Stage 3: 6 core Autumn modules + 30cr professional work placement in Spring.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"MIS30080",   name:"Information Management for Actuaries",                                  credits:5, files:[] },
+                  { code:"STAT30010",  name:"Time Series",                                                           credits:5, files:[] },
+                  { code:"STAT30080",  name:"Models — Survival Models",                                              credits:5, files:[] },
+                  { code:"STAT30090",  name:"Models — Stochastic Models",                                            credits:5, files:[] },
+                  { code:"STAT30290",  name:"Workplace Skills for BAFS",                                             credits:5, files:[] },
+                  { code:"STAT30320",  name:"Investment and Trading",                                                credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"STAT30150",  name:"BAFS Professional Work Placement",                                      credits:30, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:4, credits:55, note:"Stage 4: 5 core Autumn + 6 core Spring modules (actuarial professional exam alignment).",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"FIN30030",   name:"International Financial Management",                                    credits:5, files:[] },
+                  { code:"STAT40020",  name:"Actuarial Statistics I",                                                credits:5, files:[] },
+                  { code:"STAT40060",  name:"Actuarial Mathematics 1",                                               credits:5, files:[] },
+                  { code:"STAT40920",  name:"Financial & Actuarial Mathematics I",                                   credits:5, files:[] },
+                  { code:"STAT41000",  name:"Core Actuarial Principles 1",                                           credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"STAT30270",  name:"Statistical Machine Learning",                                          credits:5, files:[] },
+                  { code:"STAT40070",  name:"Actuarial Statistics II",                                               credits:5, files:[] },
+                  { code:"STAT40100",  name:"Actuarial Mathematics 2",                                               credits:5, files:[] },
+                  { code:"STAT40930",  name:"Financial & Actuarial Mathematics II",                                  credits:5, files:[] },
+                  { code:"STAT40980",  name:"Core Actuarial Principles 3",                                           credits:5, files:[] },
+                  { code:"STAT40990",  name:"Core Actuarial Principles 2",                                           credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        }
+      ]
+    },
+
+    // ─── UCD School of Agriculture & Food Science ─────────────────────────────
+    {
+      id:"ucd-agri", name:"UCD School of Agriculture & Food Science", icon:"🌾", uni:"ucd",
+      sub:"University College Dublin",
+      courses:[
+
+        // ── Agricultural Systems Technology (BAgrSc) ──────────────────────────
+        {
+          id:"ucd-agri-systems", name:"Agricultural Systems Technology (BAgrSc) — UCD",
+          years:[
+            {
+              year:1, credits:50, note:"Stage 1: 5 core Autumn + 4 core Spring + choose 1 Autumn option.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEM00020",  name:"Introductory Chemistry",                                                credits:5, files:[] },
+                  { code:"MATH10230",  name:"Mathematics for Agriculture I",                                         credits:5, files:[] },
+                  { code:"PHYC10180",  name:"Physics for Agricultural Science",                                      credits:5, files:[] },
+                  { code:"RDEV10020",  name:"Information Skills",                                                    credits:5, files:[] },
+                  { code:"RDEV10030",  name:"Introduction to Agricultural Economics and Business",                   credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10010",  name:"Animal Biology and Evolution",                                          credits:5, files:[] },
+                  { code:"BIOL10030",  name:"Cell and Plant Biology",                                                credits:5, files:[] },
+                  { code:"CHEM10010",  name:"Introduction to the Chemistry of Biomolecules",                         credits:5, files:[] },
+                  { code:"MATH10240",  name:"Mathematics for Agriculture II",                                        credits:5, files:[] },
+                ]},
+                { label:"Options A — Autumn (choose 1)", modules:[
+                  { code:"AESC10010",  name:"Land Use and the Environment",                                          credits:5, files:[] },
+                  { code:"FOR10020",   name:"Trees and Forests in Ireland",                                          credits:5, files:[] },
+                  { code:"FDSC10010",  name:"Food, Diet and Health",                                                 credits:5, files:[] },
+                ]},
+                { label:"Electives B (optional)", modules:[
+                  { code:"BSEN10010",  name:"Biosystems Engineering Design Challenge",                               credits:5, files:[] },
+                  { code:"BSEN10020",  name:"How Sustainable is My Food?",                                           credits:5, files:[] },
+                  { code:"CPSC10010",  name:"Introduction to Crop Science",                                          credits:5, files:[] },
+                  { code:"HORT10020",  name:"Plants and People",                                                     credits:5, files:[] },
+                  { code:"RDEV10040",  name:"Introduction to Food and Agribusiness Management",                      credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:2, credits:55, note:"Stage 2: 6 core Autumn + 5 core Spring modules + optional elective.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"AERD20030",  name:"Business Management",                                                   credits:5, files:[] },
+                  { code:"AESC20060",  name:"Soil Science Basics",                                                   credits:5, files:[] },
+                  { code:"BSEN20060",  name:"Food Physics",                                                          credits:5, files:[] },
+                  { code:"COMP10010",  name:"Introduction to Programming I",                                         credits:5, files:[] },
+                  { code:"FOR20100",   name:"Applied Biostatistics",                                                 credits:5, files:[] },
+                  { code:"MICR20010",  name:"Agricultural Microbiology",                                             credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ANSC10010",  name:"Introduction to Animal Science",                                        credits:5, files:[] },
+                  { code:"ANSC20020",  name:"Animal Nutrition I",                                                    credits:5, files:[] },
+                  { code:"BSEN20150",  name:"Agricultural Engineering Principles",                                   credits:5, files:[] },
+                  { code:"CPSC20030",  name:"Principles of Crop Science",                                            credits:5, files:[] },
+                  { code:"RDEV20140",  name:"Health, Welfare & Safety in Agriculture",                               credits:5, files:[] },
+                ]},
+                { label:"Electives A (optional)", modules:[
+                  { code:"CPSC20020",  name:"Fundamentals of Arable Crop Production",                               credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:3, credits:55, note:"Stage 3: 10 core modules (incl. 10cr work experience) + optional electives.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BSEN30170",  name:"Agricultural Mechanisation: Engines and Crop Machinery",               credits:5, files:[] },
+                  { code:"BSEN30190",  name:"Agricultural Mechanisation: Hydraulics and Components",                credits:5, files:[] },
+                  { code:"BSEN30520",  name:"Sensors and Sensing Systems",                                           credits:5, files:[] },
+                  { code:"COMP20070",  name:"Databases and Information Systems I",                                   credits:5, files:[] },
+                  { code:"CPSC30040",  name:"Grass and Forage Production",                                           credits:5, files:[] },
+                  { code:"FOR30430",   name:"Geographic Information Systems",                                        credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BSEN20040",  name:"Sustainability Engineering Research Trends",                            credits:5, files:[] },
+                  { code:"BSEN30510",  name:"Professional Work Experience",                                          credits:10, files:[] },
+                  { code:"BSEN30530",  name:"Python and Introduction to AI",                                         credits:5, files:[] },
+                  { code:"BSEN40740",  name:"Soil Technology",                                                       credits:5, files:[] },
+                ]},
+                { label:"Electives A (optional)", modules:[
+                  { code:"AESC30230",  name:"Climate, Carbon and Soil",                                              credits:5, files:[] },
+                  { code:"ANSC30050",  name:"Experimental Design and Data Analysis",                                 credits:5, files:[] },
+                  { code:"FOR30070",   name:"Forest Harvesting",                                                     credits:5, files:[] },
+                ]},
+              ]
+            },
+            {
+              year:4, credits:55, note:"Stage 4: 5 core Autumn + 5 core Spring modules + optional electives.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"AERD30190",  name:"Farm Business Management",                                              credits:5, files:[] },
+                  { code:"BSEN30240",  name:"Waste Management",                                                      credits:5, files:[] },
+                  { code:"BSEN30360",  name:"Life Cycle Assessment",                                                 credits:5, files:[] },
+                  { code:"BSEN40570",  name:"Capstone Project 1",                                                    credits:5, files:[] },
+                  { code:"BSEN40750",  name:"IoT and Cloud Platforms in AgriFood Production",                        credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BSEN30060",  name:"Quantitative Risk Assessment for Human and Animal Health",             credits:5, files:[] },
+                  { code:"BSEN30210",  name:"Precision Agriculture",                                                 credits:5, files:[] },
+                  { code:"BSEN40510",  name:"Precision Livestock Management",                                        credits:5, files:[] },
+                  { code:"BSEN40520",  name:"Optical Spectroscopy",                                                  credits:5, files:[] },
+                  { code:"BSEN40550",  name:"Capstone Project 2",                                                    credits:10, files:[] },
+                ]},
+                { label:"Electives A (optional)", modules:[
+                  { code:"BSEN20180",  name:"Introduction to Environmental Footprinting",                           credits:5, files:[] },
+                  { code:"BSEN30280",  name:"Water and Wastewater Engineering",                                      credits:5, files:[] },
+                  { code:"BSEN30020",  name:"Buildings and Environment",                                             credits:5, files:[] },
+                  { code:"BSEN30030",  name:"Air Pollution",                                                         credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
         }
       ]
     }
