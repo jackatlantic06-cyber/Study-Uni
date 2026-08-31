@@ -11454,7 +11454,1591 @@
           ]
         }
       ]
-    }
+    },
+
+    // ─── UCD ENGINEERING ─────────────────────────────────────────────────────
+    {
+      id:"ucd-engineering-school", name:"UCD College of Engineering & Architecture", icon:"⚙️", uni:"ucd",
+      sub:"University College Dublin",
+      courses:[
+        {
+          id:"ucd-architecture", name:"Architecture (B.Arch.Sc.) — UCD",
+          years:[
+            { year:1, credits:60, note:"Stage 1: Foundation studio, history and materials.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"ARCH10010", name:"Architectural Design Studio 1", credits:10, files:[] },
+                  { code:"ARCH10020", name:"Architectural Technology 1", credits:5, files:[] },
+                  { code:"ARCH10030", name:"History and Theory of Architecture 1", credits:5, files:[] },
+                  { code:"ARCH10040", name:"Visual Studies 1", credits:5, files:[] },
+                  { code:"ARCH10050", name:"Architectural Design Studio 2", credits:10, files:[] },
+                  { code:"ARCH10060", name:"Architectural Technology 2", credits:5, files:[] },
+                  { code:"ARCH10070", name:"History and Theory of Architecture 2", credits:5, files:[] },
+                  { code:"ARCH10080", name:"Visual Studies 2", credits:5, files:[] },
+                  { code:"ARCH10090", name:"Mathematics and Science for Architecture", credits:5, files:[] },
+                  { code:"ARCH10100", name:"Environmental Design 1", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Architectural design and technology.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"ARCH20010", name:"Architectural Design Studio 3", credits:10, files:[] },
+                  { code:"ARCH20020", name:"Architectural Technology 3", credits:5, files:[] },
+                  { code:"ARCH20030", name:"History and Theory of Architecture 3", credits:5, files:[] },
+                  { code:"ARCH20040", name:"Environmental Design 2", credits:5, files:[] },
+                  { code:"ARCH20050", name:"Architectural Design Studio 4", credits:10, files:[] },
+                  { code:"ARCH20060", name:"Architectural Technology 4", credits:5, files:[] },
+                  { code:"ARCH20070", name:"History and Theory of Architecture 4", credits:5, files:[] },
+                  { code:"ARCH20080", name:"Structure for Architecture 1", credits:5, files:[] },
+                  { code:"ARCH20090", name:"Environmental Design 3", credits:5, files:[] },
+                  { code:"ARCH20100", name:"Professional Studies 1", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced design studio and dissertation.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"ARCH30010", name:"Architectural Design Studio 5", credits:10, files:[] },
+                  { code:"ARCH30020", name:"Architectural Technology 5", credits:5, files:[] },
+                  { code:"ARCH30030", name:"Dissertation", credits:10, files:[] },
+                  { code:"ARCH30040", name:"History and Theory of Architecture 5", credits:5, files:[] },
+                  { code:"ARCH30050", name:"Structure for Architecture 2", credits:5, files:[] },
+                  { code:"ARCH30060", name:"Architectural Design Studio 6", credits:10, files:[] },
+                  { code:"ARCH30070", name:"Professional Studies 2", credits:5, files:[] },
+                  { code:"ARCH30080", name:"Environmental Design 4", credits:5, files:[] },
+                  { code:"ARCH30090", name:"Elective", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Final design thesis.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"ARCH40010", name:"Architectural Design Thesis", credits:30, files:[] },
+                  { code:"ARCH40020", name:"Architectural Technology 6", credits:5, files:[] },
+                  { code:"ARCH40030", name:"History and Theory of Architecture 6", credits:5, files:[] },
+                  { code:"ARCH40040", name:"Professional Studies 3", credits:5, files:[] },
+                  { code:"ARCH40050", name:"Elective", credits:5, files:[] },
+                  { code:"ARCH40060", name:"Structure for Architecture 3", credits:5, files:[] },
+                  { code:"ARCH40070", name:"Environmental Design 5", credits:5, files:[] },
+                ]}
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-engineering", name:"Engineering (BE) — Common Entry — UCD",
+          years:[
+            { year:1, credits:55, note:"Common Engineering Stage 1 shared by all BE programmes.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEM10030", name:"Chemistry for Engineers", credits:5, files:[] },
+                  { code:"CHEN10040", name:"Engineering Thermodynamics", credits:5, files:[] },
+                  { code:"CVEN10040", name:"Engineering Mechanics", credits:5, files:[] },
+                  { code:"EEEN10010", name:"Electrical Engineering 1", credits:5, files:[] },
+                  { code:"MATH10250", name:"Intro to Calculus", credits:5, files:[] },
+                  { code:"PHYC10150", name:"Mechanics, Special Relativity and Thermal Physics", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MATH10260", name:"Linear Algebra for Engineers", credits:5, files:[] },
+                  { code:"MEEN10030", name:"Engineering Materials", credits:5, files:[] },
+                  { code:"MEEN10050", name:"Engineering Design and Communication", credits:5, files:[] },
+                  { code:"PHYC10160", name:"Waves, Optics and Electromagnetism", credits:5, files:[] },
+                ]},
+                { label:"Options — Spring (choose min 1)", modules:[
+                  { code:"CHEN10010", name:"Chemical Engineering Fundamentals", credits:5, files:[] },
+                  { code:"COMP10060", name:"Programming for Engineers", credits:5, files:[] },
+                  { code:"CVEN10060", name:"Civil Engineering Fundamentals", credits:5, files:[] },
+                  { code:"EEEN10050", name:"Electronic Engineering Fundamentals", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-biomedical-engineering", name:"Biomedical Engineering (BE) — UCD",
+          years:[
+            { year:1, credits:55, note:"Common Engineering Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEM10030", name:"Chemistry for Engineers", credits:5, files:[] },
+                  { code:"CHEN10040", name:"Engineering Thermodynamics", credits:5, files:[] },
+                  { code:"CVEN10040", name:"Engineering Mechanics", credits:5, files:[] },
+                  { code:"EEEN10010", name:"Electrical Engineering 1", credits:5, files:[] },
+                  { code:"MATH10250", name:"Intro to Calculus", credits:5, files:[] },
+                  { code:"PHYC10150", name:"Mechanics, Special Relativity and Thermal Physics", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MATH10260", name:"Linear Algebra for Engineers", credits:5, files:[] },
+                  { code:"MEEN10030", name:"Engineering Materials", credits:5, files:[] },
+                  { code:"MEEN10050", name:"Engineering Design and Communication", credits:5, files:[] },
+                  { code:"PHYC10160", name:"Waves, Optics and Electromagnetism", credits:5, files:[] },
+                ]},
+                { label:"Options — Spring (choose min 1)", modules:[
+                  { code:"CHEN10010", name:"Chemical Engineering Fundamentals", credits:5, files:[] },
+                  { code:"COMP10060", name:"Programming for Engineers", credits:5, files:[] },
+                  { code:"CVEN10060", name:"Civil Engineering Fundamentals", credits:5, files:[] },
+                  { code:"EEEN10050", name:"Electronic Engineering Fundamentals", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Core biomedical engineering fundamentals.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BMEN20010", name:"Physiology for Engineers", credits:5, files:[] },
+                  { code:"BMEN20020", name:"Biomedical Signal Processing", credits:5, files:[] },
+                  { code:"BMEN20030", name:"Biomechanics", credits:5, files:[] },
+                  { code:"MEEN20020", name:"Mechanics of Materials", credits:5, files:[] },
+                  { code:"EEEN20010", name:"Circuit Theory", credits:5, files:[] },
+                  { code:"MATH20130", name:"Numerical Analysis", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BMEN20040", name:"Biomaterials", credits:5, files:[] },
+                  { code:"BMEN20050", name:"Medical Imaging", credits:5, files:[] },
+                  { code:"BMEN20060", name:"Cell and Tissue Engineering", credits:5, files:[] },
+                  { code:"MEEN20060", name:"Fluid Mechanics", credits:5, files:[] },
+                  { code:"EEEN20040", name:"Electronics and Sensors", credits:5, files:[] },
+                  { code:"STAT20110", name:"Probability & Statistical Inference I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced biomedical applications.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BMEN30010", name:"Medical Device Design", credits:5, files:[] },
+                  { code:"BMEN30020", name:"Computational Biomedical Engineering", credits:5, files:[] },
+                  { code:"BMEN30030", name:"Biomedical Instrumentation", credits:5, files:[] },
+                  { code:"BMEN30040", name:"Rehabilitation Engineering", credits:5, files:[] },
+                  { code:"BMEN30050", name:"Regulatory and Quality Systems", credits:5, files:[] },
+                  { code:"BMEN30060", name:"Professional Development", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BMEN30070", name:"Drug Delivery Systems", credits:5, files:[] },
+                  { code:"BMEN30080", name:"Tissue Engineering and Regenerative Medicine", credits:5, files:[] },
+                  { code:"BMEN30090", name:"Biosensors and Diagnostics", credits:5, files:[] },
+                  { code:"BMEN30100", name:"Biomedical Project", credits:10, files:[] },
+                  { code:"BMEN30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Final year project and advanced electives.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BMEN40010", name:"Final Year Project", credits:20, files:[] },
+                  { code:"BMEN40020", name:"Innovation and Entrepreneurship", credits:5, files:[] },
+                  { code:"BMEN40030", name:"Clinical Applications", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"BMEN40040", name:"Neural Engineering", credits:5, files:[] },
+                  { code:"BMEN40050", name:"Cardiovascular Engineering", credits:5, files:[] },
+                  { code:"BMEN40060", name:"Orthopaedic Biomechanics", credits:5, files:[] },
+                  { code:"BMEN40070", name:"Advanced Medical Imaging", credits:5, files:[] },
+                  { code:"BMEN40080", name:"Bioinformatics", credits:5, files:[] },
+                  { code:"BMEN40090", name:"Wearable Technologies", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-chemical-bioprocess-engineering", name:"Chemical & Bioprocess Engineering (BE) — UCD",
+          years:[
+            { year:1, credits:55, note:"Common Engineering Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEM10030", name:"Chemistry for Engineers", credits:5, files:[] },
+                  { code:"CHEN10040", name:"Engineering Thermodynamics", credits:5, files:[] },
+                  { code:"CVEN10040", name:"Engineering Mechanics", credits:5, files:[] },
+                  { code:"EEEN10010", name:"Electrical Engineering 1", credits:5, files:[] },
+                  { code:"MATH10250", name:"Intro to Calculus", credits:5, files:[] },
+                  { code:"PHYC10150", name:"Mechanics, Special Relativity and Thermal Physics", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MATH10260", name:"Linear Algebra for Engineers", credits:5, files:[] },
+                  { code:"MEEN10030", name:"Engineering Materials", credits:5, files:[] },
+                  { code:"MEEN10050", name:"Engineering Design and Communication", credits:5, files:[] },
+                  { code:"PHYC10160", name:"Waves, Optics and Electromagnetism", credits:5, files:[] },
+                ]},
+                { label:"Options — Spring (choose min 1)", modules:[
+                  { code:"CHEN10010", name:"Chemical Engineering Fundamentals", credits:5, files:[] },
+                  { code:"COMP10060", name:"Programming for Engineers", credits:5, files:[] },
+                  { code:"CVEN10060", name:"Civil Engineering Fundamentals", credits:5, files:[] },
+                  { code:"EEEN10050", name:"Electronic Engineering Fundamentals", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Chemical engineering core.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEN20010", name:"Mass and Energy Balances", credits:5, files:[] },
+                  { code:"CHEN20020", name:"Fluid Mechanics", credits:5, files:[] },
+                  { code:"CHEN20030", name:"Organic Chemistry for Engineers", credits:5, files:[] },
+                  { code:"CHEN20040", name:"Heat Transfer", credits:5, files:[] },
+                  { code:"MATH20130", name:"Numerical Analysis", credits:5, files:[] },
+                  { code:"STAT20110", name:"Probability & Statistical Inference I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"CHEN20050", name:"Mass Transfer", credits:5, files:[] },
+                  { code:"CHEN20060", name:"Chemical Reaction Engineering", credits:5, files:[] },
+                  { code:"CHEN20070", name:"Process Instrumentation and Control", credits:5, files:[] },
+                  { code:"CHEN20080", name:"Biochemical Engineering Fundamentals", credits:5, files:[] },
+                  { code:"CHEN20090", name:"Thermodynamics for Chemical Engineers", credits:5, files:[] },
+                  { code:"CHEN20100", name:"Engineering Entrepreneurship", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Process design and bioprocess engineering.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEN30010", name:"Process Design I", credits:5, files:[] },
+                  { code:"CHEN30020", name:"Separation Processes", credits:5, files:[] },
+                  { code:"CHEN30030", name:"Process Dynamics and Control", credits:5, files:[] },
+                  { code:"CHEN30040", name:"Bioprocess Engineering", credits:5, files:[] },
+                  { code:"CHEN30050", name:"Process Safety", credits:5, files:[] },
+                  { code:"CHEN30060", name:"Professional Development", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"CHEN30070", name:"Process Design II", credits:5, files:[] },
+                  { code:"CHEN30080", name:"Downstream Processing", credits:5, files:[] },
+                  { code:"CHEN30090", name:"Sustainable Process Engineering", credits:5, files:[] },
+                  { code:"CHEN30100", name:"Group Design Project", credits:10, files:[] },
+                  { code:"CHEN30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Final year project and advanced topics.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"CHEN40010", name:"Final Year Project", credits:20, files:[] },
+                  { code:"CHEN40020", name:"Advanced Process Design", credits:5, files:[] },
+                  { code:"CHEN40030", name:"Industrial Placement / Professional Practice", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"CHEN40040", name:"Pharmaceutical Manufacturing", credits:5, files:[] },
+                  { code:"CHEN40050", name:"Biopharmaceutical Process Development", credits:5, files:[] },
+                  { code:"CHEN40060", name:"Energy Systems Engineering", credits:5, files:[] },
+                  { code:"CHEN40070", name:"Polymers and Colloids", credits:5, files:[] },
+                  { code:"CHEN40080", name:"Computational Fluid Dynamics", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-civil-engineering", name:"Civil Engineering (BE) — UCD",
+          years:[
+            { year:1, credits:55, note:"Common Engineering Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEM10030", name:"Chemistry for Engineers", credits:5, files:[] },
+                  { code:"CHEN10040", name:"Engineering Thermodynamics", credits:5, files:[] },
+                  { code:"CVEN10040", name:"Engineering Mechanics", credits:5, files:[] },
+                  { code:"EEEN10010", name:"Electrical Engineering 1", credits:5, files:[] },
+                  { code:"MATH10250", name:"Intro to Calculus", credits:5, files:[] },
+                  { code:"PHYC10150", name:"Mechanics, Special Relativity and Thermal Physics", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MATH10260", name:"Linear Algebra for Engineers", credits:5, files:[] },
+                  { code:"MEEN10030", name:"Engineering Materials", credits:5, files:[] },
+                  { code:"MEEN10050", name:"Engineering Design and Communication", credits:5, files:[] },
+                  { code:"PHYC10160", name:"Waves, Optics and Electromagnetism", credits:5, files:[] },
+                ]},
+                { label:"Options — Spring (choose min 1)", modules:[
+                  { code:"CHEN10010", name:"Chemical Engineering Fundamentals", credits:5, files:[] },
+                  { code:"COMP10060", name:"Programming for Engineers", credits:5, files:[] },
+                  { code:"CVEN10060", name:"Civil Engineering Fundamentals", credits:5, files:[] },
+                  { code:"EEEN10050", name:"Electronic Engineering Fundamentals", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Structural and geotechnical foundations.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CVEN20010", name:"Structural Analysis 1", credits:5, files:[] },
+                  { code:"CVEN20020", name:"Geotechnical Engineering 1", credits:5, files:[] },
+                  { code:"CVEN20030", name:"Fluid Mechanics for Civil Engineers", credits:5, files:[] },
+                  { code:"CVEN20040", name:"Engineering Mathematics", credits:5, files:[] },
+                  { code:"CVEN20050", name:"Construction Materials", credits:5, files:[] },
+                  { code:"CVEN20060", name:"Engineering Surveying", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"CVEN20070", name:"Structural Analysis 2", credits:5, files:[] },
+                  { code:"CVEN20080", name:"Geotechnical Engineering 2", credits:5, files:[] },
+                  { code:"CVEN20090", name:"Hydraulics", credits:5, files:[] },
+                  { code:"CVEN20100", name:"Transportation Engineering", credits:5, files:[] },
+                  { code:"CVEN20110", name:"Environmental Engineering", credits:5, files:[] },
+                  { code:"CVEN20120", name:"Engineering Economy", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced civil engineering.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CVEN30010", name:"Structural Design 1", credits:5, files:[] },
+                  { code:"CVEN30020", name:"Geotechnical Design", credits:5, files:[] },
+                  { code:"CVEN30030", name:"Water Engineering", credits:5, files:[] },
+                  { code:"CVEN30040", name:"Construction Management", credits:5, files:[] },
+                  { code:"CVEN30050", name:"Finite Element Analysis", credits:5, files:[] },
+                  { code:"CVEN30060", name:"Professional Development", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"CVEN30070", name:"Structural Design 2", credits:5, files:[] },
+                  { code:"CVEN30080", name:"Infrastructure Planning", credits:5, files:[] },
+                  { code:"CVEN30090", name:"Environmental Geotechnics", credits:5, files:[] },
+                  { code:"CVEN30100", name:"Group Design Project", credits:10, files:[] },
+                  { code:"CVEN30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Thesis and advanced electives.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"CVEN40010", name:"Final Year Project", credits:20, files:[] },
+                  { code:"CVEN40020", name:"Engineering Project Management", credits:5, files:[] },
+                  { code:"CVEN40030", name:"Risk and Reliability", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"CVEN40040", name:"Bridge Engineering", credits:5, files:[] },
+                  { code:"CVEN40050", name:"Ground Improvement", credits:5, files:[] },
+                  { code:"CVEN40060", name:"Advanced Hydraulics", credits:5, files:[] },
+                  { code:"CVEN40070", name:"Sustainable Infrastructure", credits:5, files:[] },
+                  { code:"CVEN40080", name:"Smart Structures", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-electrical-electronic-engineering", name:"Electrical/Electronic Engineering (BE) — UCD",
+          years:[
+            { year:1, credits:55, note:"Common Engineering Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEM10030", name:"Chemistry for Engineers", credits:5, files:[] },
+                  { code:"CHEN10040", name:"Engineering Thermodynamics", credits:5, files:[] },
+                  { code:"CVEN10040", name:"Engineering Mechanics", credits:5, files:[] },
+                  { code:"EEEN10010", name:"Electrical Engineering 1", credits:5, files:[] },
+                  { code:"MATH10250", name:"Intro to Calculus", credits:5, files:[] },
+                  { code:"PHYC10150", name:"Mechanics, Special Relativity and Thermal Physics", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MATH10260", name:"Linear Algebra for Engineers", credits:5, files:[] },
+                  { code:"MEEN10030", name:"Engineering Materials", credits:5, files:[] },
+                  { code:"MEEN10050", name:"Engineering Design and Communication", credits:5, files:[] },
+                  { code:"PHYC10160", name:"Waves, Optics and Electromagnetism", credits:5, files:[] },
+                ]},
+                { label:"Options — Spring (choose min 1)", modules:[
+                  { code:"CHEN10010", name:"Chemical Engineering Fundamentals", credits:5, files:[] },
+                  { code:"COMP10060", name:"Programming for Engineers", credits:5, files:[] },
+                  { code:"CVEN10060", name:"Civil Engineering Fundamentals", credits:5, files:[] },
+                  { code:"EEEN10050", name:"Electronic Engineering Fundamentals", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Circuits, signals and systems.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"EEEN20010", name:"Circuit Theory", credits:5, files:[] },
+                  { code:"EEEN20020", name:"Digital Electronics", credits:5, files:[] },
+                  { code:"EEEN20030", name:"Signals and Systems", credits:5, files:[] },
+                  { code:"EEEN20040", name:"Electronics and Sensors", credits:5, files:[] },
+                  { code:"MATH20130", name:"Numerical Analysis", credits:5, files:[] },
+                  { code:"EEEN20050", name:"Electromagnetic Fields", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"EEEN20060", name:"Power Systems 1", credits:5, files:[] },
+                  { code:"EEEN20070", name:"Control Systems 1", credits:5, files:[] },
+                  { code:"EEEN20080", name:"Digital Signal Processing", credits:5, files:[] },
+                  { code:"EEEN20090", name:"Microprocessors", credits:5, files:[] },
+                  { code:"EEEN20100", name:"Communications Fundamentals", credits:5, files:[] },
+                  { code:"STAT20110", name:"Probability & Statistical Inference I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced electrical engineering.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"EEEN30010", name:"Power Systems 2", credits:5, files:[] },
+                  { code:"EEEN30020", name:"Control Systems 2", credits:5, files:[] },
+                  { code:"EEEN30030", name:"VLSI Design", credits:5, files:[] },
+                  { code:"EEEN30040", name:"Telecommunications", credits:5, files:[] },
+                  { code:"EEEN30050", name:"Professional Development", credits:5, files:[] },
+                  { code:"EEEN30060", name:"Machine Learning for Engineers", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"EEEN30070", name:"Power Electronics", credits:5, files:[] },
+                  { code:"EEEN30080", name:"Wireless Communications", credits:5, files:[] },
+                  { code:"EEEN30090", name:"Embedded Systems", credits:5, files:[] },
+                  { code:"EEEN30100", name:"Final Year Project (Part 1)", credits:10, files:[] },
+                  { code:"EEEN30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-mechanical-engineering", name:"Mechanical Engineering (BE) — UCD",
+          years:[
+            { year:1, credits:55, note:"Common Engineering Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CHEM10030", name:"Chemistry for Engineers", credits:5, files:[] },
+                  { code:"CHEN10040", name:"Engineering Thermodynamics", credits:5, files:[] },
+                  { code:"CVEN10040", name:"Engineering Mechanics", credits:5, files:[] },
+                  { code:"EEEN10010", name:"Electrical Engineering 1", credits:5, files:[] },
+                  { code:"MATH10250", name:"Intro to Calculus", credits:5, files:[] },
+                  { code:"PHYC10150", name:"Mechanics, Special Relativity and Thermal Physics", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MATH10260", name:"Linear Algebra for Engineers", credits:5, files:[] },
+                  { code:"MEEN10030", name:"Engineering Materials", credits:5, files:[] },
+                  { code:"MEEN10050", name:"Engineering Design and Communication", credits:5, files:[] },
+                  { code:"PHYC10160", name:"Waves, Optics and Electromagnetism", credits:5, files:[] },
+                ]},
+                { label:"Options — Spring (choose min 1)", modules:[
+                  { code:"CHEN10010", name:"Chemical Engineering Fundamentals", credits:5, files:[] },
+                  { code:"COMP10060", name:"Programming for Engineers", credits:5, files:[] },
+                  { code:"CVEN10060", name:"Civil Engineering Fundamentals", credits:5, files:[] },
+                  { code:"EEEN10050", name:"Electronic Engineering Fundamentals", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Mechanics, thermodynamics and design.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"MEEN20010", name:"Solid Mechanics", credits:5, files:[] },
+                  { code:"MEEN20020", name:"Mechanics of Materials", credits:5, files:[] },
+                  { code:"MEEN20030", name:"Engineering Thermodynamics 2", credits:5, files:[] },
+                  { code:"MEEN20040", name:"Manufacturing Processes", credits:5, files:[] },
+                  { code:"MEEN20050", name:"Engineering Mathematics", credits:5, files:[] },
+                  { code:"MEEN20060", name:"Fluid Mechanics", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MEEN20070", name:"Dynamics", credits:5, files:[] },
+                  { code:"MEEN20080", name:"Heat Transfer", credits:5, files:[] },
+                  { code:"MEEN20090", name:"Mechanical Design", credits:5, files:[] },
+                  { code:"MEEN20100", name:"Control Engineering", credits:5, files:[] },
+                  { code:"MEEN20110", name:"Engineering Instrumentation", credits:5, files:[] },
+                  { code:"MEEN20120", name:"Sustainability in Engineering", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced mechanical systems.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"MEEN30010", name:"Stress Analysis", credits:5, files:[] },
+                  { code:"MEEN30020", name:"Turbomachinery", credits:5, files:[] },
+                  { code:"MEEN30030", name:"Advanced Manufacturing", credits:5, files:[] },
+                  { code:"MEEN30040", name:"Vibrations and Acoustics", credits:5, files:[] },
+                  { code:"MEEN30050", name:"Computational Engineering", credits:5, files:[] },
+                  { code:"MEEN30060", name:"Professional Development", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MEEN30070", name:"Internal Combustion Engines", credits:5, files:[] },
+                  { code:"MEEN30080", name:"Engineering Design Project", credits:10, files:[] },
+                  { code:"MEEN30090", name:"Advanced Fluid Mechanics", credits:5, files:[] },
+                  { code:"MEEN30100", name:"Robotics and Automation", credits:5, files:[] },
+                  { code:"MEEN30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Final year project and specialisation.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"MEEN40010", name:"Final Year Project", credits:20, files:[] },
+                  { code:"MEEN40020", name:"Engineering Management", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"MEEN40030", name:"Advanced Solid Mechanics", credits:5, files:[] },
+                  { code:"MEEN40040", name:"Energy Systems", credits:5, files:[] },
+                  { code:"MEEN40050", name:"Computational Fluid Dynamics", credits:5, files:[] },
+                  { code:"MEEN40060", name:"Aerospace Engineering", credits:5, files:[] },
+                  { code:"MEEN40070", name:"Biomedical Devices", credits:5, files:[] },
+                  { code:"MEEN40080", name:"Smart Manufacturing", credits:5, files:[] },
+                  { code:"MEEN40090", name:"Renewable Energy Technologies", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-structural-engineering", name:"Structural Engineering with Architecture (BE) — UCD",
+          years:[
+            { year:2, credits:60, note:"Stage 2: Structural engineering combined with architectural design.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CVEN20010", name:"Structural Analysis 1", credits:5, files:[] },
+                  { code:"ARCH20020", name:"Architectural Technology 3", credits:5, files:[] },
+                  { code:"CVEN20020", name:"Geotechnical Engineering 1", credits:5, files:[] },
+                  { code:"CVEN20050", name:"Construction Materials", credits:5, files:[] },
+                  { code:"ARCH20030", name:"History and Theory of Architecture 3", credits:5, files:[] },
+                  { code:"CVEN20040", name:"Engineering Mathematics", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"CVEN20070", name:"Structural Analysis 2", credits:5, files:[] },
+                  { code:"ARCH20050", name:"Architectural Design Studio 4", credits:10, files:[] },
+                  { code:"CVEN20030", name:"Fluid Mechanics for Civil Engineers", credits:5, files:[] },
+                  { code:"ARCH20080", name:"Structure for Architecture 1", credits:5, files:[] },
+                  { code:"CVEN20120", name:"Engineering Economy", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced structural design and architectural integration.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"CVEN30010", name:"Structural Design 1", credits:5, files:[] },
+                  { code:"ARCH30010", name:"Architectural Design Studio 5", credits:10, files:[] },
+                  { code:"CVEN30050", name:"Finite Element Analysis", credits:5, files:[] },
+                  { code:"ARCH30020", name:"Architectural Technology 5", credits:5, files:[] },
+                  { code:"CVEN30060", name:"Professional Development", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"CVEN30070", name:"Structural Design 2", credits:5, files:[] },
+                  { code:"ARCH30060", name:"Architectural Design Studio 6", credits:10, files:[] },
+                  { code:"ARCH30050", name:"Structure for Architecture 2", credits:5, files:[] },
+                  { code:"CVEN30100", name:"Group Design Project", credits:10, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-landscape-architecture", name:"Landscape Architecture (BLA) — UCD",
+          years:[
+            { year:1, credits:60, note:"Stage 1: Foundation in landscape and environment.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"LAND10010", name:"Landscape Design Studio 1", credits:10, files:[] },
+                  { code:"LAND10020", name:"Landscape History and Theory 1", credits:5, files:[] },
+                  { code:"LAND10030", name:"Plants and Ecology 1", credits:5, files:[] },
+                  { code:"LAND10040", name:"Landscape Technology 1", credits:5, files:[] },
+                  { code:"LAND10050", name:"Visual Studies", credits:5, files:[] },
+                  { code:"LAND10060", name:"Landscape Design Studio 2", credits:10, files:[] },
+                  { code:"LAND10070", name:"Landscape History and Theory 2", credits:5, files:[] },
+                  { code:"LAND10080", name:"Plants and Ecology 2", credits:5, files:[] },
+                  { code:"LAND10090", name:"Landscape Technology 2", credits:5, files:[] },
+                  { code:"LAND10100", name:"GIS and Environmental Analysis", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Design methodology and site analysis.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"LAND20010", name:"Landscape Design Studio 3", credits:10, files:[] },
+                  { code:"LAND20020", name:"Landscape History and Theory 3", credits:5, files:[] },
+                  { code:"LAND20030", name:"Plants and Planting Design", credits:5, files:[] },
+                  { code:"LAND20040", name:"Landscape Technology 3", credits:5, files:[] },
+                  { code:"LAND20050", name:"Landscape Ecology", credits:5, files:[] },
+                  { code:"LAND20060", name:"Landscape Design Studio 4", credits:10, files:[] },
+                  { code:"LAND20070", name:"Urban Landscape Design", credits:5, files:[] },
+                  { code:"LAND20080", name:"Construction Technology", credits:5, files:[] },
+                  { code:"LAND20090", name:"Environmental Planning", credits:5, files:[] },
+                  { code:"LAND20100", name:"Landscape Infrastructure", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced design and landscape planning.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"LAND30010", name:"Landscape Design Studio 5", credits:10, files:[] },
+                  { code:"LAND30020", name:"Landscape Planning and Policy", credits:5, files:[] },
+                  { code:"LAND30030", name:"Advanced Planting Design", credits:5, files:[] },
+                  { code:"LAND30040", name:"Professional Practice 1", credits:5, files:[] },
+                  { code:"LAND30050", name:"Research Methods", credits:5, files:[] },
+                  { code:"LAND30060", name:"Landscape Design Studio 6", credits:10, files:[] },
+                  { code:"LAND30070", name:"Cultural Landscape", credits:5, files:[] },
+                  { code:"LAND30080", name:"Urban Design", credits:5, files:[] },
+                  { code:"LAND30090", name:"Elective", credits:5, files:[] },
+                  { code:"LAND30100", name:"Elective", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Thesis and professional practice.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"LAND40010", name:"Landscape Architecture Thesis", credits:20, files:[] },
+                  { code:"LAND40020", name:"Professional Practice 2", credits:5, files:[] },
+                  { code:"LAND40030", name:"Advanced Landscape Planning", credits:5, files:[] },
+                  { code:"LAND40040", name:"Technology and Innovation", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"LAND40050", name:"Heritage and Conservation", credits:5, files:[] },
+                  { code:"LAND40060", name:"Coastal and Water Landscapes", credits:5, files:[] },
+                  { code:"LAND40070", name:"Urban Ecology", credits:5, files:[] },
+                  { code:"LAND40080", name:"Climate Resilient Design", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-city-planning", name:"City Planning & Environmental Policy (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Stage 1: Introduction to planning and environment.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"PLAN10010", name:"Introduction to Planning", credits:5, files:[] },
+                  { code:"PLAN10020", name:"Urban History and Theory", credits:5, files:[] },
+                  { code:"PLAN10030", name:"Environmental Policy 1", credits:5, files:[] },
+                  { code:"PLAN10040", name:"GIS and Spatial Analysis 1", credits:5, files:[] },
+                  { code:"PLAN10050", name:"Social and Economic Geography", credits:5, files:[] },
+                  { code:"PLAN10060", name:"Planning Law and Governance", credits:5, files:[] },
+                  { code:"PLAN10070", name:"Environmental Policy 2", credits:5, files:[] },
+                  { code:"PLAN10080", name:"GIS and Spatial Analysis 2", credits:5, files:[] },
+                  { code:"PLAN10090", name:"Quantitative Methods", credits:5, files:[] },
+                  { code:"PLAN10100", name:"Sustainable Development", credits:5, files:[] },
+                  { code:"PLAN10110", name:"Planning Studio 1", credits:5, files:[] },
+                  { code:"PLAN10120", name:"Elective", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Planning practice and environmental assessment.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"PLAN20010", name:"Urban Design", credits:5, files:[] },
+                  { code:"PLAN20020", name:"Transport Planning", credits:5, files:[] },
+                  { code:"PLAN20030", name:"Environmental Impact Assessment", credits:5, files:[] },
+                  { code:"PLAN20040", name:"Housing Policy", credits:5, files:[] },
+                  { code:"PLAN20050", name:"Planning Studio 2", credits:10, files:[] },
+                  { code:"PLAN20060", name:"Rural Planning", credits:5, files:[] },
+                  { code:"PLAN20070", name:"Research Methods", credits:5, files:[] },
+                  { code:"PLAN20080", name:"Climate Change Policy", credits:5, files:[] },
+                  { code:"PLAN20090", name:"Economic Development and Planning", credits:5, files:[] },
+                  { code:"PLAN20100", name:"Elective", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced planning and dissertation.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"PLAN30010", name:"Planning Studio 3", credits:10, files:[] },
+                  { code:"PLAN30020", name:"Dissertation", credits:15, files:[] },
+                  { code:"PLAN30030", name:"Strategic Planning", credits:5, files:[] },
+                  { code:"PLAN30040", name:"Professional Practice", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"PLAN30050", name:"Urban Regeneration", credits:5, files:[] },
+                  { code:"PLAN30060", name:"Heritage Conservation", credits:5, files:[] },
+                  { code:"PLAN30070", name:"Smart Cities", credits:5, files:[] },
+                  { code:"PLAN30080", name:"Coastal Zone Management", credits:5, files:[] },
+                  { code:"PLAN30090", name:"Health and Planning", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Advanced policy and professional practice.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"PLAN40010", name:"Advanced Planning Studio", credits:10, files:[] },
+                  { code:"PLAN40020", name:"Planning Policy Analysis", credits:5, files:[] },
+                  { code:"PLAN40030", name:"Environmental Governance", credits:5, files:[] },
+                  { code:"PLAN40040", name:"Professional Development", credits:5, files:[] },
+                  { code:"PLAN40050", name:"Major Project", credits:15, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"PLAN40060", name:"Urban Futures", credits:5, files:[] },
+                  { code:"PLAN40070", name:"Land Use and Transport Integration", credits:5, files:[] },
+                  { code:"PLAN40080", name:"International Planning", credits:5, files:[] },
+                  { code:"PLAN40090", name:"Biodiversity and Ecosystem Services", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+      ]
+    },
+
+    // ─── UCD LIFE SCIENCES ────────────────────────────────────────────────────
+    {
+      id:"ucd-life-sciences-school", name:"UCD School of Biology & Environmental Science", icon:"🔬", uni:"ucd",
+      sub:"University College Dublin",
+      courses:[
+        {
+          id:"ucd-biochemistry", name:"Biochemistry & Molecular Biology (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1 shared by all BSc Science programmes.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Molecular biology and biochemistry core.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"CHEM20010", name:"Organic Chemistry II", credits:5, files:[] },
+                  { code:"BIOL20040", name:"Microbiology I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL20050", name:"Molecular Biology I", credits:5, files:[] },
+                  { code:"BIOL20060", name:"Biochemistry III", credits:5, files:[] },
+                  { code:"BIOL20070", name:"Structural Biology", credits:5, files:[] },
+                  { code:"CHEM20020", name:"Physical Chemistry I", credits:5, files:[] },
+                  { code:"BIOL20080", name:"Enzymology", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced biochemistry and molecular techniques.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL30010", name:"Molecular Biology II", credits:5, files:[] },
+                  { code:"BIOL30020", name:"Protein Structure and Function", credits:5, files:[] },
+                  { code:"BIOL30030", name:"Metabolism", credits:5, files:[] },
+                  { code:"BIOL30040", name:"Genomics and Proteomics", credits:5, files:[] },
+                  { code:"BIOL30050", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"BIOL30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL30070", name:"Gene Regulation", credits:5, files:[] },
+                  { code:"BIOL30080", name:"Cell Signalling", credits:5, files:[] },
+                  { code:"BIOL30090", name:"Bioinformatics I", credits:5, files:[] },
+                  { code:"BIOL30100", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"BIOL30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research project and advanced specialisation.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BIOL40010", name:"Research Project", credits:20, files:[] },
+                  { code:"BIOL40020", name:"Advanced Biochemistry", credits:5, files:[] },
+                  { code:"BIOL40030", name:"Drug Discovery and Development", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"BIOL40040", name:"Cancer Biology", credits:5, files:[] },
+                  { code:"BIOL40050", name:"Epigenetics", credits:5, files:[] },
+                  { code:"BIOL40060", name:"Structural Bioinformatics", credits:5, files:[] },
+                  { code:"BIOL40070", name:"Systems Biology", credits:5, files:[] },
+                  { code:"BIOL40080", name:"Metabolomics", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-bhls", name:"Biomedical, Health & Life Sciences (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Biomedical foundations.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"BHLS20010", name:"Human Anatomy and Physiology I", credits:5, files:[] },
+                  { code:"BHLS20020", name:"Pathology I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                  { code:"BIOL20040", name:"Microbiology I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BHLS20030", name:"Human Anatomy and Physiology II", credits:5, files:[] },
+                  { code:"BHLS20040", name:"Pharmacology I", credits:5, files:[] },
+                  { code:"BIOL20050", name:"Molecular Biology I", credits:5, files:[] },
+                  { code:"BHLS20050", name:"Clinical Biochemistry", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"BHLS20060", name:"Immunology I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Clinical and biomedical applications.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BHLS30010", name:"Neuroscience I", credits:5, files:[] },
+                  { code:"BHLS30020", name:"Pharmacology II", credits:5, files:[] },
+                  { code:"BHLS30030", name:"Cancer Biology", credits:5, files:[] },
+                  { code:"BHLS30040", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"BHLS30050", name:"Diagnostic Techniques", credits:5, files:[] },
+                  { code:"BHLS30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BHLS30070", name:"Immunology II", credits:5, files:[] },
+                  { code:"BHLS30080", name:"Cardiovascular Biology", credits:5, files:[] },
+                  { code:"BHLS30090", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"BHLS30100", name:"Biomedical Ethics and Regulation", credits:5, files:[] },
+                  { code:"BHLS30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research project and advanced study.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BHLS40010", name:"Research Project", credits:20, files:[] },
+                  { code:"BHLS40020", name:"Advanced Biomedical Science", credits:5, files:[] },
+                  { code:"BHLS40030", name:"Translational Medicine", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"BHLS40040", name:"Regenerative Medicine", credits:5, files:[] },
+                  { code:"BHLS40050", name:"Clinical Trials and Statistics", credits:5, files:[] },
+                  { code:"BHLS40060", name:"Personalised Medicine", credits:5, files:[] },
+                  { code:"BHLS40070", name:"Advanced Pharmacology", credits:5, files:[] },
+                  { code:"BHLS40080", name:"Infectious Disease Biology", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-cell-molecular-biology", name:"Cell & Molecular Biology (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Cell biology and molecular genetics.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"BIOL20040", name:"Microbiology I", credits:5, files:[] },
+                  { code:"BIOL20050", name:"Molecular Biology I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL20060", name:"Biochemistry III", credits:5, files:[] },
+                  { code:"BIOL20070", name:"Structural Biology", credits:5, files:[] },
+                  { code:"BIOL20080", name:"Enzymology", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"BIOL20100", name:"Developmental Biology", credits:5, files:[] },
+                  { code:"BIOL20110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced cell and molecular biology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL30010", name:"Molecular Biology II", credits:5, files:[] },
+                  { code:"BIOL30020", name:"Protein Structure and Function", credits:5, files:[] },
+                  { code:"BIOL30040", name:"Genomics and Proteomics", credits:5, files:[] },
+                  { code:"BIOL30050", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"BIOL30120", name:"Cell Signalling", credits:5, files:[] },
+                  { code:"BIOL30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL30070", name:"Gene Regulation", credits:5, files:[] },
+                  { code:"BIOL30090", name:"Bioinformatics I", credits:5, files:[] },
+                  { code:"BIOL30100", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"BIOL30130", name:"Stem Cell Biology", credits:5, files:[] },
+                  { code:"BIOL30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research and advanced specialisation.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BIOL40010", name:"Research Project", credits:20, files:[] },
+                  { code:"BIOL40090", name:"Advanced Cell Biology", credits:5, files:[] },
+                  { code:"BIOL40100", name:"Molecular Medicine", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"BIOL40040", name:"Cancer Biology", credits:5, files:[] },
+                  { code:"BIOL40050", name:"Epigenetics", credits:5, files:[] },
+                  { code:"BIOL40070", name:"Systems Biology", credits:5, files:[] },
+                  { code:"BIOL40110", name:"Chromosome Biology", credits:5, files:[] },
+                  { code:"BIOL40120", name:"RNA Biology", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-environmental-biology", name:"Environmental Biology (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Ecology and environmental science.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"ENVB20010", name:"Ecology I", credits:5, files:[] },
+                  { code:"ENVB20020", name:"Environmental Chemistry", credits:5, files:[] },
+                  { code:"ENVB20030", name:"Population Biology", credits:5, files:[] },
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"BIOL20040", name:"Microbiology I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ENVB20040", name:"Ecology II", credits:5, files:[] },
+                  { code:"ENVB20050", name:"Environmental Pollution", credits:5, files:[] },
+                  { code:"ENVB20060", name:"Conservation Biology", credits:5, files:[] },
+                  { code:"ENVB20070", name:"Biogeography", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"ENVB20080", name:"Fieldwork Methods", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced environmental biology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"ENVB30010", name:"Ecosystem Ecology", credits:5, files:[] },
+                  { code:"ENVB30020", name:"Environmental Impact Assessment", credits:5, files:[] },
+                  { code:"ENVB30030", name:"Molecular Ecology", credits:5, files:[] },
+                  { code:"ENVB30040", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"ENVB30050", name:"Ecotoxicology", credits:5, files:[] },
+                  { code:"ENVB30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ENVB30070", name:"Climate Change Biology", credits:5, files:[] },
+                  { code:"ENVB30080", name:"Biodiversity and Conservation", credits:5, files:[] },
+                  { code:"ENVB30090", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"ENVB30100", name:"Environmental Management", credits:5, files:[] },
+                  { code:"ENVB30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Thesis and applied environmental science.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"ENVB40010", name:"Research Project", credits:20, files:[] },
+                  { code:"ENVB40020", name:"Environmental Consultancy", credits:5, files:[] },
+                  { code:"ENVB40030", name:"Advanced Conservation Biology", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"ENVB40040", name:"Marine Ecology", credits:5, files:[] },
+                  { code:"ENVB40050", name:"Wetland Ecology", credits:5, files:[] },
+                  { code:"ENVB40060", name:"Urban Ecology", credits:5, files:[] },
+                  { code:"ENVB40070", name:"Restoration Ecology", credits:5, files:[] },
+                  { code:"ENVB40080", name:"GIS for Ecologists", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-genetics", name:"Genetics (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Genetics and molecular biology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"BIOL20050", name:"Molecular Biology I", credits:5, files:[] },
+                  { code:"BIOL20040", name:"Microbiology I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"GENE20010", name:"Genetics II", credits:5, files:[] },
+                  { code:"GENE20020", name:"Quantitative Genetics", credits:5, files:[] },
+                  { code:"BIOL20070", name:"Structural Biology", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"GENE20030", name:"Evolution", credits:5, files:[] },
+                  { code:"BIOL20100", name:"Developmental Biology", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced genetics.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"GENE30010", name:"Molecular Genetics", credits:5, files:[] },
+                  { code:"BIOL30040", name:"Genomics and Proteomics", credits:5, files:[] },
+                  { code:"GENE30020", name:"Population Genetics", credits:5, files:[] },
+                  { code:"BIOL30050", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"GENE30030", name:"Epigenetics", credits:5, files:[] },
+                  { code:"BIOL30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"GENE30040", name:"Human Genetics and Genetic Disease", credits:5, files:[] },
+                  { code:"BIOL30090", name:"Bioinformatics I", credits:5, files:[] },
+                  { code:"BIOL30100", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"GENE30050", name:"Developmental Genetics", credits:5, files:[] },
+                  { code:"BIOL30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research project and advanced genetics.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BIOL40010", name:"Research Project", credits:20, files:[] },
+                  { code:"GENE40010", name:"Advanced Genetics", credits:5, files:[] },
+                  { code:"GENE40020", name:"Cancer Genetics", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"GENE40030", name:"Genetic Counselling", credits:5, files:[] },
+                  { code:"GENE40040", name:"Comparative Genomics", credits:5, files:[] },
+                  { code:"GENE40050", name:"Gene Therapy", credits:5, files:[] },
+                  { code:"BIOL40050", name:"Epigenetics (Advanced)", credits:5, files:[] },
+                  { code:"BIOL40070", name:"Systems Biology", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-microbiology", name:"Microbiology (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Microbiology and cell biology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL20040", name:"Microbiology I", credits:5, files:[] },
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"BIOL20050", name:"Molecular Biology I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MICR20010", name:"Microbiology II", credits:5, files:[] },
+                  { code:"MICR20020", name:"Virology", credits:5, files:[] },
+                  { code:"MICR20030", name:"Immunology I", credits:5, files:[] },
+                  { code:"MICR20040", name:"Medical Microbiology", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"MICR20050", name:"Environmental Microbiology", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced microbiology and infection.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"MICR30010", name:"Microbial Genetics", credits:5, files:[] },
+                  { code:"MICR30020", name:"Infectious Disease", credits:5, files:[] },
+                  { code:"MICR30030", name:"Food Microbiology", credits:5, files:[] },
+                  { code:"BIOL30050", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"MICR30040", name:"Antimicrobial Resistance", credits:5, files:[] },
+                  { code:"BIOL30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"MICR30050", name:"Industrial Microbiology", credits:5, files:[] },
+                  { code:"MICR30060", name:"Microbial Ecology", credits:5, files:[] },
+                  { code:"BIOL30100", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"MICR30070", name:"Vaccine Development", credits:5, files:[] },
+                  { code:"BIOL30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research project and advanced microbiology.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BIOL40010", name:"Research Project", credits:20, files:[] },
+                  { code:"MICR40010", name:"Advanced Microbiology", credits:5, files:[] },
+                  { code:"MICR40020", name:"Infection Biology", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"MICR40030", name:"Microbiome Research", credits:5, files:[] },
+                  { code:"MICR40040", name:"Biofilm Biology", credits:5, files:[] },
+                  { code:"MICR40050", name:"Applied Virology", credits:5, files:[] },
+                  { code:"MICR40060", name:"Global Health Microbiology", credits:5, files:[] },
+                  { code:"MICR40070", name:"Synthetic Microbiology", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-neuroscience", name:"Neuroscience (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Neuroscience foundations.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"NEUR20010", name:"Neuroscience I", credits:5, files:[] },
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"BHLS20010", name:"Human Anatomy and Physiology I", credits:5, files:[] },
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"NEUR20020", name:"Neuroscience II", credits:5, files:[] },
+                  { code:"NEUR20030", name:"Neuropharmacology", credits:5, files:[] },
+                  { code:"BIOL20050", name:"Molecular Biology I", credits:5, files:[] },
+                  { code:"BHLS20030", name:"Human Anatomy and Physiology II", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"NEUR20040", name:"Sensory Neuroscience", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced neuroscience.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"NEUR30010", name:"Neuroscience III", credits:5, files:[] },
+                  { code:"NEUR30020", name:"Cognitive Neuroscience", credits:5, files:[] },
+                  { code:"NEUR30030", name:"Molecular Neuroscience", credits:5, files:[] },
+                  { code:"BIOL30050", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"NEUR30040", name:"Neurological Disorders", credits:5, files:[] },
+                  { code:"BIOL30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"NEUR30050", name:"Neuroscience of Behaviour", credits:5, files:[] },
+                  { code:"NEUR30060", name:"Neural Circuits", credits:5, files:[] },
+                  { code:"BIOL30100", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"NEUR30070", name:"Psychiatric Neuroscience", credits:5, files:[] },
+                  { code:"BIOL30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research and advanced neuroscience.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BIOL40010", name:"Research Project", credits:20, files:[] },
+                  { code:"NEUR40010", name:"Advanced Neuroscience", credits:5, files:[] },
+                  { code:"NEUR40020", name:"Translational Neuroscience", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"NEUR40030", name:"Brain Imaging Methods", credits:5, files:[] },
+                  { code:"NEUR40040", name:"Neuropathology", credits:5, files:[] },
+                  { code:"NEUR40050", name:"Computational Neuroscience", credits:5, files:[] },
+                  { code:"NEUR40060", name:"Neuroimmunology", credits:5, files:[] },
+                  { code:"NEUR40070", name:"Pain and Analgesics", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-physiology", name:"Physiology (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Physiology fundamentals.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"PHYS20010", name:"Physiology I", credits:5, files:[] },
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"BHLS20010", name:"Human Anatomy and Physiology I", credits:5, files:[] },
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"PHYS20020", name:"Physiology II", credits:5, files:[] },
+                  { code:"PHYS20030", name:"Pharmacology", credits:5, files:[] },
+                  { code:"BHLS20030", name:"Human Anatomy and Physiology II", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"PHYS20040", name:"Endocrinology", credits:5, files:[] },
+                  { code:"PHYS20050", name:"Neuroscience I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced physiology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"PHYS30010", name:"Physiology III", credits:5, files:[] },
+                  { code:"PHYS30020", name:"Cardiovascular Physiology", credits:5, files:[] },
+                  { code:"PHYS30030", name:"Renal Physiology", credits:5, files:[] },
+                  { code:"BIOL30050", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"PHYS30040", name:"Respiratory Physiology", credits:5, files:[] },
+                  { code:"BIOL30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"PHYS30050", name:"Reproductive Physiology", credits:5, files:[] },
+                  { code:"PHYS30060", name:"Gastrointestinal Physiology", credits:5, files:[] },
+                  { code:"BIOL30100", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"PHYS30070", name:"Exercise Physiology", credits:5, files:[] },
+                  { code:"BIOL30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research project and advanced physiology.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BIOL40010", name:"Research Project", credits:20, files:[] },
+                  { code:"PHYS40010", name:"Advanced Physiology", credits:5, files:[] },
+                  { code:"PHYS40020", name:"Integrative Physiology", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"PHYS40030", name:"Pathophysiology", credits:5, files:[] },
+                  { code:"PHYS40040", name:"Reproductive Medicine", credits:5, files:[] },
+                  { code:"PHYS40050", name:"Clinical Physiology", credits:5, files:[] },
+                  { code:"PHYS40060", name:"Biomedical Instrumentation", credits:5, files:[] },
+                  { code:"PHYS40070", name:"Biostatistics", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-plant-biology", name:"Plant Biology (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Plant biology and ecology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"PLNT20010", name:"Plant Biology I", credits:5, files:[] },
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"ENVB20010", name:"Ecology I", credits:5, files:[] },
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"PLNT20020", name:"Plant Biology II", credits:5, files:[] },
+                  { code:"PLNT20030", name:"Plant Physiology", credits:5, files:[] },
+                  { code:"PLNT20040", name:"Plant Ecology", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"PLNT20050", name:"Taxonomy and Systematics", credits:5, files:[] },
+                  { code:"PLNT20060", name:"Soil Science", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced plant biology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"PLNT30010", name:"Plant Molecular Biology", credits:5, files:[] },
+                  { code:"PLNT30020", name:"Plant Development", credits:5, files:[] },
+                  { code:"PLNT30030", name:"Plant Pathology", credits:5, files:[] },
+                  { code:"BIOL30050", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"PLNT30040", name:"Plant Biotechnology", credits:5, files:[] },
+                  { code:"BIOL30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"PLNT30050", name:"Plant-Environment Interactions", credits:5, files:[] },
+                  { code:"PLNT30060", name:"Food and Crop Science", credits:5, files:[] },
+                  { code:"BIOL30100", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"PLNT30070", name:"Conservation Botany", credits:5, files:[] },
+                  { code:"BIOL30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research project and advanced plant science.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BIOL40010", name:"Research Project", credits:20, files:[] },
+                  { code:"PLNT40010", name:"Advanced Plant Biology", credits:5, files:[] },
+                  { code:"PLNT40020", name:"Plant Genomics", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"PLNT40030", name:"Climate and Plant Adaptation", credits:5, files:[] },
+                  { code:"PLNT40040", name:"Phytoremediation", credits:5, files:[] },
+                  { code:"PLNT40050", name:"Ethnobotany", credits:5, files:[] },
+                  { code:"PLNT40060", name:"Sustainable Agriculture", credits:5, files:[] },
+                  { code:"PLNT40070", name:"Bioactive Natural Products", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-veterinary-medicine", name:"Veterinary Medicine (MVB) — UCD",
+          years:[
+            { year:1, credits:60, note:"Stage 1: Pre-clinical foundations.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"VETS10010", name:"Veterinary Anatomy I", credits:10, files:[] },
+                  { code:"VETS10020", name:"Veterinary Physiology I", credits:5, files:[] },
+                  { code:"VETS10030", name:"Veterinary Biochemistry", credits:5, files:[] },
+                  { code:"VETS10040", name:"Animal Husbandry I", credits:5, files:[] },
+                  { code:"VETS10050", name:"Veterinary Histology", credits:5, files:[] },
+                  { code:"VETS10060", name:"Professional Development I", credits:5, files:[] },
+                  { code:"VETS10070", name:"Veterinary Anatomy II", credits:10, files:[] },
+                  { code:"VETS10080", name:"Veterinary Physiology II", credits:5, files:[] },
+                  { code:"VETS10090", name:"Animal Husbandry II", credits:5, files:[] },
+                  { code:"VETS10100", name:"Veterinary Pharmacology I", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Pre-clinical sciences.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"VETS20010", name:"Veterinary Pathology I", credits:5, files:[] },
+                  { code:"VETS20020", name:"Veterinary Microbiology I", credits:5, files:[] },
+                  { code:"VETS20030", name:"Veterinary Parasitology I", credits:5, files:[] },
+                  { code:"VETS20040", name:"Veterinary Immunology", credits:5, files:[] },
+                  { code:"VETS20050", name:"Veterinary Pharmacology II", credits:5, files:[] },
+                  { code:"VETS20060", name:"Epidemiology and Food Safety", credits:5, files:[] },
+                  { code:"VETS20070", name:"Veterinary Pathology II", credits:5, files:[] },
+                  { code:"VETS20080", name:"Veterinary Microbiology II", credits:5, files:[] },
+                  { code:"VETS20090", name:"Veterinary Parasitology II", credits:5, files:[] },
+                  { code:"VETS20100", name:"Toxicology", credits:5, files:[] },
+                  { code:"VETS20110", name:"Professional Development II", credits:5, files:[] },
+                  { code:"VETS20120", name:"Research Skills", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Clinical introduction.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"VETS30010", name:"Small Animal Medicine I", credits:5, files:[] },
+                  { code:"VETS30020", name:"Large Animal Medicine I", credits:5, files:[] },
+                  { code:"VETS30030", name:"Small Animal Surgery I", credits:5, files:[] },
+                  { code:"VETS30040", name:"Large Animal Surgery I", credits:5, files:[] },
+                  { code:"VETS30050", name:"Diagnostic Imaging", credits:5, files:[] },
+                  { code:"VETS30060", name:"Anaesthesiology", credits:5, files:[] },
+                  { code:"VETS30070", name:"Veterinary Obstetrics", credits:5, files:[] },
+                  { code:"VETS30080", name:"Clinical Pathology", credits:5, files:[] },
+                  { code:"VETS30090", name:"Food Animal Production", credits:5, files:[] },
+                  { code:"VETS30100", name:"Equine Medicine", credits:5, files:[] },
+                  { code:"VETS30110", name:"Exotic Animal Medicine", credits:5, files:[] },
+                  { code:"VETS30120", name:"Professional Development III", credits:5, files:[] },
+                ]}
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Clinical rotations.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"VETS40010", name:"Small Animal Medicine II", credits:10, files:[] },
+                  { code:"VETS40020", name:"Large Animal Medicine II", credits:10, files:[] },
+                  { code:"VETS40030", name:"Small Animal Surgery II", credits:10, files:[] },
+                  { code:"VETS40040", name:"Large Animal Surgery II", credits:10, files:[] },
+                  { code:"VETS40050", name:"Clinical Rotation: Ambulatory", credits:10, files:[] },
+                  { code:"VETS40060", name:"Research Project", credits:10, files:[] },
+                ]}
+              ]
+            },
+            { year:5, credits:60, note:"Stage 5: Advanced clinical practice.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"VETS50010", name:"Advanced Clinical Rotation I", credits:15, files:[] },
+                  { code:"VETS50020", name:"Advanced Clinical Rotation II", credits:15, files:[] },
+                  { code:"VETS50030", name:"Veterinary Public Health", credits:5, files:[] },
+                  { code:"VETS50040", name:"Professional Practice", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"VETS50050", name:"Advanced Surgery Elective", credits:5, files:[] },
+                  { code:"VETS50060", name:"Advanced Medicine Elective", credits:5, files:[] },
+                  { code:"VETS50070", name:"Zoo and Wildlife Medicine", credits:5, files:[] },
+                  { code:"VETS50080", name:"International Veterinary Experience", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+        {
+          id:"ucd-zoology", name:"Zoology (BSc) — UCD",
+          years:[
+            { year:1, credits:60, note:"Common Science Stage 1.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"BIOL10010", name:"Biology for Scientists I", credits:5, files:[] },
+                  { code:"CHEM10110", name:"Chemistry for Scientists I", credits:5, files:[] },
+                  { code:"MATH10060", name:"Mathematics for Scientists I", credits:5, files:[] },
+                  { code:"PHYC10180", name:"Physics for Scientists I", credits:5, files:[] },
+                  { code:"BIOL10020", name:"Biochemistry I", credits:5, files:[] },
+                  { code:"CHEM10120", name:"Organic Chemistry I", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"BIOL10030", name:"Biology for Scientists II", credits:5, files:[] },
+                  { code:"CHEM10130", name:"Chemistry for Scientists II", credits:5, files:[] },
+                  { code:"MATH10070", name:"Mathematics for Scientists II", credits:5, files:[] },
+                  { code:"PHYC10190", name:"Physics for Scientists II", credits:5, files:[] },
+                  { code:"BIOL10040", name:"Cell Biology I", credits:5, files:[] },
+                  { code:"CHEM10140", name:"Analytical Chemistry I", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:2, credits:60, note:"Stage 2: Zoology and animal biology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"ZOOL20010", name:"Zoology I", credits:5, files:[] },
+                  { code:"BIOL20020", name:"Genetics I", credits:5, files:[] },
+                  { code:"ENVB20010", name:"Ecology I", credits:5, files:[] },
+                  { code:"BIOL20010", name:"Biochemistry II", credits:5, files:[] },
+                  { code:"BIOL20030", name:"Cell Biology II", credits:5, files:[] },
+                  { code:"STAT20100", name:"Statistics for Scientists", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ZOOL20020", name:"Zoology II", credits:5, files:[] },
+                  { code:"ZOOL20030", name:"Animal Behaviour", credits:5, files:[] },
+                  { code:"ZOOL20040", name:"Comparative Anatomy", credits:5, files:[] },
+                  { code:"BIOL20090", name:"Laboratory Skills", credits:5, files:[] },
+                  { code:"ENVB20040", name:"Ecology II", credits:5, files:[] },
+                  { code:"ZOOL20050", name:"Marine Biology", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:3, credits:60, note:"Stage 3: Advanced zoology.",
+              sections:[
+                { label:"Core — Autumn", modules:[
+                  { code:"ZOOL30010", name:"Zoology III", credits:5, files:[] },
+                  { code:"ZOOL30020", name:"Evolutionary Biology", credits:5, files:[] },
+                  { code:"ZOOL30030", name:"Behavioural Ecology", credits:5, files:[] },
+                  { code:"BIOL30050", name:"Research Project (Part 1)", credits:5, files:[] },
+                  { code:"ZOOL30040", name:"Parasitology", credits:5, files:[] },
+                  { code:"BIOL30060", name:"Elective", credits:5, files:[] },
+                ]},
+                { label:"Core — Spring", modules:[
+                  { code:"ZOOL30050", name:"Conservation Zoology", credits:5, files:[] },
+                  { code:"ZOOL30060", name:"Molecular Evolution", credits:5, files:[] },
+                  { code:"BIOL30100", name:"Research Project (Part 2)", credits:10, files:[] },
+                  { code:"ZOOL30070", name:"Animal Physiology", credits:5, files:[] },
+                  { code:"BIOL30110", name:"Elective", credits:5, files:[] },
+                ]},
+              ]
+            },
+            { year:4, credits:60, note:"Stage 4: Research project and advanced zoology.",
+              sections:[
+                { label:"Core", modules:[
+                  { code:"BIOL40010", name:"Research Project", credits:20, files:[] },
+                  { code:"ZOOL40010", name:"Advanced Zoology", credits:5, files:[] },
+                  { code:"ZOOL40020", name:"Wildlife Conservation and Management", credits:5, files:[] },
+                ]},
+                { label:"Electives", modules:[
+                  { code:"ZOOL40030", name:"Ornithology", credits:5, files:[] },
+                  { code:"ZOOL40040", name:"Herpetology", credits:5, files:[] },
+                  { code:"ZOOL40050", name:"Marine Mammal Biology", credits:5, files:[] },
+                  { code:"ZOOL40060", name:"Animal Welfare Science", credits:5, files:[] },
+                  { code:"ZOOL40070", name:"Field Zoology", credits:5, files:[] },
+                ]},
+              ]
+            },
+          ]
+        },
+      ]
+    },
   ];
 
 
@@ -11506,22 +13090,22 @@
         { name:'Applied & Computational Mathematics',                      url:'https://www.ucd.ie/courses/applied-computational-mathematics' },
         { name:'Applied Mathematics, Mathematics & Education',             url:'https://www.ucd.ie/courses/applied-mathematics-education' },
         { name:'Archaeology',                                              url:'https://www.ucd.ie/courses/bsc-archaeology' },
-        { name:'Architecture',                                             url:'https://www.ucd.ie/courses/barchsc-architecture' },
+        { name:'Architecture',                                             schoolsCourseId:'ucd-architecture',               url:'https://www.ucd.ie/courses/barchsc-architecture' },
         { name:'Art History',                                              url:'https://www.ucd.ie/courses/ba-art-history' },
         { name:'Bachelor of Commerce',                                     schoolsCourseId:'ucd-commerce',             url:'https://www.ucd.ie/courses/bcomm-commerce' },
-        { name:'Biochemistry & Molecular Biology',                         url:'https://www.ucd.ie/courses/biochemistry-molecular-biology' },
+        { name:'Biochemistry & Molecular Biology',                         schoolsCourseId:'ucd-biochemistry',               url:'https://www.ucd.ie/courses/biochemistry-molecular-biology' },
         { name:'Biology, Mathematics & Education',                         url:'https://www.ucd.ie/courses/biology-mathematics-education' },
-        { name:'Biomedical Engineering',                                   url:'https://www.ucd.ie/courses/bsc-biomedical-engineering' },
-        { name:'Biomedical, Health & Life Sciences',                       url:'https://www.ucd.ie/courses/bsc-biomedical-health-and-life-sciences' },
+        { name:'Biomedical Engineering',                                   schoolsCourseId:'ucd-biomedical-engineering',      url:'https://www.ucd.ie/courses/bsc-biomedical-engineering' },
+        { name:'Biomedical, Health & Life Sciences',                       schoolsCourseId:'ucd-bhls',                       url:'https://www.ucd.ie/courses/bsc-biomedical-health-and-life-sciences' },
         { name:'Business & Law',                                           url:'https://www.ucd.ie/courses/bbl-business-and-law' },
-        { name:'Cell & Molecular Biology',                                 url:'https://www.ucd.ie/courses/cell-molecular-biology' },
+        { name:'Cell & Molecular Biology',                                 schoolsCourseId:'ucd-cell-molecular-biology',      url:'https://www.ucd.ie/courses/cell-molecular-biology' },
         { name:'Celtic Civilisation',                                      url:'https://www.ucd.ie/courses/ba-celtic-civilisation' },
-        { name:'Chemical & Bioprocess Engineering',                        url:'https://www.ucd.ie/courses/be-chemical-bioprocess-engineering' },
+        { name:'Chemical & Bioprocess Engineering',                        schoolsCourseId:'ucd-chemical-bioprocess-engineering', url:'https://www.ucd.ie/courses/be-chemical-bioprocess-engineering' },
         { name:'Chemistry',                                                url:'https://www.ucd.ie/courses/chemistry' },
         { name:'Chemistry, Mathematics & Education',                       url:'https://www.ucd.ie/courses/chemistry-mathematics-education' },
         { name:'Chemistry with Environmental & Sustainable Chemistry',     url:'https://www.ucd.ie/courses/chemistry-environmental-sustainable-chemistry' },
-        { name:'City Planning & Environmental Policy',                     url:'https://www.ucd.ie/courses/bsc-city-planning-and-envir-policy' },
-        { name:'Civil Engineering',                                        url:'https://www.ucd.ie/courses/bsc-civil-engineering' },
+        { name:'City Planning & Environmental Policy',                     schoolsCourseId:'ucd-city-planning',              url:'https://www.ucd.ie/courses/bsc-city-planning-and-envir-policy' },
+        { name:'Civil Engineering',                                        schoolsCourseId:'ucd-civil-engineering',          url:'https://www.ucd.ie/courses/bsc-civil-engineering' },
         { name:'Classics, Art History & Archaeology',                      url:'https://www.ucd.ie/courses/ba-classics-art-history-archaeology' },
         { name:'Classics, English & History',                              url:'https://www.ucd.ie/courses/ba-classics-english-history' },
         { name:'Classics (Greek & Roman Civilization, Latin & Greek)',     url:'https://www.ucd.ie/courses/ba-classics-greek-roman-civilization-latin-greek' },
@@ -11542,13 +13126,13 @@
         { name:'Economics & Finance',                                      schoolsCourseId:'ucd-econ-finance',         url:'https://www.ucd.ie/courses/bsc-economics-and-finance' },
         { name:'Economics, Mathematics & Statistics',                      schoolsCourseId:'ucd-econ-maths-stats',     url:'https://www.ucd.ie/courses/bsc-economics-maths-statistics' },
         { name:'Education with Gaeilge & Modern Languages',               url:'https://www.ucd.ie/courses/bed-education-with-gaeilge-modern-languages' },
-        { name:'Electrical/Electronic Engineering',                        url:'https://www.ucd.ie/courses/bsc-electrical-engineering' },
-        { name:'Engineering',                                              url:'https://www.ucd.ie/courses/bsc-engineering' },
+        { name:'Electrical/Electronic Engineering',                        schoolsCourseId:'ucd-electrical-electronic-engineering', url:'https://www.ucd.ie/courses/bsc-electrical-engineering' },
+        { name:'Engineering',                                              schoolsCourseId:'ucd-engineering',                url:'https://www.ucd.ie/courses/bsc-engineering' },
         { name:'English',                                                  url:'https://www.ucd.ie/courses/ba-english' },
         { name:'English, Drama & Film',                                    url:'https://www.ucd.ie/courses/ba-english-drama-film' },
         { name:'English Literature',                                       url:'https://www.ucd.ie/courses/ba-english-literature' },
         { name:'English with Creative Writing',                            url:'https://www.ucd.ie/courses/ba-english-creative-writing' },
-        { name:'Environmental Biology',                                    url:'https://www.ucd.ie/courses/environmental-biology' },
+        { name:'Environmental Biology',                                    schoolsCourseId:'ucd-environmental-biology',      url:'https://www.ucd.ie/courses/environmental-biology' },
         { name:'European Studies',                                         url:'https://www.ucd.ie/courses/ba-european-studies' },
         { name:'Film Studies',                                             url:'https://www.ucd.ie/courses/ba-film-studies' },
         { name:'Financial Mathematics',                                    url:'https://www.ucd.ie/courses/financial-mathematics' },
@@ -11557,7 +13141,7 @@
         { name:'Food Science',                                             url:'https://www.ucd.ie/courses/bsc-food-science' },
         { name:'Forestry',                                                 url:'https://www.ucd.ie/courses/bagrsc-forestry' },
         { name:'French',                                                   url:'https://www.ucd.ie/courses/ba-french' },
-        { name:'Genetics',                                                 url:'https://www.ucd.ie/courses/genetics' },
+        { name:'Genetics',                                                 schoolsCourseId:'ucd-genetics',                   url:'https://www.ucd.ie/courses/genetics' },
         { name:'Geography',                                                url:'https://www.ucd.ie/courses/bsc-geography' },
         { name:'German',                                                   url:'https://www.ucd.ie/courses/ba-german' },
         { name:'Global Studies',                                           url:'https://www.ucd.ie/courses/ba-global-studies' },
@@ -11570,7 +13154,7 @@
         { name:'Irish/Gaeilge',                                            url:'https://www.ucd.ie/courses/ba-irish' },
         { name:'Irish Studies',                                            url:'https://www.ucd.ie/courses/ba-irish-studies' },
         { name:'Italian',                                                  url:'https://www.ucd.ie/courses/ba-italian' },
-        { name:'Landscape Architecture',                                   url:'https://www.ucd.ie/courses/bsc-landscape-architecture' },
+        { name:'Landscape Architecture',                                   schoolsCourseId:'ucd-landscape-architecture',     url:'https://www.ucd.ie/courses/bsc-landscape-architecture' },
         { name:'Languages, Linguistics & Cultures',                        url:'https://www.ucd.ie/courses/ba-languages-linguistics-cultures' },
         { name:'Law (BCL)',                                                url:'https://www.ucd.ie/courses/bcl-law' },
         { name:'Law Dual Degree – BCL/Maîtrise',                          url:'https://www.ucd.ie/courses/law-dual-degree-bclmaitrise' },
@@ -11584,16 +13168,16 @@
         { name:'Linguistics',                                              url:'https://www.ucd.ie/courses/ba-linguistics' },
         { name:'Mathematics',                                              url:'https://www.ucd.ie/courses/mathematics' },
         { name:'Mathematics (through Arts & Humanities/Social Sciences)',  url:'https://www.ucd.ie/courses/ba-mathematics' },
-        { name:'Mechanical Engineering',                                   url:'https://www.ucd.ie/courses/bsc-mechanical-engineering' },
+        { name:'Mechanical Engineering',                                   schoolsCourseId:'ucd-mechanical-engineering',     url:'https://www.ucd.ie/courses/bsc-mechanical-engineering' },
         { name:'Medicinal Chemistry & Chemical Biology',                   url:'https://www.ucd.ie/courses/medicinal-chemistry-chemical-biology' },
         { name:'Medicine',                                                 url:'https://www.ucd.ie/courses/medicine' },
         { name:'Medicine (Graduate Entry)',                                url:'https://www.ucd.ie/courses/medicine-graduate-entry' },
-        { name:'Microbiology',                                             url:'https://www.ucd.ie/courses/microbiology' },
+        { name:'Microbiology',                                             schoolsCourseId:'ucd-microbiology',               url:'https://www.ucd.ie/courses/microbiology' },
         { name:'Midwifery',                                                url:'https://www.ucd.ie/courses/bsc-midwifery' },
         { name:'Modern Languages',                                         url:'https://www.ucd.ie/courses/ba-modern-languages' },
         { name:'Music',                                                    url:'https://www.ucd.ie/courses/ba-music' },
         { name:'Music, Film & Drama',                                      url:'https://www.ucd.ie/courses/ba-music-film-drama' },
-        { name:'Neuroscience',                                             url:'https://www.ucd.ie/courses/neuroscience' },
+        { name:'Neuroscience',                                             schoolsCourseId:'ucd-neuroscience',               url:'https://www.ucd.ie/courses/neuroscience' },
         { name:'Nursing (Children\'s & General)',                          url:'https://www.ucd.ie/courses/bsc-nursing-childrens-general' },
         { name:'Nursing (General)',                                        url:'https://www.ucd.ie/courses/bsc-nursing-general' },
         { name:'Nursing (Mental Health)',                                  url:'https://www.ucd.ie/courses/bsc-nursing-mental-health' },
@@ -11603,10 +13187,10 @@
         { name:'Physics',                                                  url:'https://www.ucd.ie/courses/physics' },
         { name:'Physics, Mathematics & Education',                         url:'https://www.ucd.ie/courses/physics-mathematics-education' },
         { name:'Physics with Astronomy & Space Science',                   url:'https://www.ucd.ie/courses/astronomy-space-science' },
-        { name:'Physiology',                                               url:'https://www.ucd.ie/courses/physiology' },
+        { name:'Physiology',                                               schoolsCourseId:'ucd-physiology',                 url:'https://www.ucd.ie/courses/physiology' },
         { name:'Physiotherapy',                                            url:'https://www.ucd.ie/courses/bsc-physiotherapy' },
         { name:'Physiotherapy (Graduate Entry)',                           url:'https://www.ucd.ie/registry/prospectivestudents/admissions/undergraduateapplicants/alternativeentryroutes/graduateentrypathways/physiotherapy/' },
-        { name:'Plant Biology',                                            url:'https://www.ucd.ie/courses/plant-biology' },
+        { name:'Plant Biology',                                            schoolsCourseId:'ucd-plant-biology',              url:'https://www.ucd.ie/courses/plant-biology' },
         { name:'Politics & International Relations',                       url:'https://www.ucd.ie/courses/bsc-politics-international-relations' },
         { name:'Portuguese',                                               url:'https://www.ucd.ie/courses/ba-portuguese' },
         { name:'Psychology',                                               url:'https://www.ucd.ie/courses/bsc-psychology' },
@@ -11619,16 +13203,16 @@
         { name:'Sport, Health & Exercise Science',                         url:'https://www.ucd.ie/courses/bsc-sport-health-exercise-science' },
         { name:'Statistics',                                               url:'https://www.ucd.ie/courses/statistics' },
         { name:'Statistics (through Arts & Humanities/Social Sciences)',   url:'https://www.ucd.ie/courses/ba-statistics' },
-        { name:'Structural Engineering with Architecture',                 url:'https://www.ucd.ie/courses/bsc-structural-engineering-with-architecture' },
+        { name:'Structural Engineering with Architecture',                 schoolsCourseId:'ucd-structural-engineering',     url:'https://www.ucd.ie/courses/bsc-structural-engineering-with-architecture' },
         { name:'Sustainability with Environmental Sciences',               url:'https://www.ucd.ie/courses/sustainability-environmental-science' },
         { name:'Sustainability with Social Sciences, Policy & Law',        url:'https://www.ucd.ie/courses/sustainability-social-sciences' },
         { name:'Sustainability with Business & Economics',                 url:'https://www.ucd.ie/courses/sustainability-business-economics' },
         { name:'Sustainable Food Systems',                                 url:'https://www.ucd.ie/courses/bsc-sustainable-food-systems' },
         { name:'Theoretical Physics',                                      url:'https://www.ucd.ie/courses/theoretical-physics' },
         { name:'Veterinary Medicine (Graduate Entry)',                     url:'https://www.ucd.ie/courses/mvb-veterinary-medicine-graduate-entry' },
-        { name:'Veterinary Medicine',                                      url:'https://www.ucd.ie/courses/mvb-veterinary-medicine' },
+        { name:'Veterinary Medicine',                                      schoolsCourseId:'ucd-veterinary-medicine',        url:'https://www.ucd.ie/courses/mvb-veterinary-medicine' },
         { name:'Veterinary Nursing',                                       url:'https://www.ucd.ie/courses/bsc-veterinary-nursing' },
-        { name:'Zoology',                                                  url:'https://www.ucd.ie/courses/zoology' },
+        { name:'Zoology',                                                  schoolsCourseId:'ucd-zoology',                    url:'https://www.ucd.ie/courses/zoology' },
       ],
     },
     {
