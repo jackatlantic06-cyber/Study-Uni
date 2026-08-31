@@ -959,9 +959,10 @@
   // ─── HELPERS ─────────────────────────────────────────────────────────────
   function getAllCourses() {
     const out = [];
-    SCHOOLS.forEach(s => s.courses.forEach(c => {
-      if (!c.hidden) out.push({...c, schoolName: s.name});
-    }));
+    SCHOOLS.forEach(s => {
+      if ((s.uni || 'ucc') !== _selectedUni) return;
+      s.courses.forEach(c => { if (!c.hidden) out.push({...c, schoolName: s.name}); });
+    });
     return out;
   }
 
@@ -1274,24 +1275,41 @@
       ['homeUCDView','coursesUCDView'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = ''; el.innerHTML = placeholder; } });
       return;
     }
-    const isUCC = uniId === 'ucc';
+    // Check if this uni has module-level school data
+    const hasSchoolData = SCHOOLS.some(s => (s.uni || 'ucc') === uniId);
     // Update all pickers
     ['homeUniPicker','coursesUniPicker'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = _uniTabsHTML(uniId);
     });
+    // Rebuild category cards for the newly selected uni
+    if (hasSchoolData) {
+      const root = document.getElementById('categoriesRoot');
+      if (root) root.innerHTML = DEG_BUCKETS.map(b => {
+        const courses = getCoursesForBucket(b.id);
+        if (!courses.length) return '';
+        const papers = courses.reduce((a,c) => a + countPapers(c), 0);
+        return `<div class="cat-card" onclick="openDegBucket('${b.id}');showPage('courses')">
+          <div class="cat-icon">${b.icon}</div>
+          <h3>${b.label} — ${b.full}</h3>
+          <p>${b.desc}</p>
+          <span class="cat-badge">${courses.length} course${courses.length!==1?'s':''}${papers>0?' · '+papers+' papers':''}</span>
+        </div>`;
+      }).join('');
+      buildDegBuckets();
+    }
     // Home page
     const cats = document.getElementById('categoriesRoot');
     const homeUCD = document.getElementById('homeUCDView');
-    if (cats) cats.style.display = isUCC ? '' : 'none';
-    if (homeUCD) { homeUCD.style.display = isUCC ? 'none' : ''; if (!isUCC) homeUCD.innerHTML = _buildUniCoursesHTML(uniId); }
+    if (cats) cats.style.display = hasSchoolData ? '' : 'none';
+    if (homeUCD) { homeUCD.style.display = hasSchoolData ? 'none' : ''; if (!hasSchoolData) homeUCD.innerHTML = _buildUniCoursesHTML(uniId); }
     // Courses page
     const degView = document.getElementById('degBucketView');
     const coursesUCD = document.getElementById('coursesUCDView');
     const degCourse = document.getElementById('degCourseView');
-    if (degView) degView.style.display = isUCC ? '' : 'none';
-    if (degCourse && !isUCC) degCourse.style.display = 'none';
-    if (coursesUCD) { coursesUCD.style.display = isUCC ? 'none' : ''; if (!isUCC) coursesUCD.innerHTML = _buildUniCoursesHTML(uniId); }
+    if (degView) degView.style.display = hasSchoolData ? '' : 'none';
+    if (degCourse && !hasSchoolData) degCourse.style.display = 'none';
+    if (coursesUCD) { coursesUCD.style.display = hasSchoolData ? 'none' : ''; if (!hasSchoolData) coursesUCD.innerHTML = _buildUniCoursesHTML(uniId); }
   }
 
   function _initUniPicker() {
