@@ -990,7 +990,7 @@
     if (/Occupational Therapy|Speech & Language|Paramedicine/.test(name))return "MedHealth";
     if (/Public Health|Medical & Health/.test(name))                     return "MedHealth";
     // Education
-    if (/\bBEd\b|Science Education/.test(name))                         return "Education";
+    if (/\bBEd\b|Science Education|\bEducation\b/.test(name))           return "Education";
     // Business
     if (/\bBCom\b|Commerce/.test(name))                                 return "Business";
     if (/\bBFin\b|Finance BSc/.test(name))                              return "Business";
