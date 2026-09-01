@@ -14878,6 +14878,336 @@
   });
 
 
+  // ─── UCD LAW ─────────────────────────────────────────────────────────────
+  SCHOOLS.push({
+    id:"ucd-law-school", name:"UCD Sutherland School of Law", icon:"⚖️", uni:"ucd",
+    sub:"University College Dublin",
+    courses:[
+      // ── BCL (Law) ─────────────────────────────────────────────────────────
+      {
+        id:"ucd-bcl", name:"BCL (Law)", years:[
+          { year:1, credits:60, note:"Stage 1 — Constitutional law, contract, tort, civil & criminal procedure.", sections:[
+            { label:"Autumn Core", modules:[
+              { code:"LAW10050", name:"Constitutional Law: Institutional Framework of the Constitution of Ireland", credits:5, files:[] },
+              { code:"LAW10190", name:"Negligence and Related Matters",                           credits:5, files:[] },
+              { code:"LAW10270", name:"Civil Procedure",                                          credits:5, files:[] },
+              { code:"LAW10340", name:"Contract: Formation",                                      credits:5, files:[] },
+              { code:"LAW10420", name:"Legal and Professional Skills",                            credits:5, files:[] },
+              { code:"LAW10470", name:"Comparative Study of Law",                                 credits:5, files:[] },
+            ]},
+            { label:"Spring Core", modules:[
+              { code:"LAW10060", name:"Constitutional Law: Fundamental Rights under the Constitution of Ireland", credits:5, files:[] },
+              { code:"LAW10200", name:"Nominate Torts",                                           credits:5, files:[] },
+              { code:"LAW10260", name:"Criminal Procedure",                                       credits:5, files:[] },
+              { code:"LAW10350", name:"Contract: Vitiating Factors and Remedies",                credits:5, files:[] },
+              { code:"LAW10360", name:"General Introduction to the Irish Legal System",           credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Company law, EU law, property law, criminal law core + options.", sections:[
+            { label:"Autumn Core", modules:[
+              { code:"LAW20090", name:"Company Law I",                                            credits:5, files:[] },
+              { code:"LAW20330", name:"EU Constitutional Law",                                    credits:5, files:[] },
+              { code:"LAW20370", name:"Property Law I",                                           credits:5, files:[] },
+              { code:"LAW20390", name:"Criminal Liability",                                       credits:5, files:[] },
+            ]},
+            { label:"Spring Core", modules:[
+              { code:"LAW20170", name:"Company Law II",                                           credits:5, files:[] },
+              { code:"LAW20340", name:"EU Economic Law",                                          credits:5, files:[] },
+              { code:"LAW20380", name:"Property Law II",                                          credits:5, files:[] },
+              { code:"LAW20400", name:"Criminal Offences and Defences",                          credits:5, files:[] },
+            ]},
+            { label:"Options (choose 2+)", modules:[
+              { code:"LAW30400", name:"Matrimonial Law and Reliefs",                              credits:5, files:[] },
+              { code:"LAW30440", name:"Environmental Law and Policy",                             credits:5, files:[] },
+              { code:"LAW30470", name:"International Human Rights Law",                           credits:5, files:[] },
+              { code:"LAW30310", name:"Law of the ECHR",                                          credits:5, files:[] },
+              { code:"LAW30450", name:"Family and Child Law",                                     credits:5, files:[] },
+              { code:"LAW37460", name:"Planning Law",                                             credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Choose 10 modules (or 9 + Research Module) from broad elective pool.", sections:[
+            { label:"Core Options (choose 10)", modules:[
+              { code:"LAW37580", name:"Research Module",                                          credits:10, files:[] },
+              { code:"LAW30060", name:"Equity: History, Doctrines, Remedies",                    credits:5, files:[] },
+              { code:"LAW30070", name:"Evidence – Foundations",                                  credits:5, files:[] },
+              { code:"LAW30090", name:"Revenue Law: Introduction to Revenue Law",                credits:5, files:[] },
+              { code:"LAW30170", name:"Employment Law: the Contract of Employment",              credits:5, files:[] },
+              { code:"LAW30240", name:"Administrative Law: Grounds of Review",                   credits:5, files:[] },
+              { code:"LAW30300", name:"Punishment and Penal Policy",                             credits:5, files:[] },
+              { code:"LAW30360", name:"Consumer Law",                                             credits:5, files:[] },
+              { code:"LAW30610", name:"Commercial Law",                                           credits:5, files:[] },
+              { code:"LAW30690", name:"Advocacy and Mooting",                                    credits:5, files:[] },
+              { code:"LAW30700", name:"The Lawyer, Professional Ethics & Legal Practice",       credits:5, files:[] },
+              { code:"LAW30720", name:"Theory of Court Practice",                                credits:5, files:[] },
+              { code:"LAW30730", name:"Public International Law",                                credits:5, files:[] },
+              { code:"LAW30870", name:"Patent and Trade Mark Law",                               credits:5, files:[] },
+              { code:"LAW37520", name:"International Family Law",                                credits:5, files:[] },
+              { code:"LAW37530", name:"Financial Law of the EU",                                 credits:5, files:[] },
+              { code:"LAW37570", name:"Insolvency Law",                                          credits:5, files:[] },
+              { code:"LAW37670", name:"Copyright Law",                                           credits:5, files:[] },
+              { code:"LAW37700", name:"Internet Law and Regulation",                             credits:5, files:[] },
+              { code:"LAW37760", name:"International Refugee Law",                               credits:5, files:[] },
+              { code:"LAW30010", name:"Banking Law",                                             credits:5, files:[] },
+              { code:"LAW30160", name:"Evidence – Practice and Principles",                     credits:5, files:[] },
+              { code:"LAW30180", name:"Jurisprudence",                                           credits:5, files:[] },
+              { code:"LAW30230", name:"Overview of Law Relating to Trusts",                      credits:5, files:[] },
+              { code:"LAW30290", name:"Administrative Law: Remedies for Unlawful Administrative Action", credits:5, files:[] },
+              { code:"LAW30330", name:"Employment Law: Employment Rights",                       credits:5, files:[] },
+              { code:"LAW30820", name:"Private International Law",                               credits:5, files:[] },
+              { code:"LAW37430", name:"Jury Trials",                                             credits:5, files:[] },
+              { code:"LAW37590", name:"International Economic Law",                              credits:5, files:[] },
+              { code:"LAW37610", name:"Medical Law",                                             credits:5, files:[] },
+              { code:"LAW37680", name:"BCL Internship",                                          credits:30, files:[] },
+              { code:"LAW37710", name:"Applied Legal Skills",                                    credits:5, files:[] },
+              { code:"LAW37720", name:"Advanced International Law: Current Issues",              credits:5, files:[] },
+              { code:"LAW37740", name:"Victims and Victimology",                                 credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Choose 10 modules from expanded elective pool.", sections:[
+            { label:"Core Options (choose 10)", modules:[
+              { code:"LAW30640", name:"Competition Law in Practice",                             credits:5, files:[] },
+              { code:"LAW30550", name:"Legal History: The History of Public Law",                credits:5, files:[] },
+              { code:"LAW30570", name:"Contemporary Issues in Law and Politics",                 credits:5, files:[] },
+              { code:"LAW37750", name:"Financial Services in Ireland",                           credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Law with Irish ────────────────────────────────────────────────────
+      {
+        id:"ucd-law-irish", name:"Law with Irish (BCL)", years:[
+          { year:1, credits:60, note:"Stage 1 — Law core plus Irish language (Teanga na Gaeilge I).", sections:[
+            { label:"Irish Core", modules:[
+              { code:"IR10040",  name:"Teanga na Gaeilge I",                                      credits:5, files:[] },
+            ]},
+            { label:"Law Core", modules:[
+              { code:"LAW10050", name:"Constitutional Law: Institutional Framework",             credits:5, files:[] },
+              { code:"LAW10190", name:"Negligence and Related Matters",                           credits:5, files:[] },
+              { code:"LAW10270", name:"Civil Procedure",                                          credits:5, files:[] },
+              { code:"LAW10340", name:"Contract: Formation",                                      credits:5, files:[] },
+              { code:"LAW10420", name:"Legal and Professional Skills",                            credits:5, files:[] },
+              { code:"LAW10060", name:"Constitutional Law: Fundamental Rights",                  credits:5, files:[] },
+              { code:"LAW10200", name:"Nominate Torts",                                           credits:5, files:[] },
+              { code:"LAW10350", name:"Contract: Vitiating Factors and Remedies",                credits:5, files:[] },
+              { code:"LAW10360", name:"General Introduction to the Irish Legal System",           credits:5, files:[] },
+              { code:"LAW10260", name:"Criminal Procedure",                                       credits:5, files:[] },
+            ]},
+            { label:"Irish Options (choose 1)", modules:[
+              { code:"IR10210",  name:"Cultúr na hÓige Gaelaí",                                 credits:5, files:[] },
+              { code:"IR10090",  name:"Forbairt na Gaeilge Acadúla",                             credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — EU, property, criminal law core + Irish language II.", sections:[
+            { label:"Irish Core", modules:[
+              { code:"IR20180",  name:"Teanga na Gaeilge II A",                                   credits:5, files:[] },
+              { code:"IR20010",  name:"Teanga na Gaeilge II B",                                   credits:5, files:[] },
+            ]},
+            { label:"Law Core", modules:[
+              { code:"LAW20330", name:"EU Constitutional Law",                                    credits:5, files:[] },
+              { code:"LAW20370", name:"Property Law I",                                           credits:5, files:[] },
+              { code:"LAW20390", name:"Criminal Liability",                                       credits:5, files:[] },
+              { code:"LAW20340", name:"EU Economic Law",                                          credits:5, files:[] },
+              { code:"LAW20380", name:"Property Law II",                                          credits:5, files:[] },
+              { code:"LAW20400", name:"Criminal Offences and Defences",                          credits:5, files:[] },
+            ]},
+            { label:"Irish Options (choose 2)", modules:[
+              { code:"IR20050",  name:"Scríobh na Gaeilge",                                       credits:5, files:[] },
+              { code:"IR20210",  name:"Gaeilge na Meán",                                          credits:5, files:[] },
+              { code:"IR20310",  name:"An Ghaeilge sa Saol Comhaimseartha",                      credits:5, files:[] },
+              { code:"IR20220",  name:"Teanga na Gaeilge: Litríocht agus Cultúr",                credits:5, files:[] },
+              { code:"IR20250",  name:"Béaloideas agus Cultúr",                                   credits:5, files:[] },
+              { code:"IR20320",  name:"Scríbhneoireacht Chruthaitheach na Gaeilge",               credits:5, files:[] },
+              { code:"IR20330",  name:"Stair na Gaeilge",                                         credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Irish legal translation, Irish language III, law electives.", sections:[
+            { label:"Irish Core", modules:[
+              { code:"IR30350",  name:"Aistriúchán Dlíthiúil: I",                                credits:5, files:[] },
+              { code:"IR30400",  name:"Teanga na Gaeilge III A",                                  credits:5, files:[] },
+            ]},
+            { label:"Irish Options (choose 2)", modules:[
+              { code:"IR30410",  name:"Teanga na Gaeilge III B",                                  credits:5, files:[] },
+              { code:"IR30420",  name:"Canúineolaíocht",                                          credits:5, files:[] },
+              { code:"IR30460",  name:"Gaeilge na hEorpa",                                        credits:5, files:[] },
+              { code:"IR30030",  name:"Ceol Traidisiúnta",                                        credits:5, files:[] },
+              { code:"IR30090",  name:"Nua-Litríocht na Gaeilge",                                 credits:5, files:[] },
+              { code:"IR30200",  name:"An Scéalaíocht",                                           credits:5, files:[] },
+              { code:"IR30450",  name:"Gramadach Stairiúil na Gaeilge",                          credits:5, files:[] },
+            ]},
+            { label:"Law Options (choose 5)", modules:[
+              { code:"LAW37580", name:"Research Module",                                          credits:10, files:[] },
+              { code:"LAW30060", name:"Equity: History, Doctrines, Remedies",                    credits:5, files:[] },
+              { code:"LAW30070", name:"Evidence – Foundations",                                  credits:5, files:[] },
+              { code:"LAW30170", name:"Employment Law: the Contract of Employment",              credits:5, files:[] },
+              { code:"LAW30240", name:"Administrative Law: Grounds of Review",                   credits:5, files:[] },
+              { code:"LAW30610", name:"Commercial Law",                                           credits:5, files:[] },
+              { code:"LAW30730", name:"Public International Law",                                credits:5, files:[] },
+              { code:"LAW37680", name:"BCL Internship",                                          credits:30, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Irish law and translation core + law electives.", sections:[
+            { label:"Irish Core", modules:[
+              { code:"IR30380",  name:"Dlí agus Aistriúchán",                                     credits:10, files:[] },
+              { code:"IR30500",  name:"Eagarthóireacht & Aistriúchán",                           credits:10, files:[] },
+            ]},
+            { label:"Law Options (choose 5)", modules:[
+              { code:"LAW30640", name:"Competition Law in Practice",                             credits:5, files:[] },
+              { code:"LAW30550", name:"Legal History: The History of Public Law",                credits:5, files:[] },
+              { code:"LAW30010", name:"Banking Law",                                             credits:5, files:[] },
+              { code:"LAW30180", name:"Jurisprudence",                                           credits:5, files:[] },
+              { code:"LAW37750", name:"Financial Services in Ireland",                           credits:5, files:[] },
+              { code:"LAW37610", name:"Medical Law",                                             credits:5, files:[] },
+              { code:"LAW37720", name:"Advanced International Law: Current Issues",              credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Law with French Law ───────────────────────────────────────────────
+      {
+        id:"ucd-law-french", name:"Law with French Law (BCL)", years:[
+          { year:1, credits:60, note:"Stage 1 — Irish law core plus French public and private law, French language.", sections:[
+            { label:"Law Core", modules:[
+              { code:"LAW10050", name:"Constitutional Law: Institutional Framework",             credits:5, files:[] },
+              { code:"LAW10190", name:"Negligence and Related Matters",                           credits:5, files:[] },
+              { code:"LAW10340", name:"Contract: Formation",                                      credits:5, files:[] },
+              { code:"LAW10420", name:"Legal and Professional Skills",                            credits:5, files:[] },
+              { code:"LAW10480", name:"French Law Book Club",                                     credits:5, files:[] },
+              { code:"LAW10060", name:"Constitutional Law: Fundamental Rights",                  credits:5, files:[] },
+              { code:"LAW10200", name:"Nominate Torts",                                           credits:5, files:[] },
+              { code:"LAW10350", name:"Contract: Vitiating Factors and Remedies",                credits:5, files:[] },
+              { code:"LAW10360", name:"General Introduction to the Irish Legal System",           credits:5, files:[] },
+              { code:"LAW10430", name:"French Private Law 1",                                     credits:5, files:[] },
+            ]},
+            { label:"French Core", modules:[
+              { code:"LAW10300", name:"French Public Law 1 (Introduction to French Constitutional Law)", credits:5, files:[] },
+              { code:"FR10130",  name:"French Fictions",                                          credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — EU law, property, criminal law core + French law II.", sections:[
+            { label:"Law Core", modules:[
+              { code:"LAW20330", name:"EU Constitutional Law",                                    credits:5, files:[] },
+              { code:"LAW20370", name:"Property Law I",                                           credits:5, files:[] },
+              { code:"LAW20390", name:"Criminal Liability",                                       credits:5, files:[] },
+              { code:"LAW20340", name:"EU Economic Law",                                          credits:5, files:[] },
+              { code:"LAW20380", name:"Property Law II",                                          credits:5, files:[] },
+              { code:"LAW20400", name:"Criminal Offences and Defences",                          credits:5, files:[] },
+              { code:"LAW20090", name:"Company Law I",                                            credits:5, files:[] },
+              { code:"LAW20170", name:"Company Law II",                                           credits:5, files:[] },
+            ]},
+            { label:"French Core", modules:[
+              { code:"FR20020",  name:"French Language IIa: Grammaire et syntaxe françaises",   credits:5, files:[] },
+              { code:"LAW27290", name:"French Public Law 2 (Introduction to Administrative Law)", credits:5, files:[] },
+              { code:"FR20040",  name:"French Language IIb: Expression française écrite et orale", credits:5, files:[] },
+              { code:"LAW20360", name:"French Private Law 2",                                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Year abroad at a French partner university (no UCD modules).", sections:[
+            { label:"Abroad", modules:[
+              { code:"STUDY-ABROAD", name:"Year at French partner university (Université Panthéon-Assas or Université Toulouse 1 Capitole)", credits:60, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Return to UCD: French law dissertation, French language, law electives.", sections:[
+            { label:"French Core", modules:[
+              { code:"LAW30630", name:"French Law Dissertation",                                 credits:5, files:[] },
+              { code:"FR30310",  name:"French Language 3a: Expression avancée",                  credits:5, files:[] },
+              { code:"FR30320",  name:"French Language 3b",                                      credits:5, files:[] },
+            ]},
+            { label:"Law Options (choose 7+)", modules:[
+              { code:"LAW30060", name:"Equity: History, Doctrines, Remedies",                    credits:5, files:[] },
+              { code:"LAW30070", name:"Evidence – Foundations",                                  credits:5, files:[] },
+              { code:"LAW30180", name:"Jurisprudence",                                           credits:5, files:[] },
+              { code:"LAW30240", name:"Administrative Law: Grounds of Review",                   credits:5, files:[] },
+              { code:"LAW30730", name:"Public International Law",                                credits:5, files:[] },
+              { code:"LAW37530", name:"Financial Law of the EU",                                 credits:5, files:[] },
+              { code:"LAW37590", name:"International Economic Law",                              credits:5, files:[] },
+              { code:"LAW37760", name:"International Refugee Law",                               credits:5, files:[] },
+              { code:"LAW30640", name:"Competition Law in Practice",                             credits:5, files:[] },
+              { code:"LAW30550", name:"Legal History: The History of Public Law",                credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Business and Law ──────────────────────────────────────────────────
+      {
+        id:"ucd-business-law", name:"Business and Law (BBL)", years:[
+          { year:1, credits:60, note:"Stage 1 — Business and law foundations (DN610).", sections:[
+            { label:"Business Core", modules:[
+              { code:"BMGT10170", name:"Inside Organisations",                                   credits:5, files:[] },
+              { code:"HRM10730",  name:"Business in Society",                                    credits:5, files:[] },
+              { code:"MATH10030", name:"Mathematics for Business",                               credits:5, files:[] },
+              { code:"ECON10720", name:"Microeconomics for Business",                            credits:5, files:[] },
+              { code:"MIS10050",  name:"Digital Technologies in Business",                       credits:5, files:[] },
+              { code:"MIS10090",  name:"Data Analysis for Decision Makers",                      credits:5, files:[] },
+            ]},
+            { label:"Law Core", modules:[
+              { code:"LAW10050", name:"Constitutional Law: Institutional Framework",             credits:5, files:[] },
+              { code:"LAW10340", name:"Contract: Formation",                                     credits:5, files:[] },
+              { code:"LAW10420", name:"Legal and Professional Skills",                           credits:5, files:[] },
+              { code:"LAW10060", name:"Constitutional Law: Fundamental Rights",                  credits:5, files:[] },
+              { code:"LAW10350", name:"Contract: Vitiating Factors and Remedies",               credits:5, files:[] },
+              { code:"LAW10360", name:"General Introduction to the Irish Legal System",          credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Finance, marketing, analytics + EU and criminal law.", sections:[
+            { label:"Business Core", modules:[
+              { code:"FIN20010",  name:"Principles of Finance",                                  credits:5, files:[] },
+              { code:"MIS20070",  name:"Digital Society",                                        credits:5, files:[] },
+              { code:"MKT20020",  name:"Marketing: Firms, Customers & Society",                 credits:5, files:[] },
+              { code:"ACC10040",  name:"Financial Accounting 1",                                 credits:5, files:[] },
+              { code:"MIS20010",  name:"Business Analytics",                                     credits:5, files:[] },
+            ]},
+            { label:"Law Core", modules:[
+              { code:"LAW10190", name:"Negligence and Related Matters",                          credits:5, files:[] },
+              { code:"LAW20330", name:"EU Constitutional Law",                                   credits:5, files:[] },
+              { code:"LAW20390", name:"Criminal Liability",                                      credits:5, files:[] },
+              { code:"LAW10200", name:"Nominate Torts",                                          credits:5, files:[] },
+              { code:"LAW20340", name:"EU Economic Law",                                         credits:5, files:[] },
+              { code:"LAW20400", name:"Criminal Offences and Defences",                         credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Accounting, people management, global business + law electives.", sections:[
+            { label:"Business Core", modules:[
+              { code:"ACC20010",  name:"Financial Accounting 2",                                 credits:5, files:[] },
+              { code:"HRM30120",  name:"People at Work",                                         credits:5, files:[] },
+              { code:"ACC20020",  name:"Management Accounting",                                  credits:5, files:[] },
+              { code:"BMGT20140", name:"Global Business",                                        credits:5, files:[] },
+              { code:"BMGT20150", name:"Sustainable Operations & Supply Chain Management",      credits:5, files:[] },
+            ]},
+            { label:"Law Options (choose 5)", modules:[
+              { code:"LAW20370", name:"Property Law I",                                          credits:5, files:[] },
+              { code:"LAW20380", name:"Property Law II",                                         credits:5, files:[] },
+              { code:"LAW37580", name:"Research Module",                                         credits:10, files:[] },
+              { code:"LAW30060", name:"Equity: History, Doctrines, Remedies",                   credits:5, files:[] },
+              { code:"LAW30170", name:"Employment Law: the Contract of Employment",             credits:5, files:[] },
+              { code:"LAW30240", name:"Administrative Law: Grounds of Review",                  credits:5, files:[] },
+              { code:"LAW30610", name:"Commercial Law",                                          credits:5, files:[] },
+              { code:"LAW30730", name:"Public International Law",                               credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Business strategy, company law core + law and business options.", sections:[
+            { label:"Business Core", modules:[
+              { code:"BMGT30300", name:"Business Strategy",                                     credits:5, files:[] },
+              { code:"BMGT30340", name:"New Venture Creation & Development",                    credits:5, files:[] },
+            ]},
+            { label:"Law Core", modules:[
+              { code:"LAW20090", name:"Company Law I",                                          credits:5, files:[] },
+              { code:"LAW20170", name:"Company Law II",                                         credits:5, files:[] },
+            ]},
+            { label:"Law Options (choose 1+)", modules:[
+              { code:"LAW30640", name:"Competition Law in Practice",                            credits:5, files:[] },
+              { code:"LAW30550", name:"Legal History: The History of Public Law",               credits:5, files:[] },
+              { code:"LAW30010", name:"Banking Law",                                            credits:5, files:[] },
+              { code:"LAW30180", name:"Jurisprudence",                                          credits:5, files:[] },
+              { code:"LAW37750", name:"Financial Services in Ireland",                          credits:5, files:[] },
+              { code:"LAW37610", name:"Medical Law",                                            credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+    ]
+  });
+
+
   // ─── DEGREE BUCKETS ──────────────────────────────────────────────────────
   const DEG_BUCKETS = [
     { id:"Business",   label:"Business",          full:"Business & Finance",                    icon:"💼", color:"#2563eb",
@@ -14933,7 +15263,7 @@
         { name:'Biology, Mathematics & Education',                         url:'https://www.ucd.ie/courses/biology-mathematics-education' },
         { name:'Biomedical Engineering',                                   schoolsCourseId:'ucd-biomedical-engineering',      cao:'DN150', url:'https://www.ucd.ie/courses/bsc-biomedical-engineering' },
         { name:'Biomedical, Health & Life Sciences',                       schoolsCourseId:'ucd-bhls',                       cao:'DN440', url:'https://www.ucd.ie/courses/bsc-biomedical-health-and-life-sciences' },
-        { name:'Business & Law',                                           url:'https://www.ucd.ie/courses/bbl-business-and-law' },
+        { name:'Business & Law',                                           schoolsCourseId:'ucd-business-law',    cao:'DN610', url:'https://www.ucd.ie/courses/bbl-business-and-law' },
         { name:'Cell & Molecular Biology',                                 schoolsCourseId:'ucd-cell-molecular-biology',      cao:'DN200', url:'https://www.ucd.ie/courses/cell-molecular-biology' },
         { name:'Celtic Civilisation',                                      url:'https://www.ucd.ie/courses/ba-celtic-civilisation' },
         { name:'Chemical & Bioprocess Engineering',                        schoolsCourseId:'ucd-chemical-bioprocess-engineering', cao:'DN150', url:'https://www.ucd.ie/courses/be-chemical-bioprocess-engineering' },
@@ -14992,12 +15322,12 @@
         { name:'Italian',                                                  url:'https://www.ucd.ie/courses/ba-italian' },
         { name:'Landscape Architecture',                                   schoolsCourseId:'ucd-landscape-architecture',     cao:'DN120', url:'https://www.ucd.ie/courses/bsc-landscape-architecture' },
         { name:'Languages, Linguistics & Cultures',                        url:'https://www.ucd.ie/courses/ba-languages-linguistics-cultures' },
-        { name:'Law (BCL)',                                                url:'https://www.ucd.ie/courses/bcl-law' },
+        { name:'Law (BCL)',                                                schoolsCourseId:'ucd-bcl',             cao:'DN600', url:'https://www.ucd.ie/courses/bcl-law' },
         { name:'Law Dual Degree – BCL/Maîtrise',                          url:'https://www.ucd.ie/courses/law-dual-degree-bclmaitrise' },
         { name:'Law with Economics',                                       schoolsCourseId:'ucd-law-economics',        cao:'DN600', url:'https://www.ucd.ie/courses/bcl-law-with-economics' },
-        { name:'Law with French Law',                                      url:'https://www.ucd.ie/courses/bcl-law-with-french-law' },
+        { name:'Law with French Law',                                      schoolsCourseId:'ucd-law-french',      cao:'DN600', url:'https://www.ucd.ie/courses/bcl-law-with-french-law' },
         { name:'Law with History',                                         url:'https://www.ucd.ie/courses/bcl-law-with-history' },
-        { name:'Law with Irish',                                           url:'https://www.ucd.ie/courses/bcl-law-with-irish' },
+        { name:'Law with Irish',                                           schoolsCourseId:'ucd-law-irish',       cao:'DN600', url:'https://www.ucd.ie/courses/bcl-law-with-irish' },
         { name:'Law with Philosophy',                                      url:'https://www.ucd.ie/courses/bcl-law-with-philosophy' },
         { name:'Law with Politics',                                        url:'https://www.ucd.ie/courses/bcl-law-with-politics' },
         { name:'Law with Social Justice',                                  url:'https://www.ucd.ie/courses/bcl-law-with-social-justice' },
