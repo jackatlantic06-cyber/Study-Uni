@@ -16921,6 +16921,1320 @@
   });
 
 
+SCHOOLS.push({
+  id:"uog-science-school", name:"University of Galway College of Science and Engineering", icon:"🔬", uni:"uog",
+  sub:"University of Galway",
+  courses:[
+    { id:"uog-biomedical-science", name:"BSc Biomedical Science", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"PC1105",name:"Fundamentals of Human Biology",credits:10,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"BM111",name:"Introduction to Biomedical Research",credits:5,files:[]},
+          {code:"CH1101",name:"Fundamentals of Chemistry for Health Sciences",credits:10,files:[]},
+          {code:"PH1103",name:"Physics for Medical and Biomedical Students",credits:10,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"BM1101",name:"Skills for Biomedical Science 1",credits:10,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"AN2101",name:"Cells and Tissues",credits:10,files:[]},
+          {code:"PM208",name:"Fundamental Concepts in Pharmacology",credits:5,files:[]},
+          {code:"PM209",name:"Applied Concepts in Pharmacology",credits:5,files:[]},
+          {code:"SI2101",name:"Introductory Physiology",credits:10,files:[]},
+          {code:"BI208",name:"Protein Structure and Function",credits:5,files:[]},
+          {code:"BO201",name:"Molecular and Cellular Biology",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"AN223",name:"Embryology & Development",credits:5,files:[]},
+          {code:"PM210",name:"Molecular Pharmacology and Signalling",credits:10,files:[]},
+          {code:"BI206",name:"Gene Technologies and Molecular Medicine",credits:5,files:[]},
+          {code:"BI207",name:"Metabolism and Cell Signalling",credits:5,files:[]},
+          {code:"AN226",name:"Systems Histology",credits:5,files:[]},
+          {code:"SI2102",name:"Systems Physiology",credits:10,files:[]},
+          {code:"BM2101",name:"Skills for Biomedical Science 2",credits:10,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"AN326",name:"Neuroanatomy",credits:5,files:[]},
+          {code:"PM311",name:"Introduction to Toxicology",credits:5,files:[]},
+          {code:"BI309",name:"Cell Biology",credits:5,files:[]},
+          {code:"BI319",name:"Molecular Biology",credits:5,files:[]},
+          {code:"SI311",name:"Neurophysiology",credits:5,files:[]},
+          {code:"AN3105",name:"Gross Anatomy I: Upper Limb, Back, Thoracic & Anterior Abdominal Walls",credits:10,files:[]},
+          {code:"ST314",name:"Introduction to Biostatistics",credits:5,files:[]},
+          {code:"BM3101",name:"Research Methods in Biomedical Science",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"AN3106",name:"Gross Anatomy II: Thoracic and Abdominal Cavities",credits:10,files:[]},
+          {code:"BI313",name:"Cell Signalling",credits:5,files:[]},
+          {code:"BI321",name:"Protein Biochemistry",credits:5,files:[]},
+          {code:"PM3101",name:"Pharmacology in Practice",credits:5,files:[]},
+          {code:"BI317",name:"Human Molecular Genetics",credits:5,files:[]},
+          {code:"SI3106",name:"Immunology",credits:5,files:[]},
+          {code:"SI3105",name:"Cardio-Respiratory Physiology",credits:5,files:[]},
+          {code:"BM406",name:"Applications of Biomedical Science",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"BI445",name:"Biomolecules",credits:5,files:[]},
+          {code:"BI448",name:"Modern Biotechnologies",credits:5,files:[]},
+          {code:"BI446",name:"Current Topics in Bioscience",credits:5,files:[]},
+          {code:"SI4103",name:"Integrative Physiology",credits:10,files:[]},
+          {code:"SI4104",name:"Pathophysiology of Disease",credits:10,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"PM434",name:"Molecular Pharmacology & Therapeutics",credits:10,files:[]},
+          {code:"PM433",name:"Drug Development & Emerging Therapies",credits:10,files:[]},
+          {code:"BI447",name:"Literature Review and Presentation",credits:10,files:[]},
+          {code:"SI4106",name:"Therapeutics of Disease",credits:10,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-biotechnology", name:"BSc Biotechnology", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"CH101",name:"Chemistry",credits:15,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"BG1101",name:"Employability for Biotechnology",credits:5,files:[]},
+          {code:"ST2001",name:"Statistics for Data Science 1",credits:5,files:[]},
+          {code:"BG1102",name:"Biotechnology Skills I",credits:10,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"ST2002",name:"Statistics for Data Science 2",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"BG2102",name:"AI and Digital Skills for Biotechnology",credits:5,files:[]},
+          {code:"BI208",name:"Protein Structure and Function",credits:5,files:[]},
+          {code:"BO201",name:"Molecular and Cellular Biology",credits:5,files:[]},
+          {code:"MI202",name:"Laboratory Skills in Microbiology I",credits:5,files:[]},
+          {code:"CH203",name:"Physical Chemistry",credits:5,files:[]},
+          {code:"BG2101",name:"Biotechnology Skills II",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"CH2102",name:"Chemistry for Life Sciences",credits:5,files:[]},
+          {code:"BI206",name:"Gene Technologies and Molecular Medicine",credits:5,files:[]},
+          {code:"BI207",name:"Metabolism and Cell Signalling",credits:5,files:[]},
+          {code:"MI203",name:"Laboratory Skills in Microbiology II",credits:5,files:[]},
+          {code:"MI204",name:"Microbes and the Environment",credits:5,files:[]},
+          {code:"CH202",name:"Organic Chemistry",credits:5,files:[]},
+          {code:"CH205",name:"Analytical & Environmental Chemistry",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"PM208",name:"Fundamental Concepts in Pharmacology",credits:5,files:[]},
+          {code:"MI326",name:"Microbial Metabolic and Molecular Systems",credits:5,files:[]},
+          {code:"MI323",name:"Food and Industrial Microbiology",credits:5,files:[]},
+          {code:"BI319",name:"Molecular Biology",credits:5,files:[]},
+          {code:"BI309",name:"Cell Biology",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"MI322",name:"Environmental Microbiology",credits:5,files:[]},
+          {code:"BI313",name:"Cell Signalling",credits:5,files:[]},
+          {code:"BI317",name:"Human Molecular Genetics",credits:5,files:[]},
+          {code:"MI324",name:"Immunology and Recombinant Techniques",credits:5,files:[]},
+          {code:"BI321",name:"Protein Biochemistry",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"MG529",name:"Introduction to Business",credits:10,files:[]},
+          {code:"BI453",name:"Biochemistry Research Project",credits:15,files:[]},
+          {code:"BI452",name:"Biochemistry Principles and Experimental Design",credits:5,files:[]},
+          {code:"BI448",name:"Modern Biotechnologies",credits:5,files:[]},
+          {code:"BI445",name:"Biomolecules",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"BI449",name:"Molecular and Cellular Biology",credits:5,files:[]},
+          {code:"BI447",name:"Literature Review and Presentation",credits:10,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-environmental-science", name:"BSc Environmental Science", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"LW3114",name:"Introduction to Law",credits:5,files:[]},
+          {code:"ST2001",name:"Statistics for Data Science 1",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"EV102",name:"Hot Topics in Environmental Science",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"MI202",name:"Laboratory Skills in Microbiology I",credits:5,files:[]},
+          {code:"EV203",name:"Ecological Survey Techniques",credits:5,files:[]},
+          {code:"LW217",name:"Environmental Legislation",credits:5,files:[]},
+          {code:"BPS202",name:"Fundamentals in Aquatic Plant Science",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"ZO209",name:"Vertebrate Zoology",credits:5,files:[]},
+          {code:"MI203",name:"Laboratory Skills in Microbiology II",credits:5,files:[]},
+          {code:"MI204",name:"Microbes and the Environment",credits:5,files:[]},
+          {code:"ZO208",name:"Invertebrate Biology",credits:5,files:[]},
+          {code:"BPS203",name:"Plant Diversity, Physiology & Adaptation",credits:5,files:[]},
+          {code:"EOS2102",name:"The Earth: From Core to Crust",credits:10,files:[]},
+          {code:"EOS2101",name:"Introduction to Fieldskills",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"ST314",name:"Introduction to Biostatistics",credits:5,files:[]},
+          {code:"EV307",name:"Nature Conservation & Habitat Management",credits:5,files:[]},
+          {code:"MI3101",name:"Microbial Genomics",credits:5,files:[]},
+          {code:"BPS3102",name:"Plant Resources and Ecosystems",credits:5,files:[]},
+          {code:"EV3101",name:"Research Design in Environmental Science",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"LW3124",name:"Legislation for Environmental Scientists",credits:5,files:[]},
+          {code:"EV305",name:"Habitat Management Planning",credits:5,files:[]},
+          {code:"MI322",name:"Environmental Microbiology",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"EV420",name:"Project",credits:25,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"EV406",name:"Environmental Science Seminars",credits:5,files:[]},
+          {code:"EV404",name:"Advanced Field Course in Environmental Science",credits:5,files:[]},
+          {code:"EV405",name:"Environmental Impact Assessment",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-financial-maths-econ", name:"BSc Financial Mathematics and Economics", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"CS1101",name:"Introduction to Programming",credits:5,files:[]},
+          {code:"MA180",name:"Mathematics (Honours)",credits:15,files:[]},
+          {code:"EC1108",name:"Skills for Economics I",credits:5,files:[]},
+          {code:"AY104",name:"Introduction to Financial Accounting",credits:5,files:[]},
+          {code:"EC135",name:"Principles of Microeconomics",credits:5,files:[]},
+          {code:"ST1111",name:"Probability Models",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"MA1993",name:"Mathematics of Finance",credits:5,files:[]},
+          {code:"EC136",name:"Principles of Macroeconomics",credits:5,files:[]},
+          {code:"MP191",name:"Mathematical Methods I",credits:5,files:[]},
+          {code:"ST1112",name:"Statistical Methods",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"CS2101",name:"Programming for Science and Finance",credits:5,files:[]},
+          {code:"MP231",name:"Mathematical Methods I",credits:5,files:[]},
+          {code:"EC269",name:"Intermediate Microeconomics",credits:5,files:[]},
+          {code:"MA284",name:"Discrete Mathematics",credits:5,files:[]},
+          {code:"ST2003",name:"Random Variables",credits:5,files:[]},
+          {code:"MA2106",name:"Real Analysis",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"MP232",name:"Mathematical Methods II",credits:5,files:[]},
+          {code:"MA2287",name:"Complex Analysis",credits:5,files:[]},
+          {code:"EC247",name:"Introduction to Financial Economics",credits:5,files:[]},
+          {code:"EC268",name:"Intermediate Macroeconomics",credits:5,files:[]},
+          {code:"MA283",name:"Linear Algebra",credits:5,files:[]},
+          {code:"ST2004",name:"Statistical Inference",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"EC3101",name:"Microeconomics and Public Policy",credits:5,files:[]},
+          {code:"MA3343",name:"Groups",credits:5,files:[]},
+          {code:"ST313",name:"Applied Regression Models",credits:5,files:[]},
+          {code:"EC369",name:"Money and Banking",credits:5,files:[]},
+          {code:"MA341",name:"Metric Spaces",credits:5,files:[]},
+          {code:"MA3991",name:"Actuarial Mathematics: Cashflow Models",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"EC362",name:"Economics of Financial Markets",credits:5,files:[]},
+          {code:"MP491",name:"Non Linear Systems",credits:5,files:[]},
+          {code:"EC3102",name:"Macroeconomics and Public Policy",credits:5,files:[]},
+          {code:"MA342",name:"Topology",credits:5,files:[]},
+          {code:"MP307",name:"Modelling II",credits:5,files:[]},
+          {code:"AY314",name:"Business Finance II",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"MA490",name:"Measure Theory",credits:5,files:[]},
+          {code:"MA385",name:"Numerical Analysis I",credits:5,files:[]},
+          {code:"ST413",name:"Statistical Modelling",credits:5,files:[]},
+          {code:"MA3992",name:"Actuarial Mathematics: Life Contingencies 1",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"MA495",name:"Actuarial Mathematics: Life Contingencies II",credits:5,files:[]},
+          {code:"CS4423",name:"Networks",credits:5,files:[]},
+          {code:"MA418",name:"Differential Equations with Financial Derivatives",credits:5,files:[]},
+          {code:"EC4100",name:"Derivatives and Risk Management",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-marine-science", name:"BSc Marine Science", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"PH101",name:"Physics",credits:15,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"CH101",name:"Chemistry",credits:15,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"EOS213",name:"Introduction to Ocean Science",credits:10,files:[]},
+          {code:"BPS202",name:"Fundamentals in Aquatic Plant Science",credits:5,files:[]},
+          {code:"ZO2102",name:"Invertebrate Zoology: Form and Function",credits:10,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"MI204",name:"Microbes and the Environment",credits:5,files:[]},
+          {code:"ZO2103",name:"Vertebrate Zoology: Form and Function",credits:10,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, note:"Year 3 module listings not published on course page", sections:[
+        { label:"Year 3", modules:[]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"MR4101",name:"Field Skills in Marine Science",credits:5,files:[]},
+          {code:"MR409",name:"Marine Science Essay and Presentation",credits:5,files:[]},
+          {code:"MR413",name:"Research Project",credits:20,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"BPS405",name:"Ecology and Conservation Issues",credits:5,files:[]},
+          {code:"EOS409",name:"Biophysical Interactions in the Ocean",credits:5,files:[]},
+          {code:"EOS4101",name:"Earth Observation and Remote Sensing",credits:5,files:[]},
+          {code:"BPS4104",name:"Primary Productivity and Global Change",credits:5,files:[]},
+          {code:"MI4102",name:"Microbial Ecosystems Services & Systems Biology",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-ohs-management", name:"BSc Occupational Health and Safety Management", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"PH1105",name:"Environmental Health and Safety Practice 1",credits:5,files:[]},
+          {code:"PS3108",name:"Design Thinking",credits:5,files:[]},
+          {code:"LW3114",name:"Introduction to Law",credits:5,files:[]},
+          {code:"CP102",name:"Chemistry/Physics",credits:15,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"ST314",name:"Introduction to Biostatistics",credits:5,files:[]},
+          {code:"AG2102",name:"Farm Safety and On-Farm Risk Assessment",credits:5,files:[]},
+          {code:"MG524",name:"Management",credits:5,files:[]},
+          {code:"BO2101",name:"Scientific Writing Skills",credits:5,files:[]},
+          {code:"SI2103",name:"Fundamentals of Physiology",credits:5,files:[]},
+          {code:"PH328",name:"Physics of the Environment I",credits:5,files:[]},
+          {code:"LW214",name:"Health & Safety Law",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"PH2118",name:"Environmental Health and Safety Practice 2",credits:5,files:[]},
+          {code:"AN225",name:"Human Gross Anatomy",credits:5,files:[]},
+          {code:"ME5105",name:"Fundamentals of Operations Engineering",credits:5,files:[]},
+          {code:"ME2102",name:"Safety System Design",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"PH338",name:"Properties of Materials",credits:5,files:[]},
+          {code:"PH3107",name:"Ergonomic Design of the Work Environment",credits:5,files:[]},
+          {code:"HP1200",name:"Occupational Health and Wellbeing",credits:10,files:[]},
+          {code:"PH3103",name:"Exposure Science",credits:10,files:[]},
+          {code:"LW3117",name:"Environmental, Health and Safety Law",credits:5,files:[]},
+          {code:"IE446",name:"Project Management",credits:5,files:[]},
+          {code:"IE448",name:"Safety & Construction",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"BSS2104",name:"Introduction to Sustainability 2",credits:5,files:[]},
+          {code:"ME353",name:"Quality Systems",credits:5,files:[]},
+          {code:"ME3104",name:"Introduction to Regulatory Affairs in Manufacturing",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"HP1300",name:"Professional Experience Programme",credits:20,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"MG3118",name:"HRM & Decent Work",credits:5,files:[]},
+          {code:"PH4110",name:"OHM Final Year Project",credits:15,files:[]},
+          {code:"HP304",name:"Research Methods for Occupational Health & Safety",credits:5,files:[]},
+          {code:"IE323",name:"Information Systems Ergonomics",credits:5,files:[]},
+          {code:"ME572",name:"Human Reliability",credits:5,files:[]},
+          {code:"HP440",name:"Health & the Work Environment",credits:10,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-earth-ocean-sciences", name:"BSc Earth and Ocean Sciences", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"EOS1102",name:"Earth and Ocean Sciences for Society",credits:5,files:[]},
+          {code:"CH101",name:"Chemistry",credits:15,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"PH101",name:"Physics",credits:15,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"EOS2102",name:"The Earth: From Core to Crust",credits:10,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"EOS213",name:"Introduction to Ocean Science",credits:10,files:[]},
+          {code:"TI255",name:"Earth Surface Landforms and Processes",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"EOS2101",name:"Introduction to Fieldskills",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"EOS305",name:"Introduction to Applied Field Hydrology",credits:5,files:[]},
+          {code:"EOS3103",name:"Palaeontology and Evolution",credits:5,files:[]},
+          {code:"EOS323",name:"Sediments and the Sedimentary Record",credits:5,files:[]},
+          {code:"EOS3107",name:"Minerals, Magmas, and Metamorphism",credits:10,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"EOS3101",name:"Geological Structures and Maps",credits:5,files:[]},
+          {code:"EOS3102",name:"Environmental and Marine Geophysical Remote Sensing",credits:5,files:[]},
+          {code:"EOS303",name:"Ocean Dynamics",credits:5,files:[]},
+          {code:"EOS304",name:"Aquatic Geochemistry",credits:5,files:[]},
+          {code:"EOS3104",name:"Fieldskills Training",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"EOS402",name:"Global Change",credits:5,files:[]},
+          {code:"EOS4107",name:"Advanced Fieldskills",credits:5,files:[]},
+          {code:"EOS403",name:"Final Year Project",credits:20,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"EOS422",name:"Sedimentary Basins",credits:5,files:[]},
+          {code:"EOS4101",name:"Earth Observation and Remote Sensing",credits:5,files:[]},
+          {code:"EOS407",name:"History of Life",credits:5,files:[]},
+          {code:"EOS409",name:"Biophysical Interactions in the Ocean",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-biopharm-chemistry", name:"BSc Biopharmaceutical Chemistry", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"CH101",name:"Chemistry",credits:15,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"PH101",name:"Physics",credits:15,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"CH203",name:"Physical Chemistry",credits:5,files:[]},
+          {code:"CH204",name:"Inorganic Chemistry",credits:5,files:[]},
+          {code:"BO201",name:"Molecular and Cellular Biology",credits:5,files:[]},
+          {code:"BI208",name:"Protein Structure and Function",credits:5,files:[]},
+          {code:"PM208",name:"Fundamental Concepts in Pharmacology",credits:5,files:[]},
+          {code:"PM209",name:"Applied Concepts in Pharmacology",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"CH202",name:"Organic Chemistry",credits:5,files:[]},
+          {code:"CH205",name:"Analytical & Environmental Chemistry",credits:5,files:[]},
+          {code:"BI206",name:"Gene Technologies and Molecular Medicine",credits:5,files:[]},
+          {code:"BI207",name:"Metabolism and Cell Signalling",credits:5,files:[]},
+          {code:"CH3101",name:"Computers and Chemical Research",credits:10,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"CH332",name:"Drug Design & Drug Discovery",credits:10,files:[]},
+          {code:"CH333",name:"Experimental Chemistry I",credits:5,files:[]},
+          {code:"CH311",name:"Organic Chemistry",credits:5,files:[]},
+          {code:"CH326",name:"Analytical Chemistry & Molecular Structure",credits:5,files:[]},
+          {code:"BI319",name:"Molecular Biology",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"CH334",name:"Experimental Chemistry II",credits:5,files:[]},
+          {code:"CH307",name:"Inorganic Chemistry",credits:5,files:[]},
+          {code:"CH313",name:"Physical Chemistry",credits:5,files:[]},
+          {code:"BI321",name:"Protein Biochemistry",credits:5,files:[]},
+          {code:"BI317",name:"Human Molecular Genetics",credits:5,files:[]},
+          {code:"CH3103",name:"Validation in the Pharmaceutical and Medical Devices Industry",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"CH4117",name:"Work Placement",credits:20,files:[]},
+          {code:"CH4116",name:"Biopharmaceutical Chemistry Dissertation",credits:10,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"CH438",name:"Bioorganic Chemistry",credits:5,files:[]},
+          {code:"CH4113",name:"Organic Chemistry",credits:5,files:[]},
+          {code:"CH445",name:"Advanced Inorganic Chemistry",credits:5,files:[]},
+          {code:"CH4115",name:"Biopharmaceutical Chemistry",credits:5,files:[]},
+          {code:"CH432",name:"Physical Chemistry II",credits:5,files:[]},
+          {code:"CH446",name:"Bioinorganic and Inorganic Medicinal Chemistry",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-mathematical-science", name:"BSc Mathematical Science", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"MA180",name:"Mathematics (Honours)",credits:15,files:[]},
+          {code:"MP180",name:"Applied Mathematics",credits:15,files:[]},
+          {code:"ST1111",name:"Probability Models",credits:5,files:[]},
+          {code:"CS1101",name:"Introduction to Programming",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"ST1112",name:"Statistical Methods",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"MA284",name:"Discrete Mathematics",credits:5,files:[]},
+          {code:"MP236",name:"Mechanics I",credits:5,files:[]},
+          {code:"ST2003",name:"Random Variables",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"MA283",name:"Linear Algebra",credits:5,files:[]},
+          {code:"MP237",name:"Mechanics II",credits:5,files:[]},
+          {code:"ST2004",name:"Statistical Inference",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"MA341",name:"Metric Spaces",credits:5,files:[]},
+          {code:"MA385",name:"Numerical Analysis I",credits:5,files:[]},
+          {code:"MA3343",name:"Groups",credits:5,files:[]},
+          {code:"ST313",name:"Applied Regression Models",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"MA342",name:"Topology",credits:5,files:[]},
+          {code:"MA378",name:"Numerical Analysis II",credits:5,files:[]},
+          {code:"MP307",name:"Modelling II",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"MM4000",name:"Final Year Project",credits:10,files:[]},
+          {code:"MA490",name:"Measure Theory",credits:5,files:[]},
+          {code:"ST413",name:"Statistical Modelling",credits:5,files:[]},
+          {code:"MA3992",name:"Actuarial Mathematics: Life Contingencies 1",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"MA495",name:"Actuarial Mathematics: Life Contingencies II",credits:5,files:[]},
+          {code:"MA418",name:"Differential Equations with Financial Derivatives",credits:5,files:[]},
+          {code:"CS4423",name:"Networks",credits:5,files:[]},
+          {code:"MA482",name:"Functional Analysis",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-physics", name:"BSc Physics", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"MP180",name:"Applied Mathematics",credits:15,files:[]},
+          {code:"PH1104",name:"Frontiers in Physics",credits:15,files:[]},
+          {code:"PH101",name:"Physics",credits:15,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"MP231",name:"Mathematical Methods I",credits:5,files:[]},
+          {code:"PH2113",name:"Energy, Forces and Motion in Physics",credits:5,files:[]},
+          {code:"PH2114",name:"Modern Physics",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"MP232",name:"Mathematical Methods II",credits:5,files:[]},
+          {code:"PH2115",name:"Electricity and Magnetism",credits:5,files:[]},
+          {code:"PH2116",name:"Computational Physics",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"MP345",name:"Mathematical Methods I",credits:5,files:[]},
+          {code:"PH333",name:"Quantum Physics",credits:5,files:[]},
+          {code:"PH337",name:"Thermal Physics",credits:5,files:[]},
+          {code:"PH338",name:"Properties of Materials",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"PH335",name:"Nuclear & Particle Physics",credits:5,files:[]},
+          {code:"MP346",name:"Mathematical Methods II",credits:5,files:[]},
+          {code:"PH331",name:"Wave Optics",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"PH4101",name:"Physics Problem Solving",credits:5,files:[]},
+          {code:"PH4102",name:"Final Year Project",credits:20,files:[]},
+          {code:"PH421",name:"Quantum Mechanics",credits:5,files:[]},
+          {code:"PH422",name:"Solid State Physics",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"PH425",name:"Lasers and Spectroscopy",credits:5,files:[]},
+          {code:"PH424",name:"Electromagnetism and Special Relativity",credits:5,files:[]},
+          {code:"MP365",name:"Fluid Mechanics",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-genetics-genomics", name:"BSc Genetics and Genomics", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"CS1101",name:"Introduction to Programming",credits:5,files:[]},
+          {code:"CH101",name:"Chemistry",credits:15,files:[]},
+          {code:"MA180",name:"Mathematics (Honours)",credits:15,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"BI1101",name:"Introduction to Genetics & Genomics",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"BI1103",name:"Genetics and Genomics: Research and Communication",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"BI208",name:"Protein Structure and Function",credits:5,files:[]},
+          {code:"BO201",name:"Molecular and Cellular Biology",credits:5,files:[]},
+          {code:"BO202",name:"Evolution and the Tree of Life",credits:5,files:[]},
+          {code:"MI202",name:"Laboratory Skills in Microbiology I",credits:5,files:[]},
+          {code:"ST2001",name:"Statistics for Data Science 1",credits:5,files:[]},
+          {code:"MA215",name:"Mathematical Molecular Biology I",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"BI2101",name:"Genetics and Genomics II",credits:5,files:[]},
+          {code:"BI206",name:"Gene Technologies and Molecular Medicine",credits:5,files:[]},
+          {code:"MI204",name:"Microbes and the Environment",credits:5,files:[]},
+          {code:"ST2002",name:"Statistics for Data Science 2",credits:5,files:[]},
+          {code:"PAB2101",name:"AgriBiosciences",credits:5,files:[]},
+          {code:"BI2102",name:"Genetics and Genomics: Seminars and Essays",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"MI3101",name:"Microbial Genomics",credits:5,files:[]},
+          {code:"BI319",name:"Molecular Biology",credits:5,files:[]},
+          {code:"BI309",name:"Cell Biology",credits:5,files:[]},
+          {code:"ZO317",name:"Evolutionary Biology",credits:5,files:[]},
+          {code:"MA5111",name:"Genomics Data Analysis I",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"MA3103",name:"Introduction to Bioinformatics",credits:5,files:[]},
+          {code:"MA5112",name:"Genomics Data Analysis II",credits:5,files:[]},
+          {code:"BI317",name:"Human Molecular Genetics",credits:5,files:[]},
+          {code:"BI3102",name:"The Dynamic Genome",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"MA4103",name:"Machine Learning and Deep Learning for Genomics",credits:5,files:[]},
+          {code:"BI446",name:"Current Topics in Bioscience",credits:5,files:[]},
+          {code:"BI448",name:"Modern Biotechnologies",credits:5,files:[]},
+          {code:"BI453",name:"Biochemistry Research Project",credits:15,files:[]},
+          {code:"MA5106",name:"Medical Genomics 1",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"BI429",name:"Advanced Chromosome Biology",credits:5,files:[]},
+          {code:"BI447",name:"Literature Review and Presentation",credits:10,files:[]},
+          {code:"MA5107",name:"Medical Genomics II",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-agricultural-science", name:"BSc Agricultural Science", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"CH101",name:"Chemistry",credits:15,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"PH101",name:"Physics",credits:15,files:[]},
+          {code:"AG1101",name:"Introduction to Agricultural Science",credits:5,files:[]},
+          {code:"DEV1102",name:"Introduction to Sustainable Agriculture",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"DEV1100",name:"Introduction to Sustainable Development I",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"AG2103",name:"Animal Health, Welfare and Quality Assurance",credits:5,files:[]},
+          {code:"AG2101",name:"Livestock Animal Nutrition",credits:5,files:[]},
+          {code:"BO2101",name:"Scientific Writing Skills",credits:5,files:[]},
+          {code:"AG2102",name:"Farm Safety and On-Farm Risk Assessment",credits:5,files:[]},
+          {code:"TI2102",name:"Introduction to GIS",credits:10,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"DEV2101",name:"Sustainable Agriculture",credits:5,files:[]},
+          {code:"AG4103",name:"Agronomy of Crop Production",credits:5,files:[]},
+          {code:"MI204",name:"Microbes and the Environment",credits:5,files:[]},
+          {code:"AG2104",name:"Animal Breeding and Reproductive Physiology",credits:5,files:[]},
+          {code:"PAB2101",name:"AgriBiosciences",credits:5,files:[]},
+          {code:"DEV2100",name:"Comparative Rural Business Development",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"DEV3100",name:"Farm Financial Management and Planning",credits:5,files:[]},
+          {code:"AG3101",name:"Grassland & Forage Production",credits:5,files:[]},
+          {code:"PAB3101",name:"Soil Science",credits:5,files:[]},
+          {code:"PAB3102",name:"AgriBiosciences for Sustainable Global Development",credits:5,files:[]},
+          {code:"PAB4108",name:"Food Systems and Climate Change",credits:5,files:[]},
+          {code:"AG3105",name:"Farm Diversification Seminar Series",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"AG3104",name:"Farm Practice and Performance Benchmarking",credits:10,files:[]},
+          {code:"AG3103",name:"Agri-food Placement",credits:20,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"AG4106",name:"Resilient Farm Planning",credits:15,files:[]},
+          {code:"AG4105",name:"Animal Systems III (Sheep, Pigs & Poultry)",credits:5,files:[]},
+          {code:"AG4101",name:"Animal Systems I (Dairy)",credits:5,files:[]},
+          {code:"AG4102",name:"Animal Systems II (Beef)",credits:5,files:[]},
+          {code:"PAB4103",name:"Climate Change, Plants & Agriculture",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"AG2105",name:"Farming for a Circular Bioeconomy",credits:5,files:[]},
+          {code:"MI4107",name:"Microbiomes Underpinning Agriculture",credits:5,files:[]},
+          {code:"PAB3103",name:"Plant and Agricultural Genetics",credits:5,files:[]},
+          {code:"PAB4104",name:"Plant and Agri-Biotechnologies",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-zoology", name:"BSc Zoology", years:[
+      { year:1, credits:60, note:"New programme launching September 2026", sections:[
+        { label:"Semester 1", modules:[
+          {code:"BO101",name:"Biology",credits:15,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semesters 3-4", modules:[
+          {code:"BO201",name:"Molecular and Cell Biology",credits:5,files:[]},
+          {code:"BO202",name:"Evolution and the Tree of Life",credits:5,files:[]},
+          {code:"ZO208",name:"Invertebrate Biology",credits:5,files:[]},
+          {code:"ZO209",name:"Vertebrate Zoology",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"ZO317",name:"Evolutionary Biology",credits:5,files:[]},
+          {code:"ZO415",name:"Biometry",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"ZO320",name:"Concepts in Population and Community Ecology",credits:5,files:[]},
+          {code:"ZO315",name:"Applied Ecology",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"ZO417",name:"Marine and Coastal Ecology",credits:5,files:[]},
+          {code:"ZO418",name:"Phylogenetics and Conservation",credits:5,files:[]},
+          {code:"ZO4102",name:"Biostatistics in Natural Science",credits:5,files:[]},
+          {code:"ZO425",name:"Literature Review",credits:10,files:[]},
+          {code:"ZO4101",name:"Final Year Project",credits:20,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"ZO4103",name:"Animals in Captivity",credits:5,files:[]},
+          {code:"ZO416",name:"Integrative Zoology",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-computer-science", name:"BSc Computer Science and Information Technology", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"CT1114",name:"Web Development",credits:5,files:[]},
+          {code:"CT1112",name:"Professional Skills I",credits:5,files:[]},
+          {code:"CT101",name:"Computing Systems",credits:10,files:[]},
+          {code:"CT102",name:"Algorithms & Information Systems",credits:10,files:[]},
+          {code:"CT103",name:"Programming",credits:10,files:[]},
+          {code:"EE130",name:"Fundamentals of Electrical & Electronic Engineering I",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"PH150",name:"Introduction to Physics",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"CT216",name:"Software Engineering I",credits:10,files:[]},
+          {code:"CT2106",name:"Object-Oriented Programming",credits:5,files:[]},
+          {code:"CT230",name:"Database Systems I",credits:5,files:[]},
+          {code:"CT2111",name:"Computer Organisation and Operating Systems",credits:5,files:[]},
+          {code:"MA284",name:"Discrete Mathematics",credits:5,files:[]},
+          {code:"ST2001",name:"Statistics for Data Science 1",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"CT2108",name:"Networks and Data Communications 1",credits:5,files:[]},
+          {code:"CT2109",name:"Object Oriented Programming: Data Structures and Algorithms",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"CT3539",name:"Professional Experience for Computer Science",credits:15,files:[]},
+          {code:"CT326",name:"Programming III",credits:10,files:[]},
+          {code:"CT3538",name:"PEP Learning & Professional Development",credits:5,files:[]},
+          {code:"CT3532",name:"Database Systems 2",credits:5,files:[]},
+          {code:"CT3531",name:"Networks and Data Communications 2",credits:5,files:[]},
+          {code:"CT5106",name:"Software Engineering 2",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"CT3112",name:"Professional Skills",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"CT417",name:"Software Engineering III",credits:5,files:[]},
+          {code:"CT4101",name:"Machine Learning",credits:5,files:[]},
+          {code:"CT413",name:"Final Year Project",credits:10,files:[]},
+          {code:"CT4111",name:"Generative AI for Software Engineering",credits:5,files:[]},
+          {code:"CT4109",name:"Image Processing and Computer Vision",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"CT4104",name:"Computer and Network Security",credits:5,files:[]},
+          {code:"CT421",name:"Artificial Intelligence",credits:5,files:[]},
+          {code:"CT4108",name:"Distributed Systems",credits:5,files:[]},
+          {code:"CS4423",name:"Networks",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-science-general", name:"BSc Science (General Entry)", years:[
+      { year:1, credits:60, note:"Students choose 4 subjects from: Biology, Mathematics, Applied Mathematics, Physics, Chemistry, Computing and Data Science. Year 2-4 modules depend on chosen pathways.", sections:[
+        { label:"Semester 1 (choose 4 subjects)", modules:[
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"MA161",name:"Mathematical Studies",credits:15,files:[]},
+          {code:"MA180",name:"Mathematics (Honours)",credits:15,files:[]},
+          {code:"PH101",name:"Physics",credits:15,files:[]},
+          {code:"CH101",name:"Chemistry",credits:15,files:[]},
+          {code:"MP180",name:"Applied Mathematics",credits:15,files:[]},
+          {code:"CS1102",name:"Computing and Data Science",credits:15,files:[]}
+        ]}
+      ]}
+    ]}
+  ]
+});
+
+SCHOOLS.push({
+  id:"uog-arts-school-2", name:"University of Galway College of Arts, Social Sciences & Celtic Studies", icon:"🎭", uni:"uog",
+  sub:"University of Galway",
+  courses:[
+    { id:"uog-ba-human-rights", name:"BA with Human Rights", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"HR101",name:"Introduction to Human Rights I",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"HR102",name:"Introduction to Human Rights II",credits:5,files:[]},
+          {code:"HR103",name:"Introduction to Human Rights III",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"HR2101",name:"The Regional Protection of Human Rights",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"HR2103",name:"Contemporary Issues in Human Rights Protection",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"LW3160",name:"Introduction to Law",credits:5,files:[]},
+          {code:"LW503",name:"European Union Law I",credits:5,files:[]},
+          {code:"LW3127",name:"International Protection of Human Rights I",credits:5,files:[]},
+          {code:"LW357",name:"Environmental Law I",credits:5,files:[]}
+        ]},
+        { label:"Semester 6 (choose pathway)", modules:[
+          {code:"HR3101",name:"Applied Human Rights Project",credits:30,files:[]},
+          {code:"HR302",name:"Internship with HR Organisation",credits:30,files:[]},
+          {code:"HR304",name:"Study Abroad / Erasmus",credits:30,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-drama-theatre", name:"BA Drama, Theatre and Performance Studies", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"DT1174",name:"Theatre Tech and Digital Media",credits:5,files:[]},
+          {code:"DT1115",name:"Introduction to Acting",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"DT1173",name:"Performance Analysis",credits:5,files:[]},
+          {code:"DT1172",name:"Theatre Histories",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"DT2118",name:"Musical Theatre in Context",credits:5,files:[]},
+          {code:"DT2120",name:"Stagecraft: Theatre Design and Practice",credits:5,files:[]},
+          {code:"DT2119",name:"Modern Drama and Contemporary World Theatre and Film",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"DT2117",name:"Socially Engaged Theatre and Performance",credits:5,files:[]},
+          {code:"DT2115",name:"Writing for Stage and Screen",credits:5,files:[]},
+          {code:"DT2121",name:"Theatre and Language",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5-6 (choose pathway)", modules:[
+          {code:"TP312",name:"International Theatre Experience",credits:30,files:[]},
+          {code:"DT3301",name:"Acting, Directing and Production Practices",credits:15,files:[]},
+          {code:"DT3109",name:"Theatre Internship 1",credits:30,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"DT4402",name:"Practice-Based Research Methods",credits:10,files:[]},
+          {code:"DT4403",name:"Arts and Cultural Producing",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"DT4107",name:"Practice-based Research Project",credits:10,files:[]},
+          {code:"DT4404",name:"Professional Development for Drama, Theatre and Performance",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-journalism", name:"BA Journalism", years:[
+      { year:1, credits:60, note:"Module codes not published on course page", sections:[
+        { label:"Semester 1", modules:[
+          {code:"",name:"This is the News",credits:0,files:[]},
+          {code:"",name:"Introduction to Media and Communication",credits:0,files:[]},
+          {code:"",name:"History of Media",credits:0,files:[]},
+          {code:"",name:"Audio Fundamentals",credits:0,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"",name:"Cross Platform Reporting",credits:0,files:[]},
+          {code:"",name:"Power without Responsibility",credits:0,files:[]},
+          {code:"",name:"Digital Society and Platform Studies",credits:0,files:[]},
+          {code:"",name:"Broadcasting (TV and Radio)",credits:0,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"",name:"Multiplatform Journalism",credits:0,files:[]},
+          {code:"",name:"The Contemporary Irish Media",credits:0,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"",name:"Final Project",credits:0,files:[]},
+          {code:"",name:"Data Journalism",credits:0,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-cumarsaid-gaeilge", name:"BA Cumarsáid agus Gaeilge", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"CG1105",name:"Bunús na hIriseoireachta",credits:5,files:[]},
+          {code:"CG1100",name:"Scéalaíocht Dhigiteach",credits:5,files:[]},
+          {code:"CG1107",name:"Cleachtas Léirithe na Meán 1",credits:5,files:[]},
+          {code:"NG1105",name:"An Teanga Bheo",credits:10,files:[]},
+          {code:"NG1111",name:"An Ghaeilge, an Pobal agus an Stát",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"CG1104",name:"Na Meáin agus an tSochaí",credits:5,files:[]},
+          {code:"NG1110",name:"An Áit agus a Scéal",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"CG2101",name:"Craoltóireacht",credits:5,files:[]},
+          {code:"CG2106",name:"Cleachtas Léirithe na Meán 2",credits:5,files:[]},
+          {code:"NG2100",name:"An tSochtheangeolaíocht",credits:5,files:[]},
+          {code:"NG2101",name:"An Gearrscéal sa Ghaeilge",credits:5,files:[]},
+          {code:"NG227",name:"Teanga Na Nua-Ghaeilge I",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"CG2100",name:"Anailís na Meán",credits:5,files:[]},
+          {code:"CG2103",name:"Teicneolaíochtaí na Meán",credits:5,files:[]},
+          {code:"NG228",name:"Teanga Na Nua-Ghaeilge II",credits:5,files:[]},
+          {code:"NG2115",name:"Litríocht na hImirce",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5 (Gaeltacht)", modules:[
+          {code:"GA3317",name:"Tionscnamh Gaeltachta",credits:5,files:[]},
+          {code:"GA3316",name:"Gnéithe de Chultúr Dúchais na Gaeltachta",credits:5,files:[]},
+          {code:"GA3315",name:"Pobal na Gaeltachta sa lá atá inniu ann",credits:5,files:[]},
+          {code:"GA3312",name:"Saibhriú agus Scileanna Teanga",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"CG3103",name:"Socrúchán Oibre (Work Placement)",credits:30,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"GA413",name:"Geilleagar na Meán",credits:5,files:[]},
+          {code:"CG4102",name:"Lucht Féachana na Meán",credits:5,files:[]},
+          {code:"GA402",name:"Iriseoireacht Fheidhmeach",credits:5,files:[]},
+          {code:"NG4101",name:"Filí agus Filíocht na Gaeilge, 700-1900",credits:5,files:[]},
+          {code:"NG4113",name:"Teanga Na Nua-Ghaeilge III",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"CG4101",name:"Dúshláin na Meán Sóisialta",credits:5,files:[]},
+          {code:"CG4103",name:"Tionscadal Deireadh Céime",credits:5,files:[]},
+          {code:"NG4109",name:"Próslitríocht na Gaeilge",credits:5,files:[]},
+          {code:"NG4105",name:"An Béaloideas - An Scéalaíocht",credits:5,files:[]},
+          {code:"NG4114",name:"Teanga Na Nua-Ghaeilge IV",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-film-digital-media", name:"BA Film and Digital Media", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"FMSK1100",name:"Digital Design",credits:5,files:[]},
+          {code:"FS101",name:"Introduction to Film Studies I: Form",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"FM1100",name:"Introduction to Visual Culture",credits:5,files:[]},
+          {code:"FS1100",name:"Introduction to Filmmaking",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"FM2103",name:"Creative Media Design and Development",credits:5,files:[]},
+          {code:"FM2100",name:"Introduction to Screenwriting",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"FM2101",name:"Introduction to Film Theory",credits:5,files:[]},
+          {code:"FS304",name:"Digital Storytelling",credits:5,files:[]},
+          {code:"FM2102",name:"Film Practice 2",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"FM3104",name:"Online Media Production",credits:10,files:[]},
+          {code:"FM3109",name:"Film Practice 3",credits:5,files:[]}
+        ]},
+        { label:"Semester 6 (choose pathway)", modules:[
+          {code:"FM3101",name:"Study Abroad for Film",credits:30,files:[]},
+          {code:"FM3103",name:"Work Placement for Film & Digital Media",credits:30,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"FM4105",name:"Film Practice 4",credits:5,files:[]},
+          {code:"FM4106",name:"Documentary and Creative Non-Fiction on Screen",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"FM4110",name:"Television Drama",credits:5,files:[]},
+          {code:"FM4102",name:"Creative Programming and Exploratory Computing",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-global-languages", name:"BA Global Languages", years:[
+      { year:1, credits:60, note:"Students choose a language pathway: French, German, Spanish, Italian, Gaeilge, or Translation", sections:[
+        { label:"Semester 1 (French pathway)", modules:[
+          {code:"FR1100",name:"Introduction to French Language and Culture",credits:15,files:[]}
+        ]},
+        { label:"Semester 1 (German pathway)", modules:[
+          {code:"GR1100",name:"German Language and Culture (Advanced)",credits:15,files:[]},
+          {code:"GR1101",name:"German Language and Culture (Beginners)",credits:15,files:[]}
+        ]},
+        { label:"Semester 1 (Spanish pathway)", modules:[
+          {code:"SH1100",name:"Intensive Beginners Spanish Language and Culture",credits:15,files:[]},
+          {code:"SH1101",name:"Intermediate Spanish Language and Culture",credits:15,files:[]}
+        ]},
+        { label:"Semester 1 (Gaeilge pathway)", modules:[
+          {code:"NG1105",name:"An Teanga Bheo",credits:10,files:[]},
+          {code:"NG1111",name:"An Ghaeilge, an Pobal agus an Stát",credits:5,files:[]}
+        ]},
+        { label:"Semester 1 (Translation pathway)", modules:[
+          {code:"LN105",name:"Bunscileanna Aistriúcháin",credits:5,files:[]},
+          {code:"LN1103",name:"Bunscileanna Gramadaí",credits:10,files:[]},
+          {code:"LN103",name:"Gnéithe den Aistriúchán",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, note:"Full-year study abroad / immersion in chosen language", sections:[
+        { label:"Year 3 Abroad", modules:[
+          {code:"FR3501",name:"French Language Immersion Year Abroad",credits:30,files:[]},
+          {code:"GR3501",name:"German Language Immersion Year Abroad",credits:30,files:[]},
+          {code:"SH3501",name:"Spanish Language Immersion Year Abroad",credits:30,files:[]},
+          {code:"NG3530",name:"Gaeilge Language Immersion Year Abroad",credits:30,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-music", name:"BA Music", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"MU1100",name:"Introduction to Music History",credits:5,files:[]},
+          {code:"MU1101",name:"Traditional Music in Ireland: 1792 to the New Millennium",credits:5,files:[]},
+          {code:"MU1102",name:"Music Practice 1",credits:5,files:[]},
+          {code:"MU1104",name:"Music Theory",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"MU1103",name:"Music Theory and Critical Listening",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"MU2100",name:"Harmony and Keyboard Harmony",credits:5,files:[]},
+          {code:"IS2105",name:"Popular Music, Cultural Identities and Ireland",credits:5,files:[]},
+          {code:"MU2102",name:"Introduction to Composition",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"MU2103",name:"Music Practice 2",credits:5,files:[]},
+          {code:"MU2107",name:"Introduction to Sound Technology",credits:5,files:[]},
+          {code:"MU2108",name:"Music History 2",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"MU3103",name:"Scoring and Arranging",credits:10,files:[]},
+          {code:"MU3107",name:"Introduction to Musicology",credits:10,files:[]}
+        ]},
+        { label:"Semester 6 (choose pathway)", modules:[
+          {code:"MU3104",name:"Music Study Abroad",credits:30,files:[]},
+          {code:"MU3106",name:"Music Work Placement",credits:30,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"MU4111",name:"Popular Music as Social Practice",credits:5,files:[]},
+          {code:"MU4100",name:"Music Extended Essay",credits:10,files:[]},
+          {code:"MU4103",name:"Composition Portfolio",credits:10,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"MU4104",name:"Music History 3",credits:5,files:[]},
+          {code:"MU4107",name:"Opera",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-ba-government", name:"BA Government (Politics, Economics and Law)", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"EC135",name:"Principles of Microeconomics",credits:5,files:[]},
+          {code:"EC1108",name:"Skills for Economics I",credits:5,files:[]},
+          {code:"LW3160",name:"Introduction to Law",credits:5,files:[]},
+          {code:"LW3109",name:"Tort Law",credits:10,files:[]},
+          {code:"SP1120",name:"Practicing Politics",credits:5,files:[]},
+          {code:"SP1125",name:"Introduction to Politics",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"EC136",name:"Principles of Macroeconomics",credits:5,files:[]},
+          {code:"EC1109",name:"Skills for Economics II",credits:5,files:[]},
+          {code:"LW126",name:"Legal Skills",credits:5,files:[]},
+          {code:"SP1127",name:"Practicing Government",credits:5,files:[]},
+          {code:"SP1124",name:"Introduction to Government",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"EC269",name:"Intermediate Microeconomics",credits:5,files:[]},
+          {code:"LW228",name:"Constitutional Law II",credits:5,files:[]},
+          {code:"LW202",name:"Contract I",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"EC259",name:"Economics of Public Policy",credits:5,files:[]},
+          {code:"EC268",name:"Intermediate Macroeconomics",credits:5,files:[]},
+          {code:"LW227",name:"Constitutional Law I",credits:5,files:[]},
+          {code:"SP2124",name:"Introduction to Policymaking",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"SP4133",name:"Perspectives on Government",credits:5,files:[]},
+          {code:"SP3204",name:"Policymaking, Lobbying and Advocacy",credits:5,files:[]},
+          {code:"SP3203",name:"Professional Skills for Government and Policy",credits:10,files:[]}
+        ]},
+        { label:"Semester 6 (choose pathway)", modules:[
+          {code:"SP3210",name:"Work Placement for Government and Policy",credits:30,files:[]},
+          {code:"SP3216",name:"Study Abroad: Government and Policy Studies",credits:30,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"EC3101",name:"Microeconomics and Public Policy",credits:5,files:[]},
+          {code:"LW4103",name:"Administrative Law I",credits:5,files:[]},
+          {code:"LW503",name:"European Union Law I",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"EC3102",name:"Macroeconomics and Public Policy",credits:5,files:[]},
+          {code:"LW4104",name:"Administrative Law II",credits:5,files:[]},
+          {code:"LW504",name:"European Union Law II",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-ba-education-cs-maths", name:"BA Education (Computer Science and Mathematical Studies)", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"ED109",name:"Principles of Second-Level Mathematics",credits:5,files:[]},
+          {code:"ED1103",name:"Philosophy and History of Irish Education",credits:5,files:[]},
+          {code:"ED1000",name:"Preparing to Teach",credits:10,files:[]},
+          {code:"MA131",name:"Mathematical Skills",credits:5,files:[]},
+          {code:"MA133",name:"Analysis and Algebra 1",credits:5,files:[]},
+          {code:"CT1101",name:"Programming I",credits:5,files:[]},
+          {code:"CT1100",name:"Computer Systems",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"ED117",name:"Introduction to Educational Sciences",credits:10,files:[]},
+          {code:"MA135",name:"Analysis and Algebra 2",credits:5,files:[]},
+          {code:"CT1102",name:"Programming II",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"ED292",name:"Practical Teaching Programme 2",credits:15,files:[]},
+          {code:"ED2004",name:"Methodologies 1",credits:5,files:[]},
+          {code:"ED2003",name:"Curriculum & Assessment",credits:5,files:[]},
+          {code:"MA211",name:"Calculus I",credits:5,files:[]},
+          {code:"CT2101",name:"Object Oriented Programming I",credits:5,files:[]},
+          {code:"CT2105",name:"Web-based Information Systems",credits:5,files:[]},
+          {code:"ST2001",name:"Statistics for Data Science 1",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"ED2007",name:"Methodologies 2: Computer Science",credits:5,files:[]},
+          {code:"CT2102",name:"Object Oriented Programming II",credits:5,files:[]},
+          {code:"MA283",name:"Linear Algebra",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"ED305",name:"Psychology, Sociology & Catering for Diversity",credits:10,files:[]},
+          {code:"ED3002",name:"Practical Teaching Programme 3",credits:15,files:[]},
+          {code:"MA313",name:"Linear Algebra I",credits:5,files:[]},
+          {code:"CT230",name:"Database Systems I",credits:5,files:[]},
+          {code:"MA284",name:"Discrete Mathematics",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"ED3003",name:"Research Dissertation Part 1",credits:5,files:[]},
+          {code:"CT2103",name:"Systems Analysis & Design",credits:5,files:[]},
+          {code:"CT2104",name:"Web Application Development",credits:5,files:[]},
+          {code:"ST2002",name:"Statistics for Data Science 2",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"ED413",name:"Block Teaching Practice",credits:20,files:[]},
+          {code:"ED4001",name:"Research Dissertation Part 2",credits:10,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"MA212",name:"Calculus II",credits:5,files:[]},
+          {code:"MA334",name:"Geometry",credits:5,files:[]},
+          {code:"CT411",name:"Multi-Media Development",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-geography-geosystems", name:"BSc Geography and Geosystems", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"MA161",name:"Mathematical Studies",credits:15,files:[]},
+          {code:"BO101",name:"Biology",credits:15,files:[]},
+          {code:"CP102",name:"Chemistry/Physics",credits:15,files:[]},
+          {code:"TI1103",name:"Geography in Action",credits:5,files:[]},
+          {code:"TI150",name:"Principles of Human Geography",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"TI151",name:"Principles of Physical Geography",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"ST2001",name:"Statistics for Data Science 1",credits:5,files:[]},
+          {code:"LW217",name:"Environmental Legislation",credits:5,files:[]},
+          {code:"TI235",name:"Biogeography",credits:5,files:[]},
+          {code:"TI255",name:"Earth Surface Landforms and Processes",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"ST2002",name:"Statistics for Data Science 2",credits:5,files:[]},
+          {code:"EOS2102",name:"The Earth: From Core to Crust",credits:10,files:[]},
+          {code:"TI248",name:"Coastal Environments",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"TI2102",name:"Introduction to GIS",credits:10,files:[]},
+          {code:"TI335",name:"Research Project Design & Development",credits:5,files:[]},
+          {code:"BSS2103",name:"Introduction to Sustainability 1",credits:5,files:[]},
+          {code:"GCS2100",name:"Geographic Data Analysis",credits:5,files:[]},
+          {code:"GCS3101",name:"Professional Pathways for Geographers",credits:5,files:[]}
+        ]},
+        { label:"Semester 6 (choose pathway)", modules:[
+          {code:"TI3501",name:"Work Placement for Geographers",credits:30,files:[]},
+          {code:"TI3502",name:"Research Placement for Geographers",credits:30,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"TI3129",name:"Dissertation in Geography and Geosystems",credits:20,files:[]},
+          {code:"EOS305",name:"Introduction to Applied Field Hydrology",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"TI311",name:"Advanced GIS",credits:5,files:[]},
+          {code:"EOS303",name:"Ocean Dynamics",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-global-media", name:"BA Global Media", years:[
+      { year:1, credits:60, note:"Module codes not published on course page", sections:[
+        { label:"Semester 1-2", modules:[
+          {code:"",name:"Introduction to Media and Communications",credits:0,files:[]},
+          {code:"",name:"Digital Literacy",credits:0,files:[]},
+          {code:"",name:"Popular Culture Media and Society",credits:0,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3-4", modules:[
+          {code:"",name:"Understanding Media Audiences",credits:0,files:[]},
+          {code:"",name:"Power without Responsibility",credits:0,files:[]},
+          {code:"",name:"Podcasting, Video and Multimedia Storytelling",credits:0,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7-8", modules:[
+          {code:"",name:"Advanced Media Production",credits:0,files:[]},
+          {code:"",name:"Global Media Innovation",credits:0,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-gaeilge-aistriuchain", name:"BA Gaeilge agus Léann an Aistriúcháin", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"NG1111",name:"An Ghaeilge, an Pobal agus an Stát",credits:5,files:[]},
+          {code:"NG1105",name:"An Teanga Bheo",credits:10,files:[]},
+          {code:"LN103",name:"Gnéithe den Aistriúchán",credits:5,files:[]},
+          {code:"LN105",name:"Bunscileanna Aistriúcháin",credits:5,files:[]},
+          {code:"LN1103",name:"Bunscileanna Gramadaí",credits:10,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"NG1110",name:"An Áit agus a Scéal",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"NG2101",name:"An Gearrscéal sa Ghaeilge",credits:5,files:[]},
+          {code:"NG2100",name:"An tSochtheangeolaíocht",credits:5,files:[]},
+          {code:"NG227",name:"Teanga Na Nua-Ghaeilge I",credits:5,files:[]},
+          {code:"LN205",name:"Stair an Aistriúcháin in Éirinn",credits:5,files:[]},
+          {code:"LN203",name:"Gramadach agus Litriú na Gaeilge I",credits:5,files:[]},
+          {code:"LN201",name:"Aistriúchán Feidhmeach Téacsanna I",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"NG228",name:"Teanga Na Nua-Ghaeilge II",credits:5,files:[]},
+          {code:"NG2115",name:"Litríocht na hImirce",credits:5,files:[]},
+          {code:"LN204",name:"Aistriúchán Feidhmeach Téacsanna II",credits:5,files:[]},
+          {code:"LN207",name:"Cruinneas agus Saibhriú Teanga",credits:5,files:[]},
+          {code:"LN308",name:"Téarmeolaíocht",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Year 3 Work Placement", modules:[
+          {code:"GLA303",name:"Socrúchán Oibre",credits:60,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"NG4113",name:"Teanga Na Nua-Ghaeilge III",credits:5,files:[]},
+          {code:"NG4101",name:"Filí agus Filíocht na Gaeilge, 700-1900",credits:5,files:[]},
+          {code:"LN303",name:"Aistriúchán Feidhmeach Téacsanna 3",credits:5,files:[]},
+          {code:"LN305",name:"Eagarthóireacht agus Léamh Profaí",credits:5,files:[]},
+          {code:"LN302",name:"Gramadach agus Litriú na Gaeilge 2",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"NG4114",name:"Teanga Na Nua-Ghaeilge IV",credits:5,files:[]},
+          {code:"NG4105",name:"An Béaloideas - An Scéalaíocht",credits:5,files:[]},
+          {code:"NG4109",name:"Próslitríocht na Gaeilge",credits:5,files:[]},
+          {code:"LN3101",name:"Gnó an Aistriúcháin / Fotheidealú",credits:5,files:[]},
+          {code:"LN3102",name:"Tionscadal Aistriúcháin",credits:10,files:[]}
+        ]}
+      ]}
+    ]}
+  ]
+});
+
   // ─── DEGREE BUCKETS ──────────────────────────────────────────────────────
   const DEG_BUCKETS = [
     { id:"Business",   label:"Business",          full:"Business & Finance",                    icon:"💼", color:"#2563eb",
@@ -17102,28 +18416,28 @@
       live: true,
       courses: [
         { name:'Pharmacy',                                                              cao:'GY505', school:'',                                                          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/pharmacy.html' },
-        { name:'Bachelor of Science (Zoology)',                                         cao:'GY323', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/zoology.html' },
+        { name:'Bachelor of Science (Zoology)',                                         cao:'GY323', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/zoology.html', schoolsCourseId:'uog-zoology' },
         { name:'Bachelor of Science (Speech and Language Therapy)',                     cao:'GY503', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/speech-and-language-therapy.html' },
         { name:'Bachelor of Science (Social Sciences and Sustainability)',               cao:'GY123', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/social-sciences-sustainability.html', schoolsCourseId:'uog-social-sciences' },
         { name:'Bachelor of Science (Psychology)',                                      cao:'GY104', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/psychology.html', schoolsCourseId:'uog-psychology' },
         { name:'Bachelor of Science (Project and Construction Management)',              cao:'GY410', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/project-and-construction-management.html', schoolsCourseId:'uog-pcm' },
         { name:'Bachelor of Science (Podiatric Medicine)',                               cao:'GY504', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/podiatric-medicine.html' },
-        { name:'Bachelor of Science (Physics)',                                          cao:'GY320', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/physics.html' },
+        { name:'Bachelor of Science (Physics)',                                          cao:'GY320', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/physics.html', schoolsCourseId:'uog-physics' },
         { name:'Bachelor of Science (Occupational Therapy)',                             cao:'GY502', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/occupational-therapy.html' },
-        { name:'Bachelor of Science (Occupational Health and Safety Management)',        cao:'GY313', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/occupational-health-and-safety-management.html' },
-        { name:'Bachelor of Science (Mathematical Science)',                             cao:'GY319', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/mathematical-science.html' },
-        { name:'Bachelor of Science (Marine Science)',                                   cao:'GY310', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/marine-science.html' },
-        { name:'Bachelor of Science (Geography and Geosystems)',                         cao:'GY134', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/geography-and-geosystems.html' },
-        { name:'Bachelor of Science (Genetics and Genomics)',                            cao:'GY321', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/genetics-and-genomics.html' },
-        { name:'Bachelor of Science (Financial Mathematics and Economics)',               cao:'GY309', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/financial-mathematics-and-economics.html' },
-        { name:'Bachelor of Science (Environmental Science)',                            cao:'GY308', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/environmental-science.html' },
-        { name:'Bachelor of Science (Earth and Ocean Sciences)',                         cao:'GY314', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/earth-and-ocean-sciences.html' },
-        { name:'Bachelor of Science (Computer Science and Information Technology)',      cao:'GY350', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html' },
-        { name:'Bachelor of Science (Biotechnology)',                                    cao:'GY304', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/biotechnology.html' },
-        { name:'Bachelor of Science (Biopharmaceutical Chemistry)',                      cao:'GY318', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/biopharmaceutical-chemistry.html' },
-        { name:'Bachelor of Science (Biomedical Science)',                               cao:'GY303', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/biomedical-science.html' },
-        { name:'Bachelor of Science (Agricultural Science)',                             cao:'GY322', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/agricultural-science.html' },
-        { name:'Bachelor of Science',                                                    cao:'GY301', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/science.html' },
+        { name:'Bachelor of Science (Occupational Health and Safety Management)',        cao:'GY313', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/occupational-health-and-safety-management.html', schoolsCourseId:'uog-ohs-management' },
+        { name:'Bachelor of Science (Mathematical Science)',                             cao:'GY319', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/mathematical-science.html', schoolsCourseId:'uog-mathematical-science' },
+        { name:'Bachelor of Science (Marine Science)',                                   cao:'GY310', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/marine-science.html', schoolsCourseId:'uog-marine-science' },
+        { name:'Bachelor of Science (Geography and Geosystems)',                         cao:'GY134', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/geography-and-geosystems.html', schoolsCourseId:'uog-geography-geosystems' },
+        { name:'Bachelor of Science (Genetics and Genomics)',                            cao:'GY321', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/genetics-and-genomics.html', schoolsCourseId:'uog-genetics-genomics' },
+        { name:'Bachelor of Science (Financial Mathematics and Economics)',               cao:'GY309', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/financial-mathematics-and-economics.html', schoolsCourseId:'uog-financial-maths-econ' },
+        { name:'Bachelor of Science (Environmental Science)',                            cao:'GY308', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/environmental-science.html', schoolsCourseId:'uog-environmental-science' },
+        { name:'Bachelor of Science (Earth and Ocean Sciences)',                         cao:'GY314', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/earth-and-ocean-sciences.html', schoolsCourseId:'uog-earth-ocean-sciences' },
+        { name:'Bachelor of Science (Computer Science and Information Technology)',      cao:'GY350', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/computer-science-and-information-technology.html', schoolsCourseId:'uog-computer-science' },
+        { name:'Bachelor of Science (Biotechnology)',                                    cao:'GY304', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/biotechnology.html', schoolsCourseId:'uog-biotechnology' },
+        { name:'Bachelor of Science (Biopharmaceutical Chemistry)',                      cao:'GY318', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/biopharmaceutical-chemistry.html', schoolsCourseId:'uog-biopharm-chemistry' },
+        { name:'Bachelor of Science (Biomedical Science)',                               cao:'GY303', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/biomedical-science.html', schoolsCourseId:'uog-biomedical-science' },
+        { name:'Bachelor of Science (Agricultural Science)',                             cao:'GY322', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/agricultural-science.html', schoolsCourseId:'uog-agricultural-science' },
+        { name:'Bachelor of Science',                                                    cao:'GY301', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/science.html', schoolsCourseId:'uog-science-general' },
         { name:'Bachelor of Nursing Science (Mental Health)',                            cao:'GY516', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/mental-health-nursing.html' },
         { name:'Bachelor of Nursing Science (General) Galway and Portiuncula',          cao:'GY515', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/general-nursing.html' },
         { name:'Bachelor of Medicine (MB) of Surgery (BCh) and of Obstetrics (BAO)',   cao:'GY501', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/medicine.html' },
@@ -17136,21 +18450,21 @@
         { name:'Bachelor of Commerce',                                                   cao:'GY201', school:'College of Business, Public Policy & Law',                   url:'https://www.universityofgalway.ie/courses/undergraduate-courses/commerce.html', schoolsCourseId:'uog-bcom' },
         { name:'Bachelor of Business Studies in Global Luxury & Experience Management', cao:'GY263', school:'',                                                           url:'https://www.universityofgalway.ie/courses/undergraduate-courses/' },
         { name:'Bachelor of Business Studies (International Hotel Management)',          cao:'GY261', school:'',                                                           url:'https://www.universityofgalway.ie/courses/undergraduate-courses/business-studies-hotel-management.html' },
-        { name:'Bachelor of Arts with Human Rights',                                     cao:'GY113', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-human-rights.html' },
-        { name:'Bachelor of Arts Government (Politics, Economics and Law)',               cao:'GY132', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-government.html' },
-        { name:'Bachelor of Arts Education (Computer Science and Mathematical Studies)', cao:'GY133', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-education-computer-science.html' },
-        { name:'Bachelor of Arts (Music)',                                               cao:'GY130', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-music.html' },
+        { name:'Bachelor of Arts with Human Rights',                                     cao:'GY113', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-human-rights.html', schoolsCourseId:'uog-ba-human-rights' },
+        { name:'Bachelor of Arts Government (Politics, Economics and Law)',               cao:'GY132', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-government.html', schoolsCourseId:'uog-ba-government' },
+        { name:'Bachelor of Arts Education (Computer Science and Mathematical Studies)', cao:'GY133', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-education-computer-science.html', schoolsCourseId:'uog-ba-education-cs-maths' },
+        { name:'Bachelor of Arts (Music)',                                               cao:'GY130', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-music.html', schoolsCourseId:'uog-music' },
         { name:'Bachelor of Arts (Mathematics and Education)',                           cao:'GY109', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-mathematics-education.html' },
-        { name:'Bachelor of Arts (Journalism)',                                          cao:'GY119', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/journalism.html' },
+        { name:'Bachelor of Arts (Journalism)',                                          cao:'GY119', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/journalism.html', schoolsCourseId:'uog-journalism' },
         { name:'Bachelor of Arts (Joint-Honours)',                                       cao:'GY101', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts.html', schoolsCourseId:'uog-arts-joint-honours' },
         { name:'Bachelor of Arts (History)',                                             cao:'GY105', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-history.html' },
-        { name:'Bachelor of Arts (Global Media)',                                        cao:'GY135', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/global-media.html' },
-        { name:'Bachelor of Arts (Global Languages)',                                    cao:'GY128', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-global-languages.html' },
+        { name:'Bachelor of Arts (Global Media)',                                        cao:'GY135', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/global-media.html', schoolsCourseId:'uog-global-media' },
+        { name:'Bachelor of Arts (Global Languages)',                                    cao:'GY128', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-global-languages.html', schoolsCourseId:'uog-global-languages' },
         { name:'Bachelor of Arts (Global Experience)',                                   cao:'GY129', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-global-experience.html' },
-        { name:'Bachelor of Arts (Gaeilge agus Léann an Aistriúcháin)',                 cao:'GY136', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/gaeilge-agus-leann-an-aistricain.html' },
-        { name:'Bachelor of Arts (Film & Digital Media)',                                cao:'GY127', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/film-digital-media.html' },
+        { name:'Bachelor of Arts (Gaeilge agus Léann an Aistriúcháin)',                 cao:'GY136', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/gaeilge-agus-leann-an-aistricain.html', schoolsCourseId:'uog-gaeilge-aistriuchain' },
+        { name:'Bachelor of Arts (Film & Digital Media)',                                cao:'GY127', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/film-digital-media.html', schoolsCourseId:'uog-film-digital-media' },
         { name:'Bachelor of Arts (English and Creative Writing)',                        cao:'GY111', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/english-creative-writing.html', schoolsCourseId:'uog-english-creative-writing' },
-        { name:'Bachelor of Arts (Drama, Theatre, and Performance Studies)',             cao:'GY118', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/drama-theatre-performance-studies.html' },
+        { name:'Bachelor of Arts (Drama, Theatre, and Performance Studies)',             cao:'GY118', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/drama-theatre-performance-studies.html', schoolsCourseId:'uog-drama-theatre' },
         { name:"Bachelor of Arts (Children's Studies)",                                  cao:'GY110 ACS', school:'College of Arts, Social Sciences & Celtic Studies',     url:'https://www.universityofgalway.ie/courses/undergraduate-courses/childrens-studies.html' },
         { name:'Bachelor of Arts (Child, Youth and Family: Policy and Practice)',        cao:'GY137', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/youth-and-family-studies.html', schoolsCourseId:'uog-child-youth-family' },
         { name:"Bachelor of Arts (Arts with Children's Studies)",                        cao:'GY110 AWC', school:'College of Arts, Social Sciences & Celtic Studies',     url:'https://www.universityofgalway.ie/courses/undergraduate-courses/arts-with-childrens-studies.html' },
@@ -17166,7 +18480,7 @@
         { name:'Law (BCL) and Business',                                                 cao:'GY250', school:'College of Business, Public Policy & Law',                   url:'https://www.universityofgalway.ie/courses/undergraduate-courses/law-business.html', schoolsCourseId:'uog-law-business' },
         { name:'Law (BCL), Criminology and Criminal Justice',                            cao:'GY254', school:'College of Business, Public Policy & Law',                   url:'https://www.universityofgalway.ie/courses/undergraduate-courses/criminology-and-criminal-justice.html', schoolsCourseId:'uog-law-criminology' },
         { name:'Bachelor of Commerce (Accounting)',                                      cao:'GY207', school:'College of Business, Public Policy & Law',                   url:'https://www.universityofgalway.ie/courses/undergraduate-courses/commerce-accounting.html', schoolsCourseId:'uog-bcom' },
-        { name:'Bachelor of Arts (Cumarsáid agus Gaeilge)',                             cao:'GY122', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/cumarsaid-agus-gaeilge.html' },
+        { name:'Bachelor of Arts (Cumarsáid agus Gaeilge)',                             cao:'GY122', school:'College of Arts, Social Sciences & Celtic Studies',          url:'https://www.universityofgalway.ie/courses/undergraduate-courses/cumarsaid-agus-gaeilge.html', schoolsCourseId:'uog-cumarsaid-gaeilge' },
         { name:'Bachelor of Science (Business Information Systems)',                     cao:'GY206', school:'College of Business, Public Policy & Law',                   url:'https://www.universityofgalway.ie/courses/undergraduate-courses/business-information-systems-science.html', schoolsCourseId:'uog-bis' },
         { name:'Bachelor of Midwifery Science',                                          cao:'GY517', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/midwifery-science.html' },
       ],
