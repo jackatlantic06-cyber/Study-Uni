@@ -15208,6 +15208,176 @@
   });
 
 
+  // ─── UCD ARTS, SOCIAL SCIENCES & EDUCATION ───────────────────────────────
+  SCHOOLS.push({
+    id:"ucd-arts-school", name:"UCD College of Arts & Humanities / Social Sciences & Law (Education)", icon:"🎭", uni:"ucd",
+    sub:"University College Dublin",
+    courses:[
+      // ── Arts (BA) Joint Honours ───────────────────────────────────────────
+      {
+        id:"ucd-arts-ba", name:"Arts (BA) Joint Honours", years:[
+          { year:1, credits:60, note:"Stage 1 — Choose two subjects from 26 available across groups A–I. No fixed common core.", sections:[
+            { label:"Available Subjects (choose 2 from different groups)", modules:[
+              { code:"GROUP-A", name:"Art History / Greek & Roman Civilization / Irish Folklore / Linguistics / Portuguese", credits:0, files:[] },
+              { code:"GROUP-B", name:"Greek (Mode B) / History / Music / Statistics",                                        credits:0, files:[] },
+              { code:"GROUP-C", name:"German / Irish Studies / Latin / Mathematics / Spanish",                                credits:0, files:[] },
+              { code:"GROUP-D", name:"English",                                                                               credits:0, files:[] },
+              { code:"GROUP-E", name:"Film Studies / Italian Studies / Modern Irish",                                         credits:0, files:[] },
+              { code:"GROUP-F", name:"Celtic Civilization / Drama Studies / French & Francophone Studies",                    credits:0, files:[] },
+              { code:"GROUP-I", name:"Archaeology / Geography / Information & Communication Studies / Philosophy / Sociology", credits:0, files:[] },
+            ]},
+            { label:"Credit Structure", modules:[
+              { code:"STAGE1-CORE", name:"Stage 1: 55 credits subject core/options + 5 credits elective",                   credits:60, files:[] },
+              { code:"STAGE2-CORE", name:"Stage 2: 50 credits subject core/options + 10 credits elective",                   credits:60, files:[] },
+              { code:"STAGE3-CORE", name:"Stage 3: 50 credits subject core/options + 10 credits elective",                   credits:60, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Subject-specific modules (example: English major shown below).", sections:[
+            { label:"English Major — Core", modules:[
+              { code:"ENG20780", name:"Critical Theory",                                                                      credits:10, files:[] },
+              { code:"ENG20410", name:"Reading Medieval Literature",                                                          credits:5,  files:[] },
+            ]},
+            { label:"English Major — Options A (choose 2+)", modules:[
+              { code:"ENG20450", name:"Writing and Performance in the Age of Shakespeare",                                    credits:5,  files:[] },
+              { code:"ENG20490", name:"Romanticism",                                                                          credits:5,  files:[] },
+              { code:"ENG20430", name:"Modern American Literature",                                                           credits:5,  files:[] },
+              { code:"ENG20440", name:"Reading the Story of Ireland: Irish Literature in English",                            credits:5,  files:[] },
+              { code:"ENG20790", name:"Global 19th Century Literature",                                                       credits:5,  files:[] },
+              { code:"ENG20800", name:"Global Eco-Literature",                                                                credits:5,  files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Subject-specific advanced modules (example: English major shown below).", sections:[
+            { label:"English Major — Options A (choose 2 × 10cr)", modules:[
+              { code:"ENG31930", name:"Irish Fiction After 2010",                                                             credits:10, files:[] },
+              { code:"ENG32050", name:"Reading Joyce",                                                                        credits:10, files:[] },
+              { code:"ENG32070", name:"Medieval Celluloid",                                                                   credits:10, files:[] },
+              { code:"ENG31940", name:"Global Science Fiction",                                                               credits:10, files:[] },
+              { code:"ENG31980", name:"Women and the Novel in Romantic-era Britain",                                          credits:10, files:[] },
+              { code:"ENG32020", name:"Detecting Fictions: the Crime Novel",                                                  credits:10, files:[] },
+              { code:"ENG32600", name:"Creative Non-Fiction",                                                                 credits:10, files:[] },
+              { code:"ENG31990", name:"Reading Gender and Sexuality",                                                         credits:10, files:[] },
+              { code:"ENG32130", name:"Irish Gothic",                                                                         credits:10, files:[] },
+              { code:"ENG32290", name:"Reading Ulysses",                                                                      credits:10, files:[] },
+              { code:"ENG32920", name:"Making Comics",                                                                        credits:10, files:[] },
+            ]},
+            { label:"English Major — Options B (choose 1 × 5cr)", modules:[
+              { code:"ENG31780", name:"Contemporary European Crime Fiction",                                                  credits:5,  files:[] },
+              { code:"ENG32510", name:"Writing Dublin",                                                                       credits:5,  files:[] },
+              { code:"ENG32520", name:"Ugly Feelings",                                                                        credits:5,  files:[] },
+              { code:"ENG32880", name:"The 'Madwoman' in Literature",                                                        credits:5,  files:[] },
+              { code:"ENG32890", name:"Repair: Literature of Reuse & Renewal",                                               credits:5,  files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── BSc Social Sciences ───────────────────────────────────────────────
+      {
+        id:"ucd-social-sciences", name:"BSc Social Sciences", years:[
+          { year:1, credits:60, note:"Stage 1 — DN700 entry: foundations of sociology, research design.", sections:[
+            { label:"Sociology Core", modules:[
+              { code:"SOC10010", name:"Theorising Society: Foundations of Sociological Thought",  credits:5, files:[] },
+              { code:"SOC10020", name:"Introduction to Sociology",                                 credits:5, files:[] },
+              { code:"SOC10070", name:"Sociological Analysis and Research Design",                 credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Sociological theory, quantitative methods, options.", sections:[
+            { label:"Sociology Core", modules:[
+              { code:"SOC20100", name:"Sociological Theory Level 2",                               credits:5, files:[] },
+              { code:"SOC20260", name:"Quantitative Research Methods",                             credits:5, files:[] },
+            ]},
+            { label:"Sociology Options (choose 1+)", modules:[
+              { code:"SOC20220", name:"Social Theory and Social Media",                            credits:5, files:[] },
+              { code:"SOC20250", name:"Sociology of Nations",                                      credits:5, files:[] },
+              { code:"SOC20360", name:"Sociology of the Environment",                              credits:5, files:[] },
+              { code:"SOC20380", name:"Global Developments",                                       credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Sociology options: inequality, violence, gender, environment, culture.", sections:[
+            { label:"Sociology Options (choose 3+ — min 15cr)", modules:[
+              { code:"SOC30070", name:"Sociology of Education",                                    credits:5,  files:[] },
+              { code:"SOC30330", name:"Currents in Contemporary Theory",                           credits:5,  files:[] },
+              { code:"SOC30440", name:"Sociology of the Body",                                     credits:5,  files:[] },
+              { code:"SOC30690", name:"Art & Social Change",                                      credits:5,  files:[] },
+              { code:"SOC30790", name:"Alcohol, Drugs and Society",                               credits:5,  files:[] },
+              { code:"SOC30800", name:"Sociology of Empire",                                       credits:5,  files:[] },
+              { code:"SOC30270", name:"Sociology of War and Violence",                             credits:5,  files:[] },
+              { code:"SOC30350", name:"Work and Social Stratification",                            credits:5,  files:[] },
+              { code:"SOC30570", name:"Solidarities, Power and Difference",                        credits:10, files:[] },
+              { code:"SOC30810", name:"Gender, Health & Society",                                 credits:5,  files:[] },
+              { code:"SOC30820", name:"Sociology of Risk and Disaster",                            credits:5,  files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Advanced sociology options (same pool as Stage 3) + dissertation.", sections:[
+            { label:"Sociology Options (choose 3+ — min 15cr)", modules:[
+              { code:"SOC30070", name:"Sociology of Education",                                    credits:5,  files:[] },
+              { code:"SOC30330", name:"Currents in Contemporary Theory",                           credits:5,  files:[] },
+              { code:"SOC30440", name:"Sociology of the Body",                                     credits:5,  files:[] },
+              { code:"SOC30690", name:"Art & Social Change",                                      credits:5,  files:[] },
+              { code:"SOC30270", name:"Sociology of War and Violence",                             credits:5,  files:[] },
+              { code:"SOC30350", name:"Work and Social Stratification",                            credits:5,  files:[] },
+              { code:"SOC30570", name:"Solidarities, Power and Difference",                        credits:10, files:[] },
+              { code:"SOC30810", name:"Gender, Health & Society",                                 credits:5,  files:[] },
+              { code:"SOC30820", name:"Sociology of Risk and Disaster",                            credits:5,  files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── BEd Education (Languages / Gaeilge) ──────────────────────────────
+      {
+        id:"ucd-bed-education", name:"BEd Education (Languages & Gaeilge)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN760 entry: pedagogy, critical thinking, professional placement.", sections:[
+            { label:"Core", modules:[
+              { code:"EDUC10240", name:"Introduction to Language Learning, Pedagogy & Communication",     credits:5,  files:[] },
+              { code:"EDUC10260", name:"Creative Pedagogies, Critical Thinking and Wellbeing in Education", credits:5, files:[] },
+              { code:"EDUC10270", name:"\"What's it for?\" — Socio-Historic Perspectives on Education",   credits:5,  files:[] },
+              { code:"EDUC10180", name:"Irish Childhoods",                                                 credits:5,  files:[] },
+              { code:"EDUC10220", name:"Education for a Sustainable Future",                               credits:5,  files:[] },
+              { code:"EDUC10250", name:"Professional Placement",                                           credits:10, files:[] },
+            ]},
+            { label:"Language Culture Options (choose 1)", modules:[
+              { code:"FR10120",   name:"French Language & Culture I",                                      credits:5,  files:[] },
+              { code:"GER10120",  name:"German Language & Culture I",                                      credits:5,  files:[] },
+              { code:"SPAN10110", name:"Spanish Language & Culture I",                                     credits:5,  files:[] },
+              { code:"PORT10110", name:"Portuguese Language & Culture I",                                  credits:5,  files:[] },
+              { code:"ITAL20240", name:"Italian Language & Culture I",                                     credits:5,  files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Contemporary language pedagogy, inclusive education, extended placement.", sections:[
+            { label:"Core", modules:[
+              { code:"EDUC20030", name:"Key Ideas in Education",                                           credits:5,  files:[] },
+              { code:"EDUC20090", name:"Contemporary Language Pedagogy, Curriculum and Assessment",        credits:5,  files:[] },
+              { code:"EDUC20100", name:"Inclusive Education for Additional Needs",                         credits:5,  files:[] },
+              { code:"EDUC20080", name:"Professional Placement II",                                        credits:20, files:[] },
+            ]},
+            { label:"Language Culture Options (choose 1)", modules:[
+              { code:"FR20020",   name:"French Language IIa",                                              credits:5,  files:[] },
+              { code:"GER20060",  name:"German Language IIa",                                              credits:5,  files:[] },
+              { code:"SPAN20080", name:"Spanish Language IIa",                                             credits:5,  files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Erasmus/Gaeltacht year abroad + digital language pedagogy.", sections:[
+            { label:"Core", modules:[
+              { code:"IR30470",   name:"Erasmus Gaeltachta (study abroad / immersion component)",         credits:30, files:[] },
+              { code:"EDUC30090", name:"Capstone Project Methods",                                         credits:5,  files:[] },
+              { code:"EDUC30100", name:"Digital Technology & Language Pedagogy",                          credits:5,  files:[] },
+              { code:"SLL30210",  name:"Erasmus Exchange Reflection",                                      credits:5,  files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Capstone project, professional teaching placements and methods.", sections:[
+            { label:"Core", modules:[
+              { code:"EDUC30130", name:"Capstone Project",                                                 credits:10, files:[] },
+              { code:"EDUC44270", name:"Professional Placement & Portfolio I",                            credits:5,  files:[] },
+              { code:"EDUC44280", name:"Professional Teaching Methods I",                                  credits:5,  files:[] },
+              { code:"EDUC44290", name:"Professional Placement & Portfolio II",                           credits:10, files:[] },
+              { code:"EDUC44300", name:"Professional Teaching Methods II",                                 credits:10, files:[] },
+            ]},
+          ]},
+        ]
+      },
+    ]
+  });
+
+
   // ─── DEGREE BUCKETS ──────────────────────────────────────────────────────
   const DEG_BUCKETS = [
     { id:"Business",   label:"Business",          full:"Business & Finance",                    icon:"💼", color:"#2563eb",
@@ -15257,6 +15427,7 @@
         { name:'Applied Mathematics, Mathematics & Education',             url:'https://www.ucd.ie/courses/applied-mathematics-education' },
         { name:'Archaeology',                                              url:'https://www.ucd.ie/courses/bsc-archaeology' },
         { name:'Architecture',                                             schoolsCourseId:'ucd-architecture',               cao:'DN100', url:'https://www.ucd.ie/courses/barchsc-architecture' },
+        { name:'Arts (BA) Joint Honours',                                  schoolsCourseId:'ucd-arts-ba',         cao:'DN520', url:'https://www.ucd.ie/courses/ba-arts' },
         { name:'Art History',                                              url:'https://www.ucd.ie/courses/ba-art-history' },
         { name:'Bachelor of Commerce',                                     schoolsCourseId:'ucd-commerce',             cao:'DN650', url:'https://www.ucd.ie/courses/bcomm-commerce' },
         { name:'Biochemistry & Molecular Biology',                         schoolsCourseId:'ucd-biochemistry',               cao:'DN200', url:'https://www.ucd.ie/courses/biochemistry-molecular-biology' },
@@ -15291,7 +15462,7 @@
         { name:'Economics',                                                schoolsCourseId:'ucd-economics-bsc',        cao:'DN710', url:'https://www.ucd.ie/courses/bsc-economics' },
         { name:'Economics & Finance',                                      schoolsCourseId:'ucd-econ-finance',         cao:'DN670', url:'https://www.ucd.ie/courses/bsc-economics-and-finance' },
         { name:'Economics, Mathematics & Statistics',                      schoolsCourseId:'ucd-econ-maths-stats',     cao:'DN700', url:'https://www.ucd.ie/courses/bsc-economics-maths-statistics' },
-        { name:'Education with Gaeilge & Modern Languages',               url:'https://www.ucd.ie/courses/bed-education-with-gaeilge-modern-languages' },
+        { name:'Education with Gaeilge & Modern Languages',               schoolsCourseId:'ucd-bed-education', cao:'DN760', url:'https://www.ucd.ie/courses/bed-education-with-gaeilge-modern-languages' },
         { name:'Electrical/Electronic Engineering',                        schoolsCourseId:'ucd-electrical-electronic-engineering', cao:'DN150', url:'https://www.ucd.ie/courses/bsc-electrical-engineering' },
         { name:'Engineering',                                              schoolsCourseId:'ucd-engineering',                cao:'DN150', url:'https://www.ucd.ie/courses/bsc-engineering' },
         { name:'English',                                                  url:'https://www.ucd.ie/courses/ba-english' },
@@ -15363,7 +15534,7 @@
         { name:'Radiography',                                              schoolsCourseId:'ucd-radiography',         cao:'DN410', url:'https://www.ucd.ie/courses/bsc-radiography' },
         { name:'Social Justice',                                           url:'https://www.ucd.ie/courses/bsc-social-justice' },
         { name:'Social Policy & Sociology',                                url:'https://www.ucd.ie/courses/bsocsc-social-policy-sociology' },
-        { name:'Sociology',                                                url:'https://www.ucd.ie/courses/bsc-sociology' },
+        { name:'Sociology',                                                schoolsCourseId:'ucd-social-sciences', cao:'DN700', url:'https://www.ucd.ie/courses/bsc-sociology' },
         { name:'Spanish',                                                  url:'https://www.ucd.ie/courses/ba-spanish' },
         { name:'Sport & Exercise Management',                              url:'https://www.ucd.ie/courses/bsc-sport-and-exercise-management' },
         { name:'Sport, Health & Exercise Science',                         schoolsCourseId:'ucd-sport-health',        cao:'DN425', url:'https://www.ucd.ie/courses/bsc-sport-health-exercise-science' },
