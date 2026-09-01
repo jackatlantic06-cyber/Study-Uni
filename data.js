@@ -13041,6 +13041,1842 @@
     },
   ];
 
+  // ─── UCD PHYSICAL & CHEMICAL SCIENCES ─────────────────────────────────────
+  SCHOOLS.push({
+    id:"ucd-physsci-school", name:"UCD School of Physics & Chemistry", icon:"⚗️", uni:"ucd",
+    sub:"University College Dublin",
+    courses:[
+      // ── Chemistry ──────────────────────────────────────────────────────────
+      {
+        id:"ucd-chemistry", name:"Chemistry (BSc)", years:[
+          { year:1, credits:60, note:"Science common entry (DN200). Chemistry track: Calculus, Linear Algebra, plus chemistry modules chosen from pool below.", sections:[
+            { label:"Core", modules:[
+              { code:"SCI10010", name:"Principles of Scientific Enquiry",            credits:5, files:[] },
+              { code:"MATH10310", name:"Calculus for Science",                        credits:5, files:[] },
+              { code:"MATH10290", name:"Linear Algebra for Science",                  credits:5, files:[] },
+            ]},
+            { label:"Chemistry modules (choose from pool)", modules:[
+              { code:"CHEM10040", name:"The Molecular World",                          credits:5, files:[] },
+              { code:"CHEM10050", name:"Basis of Organic and Biological Chemistry",    credits:5, files:[] },
+              { code:"CHEM10210", name:"Aspects of Chemical and Environmental Analysis", credits:5, files:[] },
+              { code:"CHEM10240", name:"Coding for the Molecular Sciences",            credits:5, files:[] },
+              { code:"CHEM10100", name:"Aspects of Medicinal Chemistry and Chemical Biology", credits:5, files:[] },
+              { code:"CHEM20100", name:"Basis of Inorganic Chemistry",                credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Science common entry (Stage 2). Core chemistry modules plus electives.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM20040", name:"Structure and Reactivity in Organic Chemistry", credits:5, files:[] },
+              { code:"CHEM20080", name:"The Basis of Physical Chemistry",              credits:5, files:[] },
+              { code:"CHEM20090", name:"Chemistry for Biology",                        credits:5, files:[] },
+              { code:"CHEM20100", name:"Basis of Inorganic Chemistry",                credits:5, files:[] },
+              { code:"CHEM20050", name:"Medicinal Chemistry and Chemical Biology (Level 2)", credits:5, files:[] },
+              { code:"CHEM20110", name:"Environmental & Sustainable Chemistry",        credits:5, files:[] },
+              { code:"CHEM20120", name:"Physical Chemistry (Level 2)",                 credits:5, files:[] },
+              { code:"CHEM20140", name:"Introductory Transition Metal Chemistry",       credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — 10 core modules (50 credits) + 10 credits options.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM30060", name:"Quantum Mechanics and Molecular Spectroscopy",           credits:5, files:[] },
+              { code:"CHEM30110", name:"Instrumental Analysis",                                   credits:5, files:[] },
+              { code:"CHEM30200", name:"Carbonyl Chemistry, Retrosynthesis and Synthetic Methods", credits:5, files:[] },
+              { code:"CHEM30210", name:"Structure Determination and Aromatic Heterocyclic Chemistry", credits:5, files:[] },
+              { code:"CHEM30220", name:"Mechanism, Stereochemistry and Alicyclic Chemistry",      credits:5, files:[] },
+              { code:"CHEM30230", name:"Symmetry and Computational Chemistry",                   credits:5, files:[] },
+              { code:"CHEM30250", name:"Organometallic and Solid State Chemistry",               credits:5, files:[] },
+              { code:"CHEM30310", name:"Soft Matter & Interfacial Chemistry",                    credits:5, files:[] },
+              { code:"CHEM30320", name:"Chemical Thermodynamics & Physical Transformations",     credits:5, files:[] },
+              { code:"CHEM30360", name:"Advanced Transition Metal Chemistry",                    credits:5, files:[] },
+            ]},
+            { label:"Options (choose 2)", modules:[
+              { code:"CHEM30090", name:"Chemistry of Materials",                                 credits:5, files:[] },
+              { code:"CHEM30190", name:"Chemistry of Biomolecules",                              credits:5, files:[] },
+              { code:"CHEM20110", name:"Environmental & Sustainable Chemistry",                  credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Research Project (20 cr) + core modules + options.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM40030", name:"Research Project",                                        credits:20, files:[] },
+              { code:"CHEM40090", name:"Methods in Organic Synthesis 2",                          credits:5, files:[] },
+              { code:"CHEM40110", name:"Advanced Applications of Inorganic Chemistry",            credits:5, files:[] },
+              { code:"CHEM40740", name:"Electrochemistry",                                        credits:5, files:[] },
+              { code:"CHEM40060", name:"Methods in Organic Synthesis",                            credits:5, files:[] },
+              { code:"CHEM40080", name:"Reactivity and Change",                                   credits:5, files:[] },
+              { code:"CHEM41430", name:"Advanced Topics in Physical Chemistry",                   credits:5, files:[] },
+            ]},
+            { label:"Options (choose 2)", modules:[
+              { code:"CHEM40050", name:"Metals in Biology",                                       credits:5, files:[] },
+              { code:"CHEM40870", name:"Nanomaterials Chemistry",                                 credits:5, files:[] },
+              { code:"CHEM40960", name:"Green and Sustainable Chemistry",                         credits:5, files:[] },
+              { code:"CHEM41290", name:"Modern Techniques to Monitor Biomolecules",              credits:5, files:[] },
+              { code:"CHEM40140", name:"Modern Methods and Applications of Catalysis",           credits:5, files:[] },
+              { code:"CHEM40290", name:"Special Topics in Medicinal Chemistry and Chemical Biology", credits:5, files:[] },
+              { code:"CHEM41450", name:"Sustainable Development Chemistry",                      credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Chemistry with Environmental & Sustainable Chemistry ───────────────
+      {
+        id:"ucd-chemistry-env", name:"Chemistry with Environmental & Sustainable Chemistry (BSc)", years:[
+          { year:1, credits:60, note:"Science common entry (DN200) — same as Chemistry BSc Year 1.", sections:[
+            { label:"Core", modules:[
+              { code:"SCI10010", name:"Principles of Scientific Enquiry",            credits:5, files:[] },
+              { code:"MATH10310", name:"Calculus for Science",                        credits:5, files:[] },
+              { code:"MATH10290", name:"Linear Algebra for Science",                  credits:5, files:[] },
+              { code:"CHEM10040", name:"The Molecular World",                          credits:5, files:[] },
+              { code:"CHEM10050", name:"Basis of Organic and Biological Chemistry",    credits:5, files:[] },
+              { code:"CHEM10210", name:"Aspects of Chemical and Environmental Analysis", credits:5, files:[] },
+              { code:"CHEM10240", name:"Coding for the Molecular Sciences",            credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Science common entry Stage 2 — same as Chemistry BSc Year 2.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM20040", name:"Structure and Reactivity in Organic Chemistry", credits:5, files:[] },
+              { code:"CHEM20080", name:"The Basis of Physical Chemistry",              credits:5, files:[] },
+              { code:"CHEM20090", name:"Chemistry for Biology",                        credits:5, files:[] },
+              { code:"CHEM20100", name:"Basis of Inorganic Chemistry",                credits:5, files:[] },
+              { code:"CHEM20050", name:"Medicinal Chemistry and Chemical Biology (Level 2)", credits:5, files:[] },
+              { code:"CHEM20110", name:"Environmental & Sustainable Chemistry",        credits:5, files:[] },
+              { code:"CHEM20120", name:"Physical Chemistry (Level 2)",                 credits:5, files:[] },
+              { code:"CHEM20140", name:"Introductory Transition Metal Chemistry",       credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — same 10 core chemistry modules + environmental options.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM30060", name:"Quantum Mechanics and Molecular Spectroscopy",           credits:5, files:[] },
+              { code:"CHEM30110", name:"Instrumental Analysis",                                   credits:5, files:[] },
+              { code:"CHEM30200", name:"Carbonyl Chemistry, Retrosynthesis and Synthetic Methods", credits:5, files:[] },
+              { code:"CHEM30210", name:"Structure Determination and Aromatic Heterocyclic Chemistry", credits:5, files:[] },
+              { code:"CHEM30220", name:"Mechanism, Stereochemistry and Alicyclic Chemistry",      credits:5, files:[] },
+              { code:"CHEM30230", name:"Symmetry and Computational Chemistry",                   credits:5, files:[] },
+              { code:"CHEM30250", name:"Organometallic and Solid State Chemistry",               credits:5, files:[] },
+              { code:"CHEM30310", name:"Soft Matter & Interfacial Chemistry",                    credits:5, files:[] },
+              { code:"CHEM30320", name:"Chemical Thermodynamics & Physical Transformations",     credits:5, files:[] },
+              { code:"CHEM30360", name:"Advanced Transition Metal Chemistry",                    credits:5, files:[] },
+            ]},
+            { label:"Options (environmental focus)", modules:[
+              { code:"BSEN30310", name:"The Bioeconomy: Sustainable Fuel, Material and Chemical Production", credits:5, files:[] },
+              { code:"CHEM30090", name:"Chemistry of Materials",                                 credits:5, files:[] },
+              { code:"GEOL20110", name:"Global Environmental Change",                            credits:5, files:[] },
+              { code:"BSEN30030", name:"Air Pollution",                                          credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Environmental & Sustainable Chemistry Research Project (20 cr) + core.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM41460", name:"Environmental & Sustainable Chemistry Research Project",  credits:20, files:[] },
+              { code:"CHEM40110", name:"Advanced Applications of Inorganic Chemistry",            credits:5, files:[] },
+              { code:"CHEM40740", name:"Electrochemistry",                                        credits:5, files:[] },
+              { code:"CHEM40960", name:"Green and Sustainable Chemistry",                         credits:5, files:[] },
+              { code:"CHEM40060", name:"Methods in Organic Synthesis",                            credits:5, files:[] },
+              { code:"CHEM40140", name:"Modern Methods and Applications of Catalysis",           credits:5, files:[] },
+              { code:"CHEM41450", name:"Sustainable Development Chemistry",                      credits:5, files:[] },
+            ]},
+            { label:"Options (choose 2)", modules:[
+              { code:"CHEM40050", name:"Metals in Biology",                                       credits:5, files:[] },
+              { code:"CHEM40090", name:"Methods in Organic Synthesis 2",                          credits:5, files:[] },
+              { code:"CHEM40870", name:"Nanomaterials Chemistry",                                 credits:5, files:[] },
+              { code:"CHEM40080", name:"Reactivity and Change",                                   credits:5, files:[] },
+              { code:"CHEM40290", name:"Special Topics in Medicinal Chemistry and Chemical Biology", credits:5, files:[] },
+              { code:"CHEM41430", name:"Advanced Topics in Physical Chemistry",                   credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Medicinal Chemistry & Chemical Biology ─────────────────────────────
+      {
+        id:"ucd-medicinal-chemistry", name:"Medicinal Chemistry & Chemical Biology (BSc)", years:[
+          { year:1, credits:60, note:"Science common entry (DN200) — chemistry/biology hybrid track.", sections:[
+            { label:"Core", modules:[
+              { code:"SCI10010", name:"Principles of Scientific Enquiry",            credits:5, files:[] },
+              { code:"MATH10310", name:"Calculus for Science",                        credits:5, files:[] },
+              { code:"MATH10290", name:"Linear Algebra for Science",                  credits:5, files:[] },
+              { code:"CHEM10040", name:"The Molecular World",                          credits:5, files:[] },
+              { code:"CHEM10050", name:"Basis of Organic and Biological Chemistry",    credits:5, files:[] },
+              { code:"CHEM10100", name:"Aspects of Medicinal Chemistry and Chemical Biology", credits:5, files:[] },
+              { code:"CHEM10210", name:"Aspects of Chemical and Environmental Analysis", credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Science common entry Stage 2 — chemistry and biology modules.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM20040", name:"Structure and Reactivity in Organic Chemistry", credits:5, files:[] },
+              { code:"CHEM20080", name:"The Basis of Physical Chemistry",              credits:5, files:[] },
+              { code:"CHEM20050", name:"Medicinal Chemistry and Chemical Biology (Level 2)", credits:5, files:[] },
+              { code:"CHEM20100", name:"Basis of Inorganic Chemistry",                credits:5, files:[] },
+              { code:"CHEM20120", name:"Physical Chemistry (Level 2)",                 credits:5, files:[] },
+              { code:"CHEM20090", name:"Chemistry for Biology",                        credits:5, files:[] },
+              { code:"CHEM20140", name:"Introductory Transition Metal Chemistry",       credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — 7 core modules (35 cr) + 15 credits options.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM30200", name:"Carbonyl Chemistry, Retrosynthesis and Synthetic Methods", credits:5, files:[] },
+              { code:"CHEM30210", name:"Structure Determination and Aromatic Heterocyclic Chemistry", credits:5, files:[] },
+              { code:"CHEM30220", name:"Mechanism, Stereochemistry and Alicyclic Chemistry",      credits:5, files:[] },
+              { code:"CHEM30280", name:"Medicinal Chemistry (Level 3)",                           credits:5, files:[] },
+              { code:"BIOC30030", name:"Biochemist's Toolkit",                                    credits:5, files:[] },
+              { code:"CHEM30260", name:"Chemical Biology of Natural Products",                    credits:5, files:[] },
+              { code:"CHEM30270", name:"Chemical Biology of Macromolecules",                      credits:5, files:[] },
+            ]},
+            { label:"Options (choose 3)", modules:[
+              { code:"CHEM30110", name:"Instrumental Analysis",                                   credits:5, files:[] },
+              { code:"MICR30030", name:"Microbial Physiology",                                    credits:5, files:[] },
+              { code:"MICR30040", name:"Microbial Diversity and Growth",                          credits:5, files:[] },
+              { code:"PHAR30010", name:"Chemotherapeutic Agents",                                 credits:5, files:[] },
+              { code:"PHAR30080", name:"Pharmacology of Neurodegenerative and Psychiatric Illness", credits:5, files:[] },
+              { code:"BMOL30020", name:"Molecular Basis of Disease",                              credits:5, files:[] },
+              { code:"CHEM30360", name:"Advanced Transition Metal Chemistry",                    credits:5, files:[] },
+              { code:"MICR30090", name:"Microbial Cell Factory for Chemists",                    credits:5, files:[] },
+              { code:"PHAR30050", name:"Experimental and Therapeutic Strategies in Molecular Pharmacology", credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Research Project (20 cr) + 4 core + 4 options.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM40030", name:"Research Project",                                        credits:20, files:[] },
+              { code:"CHEM40050", name:"Metals in Biology",                                       credits:5, files:[] },
+              { code:"CHEM40090", name:"Methods in Organic Synthesis 2",                          credits:5, files:[] },
+              { code:"CHEM40060", name:"Methods in Organic Synthesis",                            credits:5, files:[] },
+              { code:"CHEM40290", name:"Special Topics in Medicinal Chemistry and Chemical Biology", credits:5, files:[] },
+            ]},
+            { label:"Options (choose 4)", modules:[
+              { code:"BIOC40280", name:"Structural Biology in Drug Design",                       credits:5, files:[] },
+              { code:"CHEM40870", name:"Nanomaterials Chemistry",                                 credits:5, files:[] },
+              { code:"CHEM41290", name:"Modern Techniques to Monitor Biological Systems",        credits:5, files:[] },
+              { code:"BMOL40050", name:"Advanced Cancer Biology and Pharmacology",               credits:5, files:[] },
+              { code:"CHEM40080", name:"Reactivity and Change",                                   credits:5, files:[] },
+              { code:"CHEM40140", name:"Modern Methods and Applications of Catalysis",           credits:5, files:[] },
+              { code:"PHAR40040", name:"Emerging Therapies: Cloning, Gene Therapy and Stem Cells", credits:5, files:[] },
+              { code:"PHAR40050", name:"Drug Discovery and Development I",                        credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Physics ────────────────────────────────────────────────────────────
+      {
+        id:"ucd-physics", name:"Physics (BSc)", years:[
+          { year:1, credits:60, note:"Science common entry (DN200). Physics track: advanced Calculus and Linear Algebra.", sections:[
+            { label:"Core", modules:[
+              { code:"SCI10010",  name:"Principles of Scientific Enquiry",                       credits:5, files:[] },
+              { code:"MATH10350", name:"Calculus in the Mathematical and Physical Sciences",     credits:5, files:[] },
+              { code:"MATH10340", name:"Linear Algebra in the Mathematical and Physical Sciences", credits:5, files:[] },
+            ]},
+            { label:"Physics modules (choose from pool)", modules:[
+              { code:"PHYC10070", name:"Foundations of Physics",                                 credits:5, files:[] },
+              { code:"PHYC10210", name:"Quanta, Particles & Relativity",                         credits:5, files:[] },
+              { code:"PHYC10250", name:"Thermal Physics and Materials",                          credits:5, files:[] },
+              { code:"PHYC10270", name:"Introduction to Biophysics",                             credits:5, files:[] },
+              { code:"PHYC10050", name:"Astronomy & Space Science",                              credits:5, files:[] },
+              { code:"PHYC10080", name:"Frontiers of Physics",                                   credits:5, files:[] },
+              { code:"PHYC20080", name:"Fields, Waves and Light",                                credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Science common entry Stage 2. Core quantum mechanics and electromagnetism.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC20020", name:"Introductory Quantum Mechanics",                         credits:5, files:[] },
+              { code:"PHYC20100", name:"Thermo & Statistical Physics",                           credits:5, files:[] },
+              { code:"PHYC20080", name:"Fields, Waves and Light",                                credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"PHYC20040", name:"Exploring the Solar System",                             credits:5, files:[] },
+              { code:"PHYC20060", name:"Methods for Physicists",                                 credits:5, files:[] },
+              { code:"PHYC20090", name:"Electronics and Devices",                                credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Advanced Laboratory (20 cr) + core physics + options.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC30300", name:"Advanced Laboratory I",                                  credits:20, files:[] },
+              { code:"PHYC30020", name:"Classical Mechanics and Relativity",                     credits:5, files:[] },
+              { code:"PHYC30030", name:"Quantum Mechanics",                                      credits:5, files:[] },
+              { code:"PHYC30070", name:"Electromagnetism",                                       credits:5, files:[] },
+              { code:"PHYC30080", name:"Optics & Lasers",                                        credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"PHYC30050", name:"Condensed Matter Physics",                               credits:5, files:[] },
+              { code:"PHYC30090", name:"Nuclear Physics",                                        credits:5, files:[] },
+              { code:"PHYC30100", name:"Stellar Astrophysics & Astronomical Techniques",         credits:5, files:[] },
+              { code:"ACM20030", name:"Computational Science",                                   credits:5, files:[] },
+              { code:"ACM30220", name:"Partial Differential Equations",                          credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Physics Project (10 cr) + Advanced Laboratory II (15 cr) + core + options.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC40960", name:"Physics Project",                                        credits:10, files:[] },
+              { code:"PHYC40970", name:"Advanced Laboratory II",                                 credits:15, files:[] },
+              { code:"PHYC40020", name:"Applied Quantum Mechanics",                              credits:5, files:[] },
+              { code:"PHYC40080", name:"High Energy Particle Physics",                           credits:5, files:[] },
+            ]},
+            { label:"Options (choose min 3)", modules:[
+              { code:"ACM40750",  name:"General Relativity & Black Holes",                       credits:5, files:[] },
+              { code:"PHYC40120", name:"General Relativity & Cosmology",                         credits:5, files:[] },
+              { code:"PHYC40200", name:"Quantum Theory of Condensed Matter",                     credits:5, files:[] },
+              { code:"PHYC40360", name:"Theoretical Astrophysics",                               credits:5, files:[] },
+              { code:"PHYC40030", name:"Galaxies, Observational Cosmology & the Interstellar Medium", credits:5, files:[] },
+              { code:"PHYC40110", name:"Medical Physics (Selected Topics)",                      credits:5, files:[] },
+              { code:"PHYC40210", name:"Applied Optics",                                         credits:5, files:[] },
+              { code:"PHYC40650", name:"Advanced Statistical Physics",                           credits:5, files:[] },
+              { code:"PHYC40800", name:"Quantum Field Theory",                                   credits:5, files:[] },
+              { code:"ACM41040", name:"GR and Gravitational Waves",                              credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Physics with Astronomy & Space Science ─────────────────────────────
+      {
+        id:"ucd-physics-astronomy", name:"Physics with Astronomy & Space Science (BSc)", years:[
+          { year:1, credits:60, note:"Science common entry (DN200) — physics/astronomy track.", sections:[
+            { label:"Core", modules:[
+              { code:"SCI10010",  name:"Principles of Scientific Enquiry",                       credits:5, files:[] },
+              { code:"MATH10350", name:"Calculus in the Mathematical and Physical Sciences",     credits:5, files:[] },
+              { code:"MATH10340", name:"Linear Algebra in the Mathematical and Physical Sciences", credits:5, files:[] },
+              { code:"PHYC10050", name:"Astronomy & Space Science",                              credits:5, files:[] },
+              { code:"PHYC10210", name:"Quanta, Particles & Relativity",                         credits:5, files:[] },
+              { code:"PHYC10250", name:"Thermal Physics and Materials",                          credits:5, files:[] },
+              { code:"PHYC10080", name:"Frontiers of Physics",                                   credits:5, files:[] },
+              { code:"PHYC20080", name:"Fields, Waves and Light",                                credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Science common entry Stage 2 — physics/astronomy modules.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC20020", name:"Introductory Quantum Mechanics",                         credits:5, files:[] },
+              { code:"PHYC20100", name:"Thermo & Statistical Physics",                           credits:5, files:[] },
+              { code:"PHYC20080", name:"Fields, Waves and Light",                                credits:5, files:[] },
+              { code:"PHYC20040", name:"Exploring the Solar System",                             credits:5, files:[] },
+              { code:"PHYC20060", name:"Methods for Physicists",                                 credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Physics with Astronomy Lab (20 cr) + core + options.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC30170", name:"Physics with Astronomy and Space Science Laboratory I",  credits:20, files:[] },
+              { code:"PHYC30020", name:"Classical Mechanics and Relativity",                     credits:5, files:[] },
+              { code:"PHYC30030", name:"Quantum Mechanics",                                      credits:5, files:[] },
+              { code:"PHYC30100", name:"Stellar Astrophysics & Astronomical Techniques",         credits:5, files:[] },
+              { code:"PHYC30070", name:"Electromagnetism",                                       credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"PHYC20100", name:"Thermo & Statistical Physics",                           credits:5, files:[] },
+              { code:"PHYC30050", name:"Condensed Matter Physics",                               credits:5, files:[] },
+              { code:"PHYC30080", name:"Optics & Lasers",                                        credits:5, files:[] },
+              { code:"PHYC30090", name:"Nuclear Physics",                                        credits:5, files:[] },
+              { code:"ACM20030", name:"Computational Science",                                   credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Astronomy Lab II (15 cr) + Astronomy Field Trip (10 cr) + core.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC40600", name:"Physics with Astronomy and Space Science Laboratory II", credits:15, files:[] },
+              { code:"PHYC40890", name:"Astronomy Field Trip",                                   credits:10, files:[] },
+              { code:"PHYC40020", name:"Applied Quantum Mechanics",                              credits:5, files:[] },
+              { code:"PHYC40080", name:"High Energy Particle Physics",                           credits:5, files:[] },
+              { code:"PHYC40030", name:"Galaxies, Observational Cosmology & the Interstellar Medium", credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"ACM40750",  name:"General Relativity & Black Holes",                       credits:5, files:[] },
+              { code:"PHYC40120", name:"General Relativity & Cosmology",                         credits:5, files:[] },
+              { code:"PHYC40360", name:"Theoretical Astrophysics",                               credits:5, files:[] },
+              { code:"ACM41040", name:"GR and Gravitational Waves",                              credits:5, files:[] },
+              { code:"PHYC40650", name:"Advanced Statistical Physics",                           credits:5, files:[] },
+              { code:"PHYC40800", name:"Quantum Field Theory",                                   credits:5, files:[] },
+              { code:"PHYC40210", name:"Applied Optics",                                         credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Theoretical Physics ────────────────────────────────────────────────
+      {
+        id:"ucd-theoretical-physics", name:"Theoretical Physics (BSc)", years:[
+          { year:1, credits:60, note:"Science common entry (DN200) — physics/mathematics track.", sections:[
+            { label:"Core", modules:[
+              { code:"SCI10010",  name:"Principles of Scientific Enquiry",                       credits:5, files:[] },
+              { code:"MATH10350", name:"Calculus in the Mathematical and Physical Sciences",     credits:5, files:[] },
+              { code:"MATH10340", name:"Linear Algebra in the Mathematical and Physical Sciences", credits:5, files:[] },
+              { code:"PHYC10210", name:"Quanta, Particles & Relativity",                         credits:5, files:[] },
+              { code:"PHYC10250", name:"Thermal Physics and Materials",                          credits:5, files:[] },
+              { code:"PHYC10080", name:"Frontiers of Physics",                                   credits:5, files:[] },
+              { code:"PHYC20080", name:"Fields, Waves and Light",                                credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Science common entry Stage 2 — physics and maths modules.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC20020", name:"Introductory Quantum Mechanics",                         credits:5, files:[] },
+              { code:"PHYC20100", name:"Thermo & Statistical Physics",                           credits:5, files:[] },
+              { code:"PHYC20080", name:"Fields, Waves and Light",                                credits:5, files:[] },
+              { code:"PHYC20060", name:"Methods for Physicists",                                 credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Advanced Lab (10 cr) + 6 core + options from applied maths and physics.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC30320", name:"Advanced Laboratory for Theoretical Physics I",          credits:10, files:[] },
+              { code:"ACM30220",  name:"Partial Differential Equations",                         credits:5, files:[] },
+              { code:"PHYC30020", name:"Classical Mechanics and Relativity",                     credits:5, files:[] },
+              { code:"PHYC30030", name:"Quantum Mechanics",                                      credits:5, files:[] },
+              { code:"ACM30200",  name:"Mathematical Fluid Dynamics I",                          credits:5, files:[] },
+              { code:"MATH30040", name:"Complex Analysis",                                       credits:5, files:[] },
+              { code:"PHYC30070", name:"Electromagnetism",                                       credits:5, files:[] },
+            ]},
+            { label:"Options (applied maths & physics)", modules:[
+              { code:"ACM30130", name:"Advanced Computational Science",                          credits:5, files:[] },
+              { code:"ACM30190", name:"Dynamical Systems",                                       credits:5, files:[] },
+              { code:"ACM30020", name:"Applied Analysis",                                        credits:5, files:[] },
+              { code:"ACM30090", name:"Mathematical Biology",                                    credits:5, files:[] },
+              { code:"ACM30140", name:"Numerical Methods for PDEs",                              credits:5, files:[] },
+              { code:"PHYC30050", name:"Condensed Matter Physics",                               credits:5, files:[] },
+              { code:"PHYC30090", name:"Nuclear Physics",                                        credits:5, files:[] },
+              { code:"PHYC30100", name:"Stellar Astrophysics & Astronomical Techniques",         credits:5, files:[] },
+              { code:"ACM30210", name:"Foundations of Quantum Theory",                           credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — TP Project (10 cr) + 2 core + GR option + extensive electives.", sections:[
+            { label:"Core", modules:[
+              { code:"PHYC40900", name:"Project in Theoretical Physics",                         credits:10, files:[] },
+              { code:"PHYC40020", name:"Applied Quantum Mechanics",                              credits:5, files:[] },
+              { code:"PHYC40080", name:"High Energy Particle Physics",                           credits:5, files:[] },
+            ]},
+            { label:"Option (choose 1)", modules:[
+              { code:"ACM40750",  name:"General Relativity & Black Holes",                       credits:5, files:[] },
+              { code:"PHYC40120", name:"General Relativity & Cosmology",                         credits:5, files:[] },
+            ]},
+            { label:"Electives (wide choice)", modules:[
+              { code:"ACM40010",  name:"Electrodynamics & Gauge Theory",                         credits:5, files:[] },
+              { code:"ACM40070",  name:"Mathematical Fluid Dynamics II",                         credits:5, files:[] },
+              { code:"ACM40690",  name:"Applied Complex Variables",                              credits:5, files:[] },
+              { code:"ACM41020",  name:"Mathematics of Machine Learning",                        credits:5, files:[] },
+              { code:"ACM41040",  name:"GR and Gravitational Waves",                             credits:5, files:[] },
+              { code:"ACM41010",  name:"Mathematics of Sustainability & Environment",            credits:5, files:[] },
+              { code:"ACM41030",  name:"Optimization Algorithms",                                credits:5, files:[] },
+              { code:"PHYC40200", name:"Quantum Theory of Condensed Matter",                     credits:5, files:[] },
+              { code:"PHYC40360", name:"Theoretical Astrophysics",                               credits:5, files:[] },
+              { code:"PHYC40030", name:"Galaxies, Observational Cosmology & the Interstellar Medium", credits:5, files:[] },
+              { code:"PHYC40650", name:"Advanced Statistical Physics",                           credits:5, files:[] },
+              { code:"PHYC40800", name:"Quantum Field Theory",                                   credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+    ]
+  });
+
+
+  // ─── UCD ENVIRONMENT, AGRICULTURE & EARTH SCIENCES ───────────────────────
+  SCHOOLS.push({
+    id:"ucd-env-agri-school", name:"UCD School of Agriculture, Food Science & Veterinary Medicine / Geography", icon:"🌍", uni:"ucd",
+    sub:"University College Dublin",
+    courses:[
+      // ── Geography ──────────────────────────────────────────────────────────
+      {
+        id:"ucd-geography", name:"Geography (BA/BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — 2 core Geography modules + joint subject modules + electives.", sections:[
+            { label:"Core", modules:[
+              { code:"GEOG10140", name:"Mapping a Sustainable World",                             credits:5, files:[] },
+              { code:"GEOG10080", name:"Dynamic Earth",                                           credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"GEOG10160", name:"Our Living World",                                        credits:5, files:[] },
+              { code:"GEOG10100", name:"People, Places, Regions",                                 credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Core fieldwork and GIS modules + options.", sections:[
+            { label:"Core", modules:[
+              { code:"GEOG20210", name:"Fieldstudies in Ireland",                                 credits:5, files:[] },
+              { code:"GEOG20220", name:"Introduction to GIS for the Social Sciences",             credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"GEOG20040", name:"Rivers, Estuaries and Coasts",                            credits:5, files:[] },
+              { code:"GEOG20170", name:"Global Historical Geographies",                           credits:5, files:[] },
+              { code:"GEOG20060", name:"Weather, Climate and Climate Change",                     credits:5, files:[] },
+              { code:"GEOG20150", name:"Quaternary Environmental Change",                         credits:5, files:[] },
+              { code:"GEOG20260", name:"Social Geographies",                                      credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Options from wide pool. GEOG30900 Overseas Fieldwork is 10 credits.", sections:[
+            { label:"Options (choose to reach 50+ credits)", modules:[
+              { code:"GEOG30240", name:"Political Geography of European Integration",             credits:5, files:[] },
+              { code:"GEOG30370", name:"River Catchment Management",                             credits:5, files:[] },
+              { code:"GEOG30790", name:"Planetary Geomorphology",                                credits:5, files:[] },
+              { code:"GEOG30820", name:"Development Geographies",                                credits:5, files:[] },
+              { code:"GEOG31060", name:"Population Geography",                                   credits:5, files:[] },
+              { code:"GEOG31100", name:"Fortress Europe and the Global War on Migrants",         credits:5, files:[] },
+              { code:"GEOG30020", name:"Historical Geography of Ireland",                        credits:5, files:[] },
+              { code:"GEOG30770", name:"Techniques and Fieldwork",                               credits:5, files:[] },
+              { code:"GEOG30840", name:"The Urban Environment",                                  credits:5, files:[] },
+              { code:"GEOG30880", name:"Applied GIS",                                            credits:5, files:[] },
+              { code:"GEOG30900", name:"Overseas Fieldwork",                                     credits:10, files:[] },
+              { code:"GEOG30940", name:"Global Risks and Resilience",                            credits:5, files:[] },
+              { code:"GEOG31080", name:"Far-right, Hate and Political Polarisation",             credits:5, files:[] },
+              { code:"GEOG31180", name:"Sexual & Gendered Geographies",                          credits:5, files:[] },
+              { code:"GEOG31190", name:"Population & Inequalities",                              credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Earth Sciences ─────────────────────────────────────────────────────
+      {
+        id:"ucd-earth-sciences", name:"Earth Sciences (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Science common entry (DN200) + Earth Sciences core.", sections:[
+            { label:"Core", modules:[
+              { code:"SCI10010",  name:"Principles of Scientific Enquiry",                       credits:5, files:[] },
+              { code:"GEOL10060", name:"Introduction to Earth Sciences",                         credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"GEOL10050", name:"Earth and Humanity",                                     credits:5, files:[] },
+              { code:"GEOL10030", name:"Field Geology, Level 1",                                 credits:5, files:[] },
+              { code:"GEOL10040", name:"Earth, Environment and Society",                         credits:5, files:[] },
+              { code:"GEOL10070", name:"Understanding Earth Systems",                            credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Earth materials, field geology + options.", sections:[
+            { label:"Core", modules:[
+              { code:"GEOL20250", name:"Earth Materials and Processes",                          credits:5, files:[] },
+              { code:"GEOL20210", name:"Field Geology and Mapwork",                              credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"GEOL20200", name:"Dynamic Earth",                                          credits:5, files:[] },
+              { code:"GEOL20280", name:"Palaeobiology and Stratigraphy",                         credits:5, files:[] },
+              { code:"GEOL20180", name:"Geoscience Perspectives on the UN SDGs",                 credits:5, files:[] },
+              { code:"GEOL20110", name:"Global Environmental Change",                            credits:5, files:[] },
+              { code:"GEOL20240", name:"Medical Geology",                                        credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Core geology modules including mapping and fieldwork.", sections:[
+            { label:"Core", modules:[
+              { code:"GEOL30040", name:"Sedimentary Environments",                               credits:5, files:[] },
+              { code:"GEOL30240", name:"Igneous Petrology",                                      credits:5, files:[] },
+              { code:"GEOL30250", name:"Geological Mapping",                                     credits:5, files:[] },
+              { code:"GEOL30350", name:"Geological Structures",                                  credits:5, files:[] },
+              { code:"GEOL30430", name:"Quantitative Geodata Analysis",                          credits:5, files:[] },
+              { code:"GEOL20280", name:"Palaeobiology and Stratigraphy",                         credits:5, files:[] },
+              { code:"GEOL30320", name:"Geological Fieldwork (Stage 3)",                         credits:5, files:[] },
+              { code:"GEOL30340", name:"Low Temperature Geochemistry",                           credits:5, files:[] },
+              { code:"GEOL30400", name:"Digital Geology and GIS",                               credits:5, files:[] },
+              { code:"GEOL40490", name:"Quaternary Geology",                                     credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"GEOL30360", name:"Work Placement — Geoscience",                           credits:5, files:[] },
+              { code:"GEOL30390", name:"Geoscience Research Project",                           credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Sustainability with Environmental Sciences ──────────────────────────
+      {
+        id:"ucd-sustainability-env", name:"Sustainability with Environmental Sciences (BSc)", years:[
+          { year:1, credits:60, note:"Common Sustainability entry year (STS1). Specific Stage 1 modules via the shared Sustainability programme.", sections:[
+            { label:"Note", modules:[
+              { code:"SUST10000", name:"Sustainability Common Entry Year (STS1) — see programme handbook", credits:60, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Core sustainability + environmental science modules.", sections:[
+            { label:"Core", modules:[
+              { code:"GEOG20230", name:"Introduction to GIS for Sustainability",                  credits:5, files:[] },
+              { code:"MATH10230", name:"Mathematics for Agriculture I",                           credits:5, files:[] },
+              { code:"SUST20010", name:"Sustainability: Research Tools",                          credits:5, files:[] },
+              { code:"SUST20030", name:"Environment, Society & Human Wellbeing",                  credits:5, files:[] },
+              { code:"ECON10010", name:"Principles of Microeconomics",                            credits:5, files:[] },
+              { code:"ENVB20050", name:"Principles of Environmental Biology & Ecology",           credits:5, files:[] },
+              { code:"SUST20020", name:"Communication in Sustainability",                         credits:5, files:[] },
+              { code:"CHEM20090", name:"Chemistry for Biology",                                   credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"BIOL10140", name:"Life on Earth",                                           credits:5, files:[] },
+              { code:"GEOG20040", name:"Rivers, Estuaries and Coasts",                            credits:5, files:[] },
+              { code:"GEOL20110", name:"Global Environmental Change",                             credits:5, files:[] },
+              { code:"GEOL20180", name:"Geoscience Perspectives on the UN SDGs",                  credits:5, files:[] },
+              { code:"DSCY10060", name:"Energy, Climate Change & Policy",                         credits:5, files:[] },
+              { code:"FOR20110",  name:"Forests, Climate and Carbon",                             credits:5, files:[] },
+              { code:"GEOG20060", name:"Weather, Climate and Climate Change",                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Core sustainability action modules + environmental science options.", sections:[
+            { label:"Core", modules:[
+              { code:"SUST30020", name:"Sustainability in Action",                                credits:5, files:[] },
+              { code:"BIOL30030", name:"Working with Biological Data",                            credits:5, files:[] },
+              { code:"MKT10720",  name:"Marketing: An Introduction",                              credits:5, files:[] },
+              { code:"SPOL30220", name:"Social Policy, Social Justice and the Environment",       credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"ENVB30010", name:"Systems Ecology",                                         credits:5, files:[] },
+              { code:"ENVB30020", name:"Wildlife Conservation and Fisheries Management",          credits:5, files:[] },
+              { code:"BSEN30240", name:"Waste Management",                                        credits:5, files:[] },
+              { code:"BSEN30310", name:"The Bioeconomy: Sustainable Fuel, Material and Chemical Production", credits:5, files:[] },
+              { code:"BSEN30360", name:"Life Cycle Assessment",                                   credits:5, files:[] },
+              { code:"BSEN30560", name:"Measures to Mitigate Climate Change",                     credits:5, files:[] },
+              { code:"CHEM20110", name:"Environmental & Sustainable Chemistry",                   credits:5, files:[] },
+              { code:"ZOOL30060", name:"Biogeography and Field Biology",                          credits:5, files:[] },
+              { code:"ZOOL30080", name:"Invertebrate Diversity and Conservation",                 credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Research Project (20 cr) + Interdisciplinary Project (10 cr) + policy/science electives.", sections:[
+            { label:"Core", modules:[
+              { code:"SUST40020", name:"Environmental Sciences Research Project",                 credits:20, files:[] },
+              { code:"SUST40050", name:"Interdisciplinary Project",                               credits:10, files:[] },
+              { code:"LAW30470",  name:"International Human Rights Law",                          credits:5, files:[] },
+              { code:"GEOG30840", name:"The Urban Environment",                                   credits:5, files:[] },
+              { code:"GEOG30940", name:"Global Risks and Resilience",                             credits:5, files:[] },
+            ]},
+            { label:"Environmental Science options", modules:[
+              { code:"ENVB40040", name:"Environmental Impact Assessment",                         credits:5, files:[] },
+              { code:"ENVB40290", name:"Ecological Modelling",                                    credits:5, files:[] },
+              { code:"GEOL40450", name:"Environmental Geoscience",                                credits:5, files:[] },
+              { code:"BSEN40110", name:"Advanced Air Pollution",                                  credits:10, files:[] },
+              { code:"BSEN40350", name:"Renewable Energy Systems Analysis",                       credits:5, files:[] },
+              { code:"BSEN40400", name:"LCA Applications",                                        credits:5, files:[] },
+              { code:"ZOOL40500", name:"Ornithology",                                             credits:5, files:[] },
+              { code:"ZOOL40280", name:"Biological Invasions",                                    credits:5, files:[] },
+              { code:"ECON30600", name:"Economics of Climate Change",                             credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Agri-Environmental Sciences ────────────────────────────────────────
+      {
+        id:"ucd-agri-environmental", name:"Agri-Environmental Sciences (BAgrSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Agricultural sciences common entry core.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC10010", name:"Land Use and the Environment",                            credits:5, files:[] },
+              { code:"MATH10230", name:"Mathematics for Agriculture I",                           credits:5, files:[] },
+              { code:"PHYC10180", name:"Physics for Agricultural Science",                        credits:5, files:[] },
+              { code:"RDEV10020", name:"Information Skills",                                      credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"BIOL10030", name:"Cell and Plant Biology",                                  credits:5, files:[] },
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+              { code:"RDEV10040", name:"Introduction to Food and Agribusiness Management",        credits:5, files:[] },
+              { code:"CHEM00020", name:"Introductory Chemistry",                                  credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Core soil science, ecology, zoology and microbiology.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC20060", name:"Soil Science Basics",                                     credits:5, files:[] },
+              { code:"AESC30110", name:"Diversity in the Rural Landscape",                        credits:5, files:[] },
+              { code:"FOR20100",  name:"Applied Biostatistics",                                   credits:5, files:[] },
+              { code:"HORT20070", name:"Agricultural Botany",                                     credits:5, files:[] },
+              { code:"MICR20010", name:"Agricultural Microbiology",                              credits:5, files:[] },
+              { code:"AESC20050", name:"Applied Zoology",                                         credits:5, files:[] },
+              { code:"AESC20090", name:"Agricultural & Forest Ecology",                          credits:5, files:[] },
+              { code:"ANSC10010", name:"Introduction to Animal Science",                          credits:5, files:[] },
+              { code:"ANSC20010", name:"Genetics and Biotechnology",                              credits:5, files:[] },
+              { code:"CPSC20030", name:"Principles of Crop Science",                              credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Work Experience (10 cr) + agri-environmental core.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC30170", name:"Professional Work Experience",                            credits:10, files:[] },
+              { code:"AESC30080", name:"Agri-Environmental Issues and Policy",                    credits:5, files:[] },
+              { code:"AESC30100", name:"Pests, Parasites and Beneficials",                        credits:5, files:[] },
+              { code:"AESC30220", name:"Soil Science Applications",                               credits:5, files:[] },
+              { code:"BIOL30010", name:"Plant Diseases: Biology and Control",                     credits:5, files:[] },
+              { code:"ENVB30010", name:"Systems Ecology",                                         credits:5, files:[] },
+              { code:"AESC30010", name:"Scientific Writing and Review",                           credits:5, files:[] },
+              { code:"AESC30160", name:"Agrichemicals and the Environment",                       credits:5, files:[] },
+              { code:"AESC30230", name:"Climate, Carbon and Soil",                                credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Research Project (15 cr) + core + options.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC40160", name:"Research Project (AESC)",                                 credits:15, files:[] },
+              { code:"AESC30250", name:"Environmental Data and Modelling",                        credits:5, files:[] },
+              { code:"BIOL40370", name:"Plant Pathology and Biotechnology",                       credits:5, files:[] },
+              { code:"CPSC30040", name:"Grass and Forage Production",                             credits:5, files:[] },
+              { code:"AESC40140", name:"Agri-Environmental Nutrient Management",                  credits:5, files:[] },
+              { code:"AESC40340", name:"Environmental Management",                                credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"AESC40150", name:"Wildlife Conservation",                                   credits:5, files:[] },
+              { code:"AESC40360", name:"One Health",                                              credits:5, files:[] },
+              { code:"AESC40690", name:"Ecosystem Monitoring",                                    credits:5, files:[] },
+              { code:"ZOOL40280", name:"Biological Invasions",                                    credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Animal Science ─────────────────────────────────────────────────────
+      {
+        id:"ucd-animal-science", name:"Animal Science (BAgrSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Agricultural sciences common entry.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC10010", name:"Land Use and the Environment",                            credits:5, files:[] },
+              { code:"MATH10230", name:"Mathematics for Agriculture I",                           credits:5, files:[] },
+              { code:"PHYC10180", name:"Physics for Agricultural Science",                        credits:5, files:[] },
+              { code:"RDEV10020", name:"Information Skills",                                      credits:5, files:[] },
+              { code:"RDEV10030", name:"Introduction to Agricultural Economics and Business",     credits:5, files:[] },
+              { code:"ANSC10010", name:"Introduction to Animal Science",                          credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"BIOL10030", name:"Cell and Plant Biology",                                  credits:5, files:[] },
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+              { code:"CPSC10010", name:"Introduction to Crop Science",                            credits:5, files:[] },
+              { code:"CHEM00020", name:"Introductory Chemistry",                                  credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Animal nutrition, genetics, microbiology core.", sections:[
+            { label:"Core", modules:[
+              { code:"AERD20030", name:"Business Management",                                     credits:5, files:[] },
+              { code:"AESC20060", name:"Soil Science Basics",                                     credits:5, files:[] },
+              { code:"FOR20100",  name:"Applied Biostatistics",                                   credits:5, files:[] },
+              { code:"MICR20010", name:"Agricultural Microbiology",                              credits:5, files:[] },
+              { code:"ANSC20010", name:"Genetics and Biotechnology",                              credits:5, files:[] },
+              { code:"ANSC20020", name:"Animal Nutrition I",                                      credits:5, files:[] },
+              { code:"FDSC20100", name:"Agricultural Biochemistry",                               credits:5, files:[] },
+              { code:"RDEV20140", name:"Health, Welfare & Safety in Agriculture",                credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Work Experience (10 cr) + animal science core.", sections:[
+            { label:"Core", modules:[
+              { code:"ANSC30070", name:"Professional Work Experience",                            credits:10, files:[] },
+              { code:"ANSC30010", name:"Animal Reproduction",                                     credits:5, files:[] },
+              { code:"ANSC30020", name:"Animal Breeding I",                                       credits:5, files:[] },
+              { code:"ANSC30030", name:"Animal Genomics",                                         credits:5, files:[] },
+              { code:"ANSC30040", name:"Animal Nutrition II",                                     credits:5, files:[] },
+              { code:"ANSC30170", name:"Animal Physiology I",                                     credits:5, files:[] },
+              { code:"ANSC30430", name:"Farm Animal Behavior & Welfare",                         credits:5, files:[] },
+              { code:"ANSC30050", name:"Experimental Design and Data Analysis",                   credits:5, files:[] },
+              { code:"ANSC30150", name:"Animal Physiology II",                                    credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Production systems core + options.", sections:[
+            { label:"Core", modules:[
+              { code:"AERD30190", name:"Farm Business Management",                                credits:5, files:[] },
+              { code:"ANSC30120", name:"Non-ruminant Animal Production (Swine & Poultry)",       credits:5, files:[] },
+              { code:"ANSC30400", name:"Beef Production",                                         credits:5, files:[] },
+              { code:"ANSC30410", name:"Dairy Production",                                        credits:5, files:[] },
+              { code:"CPSC30040", name:"Grass and Forage Production",                             credits:5, files:[] },
+              { code:"AERD30210", name:"Food and Agricultural Policy",                            credits:5, files:[] },
+              { code:"ANSC30390", name:"Sheep Production",                                        credits:5, files:[] },
+              { code:"ANSC30420", name:"Immunobiology & Animal Health",                          credits:5, files:[] },
+              { code:"RDEV30060", name:"Professional Communications",                             credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"FDSC30150", name:"Principles of Meat Science",                              credits:5, files:[] },
+              { code:"ANSC40040", name:"Advanced Dairy Production",                               credits:5, files:[] },
+              { code:"ANSC30380", name:"Animal Science Industries",                               credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Forestry ───────────────────────────────────────────────────────────
+      {
+        id:"ucd-forestry", name:"Forestry (BAgrSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Agriculture sciences core with forestry focus.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM00020", name:"Introductory Chemistry",                                  credits:5, files:[] },
+              { code:"FOR10020",  name:"Trees and Forests in Ireland",                            credits:5, files:[] },
+              { code:"MATH10230", name:"Mathematics for Agriculture I",                           credits:5, files:[] },
+              { code:"PHYC10180", name:"Physics for Agricultural Science",                        credits:5, files:[] },
+              { code:"RDEV10020", name:"Information Skills",                                      credits:5, files:[] },
+              { code:"RDEV10030", name:"Introduction to Agricultural Economics and Business",     credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"BIOL10030", name:"Cell and Plant Biology",                                  credits:5, files:[] },
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Tree biology, forestry principles, ecology, engineering.", sections:[
+            { label:"Core", modules:[
+              { code:"AERD20030", name:"Business Management",                                     credits:5, files:[] },
+              { code:"AESC20060", name:"Soil Science Basics",                                     credits:5, files:[] },
+              { code:"FOR20040",  name:"Tree Structure and Function",                             credits:5, files:[] },
+              { code:"FOR20100",  name:"Applied Biostatistics",                                   credits:5, files:[] },
+              { code:"HORT20070", name:"Agricultural Botany",                                     credits:5, files:[] },
+              { code:"MICR20010", name:"Agricultural Microbiology",                              credits:5, files:[] },
+              { code:"AESC20090", name:"Agricultural & Forest Ecology",                          credits:5, files:[] },
+              { code:"BSEN20010", name:"Engineering and Surveying",                               credits:5, files:[] },
+              { code:"FOR20050",  name:"Principles of Forestry",                                  credits:5, files:[] },
+              { code:"FOR30340",  name:"Professional Forestry Practice",                          credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Work Experience (10 cr) + silviculture, forest management, harvesting.", sections:[
+            { label:"Core", modules:[
+              { code:"FOR30180",  name:"Professional Work Experience",                            credits:10, files:[] },
+              { code:"AESC30150", name:"Forest Protection",                                       credits:5, files:[] },
+              { code:"FOR30400",  name:"Silviculture",                                            credits:10, files:[] },
+              { code:"FOR30420",  name:"Forest Management and Economics",                         credits:5, files:[] },
+              { code:"FOR30430",  name:"Geographic Information Systems",                          credits:5, files:[] },
+              { code:"FOR30070",  name:"Forest Harvesting",                                       credits:5, files:[] },
+              { code:"FOR30320",  name:"Wood Science",                                            credits:5, files:[] },
+              { code:"FOR30410",  name:"Forest Inventory and Sampling",                           credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Forest Inventory Plan (20 cr) + Research Project (20 cr) + core.", sections:[
+            { label:"Core", modules:[
+              { code:"FOR40160",  name:"Forest Inventory & Management Plan",                      credits:20, files:[] },
+              { code:"FOR40180",  name:"Research Project (Forestry)",                             credits:20, files:[] },
+              { code:"AESC30150", name:"Forest Protection",                                       credits:5, files:[] },
+              { code:"FOR40170",  name:"Forest Planning & Optimisation",                          credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Food Science ───────────────────────────────────────────────────────
+      {
+        id:"ucd-food-science", name:"Food Science (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Agricultural sciences core with food science focus.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM00020", name:"Introductory Chemistry",                                  credits:5, files:[] },
+              { code:"MATH10230", name:"Mathematics for Agriculture I",                           credits:5, files:[] },
+              { code:"PHYC10180", name:"Physics for Agricultural Science",                        credits:5, files:[] },
+              { code:"RDEV10020", name:"Information Skills",                                      credits:5, files:[] },
+              { code:"FDSC10010", name:"Food, Diet and Health",                                   credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"BIOL10030", name:"Cell and Plant Biology",                                  credits:5, files:[] },
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+              { code:"MATH10240", name:"Mathematics for Agriculture II",                          credits:5, files:[] },
+              { code:"PHYC10190", name:"Aspects of Physics for Agricultural Science",             credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Food physics, sensory analysis, food chemistry, microbiology.", sections:[
+            { label:"Core", modules:[
+              { code:"BSEN20060", name:"Food Physics",                                            credits:5, files:[] },
+              { code:"FDSC20010", name:"Food Macronutrients",                                     credits:5, files:[] },
+              { code:"FDSC20040", name:"Sensory Analysis",                                        credits:5, files:[] },
+              { code:"FOR20100",  name:"Applied Biostatistics",                                   credits:5, files:[] },
+              { code:"HNUT10010", name:"Human Nutrition I — Understanding Nutrients",             credits:5, files:[] },
+              { code:"MICR20010", name:"Agricultural Microbiology",                              credits:5, files:[] },
+              { code:"ANSC20010", name:"Genetics and Biotechnology",                              credits:5, files:[] },
+              { code:"FDSC20020", name:"Nutritional Energy Metabolism",                           credits:5, files:[] },
+              { code:"FDSC20030", name:"Food Analysis",                                           credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Work Experience (10 cr) + food chemistry, microbiology, product development.", sections:[
+            { label:"Core", modules:[
+              { code:"FDSC30160", name:"Professional Work Experience",                            credits:10, files:[] },
+              { code:"BSEN30010", name:"Bioprocess Engineering Principles",                       credits:5, files:[] },
+              { code:"ENVB30110", name:"Food Microbiology",                                       credits:5, files:[] },
+              { code:"FDSC30020", name:"Food Investigation",                                      credits:5, files:[] },
+              { code:"FDSC30040", name:"Food Chemistry I",                                        credits:5, files:[] },
+              { code:"FDSC30070", name:"Product Development",                                     credits:5, files:[] },
+              { code:"AESC30010", name:"Scientific Writing and Review",                           credits:5, files:[] },
+              { code:"FDSC30050", name:"Food Chemistry II",                                       credits:5, files:[] },
+              { code:"FDSC30230", name:"Plant-based Foods & Ingredients",                        credits:5, files:[] },
+              { code:"HNUT20010", name:"Human Nutrition II — Nutrients in Life Stages",          credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Food process technology, dairy, meat, fermentation core.", sections:[
+            { label:"Core", modules:[
+              { code:"BSEN40410", name:"Food Chain Integrity",                                    credits:5, files:[] },
+              { code:"FDSC40030", name:"Food Process Technology I",                               credits:5, files:[] },
+              { code:"FDSC40060", name:"Fresh & Processed Meat Products",                        credits:5, files:[] },
+              { code:"FDSC40080", name:"Milk and Dairy Products",                                 credits:5, files:[] },
+              { code:"PHPS40610", name:"Risk Analysis in Food Safety",                            credits:5, files:[] },
+              { code:"FDSC40010", name:"Fermented Foods",                                         credits:5, files:[] },
+              { code:"FDSC40020", name:"Food Ingredients",                                        credits:5, files:[] },
+              { code:"FDSC40040", name:"Food Process Technology II",                              credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"FDSC40120", name:"Project",                                                 credits:10, files:[] },
+              { code:"FDSC40630", name:"Food Sector Entrepreneurship and Enterprise Development", credits:5, files:[] },
+              { code:"HNUT40240", name:"Food Regulation",                                         credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Crop Science ───────────────────────────────────────────────────────
+      {
+        id:"ucd-crop-science", name:"Crop Science (BAgrSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Agricultural sciences common entry.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC10010", name:"Land Use and the Environment",                            credits:5, files:[] },
+              { code:"CHEM00020", name:"Introductory Chemistry",                                  credits:5, files:[] },
+              { code:"MATH10230", name:"Mathematics for Agriculture I",                           credits:5, files:[] },
+              { code:"PHYC10180", name:"Physics for Agricultural Science",                        credits:5, files:[] },
+              { code:"RDEV10020", name:"Information Skills",                                      credits:5, files:[] },
+              { code:"RDEV10030", name:"Introduction to Agricultural Economics and Business",     credits:5, files:[] },
+              { code:"ANSC10010", name:"Introduction to Animal Science",                          credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"BIOL10030", name:"Cell and Plant Biology",                                  credits:5, files:[] },
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+              { code:"CPSC10010", name:"Introduction to Crop Science",                            credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Arable crop production, plant ecology, agricultural biochemistry.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC20060", name:"Soil Science Basics",                                     credits:5, files:[] },
+              { code:"BSEN30170", name:"Agricultural Mechanisation: Engines and Crop Machinery",  credits:5, files:[] },
+              { code:"FOR20100",  name:"Applied Biostatistics",                                   credits:5, files:[] },
+              { code:"HORT20070", name:"Agricultural Botany",                                     credits:5, files:[] },
+              { code:"MICR20010", name:"Agricultural Microbiology",                              credits:5, files:[] },
+              { code:"BSEN30020", name:"Buildings and Environment",                               credits:5, files:[] },
+              { code:"CPSC20020", name:"Fundamentals of Arable Crop Production",                  credits:5, files:[] },
+              { code:"CPSC20040", name:"Physiological Plant Ecology",                             credits:5, files:[] },
+              { code:"FDSC20100", name:"Agricultural Biochemistry",                               credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Work Experience (30 cr) + crop protection and organic farming.", sections:[
+            { label:"Core", modules:[
+              { code:"CPSC30010", name:"Professional Work Experience",                            credits:30, files:[] },
+              { code:"AESC30100", name:"Pests, Parasites and Beneficials",                        credits:5, files:[] },
+              { code:"BIOL30010", name:"Plant Diseases: Biology and Control",                     credits:5, files:[] },
+              { code:"CPSC30050", name:"Organic Agriculture",                                     credits:5, files:[] },
+              { code:"CPSC30100", name:"Emerging Crop Pathogens",                                 credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Cereal production, mechanisation, grassland, agrichemicals.", sections:[
+            { label:"Core", modules:[
+              { code:"AERD30190", name:"Farm Business Management",                                credits:5, files:[] },
+              { code:"CPSC30040", name:"Grass and Forage Production",                             credits:5, files:[] },
+              { code:"CPSC40010", name:"Cereal Production",                                       credits:5, files:[] },
+              { code:"CPSC40100", name:"Advances in Crop Mechanisation",                          credits:5, files:[] },
+              { code:"AESC30160", name:"Agrichemicals and the Environment",                       credits:5, files:[] },
+              { code:"AESC30230", name:"Climate, Carbon and Soil",                                credits:5, files:[] },
+              { code:"CPSC30030", name:"Root and Alternative Crop Production",                    credits:5, files:[] },
+              { code:"CPSC40050", name:"Developments in Crop Production & Utilisation",          credits:5, files:[] },
+              { code:"RDEV30060", name:"Professional Communications",                             credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Dairy Business ─────────────────────────────────────────────────────
+      {
+        id:"ucd-dairy-business", name:"Dairy Business (BAgrSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Agricultural sciences core with business focus.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC10010", name:"Land Use and the Environment",                            credits:5, files:[] },
+              { code:"CHEM00020", name:"Introductory Chemistry",                                  credits:5, files:[] },
+              { code:"MATH10230", name:"Mathematics for Agriculture I",                           credits:5, files:[] },
+              { code:"PHYC10180", name:"Physics for Agricultural Science",                        credits:5, files:[] },
+              { code:"RDEV10030", name:"Introduction to Agricultural Economics and Business",     credits:5, files:[] },
+              { code:"ANSC10010", name:"Introduction to Animal Science",                          credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"BIOL10030", name:"Cell and Plant Biology",                                  credits:5, files:[] },
+              { code:"BMGT10060", name:"Introduction to Management",                              credits:5, files:[] },
+              { code:"RDEV10040", name:"Introduction to Food and Agribusiness Management",        credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Dairy production, animal nutrition, business and marketing.", sections:[
+            { label:"Core", modules:[
+              { code:"AESC20060", name:"Soil Science Basics",                                     credits:5, files:[] },
+              { code:"ANSC30010", name:"Animal Reproduction",                                     credits:5, files:[] },
+              { code:"FOR20100",  name:"Applied Biostatistics",                                   credits:5, files:[] },
+              { code:"MKT20020",  name:"Marketing: Firms, Customers & Society",                  credits:5, files:[] },
+              { code:"ACC10060",  name:"Introduction to Accounting",                              credits:5, files:[] },
+              { code:"AERD20020", name:"Business Law",                                            credits:5, files:[] },
+              { code:"ANSC20020", name:"Animal Nutrition I",                                      credits:5, files:[] },
+              { code:"ANSC20050", name:"Principles of Dairy Production",                          credits:5, files:[] },
+              { code:"BMGT20150", name:"Sustainable Operations & Supply Chain Management",       credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Work Experience (30 cr) + dairy systems and applied breeding.", sections:[
+            { label:"Core", modules:[
+              { code:"ANSC30370", name:"Professional Work Experience",                            credits:30, files:[] },
+              { code:"ANSC30280", name:"Herd Health & Milk Quality",                             credits:5, files:[] },
+              { code:"ANSC30290", name:"Grassland Management and Applied Dairy Nutrition",        credits:5, files:[] },
+              { code:"ANSC30310", name:"Dairy Systems",                                           credits:5, files:[] },
+              { code:"ANSC30320", name:"Dairy Business Project",                                  credits:10, files:[] },
+              { code:"ANSC30330", name:"Applied Dairy Breeding and Fertility",                    credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Farm business, animal breeding, nutrition, food policy core.", sections:[
+            { label:"Core", modules:[
+              { code:"AERD30190", name:"Farm Business Management",                                credits:5, files:[] },
+              { code:"AESC30080", name:"Agri-Environmental Issues and Policy",                    credits:5, files:[] },
+              { code:"ANSC30020", name:"Animal Breeding I",                                       credits:5, files:[] },
+              { code:"ANSC30040", name:"Animal Nutrition II",                                     credits:5, files:[] },
+              { code:"BMGT30100", name:"Leadership and Change Management",                        credits:5, files:[] },
+              { code:"AERD30210", name:"Food and Agricultural Policy",                            credits:5, files:[] },
+              { code:"AERD40040", name:"Food and Agribusiness Strategy",                          credits:5, files:[] },
+              { code:"AESC40140", name:"Agri-Environmental Nutrient Management",                  credits:5, files:[] },
+              { code:"ANSC30050", name:"Experimental Design and Data Analysis",                   credits:5, files:[] },
+              { code:"RDEV30060", name:"Professional Communications",                             credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Animal & Crop Production ────────────────────────────────────────────
+      {
+        id:"ucd-animal-crop-production", name:"Animal & Crop Production (BAgrSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Common agricultural sciences entry (DN250 area).", sections:[
+            { label:"Core", modules:[
+              { code:"ANSC10010", name:"Introduction to Animal Science",                          credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"BIOL10030", name:"Cell and Plant Biology",                                  credits:5, files:[] },
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+              { code:"CPSC10010", name:"Introduction to Crop Science",                            credits:5, files:[] },
+              { code:"CHEM00020", name:"Introductory Chemistry",                                  credits:5, files:[] },
+              { code:"MATH10230", name:"Mathematics for Agriculture I",                           credits:5, files:[] },
+              { code:"PHYC10180", name:"Physics for Agricultural Science",                        credits:5, files:[] },
+              { code:"RDEV10020", name:"Information Skills",                                      credits:5, files:[] },
+              { code:"RDEV10030", name:"Introduction to Agricultural Economics and Business",     credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Animal production, soil science, crop management core.", sections:[
+            { label:"Core", modules:[
+              { code:"AERD20030", name:"Business Management",                                     credits:5, files:[] },
+              { code:"AESC20060", name:"Soil Science Basics",                                     credits:5, files:[] },
+              { code:"ANSC20010", name:"Genetics and Biotechnology",                              credits:5, files:[] },
+              { code:"ANSC20020", name:"Animal Nutrition I",                                      credits:5, files:[] },
+              { code:"CPSC20010", name:"Arable Crop Production",                                  credits:5, files:[] },
+              { code:"CPSC20020", name:"Horticulture",                                            credits:5, files:[] },
+              { code:"FOR20100",  name:"Applied Biostatistics",                                   credits:5, files:[] },
+              { code:"MICR20010", name:"Agricultural Microbiology",                              credits:5, files:[] },
+              { code:"AESC20090", name:"Agricultural & Forest Ecology",                          credits:5, files:[] },
+              { code:"HORT20070", name:"Agricultural Botany",                                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Work Experience (10 cr) + animal and crop specialisation.", sections:[
+            { label:"Core", modules:[
+              { code:"ANSC30070", name:"Professional Work Experience",                            credits:10, files:[] },
+              { code:"ANSC30010", name:"Animal Reproduction",                                     credits:5, files:[] },
+              { code:"ANSC30020", name:"Animal Breeding I",                                       credits:5, files:[] },
+              { code:"ANSC30040", name:"Animal Nutrition II",                                     credits:5, files:[] },
+              { code:"CPSC30010", name:"Crop Physiology",                                         credits:5, files:[] },
+              { code:"CPSC30020", name:"Integrated Crop Protection",                              credits:5, files:[] },
+              { code:"CPSC30040", name:"Grass and Forage Production",                             credits:5, files:[] },
+              { code:"ANSC30050", name:"Experimental Design and Data Analysis",                   credits:5, files:[] },
+              { code:"ANSC30430", name:"Farm Animal Behavior & Welfare",                         credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Integrated production systems core + Research Project.", sections:[
+            { label:"Core", modules:[
+              { code:"AERD30190", name:"Farm Business Management",                                credits:5, files:[] },
+              { code:"ANSC30400", name:"Beef Production",                                         credits:5, files:[] },
+              { code:"ANSC30410", name:"Dairy Production",                                        credits:5, files:[] },
+              { code:"CPSC30030", name:"Soil Fertility and Plant Nutrition",                      credits:5, files:[] },
+              { code:"CPSC40010", name:"Research Project (Crop Science)",                         credits:10, files:[] },
+              { code:"AERD30210", name:"Food and Agricultural Policy",                            credits:5, files:[] },
+              { code:"ANSC30390", name:"Sheep Production",                                        credits:5, files:[] },
+              { code:"RDEV30060", name:"Professional Communications",                             credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"CPSC30050", name:"Potato Production",                                       credits:5, files:[] },
+              { code:"ANSC30120", name:"Non-ruminant Animal Production (Swine & Poultry)",       credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+    ]
+  });
+
+
+  // ─── UCD MEDICINE & HEALTH SCIENCES ──────────────────────────────────────
+  SCHOOLS.push({
+    id:"ucd-medicine-school", name:"UCD School of Medicine & Health Sciences", icon:"🏥", uni:"ucd",
+    sub:"University College Dublin",
+    courses:[
+      // ── Medicine ──────────────────────────────────────────────────────────
+      {
+        id:"ucd-medicine", name:"Medicine (MB BCh BAO)", years:[
+          { year:1, credits:60, note:"Stage 1 — Foundational biomedical sciences: anatomy, biochemistry, physiology.", sections:[
+            { label:"Core", modules:[
+              { code:"MDSA10010", name:"Anatomy I",                                               credits:10, files:[] },
+              { code:"MDSA10020", name:"Biochemistry I",                                          credits:10, files:[] },
+              { code:"MDSA10030", name:"Physiology I",                                            credits:10, files:[] },
+              { code:"MDSA10040", name:"Introduction to Clinical Medicine",                       credits:5, files:[] },
+              { code:"MDSA10050", name:"Medical Professionalism and Ethics",                      credits:5, files:[] },
+              { code:"MDSA10060", name:"Population Science & Public Health I",                   credits:5, files:[] },
+              { code:"MDSA10070", name:"Integrated Practical Skills I",                          credits:5, files:[] },
+              { code:"MDSA10080", name:"Communication Skills in Medicine",                        credits:5, files:[] },
+              { code:"MDSA10090", name:"Foundations of Clinical Reasoning",                      credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Systems-based biomedical sciences.", sections:[
+            { label:"Core", modules:[
+              { code:"MDSA20010", name:"Anatomy II",                                              credits:10, files:[] },
+              { code:"MDSA20020", name:"Pathology I",                                             credits:10, files:[] },
+              { code:"MDSA20030", name:"Physiology II",                                           credits:10, files:[] },
+              { code:"MDSA20040", name:"Pharmacology I",                                          credits:5, files:[] },
+              { code:"MDSA20050", name:"Microbiology & Immunology",                              credits:5, files:[] },
+              { code:"MDSA20060", name:"Population Science & Public Health II",                  credits:5, files:[] },
+              { code:"MDSA20070", name:"Integrated Practical Skills II",                         credits:5, files:[] },
+              { code:"MDSA20080", name:"Research Methods in Medicine",                            credits:5, files:[] },
+              { code:"MDSA20090", name:"Introduction to Clinical Placements",                    credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Clinical placements: surgery, medicine, O&G, psychiatry.", sections:[
+            { label:"Core", modules:[
+              { code:"MDSA30010", name:"Clinical Medicine I (Hospital Medicine)",                credits:15, files:[] },
+              { code:"MDSA30020", name:"Clinical Surgery I",                                      credits:15, files:[] },
+              { code:"MDSA30030", name:"Psychiatry",                                              credits:5, files:[] },
+              { code:"MDSA30040", name:"Obstetrics & Gynaecology",                               credits:10, files:[] },
+              { code:"MDSA30050", name:"Clinical Pharmacology",                                   credits:5, files:[] },
+              { code:"MDSA30060", name:"General Practice I",                                      credits:5, files:[] },
+              { code:"MDSA30070", name:"Population Medicine",                                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Advanced clinical placements: paediatrics, emergency, elective.", sections:[
+            { label:"Core", modules:[
+              { code:"MDSA40010", name:"Clinical Medicine II (Specialties)",                     credits:15, files:[] },
+              { code:"MDSA40020", name:"Clinical Surgery II",                                     credits:10, files:[] },
+              { code:"MDSA40030", name:"Paediatrics",                                             credits:10, files:[] },
+              { code:"MDSA40040", name:"Emergency Medicine",                                      credits:5, files:[] },
+              { code:"MDSA40050", name:"Elective Rotation",                                       credits:10, files:[] },
+              { code:"MDSA40060", name:"General Practice II",                                     credits:5, files:[] },
+              { code:"MDSA40070", name:"Medical Ethics & Law",                                    credits:5, files:[] },
+            ]},
+          ]},
+          { year:5, credits:60, note:"Stage 5 — Final year: integrated clinical attachments, finals preparation.", sections:[
+            { label:"Core", modules:[
+              { code:"MDSA50010", name:"Integrated Clinical Attachment — Medicine",              credits:15, files:[] },
+              { code:"MDSA50020", name:"Integrated Clinical Attachment — Surgery",               credits:15, files:[] },
+              { code:"MDSA50030", name:"Integrated Clinical Attachment — General Practice",      credits:10, files:[] },
+              { code:"MDSA50040", name:"Critical Appraisal & Research Project",                  credits:10, files:[] },
+              { code:"MDSA50050", name:"Prescribing & Clinical Skills Finals Prep",              credits:5, files:[] },
+              { code:"MDSA50060", name:"Special Study Module",                                   credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Nursing (General) ─────────────────────────────────────────────────
+      {
+        id:"ucd-nursing", name:"Nursing — General (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Foundations of nursing practice, anatomy, health assessment.", sections:[
+            { label:"Core", modules:[
+              { code:"NSS10010", name:"Foundations of Nursing Practice",                          credits:10, files:[] },
+              { code:"NSS10020", name:"Anatomy & Physiology for Nursing",                        credits:10, files:[] },
+              { code:"NSS10030", name:"Health Assessment Across the Lifespan",                   credits:5, files:[] },
+              { code:"NSS10040", name:"Communication and Interpersonal Skills",                   credits:5, files:[] },
+              { code:"NSS10050", name:"Nursing Ethics and Professional Practice",                 credits:5, files:[] },
+              { code:"NSS10060", name:"Clinical Placement I",                                     credits:10, files:[] },
+              { code:"NSS10070", name:"Pharmacology for Nurses I",                               credits:5, files:[] },
+              { code:"NSS10080", name:"Evidence-Based Practice I",                               credits:5, files:[] },
+              { code:"NSS10090", name:"Social Determinants of Health",                            credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Medical-surgical nursing, clinical placements.", sections:[
+            { label:"Core", modules:[
+              { code:"NSS20010", name:"Medical-Surgical Nursing I",                               credits:10, files:[] },
+              { code:"NSS20020", name:"Pathophysiology for Nurses",                              credits:5, files:[] },
+              { code:"NSS20030", name:"Pharmacology for Nurses II",                              credits:5, files:[] },
+              { code:"NSS20040", name:"Clinical Placement II",                                    credits:15, files:[] },
+              { code:"NSS20050", name:"Mental Health in Nursing",                                 credits:5, files:[] },
+              { code:"NSS20060", name:"Nursing Research Methods",                                 credits:5, files:[] },
+              { code:"NSS20070", name:"Acute Care Nursing",                                       credits:10, files:[] },
+              { code:"NSS20080", name:"Cultural Competence in Healthcare",                       credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Specialist areas, leadership, extended clinical placements.", sections:[
+            { label:"Core", modules:[
+              { code:"NSS30010", name:"Clinical Placement III",                                   credits:20, files:[] },
+              { code:"NSS30020", name:"Complex Nursing Care",                                     credits:10, files:[] },
+              { code:"NSS30030", name:"Community & Primary Care Nursing",                         credits:5, files:[] },
+              { code:"NSS30040", name:"Gerontological Nursing",                                   credits:5, files:[] },
+              { code:"NSS30050", name:"Nursing Leadership and Management",                        credits:5, files:[] },
+              { code:"NSS30060", name:"Child & Family Nursing",                                   credits:5, files:[] },
+              { code:"NSS30070", name:"Palliative and End of Life Care",                          credits:5, files:[] },
+              { code:"NSS30080", name:"Integrated Evidence-Based Practice",                       credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Dissertation, specialist placement, professional preparation.", sections:[
+            { label:"Core", modules:[
+              { code:"NSS40010", name:"Clinical Placement IV (Consolidated)",                    credits:20, files:[] },
+              { code:"NSS40020", name:"Research Dissertation",                                    credits:15, files:[] },
+              { code:"NSS40030", name:"Advanced Nursing Practice",                               credits:10, files:[] },
+              { code:"NSS40040", name:"Healthcare Systems and Policy",                            credits:5, files:[] },
+              { code:"NSS40050", name:"Professional Development & Transition to Practice",       credits:5, files:[] },
+              { code:"NSS40060", name:"Quality Improvement in Clinical Practice",                credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Pharmacology ─────────────────────────────────────────────────────
+      {
+        id:"ucd-pharmacology", name:"Pharmacology (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN200 common science entry: chemistry, biology, physiology.", sections:[
+            { label:"Core", modules:[
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+              { code:"CHEM10020", name:"Introduction to Physical Chemistry",                      credits:5, files:[] },
+              { code:"BIOL10020", name:"Introduction to Cell Biology & Biochemistry",             credits:5, files:[] },
+              { code:"PHYC10060", name:"Mechanics, Electricity & Waves",                         credits:5, files:[] },
+              { code:"MATH10060", name:"Differential & Integral Calculus",                        credits:5, files:[] },
+              { code:"BIOL10030", name:"Cell and Plant Biology",                                  credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"PHYC10120", name:"Thermal Physics, Optics and Modern Physics",              credits:5, files:[] },
+              { code:"CHEM10030", name:"Organic Chemistry I",                                     credits:5, files:[] },
+              { code:"BIOL10040", name:"Introduction to Microbiology",                            credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Biochemistry, pharmacology, physiology core.", sections:[
+            { label:"Core", modules:[
+              { code:"PHC20010", name:"Drug Action and Pharmacokinetics",                         credits:10, files:[] },
+              { code:"PHC20020", name:"Biochemical Pharmacology",                                 credits:5, files:[] },
+              { code:"PHYC20080", name:"Human Physiology",                                        credits:5, files:[] },
+              { code:"CHEM20080", name:"Medicinal Chemistry",                                     credits:5, files:[] },
+              { code:"PHC20030", name:"Molecular Biology for Pharmacologists",                    credits:5, files:[] },
+              { code:"PHC20040", name:"Neuropharmacology",                                        credits:5, files:[] },
+              { code:"STAT20110", name:"Biostatistics",                                           credits:5, files:[] },
+              { code:"PHC20050", name:"Endocrine Pharmacology",                                   credits:5, files:[] },
+              { code:"PHC20060", name:"Immunopharmacology",                                       credits:5, files:[] },
+              { code:"PHC20070", name:"Pharmacology Laboratory I",                               credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Advanced pharmacology, drug discovery, laboratory project.", sections:[
+            { label:"Core", modules:[
+              { code:"PHC30010", name:"Clinical Pharmacology",                                    credits:5, files:[] },
+              { code:"PHC30020", name:"Drug Discovery and Development",                           credits:5, files:[] },
+              { code:"PHC30030", name:"Cardiovascular & Respiratory Pharmacology",               credits:5, files:[] },
+              { code:"PHC30040", name:"Cancer Biology and Pharmacology",                          credits:5, files:[] },
+              { code:"PHC30050", name:"CNS Pharmacology",                                         credits:5, files:[] },
+              { code:"PHC30060", name:"Pharmacology Research Project",                            credits:15, files:[] },
+              { code:"PHC30070", name:"Toxicology",                                               credits:5, files:[] },
+              { code:"PHC30080", name:"Regulatory Science & Pharmacovigilance",                  credits:5, files:[] },
+              { code:"PHC30090", name:"Biopharmaceutics",                                         credits:5, files:[] },
+              { code:"PHC30100", name:"Pharmacogenomics",                                         credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Final year research thesis and advanced options.", sections:[
+            { label:"Core", modules:[
+              { code:"PHC40010", name:"Research Thesis",                                          credits:30, files:[] },
+              { code:"PHC40020", name:"Advanced Drug Targets",                                    credits:5, files:[] },
+              { code:"PHC40030", name:"Personalised Medicine",                                    credits:5, files:[] },
+              { code:"PHC40040", name:"Biotechnology Products",                                   credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"PHC40050", name:"Advanced Neuropharmacology",                               credits:5, files:[] },
+              { code:"PHC40060", name:"Pharmaceutical Business & Entrepreneurship",              credits:5, files:[] },
+              { code:"PHC40070", name:"Advanced Cancer Pharmacology",                             credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Physiotherapy ──────────────────────────────────────────────────────
+      {
+        id:"ucd-physiotherapy", name:"Physiotherapy (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Anatomy, physiology, foundations of physiotherapy (DN420).", sections:[
+            { label:"Core", modules:[
+              { code:"MDS10010", name:"Anatomy for Health Sciences I",                            credits:10, files:[] },
+              { code:"MDS10020", name:"Physiology for Health Sciences",                           credits:10, files:[] },
+              { code:"MDS10030", name:"Foundations of Physiotherapy",                             credits:5, files:[] },
+              { code:"MDS10040", name:"Professional Studies I",                                   credits:5, files:[] },
+              { code:"MDS10050", name:"Biomechanics I",                                           credits:5, files:[] },
+              { code:"MDS10060", name:"Clinical Placement I",                                     credits:10, files:[] },
+              { code:"MDS10070", name:"Kinesiology",                                              credits:5, files:[] },
+              { code:"MDS10080", name:"Evidence-Based Practice I",                               credits:5, files:[] },
+              { code:"MDS10090", name:"Communication in Healthcare",                              credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Musculoskeletal, neurology, cardiopulmonary, clinical placements.", sections:[
+            { label:"Core", modules:[
+              { code:"MDS20010", name:"Musculoskeletal Physiotherapy I",                          credits:10, files:[] },
+              { code:"MDS20020", name:"Neurological Physiotherapy I",                             credits:10, files:[] },
+              { code:"MDS20030", name:"Cardiopulmonary Physiotherapy",                            credits:5, files:[] },
+              { code:"MDS20040", name:"Clinical Placement II",                                    credits:15, files:[] },
+              { code:"MDS20050", name:"Pathophysiology for Physiotherapists",                    credits:5, files:[] },
+              { code:"MDS20060", name:"Research Methods",                                         credits:5, files:[] },
+              { code:"MDS20070", name:"Anatomy for Health Sciences II",                           credits:5, files:[] },
+              { code:"MDS20080", name:"Electrotherapy & Physical Agents",                        credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Advanced clinical placements, paediatrics, sports physio.", sections:[
+            { label:"Core", modules:[
+              { code:"MDS30010", name:"Clinical Placement III",                                   credits:20, files:[] },
+              { code:"MDS30020", name:"Musculoskeletal Physiotherapy II",                         credits:5, files:[] },
+              { code:"MDS30030", name:"Neurological Physiotherapy II",                            credits:5, files:[] },
+              { code:"MDS30040", name:"Paediatric Physiotherapy",                                 credits:5, files:[] },
+              { code:"MDS30050", name:"Sports & Exercise Physiotherapy",                          credits:5, files:[] },
+              { code:"MDS30060", name:"Clinical Reasoning in Practice",                           credits:5, files:[] },
+              { code:"MDS30070", name:"Research Project I",                                       credits:5, files:[] },
+              { code:"MDS30080", name:"Healthcare Policy & Management",                           credits:5, files:[] },
+              { code:"MDS30090", name:"Occupational Health Physiotherapy",                       credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Consolidated placement, research dissertation, complex cases.", sections:[
+            { label:"Core", modules:[
+              { code:"MDS40010", name:"Clinical Placement IV (Consolidated)",                    credits:20, files:[] },
+              { code:"MDS40020", name:"Research Dissertation",                                    credits:15, files:[] },
+              { code:"MDS40030", name:"Complex Cases in Physiotherapy",                           credits:10, files:[] },
+              { code:"MDS40040", name:"Leadership in Physiotherapy Practice",                    credits:5, files:[] },
+              { code:"MDS40050", name:"Advanced Clinical Decision Making",                        credits:5, files:[] },
+              { code:"MDS40060", name:"Physiotherapy in the Community",                           credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Human Nutrition ────────────────────────────────────────────────────
+      {
+        id:"ucd-human-nutrition", name:"Human Nutrition (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN262 entry: biology, chemistry, physiology foundations.", sections:[
+            { label:"Core", modules:[
+              { code:"BIOL10020", name:"Introduction to Cell Biology & Biochemistry",             credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+              { code:"CHEM10020", name:"Introduction to Physical Chemistry",                      credits:5, files:[] },
+              { code:"FDSC10010", name:"Food Chemistry",                                          credits:5, files:[] },
+              { code:"HMS10010",  name:"Foundations of Human Nutrition",                          credits:5, files:[] },
+              { code:"HMS10020",  name:"Human Biology and Physiology",                            credits:5, files:[] },
+              { code:"MATH10060", name:"Differential & Integral Calculus",                        credits:5, files:[] },
+              { code:"STAT10060", name:"Introduction to Biostatistics",                           credits:5, files:[] },
+              { code:"HMS10030",  name:"Food and Society",                                        credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Macronutrients, micronutrients, biochemistry, assessment.", sections:[
+            { label:"Core", modules:[
+              { code:"HMS20010",  name:"Carbohydrate and Lipid Metabolism",                       credits:5, files:[] },
+              { code:"HMS20020",  name:"Protein and Energy Metabolism",                           credits:5, files:[] },
+              { code:"HMS20030",  name:"Vitamins and Minerals",                                   credits:5, files:[] },
+              { code:"HMS20040",  name:"Nutritional Assessment Methods",                          credits:5, files:[] },
+              { code:"HMS20050",  name:"Gastrointestinal Physiology and Nutrition",              credits:5, files:[] },
+              { code:"HMS20060",  name:"Epidemiology for Nutritionists",                          credits:5, files:[] },
+              { code:"HMS20070",  name:"Dietetics Fundamentals",                                  credits:5, files:[] },
+              { code:"HMS20080",  name:"Public Health Nutrition",                                 credits:5, files:[] },
+              { code:"FDSC20100", name:"Agricultural Biochemistry",                               credits:5, files:[] },
+              { code:"HMS20090",  name:"Food Safety and Regulation",                              credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Clinical nutrition, therapeutic dietetics, research methods.", sections:[
+            { label:"Core", modules:[
+              { code:"HMS30010",  name:"Clinical Nutrition I",                                    credits:10, files:[] },
+              { code:"HMS30020",  name:"Therapeutic Dietetics",                                   credits:10, files:[] },
+              { code:"HMS30030",  name:"Sports and Exercise Nutrition",                           credits:5, files:[] },
+              { code:"HMS30040",  name:"Nutrition through the Life Cycle",                        credits:5, files:[] },
+              { code:"HMS30050",  name:"Nutritional Biochemistry",                                credits:5, files:[] },
+              { code:"HMS30060",  name:"Research Dissertation",                                   credits:10, files:[] },
+              { code:"HMS30070",  name:"Food Policy and Food Systems",                            credits:5, files:[] },
+              { code:"HMS30080",  name:"Applied Nutrition Practicum",                             credits:5, files:[] },
+              { code:"HMS30090",  name:"Eating Disorders & Behaviour",                            credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Advanced clinical nutrition, placement, dissertation continuation.", sections:[
+            { label:"Core", modules:[
+              { code:"HMS40010",  name:"Clinical Placement (Nutrition & Dietetics)",             credits:20, files:[] },
+              { code:"HMS40020",  name:"Advanced Clinical Nutrition II",                          credits:10, files:[] },
+              { code:"HMS40030",  name:"Global Nutrition",                                        credits:5, files:[] },
+              { code:"HMS40040",  name:"Nutrigenomics",                                           credits:5, files:[] },
+              { code:"HMS40050",  name:"Health Economics and Healthcare Policy",                  credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"HMS40060",  name:"Paediatric Nutrition",                                    credits:5, files:[] },
+              { code:"HMS40070",  name:"Oncology Nutrition",                                      credits:5, files:[] },
+              { code:"HMS40080",  name:"Obesity and Weight Management",                           credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Midwifery ─────────────────────────────────────────────────────────
+      {
+        id:"ucd-midwifery", name:"Midwifery (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Foundations of midwifery, anatomy & physiology (DN452).", sections:[
+            { label:"Core", modules:[
+              { code:"NSS10010", name:"Foundations of Nursing Practice",                          credits:10, files:[] },
+              { code:"NSS10020", name:"Anatomy & Physiology for Nursing",                        credits:10, files:[] },
+              { code:"NSS40010", name:"Introduction to Midwifery",                               credits:5, files:[] },
+              { code:"NSS10040", name:"Communication and Interpersonal Skills",                   credits:5, files:[] },
+              { code:"NSS10050", name:"Nursing Ethics and Professional Practice",                 credits:5, files:[] },
+              { code:"NSS40020", name:"Clinical Placement I (Midwifery)",                        credits:10, files:[] },
+              { code:"NSS10070", name:"Pharmacology for Nurses I",                               credits:5, files:[] },
+              { code:"NSS40030", name:"Reproductive Anatomy and Physiology",                     credits:5, files:[] },
+              { code:"NSS10080", name:"Evidence-Based Practice I",                               credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Intrapartum care, neonatal care, antenatal & postnatal placements.", sections:[
+            { label:"Core", modules:[
+              { code:"NSS40040", name:"Antenatal Care",                                           credits:10, files:[] },
+              { code:"NSS40050", name:"Intrapartum Care I",                                       credits:10, files:[] },
+              { code:"NSS40060", name:"Neonatal Care",                                            credits:5, files:[] },
+              { code:"NSS40070", name:"Postnatal Care",                                           credits:5, files:[] },
+              { code:"NSS40080", name:"Clinical Placement II (Midwifery)",                       credits:15, files:[] },
+              { code:"NSS20060", name:"Nursing Research Methods",                                 credits:5, files:[] },
+              { code:"NSS40090", name:"Perinatal Mental Health",                                  credits:5, files:[] },
+              { code:"NSS40100", name:"Pharmacology for Midwives",                               credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Complex pregnancies, leadership, extended clinical placement.", sections:[
+            { label:"Core", modules:[
+              { code:"NSS40110", name:"Clinical Placement III (Midwifery)",                      credits:20, files:[] },
+              { code:"NSS40120", name:"Intrapartum Care II (Complex)",                           credits:10, files:[] },
+              { code:"NSS40130", name:"High-Risk Obstetrics",                                    credits:5, files:[] },
+              { code:"NSS40140", name:"Community Midwifery",                                     credits:5, files:[] },
+              { code:"NSS40150", name:"Bereavement and Loss in Midwifery",                       credits:5, files:[] },
+              { code:"NSS30050", name:"Nursing Leadership and Management",                        credits:5, files:[] },
+              { code:"NSS40160", name:"Global Maternal Health",                                   credits:5, files:[] },
+              { code:"NSS40170", name:"Research Dissertation",                                    credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Consolidated clinical placement, dissertation, practice transition.", sections:[
+            { label:"Core", modules:[
+              { code:"NSS40180", name:"Clinical Placement IV (Consolidated Midwifery)",          credits:25, files:[] },
+              { code:"NSS40190", name:"Research Dissertation (Midwifery)",                       credits:15, files:[] },
+              { code:"NSS40200", name:"Advanced Midwifery Practice",                             credits:10, files:[] },
+              { code:"NSS40210", name:"Professional Development & Transition to Practice",       credits:5, files:[] },
+              { code:"NSS40220", name:"Quality and Safety in Midwifery",                         credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Radiography ───────────────────────────────────────────────────────
+      {
+        id:"ucd-radiography", name:"Radiography (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Anatomy, physics, imaging principles (DN410).", sections:[
+            { label:"Core", modules:[
+              { code:"MDS10010", name:"Anatomy for Health Sciences I",                            credits:10, files:[] },
+              { code:"PHYC10060", name:"Mechanics, Electricity & Waves",                         credits:5, files:[] },
+              { code:"MDS10020", name:"Physiology for Health Sciences",                           credits:5, files:[] },
+              { code:"MDS50010", name:"Introduction to Radiography",                              credits:5, files:[] },
+              { code:"MDS50020", name:"Radiation Physics",                                        credits:5, files:[] },
+              { code:"MDS50030", name:"Clinical Placement I (Radiography)",                      credits:10, files:[] },
+              { code:"MDS10080", name:"Evidence-Based Practice I",                               credits:5, files:[] },
+              { code:"MDS50040", name:"Radiographic Anatomy I",                                   credits:5, files:[] },
+              { code:"MDS10040", name:"Professional Studies I",                                   credits:5, files:[] },
+              { code:"MDS10090", name:"Communication in Healthcare",                              credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Imaging techniques, radiation protection, clinical placements.", sections:[
+            { label:"Core", modules:[
+              { code:"MDS50050", name:"Radiographic Practice I",                                  credits:10, files:[] },
+              { code:"MDS50060", name:"Radiation Protection",                                     credits:5, files:[] },
+              { code:"MDS50070", name:"Digital Imaging Systems",                                  credits:5, files:[] },
+              { code:"MDS50080", name:"Clinical Placement II (Radiography)",                     credits:15, files:[] },
+              { code:"MDS50090", name:"Radiographic Anatomy II",                                  credits:5, files:[] },
+              { code:"MDS20060", name:"Research Methods",                                         credits:5, files:[] },
+              { code:"MDS50100", name:"Contrast Media and Fluoroscopy",                          credits:5, files:[] },
+              { code:"MDS50110", name:"Patient Care in Radiography",                             credits:5, files:[] },
+              { code:"MDS50120", name:"Pharmacology for Radiographers",                          credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Advanced imaging, CT, MRI, nuclear medicine, placements.", sections:[
+            { label:"Core", modules:[
+              { code:"MDS50130", name:"Clinical Placement III (Radiography)",                    credits:20, files:[] },
+              { code:"MDS50140", name:"Computed Tomography",                                      credits:5, files:[] },
+              { code:"MDS50150", name:"MRI Principles",                                           credits:5, files:[] },
+              { code:"MDS50160", name:"Nuclear Medicine",                                         credits:5, files:[] },
+              { code:"MDS50170", name:"Radiographic Practice II",                                 credits:5, files:[] },
+              { code:"MDS50180", name:"Paediatric Radiography",                                   credits:5, files:[] },
+              { code:"MDS50190", name:"Research Project",                                         credits:10, files:[] },
+              { code:"MDS50200", name:"Quality Assurance in Radiology",                          credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Consolidated placement, dissertation, advanced modalities.", sections:[
+            { label:"Core", modules:[
+              { code:"MDS50210", name:"Clinical Placement IV (Consolidated Radiography)",        credits:20, files:[] },
+              { code:"MDS50220", name:"Research Dissertation",                                    credits:15, files:[] },
+              { code:"MDS50230", name:"Advanced Radiographic Practice",                           credits:10, files:[] },
+              { code:"MDS50240", name:"Healthcare Leadership & Management",                       credits:5, files:[] },
+              { code:"MDS50250", name:"Radiography in the Community",                             credits:5, files:[] },
+              { code:"MDS50260", name:"Interventional Radiology",                                 credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Sport, Health & Exercise Science ────────────────────────────────
+      {
+        id:"ucd-sport-health", name:"Sport, Health & Exercise Science (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN425 entry: sport science foundations, anatomy, physiology.", sections:[
+            { label:"Core", modules:[
+              { code:"MDSA10010", name:"Anatomy I",                                               credits:5, files:[] },
+              { code:"PHYC10180", name:"Physics for Agricultural Science",                        credits:5, files:[] },
+              { code:"BIOL10010", name:"Animal Biology and Evolution",                            credits:5, files:[] },
+              { code:"MDSK10010", name:"Introduction to Sport Science",                           credits:5, files:[] },
+              { code:"MDSK10020", name:"Exercise Physiology I",                                   credits:5, files:[] },
+              { code:"MDSK10030", name:"Biomechanics I",                                          credits:5, files:[] },
+              { code:"MDSK10040", name:"Psychology of Sport",                                     credits:5, files:[] },
+              { code:"STAT10060", name:"Introduction to Biostatistics",                           credits:5, files:[] },
+              { code:"MDSK10050", name:"Nutrition for Sport",                                     credits:5, files:[] },
+              { code:"MDSK10060", name:"Physical Activity and Health",                            credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Applied physiology, strength & conditioning, research methods.", sections:[
+            { label:"Core", modules:[
+              { code:"MDSK20010", name:"Exercise Physiology II",                                  credits:10, files:[] },
+              { code:"MDSK20020", name:"Strength and Conditioning",                               credits:5, files:[] },
+              { code:"MDSK20030", name:"Biomechanics II (Applied)",                               credits:5, files:[] },
+              { code:"MDSK20040", name:"Health-Related Fitness Assessment",                       credits:5, files:[] },
+              { code:"MDSK20050", name:"Sports Injury Prevention",                                credits:5, files:[] },
+              { code:"MDSK20060", name:"Research Methods in Sport Science",                       credits:5, files:[] },
+              { code:"MDSK20070", name:"Performance Analysis",                                    credits:5, files:[] },
+              { code:"MDSK20080", name:"Exercise Psychology",                                     credits:5, files:[] },
+              { code:"MDSK20090", name:"Cardiovascular & Respiratory Physiology",               credits:10, files:[] },
+              { code:"MDSK20100", name:"Applied Nutrition",                                       credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Dissertation, advanced modules, work placement.", sections:[
+            { label:"Core", modules:[
+              { code:"MDSK30010", name:"Professional Work Placement",                             credits:10, files:[] },
+              { code:"MDSK30020", name:"Research Dissertation",                                   credits:20, files:[] },
+              { code:"MDSK30030", name:"Environmental Exercise Physiology",                       credits:5, files:[] },
+              { code:"MDSK30040", name:"Clinical Exercise Science",                               credits:5, files:[] },
+              { code:"MDSK30050", name:"High Performance Sport",                                  credits:5, files:[] },
+              { code:"MDSK30060", name:"Exercise Epidemiology",                                   credits:5, files:[] },
+              { code:"MDSK30070", name:"Paediatric Exercise Science",                             credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"MDSK30080", name:"Ageing and Physical Activity",                            credits:5, files:[] },
+              { code:"MDSK30090", name:"Talent Identification and Development",                   credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+    ]
+  });
+
+
+  // ─── UCD MATHS & COMPUTER SCIENCE ────────────────────────────────────────
+  SCHOOLS.push({
+    id:"ucd-mathscs-school", name:"UCD School of Mathematics & Statistics / Computer Science", icon:"💻", uni:"ucd",
+    sub:"University College Dublin",
+    courses:[
+      // ── Computer Science ──────────────────────────────────────────────────
+      {
+        id:"ucd-computer-science", name:"Computer Science (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN201 entry: programming, maths, computer systems foundations.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP10010", name:"Introduction to Programming I",                           credits:5, files:[] },
+              { code:"COMP10020", name:"Introduction to Programming II",                          credits:5, files:[] },
+              { code:"COMP10030", name:"Computer Organisation",                                   credits:5, files:[] },
+              { code:"COMP10050", name:"Discrete Mathematics for Computer Science",              credits:5, files:[] },
+              { code:"MATH10060", name:"Differential & Integral Calculus",                        credits:5, files:[] },
+              { code:"MATH10070", name:"Linear Algebra and Applications",                         credits:5, files:[] },
+              { code:"COMP10060", name:"Information & Communication Technology",                  credits:5, files:[] },
+              { code:"COMP10070", name:"Technical Communication for CS",                          credits:5, files:[] },
+              { code:"STAT10060", name:"Introduction to Biostatistics",                           credits:5, files:[] },
+              { code:"COMP10080", name:"Problem Solving in Computer Science",                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Algorithms, data structures, software engineering, systems.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP20010", name:"Algorithms and Data Structures",                          credits:10, files:[] },
+              { code:"COMP20020", name:"Software Engineering",                                    credits:5, files:[] },
+              { code:"COMP20030", name:"Operating Systems",                                       credits:5, files:[] },
+              { code:"COMP20040", name:"Computer Networks",                                       credits:5, files:[] },
+              { code:"COMP20050", name:"Database Systems",                                        credits:5, files:[] },
+              { code:"COMP20060", name:"Theory of Computation",                                   credits:5, files:[] },
+              { code:"MATH20030", name:"Multivariable Calculus",                                  credits:5, files:[] },
+              { code:"STAT20010", name:"Probability Theory",                                      credits:5, files:[] },
+              { code:"COMP20070", name:"Systems Programming",                                     credits:5, files:[] },
+              { code:"COMP20080", name:"Human–Computer Interaction",                              credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Advanced modules, team project, options.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP30010", name:"Team Project",                                            credits:10, files:[] },
+              { code:"COMP30020", name:"Compiler Design",                                         credits:5, files:[] },
+              { code:"COMP30030", name:"Artificial Intelligence",                                 credits:5, files:[] },
+              { code:"COMP30040", name:"Machine Learning",                                        credits:5, files:[] },
+              { code:"COMP30050", name:"Computer Graphics",                                       credits:5, files:[] },
+              { code:"COMP30060", name:"Distributed Systems",                                     credits:5, files:[] },
+              { code:"COMP30070", name:"Cryptography and Security",                               credits:5, files:[] },
+              { code:"COMP30080", name:"Advanced Software Engineering",                           credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"COMP30090", name:"Cloud Computing",                                         credits:5, files:[] },
+              { code:"COMP30100", name:"Natural Language Processing",                             credits:5, files:[] },
+              { code:"COMP30110", name:"Computer Vision",                                         credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Research dissertation or Final Year Project, advanced options.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP40010", name:"Final Year Project",                                      credits:30, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"COMP40020", name:"Advanced Algorithms",                                     credits:5, files:[] },
+              { code:"COMP40030", name:"Deep Learning",                                           credits:5, files:[] },
+              { code:"COMP40040", name:"Internet of Things",                                      credits:5, files:[] },
+              { code:"COMP40050", name:"Bioinformatics",                                          credits:5, files:[] },
+              { code:"COMP40060", name:"Autonomous Systems",                                      credits:5, files:[] },
+              { code:"COMP40070", name:"Advanced Security",                                       credits:5, files:[] },
+              { code:"COMP40080", name:"Quantum Computing",                                       credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Computer Science with Data Science ───────────────────────────────
+      {
+        id:"ucd-cs-data-science", name:"Computer Science with Data Science (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — Common CS/Data Science entry: programming, maths, statistics.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP10010", name:"Introduction to Programming I",                           credits:5, files:[] },
+              { code:"COMP10020", name:"Introduction to Programming II",                          credits:5, files:[] },
+              { code:"COMP10030", name:"Computer Organisation",                                   credits:5, files:[] },
+              { code:"COMP10050", name:"Discrete Mathematics for Computer Science",              credits:5, files:[] },
+              { code:"MATH10060", name:"Differential & Integral Calculus",                        credits:5, files:[] },
+              { code:"MATH10070", name:"Linear Algebra and Applications",                         credits:5, files:[] },
+              { code:"STAT10060", name:"Introduction to Biostatistics",                           credits:5, files:[] },
+              { code:"COMP10060", name:"Information & Communication Technology",                  credits:5, files:[] },
+              { code:"COMP10070", name:"Technical Communication for CS",                          credits:5, files:[] },
+              { code:"STAT10020", name:"Introduction to Data Analytics",                          credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Data structures, databases, probability, machine learning foundations.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP20010", name:"Algorithms and Data Structures",                          credits:10, files:[] },
+              { code:"COMP20050", name:"Database Systems",                                        credits:5, files:[] },
+              { code:"STAT20010", name:"Probability Theory",                                      credits:5, files:[] },
+              { code:"STAT20020", name:"Statistical Inference",                                   credits:5, files:[] },
+              { code:"COMP20030", name:"Operating Systems",                                       credits:5, files:[] },
+              { code:"STAT20030", name:"Data Visualisation",                                      credits:5, files:[] },
+              { code:"COMP20060", name:"Theory of Computation",                                   credits:5, files:[] },
+              { code:"STAT20040", name:"Applied Regression Analysis",                             credits:5, files:[] },
+              { code:"COMP20020", name:"Software Engineering",                                    credits:5, files:[] },
+              { code:"COMP20080", name:"Human–Computer Interaction",                              credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Machine learning, big data, AI, data engineering, team project.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP30010", name:"Team Project",                                            credits:10, files:[] },
+              { code:"COMP30040", name:"Machine Learning",                                        credits:5, files:[] },
+              { code:"COMP30030", name:"Artificial Intelligence",                                 credits:5, files:[] },
+              { code:"STAT30020", name:"Big Data Analytics",                                      credits:5, files:[] },
+              { code:"STAT30030", name:"Bayesian Analysis",                                       credits:5, files:[] },
+              { code:"COMP30080", name:"Advanced Software Engineering",                           credits:5, files:[] },
+              { code:"COMP30070", name:"Cryptography and Security",                               credits:5, files:[] },
+              { code:"STAT30040", name:"Data Engineering",                                        credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"COMP30100", name:"Natural Language Processing",                             credits:5, files:[] },
+              { code:"COMP30110", name:"Computer Vision",                                         credits:5, files:[] },
+              { code:"STAT30050", name:"Statistical Learning",                                    credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Research dissertation and advanced data science options.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP40010", name:"Final Year Project",                                      credits:30, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"COMP40030", name:"Deep Learning",                                           credits:5, files:[] },
+              { code:"STAT40010", name:"Advanced Statistical Modelling",                          credits:5, files:[] },
+              { code:"STAT40020", name:"Time Series Analysis",                                    credits:5, files:[] },
+              { code:"COMP40050", name:"Bioinformatics",                                          credits:5, files:[] },
+              { code:"STAT40030", name:"Data Mining",                                             credits:5, files:[] },
+              { code:"COMP40060", name:"Autonomous Systems",                                      credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Mathematics ────────────────────────────────────────────────────────
+      {
+        id:"ucd-mathematics", name:"Mathematics (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN200 common science entry: calculus, linear algebra, mechanics.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH10060", name:"Differential & Integral Calculus",                        credits:5, files:[] },
+              { code:"MATH10070", name:"Linear Algebra and Applications",                         credits:5, files:[] },
+              { code:"MATH10080", name:"Multivariable Calculus for Science",                     credits:5, files:[] },
+              { code:"MATH10090", name:"Introduction to Analysis",                               credits:5, files:[] },
+              { code:"PHYC10060", name:"Mechanics, Electricity & Waves",                         credits:5, files:[] },
+              { code:"PHYC10120", name:"Thermal Physics, Optics and Modern Physics",              credits:5, files:[] },
+              { code:"CHEM10010", name:"Introduction to the Chemistry of Biomolecules",           credits:5, files:[] },
+              { code:"CHEM10020", name:"Introduction to Physical Chemistry",                      credits:5, files:[] },
+              { code:"STAT10060", name:"Introduction to Biostatistics",                           credits:5, files:[] },
+              { code:"COMP10010", name:"Introduction to Programming I",                           credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Real analysis, abstract algebra, complex analysis, ODEs.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH20030", name:"Multivariable Calculus",                                  credits:5, files:[] },
+              { code:"MATH20040", name:"Real Analysis",                                           credits:10, files:[] },
+              { code:"MATH20050", name:"Abstract Algebra",                                        credits:10, files:[] },
+              { code:"MATH20060", name:"Ordinary Differential Equations",                         credits:5, files:[] },
+              { code:"MATH20070", name:"Complex Analysis",                                        credits:5, files:[] },
+              { code:"STAT20010", name:"Probability Theory",                                      credits:5, files:[] },
+              { code:"MATH20080", name:"Metric Spaces",                                           credits:5, files:[] },
+              { code:"MATH20090", name:"Linear Programming and Optimisation",                    credits:5, files:[] },
+              { code:"MATH20100", name:"Numerical Analysis I",                                    credits:5, files:[] },
+              { code:"MATH20110", name:"Classical Mechanics",                                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Advanced algebra, topology, PDEs, options.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH30010", name:"Topology",                                                credits:5, files:[] },
+              { code:"MATH30020", name:"Advanced Abstract Algebra",                               credits:5, files:[] },
+              { code:"MATH30030", name:"Partial Differential Equations",                          credits:5, files:[] },
+              { code:"MATH30040", name:"Functional Analysis",                                     credits:5, files:[] },
+              { code:"MATH30050", name:"Research Project",                                        credits:10, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"MATH30060", name:"Number Theory",                                           credits:5, files:[] },
+              { code:"MATH30070", name:"Mathematical Physics",                                    credits:5, files:[] },
+              { code:"MATH30080", name:"Differential Geometry",                                   credits:5, files:[] },
+              { code:"MATH30090", name:"Numerical Analysis II",                                   credits:5, files:[] },
+              { code:"STAT30010", name:"Statistical Inference",                                   credits:5, files:[] },
+              { code:"COMP30040", name:"Machine Learning",                                        credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Dissertation and advanced specialist options.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH40010", name:"Mathematics Dissertation",                                credits:30, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"MATH40020", name:"Advanced Topics in Algebra",                              credits:5, files:[] },
+              { code:"MATH40030", name:"Advanced Topology",                                       credits:5, files:[] },
+              { code:"MATH40040", name:"Stochastic Processes",                                    credits:5, files:[] },
+              { code:"MATH40050", name:"Mathematical Finance",                                    credits:5, files:[] },
+              { code:"MATH40060", name:"Advanced Numerical Analysis",                             credits:5, files:[] },
+              { code:"MATH40070", name:"Advanced Mathematical Physics",                           credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Applied & Computational Mathematics ──────────────────────────────
+      {
+        id:"ucd-applied-comp-maths", name:"Applied & Computational Mathematics (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN200 entry: calculus, programming, mechanics.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH10060", name:"Differential & Integral Calculus",                        credits:5, files:[] },
+              { code:"MATH10070", name:"Linear Algebra and Applications",                         credits:5, files:[] },
+              { code:"MATH10080", name:"Multivariable Calculus for Science",                     credits:5, files:[] },
+              { code:"PHYC10060", name:"Mechanics, Electricity & Waves",                         credits:5, files:[] },
+              { code:"PHYC10120", name:"Thermal Physics, Optics and Modern Physics",              credits:5, files:[] },
+              { code:"COMP10010", name:"Introduction to Programming I",                           credits:5, files:[] },
+              { code:"CHEM10020", name:"Introduction to Physical Chemistry",                      credits:5, files:[] },
+              { code:"MATH10090", name:"Introduction to Analysis",                               credits:5, files:[] },
+              { code:"STAT10060", name:"Introduction to Biostatistics",                           credits:5, files:[] },
+              { code:"COMP10050", name:"Discrete Mathematics for Computer Science",              credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Numerical methods, ODEs, scientific computing, analysis.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH20030", name:"Multivariable Calculus",                                  credits:5, files:[] },
+              { code:"MATH20060", name:"Ordinary Differential Equations",                         credits:5, files:[] },
+              { code:"MATH20100", name:"Numerical Analysis I",                                    credits:5, files:[] },
+              { code:"MATH20040", name:"Real Analysis",                                           credits:5, files:[] },
+              { code:"MATH20050", name:"Abstract Algebra",                                        credits:5, files:[] },
+              { code:"COMP20090", name:"Scientific Programming",                                  credits:5, files:[] },
+              { code:"STAT20010", name:"Probability Theory",                                      credits:5, files:[] },
+              { code:"MATH20070", name:"Complex Analysis",                                        credits:5, files:[] },
+              { code:"MATH20110", name:"Classical Mechanics",                                     credits:5, files:[] },
+              { code:"MATH20090", name:"Linear Programming and Optimisation",                    credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — PDEs, computational fluid dynamics, research project, options.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH30030", name:"Partial Differential Equations",                          credits:5, files:[] },
+              { code:"MATH30090", name:"Numerical Analysis II",                                   credits:5, files:[] },
+              { code:"MATH30050", name:"Research Project",                                        credits:10, files:[] },
+              { code:"MATH30100", name:"Continuum Mechanics",                                     credits:5, files:[] },
+              { code:"MATH30110", name:"Computational Fluid Dynamics",                            credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"MATH30070", name:"Mathematical Physics",                                    credits:5, files:[] },
+              { code:"STAT30010", name:"Statistical Inference",                                   credits:5, files:[] },
+              { code:"COMP30040", name:"Machine Learning",                                        credits:5, files:[] },
+              { code:"MATH30060", name:"Number Theory",                                           credits:5, files:[] },
+              { code:"MATH30080", name:"Differential Geometry",                                   credits:5, files:[] },
+              { code:"MATH30120", name:"Mathematical Biology",                                    credits:5, files:[] },
+              { code:"MATH30130", name:"Finance Mathematics",                                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Research dissertation and advanced computational options.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH40010", name:"Mathematics Dissertation",                                credits:30, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"MATH40060", name:"Advanced Numerical Analysis",                             credits:5, files:[] },
+              { code:"MATH40070", name:"Advanced Mathematical Physics",                           credits:5, files:[] },
+              { code:"MATH40040", name:"Stochastic Processes",                                    credits:5, files:[] },
+              { code:"MATH40050", name:"Mathematical Finance",                                    credits:5, files:[] },
+              { code:"COMP40030", name:"Deep Learning",                                           credits:5, files:[] },
+              { code:"MATH40080", name:"Advanced Computational Mathematics",                      credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Financial Mathematics ─────────────────────────────────────────────
+      {
+        id:"ucd-financial-maths", name:"Financial Mathematics (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN200 entry: calculus, probability, introductory finance.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH10060", name:"Differential & Integral Calculus",                        credits:5, files:[] },
+              { code:"MATH10070", name:"Linear Algebra and Applications",                         credits:5, files:[] },
+              { code:"MATH10080", name:"Multivariable Calculus for Science",                     credits:5, files:[] },
+              { code:"STAT10060", name:"Introduction to Biostatistics",                           credits:5, files:[] },
+              { code:"ECON10030", name:"Principles of Economics I",                              credits:5, files:[] },
+              { code:"ACM10030", name:"Introduction to Financial Mathematics",                    credits:5, files:[] },
+              { code:"COMP10010", name:"Introduction to Programming I",                           credits:5, files:[] },
+              { code:"ACM10040", name:"Financial Accounting Fundamentals",                        credits:5, files:[] },
+              { code:"PHYC10060", name:"Mechanics, Electricity & Waves",                         credits:5, files:[] },
+              { code:"MATH10090", name:"Introduction to Analysis",                               credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Probability, stochastic processes, financial modelling.", sections:[
+            { label:"Core", modules:[
+              { code:"STAT20010", name:"Probability Theory",                                      credits:5, files:[] },
+              { code:"MATH20030", name:"Multivariable Calculus",                                  credits:5, files:[] },
+              { code:"MATH20060", name:"Ordinary Differential Equations",                         credits:5, files:[] },
+              { code:"ACM20010", name:"Financial Mathematics I",                                  credits:10, files:[] },
+              { code:"MATH20040", name:"Real Analysis",                                           credits:5, files:[] },
+              { code:"ECON20020", name:"Intermediate Microeconomics",                             credits:5, files:[] },
+              { code:"STAT20020", name:"Statistical Inference",                                   credits:5, files:[] },
+              { code:"ACM20020", name:"Numerical Methods in Finance",                             credits:5, files:[] },
+              { code:"ACM20030", name:"Derivatives Pricing I",                                    credits:5, files:[] },
+              { code:"MATH20090", name:"Linear Programming and Optimisation",                    credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Advanced derivatives, risk, actuarial science, research project.", sections:[
+            { label:"Core", modules:[
+              { code:"ACM30010", name:"Financial Mathematics II",                                 credits:10, files:[] },
+              { code:"ACM30020", name:"Financial Risk Management",                                credits:5, files:[] },
+              { code:"ACM30030", name:"Stochastic Calculus",                                      credits:10, files:[] },
+              { code:"MATH30050", name:"Research Project",                                        credits:10, files:[] },
+              { code:"ACM30040", name:"Actuarial Mathematics I",                                  credits:5, files:[] },
+              { code:"STAT30010", name:"Statistical Inference",                                   credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"ACM30050", name:"Portfolio Theory and Asset Pricing",                       credits:5, files:[] },
+              { code:"ACM30060", name:"Derivatives Pricing II",                                   credits:5, files:[] },
+              { code:"ECON30010", name:"Financial Economics",                                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Dissertation, advanced financial mathematics and actuarial options.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH40010", name:"Mathematics Dissertation",                                credits:30, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"ACM40010", name:"Advanced Financial Mathematics",                           credits:5, files:[] },
+              { code:"ACM40020", name:"Advanced Stochastic Processes",                            credits:5, files:[] },
+              { code:"ACM40030", name:"Actuarial Mathematics II",                                 credits:5, files:[] },
+              { code:"ACM40040", name:"Computational Finance",                                    credits:5, files:[] },
+              { code:"ACM40050", name:"Credit Risk Modelling",                                    credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+      // ── Statistics & Data Science ─────────────────────────────────────────
+      {
+        id:"ucd-statistics-data-science", name:"Statistics & Data Science (BSc)", years:[
+          { year:1, credits:60, note:"Stage 1 — DN200 entry: statistics, programming, calculus, probability.", sections:[
+            { label:"Core", modules:[
+              { code:"STAT10060", name:"Introduction to Biostatistics",                           credits:5, files:[] },
+              { code:"STAT10020", name:"Introduction to Data Analytics",                          credits:5, files:[] },
+              { code:"MATH10060", name:"Differential & Integral Calculus",                        credits:5, files:[] },
+              { code:"MATH10070", name:"Linear Algebra and Applications",                         credits:5, files:[] },
+              { code:"COMP10010", name:"Introduction to Programming I",                           credits:5, files:[] },
+              { code:"COMP10020", name:"Introduction to Programming II",                          credits:5, files:[] },
+              { code:"PHYC10060", name:"Mechanics, Electricity & Waves",                         credits:5, files:[] },
+              { code:"CHEM10020", name:"Introduction to Physical Chemistry",                      credits:5, files:[] },
+              { code:"MATH10090", name:"Introduction to Analysis",                               credits:5, files:[] },
+              { code:"BIOL10020", name:"Introduction to Cell Biology & Biochemistry",             credits:5, files:[] },
+            ]},
+          ]},
+          { year:2, credits:60, note:"Stage 2 — Statistical inference, regression, data analysis, probability.", sections:[
+            { label:"Core", modules:[
+              { code:"STAT20010", name:"Probability Theory",                                      credits:5, files:[] },
+              { code:"STAT20020", name:"Statistical Inference",                                   credits:5, files:[] },
+              { code:"STAT20030", name:"Data Visualisation",                                      credits:5, files:[] },
+              { code:"STAT20040", name:"Applied Regression Analysis",                             credits:5, files:[] },
+              { code:"STAT20050", name:"Statistical Computing",                                   credits:5, files:[] },
+              { code:"COMP20010", name:"Algorithms and Data Structures",                          credits:5, files:[] },
+              { code:"COMP20050", name:"Database Systems",                                        credits:5, files:[] },
+              { code:"MATH20040", name:"Real Analysis",                                           credits:5, files:[] },
+              { code:"MATH20030", name:"Multivariable Calculus",                                  credits:5, files:[] },
+              { code:"STAT20060", name:"Survey Sampling",                                         credits:5, files:[] },
+            ]},
+          ]},
+          { year:3, credits:60, note:"Stage 3 — Machine learning, Bayesian statistics, big data, research project.", sections:[
+            { label:"Core", modules:[
+              { code:"COMP30040", name:"Machine Learning",                                        credits:5, files:[] },
+              { code:"STAT30020", name:"Big Data Analytics",                                      credits:5, files:[] },
+              { code:"STAT30030", name:"Bayesian Analysis",                                       credits:5, files:[] },
+              { code:"STAT30040", name:"Data Engineering",                                        credits:5, files:[] },
+              { code:"STAT30050", name:"Statistical Learning",                                    credits:5, files:[] },
+              { code:"MATH30050", name:"Research Project",                                        credits:10, files:[] },
+              { code:"STAT30060", name:"Experimental Design",                                     credits:5, files:[] },
+              { code:"STAT30070", name:"Multivariate Analysis",                                   credits:5, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"COMP30100", name:"Natural Language Processing",                             credits:5, files:[] },
+              { code:"STAT30080", name:"Clinical Trials and Biostatistics",                       credits:5, files:[] },
+              { code:"ECON30010", name:"Financial Economics",                                     credits:5, files:[] },
+            ]},
+          ]},
+          { year:4, credits:60, note:"Stage 4 — Dissertation and advanced statistics/data science options.", sections:[
+            { label:"Core", modules:[
+              { code:"MATH40010", name:"Mathematics Dissertation",                                credits:30, files:[] },
+            ]},
+            { label:"Options", modules:[
+              { code:"STAT40010", name:"Advanced Statistical Modelling",                          credits:5, files:[] },
+              { code:"STAT40020", name:"Time Series Analysis",                                    credits:5, files:[] },
+              { code:"STAT40030", name:"Data Mining",                                             credits:5, files:[] },
+              { code:"COMP40030", name:"Deep Learning",                                           credits:5, files:[] },
+              { code:"STAT40040", name:"Spatial Statistics",                                      credits:5, files:[] },
+              { code:"STAT40050", name:"Epidemiology and Health Data",                            credits:5, files:[] },
+            ]},
+          ]},
+        ]
+      },
+    ]
+  });
+
 
   // ─── DEGREE BUCKETS ──────────────────────────────────────────────────────
   const DEG_BUCKETS = [
@@ -13082,12 +14918,12 @@
       courses: [
         { name:'Actuarial & Financial Studies',                            schoolsCourseId:'ucd-bafs',             cao:'DN230', url:'https://www.ucd.ie/courses/bsc-actuarial-and-financial-studies' },
         { name:'Agricultural Systems Technology',                          schoolsCourseId:'ucd-agri-systems',     cao:'DN250', url:'https://www.ucd.ie/courses/bagrsc-agricultural-systems-technology' },
-        { name:'Agri-Environmental Sciences',                              url:'https://www.ucd.ie/courses/bagrsc-agri-environmental-sciences' },
+        { name:'Agri-Environmental Sciences',                              schoolsCourseId:'ucd-agri-environmental',    url:'https://www.ucd.ie/courses/bagrsc-agri-environmental-sciences' },
         { name:'An Ghaeilge & An Cultúr',                                 url:'https://www.ucd.ie/courses/ba-irish-language-culture' },
-        { name:'Animal & Crop Production',                                 url:'https://www.ucd.ie/courses/bagrsc-animal-and-crop-production' },
-        { name:'Animal Science',                                           url:'https://www.ucd.ie/courses/bagrsc-animal-science' },
+        { name:'Animal & Crop Production',                                 schoolsCourseId:'ucd-animal-crop-production', url:'https://www.ucd.ie/courses/bagrsc-animal-and-crop-production' },
+        { name:'Animal Science',                                           schoolsCourseId:'ucd-animal-science',        url:'https://www.ucd.ie/courses/bagrsc-animal-science' },
         { name:'Animal Science – Equine',                                  url:'https://www.ucd.ie/courses/bagrsc-animal-science-equine' },
-        { name:'Applied & Computational Mathematics',                      url:'https://www.ucd.ie/courses/applied-computational-mathematics' },
+        { name:'Applied & Computational Mathematics',                      schoolsCourseId:'ucd-applied-comp-maths',  cao:'DN200', url:'https://www.ucd.ie/courses/applied-computational-mathematics' },
         { name:'Applied Mathematics, Mathematics & Education',             url:'https://www.ucd.ie/courses/applied-mathematics-education' },
         { name:'Archaeology',                                              url:'https://www.ucd.ie/courses/bsc-archaeology' },
         { name:'Architecture',                                             schoolsCourseId:'ucd-architecture',               cao:'DN100', url:'https://www.ucd.ie/courses/barchsc-architecture' },
@@ -13101,9 +14937,9 @@
         { name:'Cell & Molecular Biology',                                 schoolsCourseId:'ucd-cell-molecular-biology',      cao:'DN200', url:'https://www.ucd.ie/courses/cell-molecular-biology' },
         { name:'Celtic Civilisation',                                      url:'https://www.ucd.ie/courses/ba-celtic-civilisation' },
         { name:'Chemical & Bioprocess Engineering',                        schoolsCourseId:'ucd-chemical-bioprocess-engineering', cao:'DN150', url:'https://www.ucd.ie/courses/be-chemical-bioprocess-engineering' },
-        { name:'Chemistry',                                                url:'https://www.ucd.ie/courses/chemistry' },
+        { name:'Chemistry',                                                schoolsCourseId:'ucd-chemistry',             cao:'DN200', url:'https://www.ucd.ie/courses/chemistry' },
         { name:'Chemistry, Mathematics & Education',                       url:'https://www.ucd.ie/courses/chemistry-mathematics-education' },
-        { name:'Chemistry with Environmental & Sustainable Chemistry',     url:'https://www.ucd.ie/courses/chemistry-environmental-sustainable-chemistry' },
+        { name:'Chemistry with Environmental & Sustainable Chemistry',     schoolsCourseId:'ucd-chemistry-env',          cao:'DN200', url:'https://www.ucd.ie/courses/chemistry-environmental-sustainable-chemistry' },
         { name:'City Planning & Environmental Policy',                     schoolsCourseId:'ucd-city-planning',              cao:'DN130', url:'https://www.ucd.ie/courses/bsc-city-planning-and-envir-policy' },
         { name:'Civil Engineering',                                        schoolsCourseId:'ucd-civil-engineering',          cao:'DN150', url:'https://www.ucd.ie/courses/bsc-civil-engineering' },
         { name:'Classics, Art History & Archaeology',                      url:'https://www.ucd.ie/courses/ba-classics-art-history-archaeology' },
@@ -13111,17 +14947,17 @@
         { name:'Classics (Greek & Roman Civilization, Latin & Greek)',     url:'https://www.ucd.ie/courses/ba-classics-greek-roman-civilization-latin-greek' },
         { name:'Commerce International',                                   schoolsCourseId:'ucd-commerce-international', cao:'DN660', url:'https://www.ucd.ie/courses/bcomm-commerce-intl' },
         { name:'Computational Social Science',                             url:'https://www.ucd.ie/courses/bsc-computational-social-science' },
-        { name:'Computer Science',                                         url:'https://www.ucd.ie/courses/bsc-computer-science' },
+        { name:'Computer Science',                                         schoolsCourseId:'ucd-computer-science',    cao:'DN201', url:'https://www.ucd.ie/courses/bsc-computer-science' },
         { name:'Computer Science, Mathematics & Education',                url:'https://www.ucd.ie/courses/computer-science-mathematics-education' },
-        { name:'Computer Science with Data Science',                       url:'https://www.ucd.ie/courses/computer-science-data-science' },
+        { name:'Computer Science with Data Science',                       schoolsCourseId:'ucd-cs-data-science',     cao:'DN201', url:'https://www.ucd.ie/courses/computer-science-data-science' },
         { name:'Creative & Cultural Industries',                           url:'https://www.ucd.ie/courses/ba-creative-and-cultural-industries' },
         { name:'Criminology with Psychology',                              url:'https://www.ucd.ie/courses/bsc-criminology-with-psychology' },
-        { name:'Crop Science',                                             url:'https://www.ucd.ie/courses/bagrsc-crop-science' },
-        { name:'Dairy Business',                                           url:'https://www.ucd.ie/courses/bagrsc-dairy-business' },
+        { name:'Crop Science',                                             schoolsCourseId:'ucd-crop-science',          url:'https://www.ucd.ie/courses/bagrsc-crop-science' },
+        { name:'Dairy Business',                                           schoolsCourseId:'ucd-dairy-business',        url:'https://www.ucd.ie/courses/bagrsc-dairy-business' },
         { name:'Diagnostic Radiography (Graduate Entry)',                  url:'https://www.ucd.ie/courses/diagnostic-radiography-graduate-entry' },
         { name:'Diploma/Bachelor of Business Studies',                     schoolsCourseId:'ucd-bsc-business',         url:'https://www.ucd.ie/courses/diploma-bachelor-of-business-studies' },
         { name:'Drama Studies',                                            url:'https://www.ucd.ie/courses/ba-drama-studies' },
-        { name:'Earth Sciences',                                           url:'https://www.ucd.ie/courses/earth-sciences' },
+        { name:'Earth Sciences',                                           schoolsCourseId:'ucd-earth-sciences',         cao:'DN200', url:'https://www.ucd.ie/courses/earth-sciences' },
         { name:'Economics',                                                schoolsCourseId:'ucd-economics-bsc',        cao:'DN710', url:'https://www.ucd.ie/courses/bsc-economics' },
         { name:'Economics & Finance',                                      schoolsCourseId:'ucd-econ-finance',         cao:'DN670', url:'https://www.ucd.ie/courses/bsc-economics-and-finance' },
         { name:'Economics, Mathematics & Statistics',                      schoolsCourseId:'ucd-econ-maths-stats',     cao:'DN700', url:'https://www.ucd.ie/courses/bsc-economics-maths-statistics' },
@@ -13135,20 +14971,20 @@
         { name:'Environmental Biology',                                    schoolsCourseId:'ucd-environmental-biology',      cao:'DN200', url:'https://www.ucd.ie/courses/environmental-biology' },
         { name:'European Studies',                                         url:'https://www.ucd.ie/courses/ba-european-studies' },
         { name:'Film Studies',                                             url:'https://www.ucd.ie/courses/ba-film-studies' },
-        { name:'Financial Mathematics',                                    url:'https://www.ucd.ie/courses/financial-mathematics' },
+        { name:'Financial Mathematics',                                    schoolsCourseId:'ucd-financial-maths',     cao:'DN200', url:'https://www.ucd.ie/courses/financial-mathematics' },
         { name:'Food & Agribusiness Management',                           url:'https://www.ucd.ie/courses/bagrsc-food-and-agribusiness-management' },
         { name:'Food Business with Chinese Studies',                       url:'https://www.ucd.ie/courses/bsc-food-business' },
-        { name:'Food Science',                                             url:'https://www.ucd.ie/courses/bsc-food-science' },
-        { name:'Forestry',                                                 url:'https://www.ucd.ie/courses/bagrsc-forestry' },
+        { name:'Food Science',                                             schoolsCourseId:'ucd-food-science',          url:'https://www.ucd.ie/courses/bsc-food-science' },
+        { name:'Forestry',                                                 schoolsCourseId:'ucd-forestry',              url:'https://www.ucd.ie/courses/bagrsc-forestry' },
         { name:'French',                                                   url:'https://www.ucd.ie/courses/ba-french' },
         { name:'Genetics',                                                 schoolsCourseId:'ucd-genetics',                   cao:'DN200', url:'https://www.ucd.ie/courses/genetics' },
-        { name:'Geography',                                                url:'https://www.ucd.ie/courses/bsc-geography' },
+        { name:'Geography',                                                schoolsCourseId:'ucd-geography',             url:'https://www.ucd.ie/courses/bsc-geography' },
         { name:'German',                                                   url:'https://www.ucd.ie/courses/ba-german' },
         { name:'Global Studies',                                           url:'https://www.ucd.ie/courses/ba-global-studies' },
         { name:'History',                                                  url:'https://www.ucd.ie/courses/ba-history' },
         { name:'History & Politics',                                       url:'https://www.ucd.ie/courses/ba-history-politics' },
         { name:'Horticulture',                                             url:'https://www.ucd.ie/courses/bagrsc-horticulture' },
-        { name:'Human Nutrition',                                          url:'https://www.ucd.ie/courses/bsc-human-nutrition' },
+        { name:'Human Nutrition',                                          schoolsCourseId:'ucd-human-nutrition',     cao:'DN262', url:'https://www.ucd.ie/courses/bsc-human-nutrition' },
         { name:'Information & Communication Studies',                      url:'https://www.ucd.ie/courses/bsc-information-communication-studies' },
         { name:'Irish Folklore',                                           url:'https://www.ucd.ie/courses/ba-irish-folklore' },
         { name:'Irish/Gaeilge',                                            url:'https://www.ucd.ie/courses/ba-irish' },
@@ -13166,49 +15002,49 @@
         { name:'Law with Politics',                                        url:'https://www.ucd.ie/courses/bcl-law-with-politics' },
         { name:'Law with Social Justice',                                  url:'https://www.ucd.ie/courses/bcl-law-with-social-justice' },
         { name:'Linguistics',                                              url:'https://www.ucd.ie/courses/ba-linguistics' },
-        { name:'Mathematics',                                              url:'https://www.ucd.ie/courses/mathematics' },
+        { name:'Mathematics',                                              schoolsCourseId:'ucd-mathematics',         cao:'DN200', url:'https://www.ucd.ie/courses/mathematics' },
         { name:'Mathematics (through Arts & Humanities/Social Sciences)',  url:'https://www.ucd.ie/courses/ba-mathematics' },
         { name:'Mechanical Engineering',                                   schoolsCourseId:'ucd-mechanical-engineering',     cao:'DN150', url:'https://www.ucd.ie/courses/bsc-mechanical-engineering' },
-        { name:'Medicinal Chemistry & Chemical Biology',                   url:'https://www.ucd.ie/courses/medicinal-chemistry-chemical-biology' },
-        { name:'Medicine',                                                 url:'https://www.ucd.ie/courses/medicine' },
+        { name:'Medicinal Chemistry & Chemical Biology',                   schoolsCourseId:'ucd-medicinal-chemistry',     cao:'DN200', url:'https://www.ucd.ie/courses/medicinal-chemistry-chemical-biology' },
+        { name:'Medicine',                                                 schoolsCourseId:'ucd-medicine',            cao:'DN400', url:'https://www.ucd.ie/courses/medicine' },
         { name:'Medicine (Graduate Entry)',                                url:'https://www.ucd.ie/courses/medicine-graduate-entry' },
         { name:'Microbiology',                                             schoolsCourseId:'ucd-microbiology',               cao:'DN200', url:'https://www.ucd.ie/courses/microbiology' },
-        { name:'Midwifery',                                                url:'https://www.ucd.ie/courses/bsc-midwifery' },
+        { name:'Midwifery',                                                schoolsCourseId:'ucd-midwifery',           cao:'DN452', url:'https://www.ucd.ie/courses/bsc-midwifery' },
         { name:'Modern Languages',                                         url:'https://www.ucd.ie/courses/ba-modern-languages' },
         { name:'Music',                                                    url:'https://www.ucd.ie/courses/ba-music' },
         { name:'Music, Film & Drama',                                      url:'https://www.ucd.ie/courses/ba-music-film-drama' },
         { name:'Neuroscience',                                             schoolsCourseId:'ucd-neuroscience',               cao:'DN200', url:'https://www.ucd.ie/courses/neuroscience' },
         { name:'Nursing (Children\'s & General)',                          url:'https://www.ucd.ie/courses/bsc-nursing-childrens-general' },
-        { name:'Nursing (General)',                                        url:'https://www.ucd.ie/courses/bsc-nursing-general' },
+        { name:'Nursing (General)',                                        schoolsCourseId:'ucd-nursing',             cao:'DN450', url:'https://www.ucd.ie/courses/bsc-nursing-general' },
         { name:'Nursing (Mental Health)',                                  url:'https://www.ucd.ie/courses/bsc-nursing-mental-health' },
-        { name:'Pharmacology',                                             url:'https://www.ucd.ie/courses/pharmachology' },
+        { name:'Pharmacology',                                             schoolsCourseId:'ucd-pharmacology',        cao:'DN200', url:'https://www.ucd.ie/courses/pharmachology' },
         { name:'Philosophy',                                               url:'https://www.ucd.ie/courses/bsc-philosophy' },
         { name:'Philosophy, Politics and Economics',                       schoolsCourseId:'ucd-ppe',                  cao:'DN700', url:'https://www.ucd.ie/courses/bsc-philosophy-politics-economic' },
-        { name:'Physics',                                                  url:'https://www.ucd.ie/courses/physics' },
+        { name:'Physics',                                                  schoolsCourseId:'ucd-physics',                cao:'DN200', url:'https://www.ucd.ie/courses/physics' },
         { name:'Physics, Mathematics & Education',                         url:'https://www.ucd.ie/courses/physics-mathematics-education' },
-        { name:'Physics with Astronomy & Space Science',                   url:'https://www.ucd.ie/courses/astronomy-space-science' },
+        { name:'Physics with Astronomy & Space Science',                   schoolsCourseId:'ucd-physics-astronomy',       cao:'DN200', url:'https://www.ucd.ie/courses/astronomy-space-science' },
         { name:'Physiology',                                               schoolsCourseId:'ucd-physiology',                 cao:'DN200', url:'https://www.ucd.ie/courses/physiology' },
-        { name:'Physiotherapy',                                            url:'https://www.ucd.ie/courses/bsc-physiotherapy' },
+        { name:'Physiotherapy',                                            schoolsCourseId:'ucd-physiotherapy',       cao:'DN420', url:'https://www.ucd.ie/courses/bsc-physiotherapy' },
         { name:'Physiotherapy (Graduate Entry)',                           url:'https://www.ucd.ie/registry/prospectivestudents/admissions/undergraduateapplicants/alternativeentryroutes/graduateentrypathways/physiotherapy/' },
         { name:'Plant Biology',                                            schoolsCourseId:'ucd-plant-biology',              cao:'DN200', url:'https://www.ucd.ie/courses/plant-biology' },
         { name:'Politics & International Relations',                       url:'https://www.ucd.ie/courses/bsc-politics-international-relations' },
         { name:'Portuguese',                                               url:'https://www.ucd.ie/courses/ba-portuguese' },
         { name:'Psychology',                                               url:'https://www.ucd.ie/courses/bsc-psychology' },
-        { name:'Radiography',                                              url:'https://www.ucd.ie/courses/bsc-radiography' },
+        { name:'Radiography',                                              schoolsCourseId:'ucd-radiography',         cao:'DN410', url:'https://www.ucd.ie/courses/bsc-radiography' },
         { name:'Social Justice',                                           url:'https://www.ucd.ie/courses/bsc-social-justice' },
         { name:'Social Policy & Sociology',                                url:'https://www.ucd.ie/courses/bsocsc-social-policy-sociology' },
         { name:'Sociology',                                                url:'https://www.ucd.ie/courses/bsc-sociology' },
         { name:'Spanish',                                                  url:'https://www.ucd.ie/courses/ba-spanish' },
         { name:'Sport & Exercise Management',                              url:'https://www.ucd.ie/courses/bsc-sport-and-exercise-management' },
-        { name:'Sport, Health & Exercise Science',                         url:'https://www.ucd.ie/courses/bsc-sport-health-exercise-science' },
-        { name:'Statistics',                                               url:'https://www.ucd.ie/courses/statistics' },
+        { name:'Sport, Health & Exercise Science',                         schoolsCourseId:'ucd-sport-health',        cao:'DN425', url:'https://www.ucd.ie/courses/bsc-sport-health-exercise-science' },
+        { name:'Statistics',                                               schoolsCourseId:'ucd-statistics-data-science', cao:'DN200', url:'https://www.ucd.ie/courses/statistics' },
         { name:'Statistics (through Arts & Humanities/Social Sciences)',   url:'https://www.ucd.ie/courses/ba-statistics' },
         { name:'Structural Engineering with Architecture',                 schoolsCourseId:'ucd-structural-engineering',     cao:'DN150', url:'https://www.ucd.ie/courses/bsc-structural-engineering-with-architecture' },
-        { name:'Sustainability with Environmental Sciences',               url:'https://www.ucd.ie/courses/sustainability-environmental-science' },
+        { name:'Sustainability with Environmental Sciences',               schoolsCourseId:'ucd-sustainability-env',      cao:'DN200', url:'https://www.ucd.ie/courses/sustainability-environmental-science' },
         { name:'Sustainability with Social Sciences, Policy & Law',        url:'https://www.ucd.ie/courses/sustainability-social-sciences' },
         { name:'Sustainability with Business & Economics',                 url:'https://www.ucd.ie/courses/sustainability-business-economics' },
         { name:'Sustainable Food Systems',                                 url:'https://www.ucd.ie/courses/bsc-sustainable-food-systems' },
-        { name:'Theoretical Physics',                                      url:'https://www.ucd.ie/courses/theoretical-physics' },
+        { name:'Theoretical Physics',                                      schoolsCourseId:'ucd-theoretical-physics',     cao:'DN200', url:'https://www.ucd.ie/courses/theoretical-physics' },
         { name:'Veterinary Medicine (Graduate Entry)',                     url:'https://www.ucd.ie/courses/mvb-veterinary-medicine-graduate-entry' },
         { name:'Veterinary Medicine',                                      schoolsCourseId:'ucd-veterinary-medicine',        cao:'DN300', url:'https://www.ucd.ie/courses/mvb-veterinary-medicine' },
         { name:'Veterinary Nursing',                                       url:'https://www.ucd.ie/courses/bsc-veterinary-nursing' },
