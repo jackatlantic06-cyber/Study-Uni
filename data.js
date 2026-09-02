@@ -18239,14 +18239,404 @@ SCHOOLS.push({
   id:"uog-health-school", name:"University of Galway College of Medicine, Nursing & Health Sciences", icon:"🏥", uni:"uog",
   sub:"University of Galway",
   courses:[
-    { id:"uog-medicine",           name:"Medicine (MB BCh BAO)",                           years:[] },
-    { id:"uog-occupational-therapy",name:"BSc Occupational Therapy",                        years:[] },
-    { id:"uog-speech-language",    name:"BSc Speech and Language Therapy",                  years:[] },
-    { id:"uog-podiatric-medicine", name:"BSc Podiatric Medicine",                           years:[] },
-    { id:"uog-pharmacy",           name:"MPharm Pharmacy",                                  years:[] },
-    { id:"uog-nursing-general",    name:"Bachelor of Nursing Science (General)",            years:[] },
-    { id:"uog-nursing-mental-health",name:"Bachelor of Nursing Science (Mental Health)",    years:[] },
-    { id:"uog-midwifery",          name:"Bachelor of Midwifery Science",                    years:[] }
+    { id:"uog-medicine", name:"Medicine (MB BCh BAO)", years:[
+      { year:1, credits:60, note:"Integrated Outcome-Based Curriculum — no individual module codes published. Three longitudinal streams run across all 5 years.", sections:[
+        { label:"Year 1 — Haematology, Respiratory & Cardiovascular", modules:[
+          {code:"",name:"Knowledge of Health, Sickness and Practice (Year 1)",credits:0,files:[]},
+          {code:"",name:"Clinical Skills for Safe Practice (Year 1)",credits:0,files:[]},
+          {code:"",name:"Professional Competencies — Values and Behaviours (Year 1)",credits:0,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Year 2 — Musculoskeletal, Neurology, Renal, GI & Endocrine", modules:[
+          {code:"",name:"Knowledge of Health, Sickness and Practice (Year 2)",credits:0,files:[]},
+          {code:"",name:"Clinical Skills for Safe Practice (Year 2)",credits:0,files:[]},
+          {code:"",name:"Professional Competencies — Values and Behaviours (Year 2)",credits:0,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Year 3 — Clinical Placements Begin; Pathology, Microbiology, Public Health", modules:[
+          {code:"",name:"Knowledge of Health, Sickness and Practice (Year 3)",credits:0,files:[]},
+          {code:"",name:"Clinical Skills for Safe Practice (Year 3)",credits:0,files:[]},
+          {code:"",name:"Professional Competencies — Values and Behaviours (Year 3)",credits:0,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Year 4 — Medicine, Surgery, Paediatrics, Psychiatry, Obs & Gynae, GP", modules:[
+          {code:"",name:"Knowledge of Health, Sickness and Practice (Year 4)",credits:0,files:[]},
+          {code:"",name:"Clinical Skills for Safe Practice (Year 4)",credits:0,files:[]},
+          {code:"",name:"Professional Competencies — Values and Behaviours (Year 4)",credits:0,files:[]}
+        ]}
+      ]},
+      { year:5, credits:60, sections:[
+        { label:"Year 5 — Advanced Clinical Specialties & Electives", modules:[
+          {code:"",name:"Knowledge of Health, Sickness and Practice (Year 5)",credits:0,files:[]},
+          {code:"",name:"Clinical Skills for Safe Practice (Year 5)",credits:0,files:[]},
+          {code:"",name:"Professional Competencies — Values and Behaviours (Year 5)",credits:0,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-occupational-therapy", name:"BSc Occupational Therapy", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"OY110", name:"Mental Health 1",credits:5,files:[]},
+          {code:"SI317", name:"Human Body Function",credits:10,files:[]},
+          {code:"OY107", name:"Principles for Practice / Fundamentals",credits:5,files:[]},
+          {code:"AN230", name:"Human Body Structure",credits:5,files:[]},
+          {code:"PS1105",name:"Introduction to Psychology",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"PS4102",name:"Forensic and Clinical Psychology",credits:5,files:[]},
+          {code:"OY108", name:"Enabling Occupation — Physical Disability",credits:10,files:[]},
+          {code:"OY109", name:"Groupwork & Professional Skills",credits:5,files:[]},
+          {code:"OY111", name:"Mental Health 2",credits:5,files:[]},
+          {code:"PS1101",name:"Developmental Psychology",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"OY2111",name:"Communication for Practice",credits:5,files:[]},
+          {code:"AN208", name:"Neuroanatomy",credits:10,files:[]},
+          {code:"SI209", name:"Neurophysiology",credits:5,files:[]},
+          {code:"PS151", name:"Health Psychology",credits:5,files:[]},
+          {code:"OY212", name:"Fundamentals of Occupational Therapy 2",credits:5,files:[]},
+          {code:"OY2116",name:"Enabling Occupation — Paediatrics",credits:10,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"OY2110",name:"Occupational Science",credits:5,files:[]},
+          {code:"OY2103",name:"Social Policy",credits:5,files:[]},
+          {code:"OY2113",name:"Practice Education — Case Study 1",credits:5,files:[]},
+          {code:"OY215", name:"Enabling Occupation — Intellectual Disability",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"OY312", name:"Enabling Occupation — Older Adults",credits:5,files:[]},
+          {code:"OY308", name:"Standardised Testing",credits:5,files:[]},
+          {code:"OY306", name:"Evidence Based Practice",credits:5,files:[]},
+          {code:"OY3115",name:"Community Engagement",credits:10,files:[]},
+          {code:"OY3105",name:"Cognitive Neuropsychology",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"OY3106",name:"Enabling Occupation — Community Practice",credits:10,files:[]},
+          {code:"OY3107",name:"Practice Education — Case Study 2",credits:10,files:[]},
+          {code:"OY309", name:"Neurology",credits:5,files:[]},
+          {code:"OY307", name:"Research Methods",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"OY4104",name:"Practice Education — Case Study 4",credits:15,files:[]},
+          {code:"OY4103",name:"Practice Education — Case Study 3",credits:10,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"OY409", name:"Preparation for Practice",credits:5,files:[]},
+          {code:"OY403", name:"Research Project",credits:20,files:[]},
+          {code:"OY404", name:"Management",credits:10,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-speech-language", name:"BSc Speech and Language Therapy", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"PS1106",name:"Introduction to Psychology",credits:5,files:[]},
+          {code:"SL128", name:"Communication Impairments & Dysphagia 1",credits:5,files:[]},
+          {code:"SL122", name:"Phonetics & Phonology",credits:15,files:[]},
+          {code:"SI317", name:"Human Body Function",credits:10,files:[]},
+          {code:"AN240", name:"Human Body Structure",credits:5,files:[]},
+          {code:"SL124", name:"Professional Studies 1",credits:5,files:[]},
+          {code:"SL126", name:"Linguistics 1",credits:5,files:[]},
+          {code:"SL125", name:"Practice Education 1",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"PS1101",name:"Developmental Psychology",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"SI209", name:"Neurophysiology",credits:5,files:[]},
+          {code:"PS159", name:"Health & Social Psychology",credits:5,files:[]},
+          {code:"AN208", name:"Neuroanatomy",credits:10,files:[]},
+          {code:"SL225", name:"Communication Impairments & Dysphagia 2",credits:10,files:[]},
+          {code:"SL222", name:"Professional Studies 2",credits:10,files:[]},
+          {code:"SL223", name:"Linguistics 2",credits:5,files:[]},
+          {code:"SL221", name:"Practice Education 2",credits:10,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"PS160", name:"Research Methodology 2",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semesters 5-6", modules:[
+          {code:"SL321", name:"Psychology 3",credits:5,files:[]},
+          {code:"SL327", name:"Communication Impairments & Dysphagia 3",credits:15,files:[]},
+          {code:"SL323", name:"Research Methodology 3",credits:5,files:[]},
+          {code:"SL324", name:"Practice Education 3",credits:15,files:[]},
+          {code:"SL325", name:"Linguistics 3",credits:5,files:[]},
+          {code:"SL322", name:"Professional Studies 3",credits:15,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semesters 7-8", modules:[
+          {code:"SL407", name:"Professional Studies 4",credits:20,files:[]},
+          {code:"SL408", name:"Research Methodology 4",credits:20,files:[]},
+          {code:"SL406", name:"Practice Education 4",credits:20,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-podiatric-medicine", name:"BSc Podiatric Medicine", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"PO1060",name:"Podiatric Medicine 1",credits:20,files:[]},
+          {code:"PO1050",name:"Podiatric Dermatology",credits:5,files:[]},
+          {code:"PO100", name:"Professional Development",credits:5,files:[]},
+          {code:"SI317", name:"Human Body Function",credits:10,files:[]},
+          {code:"AN230", name:"Human Body Structure",credits:5,files:[]},
+          {code:"PO103", name:"Redefining Health & Well Being",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"PO1040",name:"Lower Limb Kinematics",credits:5,files:[]},
+          {code:"AN112", name:"Gross Anatomy of the Lower Limb",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"PO2104",name:"Lifestyle Medicine",credits:5,files:[]},
+          {code:"PO2080",name:"Podiatric Medicine 2",credits:20,files:[]},
+          {code:"SI3102",name:"Endocrinology",credits:5,files:[]},
+          {code:"PO203", name:"Functional Anatomy & Biomechanics",credits:10,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"PO2070",name:"Lower Extremity Wounds",credits:5,files:[]},
+          {code:"PO2060",name:"Evidence Based Practice",credits:5,files:[]},
+          {code:"PO2112",name:"Microbiology",credits:5,files:[]},
+          {code:"PO2101",name:"Applied Pathophysiology",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"PO3106",name:"Clinical Medicine & Surgery",credits:15,files:[]},
+          {code:"PO3105",name:"Research Methods & Biostatistics",credits:10,files:[]},
+          {code:"PO3103",name:"Pharmacology for Podiatrists",credits:10,files:[]},
+          {code:"PO3060",name:"Podopaediatrics",credits:5,files:[]},
+          {code:"PO3070",name:"Podiatric Medicine 3",credits:20,files:[]}
+        ]},
+        { label:"Semester 6 — Clinical Placement", modules:[]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"PO4102",name:"Leadership & Professional Practice",credits:10,files:[]},
+          {code:"PO4100",name:"Podiatric Sports and Musculoskeletal Medicine",credits:5,files:[]},
+          {code:"PO4070",name:"Podiatric Medicine 4",credits:15,files:[]},
+          {code:"PO4060",name:"High Risk Limb",credits:5,files:[]},
+          {code:"PO401", name:"Working with Vulnerable Adults",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"PO400", name:"Research Dissertation",credits:20,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-pharmacy", name:"MPharm Pharmacy", years:[
+      { year:1, credits:60, note:"New programme (first intake Sept 2025) — module codes not yet published.", sections:[
+        { label:"Year 1 — Foundations of Pharmaceutical Science", modules:[
+          {code:"",name:"Pharmaceutical Chemistry",credits:0,files:[]},
+          {code:"",name:"Physiology & Anatomy",credits:0,files:[]},
+          {code:"",name:"Pharmacology",credits:0,files:[]},
+          {code:"",name:"Formulation Science",credits:0,files:[]},
+          {code:"",name:"Biochemistry",credits:0,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Year 2 — Integrated Clinical Pharmacy", modules:[
+          {code:"",name:"Clinical Pharmacy & Patient Care",credits:0,files:[]},
+          {code:"",name:"Pharmaceutical Microbiology & Toxicology",credits:0,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Year 3 — Pharmaceutical Science & Regulation", modules:[
+          {code:"",name:"Pharmaceutical Science & Formulation",credits:0,files:[]},
+          {code:"",name:"Medicines Manufacture & Regulation",credits:0,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Year 4 — Advanced Clinical Practice & Research", modules:[
+          {code:"",name:"Medicines Optimisation for Complex Patients",credits:0,files:[]},
+          {code:"",name:"Clinical Placement — 4 months",credits:0,files:[]},
+          {code:"",name:"Research Project",credits:0,files:[]}
+        ]}
+      ]},
+      { year:5, credits:60, sections:[
+        { label:"Year 5 — Advanced Clinical Skills", modules:[
+          {code:"",name:"Advanced Clinical Skills",credits:0,files:[]},
+          {code:"",name:"Clinical Placement — 8 months",credits:0,files:[]},
+          {code:"",name:"Placement Research Project",credits:0,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-nursing-general", name:"Bachelor of Nursing Science (General) Galway and Portiuncula", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"NU1107",name:"Health & Applied Biosciences 1",credits:10,files:[]},
+          {code:"NU1108",name:"The Nature of Nursing",credits:5,files:[]},
+          {code:"NU1109",name:"Foundations of Nursing Practice",credits:10,files:[]},
+          {code:"NU1115",name:"Clinical Practice 1 & 2 (Gen)",credits:15,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"NU1114",name:"Communication and Interpersonal Skills",credits:5,files:[]},
+          {code:"NU1112",name:"Research and Evidence for Practice 1",credits:5,files:[]},
+          {code:"NU1113",name:"Applied Health 1",credits:10,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"NU2307",name:"Clinical Practice 3 & 4",credits:15,files:[]},
+          {code:"NU2201",name:"Community Care and Specialist Client Groups",credits:10,files:[]},
+          {code:"NU2200",name:"Health & Applied Biosciences 2",credits:10,files:[]},
+          {code:"NU2206",name:"Applied Health 2 (Optional)",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"NU2204",name:"Applied Psychology for Nursing & Midwifery",credits:5,files:[]},
+          {code:"NU2203",name:"Concepts of Pain and Life-Limiting Conditions",credits:5,files:[]},
+          {code:"NU2202",name:"Research and Evidence for Practice 2",credits:5,files:[]},
+          {code:"SP2118",name:"Sociology of Health and Healthcare",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"NU3107",name:"Clinical Practice 5 & 6",credits:10,files:[]},
+          {code:"NU3103",name:"Living Well with Long Term Conditions",credits:10,files:[]},
+          {code:"NU3102",name:"Health Promotion",credits:5,files:[]},
+          {code:"NU3101",name:"The Acutely Ill Adult",credits:10,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"NU3105",name:"Medicines and Clinical Practice",credits:10,files:[]},
+          {code:"NU3104",name:"Law and Ethics",credits:5,files:[]},
+          {code:"NU3106",name:"Clinical Judgement and Decision Making",credits:5,files:[]},
+          {code:"NU314", name:"Elective",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"NU4107",name:"Clinical Practice 7: Year 4",credits:10,files:[]},
+          {code:"NU4106",name:"Leading and Developing Practice",credits:10,files:[]},
+          {code:"NU4110",name:"Literature Review",credits:20,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"NU4109",name:"Internship, General and Mental Health",credits:15,files:[]},
+          {code:"NU4108",name:"Transition to Practice",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-nursing-mental-health", name:"Bachelor of Nursing Science (Mental Health)", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"NU1107",name:"Health & Applied Biosciences 1",credits:10,files:[]},
+          {code:"NU1116",name:"Introduction to Mental Health Nursing",credits:5,files:[]},
+          {code:"NU1111",name:"Foundations of Mental Health Nursing Practice",credits:10,files:[]},
+          {code:"NU1119",name:"Clinical Practice 1 & 2 (Mental Health)",credits:15,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"NU1112",name:"Research and Evidence for Practice 1",credits:5,files:[]},
+          {code:"NU1114",name:"Communication and Interpersonal Skills",credits:5,files:[]},
+          {code:"NU1118",name:"Mental Health Nursing 1",credits:10,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"NU2217",name:"Mental Health Nursing 4",credits:5,files:[]},
+          {code:"NU2307",name:"Clinical Practice 3 & 4",credits:15,files:[]},
+          {code:"NU2214",name:"Mental Health Nursing 2",credits:10,files:[]},
+          {code:"NU2200",name:"Health & Applied Biosciences 2",credits:10,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"NU2202",name:"Research and Evidence for Practice 2",credits:5,files:[]},
+          {code:"NU2215",name:"Mental Health Nursing 3",credits:5,files:[]},
+          {code:"NU2204",name:"Applied Psychology for Nursing & Midwifery",credits:5,files:[]},
+          {code:"SP2118",name:"Sociology of Health and Healthcare",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"NU3108",name:"Mental Health Nursing 5",credits:10,files:[]},
+          {code:"NU3109",name:"Mental Health Promotion and Recovery",credits:5,files:[]},
+          {code:"NU3110",name:"Mental Health Nursing 6",credits:5,files:[]},
+          {code:"NU3112",name:"Clinical Practice 5 & 6",credits:15,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"NU3104",name:"Law and Ethics",credits:5,files:[]},
+          {code:"NU3105",name:"Medicines and Clinical Practice",credits:10,files:[]},
+          {code:"NU3111",name:"Mental Health Nursing 7",credits:5,files:[]},
+          {code:"NU314", name:"Elective",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"NU4111",name:"Leading and Developing Practice for Mental Health Nursing",credits:10,files:[]},
+          {code:"NU4107",name:"Clinical Practice 7: Year 4",credits:10,files:[]},
+          {code:"NU4110",name:"Literature Review",credits:20,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"NU4112",name:"Transition to Practice for Mental Health Nursing",credits:5,files:[]},
+          {code:"NU4109",name:"Internship, General and Mental Health",credits:15,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-midwifery", name:"Bachelor of Midwifery Science", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"NU1121",name:"Anatomy, Physiology & Applied Skills for Midwifery Practice",credits:5,files:[]},
+          {code:"NU1107",name:"Health & Applied Biosciences 1",credits:10,files:[]},
+          {code:"NU1120",name:"An Introduction to the Profession of Midwifery",credits:5,files:[]},
+          {code:"NU1110",name:"Foundations of Midwifery Practice",credits:10,files:[]},
+          {code:"NU1123",name:"Clinical Midwifery Practice 1 & 2",credits:10,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"NU1112",name:"Research and Evidence for Practice 1",credits:5,files:[]},
+          {code:"NU1122",name:"Adaptations to Childbirth & Midwifery Care",credits:10,files:[]},
+          {code:"NU1114",name:"Communication and Interpersonal Skills",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"NU2207",name:"Clinical Practice 3 & 4",credits:10,files:[]},
+          {code:"NU2208",name:"Supporting Women Experiencing Normal Childbirth",credits:10,files:[]},
+          {code:"NU2200",name:"Health & Applied Biosciences 2",credits:10,files:[]},
+          {code:"NU2210",name:"Care of the Well Newborn",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"NU2202",name:"Research and Evidence for Practice 2",credits:5,files:[]},
+          {code:"NU2212",name:"Promoting and Supporting Health and Wellbeing",credits:5,files:[]},
+          {code:"NU2211",name:"Infant Nutrition",credits:5,files:[]},
+          {code:"NU2204",name:"Applied Psychology for Nursing & Midwifery",credits:5,files:[]},
+          {code:"SP2119",name:"Midwifery and the Sociology of Childbirth",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"NU3117",name:"Clinical Midwifery Practice 5 & 6",credits:10,files:[]},
+          {code:"NU3114",name:"Clinical Governance and Midwifery Practice",credits:5,files:[]},
+          {code:"NU3115",name:"Women with Complex Needs During Childbirth 2",credits:10,files:[]},
+          {code:"NU3113",name:"Women with Complex Needs During Childbirth 1",credits:10,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"NU3104",name:"Law and Ethics",credits:5,files:[]},
+          {code:"NU3105",name:"Medicines and Clinical Practice",credits:10,files:[]},
+          {code:"NU3116",name:"The Newborn with Complex Needs",credits:5,files:[]},
+          {code:"NU314", name:"Elective",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"NU4103",name:"Clinical Midwifery Practice 7",credits:10,files:[]},
+          {code:"NU4102",name:"Personal & Professional Development for Midwifery",credits:10,files:[]},
+          {code:"NU4110",name:"Literature Review",credits:20,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"NU4105",name:"Internship, Midwifery",credits:15,files:[]},
+          {code:"NU4104",name:"Becoming a Midwife",credits:5,files:[]}
+        ]}
+      ]}
+    ]}
   ]
 });
 
@@ -18254,13 +18644,795 @@ SCHOOLS.push({
   id:"uog-other-school", name:"University of Galway — Further Programmes", icon:"🎓", uni:"uog",
   sub:"University of Galway",
   courses:[
-    { id:"uog-bbs-hotel",          name:"Bachelor of Business Studies (International Hotel Management)",             years:[] },
-    { id:"uog-bbs-global-luxury",  name:"Bachelor of Business Studies in Global Luxury & Experience Management",     years:[] },
-    { id:"uog-ba-history",         name:"BA History",                                       years:[] },
-    { id:"uog-ba-maths-education", name:"BA Mathematics and Education",                     years:[] },
-    { id:"uog-ba-global-experience",name:"BA Global Experience",                            years:[] },
-    { id:"uog-ba-childrens-studies",name:"BA Children's Studies",                           years:[] },
-    { id:"uog-ba-arts-childrens",  name:"BA Arts with Children's Studies",                  years:[] }
+    { id:"uog-bbs-hotel", name:"Bachelor of Business Studies (International Hotel Management)", years:[
+      { year:1, credits:60, note:"Language option: pick ONE per semester (French/Spanish/German/Intercultural/EFL). Delivered at Shannon College of Hotel Management.", sections:[
+        { label:"Semester 1", modules:[
+          {code:"SC1111",name:"French [Language Option]",credits:10,files:[]},
+          {code:"SC1112",name:"Spanish [Language Option]",credits:10,files:[]},
+          {code:"SC1113",name:"German [Language Option]",credits:10,files:[]},
+          {code:"SC1114",name:"Intercultural Communications [Language Option]",credits:10,files:[]},
+          {code:"SC1110",name:"English as a Foreign Language [Language Option]",credits:10,files:[]},
+          {code:"SC1123",name:"Principles of Marketing",credits:5,files:[]},
+          {code:"SC1100",name:"Accommodation Services / Front Office Operations",credits:5,files:[]},
+          {code:"SC1120",name:"Introduction to Management Accounting",credits:5,files:[]},
+          {code:"SC1121",name:"Culinary Kitchen Practical",credits:5,files:[]},
+          {code:"SC1105",name:"Food and Beverage 1",credits:5,files:[]},
+          {code:"SC1102",name:"Skills for Work Life",credits:5,files:[]},
+          {code:"SC1101",name:"Information Technology",credits:5,files:[]},
+          {code:"SC1104",name:"F&B 1 — Restaurant Service Practical",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"SC1119",name:"Introduction to Financial Accounting",credits:5,files:[]},
+          {code:"SC1107",name:"Quantitative Methods",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:30, note:"12-month Professional Operative Work Placement. Language option: pick ONE.", sections:[
+        { label:"Placement Year", modules:[
+          {code:"SC2103",name:"French [Language Option]",credits:10,files:[]},
+          {code:"SC2104",name:"Spanish [Language Option]",credits:10,files:[]},
+          {code:"SC2105",name:"German [Language Option]",credits:10,files:[]},
+          {code:"SC2106",name:"Intercultural Communications [Language Option]",credits:10,files:[]},
+          {code:"SC2102",name:"English as a Foreign Language [Language Option]",credits:10,files:[]},
+          {code:"SC2100",name:"Progress Reports",credits:10,files:[]},
+          {code:"SC2101",name:"Placement Project",credits:10,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"SC3207",name:"English as a Foreign Language [Language Option]",credits:10,files:[]},
+          {code:"SC3206",name:"French [Language Option]",credits:10,files:[]},
+          {code:"SC3208",name:"German [Language Option]",credits:10,files:[]},
+          {code:"SC3209",name:"Spanish [Language Option]",credits:10,files:[]},
+          {code:"SC3210",name:"Intercultural Communications 2 [Language Option]",credits:10,files:[]},
+          {code:"SC3222",name:"Management Accounting 1",credits:5,files:[]},
+          {code:"SC3200",name:"Food & Beverage 2",credits:5,files:[]},
+          {code:"SC3201",name:"Principles of Marketing",credits:5,files:[]},
+          {code:"SC3202",name:"Business Skills Development",credits:5,files:[]},
+          {code:"SC3205",name:"Economics for the Hospitality Industry",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"SC3212",name:"Hospitality and Business Law",credits:5,files:[]},
+          {code:"SC3204",name:"Business Finance",credits:5,files:[]},
+          {code:"SC3211",name:"Rooms Division Management",credits:5,files:[]},
+          {code:"SC3213",name:"Human Resource Management",credits:5,files:[]},
+          {code:"SC3214",name:"Information Technology for Business",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"SC4131",name:"Advanced Beverage Studies",credits:5,files:[]},
+          {code:"SC4134",name:"Facilities Management",credits:5,files:[]},
+          {code:"SC4115",name:"Management of Organisational Change",credits:5,files:[]},
+          {code:"SC4139",name:"Culinary Entrepreneurship",credits:5,files:[]},
+          {code:"SC4129",name:"Performance Management and Cost Control",credits:5,files:[]},
+          {code:"SC4100",name:"Applied Research Methods",credits:5,files:[]},
+          {code:"SC4102",name:"Strategic Management and Hotel Simulation",credits:5,files:[]},
+          {code:"SC4103",name:"Marketing Management",credits:5,files:[]},
+          {code:"SC4118",name:"Revenue Management",credits:5,files:[]},
+          {code:"SC4133",name:"Spanish [Language Option]",credits:5,files:[]},
+          {code:"SC4108",name:"English as a Foreign Language [Language Option]",credits:5,files:[]},
+          {code:"SC4109",name:"German [Language Option]",credits:5,files:[]},
+          {code:"SC4107",name:"French [Language Option]",credits:5,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"SC4128",name:"Intercultural Communication and Management",credits:5,files:[]},
+          {code:"SC4113",name:"Event Management",credits:5,files:[]},
+          {code:"SC4119",name:"Asset Management",credits:5,files:[]},
+          {code:"SC4112",name:"Organisational Behaviour for Managers",credits:5,files:[]},
+          {code:"SC4135",name:"Final Year Research Project",credits:10,files:[]},
+          {code:"SC4136",name:"Public Speaking for Hotel Professionals",credits:5,files:[]},
+          {code:"SC4138",name:"Entrepreneurship",credits:5,files:[]},
+          {code:"SC4130",name:"Head of College Keynote Speaker Programme",credits:5,files:[]},
+          {code:"SC4105",name:"Principles of Tourism",credits:5,files:[]},
+          {code:"SC4104",name:"International HRM",credits:5,files:[]}
+        ]}
+      ]},
+      { year:5, credits:30, note:"9–18 month Trainee Management Work Placement.", sections:[
+        { label:"Placement Year", modules:[
+          {code:"SC5102",name:"Placement Reports",credits:15,files:[]},
+          {code:"SC5103",name:"Viva Voce Interview",credits:15,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-bbs-global-luxury", name:"Bachelor of Business Studies in Global Luxury & Experience Management", years:[
+      { year:1, credits:60, note:"Module codes not published — course page returns a server-side error in the modules section.", sections:[
+        { label:"Year 1 — Foundations", modules:[
+          {code:"",name:"Accounting for Luxury Brands",credits:0,files:[]},
+          {code:"",name:"Marketing in the Luxury Sector",credits:0,files:[]},
+          {code:"",name:"Consumer Psychology",credits:0,files:[]},
+          {code:"",name:"Experience Design",credits:0,files:[]},
+          {code:"",name:"Information Technology",credits:0,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Year 2 — Management", modules:[
+          {code:"",name:"Management and Finance",credits:0,files:[]},
+          {code:"",name:"Human Resource Management",credits:0,files:[]},
+          {code:"",name:"Digital Marketing & AI",credits:0,files:[]},
+          {code:"",name:"Ethics and Sustainability",credits:0,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Year 3 — International Internship or Study Abroad", modules:[]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Year 4 — Advanced Luxury Management", modules:[
+          {code:"",name:"Entrepreneurship",credits:0,files:[]},
+          {code:"",name:"Strategy and Analytics",credits:0,files:[]},
+          {code:"",name:"Revenue Management",credits:0,files:[]},
+          {code:"",name:"Elite Client Management",credits:0,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-ba-history", name:"BA History", years:[
+      { year:1, credits:60, note:"History = 20 cr in Year 1; remaining 40 cr from two other Arts subjects chosen by student.", sections:[
+        { label:"Semester 1 — History modules", modules:[
+          {code:"HI1103",name:"Europe and Ireland 1789–1918",credits:5,files:[]},
+          {code:"HISK1101",name:"Skills for Historians (1)",credits:5,files:[]}
+        ]},
+        { label:"Semester 2 — History modules", modules:[
+          {code:"HISK1102",name:"Skills for Historians (2)",credits:5,files:[]},
+          {code:"HI1106",name:"Early Cultural Encounters in Ireland and the Americas",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, note:"History contributes 30 cr in Year 2; further 30 cr from minor subject(s).", sections:[
+        { label:"Semester 3 — History electives (select from pool)", modules:[
+          {code:"HI2157",name:"The Reformation",credits:5,files:[]},
+          {code:"HI2158",name:"Global History and Modern Capitalism",credits:5,files:[]},
+          {code:"HI2160",name:"Ireland since Independence",credits:5,files:[]},
+          {code:"HI2162",name:"Scotland and Ireland",credits:5,files:[]},
+          {code:"HI204",name:"18th Century Ireland, 1691–1801",credits:5,files:[]},
+          {code:"HI2102",name:"The Modern United States, 1865–2008",credits:5,files:[]}
+        ]},
+        { label:"Semester 4 — History electives (select from pool)", modules:[
+          {code:"LIB2102",name:"Using Archives and Special Collections in Research",credits:5,files:[]},
+          {code:"HI431",name:"French Mobilisation and the Great War",credits:10,files:[]},
+          {code:"HI2159",name:"Land and Revolution in Ireland, 1879–1922",credits:10,files:[]},
+          {code:"HI295",name:"The American Civil War",credits:10,files:[]},
+          {code:"HI2150",name:"Europe, 1918–49",credits:5,files:[]},
+          {code:"HI2163",name:"Life under Communism",credits:10,files:[]},
+          {code:"HI2164",name:"Europe, 1950–2010",credits:5,files:[]},
+          {code:"HI2146",name:"The Making & Breaking of Britain",credits:5,files:[]},
+          {code:"HI166",name:"Ireland in the 1950s",credits:10,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, note:"Students choose: Study Abroad (Erasmus), Work Placement (museums/archives/heritage), or Independent Research Project.", sections:[
+        { label:"Year 3 — Study Abroad / Work Placement / Research Project", modules:[]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7 — History electives (select from pool)", modules:[
+          {code:"HI3112",name:"The First World War",credits:10,files:[]},
+          {code:"HI484",name:"Slavery and Emancipation in the American South",credits:10,files:[]},
+          {code:"HI3204",name:"The Family in Irish Society",credits:10,files:[]},
+          {code:"HI3195",name:"Suffrage to Repeal",credits:5,files:[]},
+          {code:"HI3206",name:"Race, Enslavement and Representation",credits:10,files:[]},
+          {code:"HI3210",name:"The British Empire",credits:5,files:[]},
+          {code:"HI3213",name:"The Irish Land War in Transnational Perspective",credits:10,files:[]},
+          {code:"HI3214",name:"Irish Elites in the British Empire",credits:10,files:[]},
+          {code:"HI3215",name:"The Boyne and After",credits:10,files:[]},
+          {code:"HI3216",name:"Ideas and Social and Political Institutions",credits:10,files:[]},
+          {code:"HI3217",name:"(Ab)Using The Past",credits:5,files:[]},
+          {code:"HI167",name:"Power and Conflict in Northern Ireland",credits:10,files:[]}
+        ]},
+        { label:"Semester 8 — History electives (select from pool)", modules:[
+          {code:"HI362",name:"Party & Power in 19th & 20th Century British History",credits:5,files:[]},
+          {code:"HI3205",name:"Gender, Sexuality, and Society in Ireland",credits:5,files:[]},
+          {code:"HI3196",name:"The Great Irish Famine",credits:5,files:[]},
+          {code:"HI3100",name:"Brave New World: Globalisation since 1945",credits:5,files:[]},
+          {code:"HI3207",name:"The Transatlantic Slave Trade",credits:5,files:[]},
+          {code:"HI3218",name:"Famine in Nineteenth-Century Europe",credits:5,files:[]},
+          {code:"HI3219",name:"Science and Technology from the Scientific Revolution",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-ba-maths-education", name:"BA Mathematics and Education", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"ED109",name:"Principles of Second-Level Mathematics",credits:5,files:[]},
+          {code:"ED1103",name:"Philosophy and History of Irish Education",credits:5,files:[]},
+          {code:"ED1000",name:"Preparing to Teach",credits:10,files:[]},
+          {code:"MP173",name:"Skills of Applied Mathematics",credits:5,files:[]},
+          {code:"MA185",name:"Analysis and Algebra 1",credits:5,files:[]},
+          {code:"MP171",name:"Introduction to Applied Mathematics",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"ED117",name:"Introduction to Educational Sciences",credits:10,files:[]},
+          {code:"MA187",name:"Mathematical Skills",credits:5,files:[]},
+          {code:"MA186",name:"Analysis and Algebra 2",credits:5,files:[]},
+          {code:"MP172",name:"Introduction to Mathematical Modelling",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"ED292",name:"Practical Teaching Programme 2",credits:15,files:[]},
+          {code:"ED2004",name:"Methodologies 1",credits:5,files:[]},
+          {code:"ED2003",name:"Curriculum & Assessment",credits:5,files:[]},
+          {code:"ST2001",name:"Statistics for Data Science 1",credits:5,files:[]},
+          {code:"MP236",name:"Mechanics I",credits:5,files:[]},
+          {code:"MA2106",name:"Real Analysis",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"ED2006",name:"Methodologies 2: Applied Mathematics",credits:5,files:[]},
+          {code:"ST2002",name:"Statistics for Data Science 2",credits:5,files:[]},
+          {code:"MA334",name:"Geometry",credits:5,files:[]},
+          {code:"MA283",name:"Linear Algebra",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, sections:[
+        { label:"Semester 5", modules:[
+          {code:"ED305",name:"Psychology, Sociology & Catering for Diversity",credits:10,files:[]},
+          {code:"ED3002",name:"Practical Teaching Programme 3",credits:15,files:[]},
+          {code:"MA3343",name:"Groups",credits:5,files:[]},
+          {code:"MP305",name:"Modelling I",credits:5,files:[]},
+          {code:"MA284",name:"Discrete Mathematics",credits:5,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"ED3003",name:"Research Dissertation Part 1",credits:5,files:[]},
+          {code:"CS3101",name:"Software for Mathematical Scientists and Educators",credits:5,files:[]},
+          {code:"MP307",name:"Modelling II",credits:5,files:[]},
+          {code:"MA2287",name:"Complex Analysis",credits:5,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, note:"Required: ED4001 (10 cr) + ED413 Block Teaching Practice (20 cr). Remaining 30 cr from optional electives.", sections:[
+        { label:"Semester 7", modules:[
+          {code:"ED4001",name:"Research Dissertation Part 2",credits:10,files:[]},
+          {code:"ED413",name:"Block Teaching Practice",credits:20,files:[]},
+          {code:"ST311",name:"Applied Statistics I [Optional]",credits:5,files:[]},
+          {code:"MM4000",name:"Final Year Project [Optional]",credits:10,files:[]}
+        ]},
+        { label:"Semester 8 — Optional electives", modules:[
+          {code:"MA378",name:"Numerical Analysis II",credits:5,files:[]},
+          {code:"CS402",name:"Cryptography",credits:5,files:[]},
+          {code:"MA342",name:"Topology",credits:5,files:[]},
+          {code:"MA482",name:"Functional Analysis",credits:5,files:[]},
+          {code:"ST312",name:"Applied Statistics II",credits:5,files:[]},
+          {code:"MA4344",name:"Advanced Group Theory",credits:5,files:[]},
+          {code:"MA3491",name:"Fields and Applications",credits:5,files:[]},
+          {code:"CS4423",name:"Networks",credits:5,files:[]},
+          {code:"MA216",name:"Mathematical Molecular Biology II",credits:5,files:[]},
+          {code:"MA2104",name:"Mathematics for Sustainability",credits:5,files:[]},
+          {code:"MP237",name:"Mechanics II",credits:5,files:[]},
+          {code:"MP491",name:"Non Linear Systems",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-ba-global-experience", name:"BA Global Experience", years:[
+      { year:1, credits:60, note:"Pick 3 subjects from 7 groups (20 cr each). All available modules are listed — students build their own combination.", sections:[
+        { label:"Semester 1 — elective pool by subject group", modules:[
+          {code:"AR113",name:"Prehistoric Ireland & Europe [Archaeology]",credits:5,files:[]},
+          {code:"AR1104",name:"Material Culture and Museums [Archaeology]",credits:5,files:[]},
+          {code:"FR1100",name:"Introduction to French Language and Culture [French]",credits:15,files:[]},
+          {code:"MA133",name:"Analysis and Algebra 1 [Maths]",credits:5,files:[]},
+          {code:"MA185",name:"Analysis and Algebra 1 [Maths alt]",credits:5,files:[]},
+          {code:"MA131",name:"Mathematical Skills [Maths]",credits:5,files:[]},
+          {code:"LW3109",name:"Tort Law [Law]",credits:10,files:[]},
+          {code:"LW3160",name:"Introduction to Law [Law]",credits:5,files:[]},
+          {code:"PS122",name:"Introductory Psychology 1 [Psychology]",credits:5,files:[]},
+          {code:"PS1103",name:"Introduction to Research Methods in Psychology [Psychology]",credits:10,files:[]},
+          {code:"SG1100",name:"Medieval Celtic Literature A [Celtic Civilisation]",credits:5,files:[]},
+          {code:"SG1101",name:"Medieval Celtic Literature B [Celtic Civilisation]",credits:5,files:[]},
+          {code:"SG111",name:"Early & Medieval History of the Celts [Celtic Civilisation]",credits:5,files:[]},
+          {code:"FS101",name:"Introduction to Film Studies I: Form [Performance & Screen]",credits:5,files:[]},
+          {code:"PSS1102",name:"Acting and Performance Processes [Performance & Screen]",credits:5,files:[]},
+          {code:"CC1101",name:"Mythology and the City in Ancient Greece [Ancient Classics]",credits:5,files:[]},
+          {code:"CC114",name:"Written Words & Spoken Languages in the Ancient World [Ancient Classics]",credits:5,files:[]},
+          {code:"CC1100",name:"Classics in 20 Objects [Ancient Classics]",credits:5,files:[]},
+          {code:"TI1102",name:"Geography in Action [Geography]",credits:10,files:[]},
+          {code:"TI150",name:"Principles of Human Geography [Geography]",credits:5,files:[]},
+          {code:"GR1100",name:"German Language and Culture (Advanced) [German]",credits:15,files:[]},
+          {code:"GR1101",name:"German Language and Culture (Beginners) [German]",credits:15,files:[]},
+          {code:"CG1100",name:"Scéalaíocht Dhigiteach [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"CG1105",name:"Bunús na hIriseoireachta [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"CG1107",name:"Cleachtas Léirithe na Meán 1 [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"IS1103",name:"Introducing Irish Traditional Music & Dance since 1893 [Modern Irish Culture]",credits:5,files:[]},
+          {code:"ISSK1100",name:"Introducing Modern and Contemporary Irish Literature [Modern Irish Culture]",credits:5,files:[]},
+          {code:"AJ1109",name:"Media Worlds [Global Media]",credits:5,files:[]},
+          {code:"AJ1108",name:"Media Foundations [Global Media]",credits:10,files:[]},
+          {code:"EN1106",name:"Exploring English [English]",credits:5,files:[]},
+          {code:"EN1101",name:"Literature and the Social World [English]",credits:5,files:[]},
+          {code:"EN124",name:"Introduction to English 1 [English]",credits:5,files:[]},
+          {code:"EC1108",name:"Skills for Economics I [Economics]",credits:5,files:[]},
+          {code:"EC135",name:"Principles of Microeconomics [Economics]",credits:5,files:[]},
+          {code:"SP1120",name:"Practicing Politics [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP1125",name:"Introduction to Politics [Sociology & Politics]",credits:5,files:[]},
+          {code:"CT1101",name:"Programming I [IT]",credits:5,files:[]},
+          {code:"CT1100",name:"Computer Systems [IT]",credits:5,files:[]},
+          {code:"LN103",name:"Gnéithe den Aistriúchán [Léann an Aistriúchán]",credits:5,files:[]},
+          {code:"LN105",name:"Bunscileanna Aistriúcháin [Léann an Aistriúchán]",credits:5,files:[]},
+          {code:"LN1103",name:"Bunscileanna Gramadaí [Léann an Aistriúchán]",credits:10,files:[]},
+          {code:"HI1103",name:"Europe and Ireland 1789–1918 [History]",credits:5,files:[]},
+          {code:"HISK1101",name:"Skills for Historians (1) [History]",credits:5,files:[]},
+          {code:"SH1100",name:"Intensive Beginners Spanish Language and Culture [Spanish]",credits:15,files:[]},
+          {code:"SH1102",name:"Mundo hispano [Spanish Supplement]",credits:5,files:[]},
+          {code:"SH1101",name:"Intermediate Spanish Language and Culture [Spanish]",credits:15,files:[]},
+          {code:"NG1111",name:"An Ghaeilge, an Pobal agus an Stát [Gaeilge]",credits:5,files:[]},
+          {code:"NG1105",name:"An Teanga Bheo [Gaeilge]",credits:10,files:[]},
+          {code:"IT1100",name:"Italian Language and Culture [Italian]",credits:15,files:[]},
+          {code:"IT1101",name:"Italy at the Movies [Italian]",credits:5,files:[]},
+          {code:"PI107",name:"Introduction to the History of Philosophy [Philosophy]",credits:5,files:[]},
+          {code:"PI120",name:"Philosophical Questions & Issues [Philosophy]",credits:5,files:[]},
+          {code:"PISK1102",name:"Critical Thinking and Logic [Philosophy]",credits:5,files:[]}
+        ]},
+        { label:"Semester 2 — elective pool continued", modules:[
+          {code:"AR1105",name:"Medieval Ireland and Europe [Archaeology]",credits:5,files:[]},
+          {code:"AR1106",name:"Sites and Monuments in the Landscape [Archaeology]",credits:5,files:[]},
+          {code:"FR1101",name:"Introduction to French Literature in Context [French]",credits:5,files:[]},
+          {code:"MA135",name:"Analysis and Algebra 2 [Maths]",credits:5,files:[]},
+          {code:"MA186",name:"Analysis and Algebra 2 [Maths alt]",credits:5,files:[]},
+          {code:"MA187",name:"Mathematical Skills [Maths]",credits:5,files:[]},
+          {code:"MA2105",name:"Quantitative Methods with Programming [Maths]",credits:5,files:[]},
+          {code:"LW126",name:"Legal Skills [Law]",credits:5,files:[]},
+          {code:"PS124",name:"Introductory Psychology 2 [Psychology]",credits:5,files:[]},
+          {code:"SG116",name:"Celtic Mythology, Religion & Folklore [Celtic Civilisation]",credits:5,files:[]},
+          {code:"PSS1101",name:"Performing and Screening Ireland [Performance & Screen]",credits:5,files:[]},
+          {code:"FM1100",name:"Introduction to Visual Culture [Performance & Screen]",credits:5,files:[]},
+          {code:"CC1102",name:"Empire and Literature in Ancient Rome [Ancient Classics]",credits:5,files:[]},
+          {code:"TI151",name:"Principles of Physical Geography [Geography]",credits:5,files:[]},
+          {code:"CG1104",name:"Na Meáin agus an tSochaí [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"IS1100",name:"Irish Music and Emigration [Modern Irish Culture]",credits:5,files:[]},
+          {code:"IS1104",name:"The Migrant Experience in Modern Irish Writing [Modern Irish Culture]",credits:5,files:[]},
+          {code:"AJ1106",name:"Pop Culture, Media and Society [Global Media]",credits:5,files:[]},
+          {code:"EN125",name:"Introduction to English 2 [English]",credits:5,files:[]},
+          {code:"EC1109",name:"Skills for Economics II [Economics]",credits:5,files:[]},
+          {code:"EC136",name:"Principles of Macroeconomics [Economics]",credits:5,files:[]},
+          {code:"SP1121",name:"Practicing Sociology [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP1126",name:"Introduction to Sociology [Sociology & Politics]",credits:5,files:[]},
+          {code:"CT1120",name:"Algorithms [IT]",credits:5,files:[]},
+          {code:"CT1102",name:"Programming II [IT]",credits:5,files:[]},
+          {code:"HISK1102",name:"Skills for Historians (2) [History]",credits:5,files:[]},
+          {code:"HI1106",name:"Early Cultural Encounters in Ireland and the Americas [History]",credits:5,files:[]},
+          {code:"NG1110",name:"An Áit agus a Scéal [Gaeilge]",credits:5,files:[]},
+          {code:"PI108",name:"Introduction to Practical Ethics [Philosophy]",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, note:"Continue 2 Year-1 subjects (30 cr each).", sections:[
+        { label:"Semester 3 — elective pool by subject", modules:[
+          {code:"CC2103",name:"Mediterranean Origins [Ancient Classics]",credits:5,files:[]},
+          {code:"CC230",name:"Beginning Latin Part 1 [Ancient Classics]",credits:5,files:[]},
+          {code:"CC2105",name:"Heroic Epic [Ancient Classics]",credits:5,files:[]},
+          {code:"AR2103",name:"Archaeology and Irish Identity",credits:5,files:[]},
+          {code:"AR2107",name:"Ancient Civilizations",credits:5,files:[]},
+          {code:"AR2108",name:"Space, Place and the Irish Landscape",credits:5,files:[]},
+          {code:"SG215",name:"Medieval Irish Literature c.700–1100 [Celtic Civilisation]",credits:5,files:[]},
+          {code:"WE111",name:"Introduction to Welsh Language I [Celtic Civilisation]",credits:5,files:[]},
+          {code:"SG216",name:"The Stories of Medieval Wales [Celtic Civilisation]",credits:5,files:[]},
+          {code:"SG2100",name:"Pan-Celticism [Celtic Civilisation]",credits:5,files:[]},
+          {code:"EC207",name:"Irish Economic History [Economics]",credits:5,files:[]},
+          {code:"EC3107",name:"Economic Ideas [Economics]",credits:5,files:[]},
+          {code:"EC273",name:"Mathematics for Economics [Economics]",credits:5,files:[]},
+          {code:"EC269",name:"Intermediate Microeconomics [Economics]",credits:5,files:[]},
+          {code:"EN2102",name:"Renaissance Drama [English]",credits:5,files:[]},
+          {code:"EN2106",name:"Shakespearean Comedies [English]",credits:5,files:[]},
+          {code:"EN2133",name:"Media, Culture, Society [English]",credits:5,files:[]},
+          {code:"EN2185",name:"Stories Told and Re-Told [English]",credits:5,files:[]},
+          {code:"FR269",name:"Lecture du français [French]",credits:5,files:[]},
+          {code:"FR266",name:"French Language 5 [French]",credits:10,files:[]},
+          {code:"FR270",name:"Langue poétique / langue vivante [French]",credits:5,files:[]},
+          {code:"NG227",name:"Teanga Na Nua-Ghaeilge I [Gaeilge]",credits:5,files:[]},
+          {code:"NG2100",name:"An tSochtheangeolaíocht [Gaeilge]",credits:5,files:[]},
+          {code:"NG2101",name:"An Gearrscéal sa Ghaeilge [Gaeilge]",credits:5,files:[]},
+          {code:"TI229",name:"Political & Cultural Geography",credits:5,files:[]},
+          {code:"TI235",name:"Biogeography",credits:5,files:[]},
+          {code:"TI230",name:"Economic Geography",credits:5,files:[]},
+          {code:"GCS2100",name:"Geographic Data Analysis",credits:5,files:[]},
+          {code:"TI2102",name:"Introduction to GIS",credits:10,files:[]},
+          {code:"GR236",name:"German Language I [German]",credits:5,files:[]},
+          {code:"GR239",name:"History of German Literature & Culture I [German]",credits:5,files:[]},
+          {code:"GR238",name:"German Studies I [German]",credits:5,files:[]},
+          {code:"AJ2126",name:"Storytelling with Numbers and Data [Global Media]",credits:5,files:[]},
+          {code:"AJ2120",name:"Celebrity, Social Class and Media Culture [Global Media]",credits:5,files:[]},
+          {code:"AJ2109",name:"Understanding Media Audiences [Global Media]",credits:5,files:[]},
+          {code:"AJ2134",name:"Media, Politics and Public Opinion [Global Media]",credits:5,files:[]},
+          {code:"HI2157",name:"The Reformation [History]",credits:5,files:[]},
+          {code:"HI2158",name:"Global History and Modern Capitalism [History]",credits:5,files:[]},
+          {code:"HI2160",name:"Ireland since Independence [History]",credits:5,files:[]},
+          {code:"HI2162",name:"Scotland and Ireland [History]",credits:5,files:[]},
+          {code:"CT2101",name:"Object Oriented Programming I [IT]",credits:5,files:[]},
+          {code:"CT230",name:"Database Systems I [IT]",credits:5,files:[]},
+          {code:"CT2105",name:"Web-based Information Systems [IT]",credits:5,files:[]},
+          {code:"IT235",name:"Intermediate Language I [Italian]",credits:5,files:[]},
+          {code:"IT2101",name:"Oral Communication and Presentation Skills [Italian]",credits:5,files:[]},
+          {code:"IT238",name:"Italian Culture & Society I [Italian]",credits:5,files:[]},
+          {code:"LW3158",name:"Animal Law [Law]",credits:5,files:[]},
+          {code:"LW357",name:"Environmental Law I [Law]",credits:5,files:[]},
+          {code:"LW383",name:"Information Technology Law [Law]",credits:5,files:[]},
+          {code:"LW228",name:"Constitutional Law II [Law]",credits:5,files:[]},
+          {code:"LW202",name:"Contract I [Law]",credits:5,files:[]},
+          {code:"LN201",name:"Aistriúchán Feidhmeach Téacsanna I [Léann an Aistriúchán]",credits:5,files:[]},
+          {code:"LN203",name:"Gramadach agus Litriú na Gaeilge I [Léann an Aistriúchán]",credits:5,files:[]},
+          {code:"CG2101",name:"Craoltóireacht [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"CG2106",name:"Cleachtas Léirithe na Meán 2 [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"ST2001",name:"Statistics for Data Science 1 [Maths]",credits:5,files:[]},
+          {code:"MA284",name:"Discrete Mathematics [Maths]",credits:5,files:[]},
+          {code:"IS2104",name:"Claiming Place in Gaelic Irish Literature [Modern Irish Culture]",credits:5,files:[]},
+          {code:"IS2105",name:"Popular Music, Cultural Identities and Ireland [Modern Irish Culture]",credits:5,files:[]},
+          {code:"FM4100",name:"Gender and Sexuality Onscreen [Performance & Screen]",credits:5,files:[]},
+          {code:"FM2104",name:"Beyond Hollywood: Global Cinemas [Performance & Screen]",credits:5,files:[]},
+          {code:"PSS2106",name:"Theory and Practice for Performance Studies [Performance & Screen]",credits:5,files:[]},
+          {code:"PI240",name:"Bioethics [Philosophy]",credits:5,files:[]},
+          {code:"PI247",name:"Nietzsche & Philosophy [Philosophy]",credits:5,files:[]},
+          {code:"PI248",name:"Phenomenology [Philosophy]",credits:5,files:[]},
+          {code:"PS403",name:"Biological Psychology [Psychology]",credits:5,files:[]},
+          {code:"PS214",name:"Developmental Psychology 1 [Psychology]",credits:5,files:[]},
+          {code:"PS219",name:"Research Methods in Psychology [Psychology]",credits:5,files:[]},
+          {code:"SP2117",name:"International and Global Politics [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP2116",name:"Sociology of Health [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP2122",name:"European Politics [Sociology & Politics]",credits:5,files:[]},
+          {code:"SH2101",name:"Spanish Language II A [Spanish]",credits:5,files:[]},
+          {code:"SH2100",name:"Spanish Language II B [Spanish]",credits:5,files:[]},
+          {code:"SH232",name:"Hispanic Literature & Culture I [Spanish]",credits:5,files:[]},
+          {code:"SH2102",name:"Spoken Spanish and Oral Presentation Skills [Spanish]",credits:5,files:[]}
+        ]},
+        { label:"Semester 4 — elective pool continued", modules:[
+          {code:"CC2104",name:"The City-State [Ancient Classics]",credits:5,files:[]},
+          {code:"CC232",name:"Beginning Latin Part 2 [Ancient Classics]",credits:5,files:[]},
+          {code:"AR245",name:"Archaeology in Practice",credits:5,files:[]},
+          {code:"AR236",name:"Interpretation in Archaeology",credits:5,files:[]},
+          {code:"SG220",name:"King Arthur & the Holy Grail [Celtic Civilisation]",credits:5,files:[]},
+          {code:"SG219",name:"The Celtic Languages in the Modern World [Celtic Civilisation]",credits:5,files:[]},
+          {code:"EC247",name:"Introduction to Financial Economics [Economics]",credits:5,files:[]},
+          {code:"EC259",name:"Economics of Public Policy [Economics]",credits:5,files:[]},
+          {code:"EC268",name:"Intermediate Macroeconomics [Economics]",credits:5,files:[]},
+          {code:"EC275",name:"Statistics for Economics [Economics]",credits:5,files:[]},
+          {code:"FR267",name:"La France mise en scène [French]",credits:5,files:[]},
+          {code:"FR2100",name:"Expressing French and Francophone Identities [French]",credits:5,files:[]},
+          {code:"NG2102",name:"Scannánaíocht na Gaeilge [Gaeilge]",credits:5,files:[]},
+          {code:"NG2108",name:"Canúint agus Caighdeán [Gaeilge]",credits:5,files:[]},
+          {code:"NG228",name:"Teanga Na Nua-Ghaeilge II [Gaeilge]",credits:5,files:[]},
+          {code:"TI2110",name:"Perspectives on Climate Change [Geography]",credits:5,files:[]},
+          {code:"TI2108",name:"Introduction to Palaeoclimatology [Geography]",credits:5,files:[]},
+          {code:"TI248",name:"Coastal Environments [Geography]",credits:5,files:[]},
+          {code:"TI2112",name:"Environmental Planning, Sustainability and Climate Action [Geography]",credits:5,files:[]},
+          {code:"GR237",name:"German Language II [German]",credits:5,files:[]},
+          {code:"GR235",name:"History of German Literature & Culture II [German]",credits:5,files:[]},
+          {code:"AJ2123",name:"The Media and Global Migration [Global Media]",credits:5,files:[]},
+          {code:"AJ2129",name:"Global Pop Culture, Media and Identity [Global Media]",credits:5,files:[]},
+          {code:"AJ2133",name:"The Media and Me [Global Media]",credits:5,files:[]},
+          {code:"HI431",name:"French Mobilisation and the Great War [History]",credits:10,files:[]},
+          {code:"HI2159",name:"Land and Revolution in Ireland, 1879–1922 [History]",credits:10,files:[]},
+          {code:"HI2150",name:"Europe, 1918–49 [History]",credits:5,files:[]},
+          {code:"CT2103",name:"Systems Analysis & Design [IT]",credits:5,files:[]},
+          {code:"CT2102",name:"Object Oriented Programming II [IT]",credits:5,files:[]},
+          {code:"CT2104",name:"Web Application Development [IT]",credits:5,files:[]},
+          {code:"IT236",name:"Intermediate Language II [Italian]",credits:5,files:[]},
+          {code:"IT237",name:"Applied Language Skills: Intercultural Studies [Italian]",credits:5,files:[]},
+          {code:"IT239",name:"Italian Culture & Society II [Italian]",credits:5,files:[]},
+          {code:"LW227",name:"Constitutional Law I [Law]",credits:5,files:[]},
+          {code:"LW205",name:"Contract II [Law]",credits:5,files:[]},
+          {code:"LN204",name:"Aistriúchán Feidhmeach Téacsanna II [Léann an Aistriúchán]",credits:5,files:[]},
+          {code:"CG2100",name:"Anailís na Meán [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"CG2103",name:"Teicneolaíochtaí na Meán [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"ST2002",name:"Statistics for Data Science 2 [Maths]",credits:5,files:[]},
+          {code:"MA212",name:"Calculus II [Maths]",credits:5,files:[]},
+          {code:"MA283",name:"Linear Algebra [Maths]",credits:5,files:[]},
+          {code:"IS2102",name:"Festival, Ritual and Commemoration [Modern Irish Culture]",credits:5,files:[]},
+          {code:"IS2103",name:"Irish Landscapes, Culture and Literature [Modern Irish Culture]",credits:5,files:[]},
+          {code:"FS304",name:"Digital Storytelling [Performance & Screen]",credits:5,files:[]},
+          {code:"PSS2105",name:"Playwriting and Screenwriting [Performance & Screen]",credits:5,files:[]},
+          {code:"FM2101",name:"Introduction to Film Theory [Performance & Screen]",credits:5,files:[]},
+          {code:"PI210",name:"Moral and Political Philosophy [Philosophy]",credits:5,files:[]},
+          {code:"PI241",name:"History of Irish Thought [Philosophy]",credits:5,files:[]},
+          {code:"PI2102",name:"Formal Logic [Philosophy]",credits:5,files:[]},
+          {code:"PS338",name:"Theories of Personality [Psychology]",credits:5,files:[]},
+          {code:"PS428",name:"Social Psychology [Psychology]",credits:5,files:[]},
+          {code:"PS3122",name:"Cognitive Psychology [Psychology]",credits:5,files:[]},
+          {code:"SP212",name:"Classical Social Thought [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP2123",name:"Modern Political Thought [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP220",name:"Methods for Social and Political Science [Sociology & Politics]",credits:5,files:[]},
+          {code:"SH2104",name:"Creativity in Hispanic Textual and Cultural Practice [Spanish]",credits:5,files:[]},
+          {code:"SH2103",name:"Spanish Language II C [Spanish]",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, note:"Full year study abroad at partner university. Module codes assigned by host institution.", sections:[
+        { label:"Year 3 — Study Abroad (partner university modules)", modules:[
+          {code:"LN3530",name:"Léann an Aistriúcháin Abroad",credits:30,files:[]},
+          {code:"EN3530",name:"English Abroad",credits:30,files:[]},
+          {code:"FR3530",name:"French Abroad",credits:30,files:[]},
+          {code:"SH3530",name:"Spanish Abroad",credits:30,files:[]},
+          {code:"GR3530",name:"German Abroad",credits:30,files:[]},
+          {code:"HI3530",name:"History Abroad",credits:30,files:[]},
+          {code:"EC3530",name:"Economics Abroad",credits:30,files:[]},
+          {code:"SP3530",name:"Sociological & Political Studies Abroad",credits:30,files:[]},
+          {code:"LW3530",name:"Law Abroad",credits:30,files:[]},
+          {code:"TI3530",name:"Geography Abroad",credits:30,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, note:"Continue 2 subjects from Years 1–2 (30 cr each).", sections:[
+        { label:"Semester 7 — elective pool by subject", modules:[
+          {code:"CC3102",name:"Studying Greek Figured Pottery [Ancient Classics]",credits:5,files:[]},
+          {code:"CC316",name:"Barbarians [Ancient Classics]",credits:5,files:[]},
+          {code:"AR3104",name:"Archaeological Post-excavation",credits:5,files:[]},
+          {code:"AR3106",name:"The Bronze Age Roots of European Civilization",credits:5,files:[]},
+          {code:"SG313",name:"The Poetry of Medieval Wales c.600–1100 [Celtic Civilisation]",credits:5,files:[]},
+          {code:"SG317",name:"Medieval Irish Language III [Celtic Civilisation]",credits:5,files:[]},
+          {code:"EC369",name:"Money and Banking [Economics]",credits:5,files:[]},
+          {code:"EC345",name:"Health Economics [Economics]",credits:5,files:[]},
+          {code:"EC3105",name:"Econometrics [Economics]",credits:5,files:[]},
+          {code:"EC3101",name:"Microeconomics and Public Policy [Economics]",credits:5,files:[]},
+          {code:"EN3105",name:"20th Century Children's Fiction [English]",credits:5,files:[]},
+          {code:"EN3109",name:"Poetry of the First World War [English]",credits:5,files:[]},
+          {code:"EN3159",name:"20th Century Writing By Women [English]",credits:5,files:[]},
+          {code:"EN3141",name:"North American Literature [English]",credits:5,files:[]},
+          {code:"FR371",name:"French Literature & Culture 7 [French]",credits:5,files:[]},
+          {code:"FR3100",name:"French Literature and Culture 11 [French]",credits:5,files:[]},
+          {code:"FR379",name:"French Language 6 [French]",credits:10,files:[]},
+          {code:"NG4102",name:"Miontráchtas Taighde i Léann na Gaeilge [Gaeilge]",credits:5,files:[]},
+          {code:"NG4112",name:"Scríbhneoirí Thír Chonaill [Gaeilge]",credits:5,files:[]},
+          {code:"NG4101",name:"Filí agus Filíocht na Gaeilge [Gaeilge]",credits:5,files:[]},
+          {code:"TI326",name:"War & Representation [Geography]",credits:5,files:[]},
+          {code:"TI303",name:"Coastal Dynamics [Geography]",credits:5,files:[]},
+          {code:"TI3130",name:"Introduction to Spatial Planning [Geography]",credits:5,files:[]},
+          {code:"GR337",name:"German Cultural Studies I [German]",credits:5,files:[]},
+          {code:"GR341",name:"German Language I [German]",credits:5,files:[]},
+          {code:"AJ4120",name:"Algorithmic Media in an Age of AI [Global Media]",credits:5,files:[]},
+          {code:"AJ4121",name:"Communicating Climate Action [Global Media]",credits:5,files:[]},
+          {code:"AJ4106",name:"Media Research Methods [Global Media]",credits:5,files:[]},
+          {code:"AJ4102",name:"Global Political Economy of the Mass Media [Global Media]",credits:5,files:[]},
+          {code:"HI3112",name:"The First World War [History]",credits:10,files:[]},
+          {code:"HI3204",name:"The Family in Irish Society [History]",credits:10,files:[]},
+          {code:"HI3206",name:"Race, Enslavement and Representation [History]",credits:10,files:[]},
+          {code:"HI167",name:"Power and Conflict in Northern Ireland [History]",credits:10,files:[]},
+          {code:"CT319",name:"Artificial Intelligence [IT]",credits:5,files:[]},
+          {code:"CT318",name:"Human Computer Interaction [IT]",credits:5,files:[]},
+          {code:"CT328",name:"Final Year Project [IT]",credits:10,files:[]},
+          {code:"IT342",name:"Italian Culture & Society III [Italian]",credits:5,files:[]},
+          {code:"IT324",name:"Language III [Italian]",credits:10,files:[]},
+          {code:"IS3100",name:"Introducing Literary and Cultural Theory [Modern Irish Culture]",credits:5,files:[]},
+          {code:"IS3101",name:"Topics in Irish Music Studies [Modern Irish Culture]",credits:5,files:[]},
+          {code:"FM4106",name:"Documentary and Creative Non-Fiction on Screen [Performance & Screen]",credits:5,files:[]},
+          {code:"PSS3103",name:"Performance & Screen Studies Capstone Project I [Performance & Screen]",credits:10,files:[]},
+          {code:"PI315",name:"Philosophy of Mind [Philosophy]",credits:5,files:[]},
+          {code:"PI327",name:"Philosophy of Religion [Philosophy]",credits:5,files:[]},
+          {code:"PI3103",name:"Environmental Ethics [Philosophy]",credits:5,files:[]},
+          {code:"PS408",name:"Human Sexuality [Psychology]",credits:5,files:[]},
+          {code:"PS342",name:"Introduction to Positive Psychology [Psychology]",credits:5,files:[]},
+          {code:"PS322",name:"Health Psychology [Psychology]",credits:5,files:[]},
+          {code:"SP3195",name:"Equality, Diversity and Collective Action [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP3197",name:"Thinking Politically: The Power of Ideas [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP3208",name:"Contemporary American Politics [Sociology & Politics]",credits:5,files:[]},
+          {code:"SH339",name:"Spanish Language III [Spanish]",credits:5,files:[]},
+          {code:"SH337",name:"Hispanic Literature & Culture IV [Spanish]",credits:5,files:[]},
+          {code:"SH336",name:"Hispanic Literature & Culture III [Spanish]",credits:5,files:[]}
+        ]},
+        { label:"Semester 8 — elective pool continued", modules:[
+          {code:"CCS306",name:"Iconography [Ancient Classics]",credits:5,files:[]},
+          {code:"CC3100",name:"Pompeii [Ancient Classics]",credits:5,files:[]},
+          {code:"AR343",name:"Public Archaeology",credits:5,files:[]},
+          {code:"AR325",name:"Minor Dissertation",credits:5,files:[]},
+          {code:"SG3103",name:"Poets and Patrons [Celtic Civilisation]",credits:5,files:[]},
+          {code:"EC3100",name:"Economics and Philosophy [Economics]",credits:5,files:[]},
+          {code:"EC362",name:"Economics of Financial Markets [Economics]",credits:5,files:[]},
+          {code:"EC386",name:"Public Economics [Economics]",credits:5,files:[]},
+          {code:"EC357",name:"Development Economics [Economics]",credits:5,files:[]},
+          {code:"EC3103",name:"Behavioural Economics [Economics]",credits:5,files:[]},
+          {code:"EN3112",name:"Poetry of the First World War (S2) [English]",credits:5,files:[]},
+          {code:"EN3120",name:"Technology and Culture B [English]",credits:5,files:[]},
+          {code:"EN3173",name:"Transformations of the Novel [English]",credits:5,files:[]},
+          {code:"FR366",name:"French and Francophone Studies 10 [French]",credits:5,files:[]},
+          {code:"FR380",name:"French and Francophone Studies 11 [French]",credits:5,files:[]},
+          {code:"NG4105",name:"An Béaloideas — An Scéalaíocht [Gaeilge]",credits:5,files:[]},
+          {code:"NG4109",name:"Próslitríocht na Gaeilge [Gaeilge]",credits:5,files:[]},
+          {code:"TI311",name:"Advanced GIS [Geography]",credits:5,files:[]},
+          {code:"TI3117",name:"Migration, Mobility and Belonging [Geography]",credits:5,files:[]},
+          {code:"GR339",name:"German Cultural Studies III [German]",credits:5,files:[]},
+          {code:"GR342",name:"German Language II [German]",credits:5,files:[]},
+          {code:"AJ4113",name:"Bursting the Western Bubble [Global Media]",credits:5,files:[]},
+          {code:"AJ4105",name:"Media Law and Ethics [Global Media]",credits:5,files:[]},
+          {code:"AJ4114",name:"Contemporary Issues in Media [Global Media]",credits:5,files:[]},
+          {code:"HI362",name:"Party & Power in 19th & 20th Century British History [History]",credits:5,files:[]},
+          {code:"HI3205",name:"Gender, Sexuality, and Society in Ireland [History]",credits:5,files:[]},
+          {code:"HI3196",name:"The Great Irish Famine [History]",credits:5,files:[]},
+          {code:"HI3100",name:"Brave New World: Globalisation since 1945 [History]",credits:5,files:[]},
+          {code:"HI3207",name:"The Transatlantic Slave Trade [History]",credits:5,files:[]},
+          {code:"CT411",name:"Multi-Media Development [IT]",credits:5,files:[]},
+          {code:"CT327",name:"Humanities Applications [IT]",credits:5,files:[]},
+          {code:"IS3103",name:"Independent Project in Irish Studies [Modern Irish Culture]",credits:15,files:[]},
+          {code:"FM4108",name:"Sport and Cinema [Performance & Screen]",credits:5,files:[]},
+          {code:"PSS3104",name:"Performance & Screen Studies Capstone Project II [Performance & Screen]",credits:10,files:[]},
+          {code:"PI310",name:"Topics in Applied Philosophy [Philosophy]",credits:5,files:[]},
+          {code:"PI3108",name:"Topics in Post-Kantian Philosophy [Philosophy]",credits:5,files:[]},
+          {code:"PI3110",name:"Philosophy of Literature [Philosophy]",credits:5,files:[]},
+          {code:"PS3114",name:"Introduction to Communication Skills and Counselling [Psychology]",credits:5,files:[]},
+          {code:"PS345",name:"Applied Developmental Psychology [Psychology]",credits:5,files:[]},
+          {code:"PS4100",name:"Technology and Health [Psychology]",credits:5,files:[]},
+          {code:"SP3137",name:"Youth and Society [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP405",name:"Contemporary Social Thought [Sociology & Politics]",credits:5,files:[]},
+          {code:"SP3129",name:"Sexualities, Genders and Diversities [Sociology & Politics]",credits:5,files:[]},
+          {code:"SH3104",name:"Hispanic Research: From Theory to Practice [Spanish]",credits:5,files:[]},
+          {code:"SH3107",name:"Spanish Language IV [Spanish]",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-ba-childrens-studies", name:"BA Children's Studies", years:[
+      { year:1, credits:60, sections:[
+        { label:"Semester 1", modules:[
+          {code:"CN1110",name:"Introduction to Children's Studies",credits:5,files:[]},
+          {code:"CN1111",name:"Children and Creativity",credits:10,files:[]},
+          {code:"CN1107",name:"Modern Children's Literature",credits:5,files:[]},
+          {code:"CN1108",name:"Introduction to Academic Skills in the Context of Children's Studies",credits:10,files:[]},
+          {code:"FR1100",name:"Introduction to French Language and Culture [Language Option]",credits:15,files:[]},
+          {code:"GR1100",name:"German Language and Culture (Advanced) [Language Option]",credits:15,files:[]},
+          {code:"GR1101",name:"German Language and Culture (Beginners) [Language Option]",credits:15,files:[]},
+          {code:"IT1100",name:"Italian Language and Culture [Language Option]",credits:15,files:[]},
+          {code:"SH1100",name:"Intensive Beginners Spanish Language and Culture [Language Option]",credits:15,files:[]},
+          {code:"SH1101",name:"Intermediate Spanish Language and Culture [Language Option]",credits:15,files:[]},
+          {code:"NG1105",name:"An Teanga Bheo [Gaeilge Option]",credits:10,files:[]},
+          {code:"NG1111",name:"An Ghaeilge, an Pobal agus an Stát [Gaeilge Option]",credits:5,files:[]},
+          {code:"CN1112",name:"History of Modern Ideas about Childhood and Youth [Optional]",credits:5,files:[]}
+        ]},
+        { label:"Semester 2", modules:[
+          {code:"CN1103",name:"Children in Social Contexts",credits:5,files:[]},
+          {code:"CN1100",name:"Children and Health",credits:5,files:[]},
+          {code:"CN1104",name:"Fairytales and Children [Optional]",credits:5,files:[]},
+          {code:"PS1101",name:"Developmental Psychology [Optional]",credits:5,files:[]},
+          {code:"CN1105",name:"The Child in Film [Optional]",credits:5,files:[]},
+          {code:"NG1110",name:"An Áit agus a Scéal [Gaeilge Option]",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, sections:[
+        { label:"Semester 3", modules:[
+          {code:"CN2107",name:"European Educational Approaches, Policies and Practices",credits:5,files:[]},
+          {code:"CN2113",name:"Numeracy for Working with Children and Youth",credits:5,files:[]},
+          {code:"CN2105",name:"Understanding Children's Medicine [Optional]",credits:5,files:[]},
+          {code:"CN2108",name:"Arts and Culture in Education and Social Settings [Optional]",credits:5,files:[]},
+          {code:"CN2104",name:"Marginalised Children's Groups in Ireland [Optional]",credits:10,files:[]},
+          {code:"FR269",name:"Lecture du français [Language Option]",credits:5,files:[]},
+          {code:"FR266",name:"French Language 5 [Language Option]",credits:10,files:[]},
+          {code:"GR236",name:"German Language I [Language Option]",credits:5,files:[]},
+          {code:"IT235",name:"Intermediate Language I [Language Option]",credits:5,files:[]},
+          {code:"SH2101",name:"Spanish Language II A [Language Option]",credits:5,files:[]},
+          {code:"SH2100",name:"Spanish Language II B [Language Option]",credits:5,files:[]},
+          {code:"NG227",name:"Teanga Na Nua-Ghaeilge I [Gaeilge Option]",credits:5,files:[]},
+          {code:"NG2101",name:"An Gearrscéal sa Ghaeilge [Gaeilge Option]",credits:5,files:[]}
+        ]},
+        { label:"Semester 4", modules:[
+          {code:"CN2112",name:"Intro to Research Methods for Children's Studies",credits:5,files:[]},
+          {code:"CSS201",name:"Introduction to Child Law",credits:5,files:[]},
+          {code:"CN2106",name:"Children and Storytelling",credits:10,files:[]},
+          {code:"CN2103",name:"Careers and Professional Skills",credits:5,files:[]},
+          {code:"CN2100",name:"Adolescents in Ireland: Healthy and Risky Behaviour [Optional]",credits:5,files:[]},
+          {code:"CN2109",name:"Food and Health in Children and YA Literature [Optional]",credits:5,files:[]},
+          {code:"CN2111",name:"Irish Childhoods: Gaelic Language and Literature [Optional]",credits:5,files:[]},
+          {code:"CN2110",name:"Global Childhoods [Optional]",credits:5,files:[]},
+          {code:"FR2100",name:"Expressing French and Francophone Identities [Language Option]",credits:5,files:[]},
+          {code:"GR237",name:"German Language II [Language Option]",credits:5,files:[]},
+          {code:"IT236",name:"Intermediate Language II [Language Option]",credits:5,files:[]},
+          {code:"SH2103",name:"Spanish Language II C [Language Option]",credits:5,files:[]},
+          {code:"NG228",name:"Teanga Na Nua-Ghaeilge II [Gaeilge Option]",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, note:"Study Abroad, Work Placement, or on-campus electives.", sections:[
+        { label:"Semester 5", modules:[
+          {code:"CN3102",name:"Children's Studies Abroad (Semester 1)",credits:30,files:[]},
+          {code:"CN3103",name:"Children's Studies Placement (Semester 1)",credits:30,files:[]},
+          {code:"CN3104",name:"Transition in Childhood and Adolescence",credits:10,files:[]},
+          {code:"CN3108",name:"Education for Sustainable Development in the Context of the UN SDGs",credits:10,files:[]},
+          {code:"CN3101",name:"Child Centred Research Methods",credits:10,files:[]},
+          {code:"CN3107",name:"Designing Play",credits:10,files:[]},
+          {code:"CN4108",name:"Comics, Childhood and the Alternative",credits:10,files:[]},
+          {code:"CN3110",name:"Problematising the Wonderful World of Walt Disney",credits:10,files:[]},
+          {code:"DT3107",name:"Theatre for Children and Young People",credits:10,files:[]}
+        ]},
+        { label:"Semester 6", modules:[
+          {code:"CSS306",name:"Children's Studies Abroad (Semester 2)",credits:30,files:[]},
+          {code:"CSS309",name:"Children's Studies Placement (Semester 2)",credits:30,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, sections:[
+        { label:"Semester 7", modules:[
+          {code:"CN4100",name:"Supporting Children with Diverse Needs (runs across S7 & S8)",credits:15,files:[]},
+          {code:"CSS304",name:"Children's Rights [Optional]",credits:10,files:[]},
+          {code:"CN4105",name:"Connecting Research, Policy & Practice in Children's Lives and Services [Optional]",credits:10,files:[]},
+          {code:"CN4101",name:"Health and E-Literacy in Young People [Optional]",credits:10,files:[]},
+          {code:"CN4104",name:"Children and the Digital World [Optional]",credits:10,files:[]},
+          {code:"TI3127",name:"Critical Geographies of Children [Optional]",credits:5,files:[]},
+          {code:"FR371",name:"French Literature & Culture 7 [Language Option]",credits:5,files:[]},
+          {code:"FR379",name:"French Language 6 [Language Option]",credits:10,files:[]},
+          {code:"GR337",name:"German Cultural Studies I [Language Option]",credits:5,files:[]},
+          {code:"SH339",name:"Spanish Language III [Language Option]",credits:5,files:[]},
+          {code:"NG4101",name:"Filí agus Filíocht na Gaeilge [Gaeilge Option]",credits:5,files:[]},
+          {code:"GA4113",name:"Scileanna Gaeilge — Staidéar Leanaí [Gaeilge Option]",credits:10,files:[]}
+        ]},
+        { label:"Semester 8", modules:[
+          {code:"CN4103",name:"The World of Picture-books: Approaches and Aesthetics [Optional]",credits:5,files:[]},
+          {code:"CN4102",name:"Children, Culture, and the Media [Optional]",credits:10,files:[]},
+          {code:"CN4109",name:"The Power of Outdoor and Place-based Learning [Optional]",credits:5,files:[]},
+          {code:"FR380",name:"French and Francophone Studies 11 [Language Option]",credits:5,files:[]},
+          {code:"GR342",name:"German Language II [Language Option]",credits:5,files:[]},
+          {code:"SH3107",name:"Spanish Language IV [Language Option]",credits:5,files:[]},
+          {code:"NG4109",name:"Próslitríocht na Gaeilge [Gaeilge Option]",credits:5,files:[]},
+          {code:"NG4114",name:"Teanga Na Nua-Ghaeilge IV [Gaeilge Option]",credits:5,files:[]}
+        ]}
+      ]}
+    ]},
+    { id:"uog-ba-arts-childrens", name:"BA Arts with Children's Studies", years:[
+      { year:1, credits:60, note:"Children's Studies plus two Arts subjects of choice. All available modules listed — actual selection depends on chosen Arts combination.", sections:[
+        { label:"Semester 1 — full module pool", modules:[
+          {code:"CN1107",name:"Modern Children's Literature [CN]",credits:5,files:[]},
+          {code:"CN1110",name:"Introduction to Children's Studies [CN]",credits:5,files:[]},
+          {code:"CC1101",name:"Mythology and the City in Ancient Greece [Ancient Classics]",credits:5,files:[]},
+          {code:"CC114",name:"Written Words & Spoken Languages in the Ancient World [Ancient Classics]",credits:5,files:[]},
+          {code:"AR1104",name:"Material Culture and Museums [Archaeology]",credits:5,files:[]},
+          {code:"AR113",name:"Prehistoric Ireland & Europe [Archaeology]",credits:5,files:[]},
+          {code:"SG1100",name:"Medieval Celtic Literature A [Celtic Civilisation]",credits:5,files:[]},
+          {code:"SG111",name:"Early & Medieval History of the Celts [Celtic Civilisation]",credits:5,files:[]},
+          {code:"FR1100",name:"Introduction to French Language and Culture [French]",credits:15,files:[]},
+          {code:"NG1105",name:"An Teanga Bheo [Gaeilge]",credits:10,files:[]},
+          {code:"NG1111",name:"An Ghaeilge, an Pobal agus an Stát [Gaeilge]",credits:5,files:[]},
+          {code:"TI1103",name:"Geography in Action [Geography]",credits:5,files:[]},
+          {code:"TI150",name:"Principles of Human Geography [Geography]",credits:5,files:[]},
+          {code:"GR1100",name:"German Language and Culture (Advanced) [German]",credits:15,files:[]},
+          {code:"GR1101",name:"German Language and Culture (Beginners) [German]",credits:15,files:[]},
+          {code:"AJ1108",name:"Media Foundations [Global Media]",credits:10,files:[]},
+          {code:"HI1103",name:"Europe and Ireland 1789–1918 [History]",credits:5,files:[]},
+          {code:"CT1101",name:"Programming I [IT]",credits:5,files:[]},
+          {code:"CT1100",name:"Computer Systems [IT]",credits:5,files:[]},
+          {code:"IT1100",name:"Italian Language and Culture [Italian]",credits:15,files:[]},
+          {code:"LW3160",name:"Introduction to Law [Law]",credits:5,files:[]},
+          {code:"LW3109",name:"Tort Law [Law]",credits:10,files:[]},
+          {code:"LN1103",name:"Bunscileanna Gramadaí [Léann an Aistriúchán]",credits:10,files:[]},
+          {code:"CG1105",name:"Bunús na hIriseoireachta [Léann na Cumarsáide]",credits:5,files:[]},
+          {code:"MA185",name:"Analysis and Algebra 1 [Maths]",credits:5,files:[]},
+          {code:"ISSK1100",name:"Introducing Modern and Contemporary Irish Literature [Modern Irish Culture]",credits:5,files:[]},
+          {code:"PSS1102",name:"Acting and Performance Processes [Performance & Screen]",credits:5,files:[]},
+          {code:"FS101",name:"Introduction to Film Studies I: Form [Performance & Screen]",credits:5,files:[]},
+          {code:"PI107",name:"Introduction to the History of Philosophy [Philosophy]",credits:5,files:[]},
+          {code:"PISK1102",name:"Critical Thinking and Logic [Philosophy]",credits:5,files:[]},
+          {code:"PS122",name:"Introductory Psychology 1 [Psychology]",credits:5,files:[]},
+          {code:"SP1125",name:"Introduction to Politics [Sociology & Politics]",credits:5,files:[]},
+          {code:"SH1100",name:"Intensive Beginners Spanish Language and Culture [Spanish]",credits:15,files:[]},
+          {code:"SH1101",name:"Intermediate Spanish Language and Culture [Spanish]",credits:15,files:[]}
+        ]},
+        { label:"Semester 2 — full module pool", modules:[
+          {code:"CN1100",name:"Children and Health [CN]",credits:5,files:[]},
+          {code:"CN1103",name:"Children in Social Contexts [CN]",credits:5,files:[]},
+          {code:"CC1102",name:"Empire and Literature in Ancient Rome [Ancient Classics]",credits:5,files:[]},
+          {code:"AR1105",name:"Medieval Ireland and Europe [Archaeology]",credits:5,files:[]},
+          {code:"AR1106",name:"Sites and Monuments in the Landscape [Archaeology]",credits:5,files:[]},
+          {code:"SG116",name:"Celtic Mythology, Religion & Folklore [Celtic Civilisation]",credits:5,files:[]},
+          {code:"NG1110",name:"An Áit agus a Scéal [Gaeilge]",credits:5,files:[]},
+          {code:"TI151",name:"Principles of Physical Geography [Geography]",credits:5,files:[]},
+          {code:"AJ1106",name:"Pop Culture, Media and Society [Global Media]",credits:5,files:[]},
+          {code:"HI1106",name:"Early Cultural Encounters in Ireland and the Americas [History]",credits:5,files:[]},
+          {code:"CT1102",name:"Programming II [IT]",credits:5,files:[]},
+          {code:"MA186",name:"Analysis and Algebra 2 [Maths]",credits:5,files:[]},
+          {code:"IS1104",name:"The Migrant Experience in Modern Irish Writing [Modern Irish Culture]",credits:5,files:[]},
+          {code:"PSS1101",name:"Performing and Screening Ireland [Performance & Screen]",credits:5,files:[]},
+          {code:"PI108",name:"Introduction to Practical Ethics [Philosophy]",credits:5,files:[]},
+          {code:"PS124",name:"Introductory Psychology 2 [Psychology]",credits:5,files:[]},
+          {code:"SP1126",name:"Introduction to Sociology [Sociology & Politics]",credits:5,files:[]},
+          {code:"CG1104",name:"Na Meáin agus an tSochaí [Léann na Cumarsáide]",credits:5,files:[]}
+        ]}
+      ]},
+      { year:2, credits:60, note:"CN modules plus chosen Arts subjects.", sections:[
+        { label:"Semesters 3-4 — same elective pool as BA Global Experience Year 2", modules:[
+          {code:"CN2107",name:"European Educational Approaches, Policies and Practices [CN]",credits:5,files:[]},
+          {code:"CN2113",name:"Numeracy for Working with Children and Youth [CN]",credits:5,files:[]},
+          {code:"CN2112",name:"Intro to Research Methods for Children's Studies [CN]",credits:5,files:[]},
+          {code:"CSS201",name:"Introduction to Child Law [CN]",credits:5,files:[]},
+          {code:"CN2106",name:"Children and Storytelling [CN]",credits:10,files:[]},
+          {code:"CN2103",name:"Careers and Professional Skills [CN]",credits:5,files:[]}
+        ]}
+      ]},
+      { year:3, credits:60, note:"Study Abroad or Work Placement (same structure as BA Children's Studies).", sections:[
+        { label:"Year 3 — Study Abroad / Work Placement", modules:[
+          {code:"CSS307",name:"Children's Studies Abroad (Year Long)",credits:60,files:[]},
+          {code:"CN3109",name:"Children's Studies Placement (Year-Long)",credits:60,files:[]}
+        ]}
+      ]},
+      { year:4, credits:60, note:"CN Year 4 modules plus chosen Arts subject Year 4 modules.", sections:[
+        { label:"Semesters 7-8 — CN Year 4 core + Arts electives", modules:[
+          {code:"CN4100",name:"Supporting Children with Diverse Needs",credits:15,files:[]},
+          {code:"CSS304",name:"Children's Rights [Optional]",credits:10,files:[]},
+          {code:"CN4105",name:"Connecting Research, Policy & Practice [Optional]",credits:10,files:[]},
+          {code:"CN4101",name:"Health and E-Literacy in Young People [Optional]",credits:10,files:[]},
+          {code:"CN4104",name:"Children and the Digital World [Optional]",credits:10,files:[]},
+          {code:"CN4103",name:"The World of Picture-books [Optional]",credits:5,files:[]},
+          {code:"CN4102",name:"Children, Culture, and the Media [Optional]",credits:10,files:[]},
+          {code:"CN4109",name:"The Power of Outdoor and Place-based Learning [Optional]",credits:5,files:[]}
+        ]}
+      ]}
+    ]}
   ]
 });
 
