@@ -989,11 +989,14 @@
     if (/BPharm|MPharm|Pharmacy/.test(name))                             return "MedHealth";
     if (/Nursing|Midwifery/.test(name))                                  return "MedHealth";
     if (/Occupational Therapy|Speech.*(Language|Therapy)|Paramedicine/.test(name)) return "MedHealth";
+    if (/Physiotherapy|Radiation Therapy|Deaf Studies/.test(name))       return "MedHealth";
+    if (/Human Health|Dietetics|Human Nutrition/.test(name))             return "MedHealth";
     if (/Podiatric|Public Health|Medical & Health/.test(name))           return "MedHealth";
     // Education
     if (/\bBEd\b|Science Education|\bEducation\b/.test(name))           return "Education";
     // Business
     if (/\bBCom\b|Commerce|Business Studies|\bBBS\b/.test(name))        return "Business";
+    if (/Global Business|Business.*Economics/.test(name))               return "Business";
     if (/\bBFin\b|Finance BSc/.test(name))                              return "Business";
     if (/\bBAcc\b|Accounting/.test(name))                               return "Business";
     if (/\bBIS\b|Business Information/.test(name))                      return "Business";
@@ -1006,7 +1009,7 @@
     // Physical Sciences
     if (/Chemical Sciences|Chemical Physics/.test(name))                 return "PhysSci";
     if (/\bChemistry\b/.test(name))                                      return "PhysSci";
-    if (/\bPhysics\b|Astrophysics/.test(name))                          return "PhysSci";
+    if (/\bPhysics\b|Astrophysics|Physical Sciences/.test(name))        return "PhysSci";
     // Environmental & Earth Sciences
     if (/Ecology|Environmental (Science|Biology)|Geoscience/.test(name)) return "EnvSci";
     if (/Zoology|Sustainability|Agricultural/.test(name))                return "EnvSci";
