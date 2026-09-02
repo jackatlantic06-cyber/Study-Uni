@@ -979,25 +979,26 @@
 
   function degreeType(name) {
     // Engineering & Architecture
-    if (/\bBE\b/.test(name))                                            return "Engineering";
-    if (/Architecture/.test(name))                                        return "Engineering";
+    if (/\bBE\b|Engineering|Architecture/.test(name))                    return "Engineering";
+    if (/Construction Management|Project and Construction/.test(name))    return "Engineering";
+    if (/Occupational Health and Safety/.test(name))                      return "Engineering";
     // Law
-    if (/BCL|^Law\s|Law &|Law \(/.test(name))                          return "Law";
+    if (/BCL|^Law\s|Law &|Law \(/.test(name))                           return "Law";
     // Medicine & Health
-    if (/\bMB\b|\bBCh\b|\bBDS\b|Medicine|Dentistry/.test(name))    return "MedHealth";
+    if (/\bMB\b|\bBCh\b|\bBDS\b|Medicine|Dentistry/.test(name))         return "MedHealth";
     if (/BPharm|MPharm|Pharmacy/.test(name))                             return "MedHealth";
     if (/Nursing|Midwifery/.test(name))                                  return "MedHealth";
-    if (/Occupational Therapy|Speech & Language|Paramedicine/.test(name))return "MedHealth";
-    if (/Public Health|Medical & Health/.test(name))                     return "MedHealth";
+    if (/Occupational Therapy|Speech.*(Language|Therapy)|Paramedicine/.test(name)) return "MedHealth";
+    if (/Podiatric|Public Health|Medical & Health/.test(name))           return "MedHealth";
     // Education
     if (/\bBEd\b|Science Education|\bEducation\b/.test(name))           return "Education";
     // Business
-    if (/\bBCom\b|Commerce/.test(name))                                 return "Business";
+    if (/\bBCom\b|Commerce|Business Studies|\bBBS\b/.test(name))        return "Business";
     if (/\bBFin\b|Finance BSc/.test(name))                              return "Business";
     if (/\bBAcc\b|Accounting/.test(name))                               return "Business";
     if (/\bBIS\b|Business Information/.test(name))                      return "Business";
     if (/\bBAEcon\b|Applied Economics/.test(name))                      return "Business";
-    if (/Food Marketing|International Business/.test(name))              return "Business";
+    if (/Food Marketing|International Business|Hotel Management/.test(name)) return "Business";
     // Life Sciences (CK402 check FIRST so "Biological and Chemical Sciences" isn't caught by PhysSci)
     if (/CK402|Biological and Chemical/.test(name))                      return "LifeSci";
     if (/Biochemistry|Biotechnology|Microbiology|Neuroscience|Physiology/.test(name)) return "LifeSci";
@@ -1009,12 +1010,14 @@
     // Environmental & Earth Sciences
     if (/Ecology|Environmental (Science|Biology)|Geoscience/.test(name)) return "EnvSci";
     if (/Zoology|Sustainability|Agricultural/.test(name))                return "EnvSci";
+    if (/Marine Science|Earth and Ocean|Ocean Sciences/.test(name))      return "EnvSci";
+    if (/Geography|Geosystems/.test(name))                               return "EnvSci";
     if (/CK404|Biological, Environmental/.test(name))                    return "EnvSci";
     // Maths & Computing
     if (/Mathematical|Financial Mathematics|Actuarial/.test(name))       return "MathsCS";
     if (/Computer Science|Data Science/.test(name))                      return "MathsCS";
     // Arts & Humanities (social sciences fold in here)
-    if (/\bBSocSc\b|Social Science|Social Work|\bBSW\b/.test(name))   return "Arts";
+    if (/\bBSocSc\b|Social Science|Social Work|\bBSW\b/.test(name))    return "Arts";
     if (/Government|Political Science|Criminology/.test(name))           return "Arts";
     if (/\bBA\b/.test(name))                                            return "Arts";
     return "Arts";
