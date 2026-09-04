@@ -1154,7 +1154,7 @@
   var _selectedUni = 'ucc';
 
   function _uniTabsHTML(activeId) {
-    return (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => !u.group).map(u => `
+    return (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => !u.group && u.live).map(u => `
       <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectUni('${u.id}')">
         <span class="uni-tab-icon">${u.icon}</span>
         <span class="uni-tab-body">
