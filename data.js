@@ -20319,7 +20319,7 @@ SCHOOLS.push({
       id:'ucd', name:'UCD', fullName:'University College Dublin',
       location:'Dublin, Ireland', icon:'📚', color:'#1d4ed8',
       tagline:'Commerce, Commerce International & Economics & Finance modules — papers coming soon',
-      live: true,
+      live: false,
       courses: [
         { name:'Actuarial & Financial Studies',                            schoolsCourseId:'ucd-bafs',             cao:'DN230', url:'https://www.ucd.ie/courses/bsc-actuarial-and-financial-studies' },
         { name:'Agricultural Systems Technology',                          schoolsCourseId:'ucd-agri-systems',     cao:'DN250', url:'https://www.ucd.ie/courses/bagrsc-agricultural-systems-technology' },
@@ -20461,7 +20461,7 @@ SCHOOLS.push({
       id:'uog', name:'University of Galway', fullName:'University of Galway',
       location:'Galway, Ireland', icon:'🌊', color:'#0369a1',
       tagline:'Explore module-level content for University of Galway courses',
-      live: true,
+      live: false,
       courses: [
         { name:'Pharmacy',                                                              cao:'GY505', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/pharmacy.html', schoolsCourseId:'uog-pharmacy' },
         { name:'Bachelor of Science (Zoology)',                                         cao:'GY323', school:'College of Science and Engineering',                         url:'https://www.universityofgalway.ie/courses/undergraduate-courses/zoology.html', schoolsCourseId:'uog-zoology' },
@@ -20533,7 +20533,7 @@ SCHOOLS.push({
         { name:'Bachelor of Midwifery Science',                                          cao:'GY517', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/midwifery-science.html', schoolsCourseId:'uog-midwifery' },
       ],
     },
-    { id:'tcd', name:'Trinity', fullName:'Trinity College Dublin', location:'Dublin, Ireland', icon:'🏰', color:'#1e3a5f', tagline:'Engineering modules live — more courses coming soon', live: true,
+    { id:'tcd', name:'Trinity', fullName:'Trinity College Dublin', location:'Dublin, Ireland', icon:'🏰', color:'#1e3a5f', tagline:'Engineering modules live — more courses coming soon', live: false,
       courses: [
         { name:'Acting',                                                                     url:'https://www.tcd.ie/courses/undergraduate/courses/acting/' },
         { name:'Ancient and Medieval History and Culture',           cao:'TR028',            url:'https://www.tcd.ie/courses/undergraduate/courses/ancient-and-medieval-history-and-culture/' },
