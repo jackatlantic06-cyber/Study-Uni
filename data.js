@@ -19460,6 +19460,853 @@ SCHOOLS.push({
       desc:"BEd, Science Education, Physical Education, Gaeilge Education" },
   ];
 
+  // ─── TCD SCHOOLS ──────────────────────────────────────────────────────────
+  // Years 1–2 are common to all Engineering streams (TR032).
+  // Years 3–4 are stream-specific. Year 5 = MAI (optional Masters).
+  const _tcdEngY1 = [
+    { label:'Semester 1', modules:[
+      { code:'CEU11E20', name:'Materials Applications',                      credits:5, files:[] },
+      { code:'CHU11E05', name:'Chemistry',                                   credits:5, files:[] },
+      { code:'MAU11E01', name:'Engineering Mathematics I',                   credits:5, files:[] },
+      { code:'MEU11E16', name:'Materials Science',                           credits:5, files:[] },
+      { code:'MEU11E19', name:'Engineering Practice 1',                      credits:5, files:[] },
+      { code:'MEU11E17', name:'Engineering Practice 2',                      credits:5, files:[] },
+    ]},
+    { label:'Semester 2', modules:[
+      { code:'CEU11E07', name:'Mechanics',                                   credits:5, files:[] },
+      { code:'CSU11E03', name:'Computer Engineering I',                      credits:5, files:[] },
+      { code:'EEU11E06', name:'Electrical Engineering',                      credits:5, files:[] },
+      { code:'EEU11E21', name:'Probability, Statistics and Data Centric Engineering', credits:5, files:[] },
+      { code:'MAU11E02', name:'Engineering Mathematics II',                  credits:5, files:[] },
+      { code:'PYU11E04', name:'Physics',                                     credits:5, files:[] },
+    ]},
+  ];
+  const _tcdEngY2 = [
+    { label:'Semester 1', modules:[
+      { code:'CEU22E04', name:'Solids and Structures',                       credits:5, files:[] },
+      { code:'CEU22E07', name:'Engineering and the Environment',             credits:5, files:[] },
+      { code:'CEU22E09', name:'Engineering Design III',                      credits:5, files:[] },
+      { code:'CSU22E03', name:'Computer Engineering',                        credits:5, files:[] },
+      { code:'EEU22E06', name:'Electronics',                                 credits:5, files:[] },
+      { code:'MAU22E01', name:'Engineering Mathematics III',                 credits:5, files:[] },
+    ]},
+    { label:'Semester 2', modules:[
+      { code:'EEU22E10', name:'Engineering Design IV Project',               credits:10, files:[] },
+      { code:'EEU22E12', name:'Computational Science and Engineering 1',     credits:5, files:[] },
+      { code:'MAU22E02', name:'Engineering Mathematics IV',                  credits:5, files:[] },
+      { code:'MEU22E05', name:'Thermo-fluids',                               credits:5, files:[] },
+      { code:'',         name:'Trinity Elective (1 module, free choice)',    credits:5, files:[] },
+    ]},
+  ];
+
+  SCHOOLS.push(
+    // ── TCD Engineering ───────────────────────────────────────────────────
+    { id:"tcd-engineering-school", name:"Trinity School of Engineering", icon:"⚙️", uni:"tcd", sub:"Engineering",
+      courses:[
+        // ── Biomedical Engineering ─────────────────────────────────────
+        { id:"tcd-biomedical-engineering", name:"Biomedical Engineering",
+          years:[
+            { year:1, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY1 },
+            { year:2, credits:60, note:"Common to all Engineering streams; choose specialism at end of Year 2", sections:_tcdEngY2 },
+            { year:3, credits:60, sections:[
+              { label:'Semester 1', modules:[
+                { code:'EEU33C01',  name:'Signals and Systems',              credits:5, files:[] },
+                { code:'MAU33E01',  name:'Engineering Mathematics V',        credits:5, files:[] },
+                { code:'MEU23B10',  name:'3D Computer Aided Design',         credits:5, files:[] },
+                { code:'MEU33B04',  name:'Mechanical Engineering Materials', credits:5, files:[] },
+                { code:'EEU33C13',  name:'Electronic Circuits',              credits:5, files:[] },
+                { code:'',          name:'Trinity Elective',                 credits:5, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'EEU33E03',  name:'Probability and Statistics',       credits:5, files:[] },
+                { code:'MEU33B03',  name:'Mechanics of Solids',              credits:5, files:[] },
+                { code:'MEU33B05',  name:'Mechanics of Machines',            credits:5, files:[] },
+                { code:'MEU23B07',  name:'Manufacturing Processes',          credits:5, files:[] },
+                { code:'MEU33BM2',  name:'Biomedical Design Project',        credits:5, files:[] },
+                { code:'EEU33BM1',  name:'Applied Health Sciences',          credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Project (5 cr mandatory) + electives; internship pathway available (30 cr)", sections:[
+              { label:'Mandatory', modules:[
+                { code:'MEU44E02',  name:'Biomedical Engineering Project',   credits:5, files:[] },
+              ]},
+              { label:'Elective options — Semester 1 (choose to fill 25 cr)', modules:[
+                { code:'EEU44C05',  name:'Digital Signal Processing',        credits:5, files:[] },
+                { code:'MEU44B17',  name:'Multibody Dynamics',               credits:5, files:[] },
+                { code:'MEU44BM4',  name:'Experimental and Research Methods',credits:5, files:[] },
+                { code:'MEU44BM5',  name:'Biomechanics',                     credits:5, files:[] },
+                { code:'MEU44BM6',  name:'Biomaterials',                     credits:5, files:[] },
+                { code:'MEP56BM9',  name:'Medical Device Design Fundamentals',credits:5, files:[] },
+              ]},
+              { label:'Elective options — Semester 2 (choose to fill 30 cr)', modules:[
+                { code:'EEU44C08',  name:'Digital Image and Video Processing',credits:5, files:[] },
+                { code:'MEU44B01',  name:'Mechanics of Solids',              credits:5, files:[] },
+                { code:'MEU44B02',  name:'Forensic Materials Engineering',   credits:5, files:[] },
+                { code:'MEU44B19',  name:'Mechatronics and Control Systems', credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+        // ── Civil, Structural and Environmental Engineering ────────────
+        { id:"tcd-civil-structural-environmental-engineering", name:"Civil, Structural and Environmental Engineering",
+          years:[
+            { year:1, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY1 },
+            { year:2, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY2 },
+            { year:3, credits:60, sections:[
+              { label:'Full year', modules:[
+                { code:'CEU33A12',  name:'Civil Engineering Design Challenge',credits:10, files:[] },
+              ]},
+              { label:'Semester 1', modules:[
+                { code:'CEU33A02',  name:'Structural Design',                credits:5, files:[] },
+                { code:'CEU33A05',  name:'Soil Mechanics',                   credits:5, files:[] },
+                { code:'CEU33A07',  name:'Transport Engineering',            credits:5, files:[] },
+                { code:'MAU33E01',  name:'Engineering Mathematics V',        credits:5, files:[] },
+                { code:'',          name:'Trinity Elective',                 credits:5, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'CEU33A04',  name:'Structural Analysis',              credits:5, files:[] },
+                { code:'CEU33A08',  name:'Geology for Engineers',            credits:5, files:[] },
+                { code:'CEU33A10',  name:'Surveying and Geospatial Planning',credits:5, files:[] },
+                { code:'CEU33A11',  name:'Fluids & Environment',             credits:5, files:[] },
+                { code:'EEU33E03',  name:'Probability and Statistics',       credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"50 cr mandatory + 10 cr elective (or 30 cr internship pathway)", sections:[
+              { label:'Mandatory — Full year', modules:[
+                { code:'CEU44E02',  name:'Civil Engineering Project',        credits:15, files:[] },
+                { code:'CEU44E03',  name:'Research Methods',                 credits:5, files:[] },
+              ]},
+              { label:'Mandatory — Semester 1', modules:[
+                { code:'CEU44A15',  name:'Hydraulics & Hydrology',           credits:5, files:[] },
+                { code:'CEU44A16',  name:'Transport Engineering & Modelling',credits:5, files:[] },
+                { code:'CEU44A31',  name:'Environmental Engineering',        credits:5, files:[] },
+                { code:'CEU44A51',  name:'Geotechnical Engineering',         credits:5, files:[] },
+                { code:'CEU44A61',  name:'Structures 1',                     credits:5, files:[] },
+                { code:'CEU44E01',  name:'Management for Engineers',         credits:5, files:[] },
+              ]},
+              { label:'Elective options — Semester 2 (choose ~10 cr)', modules:[
+                { code:'CEU44A01',  name:'Civil Engineering Materials',      credits:5, files:[] },
+                { code:'CEU44A02',  name:'Groundwater and Pollution Control',credits:5, files:[] },
+                { code:'CEU44A62',  name:'Structures 2: Advanced Design',    credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+        // ── Computer Engineering ───────────────────────────────────────
+        { id:"tcd-computer-engineering", name:"Computer Engineering",
+          years:[
+            { year:1, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY1 },
+            { year:2, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY2 },
+            { year:3, credits:60, sections:[
+              { label:'Semester 1', modules:[
+                { code:'MAU33E01',  name:'Engineering Mathematics V',        credits:5, files:[] },
+                { code:'CSU33D01',  name:'Microprocessor Systems I',         credits:5, files:[] },
+                { code:'CSU33D05',  name:'Data Structures and Algorithms',   credits:5, files:[] },
+                { code:'EEU33C01',  name:'Signals and Systems',              credits:5, files:[] },
+                { code:'EEU33C13',  name:'Electronic Circuits',              credits:5, files:[] },
+                { code:'',          name:'Trinity Elective',                 credits:5, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'CSU23016',  name:'Concurrent Systems and Operating Systems', credits:5, files:[] },
+                { code:'CSU23021',  name:'Microprocessor Systems',           credits:5, files:[] },
+                { code:'CSU33D03',  name:'Computer Networks',                credits:5, files:[] },
+                { code:'CSU33D06',  name:'Software Design Analysis',         credits:5, files:[] },
+                { code:'EEU33C07',  name:'Digital Systems Design',           credits:5, files:[] },
+                { code:'EEU33E03',  name:'Probability and Statistics',       credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"15 cr mandatory project + electives; internship pathway available", sections:[
+              { label:'Mandatory', modules:[
+                { code:'CSU44E02',  name:'Computer Engineering Project',     credits:15, files:[] },
+                { code:'CSU44D01',  name:'Information Management for Engineering', credits:5, files:[] },
+              ]},
+              { label:'Elective options — Semester 1', modules:[
+                { code:'CEU44E01',  name:'Management for Engineers',         credits:5, files:[] },
+                { code:'CSU34021',  name:'Computer Architecture II',         credits:5, files:[] },
+                { code:'CSU44000',  name:'Internet Applications',            credits:5, files:[] },
+                { code:'CSU44052',  name:'Computer Graphics',                credits:5, files:[] },
+                { code:'CSU44053',  name:'Computer Vision',                  credits:5, files:[] },
+                { code:'CSU44056',  name:'Data Visualisation',               credits:5, files:[] },
+                { code:'EEU44C01',  name:'Integrated Systems Design',        credits:5, files:[] },
+                { code:'EEU44C04',  name:'Next Generation Networks',         credits:5, files:[] },
+                { code:'EEU44C05',  name:'Digital Signal Processing',        credits:5, files:[] },
+                { code:'EEU44C16',  name:'Deep Learning and Applications',   credits:10, files:[] },
+                { code:'EEU44E03',  name:'Research Methods',                 credits:5, files:[] },
+              ]},
+              { label:'Elective options — Semester 2', modules:[
+                { code:'CSU44032',  name:'Security and Privacy',             credits:5, files:[] },
+                { code:'CSU44D02',  name:'Knowledge Engineering',            credits:5, files:[] },
+                { code:'EEU44C08',  name:'Digital Image and Video Processing',credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+        // ── Electronic Engineering ─────────────────────────────────────
+        { id:"tcd-electronic-engineering", name:"Electronic Engineering",
+          years:[
+            { year:1, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY1 },
+            { year:2, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY2 },
+            { year:3, credits:60, sections:[
+              { label:'Semester 1', modules:[
+                { code:'MAU33E01',  name:'Engineering Mathematics V',        credits:5, files:[] },
+                { code:'CSU33D01',  name:'Microprocessor Systems I',         credits:5, files:[] },
+                { code:'CSU33D05',  name:'Data Structures and Algorithms',   credits:5, files:[] },
+                { code:'EEU33C01',  name:'Signals and Systems',              credits:5, files:[] },
+                { code:'EEU33C13',  name:'Electronic Circuits',              credits:5, files:[] },
+                { code:'',          name:'Trinity Elective',                 credits:5, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'EEU33C05',  name:'Telecommunications',               credits:5, files:[] },
+                { code:'EEU33C07',  name:'Digital Systems Design',           credits:5, files:[] },
+                { code:'EEU33C10',  name:'Circuits & Systems Design',        credits:5, files:[] },
+                { code:'EEU33C11',  name:'Sensors',                          credits:5, files:[] },
+                { code:'EEU33C14',  name:'Engineering Electromagnetics',     credits:5, files:[] },
+                { code:'EEU33E03',  name:'Probability and Statistics',       credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"15 cr mandatory project + electives; internship pathway available", sections:[
+              { label:'Mandatory', modules:[
+                { code:'EEU44EE2',  name:'Electronic and Electrical Engineering Project', credits:15, files:[] },
+              ]},
+              { label:'Elective options — Semester 1', modules:[
+                { code:'CEU44E01',  name:'Management for Engineers',         credits:5, files:[] },
+                { code:'EEU44C01',  name:'Integrated Systems Design',        credits:5, files:[] },
+                { code:'EEU44C04',  name:'Next Generation Networks',         credits:5, files:[] },
+                { code:'EEU44C05',  name:'Digital Signal Processing',        credits:5, files:[] },
+                { code:'EEU44C16',  name:'Deep Learning and Applications',   credits:10, files:[] },
+                { code:'EEU44C18',  name:'Digital Wireless Communications',  credits:5, files:[] },
+                { code:'EEU44E03',  name:'Research Methods',                 credits:5, files:[] },
+              ]},
+              { label:'Elective options — Semester 2', modules:[
+                { code:'EEU44C08',  name:'Digital Image and Video Processing',credits:5, files:[] },
+                { code:'EEU44C32',  name:'VLSI Design',                      credits:5, files:[] },
+                { code:'EEU44C33',  name:'Power System Analysis',            credits:5, files:[] },
+                { code:'MEU44B09',  name:'Control Engineering I',            credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+        // ── Electronic and Computer Engineering ───────────────────────
+        { id:"tcd-electronic-computer-engineering", name:"Electronic and Computer Engineering",
+          years:[
+            { year:1, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY1 },
+            { year:2, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY2 },
+            { year:3, credits:60, note:"Shares Year 3 curriculum with Electronic Engineering", sections:[
+              { label:'Semester 1', modules:[
+                { code:'MAU33E01',  name:'Engineering Mathematics V',        credits:5, files:[] },
+                { code:'CSU33D01',  name:'Microprocessor Systems I',         credits:5, files:[] },
+                { code:'CSU33D05',  name:'Data Structures and Algorithms',   credits:5, files:[] },
+                { code:'EEU33C01',  name:'Signals and Systems',              credits:5, files:[] },
+                { code:'EEU33C13',  name:'Electronic Circuits',              credits:5, files:[] },
+                { code:'',          name:'Trinity Elective',                 credits:5, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'EEU33E03',  name:'Probability and Statistics',       credits:5, files:[] },
+                { code:'EEU33C05',  name:'Telecommunications',               credits:5, files:[] },
+                { code:'EEU33C07',  name:'Digital Systems Design',           credits:5, files:[] },
+                { code:'EEU33C10',  name:'Circuits & Systems Design',        credits:5, files:[] },
+                { code:'EEU33C11',  name:'Sensors',                          credits:5, files:[] },
+                { code:'EEU33C14',  name:'Engineering Electromagnetics',     credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Two projects (30 cr mandatory) + electives", sections:[
+              { label:'Mandatory', modules:[
+                { code:'CSU44E02',  name:'Computer Engineering Project',     credits:15, files:[] },
+                { code:'EEU44EE2',  name:'Electronic and Electrical Engineering Project', credits:15, files:[] },
+              ]},
+              { label:'Elective options — Semester 1', modules:[
+                { code:'CEU44E01',  name:'Management for Engineers',         credits:5, files:[] },
+                { code:'CSU34021',  name:'Computer Architecture II',         credits:5, files:[] },
+                { code:'CSU44053',  name:'Computer Vision',                  credits:5, files:[] },
+                { code:'CSU44D01',  name:'Information Management for Engineering', credits:5, files:[] },
+                { code:'EEU44C01',  name:'Integrated Systems Design',        credits:5, files:[] },
+                { code:'EEU44C04',  name:'Next Generation Networks',         credits:5, files:[] },
+                { code:'EEU44C05',  name:'Digital Signal Processing',        credits:5, files:[] },
+                { code:'EEU44C16',  name:'Deep Learning and Applications',   credits:10, files:[] },
+                { code:'EEU44C18',  name:'Digital Wireless Communications',  credits:5, files:[] },
+                { code:'EEU44E03',  name:'Research Methods',                 credits:5, files:[] },
+              ]},
+              { label:'Elective options — Semester 2', modules:[
+                { code:'CSU44032',  name:'Security and Privacy',             credits:5, files:[] },
+                { code:'CSU44057',  name:'Extended Reality',                 credits:5, files:[] },
+                { code:'CSU44D02',  name:'Knowledge Engineering',            credits:5, files:[] },
+                { code:'EEU44C08',  name:'Digital Image and Video Processing',credits:5, files:[] },
+                { code:'EEU44C33',  name:'Power System Analysis',            credits:5, files:[] },
+                { code:'MEU44B09',  name:'Control Engineering I',            credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+        // ── Mechanical and Manufacturing Engineering ───────────────────
+        { id:"tcd-mechanical-manufacturing-engineering", name:"Mechanical and Manufacturing Engineering",
+          years:[
+            { year:1, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY1 },
+            { year:2, credits:60, note:"Common to all Engineering streams", sections:_tcdEngY2 },
+            { year:3, credits:60, sections:[
+              { label:'Semester 1', modules:[
+                { code:'MAU33E01',  name:'Engineering Mathematics V',        credits:5, files:[] },
+                { code:'EEU33C01',  name:'Signals and Systems',              credits:5, files:[] },
+                { code:'MEU33B04',  name:'Mechanical Engineering Materials', credits:5, files:[] },
+                { code:'MEU23B10',  name:'3D Computer Aided Design',         credits:5, files:[] },
+                { code:'MEU33B02',  name:'Fluid Mechanics 1',                credits:5, files:[] },
+                { code:'MEU33B09',  name:'Universal Design Innovation',      credits:5, files:[] },
+                { code:'',          name:'Trinity Elective',                 credits:5, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'EEU33E03',  name:'Probability and Statistics',       credits:5, files:[] },
+                { code:'MEU33B01',  name:'Thermodynamics',                   credits:5, files:[] },
+                { code:'MEU33B03',  name:'Solid Mechanics 1',                credits:5, files:[] },
+                { code:'MEU23B07',  name:'Manufacturing Processes',          credits:5, files:[] },
+                { code:'MEU33B05',  name:'Mechanics of Machines',            credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"30 cr mandatory + 30 cr elective (or internship pathway)", sections:[
+              { label:'Mandatory — Semester 1', modules:[
+                { code:'MEU44B04',  name:'Heat Transfer',                    credits:5, files:[] },
+                { code:'MEU34B06',  name:'Manufacturing Systems',            credits:5, files:[] },
+                { code:'MEU44B07',  name:'Computer Aided Engineering',       credits:5, files:[] },
+                { code:'MEU44B13',  name:'Fluid Mechanics 2',                credits:5, files:[] },
+                { code:'MEU44B17',  name:'Multibody Dynamics',               credits:5, files:[] },
+                { code:'MEU44E03',  name:'Engineering Research Methods',     credits:5, files:[] },
+              ]},
+              { label:'Elective options — Semester 2 (choose ~15–30 cr)', modules:[
+                { code:'MEU44B01',  name:'Solid Mechanics 2',                credits:5, files:[] },
+                { code:'MEU44B02',  name:'Forensic Materials Engineering',   credits:5, files:[] },
+                { code:'MEU44B05',  name:'Laser Processing & Additive Manufacturing', credits:5, files:[] },
+                { code:'MEU44B08',  name:'Turbomachinery',                   credits:5, files:[] },
+                { code:'MEU44B14',  name:'Engineering Vibrations & Noise',   credits:5, files:[] },
+                { code:'MEU44B19',  name:'Mechatronics and Control Systems', credits:5, files:[] },
+                { code:'MEU44E02',  name:'Mechanical Engineering Project',   credits:15, files:[] },
+              ]},
+            ]},
+          ],
+        },
+      ],
+    }
+  );
+
+  // ─── TCD Life Sciences (TR060) ────────────────────────────────────────────
+  // Years 1–2 are common to all 11 streams. Source: TCD PDF booklets 2026-27.
+  const _tcdBBSY1 = [
+    { label:'Semester 1 — Core', modules:[
+      { code:'BYU11101', name:'From Molecules to Cells',                              credits:10, files:[] },
+      { code:'CHU11B01', name:'Chemistry for Biologists',                             credits:10, files:[] },
+    ]},
+    { label:'Semester 2 — Core', modules:[
+      { code:'BYU11102', name:'From Organisms to Ecosystems',                         credits:10, files:[] },
+      { code:'MAU11002', name:'Mathematics, Statistics and Computation 2',            credits:10, files:[] },
+    ]},
+    { label:'Open modules — choose 10 ECTS per semester (20 ECTS total)', modules:[
+      { code:'GSU11001', name:'Spaceship Earth: An Introduction to Earth System Science (S1)',  credits:10, files:[] },
+      { code:'PYU11F10', name:'Foundation Physics for Life and Earth Sciences 1 (S1 or S2)',   credits:10, files:[] },
+      { code:'EDU11001', name:'Science Communication 1 (S1 or S2)',                            credits:10, files:[] },
+      { code:'GSU11005', name:'Introduction to Geology: A Beginner\'s Guide to Planet Earth (S2)', credits:10, files:[] },
+      { code:'PYU11F20', name:'Foundation Physics for Life and Earth Sciences 2 (S1 or S2)',   credits:10, files:[] },
+      { code:'EDU11002', name:'Science Communication 2 (S1 or S2)',                            credits:10, files:[] },
+    ]},
+  ];
+  const _tcdBBSY2 = [
+    { label:'Semester 1 — Core', modules:[
+      { code:'BYU22201', name:'From Molecules to Cells II',                           credits:10, files:[] },
+      { code:'BYU22S01', name:'Statistics and Computation',                           credits:5,  files:[] },
+      { code:'PIU22991', name:'History, Philosophy and Ethics of Science',            credits:5,  files:[] },
+    ]},
+    { label:'Semester 2 — Core', modules:[
+      { code:'BYU22202', name:'From Cells to Organisms',                              credits:10, files:[] },
+      { code:'BYU22203', name:'From Organisms to Ecosystems II',                      credits:10, files:[] },
+    ]},
+    { label:'Open modules — Semester 1 options (choose 10 ECTS)', modules:[
+      { code:'BYU22209', name:'Fundamentals of Behaviour',                            credits:5, files:[] },
+      { code:'BYU22210', name:'Sustainable Agriculture and the Bioeconomy',           credits:5, files:[] },
+      { code:'BYU22208', name:'Molecular Nutrition',                                  credits:5, files:[] },
+      { code:'GSU22205', name:'Sedimentary Processes and Environments',               credits:5, files:[] },
+    ]},
+    { label:'Open modules — Semester 2 options (choose 10 ECTS)', modules:[
+      { code:'BYU22206', name:'Microbes, Immune Systems, and their Interaction',      credits:5,  files:[] },
+      { code:'BYU22207', name:'Genomes, Disease and Diversity',                       credits:5,  files:[] },
+      { code:'CHU22205', name:'Chemistry for Biologists II',                          credits:5,  files:[] },
+      { code:'GGU22006', name:'Physical Geography: Dynamic Earth (10 ECTS — takes both S2 slots)', credits:10, files:[] },
+    ]},
+  ];
+
+  SCHOOLS.push(
+    { id:"tcd-life-sciences-school", name:"Trinity School of Natural Sciences & Biochemistry", icon:"🔬", uni:"tcd", sub:"Biological & Biomedical Sciences",
+      courses:[
+
+        // ── BIOCHEMISTRY ─────────────────────────────────────────────────────
+        { id:"tcd-biochemistry", name:"Biochemistry: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'BIU33110', name:'Protein Structure and Function',              credits:10, files:[] },
+                { code:'BIU33120', name:'Membranes and Cell Biology',                  credits:10, files:[] },
+                { code:'GEU33045', name:'Genomics and Systems Biology (mandatory elective)', credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'BIU33010', name:'Nucleic Acids',                               credits:10, files:[] },
+                { code:'BIU33160', name:'Research Skills in Biochemistry',             credits:10, files:[] },
+                { code:'BIU33250', name:'Introduction to Immunology and Immunometabolism (mandatory elective)', credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~10 ECTS from pool', modules:[
+                { code:'PGU33905', name:'Cell Physiology and Pharmacology',            credits:5, files:[] },
+                { code:'GEU33215', name:'Medical Genetics',                            credits:5, files:[] },
+                { code:'BIU33475', name:'Basics of Neurobiology',                      credits:5, files:[] },
+                { code:'',         name:'Trinity Elective (college-wide, 5 ECTS)',     credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — all modules mandatory", sections:[
+              { label:'Semester 1', modules:[
+                { code:'BIU44190', name:'Research Project in Biochemistry',            credits:20, files:[] },
+                { code:'BIU44010', name:'Advanced Research Skills',                    credits:10, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'BIU44110', name:'Biochemistry in Health and Disease',          credits:10, files:[] },
+                { code:'BIU44120', name:'Immunology and Microbiology',                 credits:10, files:[] },
+                { code:'BIU44130', name:'Cancer Biology and Cell Signalling',          credits:10, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── BOTANY ───────────────────────────────────────────────────────────
+        { id:"tcd-botany", name:"Botany: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open. Includes field trip to Gran Canaria.", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'BOU33100', name:'Plant Physiology',                            credits:5, files:[] },
+                { code:'ZOU33010', name:'Fundamentals of Ecology',                     credits:5, files:[] },
+                { code:'BOU33108', name:'Plants in the Irish Environment',             credits:5, files:[] },
+                { code:'ESU33004', name:'Scientific Writing and Communication (runs S1–S2; credits awarded S2)', credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'BOU33107', name:'Plant Molecular Biology',                     credits:5, files:[] },
+                { code:'ZOU33070', name:'Experimental Design and Analysis',            credits:5, files:[] },
+                { code:'BOU33112', name:'Botanical Diversity 1',                       credits:5, files:[] },
+                { code:'BOU33121', name:'Field Skills in Plant and Environmental Sciences (Gran Canaria)', credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~20 ECTS from pool', modules:[
+                { code:'BOU33123', name:'Soil Science (S1)',                           credits:5, files:[] },
+                { code:'BOU33114', name:'Conservation Horticulture (S1)',              credits:5, files:[] },
+                { code:'BOU33105', name:'Global Environmental Change (S1 or S2)',      credits:5, files:[] },
+                { code:'ZOU33006', name:'Ecology and Evolution of Infectious Diseases (S2)', credits:5, files:[] },
+                { code:'BOU33122', name:'Chemical Ecology (S2)',                       credits:5, files:[] },
+                { code:'',         name:'Trinity Elective (S1 or S2, 5 ECTS)',         credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — 50 ECTS core + 10 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'ZOU44030', name:'Data Handling',                               credits:5, files:[] },
+                { code:'BOU44109', name:'Botanical Diversity 2',                       credits:5, files:[] },
+                { code:'BOU44060', name:'Plant-Breeding Biotechnology',                credits:5, files:[] },
+                { code:'BOU44112', name:'Plants and the Planet',                       credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'BOU44103', name:'Plant Conservation and Biodiversity',         credits:5,  files:[] },
+                { code:'BOU44110', name:'Evolution of Plants and Plant-Atmosphere Interactions', credits:5, files:[] },
+                { code:'FBU44000', name:'Research Project',                            credits:20, files:[] },
+              ]},
+              { label:'Open electives — choose ~10 ECTS from pool', modules:[
+                { code:'BOU44111', name:'Restoration Ecology and Re-Wilding (S1)',     credits:5, files:[] },
+                { code:'BOU44108', name:'Plant-Environment Interactions (S1)',         credits:5, files:[] },
+                { code:'ZOU44021', name:'Tropical Ecology and Conservation (S1)',      credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── ENVIRONMENTAL SCIENCES ───────────────────────────────────────────
+        { id:"tcd-environmental-sciences", name:"Environmental Sciences: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'BOU33108', name:'Plants in the Irish Environment',             credits:5, files:[] },
+                { code:'ZOU33010', name:'Fundamentals of Ecology',                     credits:5, files:[] },
+                { code:'ESU33040', name:'Environmental Monitoring',                    credits:5, files:[] },
+                { code:'BOU33123', name:'Soil Science',                                credits:5, files:[] },
+                { code:'BOU33105', name:'Global Environmental Change (S1 or S2)',      credits:5, files:[] },
+                { code:'ESU33004', name:'Scientific Writing and Communication (runs S1–S2; credits awarded S2)', credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'GGU33931', name:'Environmental Governance 1',                  credits:5, files:[] },
+                { code:'ZOU33070', name:'Experimental Design and Analysis',            credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~20 ECTS from pool', modules:[
+                { code:'GSU33003', name:'Ice Age Earth (S1)',                          credits:5, files:[] },
+                { code:'BOU33100', name:'Plant Physiology (S1)',                       credits:5, files:[] },
+                { code:'GLU33002', name:'Blue Earth: Understanding Marine Systems (S1 or S2)', credits:5, files:[] },
+                { code:'BOU33114', name:'Conservation Horticulture (S1)',              credits:5, files:[] },
+                { code:'BOU33126', name:'Mycology',                                    credits:5, files:[] },
+                { code:'GLU33009', name:'Hydrology and Groundwater Quality (S2)',      credits:5, files:[] },
+                { code:'BOU33121', name:'Field Skills in Plant and Environmental Sciences (S2)', credits:5, files:[] },
+                { code:'ZOU33086', name:'Terrestrial Wildlife and Field Ecology (S2)', credits:5, files:[] },
+                { code:'BOU33122', name:'Chemical Ecology (S2)',                       credits:5, files:[] },
+                { code:'ZOU33006', name:'Ecology and Evolution of Infectious Diseases (S2)', credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — 45 ECTS core + 15 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'ZOU44030', name:'Data Handling',                               credits:5, files:[] },
+                { code:'ZOU44092', name:'Environmental Impact Assessment',             credits:5, files:[] },
+                { code:'ZOU44060', name:'Research Comprehension (spans S1 and S2)',    credits:5, files:[] },
+                { code:'BOU44111', name:'Restoration Ecology and Re-Wilding',          credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'ESU44052', name:'General Environmental Sciences',              credits:5,  files:[] },
+                { code:'FBU44000', name:'Research Project',                            credits:20, files:[] },
+              ]},
+              { label:'Open electives — choose ~15 ECTS from pool', modules:[
+                { code:'ZOU44021', name:'Tropical Ecology and Conservation (S1)',      credits:5, files:[] },
+                { code:'BOU44107', name:'Plant-Animal Interactions (S1)',              credits:5, files:[] },
+                { code:'BOU44108', name:'Plant-Environment Interactions (S1)',         credits:5, files:[] },
+                { code:'ZOU44013', name:'Conservation and Wildlife Management (S1)',   credits:5, files:[] },
+                { code:'ESU44054', name:'Spatial Analysis using GIS (S1)',             credits:5, files:[] },
+                { code:'BOU44103', name:'Plant Conservation and Biodiversity (S2)',    credits:5, files:[] },
+                { code:'GGU44927', name:'Environmental Governance 2 (S2)',             credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── GENETICS ─────────────────────────────────────────────────────────
+        { id:"tcd-genetics", name:"Genetics: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open. Non-credit compulsory field trip.", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'MIU33302', name:'Molecular Genetics I: Regulation of Gene Expression',  credits:5, files:[] },
+                { code:'GEU33007', name:'Molecular Genetics Laboratory',                        credits:5, files:[] },
+                { code:'GEU33075', name:'Evolutionary and Population Genetics',                 credits:5, files:[] },
+                { code:'GEU33085', name:'Science Structure, Discussion and Presentation',       credits:5, files:[] },
+                { code:'GEU33045', name:'Genomics and Systems Biology (mandatory elective)',    credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'GEU33301', name:'Bioinformatics',                                       credits:5, files:[] },
+                { code:'GEU33303', name:'Molecular Genetics II: Genome Structure and Dynamics', credits:5, files:[] },
+                { code:'GEU33035', name:'Genetic Analysis of Nervous Systems',                  credits:5, files:[] },
+                { code:'GEU33008', name:'Analytical Genetics Laboratory',                       credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~15 ECTS from pool', modules:[
+                { code:'BIU33150', name:'Biochemistry for Biosciences (S1)',                    credits:5, files:[] },
+                { code:'GEU33055', name:'Developmental Genetics (S2)',                          credits:5, files:[] },
+                { code:'GEU33215', name:'Medical Genetics (S2)',                                credits:5, files:[] },
+                { code:'BIU33250', name:'Introduction to Immunology and Immunometabolism (S2)', credits:5, files:[] },
+                { code:'BIU33475', name:'Basics of Neurobiology (S2)',                          credits:5, files:[] },
+                { code:'',         name:'Trinity Elective (S1 or S2, 5 ECTS, up to 2)',         credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — all 5 modules are full-year (spanning both semesters)", sections:[
+              { label:'Full year — all mandatory', modules:[
+                { code:'GEU44008', name:'Advanced Topics in Genetics',                         credits:10, files:[] },
+                { code:'GEU44009', name:'From Individuals to Populations to Species',          credits:10, files:[] },
+                { code:'GEU44010', name:'Dealing with Data in Genetic Research',               credits:10, files:[] },
+                { code:'GEU44011', name:'Molecular and Cellular Genetics',                     credits:10, files:[] },
+                { code:'GEU44012', name:'Capstone Project',                                    credits:20, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── HUMAN GENETICS ───────────────────────────────────────────────────
+        { id:"tcd-human-genetics", name:"Human Genetics: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'MIU33302', name:'Molecular Genetics I: Regulation of Gene Expression',  credits:5, files:[] },
+                { code:'GEU33007', name:'Molecular Genetics Laboratory',                        credits:5, files:[] },
+                { code:'GEU33075', name:'Evolutionary and Population Genetics',                 credits:5, files:[] },
+                { code:'GEU33285', name:'Science Structure, Discussion and Presentation (Human Genetics)', credits:5, files:[] },
+                { code:'GEU33045', name:'Genomics and Systems Biology (mandatory elective)',    credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'GEU33301', name:'Bioinformatics',                                       credits:5, files:[] },
+                { code:'GEU33303', name:'Molecular Genetics II: Genome Structure and Dynamics', credits:5, files:[] },
+                { code:'GEU33035', name:'Genetic Analysis of Nervous Systems',                  credits:5, files:[] },
+                { code:'GEU33008', name:'Analytical Genetics Laboratory',                       credits:5, files:[] },
+                { code:'GEU33215', name:'Medical Genetics (mandatory elective)',                credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~10 ECTS from pool', modules:[
+                { code:'BIU33150', name:'Biochemistry for Biosciences (S1)',                    credits:5, files:[] },
+                { code:'GEU33055', name:'Developmental Genetics (S2)',                          credits:5, files:[] },
+                { code:'BIU33250', name:'Introduction to Immunology and Immunometabolism (S2)', credits:5, files:[] },
+                { code:'BIU33475', name:'Basics of Neurobiology (S2)',                          credits:5, files:[] },
+                { code:'',         name:'Trinity Elective (S1 or S2, 5 ECTS, up to 2)',         credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — all modules full-year (spanning both semesters)", sections:[
+              { label:'Full year — all mandatory', modules:[
+                { code:'GEU44208', name:'Medical Genetics in the Era of Precision Medicine',   credits:10, files:[] },
+                { code:'GEU44009', name:'From Individuals to Populations to Species',          credits:10, files:[] },
+                { code:'GEU44010', name:'Dealing with Data in Genetic Research',               credits:10, files:[] },
+                { code:'GEU44011', name:'Molecular and Cellular Genetics',                     credits:10, files:[] },
+                { code:'GEU44212', name:'Capstone Project',                                    credits:20, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── IMMUNOLOGY ───────────────────────────────────────────────────────
+        { id:"tcd-immunology", name:"Immunology: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'BIU33220', name:'Core Concepts in Immunology',                 credits:10, files:[] },
+                { code:'BIU33270', name:'Immunity and Disease',                        credits:10, files:[] },
+                { code:'BIU33150', name:'Biochemistry for Biosciences (mandatory elective)', credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'BIU33230', name:'Gene Regulation',                             credits:10, files:[] },
+                { code:'BIU33160', name:'Research Skills in Immunology',               credits:10, files:[] },
+                { code:'MIU33012', name:'Microbial Pathogenesis (mandatory elective)', credits:5,  files:[] },
+              ]},
+              { label:'Open electives — choose ~10 ECTS from pool', modules:[
+                { code:'GEU33045', name:'Genomics and Systems Biology (S1)',           credits:5, files:[] },
+                { code:'ZOU33006', name:'Ecology and Evolution of Infectious Disease (S2)', credits:5, files:[] },
+                { code:'',         name:'Trinity Elective (5 ECTS)',                   credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — all modules mandatory", sections:[
+              { label:'Semester 1', modules:[
+                { code:'BIU44290', name:'Research Project in Immunology',              credits:20, files:[] },
+                { code:'BIU44010', name:'Advanced Research Skills',                    credits:10, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'BIU44210', name:'General Immunology',                          credits:10, files:[] },
+                { code:'BIU44220', name:'Infection and Immunity',                      credits:10, files:[] },
+                { code:'BIU44230', name:'Immunological Diseases and Immunotherapy',    credits:10, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── MICROBIOLOGY ─────────────────────────────────────────────────────
+        { id:"tcd-microbiology", name:"Microbiology: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'MIU33011',  name:'Microbial Physiology',                                    credits:5, files:[] },
+                { code:'MIU33016',  name:'Applied Microbiology and Antimicrobial Agents',           credits:5, files:[] },
+                { code:'MIU33019',  name:'Experimental Microbiology I',                             credits:5, files:[] },
+                { code:'MIU33302',  name:'Molecular Genetics I: Regulation of Gene Expression',     credits:5, files:[] },
+                { code:'BIU33150',  name:'Biochemistry for Biosciences (mandatory elective)',       credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'MIU33012',  name:'Microbial Pathogenicity',                                 credits:5, files:[] },
+                { code:'MIU33020',  name:'Experimental Microbiology II',                            credits:5, files:[] },
+                { code:'GEU33303',  name:'Molecular Genetics II: Genome Structure and Dynamics',    credits:5, files:[] },
+                { code:'GEU33301',  name:'Bioinformatics',                                          credits:5, files:[] },
+                { code:'BIU33250',  name:'Introduction to Immunology and Immunometabolism (mandatory elective)', credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~10 ECTS from pool', modules:[
+                { code:'GEU33045', name:'Genomics and Systems Biology (S1)',           credits:5, files:[] },
+                { code:'ZOU33006', name:'Ecology and Evolution of Infectious Disease (S2)', credits:5, files:[] },
+                { code:'',         name:'Trinity Elective (5 ECTS)',                   credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — all modules mandatory", sections:[
+              { label:'Semester 1', modules:[
+                { code:'MIU44002', name:'Microbial Molecular and Cellular Biology',    credits:10, files:[] },
+                { code:'MIU44003', name:'Microbial Pathogenicity',                     credits:10, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'MIU44001', name:'Research in Microbiology (9-week full-time lab project)', credits:20, files:[] },
+                { code:'MIU44004', name:'Advanced Topics in Microbiology',             credits:10, files:[] },
+                { code:'MIU44005', name:'Data Handling',                               credits:10, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── MOLECULAR MEDICINE ───────────────────────────────────────────────
+        { id:"tcd-molecular-medicine", name:"Molecular Medicine: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'BIU33370', name:'Proteins to Cells',                           credits:10, files:[] },
+                { code:'BIU33380', name:'Disease Mechanisms and Drug Discovery',       credits:10, files:[] },
+                { code:'GEU33045', name:'Genomics and Systems Biology (mandatory elective)', credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'BIU33360', name:'Research Skills in Molecular Medicine',       credits:10, files:[] },
+                { code:'BIU33390', name:'Nucleic Acids (Molecular Medicine)',          credits:10, files:[] },
+                { code:'BIU33250', name:'Introduction to Immunology and Immunometabolism (mandatory elective)', credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~10 ECTS from pool', modules:[
+                { code:'PGU33905', name:'Cell Physiology and Pharmacology (S1)',       credits:5, files:[] },
+                { code:'GEU33215', name:'Medical Genetics (S2)',                       credits:5, files:[] },
+                { code:'BIU33475', name:'Basics of Neurobiology (S2)',                 credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — all modules mandatory", sections:[
+              { label:'Semester 1', modules:[
+                { code:'BIU44390', name:'Research Project in Molecular Medicine',      credits:20, files:[] },
+                { code:'BIU44010', name:'Advanced Research Skills',                    credits:10, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'BIU44310', name:'Neurobiology and Immunology',                 credits:10, files:[] },
+                { code:'BIU44320', name:'Microbial Diseases and Immune System Disorders', credits:10, files:[] },
+                { code:'BIU44330', name:'Cell Cycle, Cancer Biology and Therapeutics', credits:10, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── NEUROSCIENCE ─────────────────────────────────────────────────────
+        { id:"tcd-neuroscience", name:"Neuroscience: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 35 ECTS core + 25 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'BIU33485', name:'Research Skills',                             credits:5, files:[] },
+                { code:'PGU33009', name:'Neurophysiology I',                           credits:5, files:[] },
+                { code:'PGU33905', name:'Cell Physiology and Pharmacology (mandatory elective)', credits:5, files:[] },
+                { code:'BIU33150', name:'Biochemistry for Biosciences (mandatory elective)', credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'BIU33465', name:'Integrative Neuroscience',                    credits:5, files:[] },
+                { code:'ANU33001', name:'Neuroanatomy',                                credits:5, files:[] },
+                { code:'BIU33495', name:'Nucleic Acids and Molecular Biology Techniques', credits:5, files:[] },
+                { code:'BIU33445', name:'Neurochemistry I',                            credits:5, files:[] },
+                { code:'GEU33035', name:'Genetic Analysis of Nervous System',          credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~10 ECTS from pool', modules:[
+                { code:'PSU34180', name:'Perceptual Neuroscience (or Human Neuropsychology — alternates by year)', credits:5, files:[] },
+                { code:'GEU33045', name:'Genomics and Systems Biology (S1)',           credits:5, files:[] },
+                { code:'',         name:'Trinity Elective (S1 or S2, 5 ECTS, up to 2)', credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — 10-week full-time capstone research project + coursework", sections:[
+              { label:'Full year', modules:[
+                { code:'NSU44490', name:'Capstone Research Project (10-week full-time lab project)', credits:20, files:[] },
+              ]},
+              { label:'Semester 1', modules:[
+                { code:'BIU44415', name:'Research Literature Skills',                  credits:5, files:[] },
+                { code:'PGU44004', name:'Neurophysiology II',                          credits:5, files:[] },
+                { code:'PSU34540', name:'Social Neuroscience (alternates yearly with Case Studies in Neuropsychology)', credits:5, files:[] },
+                { code:'NSU44PH2', name:'Neuropharmacology',                           credits:5, files:[] },
+              ]},
+              { label:'Semester 2', modules:[
+                { code:'BIU44445', name:'Neurochemistry II',                           credits:5, files:[] },
+                { code:'GEU44500', name:'Neurogenetics',                               credits:5, files:[] },
+                { code:'BIU44455', name:'Neuroimmunology and Neurodegeneration',       credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── PHYSIOLOGY ───────────────────────────────────────────────────────
+        { id:"tcd-physiology", name:"Physiology: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'PGU33950', name:'Cell Physiology and Pharmacology',            credits:5, files:[] },
+                { code:'PGU33005', name:'Research Skills, Cell and Tissue Structure',  credits:5, files:[] },
+                { code:'PGU33006', name:'Nerve, Muscle and Sensation',                 credits:5, files:[] },
+                { code:'PGU33008', name:'Brain, Nerve and Muscle',                     credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'PGU33007', name:'Fluid, Heat and Metabolism',                  credits:5, files:[] },
+                { code:'PGU33010', name:'Cardiovascular System',                       credits:5, files:[] },
+                { code:'PGU33011', name:'Gut, Metabolism and Hormones (spans S1 and S2)', credits:5, files:[] },
+                { code:'PGU33112', name:'Respiratory System',                          credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~20 ECTS from pool', modules:[
+                { code:'BIU33350', name:'Molecular Basis of Disease (S1)',             credits:5, files:[] },
+                { code:'BIU33150', name:'Biochemistry for Biosciences (S1)',           credits:5, files:[] },
+                { code:'ZOU33050', name:'Introduction to Developmental Biology (S1)',  credits:5, files:[] },
+                { code:'PGU33109', name:'Neurophysiology I (S2)',                      credits:5, files:[] },
+                { code:'BIU33475', name:'Basics of Neurobiology (S2)',                 credits:5, files:[] },
+                { code:'BIU33250', name:'Introduction to Immunology and Immunometabolism (S2)', credits:5, files:[] },
+                { code:'GEU33215', name:'Medical Genetics (S2)',                       credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — capstone project + full-year general exam modules + S1 coursework", sections:[
+              { label:'Full year', modules:[
+                { code:'PGU44803', name:'General Physiology',                          credits:10, files:[] },
+                { code:'PGU44802', name:'Integrative Physiology',                      credits:10, files:[] },
+                { code:'PGU44020', name:'Capstone Project',                            credits:20, files:[] },
+              ]},
+              { label:'Semester 1', modules:[
+                { code:'PGU44006', name:'Biomechanics and Neural Control of Movement', credits:5, files:[] },
+                { code:'PGU44007', name:'Glial Physiology',                            credits:5, files:[] },
+                { code:'PGU44101', name:'Neurophysiology',                             credits:5, files:[] },
+                { code:'PGU44009', name:'Techniques in Cell Physiology',               credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+        // ── ZOOLOGY ──────────────────────────────────────────────────────────
+        { id:"tcd-zoology", name:"Zoology: Biological and Biomedical Sciences",
+          years:[
+            { year:1, credits:60, note:"Years 1–2 are identical for all TR060 streams.", sections:_tcdBBSY1 },
+            { year:2, credits:60, sections:_tcdBBSY2 },
+            { year:3, credits:60, note:"Junior Sophister — 40 ECTS core + 20 ECTS open", sections:[
+              { label:'Semester 1 — Core', modules:[
+                { code:'ZOU33000', name:'Marine Biology',                              credits:5, files:[] },
+                { code:'ZOU33003', name:'Animal Diversity 1',                          credits:5, files:[] },
+                { code:'ZOU33004', name:'Animal Diversity 2',                          credits:5, files:[] },
+                { code:'ZOU33010', name:'Fundamentals of Ecology',                     credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'ZOU33005', name:'Evolutionary Biology',                        credits:5, files:[] },
+                { code:'ZOU33070', name:'Experimental Design and Analysis',            credits:5, files:[] },
+                { code:'ZOU33086', name:'Terrestrial Wildlife and Field Ecology',      credits:5, files:[] },
+                { code:'ESU33004', name:'Scientific Writing and Communication',        credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~20 ECTS from pool', modules:[
+                { code:'ZOU33050', name:'Developmental Biology (S1)',                  credits:5, files:[] },
+                { code:'GLU33002', name:'Blue Earth: Understanding Marine Systems (S1 or S2)', credits:5, files:[] },
+                { code:'ZOU33006', name:'Ecology and Evolution of Infectious Diseases (S2)', credits:5, files:[] },
+                { code:'BOU33122', name:'Chemical Ecology (S2)',                       credits:5, files:[] },
+                { code:'BIU33250', name:'Introduction to Immunology and Immunometabolism (S2)', credits:5, files:[] },
+                { code:'PGU33009', name:'Neurophysiology I (S2)',                      credits:5, files:[] },
+              ]},
+            ]},
+            { year:4, credits:60, note:"Senior Sophister — 35 ECTS core + 25 ECTS open", sections:[
+              { label:'Full year — Core', modules:[
+                { code:'ZOU44060', name:'Research Comprehension (spans S1 and S2)',    credits:5,  files:[] },
+                { code:'FBU44000', name:'Research Project',                            credits:20, files:[] },
+              ]},
+              { label:'Semester 1 — Core', modules:[
+                { code:'ZOU44030', name:'Data Handling',                               credits:5, files:[] },
+                { code:'ZOU44022', name:'Comparative Physiology',                      credits:5, files:[] },
+              ]},
+              { label:'Semester 2 — Core', modules:[
+                { code:'ZOU44020', name:'General Zoology',                             credits:5, files:[] },
+              ]},
+              { label:'Open electives — choose ~25 ECTS from pool', modules:[
+                { code:'ZOU44013', name:'Conservation and Wildlife Management (S1)',   credits:5, files:[] },
+                { code:'ZOU44021', name:'Tropical Ecology and Conservation (S1)',      credits:5, files:[] },
+                { code:'ZOU44092', name:'Environmental Impact Assessment (S1)',        credits:5, files:[] },
+                { code:'BOU44111', name:'Restoration Ecology and Re-Wilding (S1)',     credits:5, files:[] },
+                { code:'ZOU44019', name:'Advances in Behavioural Ecology (S1)',        credits:5, files:[] },
+              ]},
+            ]},
+          ],
+        },
+
+      ],
+    }
+  );
+
   // ─── UNIVERSITIES ─────────────────────────────────────────────────────────
   const UNIVERSITIES = [
     {
@@ -19686,15 +20533,15 @@ SCHOOLS.push({
         { name:'Bachelor of Midwifery Science',                                          cao:'GY517', school:'College of Medicine, Nursing & Health Sciences',             url:'https://www.universityofgalway.ie/courses/undergraduate-courses/midwifery-science.html', schoolsCourseId:'uog-midwifery' },
       ],
     },
-    { id:'tcd', name:'Trinity', fullName:'Trinity College Dublin', location:'Dublin, Ireland', icon:'🏰', color:'#1e3a5f', tagline:'Course browser — full content launching soon', live: false,
+    { id:'tcd', name:'Trinity', fullName:'Trinity College Dublin', location:'Dublin, Ireland', icon:'🏰', color:'#1e3a5f', tagline:'Engineering modules live — more courses coming soon', live: true,
       courses: [
         { name:'Acting',                                                                     url:'https://www.tcd.ie/courses/undergraduate/courses/acting/' },
         { name:'Ancient and Medieval History and Culture',           cao:'TR028',            url:'https://www.tcd.ie/courses/undergraduate/courses/ancient-and-medieval-history-and-culture/' },
         { name:'Ancient History and Archaeology (JH)',               cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/ancient-history-and-archaeology-jh/' },
-        { name:'Biochemistry: Biological and Biomedical Sciences',   cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/biochemistry-biological-and-biomedical-sciences/' },
+        { name:'Biochemistry: Biological and Biomedical Sciences',   cao:'TR060', schoolsCourseId:'tcd-biochemistry',           url:'https://www.tcd.ie/courses/undergraduate/courses/biochemistry-biological-and-biomedical-sciences/' },
         { name:'Biological and Biomedical Sciences',                 cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/biological-and-biomedical-sciences/' },
-        { name:'Biomedical Engineering',                             cao:'TR032',            url:'https://www.tcd.ie/courses/undergraduate/courses/biomedical-engineering/' },
-        { name:'Botany: Biological and Biomedical Sciences',         cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/botany-biological-and-biomedical-sciences/' },
+        { name:'Biomedical Engineering',                             cao:'TR032', schoolsCourseId:'tcd-biomedical-engineering',                    url:'https://www.tcd.ie/courses/undergraduate/courses/biomedical-engineering/' },
+        { name:'Botany: Biological and Biomedical Sciences',         cao:'TR060', schoolsCourseId:'tcd-botany',                 url:'https://www.tcd.ie/courses/undergraduate/courses/botany-biological-and-biomedical-sciences/' },
         { name:'Business (JH)',                                      cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/business-jh/' },
         { name:'Business Studies and French',                        cao:'TR085',            url:'https://www.tcd.ie/courses/undergraduate/courses/business-studies-and-french/' },
         { name:'Business Studies and German',                        cao:'TR086',            url:'https://www.tcd.ie/courses/undergraduate/courses/business-studies-and-german/' },
@@ -19706,13 +20553,13 @@ SCHOOLS.push({
         { name:'Chemistry with Biosciences: Chemical Sciences',      cao:'TR061',            url:'https://www.tcd.ie/courses/undergraduate/courses/chemistry-with-biosciences-chemical-sciences/' },
         { name:'Chemistry with Molecular Modelling: Chemical Sciences', cao:'TR061',         url:'https://www.tcd.ie/courses/undergraduate/courses/chemistry-with-molecular-modelling-chemical-sciences/' },
         { name:'Chemistry: Chemical Sciences',                       cao:'TR061',            url:'https://www.tcd.ie/courses/undergraduate/courses/chemistry-chemical-sciences/' },
-        { name:'Civil, Structural, and Environmental Engineering',   cao:'TR032',            url:'https://www.tcd.ie/courses/undergraduate/courses/civil-structural-and-environmental-engineering/' },
+        { name:'Civil, Structural, and Environmental Engineering',   cao:'TR032', schoolsCourseId:'tcd-civil-structural-environmental-engineering', url:'https://www.tcd.ie/courses/undergraduate/courses/civil-structural-and-environmental-engineering/' },
         { name:'Classical Civilisation (JH)',                        cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/classical-civilisation-jh/' },
         { name:'Classical Languages (JH)',                           cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/classical-languages-jh/' },
         { name:'Classics, Ancient History and Archaeology',          cao:'TR021',            url:'https://www.tcd.ie/courses/undergraduate/courses/classics-ancient-history-and-archaeology/' },
         { name:'Clinical Speech and Language Studies',               cao:'TR007',            url:'https://www.tcd.ie/courses/undergraduate/courses/clinical-speech-and-language-studies/' },
         { name:'Columbia Dual Degree',                                                       url:'https://www.tcd.ie/courses/undergraduate/courses/columbia-dual-degree/' },
-        { name:'Computer Engineering',                               cao:'TR032',            url:'https://www.tcd.ie/courses/undergraduate/courses/computer-engineering/' },
+        { name:'Computer Engineering',                               cao:'TR032', schoolsCourseId:'tcd-computer-engineering',                      url:'https://www.tcd.ie/courses/undergraduate/courses/computer-engineering/' },
         { name:'Computer Science',                                   cao:'TR033',            url:'https://www.tcd.ie/courses/undergraduate/courses/computer-science/' },
         { name:'Computer Science (JH)',                              cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/computer-science-jh/' },
         { name:'Computer Science Linguistics and a Language',        cao:'TR039',            url:'https://www.tcd.ie/courses/undergraduate/courses/computer-science-linguistics-and-a-language/' },
@@ -19727,19 +20574,19 @@ SCHOOLS.push({
         { name:'Early and Modern Irish',                             cao:'TR022',            url:'https://www.tcd.ie/courses/undergraduate/courses/early-and-modern-irish/' },
         { name:'Early Irish (JH)',                                   cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/early-irish-jh/' },
         { name:'Economics (JH)',                                     cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/economics-jh/' },
-        { name:'Electronic and Computer Engineering (joint programme)', cao:'TR032',         url:'https://www.tcd.ie/courses/undergraduate/courses/electronic-and-computer-engineering-joint-programme/' },
-        { name:'Electronic Engineering',                             cao:'TR032',            url:'https://www.tcd.ie/courses/undergraduate/courses/electronic-engineering/' },
+        { name:'Electronic and Computer Engineering (joint programme)', cao:'TR032', schoolsCourseId:'tcd-electronic-computer-engineering', url:'https://www.tcd.ie/courses/undergraduate/courses/electronic-and-computer-engineering-joint-programme/' },
+        { name:'Electronic Engineering',                             cao:'TR032', schoolsCourseId:'tcd-electronic-engineering',                    url:'https://www.tcd.ie/courses/undergraduate/courses/electronic-engineering/' },
         { name:'Engineering',                                        cao:'TR032',            url:'https://www.tcd.ie/courses/undergraduate/courses/engineering/' },
         { name:'Engineering with Management',                        cao:'TR038',            url:'https://www.tcd.ie/courses/undergraduate/courses/engineering-with-management/' },
         { name:'English Studies',                                    cao:'TR023',            url:'https://www.tcd.ie/courses/undergraduate/courses/english-studies/' },
         { name:'English Studies (JH)',                               cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/english-studies-jh/' },
         { name:'Environmental Science and Engineering',              cao:'TR064',            url:'https://www.tcd.ie/courses/undergraduate/courses/environmental-science-and-engineering/' },
-        { name:'Environmental Sciences: Biological and Biomedical Sciences', cao:'TR060',   url:'https://www.tcd.ie/courses/undergraduate/courses/environmental-sciences-biological-and-biomedical-sciences/' },
+        { name:'Environmental Sciences: Biological and Biomedical Sciences', cao:'TR060', schoolsCourseId:'tcd-environmental-sciences', url:'https://www.tcd.ie/courses/undergraduate/courses/environmental-sciences-biological-and-biomedical-sciences/' },
         { name:'European Studies',                                   cao:'TR024',            url:'https://www.tcd.ie/courses/undergraduate/courses/european-studies/' },
         { name:'Film',                                               cao:'TR042',            url:'https://www.tcd.ie/courses/undergraduate/courses/film/' },
         { name:'Film Studies (JH)',                                  cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/film-studies-jh/' },
         { name:'French (JH)',                                        cao:'TR667',            url:'https://www.tcd.ie/courses/undergraduate/courses/french-jh/' },
-        { name:'Genetics: Biological and Biomedical Sciences',       cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/genetics-biological-and-biomedical-sciences/' },
+        { name:'Genetics: Biological and Biomedical Sciences',       cao:'TR060', schoolsCourseId:'tcd-genetics',               url:'https://www.tcd.ie/courses/undergraduate/courses/genetics-biological-and-biomedical-sciences/' },
         { name:'Geography (JH)',                                     cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/geography-jh/' },
         { name:'Geography and Geoscience',                           cao:'TR062',            url:'https://www.tcd.ie/courses/undergraduate/courses/geography-and-geoscience/' },
         { name:'Geography: Geography and Geoscience',                cao:'TR062',            url:'https://www.tcd.ie/courses/undergraduate/courses/geography-geography-and-geoscience/' },
@@ -19750,10 +20597,10 @@ SCHOOLS.push({
         { name:'History (JH)',                                       cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/history-jh/' },
         { name:'History of Art and Architecture',                    cao:'TR043',            url:'https://www.tcd.ie/courses/undergraduate/courses/history-of-art-and-architecture/' },
         { name:'History of Art and Architecture (JH)',               cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/history-of-art-and-architecture-jh/' },
-        { name:'Human Genetics: Biological and Biomedical Sciences', cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/human-genetics-biological-and-biomedical-sciences/' },
+        { name:'Human Genetics: Biological and Biomedical Sciences', cao:'TR060', schoolsCourseId:'tcd-human-genetics',          url:'https://www.tcd.ie/courses/undergraduate/courses/human-genetics-biological-and-biomedical-sciences/' },
         { name:'Human Health and Disease',                           cao:'TR056',            url:'https://www.tcd.ie/courses/undergraduate/courses/human-health-and-disease/' },
         { name:'Human Nutrition and Dietetics (Joint Degree)',                               url:'https://www.tcd.ie/courses/undergraduate/courses/human-nutrition-and-dietetics-joint-degree/' },
-        { name:'Immunology: Biological and Biomedical Sciences',     cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/immunology-biological-and-biomedical-sciences/' },
+        { name:'Immunology: Biological and Biomedical Sciences',     cao:'TR060', schoolsCourseId:'tcd-immunology',             url:'https://www.tcd.ie/courses/undergraduate/courses/immunology-biological-and-biomedical-sciences/' },
         { name:"Integrated Children's and General Nursing",          cao:'TR911',            url:'https://www.tcd.ie/courses/undergraduate/courses/integrated-childrens-and-general-nursing/' },
         { name:'Irish (JH)',                                         cao:'TR669',            url:'https://www.tcd.ie/courses/undergraduate/courses/irish-jh/' },
         { name:'Italian (JH)',                                       cao:'TR670',            url:'https://www.tcd.ie/courses/undergraduate/courses/italian-jh/' },
@@ -19765,21 +20612,21 @@ SCHOOLS.push({
         { name:'Management Science and Information Systems Studies',  cao:'TR034',            url:'https://www.tcd.ie/courses/undergraduate/courses/management-science-and-information-systems-studies/' },
         { name:'Mathematics',                                        cao:'TR031',            url:'https://www.tcd.ie/courses/undergraduate/courses/mathematics/' },
         { name:'Mathematics (JH)',                                   cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/mathematics-jh/' },
-        { name:'Mechanical and Manufacturing Engineering',           cao:'TR032',            url:'https://www.tcd.ie/courses/undergraduate/courses/mechanical-and-manufacturing-engineering/' },
+        { name:'Mechanical and Manufacturing Engineering',           cao:'TR032', schoolsCourseId:'tcd-mechanical-manufacturing-engineering',         url:'https://www.tcd.ie/courses/undergraduate/courses/mechanical-and-manufacturing-engineering/' },
         { name:'Medicinal Chemistry: Chemical Sciences',             cao:'TR061',            url:'https://www.tcd.ie/courses/undergraduate/courses/medicinal-chemistry-chemical-sciences/' },
         { name:'Medicine',                                           cao:'TR051',            url:'https://www.tcd.ie/courses/undergraduate/courses/medicine/' },
-        { name:'Microbiology: Biological and Biomedical Sciences',   cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/microbiology-biological-and-biomedical-sciences/' },
+        { name:'Microbiology: Biological and Biomedical Sciences',   cao:'TR060', schoolsCourseId:'tcd-microbiology',           url:'https://www.tcd.ie/courses/undergraduate/courses/microbiology-biological-and-biomedical-sciences/' },
         { name:'Middle Eastern and European Languages and Cultures', cao:'TR040',            url:'https://www.tcd.ie/courses/undergraduate/courses/middle-eastern-and-european-languages-and-cultures/' },
         { name:'Middle Eastern Jewish and Islamic Civilisations (JH)', cao:'TR001',          url:'https://www.tcd.ie/courses/undergraduate/courses/middle-eastern-jewish-and-islamic-civilisations-jh/' },
         { name:'Midwifery',                                          cao:'TR913',            url:'https://www.tcd.ie/courses/undergraduate/courses/midwifery/' },
         { name:'Modern Language (JH)',                               cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/modern-language-jh/' },
-        { name:'Molecular Medicine: Biological and Biomedical Sciences', cao:'TR060',        url:'https://www.tcd.ie/courses/undergraduate/courses/molecular-medicine-biological-and-biomedical-sciences/' },
+        { name:'Molecular Medicine: Biological and Biomedical Sciences', cao:'TR060', schoolsCourseId:'tcd-molecular-medicine',  url:'https://www.tcd.ie/courses/undergraduate/courses/molecular-medicine-biological-and-biomedical-sciences/' },
         { name:'Music',                                              cao:'TR002',            url:'https://www.tcd.ie/courses/undergraduate/courses/music/' },
         { name:'Music (JH)',                                         cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/music-jh/' },
         { name:'Music Education',                                    cao:'TR009',            url:'https://www.tcd.ie/courses/undergraduate/courses/music-education/' },
         { name:'Nanoscience: Chemical Sciences',                     cao:'TR061',            url:'https://www.tcd.ie/courses/undergraduate/courses/nanoscience-chemical-sciences/' },
         { name:'Nanoscience: Physical Sciences',                     cao:'TR063',            url:'https://www.tcd.ie/courses/undergraduate/courses/nanoscience-physical-sciences/' },
-        { name:'Neuroscience: Biological and Biomedical Sciences',   cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/neuroscience-biological-and-biomedical-sciences/' },
+        { name:'Neuroscience: Biological and Biomedical Sciences',   cao:'TR060', schoolsCourseId:'tcd-neuroscience',           url:'https://www.tcd.ie/courses/undergraduate/courses/neuroscience-biological-and-biomedical-sciences/' },
         { name:'Nursing - General Nursing',                          cao:'TR091',            url:'https://www.tcd.ie/courses/undergraduate/courses/nursing---general-nursing/' },
         { name:'Nursing - General Nursing Adelaide',                 cao:'TR093',            url:'https://www.tcd.ie/courses/undergraduate/courses/nursing---general-nursing-adelaide/' },
         { name:'Nursing - Intellectual Disability Nursing',          cao:'TR097',            url:'https://www.tcd.ie/courses/undergraduate/courses/nursing---intellectual-disability-nursing/' },
@@ -19793,7 +20640,7 @@ SCHOOLS.push({
         { name:'Physical Sciences',                                  cao:'TR063',            url:'https://www.tcd.ie/courses/undergraduate/courses/physical-sciences/' },
         { name:'Physics and Astrophysics: Physical Sciences',        cao:'TR063',            url:'https://www.tcd.ie/courses/undergraduate/courses/physics-and-astrophysics-physical-sciences/' },
         { name:'Physics: Physical Sciences',                         cao:'TR063',            url:'https://www.tcd.ie/courses/undergraduate/courses/physics-physical-sciences/' },
-        { name:'Physiology: Biological and Biomedical Sciences',     cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/physiology-biological-and-biomedical-sciences/' },
+        { name:'Physiology: Biological and Biomedical Sciences',     cao:'TR060', schoolsCourseId:'tcd-physiology',             url:'https://www.tcd.ie/courses/undergraduate/courses/physiology-biological-and-biomedical-sciences/' },
         { name:'Physiotherapy',                                      cao:'TR053',            url:'https://www.tcd.ie/courses/undergraduate/courses/physiotherapy/' },
         { name:'Political Science (JH)',                             cao:'TR001',            url:'https://www.tcd.ie/courses/undergraduate/courses/political-science-jh/' },
         { name:'Psychology',                                         cao:'TR006',            url:'https://www.tcd.ie/courses/undergraduate/courses/psychology/' },
@@ -19808,7 +20655,7 @@ SCHOOLS.push({
         { name:'Spanish (JH)',                                       cao:'TR672',            url:'https://www.tcd.ie/courses/undergraduate/courses/spanish-jh/' },
         { name:'Stage Management and Technical Theatre',                                     url:'https://www.tcd.ie/courses/undergraduate/courses/stage-management-and-technical-theatre/' },
         { name:'Theoretical Physics',                                cao:'TR035',            url:'https://www.tcd.ie/courses/undergraduate/courses/theoretical-physics/' },
-        { name:'Zoology: Biological and Biomedical Sciences',        cao:'TR060',            url:'https://www.tcd.ie/courses/undergraduate/courses/zoology-biological-and-biomedical-sciences/' },
+        { name:'Zoology: Biological and Biomedical Sciences',        cao:'TR060', schoolsCourseId:'tcd-zoology',                url:'https://www.tcd.ie/courses/undergraduate/courses/zoology-biological-and-biomedical-sciences/' },
       ],
     },
     { id:'ul', name:'UL', fullName:'University of Limerick', location:'Limerick, Ireland', icon:'⚡', color:'#003d7a', tagline:'Course browser — full content launching soon', live: false,

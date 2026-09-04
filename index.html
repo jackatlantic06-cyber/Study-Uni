@@ -1003,9 +1003,11 @@
     if (/\bBAEcon\b|Applied Economics/.test(name))                      return "Business";
     if (/Food Marketing|International Business|Hotel Management/.test(name)) return "Business";
     // Life Sciences (CK402 check FIRST so "Biological and Chemical Sciences" isn't caught by PhysSci)
+    if (/Molecular Medicine/.test(name))                                  return "LifeSci";
     if (/CK402|Biological and Chemical/.test(name))                      return "LifeSci";
     if (/Biochemistry|Biotechnology|Microbiology|Neuroscience|Physiology/.test(name)) return "LifeSci";
     if (/Biomedical|Genetics|Nutritional|Food Science/.test(name))       return "LifeSci";
+    if (/Botany|Immunology/.test(name))                                   return "LifeSci";
     // Physical Sciences
     if (/Chemical Sciences|Chemical Physics/.test(name))                 return "PhysSci";
     if (/\bChemistry\b/.test(name))                                      return "PhysSci";
