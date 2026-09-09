@@ -188,8 +188,15 @@
     ],
   };
 
-  // QUIZ BANK — EC1208 only, topic-based structure
-  // Value is { "Topic Name": [{q, options:[A,B,C,D], correct (0-based), explanation}] }
+  // Helpers for randomised math question generators
+  const _mathQ = {
+    pick: function(a) { return a[Math.floor(Math.random() * a.length)]; },
+    int:  function(lo, hi, step) { var s = step||1, n = Math.floor((hi-lo)/s)+1; return lo + Math.floor(Math.random()*n)*s; },
+    fmt:  function(n) { return Number(n).toLocaleString('en-IE'); },
+    pct:  function(n, dp) { return (Math.round(n * Math.pow(10, (dp||1)+2)) / Math.pow(10, dp||1)).toFixed(dp||1); }
+  };
+
+  // QUIZ BANK
   const QUIZ_BANK = {
     "EC1208": {
       "MCQ Exam 2023": [
@@ -197,38 +204,114 @@
           options: ["C+I+G","G-T","X+M","C+I+G+X-M"],
           correct: 3,
           explanation: "GDP = C+I+G+(X−M). C=Consumption, I=Investment, G=Government spending, X=Exports, M=Imports. Net exports NX = X−M." },
-        { q: "Country 1 basket = 10 karls ($2 US), income 3,200 karls. Country 2 basket = 25 ritz ($2 US), income 5,500 ritz. Which is true about PPP-adjusted income per capita?",
-          options: ["Country 1 PPP income is $3,500","Country 2 PPP income is $5,800","Country 1 PPP income is higher than Country 2","Country 1 PPP income is lower than Country 2"],
-          correct: 2,
-          explanation: "$1=5 karls → Country 1 PPP = 3,200÷5 = $640. $1=12.5 ritz → Country 2 PPP = 5,500÷12.5 = $440. Country 1 ($640) > Country 2 ($440)." },
-        { q: "A country: 5,000 units in Year 1 @ $280, 6,000 units in Year 2 @ $320. Year 1 is the base year. What is the real GDP growth rate?",
-          options: ["0.2%","20%","10%","5%"],
-          correct: 1,
-          explanation: "Real GDP Y1 = 5,000×$280 = $1,400,000. Real GDP Y2 = 6,000×$280 (base-year prices) = $1,680,000. Growth = 280,000÷1,400,000 = 20%." },
-        { q: "An iPad costs $500 in the US and 30,000 rupees in India. Using PPP, a basket worth $1 in the US costs ________ in India.",
-          options: ["0.17 rupees","2 rupees","60 rupees","100 rupees"],
-          correct: 2,
-          explanation: "$500 = 30,000 rupees → $1 = 30,000÷500 = 60 rupees. This PPP exchange rate reflects the relative purchasing power of the two currencies." },
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var k1 = p.int(5,15), kus = p.int(1,3), inc1 = p.int(2,6)*1000;
+          var r1 = p.int(15,35,5), rus = p.int(1,3), inc2 = p.int(3,9)*1000;
+          var rate1 = k1/kus, rate2 = r1/rus; // local per $1
+          var ppp1 = Math.round(inc1/rate1), ppp2 = Math.round(inc2/rate2);
+          var higher = ppp1 > ppp2 ? 1 : 2;
+          var w1 = '$' + p.fmt(ppp1 + p.int(100,500,100));
+          var w2 = '$' + p.fmt(ppp2 + p.int(100,500,100));
+          return {
+            q: 'Country 1 basket = '+k1+' karls ($'+kus+' US), income '+p.fmt(inc1)+' karls. Country 2 basket = '+r1+' ritz ($'+rus+' US), income '+p.fmt(inc2)+' ritz. Which is true about PPP-adjusted income per capita?',
+            options: ['Country 1 PPP income is '+w1, 'Country 2 PPP income is '+w2, 'Country 1 PPP income is higher than Country 2', 'Country 1 PPP income is lower than Country 2'],
+            correct: higher === 1 ? 2 : 3,
+            explanation: '$1='+rate1+' karls → Country 1 PPP = '+p.fmt(inc1)+'÷'+rate1+' = $'+p.fmt(ppp1)+'. $1='+rate2+' ritz → Country 2 PPP = '+p.fmt(inc2)+'÷'+rate2+' = $'+p.fmt(ppp2)+'. Country '+(ppp1>ppp2?'1 ($'+p.fmt(ppp1)+') > Country 2 ($'+p.fmt(ppp2)+')':'2 ($'+p.fmt(ppp2)+') > Country 1 ($'+p.fmt(ppp1)+')')+'.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var q1 = p.int(3,8)*1000, price = p.int(100,500,50);
+          var q2 = q1 + p.int(1,4)*1000;
+          var rgdp1 = q1*price, rgdp2 = q2*price;
+          var growth = Math.round((rgdp2-rgdp1)/rgdp1*100);
+          var nomGrowth = Math.round((q2*(price+p.int(20,80,10))-rgdp1)/rgdp1*100);
+          var w2 = growth/2, w3 = growth+5;
+          return {
+            q: 'A country: '+p.fmt(q1)+' units in Year 1 @ $'+p.fmt(price)+', '+p.fmt(q2)+' units in Year 2 @ $'+p.fmt(price+p.int(20,80,10))+'. Year 1 is the base year. What is the real GDP growth rate?',
+            options: [growth+'%', nomGrowth+'%', w2+'%', w3+'%'],
+            correct: 0,
+            explanation: 'Real GDP Y1 = '+p.fmt(q1)+'×$'+p.fmt(price)+' = $'+p.fmt(rgdp1)+'. Real GDP Y2 = '+p.fmt(q2)+'×$'+p.fmt(price)+' (base-year prices) = $'+p.fmt(rgdp2)+'. Growth = '+p.fmt(rgdp2-rgdp1)+'÷'+p.fmt(rgdp1)+' = '+growth+'%.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var goods = p.pick(['an iPhone','a laptop','a television','a PlayStation','a pair of Nike trainers']);
+          var usd = p.pick([300,400,500,600,800]);
+          var rate = p.pick([40,50,60,70,80,90]);
+          var local = usd * rate;
+          var w1 = Math.round(usd/local*100)/100; // inverted
+          var w2 = rate/2, w3 = rate*2;
+          return {
+            q: 'The price of '+goods+' is $'+usd+' in the US and '+p.fmt(local)+' rupees in India. Using PPP, a basket worth $1 in the US costs ________ in India.',
+            options: [rate+' rupees', w1+' rupees', w2+' rupees', w3+' rupees'],
+            correct: 0,
+            explanation: '$'+usd+' = '+p.fmt(local)+' rupees → $1 = '+p.fmt(local)+'÷'+usd+' = '+rate+' rupees. This PPP exchange rate reflects the relative purchasing power of the two currencies.'
+          };
+        }},
         { q: "Unemployment fell 6%→5%. Total population, capital stock and output are unchanged. What happens?",
           options: ["Income per capita falls","Income per worker falls","Income per capita increases","Income per worker increases"],
           correct: 1,
           explanation: "More workers are employed (unemployment fell), but total output is unchanged. Same output ÷ more workers = lower income per worker. Income per capita (output ÷ population) is unchanged." },
-        { q: "Consumption $185,000; Investment $60,000; Government $103,000; Exports $54,000; Imports $50,000. What is GDP?",
-          options: ["$452,000","$402,000","$554,000","$352,000"],
-          correct: 3,
-          explanation: "GDP = C+I+G+(X−M) = 185,000+60,000+103,000+(54,000−50,000) = $352,000." },
-        { q: "Using the same data, if the country runs a trade surplus of $30,000 next year (all else equal), what is the new GDP?",
-          options: ["$524,000","$378,000","$372,000","$407,000"],
-          correct: 1,
-          explanation: "Trade surplus: NX = $30,000. New GDP = 185,000+60,000+103,000+30,000 = $378,000." },
-        { q: "GNP = $340,000. Domestic factors earned $140,000 abroad; foreign factors earned $50,000 domestically. What is GDP?",
-          options: ["$430,000","$160,000","$250,000","$480,000"],
-          correct: 2,
-          explanation: "GDP = GNP − income earned abroad by domestic factors + income earned here by foreign factors = 340,000 − 140,000 + 50,000 = $250,000." },
-        { q: "Year 1 basket: 10 lb apples @$1.40, 5 lb oranges @$1.80, 4 lb pears @$2.00. Year 2 prices: $1.50, $2.00, $2.50. CPI for Year 2 (base: Year 1)?",
-          options: ["122.9","149.2","118.2","112.9"],
-          correct: 3,
-          explanation: "Y1 basket cost: 14+9+8=$31. Y2 same basket: 15+10+10=$35. CPI = (35÷31)×100 = 112.9." },
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var C = p.int(15,25)*10000, I = p.int(4,9)*10000, G = p.int(8,15)*10000;
+          var X = p.int(4,8)*10000, M = p.int(3,7)*10000;
+          var gdp = C+I+G+(X-M);
+          var w1 = C+I+G+X+M, w2 = C+I+G+X, w3 = C+I+G;
+          return {
+            q: 'Consumption $'+p.fmt(C)+'; Investment $'+p.fmt(I)+'; Government $'+p.fmt(G)+'; Exports $'+p.fmt(X)+'; Imports $'+p.fmt(M)+'. What is GDP?',
+            options: ['$'+p.fmt(gdp),'$'+p.fmt(w1),'$'+p.fmt(w2),'$'+p.fmt(w3)],
+            correct: 0,
+            explanation: 'GDP = C+I+G+(X−M) = '+p.fmt(C)+'+'+p.fmt(I)+'+'+p.fmt(G)+'+('+p.fmt(X)+'−'+p.fmt(M)+') = $'+p.fmt(gdp)+'.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var C = p.int(15,25)*10000, I = p.int(4,9)*10000, G = p.int(8,15)*10000;
+          var surplus = p.int(2,6)*10000;
+          var gdp = C+I+G+surplus;
+          var w1 = C+I+G-surplus, w2 = C+I+G+surplus*2, w3 = C+I+G;
+          return {
+            q: 'A country has C=$'+p.fmt(C)+', I=$'+p.fmt(I)+', G=$'+p.fmt(G)+' and runs a trade surplus of $'+p.fmt(surplus)+' (no other changes). What is GDP?',
+            options: ['$'+p.fmt(gdp),'$'+p.fmt(w1),'$'+p.fmt(w2),'$'+p.fmt(w3)],
+            correct: 0,
+            explanation: 'Trade surplus: NX = $'+p.fmt(surplus)+'. GDP = '+p.fmt(C)+'+'+p.fmt(I)+'+'+p.fmt(G)+'+'+p.fmt(surplus)+' = $'+p.fmt(gdp)+'.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var gnp = p.int(25,50)*10000;
+          var abroad = p.int(8,18)*10000;
+          var foreign = p.int(3,9)*10000;
+          var gdp = gnp - abroad + foreign;
+          var w1 = gnp + abroad - foreign, w2 = gnp - abroad - foreign, w3 = gnp + abroad + foreign;
+          return {
+            q: 'GNP = $'+p.fmt(gnp)+'. Domestic factors earned $'+p.fmt(abroad)+' abroad; foreign factors earned $'+p.fmt(foreign)+' domestically. What is GDP?',
+            options: ['$'+p.fmt(gdp),'$'+p.fmt(w1),'$'+p.fmt(w2),'$'+p.fmt(w3)],
+            correct: 0,
+            explanation: 'GDP = GNP − income earned abroad by domestic factors + income earned here by foreign factors = '+p.fmt(gnp)+'−'+p.fmt(abroad)+'+'+p.fmt(foreign)+' = $'+p.fmt(gdp)+'.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var qa = p.int(8,14), qo = p.int(4,7), qpe = p.int(3,6);
+          var pa1 = p.int(12,18)*0.1, po1 = p.int(15,22)*0.1, ppe1 = p.int(18,26)*0.1;
+          var pa2 = +(pa1 + p.int(1,4)*0.1).toFixed(2);
+          var po2 = +(po1 + p.int(1,4)*0.1).toFixed(2);
+          var ppe2 = +(ppe1 + p.int(2,6)*0.1).toFixed(2);
+          var cost1 = +(qa*pa1 + qo*po1 + qpe*ppe1).toFixed(2);
+          var cost2 = +(qa*pa2 + qo*po2 + qpe*ppe2).toFixed(2);
+          var cpi = +(cost2/cost1*100).toFixed(1);
+          var w1 = +((cost1/cost2)*100).toFixed(1), w2 = +(cpi+8).toFixed(1), w3 = +(cpi-5).toFixed(1);
+          return {
+            q: 'Y1 basket: '+qa+' lb apples @$'+pa1.toFixed(2)+', '+qo+' lb oranges @$'+po1.toFixed(2)+', '+qpe+' lb pears @$'+ppe1.toFixed(2)+'. Y2 prices: $'+pa2.toFixed(2)+', $'+po2.toFixed(2)+', $'+ppe2.toFixed(2)+'. CPI for Y2 (base: Y1)?',
+            options: [String(cpi), String(w1), String(w2), String(w3)],
+            correct: 0,
+            explanation: 'Y1 cost: $'+cost1.toFixed(2)+'. Y2 same basket: $'+cost2.toFixed(2)+'. CPI = ('+cost2.toFixed(2)+'÷'+cost1.toFixed(2)+')×100 = '+cpi+'.'
+          };
+        }},
         { q: "At equilibrium in the Solow Growth model, which statement is correct?",
           options: ["Savings is the distance from L to G","Income is the distance from 0 to T","Consumption is the distance from G to T","The marginal product of capital is the slope of the production function at L"],
           correct: 3,
@@ -299,14 +382,35 @@
           options: ["Consumption","Investment","Government spending","Net exports"],
           correct: 3,
           explanation: "NX = Net Exports = Exports (X) minus Imports (M). Positive NX = trade surplus; negative NX = trade deficit." },
-        { q: "If C=$5T, I=$2T, G=$1T, NX=−$0.5T, what is GDP?",
-          options: ["$5.5T","$7T","$7.5T","$8T"],
-          correct: 2,
-          explanation: "GDP = C+I+G+NX = 5+2+1+(−0.5) = $7.5 trillion." },
-        { q: "Using the values above, if government spending increases by $500 billion (all else unchanged), what is the new GDP?",
-          options: ["$7.5T","$8T","$8.5T","$9T"],
-          correct: 1,
-          explanation: "New G = $1.5T. GDP = 5+2+1.5+(−0.5) = $8 trillion." },
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var C = p.int(3,7)*10, I = p.int(1,4)*10, G = p.int(1,3)*10;
+          var NX = (p.int(1,6)*10 - p.int(1,6)*10)/10;
+          var gdp = +(C/10 + I/10 + G/10 + NX).toFixed(1);
+          var w1 = +(gdp+0.5).toFixed(1), w2 = +(gdp-0.5).toFixed(1), w3 = +(C/10+I/10+G/10).toFixed(1);
+          var Cs = (C/10)+'T', Is = (I/10)+'T', Gs = (G/10)+'T', NXs = (NX>=0?'+':'')+NX+'T';
+          return {
+            q: 'If C=$'+Cs+', I=$'+Is+', G=$'+Gs+', NX=$'+NXs+', what is GDP?',
+            options: ['$'+gdp+'T','$'+w1+'T','$'+w2+'T','$'+w3+'T'],
+            correct: 0,
+            explanation: 'GDP = C+I+G+NX = '+Cs+'+'+Is+'+'+Gs+'+('+NXs+') = $'+gdp+' trillion.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var C = p.int(3,7)*10, I = p.int(1,4)*10, G = p.int(1,3)*10;
+          var NX = (p.int(1,6)*10 - p.int(1,6)*10)/10;
+          var inc = p.pick([5,10,15,20]);
+          var gdpOld = +(C/10 + I/10 + G/10 + NX).toFixed(1);
+          var gdpNew = +(gdpOld + inc/10).toFixed(1);
+          var w1 = +(gdpNew+0.5).toFixed(1), w2 = +(gdpNew-0.5).toFixed(1), w3 = gdpOld;
+          return {
+            q: 'C=$'+(C/10)+'T, I=$'+(I/10)+'T, G=$'+(G/10)+'T, NX='+(NX>=0?'+':'')+NX+'T. If government spending increases by $'+inc+'B (all else unchanged), what is the new GDP?',
+            options: ['$'+gdpNew+'T','$'+w1+'T','$'+w2+'T','$'+w3+'T'],
+            correct: 0,
+            explanation: 'New G = $'+(+(G/10+inc/10).toFixed(1))+'T. GDP = '+(C/10)+'+'+(I/10)+'+'+(+(G/10+inc/10).toFixed(1))+'+('+NX+') = $'+gdpNew+' trillion.'
+          };
+        }},
         { q: "Which of the following is NOT included in the calculation of GDP?",
           options: ["The sale of a new car","The sale of a used car","The value of car repairs","The value of car insurance premiums"],
           correct: 1,
@@ -347,34 +451,85 @@
           options: ["(Nominal GDP ÷ Real GDP) × 100","(Real GDP ÷ Nominal GDP) × 100","(Price Index ÷ Real GDP) × 100","(Nominal GDP ÷ Price Index) × 100"],
           correct: 0,
           explanation: "GDP Deflator = (Nominal GDP ÷ Real GDP) × 100. A value above 100 means prices are higher than in the base year." },
-        { q: "If nominal GDP is $5,000 and real GDP is $4,000, what is the GDP deflator?",
-          options: ["80","100","125","150"],
-          correct: 2,
-          explanation: "GDP Deflator = (5,000 ÷ 4,000) × 100 = 125. Prices are 25% higher than in the base year." },
-        { q: "If the price index is 120 and nominal GDP is $10,000, what is real GDP?",
-          options: ["$8,333","$12,000","$14,000","$12,500"],
-          correct: 0,
-          explanation: "Real GDP = Nominal GDP ÷ (Price Index ÷ 100) = 10,000 ÷ 1.20 = $8,333." },
-        { q: "If real GDP is $7,000 and the GDP deflator is 140, what is nominal GDP?",
-          options: ["$9,800","$8,500","$10,500","$9,000"],
-          correct: 0,
-          explanation: "Nominal GDP = Real GDP × (GDP Deflator ÷ 100) = 7,000 × 1.40 = $9,800." },
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var real = p.int(3,9)*1000, deflator = p.int(110,160,5);
+          var nominal = Math.round(real * deflator / 100 / 100) * 100;
+          var def2 = Math.round(nominal/real*100);
+          var w1 = Math.round(real/nominal*100), w2 = def2+20, w3 = def2-10;
+          return {
+            q: 'If nominal GDP is $'+p.fmt(nominal)+' and real GDP is $'+p.fmt(real)+', what is the GDP deflator?',
+            options: [String(def2), String(w1), String(w2), String(w3)],
+            correct: 0,
+            explanation: 'GDP Deflator = ('+p.fmt(nominal)+'÷'+p.fmt(real)+')×100 = '+def2+'. Prices are '+(def2-100)+'% higher than in the base year.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var nominal = p.int(8,20)*1000, idx = p.int(110,160,5);
+          var real = Math.round(nominal / idx * 100 / 100) * 100;
+          var w1 = Math.round(nominal*idx/100/100)*100, w2 = real+500, w3 = real-200;
+          return {
+            q: 'If the price index is '+idx+' and nominal GDP is $'+p.fmt(nominal)+', what is real GDP?',
+            options: ['$'+p.fmt(real),'$'+p.fmt(w1),'$'+p.fmt(w2),'$'+p.fmt(w3)],
+            correct: 0,
+            explanation: 'Real GDP = Nominal GDP ÷ (Price Index ÷ 100) = '+p.fmt(nominal)+'÷'+idx/100+' = $'+p.fmt(real)+'.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var real = p.int(4,10)*1000, deflator = p.int(115,165,5);
+          var nominal = Math.round(real * deflator / 100 / 100) * 100;
+          var w1 = Math.round(real / deflator * 100 / 100)*100, w2 = nominal+500, w3 = nominal-1000;
+          return {
+            q: 'If real GDP is $'+p.fmt(real)+' and the GDP deflator is '+deflator+', what is nominal GDP?',
+            options: ['$'+p.fmt(nominal),'$'+p.fmt(w1),'$'+p.fmt(w2),'$'+p.fmt(w3)],
+            correct: 0,
+            explanation: 'Nominal GDP = Real GDP × (GDP Deflator ÷ 100) = '+p.fmt(real)+'×'+(deflator/100).toFixed(2)+' = $'+p.fmt(nominal)+'.'
+          };
+        }},
         { q: "The formula for calculating the CPI is:",
           options: ["(Price of basket this year ÷ Price of basket in base year) × 100","(Price of basket in base year ÷ Price of basket this year) × 100","(Price of one good this year ÷ Price of one good in base year) × 100","(Price of one good in base year ÷ Price of one good this year) × 100"],
           correct: 0,
           explanation: "CPI = (Cost of basket in current year ÷ Cost of same basket in base year) × 100. Base year CPI = 100. CPI of 120 means prices are 20% higher than base year." },
-        { q: "If a basket costs $100 in the base year and $120 now, what is the CPI?",
-          options: ["80","100","120","140"],
-          correct: 2,
-          explanation: "CPI = (120 ÷ 100) × 100 = 120. The price level is 20% above the base year." },
-        { q: "If the CPI in the base year is 100 and the CPI in the current year is 120, what is the inflation rate?",
-          options: ["10%","12%","20%","24%"],
-          correct: 2,
-          explanation: "Inflation = ((CPI current − CPI previous) ÷ CPI previous) × 100 = ((120−100) ÷ 100) × 100 = 20%." },
-        { q: "If a basket cost $200 in the base year and $240 this year, what is the inflation rate?",
-          options: ["20%","10%","50%","25%"],
-          correct: 0,
-          explanation: "Inflation = ((240−200) ÷ 200) × 100 = (40 ÷ 200) × 100 = 20%." },
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var base = p.int(8,20)*10, pctUp = p.int(10,40,5);
+          var current = Math.round(base * (1 + pctUp/100));
+          var cpi = Math.round(current/base*100);
+          var w1 = Math.round(base/current*100), w2 = cpi-10, w3 = cpi+10;
+          return {
+            q: 'If a basket costs $'+base+' in the base year and $'+current+' now, what is the CPI?',
+            options: [String(cpi), String(w1), String(w2), String(w3)],
+            correct: 0,
+            explanation: 'CPI = ('+current+'÷'+base+')×100 = '+cpi+'. The price level is '+pctUp+'% above the base year.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var cpi1 = 100, cpi2 = p.int(105,135,5);
+          var inf = cpi2 - cpi1;
+          var w1 = inf/2, w2 = cpi2, w3 = inf+5;
+          return {
+            q: 'If the CPI in the base year is '+cpi1+' and the CPI in the current year is '+cpi2+', what is the inflation rate?',
+            options: [inf+'%', w1+'%', w2+'%', w3+'%'],
+            correct: 0,
+            explanation: 'Inflation = (('+cpi2+'−'+cpi1+')÷'+cpi1+')×100 = '+inf+'%.'
+          };
+        }},
+        { type:'math', gen: function() {
+          var p = _mathQ;
+          var base = p.int(10,30)*10, pctUp = p.int(10,40,5);
+          var current = Math.round(base * (1 + pctUp/100));
+          var inf = Math.round((current-base)/base*100);
+          var w1 = inf+10, w2 = Math.round(base/current*100), w3 = inf-5;
+          return {
+            q: 'If a basket cost $'+base+' in the base year and $'+current+' this year, what is the inflation rate?',
+            options: [inf+'%', w1+'%', w2+'%', w3+'%'],
+            correct: 0,
+            explanation: 'Inflation = (('+current+'−'+base+')÷'+base+')×100 = ('+( current-base)+'÷'+base+')×100 = '+inf+'%.'
+          };
+        }},
       ],
       "Topic 2: Labour Productivity & Innovation": [
         { q: "Which is a disadvantage of using market exchange rates to compare GDP across countries?",
@@ -2114,7 +2269,14 @@
       { q: "A company receives €20,000 in January for goods sold in December. Under accrual accounting, when is the income normally recognised?", options: ["In January, because that is when cash is received", "In December, because that is when the goods were sold", "Half in December and half in January", "Only when the customer receives an invoice"], correct: 1, explanation: "Accrual accounting recognises income when earned. The December sale belongs in December even if cash arrives in January. Splitting it has no basis in the scenario, and invoice timing does not override the period the income was earned." },
     ],
     "Topic - Accounting Equation and Classification": [
-      { q: "A business has assets of €180,000 and liabilities of €65,000. What is capital?", options: ["€115,000", "€245,000", "€65,000", "€180,000"], correct: 0, explanation: "Capital = Assets − Liabilities = €180,000 − €65,000 = €115,000. €245,000 adds rather than subtracts; €65,000 is liabilities only; €180,000 is assets only." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var assets = p.int(10,30)*10000, liab = p.int(3,9)*10000;
+        var capital = assets - liab;
+        var w1 = assets + liab, w2 = liab, w3 = assets;
+        return { q: 'A business has assets of €'+p.fmt(assets)+' and liabilities of €'+p.fmt(liab)+'. What is capital?',
+          options: ['€'+p.fmt(capital),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Capital = Assets − Liabilities = €'+p.fmt(assets)+' − €'+p.fmt(liab)+' = €'+p.fmt(capital)+'.' }; } },
       { q: "An owner introduces €12,000 cash into a sole trader business. What is the immediate effect?", options: ["Assets increase €12,000 and capital increases €12,000", "Assets increase €12,000 and liabilities increase €12,000", "Expenses increase €12,000 and capital decreases €12,000", "Assets decrease €12,000 and capital increases €12,000"], correct: 0, explanation: "Cash is an asset and the owner's investment increases capital — both sides of the equation rise by €12,000. Owner investment is not a liability, not an expense, and cash received increases rather than decreases assets." },
       { q: "The owner withdraws €1,500 from the business bank account for personal use. Which treatment is correct?", options: ["Debit wages expense; credit bank", "Debit drawings; credit bank", "Debit bank; credit capital", "Debit purchases; credit bank"], correct: 1, explanation: "A personal withdrawal is drawings, reducing the owner's equity; the bank asset also decreases. It is not wages, not a bank increase, and not a purchase of goods for resale." },
     ],
@@ -2124,41 +2286,143 @@
       { q: "A trial balance totals correctly. Which error could still be present?", options: ["A €900 transaction was completely omitted from both accounts", "Only the debit entry of a €900 transaction was recorded", "A debit of €900 was entered as €90 while the credit remained €900", "A credit balance was placed in the debit column"], correct: 0, explanation: "A complete omission affects neither total, so the trial balance can still agree. Recording only one side, using different amounts on both sides, or misplacing a balance all cause a disagreement." },
     ],
     "Topic - Inventory and Gross Profit": [
-      { q: "Opening inventory is €18,000, net purchases are €74,000, carriage inwards is €3,000 and closing inventory is €21,000. What is cost of sales?", options: ["€74,000", "€116,000", "€70,000", "€95,000"], correct: 0, explanation: "Cost of sales = €18,000 + €74,000 + €3,000 − €21,000 = €74,000. €116,000 adds closing inventory instead of deducting it; €95,000 is the goods available before deducting closing inventory." },
-      { q: "Sales are €160,000, sales returns are €4,000 and cost of sales is €92,000. What is gross profit?", options: ["€64,000", "€68,000", "€72,000", "€252,000"], correct: 0, explanation: "Net sales = €160,000 − €4,000 = €156,000. Gross profit = €156,000 − €92,000 = €64,000. €68,000 ignores sales returns; €252,000 adds sales and cost of sales." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var oi = p.int(1,4)*10000, pur = p.int(5,12)*10000, carr = p.int(1,4)*1000, ci = p.int(1,4)*10000;
+        var cos = oi + pur + carr - ci;
+        var w1 = oi+pur+carr+ci, w2 = oi+pur+carr, w3 = pur+carr;
+        return { q: 'Opening inventory is €'+p.fmt(oi)+', net purchases are €'+p.fmt(pur)+', carriage inwards is €'+p.fmt(carr)+' and closing inventory is €'+p.fmt(ci)+'. What is cost of sales?',
+          options: ['€'+p.fmt(cos),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Cost of sales = €'+p.fmt(oi)+'+€'+p.fmt(pur)+'+€'+p.fmt(carr)+'−€'+p.fmt(ci)+' = €'+p.fmt(cos)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var sales = p.int(12,25)*10000, ret = p.int(2,6)*1000, cos = p.int(6,16)*10000;
+        var netSales = sales - ret, gp = netSales - cos;
+        if (gp <= 0) { cos = Math.round(netSales * 0.6); gp = netSales - cos; }
+        var w1 = sales - cos, w2 = sales - ret + cos, w3 = sales + cos;
+        return { q: 'Sales are €'+p.fmt(sales)+', sales returns are €'+p.fmt(ret)+' and cost of sales is €'+p.fmt(cos)+'. What is gross profit?',
+          options: ['€'+p.fmt(gp),'€'+p.fmt(w1),'€'+p.fmt(Math.abs(w2)),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Net sales = €'+p.fmt(sales)+'−€'+p.fmt(ret)+' = €'+p.fmt(netSales)+'. Gross profit = €'+p.fmt(netSales)+'−€'+p.fmt(cos)+' = €'+p.fmt(gp)+'.' }; } },
       { q: "Closing inventory is accidentally overstated by €6,000. What is the effect on the current year's gross profit?", options: ["Gross profit is understated by €6,000", "Gross profit is overstated by €6,000", "Gross profit is unaffected", "Gross profit is overstated by €12,000"], correct: 1, explanation: "Overstating closing inventory understates cost of sales, which overstates gross profit by €6,000. The direction in option A is reversed; closing inventory directly affects cost of sales; the error affects profit by the misstatement amount, not double." },
     ],
     "Topic - Non-Current Assets and Depreciation": [
-      { q: "A machine costs €48,000, has a residual value of €3,000 and a useful life of five years. What is annual straight-line depreciation?", options: ["€9,000", "€9,600", "€10,200", "€45,000"], correct: 0, explanation: "Straight-line depreciation = (cost − residual value) / useful life = (€48,000 − €3,000) / 5 = €9,000. €9,600 ignores residual value; €45,000 is the total depreciable amount, not the annual charge." },
-      { q: "A van has a carrying amount of €32,000 at the start of the year. Depreciation is 25% reducing balance. What is the year's depreciation?", options: ["€8,000", "€6,000", "€24,000", "€10,667"], correct: 0, explanation: "Reducing-balance depreciation = 25% × €32,000 = €8,000. €24,000 is the closing carrying amount; the other options apply incorrect bases or rates." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var life = p.pick([4,5,6,8,10]);
+        var res = p.int(2,8)*1000;
+        var cost = res + life * p.int(6,15)*1000;
+        var dep = (cost - res) / life;
+        var w1 = cost / life, w2 = dep + 1000, w3 = cost - res;
+        return { q: 'A machine costs €'+p.fmt(cost)+', has a residual value of €'+p.fmt(res)+' and a useful life of '+life+' years. What is annual straight-line depreciation?',
+          options: ['€'+p.fmt(dep),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Depreciation = (€'+p.fmt(cost)+'−€'+p.fmt(res)+') / '+life+' = €'+p.fmt(dep)+' per year.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([20,25,30,33]);
+        var ca = p.int(2,8)*10000;
+        var dep = Math.round(ca * rate / 100);
+        var closing = ca - dep;
+        var w1 = Math.round(ca * (rate-5) / 100), w2 = closing, w3 = Math.round(ca / rate * 100);
+        return { q: 'An asset has a carrying amount of €'+p.fmt(ca)+' at the start of the year. Depreciation is '+rate+'% reducing balance. What is the year\'s depreciation?',
+          options: ['€'+p.fmt(dep),'€'+p.fmt(w1),'€'+p.fmt(closing),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Reducing-balance depreciation = '+rate+'% × €'+p.fmt(ca)+' = €'+p.fmt(dep)+'. Closing carrying amount = €'+p.fmt(closing)+'.' }; } },
       { q: "Which journal records depreciation for the year?", options: ["Dr Accumulated depreciation; Cr Depreciation expense", "Dr Depreciation expense; Cr Accumulated depreciation", "Dr Asset cost; Cr Depreciation expense", "Dr Bank; Cr Accumulated depreciation"], correct: 1, explanation: "Depreciation expense is debited and accumulated depreciation is credited. Option A reverses the required journal; option C incorrectly increases the asset cost; option D wrongly implies a cash payment." },
       { q: "Repairs of €1,200 were incorrectly added to the machinery cost account. Which correcting entry is required?", options: ["Dr Machinery cost; Cr Repairs expense", "Dr Repairs expense; Cr Machinery cost", "Dr Bank; Cr Machinery cost", "Dr Depreciation expense; Cr Repairs expense"], correct: 1, explanation: "The amount must be removed from the asset account and recognised as a repair expense. Option A increases the incorrect capitalisation; option C wrongly involves cash; option D uses an incorrect expense account." },
     ],
     "Topic - Bad Debts and Allowances": [
       { q: "A customer owing €750 is confirmed as unable to pay. Which journal writes off the debt?", options: ["Dr Trade receivables; Cr Bad debt expense", "Dr Bad debt expense; Cr Trade receivables", "Dr Bank; Cr Trade receivables", "Dr Allowance for bad debts; Cr Sales"], correct: 1, explanation: "Writing off a specific debt recognises bad debt expense and removes the receivable. Option A increases the receivable; option C wrongly implies cash received; option D incorrectly adjusts sales." },
-      { q: "Closing trade receivables are €80,000 and the required allowance is 4%. The existing allowance is €2,200. What expense is required this year?", options: ["€1,000", "€3,200", "€2,200", "€5,400"], correct: 0, explanation: "Required closing allowance = 4% × €80,000 = €3,200. Increase needed = €3,200 − €2,200 = €1,000. €3,200 is the closing balance not the movement; €5,400 incorrectly adds the two balances." },
-      { q: "The allowance for bad debts must decrease from €5,000 to €3,800. What is the effect on profit?", options: ["Profit decreases by €1,200", "Profit increases by €1,200", "Profit decreases by €3,800", "Profit is unaffected"], correct: 1, explanation: "A reduction in the allowance reverses part of the previous expense, increasing profit by €1,200. A decrease in allowance reduces expense rather than increasing it; €3,800 is the closing allowance, not the movement." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var recvs = p.int(6,15)*10000, pct = p.pick([2,3,4,5]);
+        var reqd = Math.round(recvs * pct / 100);
+        var existing = reqd - p.int(5,20)*100;
+        if (existing <= 0) existing = reqd - 500;
+        var inc = reqd - existing;
+        var w1 = reqd, w2 = existing, w3 = reqd + existing;
+        return { q: 'Closing trade receivables are €'+p.fmt(recvs)+' and the required allowance is '+pct+'%. The existing allowance is €'+p.fmt(existing)+'. What expense is required this year?',
+          options: ['€'+p.fmt(inc),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Required closing allowance = '+pct+'% × €'+p.fmt(recvs)+' = €'+p.fmt(reqd)+'. Increase needed = €'+p.fmt(reqd)+'−€'+p.fmt(existing)+' = €'+p.fmt(inc)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var from = p.int(3,8)*1000, to = from - p.int(5,20)*100;
+        if (to <= 0) to = from - 500;
+        var mov = from - to;
+        var w1 = to, w2 = from, w3 = from + to;
+        return { q: 'The allowance for bad debts must decrease from €'+p.fmt(from)+' to €'+p.fmt(to)+'. What is the effect on profit?',
+          options: ['Profit increases by €'+p.fmt(mov),'Profit decreases by €'+p.fmt(mov),'Profit decreases by €'+p.fmt(to),'Profit is unaffected'], correct: 0,
+          explanation: 'A reduction in the allowance reverses part of the previous expense, increasing profit by €'+p.fmt(mov)+'.' }; } },
     ],
     "Topic - Accruals and Prepayments": [
-      { q: "Electricity expense in the trial balance is €9,400. A year-end bill of €650 has not yet been received or recorded. What expense appears in the SOPL?", options: ["€8,750", "€9,400", "€10,050", "€650"], correct: 2, explanation: "The unrecorded €650 is an accrual. Electricity expense = €9,400 + €650 = €10,050. €8,750 subtracts an accrual instead of adding it; €9,400 ignores the unrecorded amount; €650 is only the adjustment." },
-      { q: "Insurance of €12,000 was paid for the 12 months ending 31 March next year. The reporting date is 31 December. What prepayment is recognised?", options: ["€3,000", "€9,000", "€12,000", "€1,000"], correct: 0, explanation: "Three months (January to March) relate to the next period. Prepayment = 3/12 × €12,000 = €3,000. €9,000 is the current-year expense; €12,000 treats the full payment as unused; €1,000 is only one month." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var base = p.int(6,18)*1000, accrual = p.int(3,12)*100;
+        var total = base + accrual;
+        var w1 = base - accrual, w2 = base, w3 = accrual;
+        return { q: 'An expense in the trial balance is €'+p.fmt(base)+'. A year-end bill of €'+p.fmt(accrual)+' has not yet been received or recorded. What expense appears in the SOPL?',
+          options: ['€'+p.fmt(total),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'The unrecorded €'+p.fmt(accrual)+' is an accrual. Expense = €'+p.fmt(base)+' + €'+p.fmt(accrual)+' = €'+p.fmt(total)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var total = p.int(8,24)*1000;
+        var futMths = p.pick([1,2,3,4]);
+        var prepay = Math.round(total * futMths / 12);
+        var expense = total - prepay;
+        var w1 = expense, w2 = total, w3 = Math.round(total / 12);
+        return { q: 'A payment of €'+p.fmt(total)+' covers the 12 months to 31 March next year. The reporting date is 31 December. What prepayment is recognised?',
+          options: ['€'+p.fmt(prepay),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: futMths+' month'+(futMths>1?'s':'')+' relate to the next period. Prepayment = '+futMths+'/12 × €'+p.fmt(total)+' = €'+p.fmt(prepay)+'.' }; } },
       { q: "Which journal creates a year-end expense accrual of €900?", options: ["Dr Accruals €900; Cr Expense €900", "Dr Expense €900; Cr Accruals €900", "Dr Prepayment €900; Cr Expense €900", "Dr Expense €900; Cr Bank €900"], correct: 1, explanation: "The expense incurred is debited and the outstanding liability (accruals) is credited. Option A reverses the journal; option C relates to prepayments; option D wrongly implies cash was paid." },
       { q: "A €2,400 rent prepayment is omitted at year-end. What is the combined effect?", options: ["Expenses are overstated and assets are understated by €2,400", "Expenses are understated and assets are overstated by €2,400", "Expenses and liabilities are overstated by €2,400", "Profit and assets are both overstated by €2,400"], correct: 0, explanation: "Without the adjustment, too much rent remains as expense (overstated) and the prepayment asset is missing (understated). Option B reverses both effects; a prepayment affects an asset not a liability; omitting it understates rather than overstates profit." },
     ],
     "Topic - Bank Reconciliation and Cash": [
-      { q: "The cash book shows €18,400. Bank charges of €250 appear on the bank statement but have not been entered in the cash book. What is the adjusted cash-book balance?", options: ["€18,150", "€18,400", "€18,650", "€250"], correct: 0, explanation: "Bank charges reduce the balance: €18,400 − €250 = €18,150. €18,400 ignores the charge; €18,650 adds it instead of deducting it; €250 is the adjustment, not the closing balance." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var cb = p.int(10,40)*1000, chg = p.int(1,8)*100;
+        var adj = cb - chg;
+        var w1 = cb, w2 = cb + chg, w3 = chg;
+        return { q: 'The cash book shows €'+p.fmt(cb)+'. Bank charges of €'+p.fmt(chg)+' appear on the bank statement but have not been entered in the cash book. What is the adjusted cash-book balance?',
+          options: ['€'+p.fmt(adj),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Bank charges reduce the balance: €'+p.fmt(cb)+'−€'+p.fmt(chg)+' = €'+p.fmt(adj)+'.' }; } },
       { q: "A cheque issued to a supplier has been recorded in the cash book but has not yet appeared on the bank statement. How is it treated in the bank reconciliation?", options: ["It is added to the cash-book balance", "It is an outstanding cheque reconciling item", "It is recorded as bank interest", "It is removed from trade payables only"], correct: 1, explanation: "The business has recorded the payment but the bank has not yet processed it — it is an outstanding (unpresented) cheque reconciling item. It is not a cash-book correction, not interest, and the trade payables entry is already correct." },
       { q: "A customer lodgement of €1,600 is in the cash book on 31 December but reaches the bank statement on 2 January. Which description is correct?", options: ["Unpresented cheque", "Outstanding lodgement", "Bank error requiring a cash-book credit", "Bad debt recovered"], correct: 1, explanation: "The receipt is recorded by the business but not yet by the bank — an outstanding lodgement. An unpresented cheque relates to a payment; it is a timing difference not an error; and it is an ordinary receipt, not a bad debt recovery." },
       { q: "Which item normally requires an entry in the cash book rather than appearing only as a reconciling timing difference?", options: ["An outstanding lodgement", "An unpresented cheque", "Bank interest charged directly by the bank", "A cheque recorded by the business but not yet processed by the bank"], correct: 2, explanation: "Direct bank interest is first discovered from the bank statement and must be entered in the cash book. Outstanding lodgements and unpresented cheques are already in the cash book; a cheque not yet processed by the bank is simply an unpresented cheque." },
     ],
     "Topic - VAT": [
-      { q: "A VAT-registered business sells goods for €12,300 including VAT at 23%. What is the net sales amount?", options: ["€10,000", "€9,471", "€12,300", "€2,300"], correct: 0, explanation: "Net sales = €12,300 / 1.23 = €10,000. €9,471 uses an incorrect extraction method; €12,300 includes VAT; €2,300 is the VAT element only." },
-      { q: "A VAT-registered business buys goods on credit for €6,150 including VAT at 23%. Which entry records the purchase?", options: ["Dr Purchases €6,150; Cr Trade payables €6,150", "Dr Purchases €5,000; Dr VAT €1,150; Cr Trade payables €6,150", "Dr Purchases €5,000; Cr VAT €1,150; Cr Trade payables €3,850", "Dr VAT €6,150; Cr Purchases €6,150"], correct: 1, explanation: "Net purchase = €5,000, recoverable VAT = €1,150, and the full gross amount is owed to the supplier (€6,150). Option A fails to separate VAT; option C does not balance and credits VAT incorrectly; option D does not represent a credit purchase." },
-      { q: "During a VAT period, output VAT is €8,900 and input VAT is €6,400. What is the net VAT position?", options: ["€2,500 payable", "€2,500 refundable", "€15,300 payable", "€6,400 payable"], correct: 0, explanation: "Net VAT payable = output VAT − input VAT = €8,900 − €6,400 = €2,500. A refund would arise only if input exceeded output; €15,300 incorrectly adds both; €6,400 is input VAT only." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var net = p.int(5,20)*1000, rate = 23;
+        var gross = Math.round(net * 1.23);
+        var vat = gross - net;
+        var w1 = Math.round(gross * 100 / (100+rate) * (100-rate)/100), w2 = gross, w3 = vat;
+        return { q: 'A VAT-registered business sells goods for €'+p.fmt(gross)+' including VAT at '+rate+'%. What is the net sales amount?',
+          options: ['€'+p.fmt(net),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Net sales = €'+p.fmt(gross)+' / 1.'+rate+' = €'+p.fmt(net)+'. VAT element = €'+p.fmt(vat)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var net = p.int(4,15)*1000, rate = 23;
+        var vat = Math.round(net * rate / 100);
+        var gross = net + vat;
+        return { q: 'During a VAT period, output VAT is €'+p.fmt(Math.round(net*1.4*rate/100))+' and input VAT is €'+p.fmt(vat)+'. What is the net VAT position?',
+          options: ['€'+p.fmt(Math.round(net*1.4*rate/100)-vat)+' payable','€'+p.fmt(Math.round(net*1.4*rate/100)-vat)+' refundable','€'+p.fmt(Math.round(net*1.4*rate/100)+vat)+' payable','€'+p.fmt(vat)+' payable'], correct: 0,
+          explanation: 'Net VAT payable = output VAT − input VAT = €'+p.fmt(Math.round(net*1.4*rate/100))+'−€'+p.fmt(vat)+' = €'+p.fmt(Math.round(net*1.4*rate/100)-vat)+'.' }; } },
     ],
     "Topic - Wages and Salaries": [
-      { q: "Gross wages are €30,000. Employee deductions total €7,200. Employer PRSI is €3,300. What cash is paid to employees?", options: ["€22,800", "€26,100", "€30,000", "€19,500"], correct: 0, explanation: "Net pay = gross wages − employee deductions = €30,000 − €7,200 = €22,800. Employer PRSI is an additional employer cost not deducted from employee net pay. €26,100 mixes employer PRSI into employee pay; €30,000 is gross; €19,500 deducts both." },
-      { q: "Using gross wages of €30,000 and employer PRSI of €3,300, what total wages-related expense is charged to the business?", options: ["€22,800", "€30,000", "€33,300", "€40,500"], correct: 2, explanation: "The employer's total cost = gross wages + employer PRSI = €30,000 + €3,300 = €33,300. €22,800 is net employee pay; €30,000 excludes employer PRSI; €40,500 incorrectly adds employee deductions as an extra business cost." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var gross = p.int(2,6)*10000, empDed = p.int(10,25)*100*Math.round(gross/10000), prsi = p.int(5,15)*100*Math.round(gross/10000);
+        var netPay = gross - empDed;
+        var w1 = gross - empDed + prsi, w2 = gross, w3 = gross - empDed - prsi;
+        return { q: 'Gross wages are €'+p.fmt(gross)+'. Employee deductions total €'+p.fmt(empDed)+'. Employer PRSI is €'+p.fmt(prsi)+'. What cash is paid to employees?',
+          options: ['€'+p.fmt(netPay),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Net pay = gross wages − employee deductions = €'+p.fmt(gross)+'−€'+p.fmt(empDed)+' = €'+p.fmt(netPay)+'. Employer PRSI is not deducted from employee pay.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var gross = p.int(2,6)*10000, empDed = p.int(10,25)*100*Math.round(gross/10000), prsi = p.int(5,15)*100*Math.round(gross/10000);
+        var total = gross + prsi, netPay = gross - empDed;
+        var w1 = netPay, w2 = gross, w3 = gross + prsi + empDed;
+        return { q: 'Gross wages are €'+p.fmt(gross)+'. Employer PRSI is €'+p.fmt(prsi)+'. What total wages-related expense is charged to the business?',
+          options: ['€'+p.fmt(total),'€'+p.fmt(netPay),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Total employer cost = gross wages + employer PRSI = €'+p.fmt(gross)+'+€'+p.fmt(prsi)+' = €'+p.fmt(total)+'.' }; } },
       { q: "Which statement about employee deductions is correct?", options: ["They reduce gross wages expense in the SOPL", "They form part of amounts payable to the relevant authorities", "They are an additional expense on top of gross wages", "They increase the cash paid directly to employees"], correct: 1, explanation: "Employee deductions reduce net pay and create liabilities to tax and other authorities until remitted. Gross wages remain the employee-service cost; deductions are withheld from gross pay, not extra costs; they reduce rather than increase cash to employees." },
     ],
     "Topic - Accounting Errors": [
@@ -2168,9 +2432,37 @@
     ],
     "Topic - Preparing Financial Statements": [
       { q: "Which item is presented in the equity section of a sole trader's Statement of Financial Position rather than as an expense in the SOPL?", options: ["Wages", "Depreciation", "Drawings", "Bank interest"], correct: 2, explanation: "Drawings are withdrawals by the owner that reduce capital — they are not a business operating expense. Wages, depreciation and bank interest charged are all expenses recognised in the SOPL." },
-      { q: "A trial balance includes rates expense of €18,000 covering 1 March to the following 1 March. The reporting date is 31 December. What rates expense belongs in the current year?", options: ["€18,000", "€15,000", "€3,000", "€12,000"], correct: 1, explanation: "Ten months (March to December) belong to the current year: 10/12 × €18,000 = €15,000. The remaining €3,000 is prepaid. €18,000 charges the future two months; €12,000 represents only eight months." },
-      { q: "A loan of €40,000 at 9% per annum was taken out on 1 September. No interest has been recorded by 31 December. What adjustment is required?", options: ["€3,600 interest expense and accrual", "€1,200 interest expense and accrual", "€900 interest expense and bank reduction", "€2,400 interest expense and accrual"], correct: 1, explanation: "Four months' interest is accrued: €40,000 × 9% × 4/12 = €1,200. €3,600 is a full year's interest; €900 uses an incorrect fraction and assumes bank payment; €2,400 represents eight months, not four." },
-      { q: "A business has net sales of €300,000, cost of sales of €180,000 and operating expenses of €92,000. What figures should appear as gross profit and net profit?", options: ["Gross profit €120,000; net profit €28,000", "Gross profit €208,000; net profit €120,000", "Gross profit €28,000; net profit €120,000", "Gross profit €480,000; net profit €388,000"], correct: 0, explanation: "Gross profit = €300,000 − €180,000 = €120,000. Net profit = €120,000 − €92,000 = €28,000. Option B confuses the stages; option C reverses gross and net profit; option D adds rather than subtracts." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var total = p.int(12,30)*1000;
+        var futMths = p.pick([1,2,3]);
+        var curMths = 12 - futMths;
+        var expense = Math.round(total * curMths / 12);
+        var prepay = total - expense;
+        var w1 = total, w2 = prepay, w3 = Math.round(total * (curMths-2) / 12);
+        return { q: 'A trial balance includes rates expense of €'+p.fmt(total)+' covering 1 March to 1 March next year. The reporting date is 31 December. What expense belongs in the current year?',
+          options: ['€'+p.fmt(expense),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: curMths+' months (March to December) belong to the current year: '+curMths+'/12 × €'+p.fmt(total)+' = €'+p.fmt(expense)+'. Prepayment = €'+p.fmt(prepay)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var loan = p.int(2,8)*10000, rate = p.pick([6,8,9,10,12]);
+        var mths = p.pick([2,3,4,5]);
+        var interest = Math.round(loan * rate / 100 * mths / 12);
+        var annual = loan * rate / 100;
+        var w1 = annual, w2 = Math.round(loan * rate / 100 * (mths-1) / 12), w3 = Math.round(loan * rate / 100 * (mths+2) / 12);
+        return { q: 'A loan of €'+p.fmt(loan)+' at '+rate+'% per annum was taken out on 1 September. No interest has been recorded by 31 December. What interest accrual is required?',
+          options: ['€'+p.fmt(interest)+' interest expense and accrual','€'+p.fmt(w1)+' interest expense and accrual','€'+p.fmt(w2)+' interest expense','€'+p.fmt(w3)+' interest expense and accrual'], correct: 0,
+          explanation: mths+' months\' interest: €'+p.fmt(loan)+' × '+rate+'% × '+mths+'/12 = €'+p.fmt(interest)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var sales = p.int(20,50)*10000, cos = p.int(10,30)*10000, opex = p.int(4,12)*10000;
+        if (cos >= sales) cos = Math.round(sales * 0.6);
+        var gp = sales - cos, np = gp - opex;
+        if (np <= 0) { opex = Math.round(gp * 0.7); np = gp - opex; }
+        var w1gp = sales - opex, w1np = gp;
+        return { q: 'A business has net sales of €'+p.fmt(sales)+', cost of sales of €'+p.fmt(cos)+' and operating expenses of €'+p.fmt(opex)+'. What are gross profit and net profit?',
+          options: ['Gross profit €'+p.fmt(gp)+'; net profit €'+p.fmt(np),'Gross profit €'+p.fmt(w1gp)+'; net profit €'+p.fmt(gp),'Gross profit €'+p.fmt(np)+'; net profit €'+p.fmt(gp),'Gross profit €'+p.fmt(sales+cos)+'; net profit €'+p.fmt(sales)], correct: 0,
+          explanation: 'Gross profit = €'+p.fmt(sales)+'−€'+p.fmt(cos)+' = €'+p.fmt(gp)+'. Net profit = €'+p.fmt(gp)+'−€'+p.fmt(opex)+' = €'+p.fmt(np)+'.' }; } },
     ],
   },
 
@@ -2185,7 +2477,16 @@
     ],
     "Topic - IAS 37 Provisions and Contingencies": [
       { q: "Which combination is required before a provision is recognised under IAS 37?", options: ["A possible obligation, possible outflow and exact measurement", "A present obligation, probable outflow and reliable estimate", "A future management intention, probable outflow and board approval", "A present obligation, remote outflow and reliable estimate"], correct: 1, explanation: "IAS 37 requires a present legal or constructive obligation from a past event, a probable outflow of resources, and a reliable estimate of the amount. Possible obligations, remote outflows or management intentions are insufficient." },
-      { q: "A company expects to lose a legal case and pay €3.2 million in one year. The discount factor is 0.9091. What provision should initially be recognised?", options: ["€2.40 million", "€2.91 million", "€3.20 million", "€3.52 million"], correct: 1, explanation: "Where the time value of money is material the provision is discounted: €3.2m × 0.9091 ≈ €2.91m. The undiscounted €3.20m ignores the time value; the other figures use incorrect calculations." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var pay = p.pick([2,3,4,5,6,8,10]);
+        var dfactors = [0.9091, 0.9259, 0.9434, 0.9524];
+        var df = p.pick(dfactors);
+        var prov = +(pay * df).toFixed(2);
+        var w1 = +(pay * 0.75).toFixed(2), w2 = pay, w3 = +(pay * 1.1).toFixed(2);
+        return { q: 'A company expects to lose a legal case and pay €'+pay+'m in one year. The discount factor is '+df+'. What provision should initially be recognised?',
+          options: ['€'+prov+'m','€'+w1+'m','€'+w2+'m','€'+w3+'m'], correct: 0,
+          explanation: 'The provision is discounted: €'+pay+'m × '+df+' = €'+prov+'m. The undiscounted €'+pay+'m ignores the time value of money.' }; } },
       { q: "Lawyers advise that an outflow from a lawsuit is possible but not probable. The amount is material. What is the usual accounting treatment?", options: ["Recognise a full provision", "Recognise half the estimated amount", "Disclose a contingent liability but make no provision", "Ignore the matter completely"], correct: 2, explanation: "A possible rather than probable outflow is disclosed as a contingent liability in the notes — no provision is recognised. The matter is only ignored if the possibility is remote." },
       { q: "A mining company damages two sites. Cleanup is legally required at Site 1 but not at Site 2, and the company has no constructive policy of voluntarily restoring sites. Which amount is provided?", options: ["The estimated cleanup cost of Site 1 only", "The estimated cleanup cost of Site 2 only", "The estimated cleanup cost of both sites", "No amount for either site"], correct: 0, explanation: "Site 1 creates a legal present obligation, so a provision is required. Site 2 creates no legal obligation and — with no constructive obligation from a voluntary restoration policy — no provision is made." },
     ],
@@ -2195,10 +2496,43 @@
       { q: "Motor vehicles are stolen ten days after year-end. The theft was unrelated to any condition existing at year-end and is material. What is the treatment?", options: ["Adjust the carrying amount at year-end", "Recognise a provision at year-end", "Do not adjust, but disclose the material event", "Restate the prior-year comparative figures"], correct: 2, explanation: "The theft reflects a new condition arising after year-end — it is non-adjusting. A material non-adjusting event is disclosed in the notes; no adjustment to year-end figures is made." },
     ],
     "Topic - IAS 16 and IAS 23 Non-Current Assets": [
-      { q: "A specific 10% loan of €76.8m finances construction from 1 October until the asset is ready on 30 June. How much interest is eligible for capitalisation?", options: ["€1.92m", "€5.76m", "€7.68m", "€9.60m"], correct: 1, explanation: "Capitalisation runs for nine months while construction is active: €76.8m × 10% × 9/12 = €5.76m. Interest after the asset is ready for use is expensed." },
-      { q: "A qualifying property is available for use on 30 June, has a depreciable amount of €90m and a 20-year life. What depreciation is charged for the three months to 30 September?", options: ["€1.125m", "€2.250m", "€4.500m", "€5.760m"], correct: 0, explanation: "Annual straight-line depreciation = €90m / 20 = €4.5m. Three months gives €4.5m × 3/12 = €1.125m." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var loan = p.pick([40,60,80,100,120]);
+        var rate = p.pick([8,10,12]);
+        var mths = p.pick([6,8,9]);
+        var cap = +(loan * rate / 100 * mths / 12).toFixed(2);
+        var annual = +(loan * rate / 100).toFixed(2);
+        var w1 = +(loan * rate / 100 * 3/12).toFixed(2), w2 = annual, w3 = +(loan * rate / 100 * (mths+3)/12).toFixed(2);
+        return { q: 'A specific '+rate+'% loan of €'+loan+'m finances construction for '+mths+' months until the asset is ready for use. How much interest is eligible for capitalisation?',
+          options: ['€'+cap+'m','€'+w1+'m','€'+annual+'m','€'+w3+'m'], correct: 0,
+          explanation: 'Capitalisation runs for '+mths+' months: €'+loan+'m × '+rate+'% × '+mths+'/12 = €'+cap+'m.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var dep = p.pick([60,80,90,100,120]);
+        var life = p.pick([15,20,25]);
+        var mths = p.pick([3,6,9]);
+        var annual = +(dep / life).toFixed(2);
+        var charge = +(annual * mths / 12).toFixed(3);
+        var w1 = +(annual * 6/12).toFixed(3), w2 = annual, w3 = +(dep * mths / 12).toFixed(2);
+        return { q: 'A property available for use has a depreciable amount of €'+dep+'m and a '+life+'-year life. What depreciation is charged for '+mths+' months?',
+          options: ['€'+charge+'m','€'+w1+'m','€'+annual+'m','€'+w3+'m'], correct: 0,
+          explanation: 'Annual depreciation = €'+dep+'m / '+life+' = €'+annual+'m. '+mths+' months = €'+annual+'m × '+mths+'/12 = €'+charge+'m.' }; } },
       { q: "A property's carrying amount increases on its first revaluation. Where is the gain normally recognised?", options: ["Entirely in revenue", "In other comprehensive income and revaluation surplus", "As a current liability", "As share premium"], correct: 1, explanation: "An upward revaluation is recognised in OCI and accumulated in revaluation surplus, except to the extent it reverses a previous decrease previously recognised in profit or loss." },
-      { q: "Equipment cost €100, accumulated depreciation is €82, and proceeds are €20. What is the disposal result?", options: ["€2 profit", "€2 loss", "€18 profit", "€80 loss"], correct: 0, explanation: "Carrying amount = €100 − €82 = €18. Proceeds of €20 exceed carrying amount by €2, giving a €2 profit on disposal." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var cost = p.int(5,20)*10000, accDep = p.int(3,9)*10000;
+        if (accDep >= cost) accDep = cost - 5000;
+        var ca = cost - accDep;
+        var diff = p.pick([-3,-2,-1,1,2,3,4])*1000;
+        var proceeds = ca + diff;
+        if (proceeds <= 0) proceeds = ca + 1000;
+        var result = proceeds - ca;
+        var label = result > 0 ? '€'+p.fmt(result)+' profit' : '€'+p.fmt(Math.abs(result))+' loss';
+        var w1 = result > 0 ? '€'+p.fmt(result)+' loss' : '€'+p.fmt(Math.abs(result))+' profit';
+        return { q: 'Equipment cost €'+p.fmt(cost)+', accumulated depreciation is €'+p.fmt(accDep)+', and proceeds on disposal are €'+p.fmt(proceeds)+'. What is the disposal result?',
+          options: [label, w1, '€'+p.fmt(ca)+' profit', '€'+p.fmt(accDep)+' loss'], correct: 0,
+          explanation: 'Carrying amount = €'+p.fmt(cost)+'−€'+p.fmt(accDep)+' = €'+p.fmt(ca)+'. Proceeds €'+p.fmt(proceeds)+' '+(result>0?'exceed':'are below')+' carrying amount by €'+p.fmt(Math.abs(result))+', giving a '+( result>0?'profit':'loss')+'.' }; } },
     ],
     "Topic - IAS 8 Prior-Period Errors": [
       { q: "A material fraud is discovered after year-end revealing that €4.8m of receivables recorded in earlier periods never existed. How is that portion normally corrected?", options: ["Charge it entirely to current-year operating expenses", "Adjust opening retained earnings and comparative information retrospectively", "Recognise it in other comprehensive income", "Leave prior years unchanged and disclose only"], correct: 1, explanation: "A material prior-period error is corrected retrospectively — comparatives are restated and opening equity is adjusted for the earliest period presented. Charging it to current-year expenses misrepresents the current period." },
@@ -2230,40 +2564,274 @@
     "Topic - Cost Concepts and Cost Behaviour": [
       { q: "A factory supervisor is paid €4,000 for a production period. When the cost object is one individual table, how should the supervisor's salary normally be classified?", options: ["Direct fixed cost", "Direct variable cost", "Opportunity cost", "Indirect cost"], correct: 3, explanation: "The salary cannot be conveniently traced to one individual table, so it is indirect relative to that cost object." },
       { q: "A telephone bill consists of a fixed monthly charge plus a charge per call. Which description best fits this cost?", options: ["Pure variable cost", "Mixed cost", "Sunk cost", "Step-fixed cost"], correct: 1, explanation: "A mixed cost contains both a fixed element and a variable element." },
-      { q: "Within the relevant range, production rises from 2,000 to 2,500 units while total fixed cost remains €30,000. What happens to fixed cost per unit?", options: ["It falls from €15 to €12", "It remains €15", "It falls from €15 to €10", "It rises from €12 to €15"], correct: 0, explanation: "Fixed cost per unit falls from €30,000/2,000 = €15 to €30,000/2,500 = €12." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var fc = p.pick([20,24,30,36,40,48])*1000;
+        var u1 = p.int(15,25)*100, u2 = u1 + p.pick([3,4,5,6])*100;
+        var fpu1 = fc/u1, fpu2 = fc/u2;
+        return { q: 'Within the relevant range, production rises from '+p.fmt(u1)+' to '+p.fmt(u2)+' units while total fixed cost remains €'+p.fmt(fc)+'. What happens to fixed cost per unit?',
+          options: ['It falls from €'+fpu1.toFixed(2)+' to €'+fpu2.toFixed(2),'It rises from €'+fpu2.toFixed(2)+' to €'+fpu1.toFixed(2),'It remains €'+fpu1.toFixed(2),'It falls to zero'], correct: 0,
+          explanation: 'Fixed cost per unit = €'+p.fmt(fc)+'/'+p.fmt(u1)+' = €'+fpu1.toFixed(2)+' falling to €'+p.fmt(fc)+'/'+p.fmt(u2)+' = €'+fpu2.toFixed(2)+'.' }; } },
       { q: "Which pair correctly describes prime cost and conversion cost?", options: ["Prime: direct labour + overhead; Conversion: direct materials + direct labour", "Prime: all manufacturing costs; Conversion: all period costs", "Prime: direct materials + direct labour; Conversion: direct labour + manufacturing overhead", "Prime: direct materials + overhead; Conversion: direct materials + labour"], correct: 2, explanation: "Prime cost is direct materials plus direct labour; conversion cost is direct labour plus manufacturing overhead." },
       { q: "A cost has already been incurred and cannot be changed by any current decision. Which treatment is appropriate in a decision analysis?", options: ["Exclude it as a sunk cost", "Include it as a differential cost", "Treat it as a variable cost", "Include it as an opportunity cost"], correct: 0, explanation: "A sunk cost is past and unavoidable, so it is irrelevant to the current choice." },
       { q: "A business can use a vacant room itself or rent it out for €8,000. If it uses the room itself, what is the €8,000?", options: ["Sunk cost", "Committed fixed cost", "Prime cost", "Opportunity cost"], correct: 3, explanation: "The rental income forgone is the potential benefit sacrificed by choosing internal use." },
       { q: "Fuel cost is almost unchanged when one extra passenger boards a scheduled bus, but rises when an extra route kilometre is added. What does this show?", options: ["Fuel is a variable cost in every decision", "A cost's classification can depend on the decision and activity base", "Only direct costs change with activity", "Fuel is a fixed cost in every decision"], correct: 1, explanation: "Cost behaviour is defined relative to a particular activity and decision context." },
       { q: "Which statement best describes management accounting information?", options: ["It is tailored for internal planning, control and decisions", "It is mainly historical and prescribed for external users", "It focuses only on cash transactions", "It must follow one mandatory format for all firms"], correct: 0, explanation: "Management accounting is designed for internal users and can be adapted to planning, control and decision needs." },
-      { q: "Using the high-low method, total cost is €35,030 at 900 units and €62,390 at 2,100 units. What is the variable cost per unit?", options: ["€14,510", "€22.80", "€13.03", "€57,830"], correct: 1, explanation: "Variable cost per unit = change in cost / change in activity = (€62,390 − €35,030) / (2,100 − 900) = €22.80." },
-      { q: "A mixed cost is €13,700 at 250 units and €24,040 at 800 units. Using high-low, what total cost is expected at 400 units?", options: ["€9,000", "€7,520", "€21,220", "€16,520"], correct: 3, explanation: "Variable rate = (€24,040 − €13,700) / (800 − 250) = €18.80 per unit. Fixed cost = €13,700 − 250 × €18.80 = €9,000. Total at 400 units = €9,000 + 400 × €18.80 = €16,520." },
-      { q: "Using the high-low method, total cost is €5,320 at 150 units and €11,040 at 800 units. What is the variable cost per unit?", options: ["€8.80", "€7.15", "€4,000", "€5,760"], correct: 0, explanation: "Variable cost per unit = (€11,040 − €5,320) / (800 − 150) = €8.80." },
-      { q: "A mixed cost is €44,660 at 1,963 units and €69,240 at 3,192 units. Using high-low, what total cost is expected at 2,100 units?", options: ["€5,400", "€86,660", "€47,400", "€42,000"], correct: 2, explanation: "Variable rate = (€69,240 − €44,660) / (3,192 − 1,963) = €20 per unit. Fixed cost = €5,400. Total at 2,100 units = €5,400 + 2,100 × €20 = €47,400." },
-      { q: "Using the high-low method, total cost is €7,500 at 4,000 units and €13,500 at 12,000 units. What is the variable cost per unit?", options: ["€4,500", "€0.75", "€0.50", "€12,750"], correct: 1, explanation: "Variable cost per unit = (€13,500 − €7,500) / (12,000 − 4,000) = €0.75." },
-      { q: "A mixed cost is €1,800 at 300 units and €2,700 at 800 units. Using high-low, what total cost is expected at 500 units?", options: ["€1,260", "€2,700", "€900", "€2,160"], correct: 3, explanation: "Variable rate = (€2,700 − €1,800) / (800 − 300) = €1.80 per unit. Fixed cost = €1,260. Total at 500 units = €1,260 + 500 × €1.80 = €2,160." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.int(5,40)*p.pick([1,2,5]);
+        var uLo = p.int(5,15)*100, uHi = uLo + p.int(8,20)*100;
+        var fc = p.int(3,12)*1000;
+        var cLo = fc + uLo*vpu, cHi = fc + uHi*vpu;
+        var w1 = cHi - cLo, w2 = +(cLo/uLo).toFixed(2), w3 = cHi - cLo + 5000;
+        return { q: 'Using the high-low method, total cost is €'+p.fmt(cLo)+' at '+p.fmt(uLo)+' units and €'+p.fmt(cHi)+' at '+p.fmt(uHi)+' units. What is the variable cost per unit?',
+          options: ['€'+vpu,'€'+p.fmt(w1),'€'+w2,'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Variable cost per unit = (€'+p.fmt(cHi)+'−€'+p.fmt(cLo)+') / ('+p.fmt(uHi)+'−'+p.fmt(uLo)+') = €'+vpu+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.int(5,40)*p.pick([1,2,5]);
+        var uLo = p.int(2,8)*100, uHi = uLo + p.int(4,12)*100;
+        var fc = p.int(2,10)*1000;
+        var cLo = fc + uLo*vpu, cHi = fc + uHi*vpu;
+        var uTarget = uLo + p.int(1,3)*100;
+        if (uTarget >= uHi) uTarget = uLo + p.int(1,2)*100;
+        var total = fc + uTarget*vpu;
+        var w1 = fc, w2 = cLo+cHi, w3 = total + fc;
+        return { q: 'A mixed cost is €'+p.fmt(cLo)+' at '+p.fmt(uLo)+' units and €'+p.fmt(cHi)+' at '+p.fmt(uHi)+' units. Using high-low, what total cost is expected at '+p.fmt(uTarget)+' units?',
+          options: ['€'+p.fmt(total),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Variable rate = €'+vpu+' per unit. Fixed cost = €'+p.fmt(cLo)+'−'+p.fmt(uLo)+'×€'+vpu+' = €'+p.fmt(fc)+'. Total at '+p.fmt(uTarget)+' = €'+p.fmt(fc)+'+'+p.fmt(uTarget)+'×€'+vpu+' = €'+p.fmt(total)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.int(2,20)*p.pick([0.25,0.5,1,2]);
+        var uLo = p.int(1,5)*100, uHi = uLo + p.int(5,15)*100;
+        var fc = p.int(1,6)*1000;
+        var cLo = fc + uLo*vpu, cHi = fc + uHi*vpu;
+        var w1 = +(cLo/uLo).toFixed(2), w2 = fc, w3 = cHi-cLo;
+        return { q: 'Using the high-low method, total cost is €'+p.fmt(cLo)+' at '+p.fmt(uLo)+' units and €'+p.fmt(cHi)+' at '+p.fmt(uHi)+' units. What is the variable cost per unit?',
+          options: ['€'+vpu,'€'+w1,'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Variable cost per unit = (€'+p.fmt(cHi)+'−€'+p.fmt(cLo)+') / ('+p.fmt(uHi)+'−'+p.fmt(uLo)+') = €'+vpu+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.int(5,30)*p.pick([1,2,4,5]);
+        var uLo = p.int(10,25)*100, uHi = uLo + p.int(8,20)*100;
+        var fc = p.int(3,12)*1000;
+        var cLo = fc + uLo*vpu, cHi = fc + uHi*vpu;
+        var uTarget = uLo + p.int(1,4)*100;
+        if (uTarget >= uHi) uTarget = uLo + 200;
+        var total = fc + uTarget*vpu;
+        var w1 = fc, w2 = cLo+cHi, w3 = total + p.int(1,3)*1000;
+        return { q: 'A mixed cost is €'+p.fmt(cLo)+' at '+p.fmt(uLo)+' units and €'+p.fmt(cHi)+' at '+p.fmt(uHi)+' units. Using high-low, what total cost is expected at '+p.fmt(uTarget)+' units?',
+          options: ['€'+p.fmt(total),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Variable rate = €'+vpu+'/unit. Fixed cost = €'+p.fmt(fc)+'. Total at '+p.fmt(uTarget)+' = €'+p.fmt(fc)+'+'+p.fmt(uTarget)+'×€'+vpu+' = €'+p.fmt(total)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.pick([0.50,0.60,0.75,0.80,1.00,1.25]);
+        var uLo = p.int(20,60)*100, uHi = uLo + p.int(40,80)*100;
+        var fc = p.int(2,8)*1000;
+        var cLo = fc + uLo*vpu, cHi = fc + uHi*vpu;
+        var w1 = cHi - cLo, w2 = +(cLo/uLo).toFixed(2), w3 = +(cHi-cLo+1000);
+        return { q: 'Using the high-low method, total cost is €'+p.fmt(cLo)+' at '+p.fmt(uLo)+' units and €'+p.fmt(cHi)+' at '+p.fmt(uHi)+' units. What is the variable cost per unit?',
+          options: ['€'+vpu,'€'+p.fmt(w1),'€'+w2,'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Variable cost per unit = (€'+p.fmt(cHi)+'−€'+p.fmt(cLo)+') / ('+p.fmt(uHi)+'−'+p.fmt(uLo)+') = €'+vpu+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.pick([1.20,1.50,1.80,2.00,2.50]);
+        var uLo = p.int(2,6)*100, uHi = uLo + p.int(4,8)*100;
+        var fc = p.int(5,20)*100;
+        var cLo = fc + uLo*vpu, cHi = fc + uHi*vpu;
+        var uTarget = uLo + p.int(1,3)*100;
+        if (uTarget >= uHi) uTarget = uLo + 100;
+        var total = +(fc + uTarget*vpu).toFixed(0);
+        var w1 = fc, w2 = cHi, w3 = total + 300;
+        return { q: 'A mixed cost is €'+p.fmt(cLo)+' at '+p.fmt(uLo)+' units and €'+p.fmt(cHi)+' at '+p.fmt(uHi)+' units. Using high-low, what total cost is expected at '+p.fmt(uTarget)+' units?',
+          options: ['€'+p.fmt(total),'€'+p.fmt(w2),'€'+p.fmt(w1),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Variable rate = €'+vpu+'/unit. Fixed cost = €'+p.fmt(fc)+'. Total at '+p.fmt(uTarget)+' = €'+p.fmt(fc)+'+'+p.fmt(uTarget)+'×€'+vpu+' = €'+p.fmt(total)+'.' }; } },
       { q: "A maintenance contract costs €6,000 for up to 10,000 machine hours and €9,000 for 10,001–20,000 hours. What type of cost is this?", options: ["Differential revenue", "Step-fixed cost", "Pure variable cost", "Mixed cost"], correct: 1, explanation: "The total cost remains fixed over a band of activity, then jumps to a new level — the definition of a step-fixed cost." },
       { q: "Why can the high-low method produce a misleading cost formula?", options: ["It requires all costs to be direct costs", "It cannot separate fixed and variable elements", "It uses only the highest and lowest activity observations, which may be abnormal", "It includes too many observations and overfits the data"], correct: 2, explanation: "High-low ignores all middle observations and is vulnerable if either extreme point is unrepresentative of normal operations." },
       { q: "In the planning and control cycle, which activity is primarily a control activity?", options: ["Forecasting demand for a new product", "Choosing a pricing strategy", "Comparing actual results with budget and investigating variances", "Setting next year's sales target"], correct: 2, explanation: "Control compares actual performance with plans and responds to deviations; the other options relate to planning." },
-      { q: "Direct labour is €63,000 and represents 60% of conversion cost. What is manufacturing overhead?", options: ["€105,000", "€25,200", "€63,000", "€42,000"], correct: 3, explanation: "Conversion cost = €63,000 / 0.60 = €105,000; manufacturing overhead is the remaining 40% = €105,000 × 0.40 = €42,000." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var dlPct = p.pick([40,50,60,70]);
+        var mfgPct = 100 - dlPct;
+        var dl = p.int(2,9)*10000 + p.int(0,9)*1000;
+        var total = Math.round(dl / (dlPct/100));
+        var mfg = total - dl;
+        var w1 = total, w2 = Math.round(dl * mfgPct/100), w3 = dl;
+        return { q: 'Direct labour is €'+p.fmt(dl)+' and represents '+dlPct+'% of conversion cost. What is manufacturing overhead?',
+          options: ['€'+p.fmt(mfg),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Conversion cost = €'+p.fmt(dl)+' / '+dlPct+'% = €'+p.fmt(total)+'. Overhead = '+mfgPct+'% × €'+p.fmt(total)+' = €'+p.fmt(mfg)+'.' }; } },
       { q: "A scattergraph shows one extreme activity month far above the general cost pattern. What is the best response before using high-low?", options: ["Use the extreme automatically because high-low requires it", "Delete every observation except the two extremes", "Classify the entire cost as fixed", "Investigate whether the point is abnormal and consider a representative alternative"], correct: 3, explanation: "An outlier may distort the estimated slope; its cause should be investigated rather than accepted mechanically." },
       { q: "What is the relevant range?", options: ["The activity range over which cost-behaviour assumptions are reasonable", "The period before a sunk cost is incurred", "The range of selling prices customers will accept", "The range between budgeted profit and actual profit"], correct: 0, explanation: "Cost equations are approximations intended for a specified activity range; outside this range, fixed-cost steps or other changes may invalidate the formula." },
     ],
     "Topic - Cost-Volume-Profit Analysis": [
-      { q: "A product sells for €20 per unit, has variable cost of €8 per unit and fixed costs of €30,000. What is the break-even point in units?", options: ["1,500 units", "2,700 units", "3,750 units", "2,500 units"], correct: 3, explanation: "Unit contribution = €20 − €8 = €12. Break-even units = €30,000 / €12 = 2,500 units." },
-      { q: "For the same product (selling price €20, variable cost €8, fixed costs €30,000), what is break-even sales revenue?", options: ["€50,000", "€2,500", "€1,500", "€75,000"], correct: 0, explanation: "Contribution margin ratio = €12 / €20 = 60%. Break-even revenue = €30,000 / 0.60 = €50,000." },
-      { q: "At sales of 3,000 units, the product sells for €20, variable cost is €8, and fixed cost is €30,000. What is the operating profit?", options: ["€6,000", "€36,000", "€−6,000", "€30,000"], correct: 0, explanation: "Operating profit = total contribution − fixed costs = 3,000 × €12 − €30,000 = €6,000." },
-      { q: "A product sells for €24 per unit, has variable cost of €13 per unit and fixed costs of €22,000. What is the break-even point in units?", options: ["917 units", "1,692 units", "2,000 units", "2,271 units"], correct: 2, explanation: "Unit contribution = €24 − €13 = €11. Break-even units = €22,000 / €11 = 2,000 units." },
-      { q: "For the same product (selling price €24, variable cost €13, fixed costs €22,000), what is break-even sales revenue?", options: ["€916.67", "€40,615.38", "€2,000", "€48,000"], correct: 3, explanation: "Contribution margin ratio = €11 / €24 ≈ 45.83%. Break-even revenue = €22,000 / 0.4583 ≈ €48,000." },
-      { q: "At sales of 2,500 units, the product sells for €24, variable cost is €13, and fixed cost is €22,000. What is the operating profit?", options: ["€38,000", "€5,500", "€27,500", "€−5,500"], correct: 1, explanation: "Operating profit = 2,500 × €11 − €22,000 = €27,500 − €22,000 = €5,500." },
-      { q: "A product sells for €1,300 per unit, has variable cost of €800 per unit and fixed costs of €75,000. What is the break-even point in units?", options: ["168 units", "150 units", "58 units", "94 units"], correct: 1, explanation: "Unit contribution = €1,300 − €800 = €500. Break-even units = €75,000 / €500 = 150 units." },
-      { q: "For the same product (selling price €1,300, variable cost €800, fixed costs €75,000), what is break-even sales revenue?", options: ["€195,000", "€121,875", "€57.69", "€150"], correct: 0, explanation: "Contribution margin ratio = €500 / €1,300 ≈ 38.46%. Break-even revenue = €75,000 / 0.3846 ≈ €195,000." },
-      { q: "At sales of 180 units, the product sells for €1,300, variable cost is €800, and fixed cost is €75,000. What is the operating profit?", options: ["€90,000", "€15,000", "€−15,000", "€159,000"], correct: 1, explanation: "Operating profit = 180 × €500 − €75,000 = €90,000 − €75,000 = €15,000." },
-      { q: "A product sells for €35 per unit, has variable cost of €21 per unit and fixed costs of €56,000. What is the break-even point in units?", options: ["4,000 units", "4,600 units", "1,600 units", "2,667 units"], correct: 0, explanation: "Unit contribution = €35 − €21 = €14. Break-even units = €56,000 / €14 = 4,000 units." },
-      { q: "For the same product (selling price €35, variable cost €21, fixed costs €56,000), what is break-even sales revenue?", options: ["€1,600", "€4,000", "€140,000", "€93,333.33"], correct: 2, explanation: "Contribution margin ratio = €14 / €35 = 40%. Break-even revenue = €56,000 / 0.40 = €140,000." },
-      { q: "A product sells for €50 per unit, has variable cost of €30 per unit and fixed costs of €90,000. What is the break-even point in units?", options: ["5,400 units", "4,500 units", "1,800 units", "3,000 units"], correct: 1, explanation: "Unit contribution = €50 − €30 = €20. Break-even units = €90,000 / €20 = 4,500 units." },
-      { q: "A product sells for €18 per unit, has variable cost of €11 per unit and fixed costs of €28,000. What is the break-even point in units?", options: ["2,545 units", "1,556 units", "4,000 units", "4,611 units"], correct: 2, explanation: "Unit contribution = €18 − €11 = €7. Break-even units = €28,000 / €7 = 4,000 units." },
-      { q: "A product sells for €12 per unit, has variable cost of €7.50 per unit and fixed costs of €22,500. What is the break-even point in units?", options: ["1,875 units", "5,000 units", "6,250 units", "3,000 units"], correct: 1, explanation: "Unit contribution = €12 − €7.50 = €4.50. Break-even units = €22,500 / €4.50 = 5,000 units." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [4,5,6,7,8,10,12,14,15,20];
+        var contrib = p.pick(contribs);
+        var be = p.pick([1000,1500,2000,2500,3000,4000,5000]);
+        var fc = be * contrib;
+        var vc = p.int(4,15)*2; var sp = vc + contrib;
+        var w1 = Math.round(fc/sp), w2 = Math.round(fc/vc), w3 = be + 500;
+        return { q: 'A product sells for €'+sp+' per unit, has variable cost of €'+vc+' per unit and fixed costs of €'+p.fmt(fc)+'. What is the break-even point in units?',
+          options: [p.fmt(be)+' units', p.fmt(w1)+' units', p.fmt(w2)+' units', p.fmt(w3)+' units'], correct: 0,
+          explanation: 'Unit contribution = €'+sp+'−€'+vc+' = €'+contrib+'. Break-even = €'+p.fmt(fc)+'/€'+contrib+' = '+p.fmt(be)+' units.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [4,5,6,7,8,10,12,14,15,20];
+        var contrib = p.pick(contribs);
+        var be = p.pick([1000,1500,2000,2500,3000,4000,5000]);
+        var fc = be * contrib;
+        var vc = p.int(4,15)*2; var sp = vc + contrib;
+        var cmr = contrib/sp;
+        var beRev = Math.round(fc / cmr);
+        var w1 = fc, w2 = Math.round(fc*sp/vc), w3 = beRev + 10000;
+        return { q: 'A product sells for €'+sp+' per unit, variable cost is €'+vc+' and fixed costs are €'+p.fmt(fc)+'. What is break-even sales revenue?',
+          options: ['€'+p.fmt(beRev),'€'+p.fmt(fc),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Contribution margin ratio = €'+contrib+'/€'+sp+' = '+(cmr*100).toFixed(1)+'%. Break-even revenue = €'+p.fmt(fc)+'/'+cmr.toFixed(4)+' = €'+p.fmt(beRev)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [4,5,6,8,10,12];
+        var contrib = p.pick(contribs);
+        var be = p.pick([1500,2000,2500,3000]);
+        var fc = be * contrib;
+        var vc = p.int(4,12)*2; var sp = vc + contrib;
+        var actUnits = be + p.pick([200,300,500,1000]);
+        var op = actUnits * contrib - fc;
+        var w1 = actUnits * contrib, w2 = -(op), w3 = op + fc;
+        return { q: 'At sales of '+p.fmt(actUnits)+' units, selling price is €'+sp+', variable cost is €'+vc+' and fixed cost is €'+p.fmt(fc)+'. What is the operating profit?',
+          options: ['€'+p.fmt(op),'€'+p.fmt(w1),'−€'+p.fmt(Math.abs(w2)),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Operating profit = '+p.fmt(actUnits)+'×€'+contrib+'−€'+p.fmt(fc)+' = €'+p.fmt(actUnits*contrib)+'−€'+p.fmt(fc)+' = €'+p.fmt(op)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [5,6,7,8,9,10,11,12,15];
+        var contrib = p.pick(contribs);
+        var be = p.pick([1000,1500,2000,2500,3000]);
+        var fc = be * contrib;
+        var vc = p.int(8,20)*1; var sp = vc + contrib;
+        var w1 = Math.round(fc/vc), w2 = Math.round(fc/sp), w3 = be + 500;
+        return { q: 'A product sells for €'+sp+' per unit, has variable cost of €'+vc+' per unit and fixed costs of €'+p.fmt(fc)+'. What is the break-even point in units?',
+          options: [p.fmt(be)+' units', p.fmt(w1)+' units', p.fmt(w2)+' units', p.fmt(w3)+' units'], correct: 0,
+          explanation: 'Unit contribution = €'+sp+'−€'+vc+' = €'+contrib+'. Break-even = €'+p.fmt(fc)+'/€'+contrib+' = '+p.fmt(be)+' units.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [5,6,7,8,9,10,11,12,15];
+        var contrib = p.pick(contribs);
+        var be = p.pick([1000,1500,2000,2500,3000]);
+        var fc = be * contrib;
+        var vc = p.int(8,20)*1; var sp = vc + contrib;
+        var cmr = contrib/sp;
+        var beRev = Math.round(fc / cmr);
+        var w1 = be*sp, w2 = fc, w3 = Math.round(fc*1.2);
+        return { q: 'A product sells for €'+sp+' per unit, variable cost is €'+vc+' and fixed costs are €'+p.fmt(fc)+'. What is break-even sales revenue?',
+          options: ['€'+p.fmt(beRev),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Contribution margin ratio = €'+contrib+'/€'+sp+' = '+(cmr*100).toFixed(1)+'%. Break-even revenue = €'+p.fmt(fc)+'÷'+(cmr).toFixed(4)+' = €'+p.fmt(beRev)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [5,6,7,8,9,10,11,12];
+        var contrib = p.pick(contribs);
+        var be = p.pick([1500,2000,2500,3000]);
+        var fc = be * contrib;
+        var vc = p.int(8,18)*1; var sp = vc + contrib;
+        var actUnits = be + p.pick([200,300,500]);
+        var op = actUnits * contrib - fc;
+        var w1 = actUnits * sp - fc, w2 = actUnits * contrib, w3 = -op;
+        return { q: 'At sales of '+p.fmt(actUnits)+' units, selling price is €'+sp+', variable cost is €'+vc+' and fixed cost is €'+p.fmt(fc)+'. What is the operating profit?',
+          options: ['€'+p.fmt(op),'€'+p.fmt(w1),'€'+p.fmt(w2),'−€'+p.fmt(Math.abs(op))], correct: 0,
+          explanation: 'Operating profit = '+p.fmt(actUnits)+'×€'+contrib+'−€'+p.fmt(fc)+' = €'+p.fmt(op)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [200,250,300,400,500,600];
+        var contrib = p.pick(contribs);
+        var be = p.pick([100,120,150,200]);
+        var fc = be * contrib;
+        var vc = p.pick([500,600,700,800,1000]); var sp = vc + contrib;
+        var w1 = Math.round(fc/sp), w2 = be+30, w3 = Math.round(fc/vc);
+        return { q: 'A product sells for €'+p.fmt(sp)+' per unit, has variable cost of €'+p.fmt(vc)+' per unit and fixed costs of €'+p.fmt(fc)+'. What is the break-even point in units?',
+          options: [p.fmt(be)+' units', p.fmt(w1)+' units', p.fmt(w2)+' units', p.fmt(w3)+' units'], correct: 0,
+          explanation: 'Unit contribution = €'+p.fmt(sp)+'−€'+p.fmt(vc)+' = €'+p.fmt(contrib)+'. Break-even = €'+p.fmt(fc)+'/€'+p.fmt(contrib)+' = '+p.fmt(be)+' units.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [200,250,300,400,500,600];
+        var contrib = p.pick(contribs);
+        var be = p.pick([100,120,150,200]);
+        var fc = be * contrib;
+        var vc = p.pick([500,600,700,800,1000]); var sp = vc + contrib;
+        var cmr = contrib/sp;
+        var beRev = Math.round(fc / cmr);
+        var w1 = be*sp, w2 = Math.round(fc*sp/vc), w3 = beRev - 10000;
+        return { q: 'A product sells for €'+p.fmt(sp)+' per unit, variable cost is €'+p.fmt(vc)+' and fixed costs are €'+p.fmt(fc)+'. What is break-even sales revenue?',
+          options: ['€'+p.fmt(beRev),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Contribution margin ratio = €'+p.fmt(contrib)+'/€'+p.fmt(sp)+' = '+(cmr*100).toFixed(1)+'%. Break-even revenue = €'+p.fmt(fc)+'÷'+(cmr).toFixed(4)+' = €'+p.fmt(beRev)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [200,300,400,500];
+        var contrib = p.pick(contribs);
+        var be = p.pick([100,120,150,200]);
+        var fc = be * contrib;
+        var vc = p.pick([500,600,700,800]); var sp = vc + contrib;
+        var actUnits = be + p.pick([20,30,40,50]);
+        var op = actUnits * contrib - fc;
+        var w1 = actUnits * sp - fc, w2 = -op, w3 = fc + op;
+        return { q: 'At sales of '+p.fmt(actUnits)+' units, selling price is €'+p.fmt(sp)+', variable cost is €'+p.fmt(vc)+' and fixed cost is €'+p.fmt(fc)+'. What is the operating profit?',
+          options: ['€'+p.fmt(op),'€'+p.fmt(w1),'−€'+p.fmt(Math.abs(op)),'€'+p.fmt(w2)], correct: 0,
+          explanation: 'Operating profit = '+p.fmt(actUnits)+'×€'+p.fmt(contrib)+'−€'+p.fmt(fc)+' = €'+p.fmt(op)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [10,12,14,15,16,20];
+        var contrib = p.pick(contribs);
+        var be = p.pick([2000,3000,4000,5000]);
+        var fc = be * contrib;
+        var vc = p.int(15,30)*1; var sp = vc + contrib;
+        var w1 = be+500, w2 = Math.round(fc/sp), w3 = Math.round(fc/vc);
+        return { q: 'A product sells for €'+sp+' per unit, has variable cost of €'+vc+' per unit and fixed costs of €'+p.fmt(fc)+'. What is the break-even point in units?',
+          options: [p.fmt(be)+' units', p.fmt(w1)+' units', p.fmt(w2)+' units', p.fmt(w3)+' units'], correct: 0,
+          explanation: 'Unit contribution = €'+sp+'−€'+vc+' = €'+contrib+'. Break-even = €'+p.fmt(fc)+'/€'+contrib+' = '+p.fmt(be)+' units.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [10,12,14,15,16,20];
+        var contrib = p.pick(contribs);
+        var be = p.pick([2000,3000,4000,5000]);
+        var fc = be * contrib;
+        var vc = p.int(15,30)*1; var sp = vc + contrib;
+        var cmr = contrib/sp;
+        var beRev = Math.round(fc / cmr);
+        var w1 = be*sp, w2 = fc, w3 = Math.round(beRev*0.7);
+        return { q: 'A product sells for €'+sp+' per unit, variable cost is €'+vc+' and fixed costs are €'+p.fmt(fc)+'. What is break-even sales revenue?',
+          options: ['€'+p.fmt(beRev),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Contribution margin ratio = €'+contrib+'/€'+sp+' = '+(cmr*100).toFixed(1)+'%. Break-even revenue = €'+p.fmt(beRev)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [10,12,15,16,20,25];
+        var contrib = p.pick(contribs);
+        var be = p.pick([2500,3000,4000,4500,5000]);
+        var fc = be * contrib;
+        var vc = p.int(15,40)*1; var sp = vc + contrib;
+        var w1 = be+1000, w2 = Math.round(fc/sp), w3 = be-500;
+        return { q: 'A product sells for €'+sp+' per unit, has variable cost of €'+vc+' per unit and fixed costs of €'+p.fmt(fc)+'. What is the break-even point in units?',
+          options: [p.fmt(be)+' units', p.fmt(w1)+' units', p.fmt(w2)+' units', p.fmt(w3)+' units'], correct: 0,
+          explanation: 'Unit contribution = €'+sp+'−€'+vc+' = €'+contrib+'. Break-even = €'+p.fmt(fc)+'/€'+contrib+' = '+p.fmt(be)+' units.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [4,5,6,7,8];
+        var contrib = p.pick(contribs);
+        var be = p.pick([2000,3000,4000,5000,6000]);
+        var fc = be * contrib;
+        var vc = p.int(8,20)*1; var sp = vc + contrib;
+        var w1 = be+1000, w2 = Math.round(fc/sp), w3 = Math.round(fc/vc);
+        return { q: 'A product sells for €'+sp+' per unit, has variable cost of €'+vc+' per unit and fixed costs of €'+p.fmt(fc)+'. What is the break-even point in units?',
+          options: [p.fmt(be)+' units', p.fmt(w1)+' units', p.fmt(w2)+' units', p.fmt(w3)+' units'], correct: 0,
+          explanation: 'Unit contribution = €'+sp+'−€'+vc+' = €'+contrib+'. Break-even = €'+p.fmt(fc)+'/€'+contrib+' = '+p.fmt(be)+' units.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var contribs = [3,4,4.5,5,6];
+        var contrib = p.pick(contribs);
+        var be = p.pick([3000,4000,5000,6000]);
+        var fc = be * contrib;
+        var vc = p.pick([6,7,7.5,8,9,10]); var sp = vc + contrib;
+        var w1 = be+1000, w2 = Math.round(fc/sp), w3 = Math.round(fc/(contrib+1));
+        return { q: 'A product sells for €'+sp+' per unit, has variable cost of €'+vc+' per unit and fixed costs of €'+p.fmt(fc)+'. What is the break-even point in units?',
+          options: [p.fmt(be)+' units', p.fmt(w1)+' units', p.fmt(w2)+' units', p.fmt(w3)+' units'], correct: 0,
+          explanation: 'Unit contribution = €'+sp+'−€'+vc+' = €'+contrib+'. Break-even = €'+p.fmt(fc)+'/€'+contrib+' = '+p.fmt(be)+' units.' }; } },
       { q: "The margin of safety measures:", options: ["The excess of actual or budgeted sales over break-even sales", "The percentage of fixed cost included in stock", "The increase in profit caused by a 1% price rise", "The contribution earned per unit sold"], correct: 0, explanation: "Margin of safety shows how far sales can fall before the business reaches break-even." },
       { q: "Degree of operating leverage at a given sales level is calculated as:", options: ["Contribution / operating profit", "Operating profit / contribution", "Sales revenue / variable costs", "Fixed costs / sales revenue"], correct: 0, explanation: "DOL = contribution margin divided by operating profit, measuring how sensitive profit is to a given change in sales volume." },
       { q: "A business has a degree of operating leverage of 5. Sales volume is expected to rise by 12%, with selling price and costs unchanged. What percentage change in operating profit is predicted?", options: ["12% increase", "17% increase", "60% increase", "5% increase"], correct: 2, explanation: "Predicted profit change = DOL × sales-volume change = 5 × 12% = 60%." },
@@ -2277,21 +2845,106 @@
     ],
     "Topic - Variable and Absorption Costing": [
       { q: "Which cost is included in product cost under absorption costing but treated as a period cost under variable costing?", options: ["Direct labour", "Variable manufacturing overhead", "Fixed manufacturing overhead", "Direct materials"], correct: 2, explanation: "Fixed manufacturing overhead is inventoried under absorption costing but expensed in the period under variable costing." },
-      { q: "Variable manufacturing cost is €7 per unit and fixed manufacturing overhead is €30,000 for 6,000 units produced. What is absorption-costing unit product cost?", options: ["€7", "€5", "€37", "€12"], correct: 3, explanation: "Fixed overhead rate = €30,000 / 6,000 = €5 per unit. Absorption unit cost = €7 + €5 = €12." },
-      { q: "A firm produces 6,000 units and sells 5,000. Fixed manufacturing overhead is €5 per unit produced. By how much will absorption profit exceed variable-costing profit, assuming no opening stock?", options: ["€0", "€25,000", "€5,000", "€30,000"], correct: 2, explanation: "1,000 unsold units enter closing stock, deferring 1,000 × €5 = €5,000 of fixed overhead — so absorption profit is higher by €5,000." },
-      { q: "Opening stock is 800 units carrying €4 fixed manufacturing overhead each. Closing stock is 500 units carrying the same rate. How does absorption profit compare with variable-costing profit?", options: ["Absorption profit is €3,200 lower", "Absorption profit is €1,200 lower", "Absorption profit is €1,200 higher", "The profits are equal"], correct: 1, explanation: "Stock falls by 300 units, releasing 300 × €4 = €1,200 of prior fixed overhead into cost of sales, reducing absorption profit by €1,200." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.int(5,20)*1; var prod = p.pick([4000,5000,6000,8000,10000]);
+        var foh = p.int(2,6)*prod; var rate = foh/prod; var abs = vpu + rate;
+        var w1 = vpu, w2 = rate, w3 = abs + rate;
+        return { q: 'Variable manufacturing cost is €'+vpu+' per unit and fixed manufacturing overhead is €'+p.fmt(foh)+' for '+p.fmt(prod)+' units produced. What is absorption-costing unit product cost?',
+          options: ['€'+abs,'€'+vpu,'€'+rate,'€'+w3], correct: 0,
+          explanation: 'Fixed overhead rate = €'+p.fmt(foh)+'/'+p.fmt(prod)+' = €'+rate+'/unit. Absorption cost = €'+vpu+'+€'+rate+' = €'+abs+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([3,4,5,6,8,10]);
+        var prod = p.pick([4000,5000,6000,8000]);
+        var sold = prod - p.pick([500,800,1000,1200,1500]);
+        var unsold = prod - sold;
+        var diff = unsold * rate;
+        var w1 = 0, w2 = prod*rate, w3 = sold*rate;
+        return { q: 'A firm produces '+p.fmt(prod)+' units and sells '+p.fmt(sold)+'. Fixed manufacturing overhead is €'+rate+' per unit produced. By how much does absorption profit exceed variable-costing profit (no opening stock)?',
+          options: ['€'+p.fmt(diff),'€0','€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: p.fmt(unsold)+' unsold units defer '+p.fmt(unsold)+'×€'+rate+' = €'+p.fmt(diff)+' of fixed overhead — absorption profit is higher by €'+p.fmt(diff)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([3,4,5,6,8]);
+        var opStock = p.int(5,12)*100;
+        var clStock = opStock - p.pick([100,200,300,400]);
+        if (clStock <= 0) clStock = 100;
+        var stockFall = opStock - clStock;
+        var diff = stockFall * rate;
+        var w1 = opStock*rate, w2 = clStock*rate, w3 = (opStock+clStock)*rate;
+        return { q: 'Opening stock is '+p.fmt(opStock)+' units, closing stock is '+p.fmt(clStock)+' units, each carrying €'+rate+' fixed overhead. How does absorption profit compare with variable-costing profit?',
+          options: ['Absorption profit is €'+p.fmt(diff)+' lower','Absorption profit is €'+p.fmt(diff)+' higher','Absorption profit is €'+p.fmt(w1)+' lower','Profits are equal'], correct: 0,
+          explanation: 'Stock falls by '+p.fmt(stockFall)+' units, releasing '+p.fmt(stockFall)+'×€'+rate+' = €'+p.fmt(diff)+' of prior overhead, reducing absorption profit by €'+p.fmt(diff)+'.' }; } },
       { q: "When will variable-costing and absorption-costing profit be identical, assuming the fixed overhead rate is unchanged?", options: ["When selling price equals variable cost", "When production equals sales", "When fixed marketing cost is zero", "When contribution equals revenue"], correct: 1, explanation: "With no change in inventory units, no fixed manufacturing overhead is deferred or released, so both methods give the same profit." },
       { q: "Sales remain constant, but production is increased solely to build inventory. Which profit measure is most vulnerable to increasing?", options: ["Both profits by the same amount", "Absorption-costing profit", "Variable-costing profit", "Neither profit under any circumstances"], correct: 1, explanation: "Absorption costing allocates fixed manufacturing overhead across more units and defers some in closing inventory, artificially raising reported profit." },
       { q: "Which format is most directly useful for CVP analysis?", options: ["Cash-flow statement only", "Statement of financial position", "Contribution format under variable costing", "Gross-profit format under absorption costing"], correct: 2, explanation: "Variable costing groups costs by behaviour and reports contribution margin directly, making CVP relationships transparent." },
       { q: "Why is absorption costing often preferred for external inventory valuation?", options: ["It excludes manufacturing overhead from inventory", "It treats selling costs as product costs", "It includes both variable and fixed manufacturing costs in product cost", "It guarantees profit equals cash flow"], correct: 2, explanation: "Absorption costing assigns all manufacturing costs to products, consistent with external financial reporting requirements." },
-      { q: "Variable manufacturing cost is €22 per unit. Fixed manufacturing overhead is €14,280 and production is 2,800 units. What is the absorption-costing unit product cost?", options: ["€14,302", "€22", "€5.10", "€27.10"], correct: 3, explanation: "Fixed overhead rate = €14,280 / 2,800 = €5.10 per unit. Absorption unit cost = €22 + €5.10 = €27.10." },
-      { q: "A company produces 6,800 units and sells 5,240. Fixed manufacturing overhead is €59,160. There is no opening stock. By how much does absorption profit exceed variable-costing profit?", options: ["€13,572", "€59,160", "€45,588", "€0"], correct: 0, explanation: "Closing stock = 6,800 − 5,240 = 1,560 units. Overhead rate = €59,160 / 6,800 = €8.70. Deferred overhead = 1,560 × €8.70 = €13,572." },
-      { q: "Variable manufacturing cost is €60.50 per unit. Fixed manufacturing overhead is €72,000 and production is 6,000 units. What is the absorption-costing unit product cost?", options: ["€12", "€60.50", "€72,060.50", "€72.50"], correct: 3, explanation: "Fixed overhead rate = €72,000 / 6,000 = €12 per unit. Absorption unit cost = €60.50 + €12 = €72.50." },
-      { q: "A company produces 16,000 units and sells 16,000. Fixed manufacturing overhead is €47,200. There is no opening stock. By how much does absorption profit exceed variable-costing profit?", options: ["€47,200", "€0", "€0", "€47,200"], correct: 1, explanation: "Production equals sales, so closing stock is zero. No fixed overhead is deferred in inventory, so both methods give the same profit (difference = €0)." },
-      { q: "Variable manufacturing cost is €12.50 per unit. Fixed manufacturing overhead is €46,800 and production is 18,000 units. What is the absorption-costing unit product cost?", options: ["€12.50", "€46,812.50", "€2.60", "€15.10"], correct: 3, explanation: "Fixed overhead rate = €46,800 / 18,000 = €2.60 per unit. Absorption unit cost = €12.50 + €2.60 = €15.10." },
-      { q: "A company produces 70,000 units and sells 64,500. Fixed manufacturing overhead is €238,000. There is no opening stock. By how much does absorption profit exceed variable-costing profit?", options: ["€219,300", "€18,700", "€0", "€238,000"], correct: 1, explanation: "Closing stock = 70,000 − 64,500 = 5,500 units. Overhead rate = €238,000 / 70,000 = €3.40. Deferred overhead = 5,500 × €3.40 = €18,700." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.pick([18,20,22,25,30])*1.0; var prod = p.pick([2000,2500,2800,3000,4000]);
+        var foh = prod * p.pick([4,5,6,8,10]); var rate = foh/prod; var abs = +(vpu + rate).toFixed(2);
+        var w1 = foh, w2 = vpu, w3 = +(abs+rate).toFixed(2);
+        return { q: 'Variable manufacturing cost is €'+vpu+' per unit. Fixed manufacturing overhead is €'+p.fmt(foh)+' and production is '+p.fmt(prod)+' units. What is the absorption-costing unit product cost?',
+          options: ['€'+abs,'€'+p.fmt(foh),'€'+vpu,'€'+w3], correct: 0,
+          explanation: 'Fixed overhead rate = €'+p.fmt(foh)+'/'+p.fmt(prod)+' = €'+rate+'/unit. Absorption cost = €'+vpu+'+€'+rate+' = €'+abs+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([5,6,7,8,9,10]);
+        var prod = p.pick([5000,6000,6800,8000]);
+        var unsold = p.pick([1000,1200,1500,1560]);
+        var sold = prod - unsold;
+        var foh = prod * rate;
+        var diff = unsold * rate;
+        var w1 = foh, w2 = sold*rate, w3 = 0;
+        return { q: 'A company produces '+p.fmt(prod)+' units and sells '+p.fmt(sold)+'. Fixed manufacturing overhead is €'+p.fmt(foh)+'. No opening stock. By how much does absorption profit exceed variable-costing profit?',
+          options: ['€'+p.fmt(diff),'€'+p.fmt(foh),'€'+p.fmt(w2),'€0'], correct: 0,
+          explanation: 'Closing stock = '+p.fmt(unsold)+' units. Overhead rate = €'+p.fmt(foh)+'/'+p.fmt(prod)+' = €'+rate+'. Deferred = '+p.fmt(unsold)+'×€'+rate+' = €'+p.fmt(diff)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.pick([15,18,20,25,30,40,60])*1.0; var prod = p.pick([4000,5000,6000,8000]);
+        var foh = prod * p.pick([6,8,10,12,15]); var rate = foh/prod; var abs = +(vpu + rate).toFixed(2);
+        var w1 = vpu, w2 = rate, w3 = +(abs + 5).toFixed(2);
+        return { q: 'Variable manufacturing cost is €'+vpu+' per unit. Fixed manufacturing overhead is €'+p.fmt(foh)+' and production is '+p.fmt(prod)+' units. What is the absorption-costing unit product cost?',
+          options: ['€'+abs,'€'+vpu,'€'+rate,'€'+w3], correct: 0,
+          explanation: 'Fixed overhead rate = €'+p.fmt(foh)+'/'+p.fmt(prod)+' = €'+rate+'/unit. Absorption cost = €'+vpu+'+€'+rate+' = €'+abs+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var prod = p.pick([10000,12000,15000,16000,20000]);
+        var foh = p.int(2,8)*prod;
+        return { q: 'A company produces '+p.fmt(prod)+' units and sells '+p.fmt(prod)+'. Fixed manufacturing overhead is €'+p.fmt(foh)+'. No opening stock. By how much does absorption profit exceed variable-costing profit?',
+          options: ['€0','€'+p.fmt(foh),'€'+p.fmt(Math.round(foh*0.5)),'€'+p.fmt(Math.round(foh*0.8))], correct: 0,
+          explanation: 'Production equals sales so closing stock is zero — no fixed overhead is deferred. Both methods give identical profit (difference = €0).' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var vpu = p.pick([10,12,12.5,15,18,20]); var prod = p.pick([10000,12000,15000,18000,20000]);
+        var foh = prod * p.pick([2,2.5,3,4,5]); var rate = foh/prod; var abs = +(vpu + rate).toFixed(2);
+        var w1 = vpu, w2 = rate, w3 = +(abs*1.2).toFixed(2);
+        return { q: 'Variable manufacturing cost is €'+vpu+' per unit. Fixed manufacturing overhead is €'+p.fmt(foh)+' and production is '+p.fmt(prod)+' units. What is the absorption-costing unit product cost?',
+          options: ['€'+abs,'€'+vpu,'€'+rate,'€'+w3], correct: 0,
+          explanation: 'Fixed overhead rate = €'+p.fmt(foh)+'/'+p.fmt(prod)+' = €'+rate+'/unit. Absorption cost = €'+vpu+'+€'+rate+' = €'+abs+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([2,3,3.4,4,5]);
+        var prod = p.pick([50000,60000,70000,80000]);
+        var unsold = p.pick([3000,4000,5000,5500,6000]);
+        var sold = prod - unsold;
+        var foh = prod * rate;
+        var diff = unsold * rate;
+        var w1 = sold*rate, w2 = foh, w3 = 0;
+        return { q: 'A company produces '+p.fmt(prod)+' units and sells '+p.fmt(sold)+'. Fixed manufacturing overhead is €'+p.fmt(foh)+'. No opening stock. By how much does absorption profit exceed variable-costing profit?',
+          options: ['€'+p.fmt(diff),'€'+p.fmt(w1),'€0','€'+p.fmt(w2)], correct: 0,
+          explanation: 'Closing stock = '+p.fmt(unsold)+' units. Overhead rate = €'+rate+'. Deferred = '+p.fmt(unsold)+'×€'+rate+' = €'+p.fmt(diff)+'.' }; } },
       { q: "Under variable costing, fixed manufacturing overhead is best described as:", options: ["A period cost expensed in full", "A product cost deferred until sale", "A direct cost of each unit", "A variable selling expense"], correct: 0, explanation: "Variable costing treats fixed manufacturing overhead as a cost of maintaining capacity for the period, expensed in full regardless of production." },
-      { q: "Closing inventory is 1,560 units. The fixed manufacturing overhead rate is €8.70 per unit. What fixed overhead is deferred in closing stock under absorption costing?", options: ["€37,908", "€13,572", "€24,336", "€59,160"], correct: 1, explanation: "Deferred fixed overhead = 1,560 × €8.70 = €13,572." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var clStock = p.pick([800,1000,1200,1500,1560,2000]);
+        var rate = p.pick([3,4,5,6,7,8,8.7,10]);
+        var deferred = +(clStock * rate).toFixed(0);
+        var w1 = deferred*2, w2 = Math.round(deferred*0.6), w3 = deferred + clStock;
+        return { q: 'Closing inventory is '+p.fmt(clStock)+' units. The fixed manufacturing overhead rate is €'+rate+' per unit. What fixed overhead is deferred in closing stock under absorption costing?',
+          options: ['€'+p.fmt(deferred),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Deferred fixed overhead = '+p.fmt(clStock)+' × €'+rate+' = €'+p.fmt(deferred)+'.' }; } },
       { q: "Which statement best explains the difference between variable-costing and absorption-costing profit?", options: ["One method records sales on a cash basis", "The methods use different selling prices", "It is mainly a timing difference in recognition of fixed manufacturing overhead", "One method ignores direct materials"], correct: 2, explanation: "The methods differ only in whether fixed manufacturing overhead is expensed immediately (variable costing) or carried in inventory until units are sold (absorption costing)." },
       { q: "One advantage of variable costing is that:", options: ["It removes the need to estimate variable costs", "Incremental analysis is often more straightforward", "It capitalises fixed selling costs in inventory", "It is required for all external inventory reports"], correct: 1, explanation: "Variable costing highlights variable out-of-pocket costs and contribution margin directly, making short-run incremental decisions more transparent." },
       { q: "One advantage of absorption costing is that:", options: ["It reports contribution margin directly", "It recognises fixed manufacturing overhead as part of product cost", "It makes profit independent of production volume", "It excludes fixed costs from pricing information"], correct: 1, explanation: "Absorption costing reflects that fixed manufacturing facilities are necessary for production, and so their costs should attach to the product." },
@@ -2299,41 +2952,159 @@
     "Topic - Activity-Based Costing": [
       { q: "In ABC, a cost pool is:", options: ["The number of units produced", "A stock valuation reserve", "A grouping of costs associated with a particular activity", "The selling price of a product"], correct: 2, explanation: "A cost pool accumulates overhead costs linked to one activity before allocation to cost objects using a driver." },
       { q: "An activity rate is normally calculated as:", options: ["Sales revenue / machine hours", "Estimated activity cost pool / estimated total cost-driver activity", "Total direct cost / units sold", "Fixed overhead / contribution margin"], correct: 1, explanation: "ABC divides each activity cost pool by the total quantity of its chosen cost driver to obtain a rate per driver unit." },
-      { q: "A purchasing cost pool is €45,900 and is driven by 50 purchase orders. What is the activity rate?", options: ["€2,295 per order", "€918 per order", "€91.80 per order", "€45,900 per order"], correct: 1, explanation: "Activity rate = €45,900 / 50 orders = €918 per purchase order." },
-      { q: "A product uses 10 purchase orders. The purchasing activity rate is €918 per order. How much purchasing overhead is assigned?", options: ["€91.80", "€918", "€10,918", "€9,180"], correct: 3, explanation: "Assigned cost = driver usage × rate = 10 × €918 = €9,180." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var orders = p.pick([20,25,30,40,50,60]);
+        var rate = p.pick([500,600,750,800,900,918,1000,1200]);
+        var pool = orders * rate;
+        var w1 = Math.round(pool/orders*2), w2 = +(pool/100).toFixed(2), w3 = pool;
+        return { q: 'A purchasing cost pool is €'+p.fmt(pool)+' and is driven by '+orders+' purchase orders. What is the activity rate?',
+          options: ['€'+p.fmt(rate)+' per order','€'+p.fmt(w1)+' per order','€'+w2+' per order','€'+p.fmt(w3)+' per order'], correct: 0,
+          explanation: 'Activity rate = €'+p.fmt(pool)+' / '+orders+' orders = €'+p.fmt(rate)+' per purchase order.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([500,600,750,800,900,918,1000]);
+        var usage = p.pick([3,4,5,6,8,10,12]);
+        var assigned = rate * usage;
+        var w1 = rate, w2 = assigned*2, w3 = +(assigned/10).toFixed(0);
+        return { q: 'A product uses '+usage+' purchase orders. The purchasing activity rate is €'+p.fmt(rate)+' per order. How much purchasing overhead is assigned?',
+          options: ['€'+p.fmt(assigned),'€'+p.fmt(rate),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Assigned cost = '+usage+'×€'+p.fmt(rate)+' = €'+p.fmt(assigned)+'.' }; } },
       { q: "Which is most likely a batch-level activity?", options: ["Machine setup for a production run", "Maintaining the corporate head office", "Designing a new product model", "Drilling one hole in each unit"], correct: 0, explanation: "A machine setup is performed once per batch regardless of the number of units in that batch — a classic batch-level activity." },
       { q: "Which is most likely a product-level activity?", options: ["Product design changes", "Inspection of every unit", "Processing each customer order", "Power used per machine hour"], correct: 0, explanation: "Product design supports an entire product line regardless of how many units or batches are produced — a product-sustaining activity." },
       { q: "A low-volume complex product requires many setups and purchase orders. A traditional system allocates overhead only by machine hours. What distortion is most likely?", options: ["The complex product is over-costed", "The complex product is under-costed", "Direct materials are omitted", "Both products receive exact costs"], correct: 1, explanation: "A machine-hour average fails to capture the extra batch and ordering activities the complex product consumes, so it is under-costed by the traditional system." },
       { q: "What does 'product cost cross-subsidisation' mean?", options: ["All products have identical unit costs", "Direct labour is moved into selling expense", "Over-costing one product offsets under-costing another", "Customers directly pay each other's invoices"], correct: 2, explanation: "When broad overhead averages misallocate costs, some products absorb too much while others absorb too little — the over-costing subsidises the under-costing." },
       { q: "Peanut-butter costing refers to:", options: ["Excluding overhead from product cost", "Spreading overhead broadly and uniformly across products", "Tracing every overhead cost to a unique transaction", "Using contribution margin for stock valuation"], correct: 1, explanation: "The term describes spreading indirect costs broadly and uniformly regardless of actual consumption differences across products." },
       { q: "Which environment gives the strongest case for ABC?", options: ["High overhead, diverse products and varied activity consumption", "A business using only direct materials", "No indirect costs and identical processing", "One homogeneous product with negligible overhead"], correct: 0, explanation: "ABC adds most value when overhead is large, products are diverse, and different products consume overhead activities in very different proportions." },
-      { q: "The maintenance cost pool is €35,100 and total driver activity is 4,875. A product uses 400 driver units. How much maintenance overhead is assigned to the product?", options: ["€2,880", "€87.75", "€7.20", "€32,220"], correct: 0, explanation: "Activity rate = €35,100 / 4,875 = €7.20 per driver unit. Assigned cost = 400 × €7.20 = €2,880." },
-      { q: "The materials handling cost pool is €30,600 and total driver activity is 20. A product uses 10 driver units. How much materials handling overhead is assigned to the product?", options: ["€15,300", "€15,300", "€1,530", "€3,060"], correct: 0, explanation: "Activity rate = €30,600 / 20 = €1,530 per driver unit. Assigned cost = 10 × €1,530 = €15,300." },
-      { q: "The quality cost pool is €36,720 and total driver activity is 1,200. A product uses 200 driver units. How much quality overhead is assigned to the product?", options: ["€6,120", "€30,600", "€30.60", "€183.60"], correct: 0, explanation: "Activity rate = €36,720 / 1,200 = €30.60 per driver unit. Assigned cost = 200 × €30.60 = €6,120." },
-      { q: "The purchasing cost pool is €18,360 and total driver activity is 20. A product uses 6 driver units. How much purchasing overhead is assigned to the product?", options: ["€12,852", "€918", "€3,060", "€5,508"], correct: 3, explanation: "Activity rate = €18,360 / 20 = €918 per driver unit. Assigned cost = 6 × €918 = €5,508." },
-      { q: "The scheduling cost pool is €29,250 and total driver activity is 30. A product uses 3 driver units. How much scheduling overhead is assigned to the product?", options: ["€26,325", "€9,750", "€2,925", "€975"], correct: 2, explanation: "Activity rate = €29,250 / 30 = €975 per driver unit. Assigned cost = 3 × €975 = €2,925." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([5,6,7,8,9,10,12,15]);
+        var total = p.pick([2000,3000,4000,4875,5000,6000]);
+        var pool = total * rate;
+        var usage = p.pick([200,300,400,500,600]);
+        var assigned = usage * rate;
+        var w1 = pool/usage, w2 = rate, w3 = pool - assigned;
+        return { q: 'A cost pool is €'+p.fmt(pool)+' and total driver activity is '+p.fmt(total)+'. A product uses '+p.fmt(usage)+' driver units. How much overhead is assigned to the product?',
+          options: ['€'+p.fmt(assigned),'€'+p.fmt(w1),'€'+rate,'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Activity rate = €'+p.fmt(pool)+'/'+p.fmt(total)+' = €'+rate+'. Assigned = '+p.fmt(usage)+'×€'+rate+' = €'+p.fmt(assigned)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([500,600,750,1000,1200,1530]);
+        var total = p.pick([10,15,20,25,30]);
+        var pool = total * rate;
+        var usage = p.pick([3,4,5,6,8,10]);
+        if (usage > total) usage = Math.floor(total/2);
+        var assigned = usage * rate;
+        var w1 = pool-assigned, w2 = pool/usage*2, w3 = rate;
+        return { q: 'A cost pool is €'+p.fmt(pool)+' and total driver activity is '+total+'. A product uses '+usage+' driver units. How much overhead is assigned?',
+          options: ['€'+p.fmt(assigned),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Activity rate = €'+p.fmt(pool)+'/'+total+' = €'+p.fmt(rate)+'. Assigned = '+usage+'×€'+p.fmt(rate)+' = €'+p.fmt(assigned)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([20,25,30,30.6,40,50]);
+        var total = p.pick([800,1000,1200,1500,2000]);
+        var pool = total * rate;
+        var usage = p.pick([100,150,200,250]);
+        var assigned = usage * rate;
+        var w1 = pool - assigned, w2 = rate, w3 = pool;
+        return { q: 'A quality cost pool is €'+p.fmt(pool)+' and total driver activity is '+p.fmt(total)+'. A product uses '+p.fmt(usage)+' driver units. How much quality overhead is assigned?',
+          options: ['€'+p.fmt(assigned),'€'+p.fmt(w1),'€'+rate,'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Activity rate = €'+p.fmt(pool)+'/'+p.fmt(total)+' = €'+rate+'. Assigned = '+p.fmt(usage)+'×€'+rate+' = €'+p.fmt(assigned)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([600,750,800,900,918,1000]);
+        var total = p.pick([15,20,25,30]);
+        var pool = total * rate;
+        var usage = p.pick([3,4,5,6,7,8]);
+        if (usage > total) usage = 3;
+        var assigned = usage * rate;
+        var w1 = pool - assigned, w2 = rate, w3 = assigned * 2;
+        return { q: 'A purchasing cost pool is €'+p.fmt(pool)+' and total driver activity is '+total+'. A product uses '+usage+' driver units. How much purchasing overhead is assigned?',
+          options: ['€'+p.fmt(assigned),'€'+p.fmt(w1),'€'+p.fmt(rate),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Activity rate = €'+p.fmt(pool)+'/'+total+' = €'+p.fmt(rate)+'. Assigned = '+usage+'×€'+p.fmt(rate)+' = €'+p.fmt(assigned)+'.' }; } },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var rate = p.pick([800,900,950,975,1000,1200]);
+        var total = p.pick([20,25,30,40,50]);
+        var pool = total * rate;
+        var usage = p.pick([2,3,4,5,6]);
+        if (usage > total) usage = 2;
+        var assigned = usage * rate;
+        var w1 = pool - assigned, w2 = pool/2, w3 = rate;
+        return { q: 'A scheduling cost pool is €'+p.fmt(pool)+' and total driver activity is '+total+'. A product uses '+usage+' driver units. How much scheduling overhead is assigned?',
+          options: ['€'+p.fmt(assigned),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(rate)], correct: 0,
+          explanation: 'Activity rate = €'+p.fmt(pool)+'/'+total+' = €'+p.fmt(rate)+'. Assigned = '+usage+'×€'+p.fmt(rate)+' = €'+p.fmt(assigned)+'.' }; } },
       { q: "A high-volume simple product is over-costed under a traditional machine-hour system. What pricing risk follows?", options: ["Its price must be below variable cost", "Its price may be set too high, reducing competitiveness", "Its direct material usage will be understated", "Its contribution margin automatically becomes zero"], correct: 1, explanation: "Overstated unit cost can lead managers to set an unnecessarily high price, making the product uncompetitive or causing it to be incorrectly discontinued." },
-      { q: "Traditional overhead is €258,990 and total machine hours are 27,500. What is the machine-hour absorption rate?", options: ["€94.18 per machine hour", "€9.42 per machine hour", "€258,990 per machine hour", "€0.11 per machine hour"], correct: 1, explanation: "Machine-hour rate = €258,990 / 27,500 ≈ €9.42 per machine hour." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var hrs = p.pick([10000,15000,20000,25000,27500,30000]);
+        var rate = p.pick([8,9,9.42,10,12,15,20]);
+        var pool = Math.round(hrs * rate);
+        var w1 = Math.round(pool/hrs*10)/10, w2 = +(pool/hrs/10).toFixed(2), w3 = pool;
+        return { q: 'Traditional overhead is €'+p.fmt(pool)+' and total machine hours are '+p.fmt(hrs)+'. What is the machine-hour absorption rate?',
+          options: ['€'+rate+' per machine hour','€'+p.fmt(Math.round(pool*hrs))+ ' per machine hour','€'+p.fmt(pool)+' per machine hour','€'+w2+' per machine hour'], correct: 0,
+          explanation: 'Machine-hour rate = €'+p.fmt(pool)+' / '+p.fmt(hrs)+' = €'+rate+' per machine hour.' }; } },
       { q: "ABC shows a non-routine job costs €8,609 while the standard bid is €5,000. What is the strongest managerial implication?", options: ["Identify non-routine work early and reflect its extra activities in the bid", "Exclude setup and non-routine costs as sunk", "Continue the same bid because all jobs should have one average cost", "Allocate the extra cost to routine jobs"], correct: 0, explanation: "The ABC result shows that special activities materially increase resource consumption; non-routine work should be identified early and its extra cost reflected in the bid." },
       { q: "Which sequence best describes a two-stage ABC allocation?", options: ["Assign resource costs to activity pools, then assign activity costs to cost objects", "Assign fixed costs to revenue, then revenue to customers", "Assign sales to products, then products to departments", "Assign direct labour to inventory, then inventory to cash"], correct: 0, explanation: "ABC first accumulates costs by activity, then uses cost drivers to allocate each activity's costs to products, orders, or customers." },
       { q: "A manager says, 'A cost is a cost; knowing product versus period cost is enough.' What key information does ABC add?", options: ["Whether direct labour is paid weekly", "How different cost objects consume different activities and overhead resources", "Whether revenue is received in cash", "Whether stock is sold FIFO or weighted average"], correct: 1, explanation: "ABC reveals how different products or customers consume overhead activities in different proportions, explaining why broad averages distort unit costs." },
     ],
     "Topic - Integrated Management Accounting": [
       { q: "A company sells 30,000 units for €165,000. Variable expenses are €63,000 and fixed costs are €56,100. Which set is correct?", options: ["Break-even 16,500 units; margin of safety 45%; operating leverage about 2.22", "Break-even 16,500 units; margin of safety 55%; operating leverage 4", "Break-even 18,000 units; margin of safety 40%; operating leverage 3", "Break-even 10,200 units; margin of safety 66%; operating leverage 2.22"], correct: 0, explanation: "Price = €5.50, VC = €2.10, unit contribution = €3.40. BE = €56,100/€3.40 = 16,500; MOS = 13,500/30,000 = 45%; DOL = €102,000/€45,900 ≈ 2.22." },
-      { q: "Manufacturing overhead is 55% of conversion cost and direct labour is €40,500. What is manufacturing overhead?", options: ["€22,275", "€49,500", "€33,136", "€90,000"], correct: 1, explanation: "Direct labour is 45% of conversion cost. Total conversion cost = €40,500 / 0.45 = €90,000; manufacturing overhead = 55% × €90,000 = €49,500." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var mfgPct = p.pick([40,45,50,55,60]);
+        var dlPct = 100 - mfgPct;
+        var total = p.int(4,12)*10000; var dl = Math.round(total * dlPct/100); var mfg = total - dl;
+        var w1 = Math.round(dl * mfgPct/100), w2 = Math.round(dl / mfgPct * 100), w3 = dl;
+        return { q: 'Manufacturing overhead is '+mfgPct+'% of conversion cost and direct labour is €'+p.fmt(dl)+'. What is manufacturing overhead?',
+          options: ['€'+p.fmt(mfg),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Direct labour is '+dlPct+'% of conversion cost. Total = €'+p.fmt(dl)+'/'+dlPct+'% = €'+p.fmt(total)+'. Overhead = '+mfgPct+'%×€'+p.fmt(total)+' = €'+p.fmt(mfg)+'.' }; } },
       { q: "Which statement about differential costs is correct?", options: ["Only variable costs can be differential", "A sunk cost is always differential", "Differential cost means the same as opportunity cost", "A differential cost is any cost difference between alternatives"], correct: 3, explanation: "Differential costs may be fixed or variable; the defining feature is that they differ between the alternatives being compared." },
       { q: "Which statement distinguishes financial from management accounting most accurately?", options: ["Financial accounting is externally oriented and more regulated; management accounting is internally tailored", "Both must use identical reports and time periods", "Management accounting excludes non-financial data", "Financial accounting is future-only; management accounting is past-only"], correct: 0, explanation: "External financial reports follow prescribed rules for outside stakeholders; internal management reports are designed flexibly to support planning, control and decisions." },
       { q: "A firm's fixed costs increase but unit contribution and sales mix remain unchanged. What combination is expected?", options: ["Break-even is unchanged and operating leverage falls to zero", "Break-even rises and margin of safety falls at the same sales volume", "Break-even falls and margin of safety rises", "Contribution margin ratio rises automatically"], correct: 1, explanation: "Higher fixed costs require more contribution to break even; at the same sales volume, the safety cushion (margin of safety) narrows." },
       { q: "A product has direct materials of €25, direct labour of €100 and allocated overhead of €47.10. What are prime cost and total unit cost?", options: ["Prime cost €125; total unit cost €172.10", "Prime cost €72.10; total unit cost €172.10", "Prime cost €147.10; total unit cost €172.10", "Prime cost €125; total unit cost €147.10"], correct: 0, explanation: "Prime cost = direct materials + direct labour = €25 + €100 = €125. Total unit cost adds overhead: €125 + €47.10 = €172.10." },
       { q: "Why should an MCQ about management accounting calculations include plausible numerical distractors?", options: ["It allows students to answer without subject knowledge", "It makes every option equally correct", "Each wrong option can reveal a specific setup or calculation error", "It removes the need for explanations"], correct: 2, explanation: "Diagnostic distractors map to common mistakes such as using selling price instead of contribution or reversing a ratio, helping students identify their specific error." },
       { q: "A company reports a high degree of operating leverage and a low margin of safety. What risk profile does this imply?", options: ["Fixed cost must be lower than every competitor's", "Variable cost must be zero", "Profit is highly sensitive to sales changes and losses are relatively close", "Profit is insensitive to sales and break-even is far below sales"], correct: 2, explanation: "High DOL means profit swings sharply with sales; low MOS means only a small sales decline separates the firm from break-even (or loss)." },
-      { q: "A firm sells two products in a 3:2 mix. Unit contributions are €8 and €6. Fixed costs are €57,600. What is the break-even quantity of the first product?", options: ["4,800 units", "12,000 units", "7,200 units", "3,600 units"], correct: 0, explanation: "Bundle contribution = 3×€8 + 2×€6 = €36. Break-even bundles = €57,600/€36 = 1,600. First product = 1,600×3 = 4,800 units." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var c1 = p.pick([6,7,8,9,10,12]); var c2 = p.pick([4,5,6,7,8]);
+        var r1 = p.pick([2,3,4]); var r2 = p.pick([1,2,3]);
+        var bundle = r1*c1 + r2*c2;
+        var fc = bundle * p.pick([800,1000,1200,1600]);
+        var bundles = fc / bundle;
+        var q1 = bundles * r1;
+        var w1 = bundles*r2, w2 = q1+1000, w3 = Math.round(fc/c1);
+        return { q: 'A firm sells two products in a '+r1+':'+r2+' mix. Unit contributions are €'+c1+' and €'+c2+'. Fixed costs are €'+p.fmt(fc)+'. What is the break-even quantity of the first product?',
+          options: [p.fmt(q1)+' units', p.fmt(w1)+' units', p.fmt(w2)+' units', p.fmt(w3)+' units'], correct: 0,
+          explanation: 'Bundle contribution = '+r1+'×€'+c1+'+'+r2+'×€'+c2+' = €'+bundle+'. Break-even bundles = €'+p.fmt(fc)+'/€'+bundle+' = '+p.fmt(bundles)+'. Product 1 = '+p.fmt(bundles)+'×'+r1+' = '+p.fmt(q1)+' units.' }; } },
       { q: "Which statement about cost objects is correct?", options: ["A direct cost is direct for every possible cost object", "Cost-object choice affects cost behaviour but not traceability", "Only products can be cost objects", "The same cost may be direct for one cost object and indirect for another"], correct: 3, explanation: "Classification depends on what is being costed; a supervisor's salary may be direct to a production line but indirect to a single unit." },
       { q: "A manager wants a short-run decision report on whether to accept a one-off order with spare capacity. Which information is most relevant?", options: ["Incremental revenue and costs that change because of the order", "Allocated fixed overhead that will be incurred either way", "Historical sunk development cost", "The book value of unused machinery only"], correct: 0, explanation: "The decision should compare future revenues and costs that differ between accepting and rejecting; sunk costs and unavoidable overheads are irrelevant." },
-      { q: "Sales are €200,000 and the contribution margin ratio is 35%. Fixed costs are €50,000. What is operating profit?", options: ["€120,000", "€15,000", "€20,000", "€70,000"], correct: 2, explanation: "Contribution = €200,000 × 35% = €70,000. Operating profit = €70,000 − €50,000 = €20,000." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var sales = p.pick([100,150,200,250,300])*1000;
+        var cmr = p.pick([30,35,40,45,50]);
+        var contrib = Math.round(sales * cmr / 100);
+        var fc = p.pick([30,40,50,60,70])*1000;
+        if (fc >= contrib) fc = Math.round(contrib * 0.6 / 10000)*10000;
+        var op = contrib - fc;
+        var w1 = sales - fc, w2 = contrib, w3 = op + fc;
+        return { q: 'Sales are €'+p.fmt(sales)+' and the contribution margin ratio is '+cmr+'%. Fixed costs are €'+p.fmt(fc)+'. What is operating profit?',
+          options: ['€'+p.fmt(op),'€'+p.fmt(w1),'€'+p.fmt(w2),'€'+p.fmt(w3)], correct: 0,
+          explanation: 'Contribution = €'+p.fmt(sales)+'×'+cmr+'% = €'+p.fmt(contrib)+'. Operating profit = €'+p.fmt(contrib)+'−€'+p.fmt(fc)+' = €'+p.fmt(op)+'.' }; } },
       { q: "A cost formula estimated within 1,000–5,000 units is used to forecast 12,000 units. What is the main concern?", options: ["The forecast is outside the relevant range, so linear assumptions may fail", "Fixed costs must become zero above the range", "Variable cost per unit must double", "High-low cannot be used with more than 5,000 units"], correct: 0, explanation: "Beyond the observed relevant range, capacity steps, volume discounts or efficiency changes may mean the linear cost equation no longer holds." },
       { q: "What is the central purpose of management accounting in the module?", options: ["To provide information relevant to organisational planning, control and business decisions", "To replace all financial accounting reports", "To prepare only statutory tax returns", "To record only past cash receipts"], correct: 0, explanation: "Management accounting provides tailored information to support planning (budgets, forecasts), control (variance analysis), and business decisions (CVP, costing)." },
-      { q: "A firm has sales revenue of €120,000, variable costs of €72,000 and fixed costs of €36,000. What is its contribution margin ratio?", options: ["60%", "40%", "30%", "10%"], correct: 1, explanation: "Contribution = €120,000 − €72,000 = €48,000. CMR = €48,000 / €120,000 = 40%." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var sales = p.pick([80,100,120,150,200])*1000;
+        var cmr = p.pick([30,35,40,45,50,60]);
+        var contrib = Math.round(sales * cmr / 100);
+        var vc = sales - contrib;
+        var fc = p.pick([20,25,30,35,40])*1000;
+        var op = contrib - fc;
+        var w1 = Math.round(vc/sales*100), w2 = Math.round(fc/sales*100), w3 = Math.round(contrib/vc*100);
+        return { q: 'A firm has sales revenue of €'+p.fmt(sales)+', variable costs of €'+p.fmt(vc)+' and fixed costs of €'+p.fmt(fc)+'. What is its contribution margin ratio?',
+          options: [cmr+'%', w1+'%', w2+'%', w3+'%'], correct: 0,
+          explanation: 'Contribution = €'+p.fmt(sales)+'−€'+p.fmt(vc)+' = €'+p.fmt(contrib)+'. CMR = €'+p.fmt(contrib)+'/€'+p.fmt(sales)+' = '+cmr+'%.' }; } },
       { q: "A product is under-costed by a traditional system but correctly costed under ABC. Which managerial decision is most at risk under the traditional figure?", options: ["Setting a selling price too low", "Understating total sales volume", "Setting a selling price too high", "Reporting too much direct material usage"], correct: 0, explanation: "An understated cost can cause managers to set a price too low, failing to recover the resources actually consumed by that product." },
       { q: "Which measure compares the excess of current sales over break-even sales with current sales?", options: ["Contribution margin ratio", "Margin of safety percentage", "Fixed-cost absorption rate", "Degree of operating leverage"], correct: 1, explanation: "Margin of safety percentage = (actual/budgeted sales − break-even sales) / actual/budgeted sales, expressed as a percentage." },
     ],
