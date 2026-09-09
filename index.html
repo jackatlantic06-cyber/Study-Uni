@@ -1654,7 +1654,8 @@
       const notifyBtn = `<button class="notify-btn${NOTIFIED[m.code]?' notified':''}" data-code="${esc(m.code)}" onclick="openNotifModal('${esc(m.code)}','${esc(m.name)}')" title="Notify me when new content is added">🔔</button>`;
       const paperCell = `<div class="papers-cell">${paperRows}</div>`;
       _modData[m.code] = { name: m.name, years: regularPapers.map(f => typeof f === 'object' ? f.label : labelFromFilename(f)) };
-      const predictCell = `<div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px"><div class="pred-wrap"><button class="btn-predict" onclick="togglePredict('${esc(m.code)}',this)">📊 Predict</button><div class="pred-panel"></div></div><button class="btn-discuss" onclick="openDiscussion('${esc(m.code)}','${esc(m.name)}')">💬 Discuss</button></div>`;
+      const predictBtn = regularPapers.length ? `<div class="pred-wrap"><button class="btn-predict" onclick="togglePredict('${esc(m.code)}',this)">📊 Predict</button><div class="pred-panel"></div></div>` : '';
+      const predictCell = `<div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px">${predictBtn}<button class="btn-discuss" onclick="openDiscussion('${esc(m.code)}','${esc(m.name)}')">💬 Discuss</button></div>`;
       return `<tr class="${isEmpty ? 'row-empty' : ''}">
         <td><span class="mod-code">${m.code}</span>${notifyBtn}</td>
         <td>${m.name}</td>
