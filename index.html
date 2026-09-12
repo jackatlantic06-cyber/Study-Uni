@@ -1707,8 +1707,10 @@
   }
 
   function _shuffleOptions(q) {
-    const idxs = [0,1,2,3];
-    for (let i = 3; i > 0; i--) {
+    if (!q.options || q.options.length === 0) return q;
+    const len = q.options.length;
+    const idxs = Array.from({length: len}, function(_, i){ return i; });
+    for (let i = len - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [idxs[i], idxs[j]] = [idxs[j], idxs[i]];
     }
@@ -1990,7 +1992,7 @@
     _qTimeLeft = _qTimerSecs;
     const q = _qState.questions[_qState.current];
     const n = _qState.questions.length;
-    const letters = ['A','B','C','D'];
+    const letters = ['A','B','C','D','E'];
     const isLast = _qState.current === n - 1;
 
     if (q.type === 'fill') {
@@ -2112,7 +2114,7 @@
     });
     const exp = document.getElementById('quizExp');
     exp.className = 'quiz-exp wrong';
-    exp.innerHTML = '&#9200; Time\'s up! Correct answer: <strong>' + ['A','B','C','D'][q.correct] + '</strong>. ' + q.explanation;
+    exp.innerHTML = '&#9200; Time\'s up! Correct answer: <strong>' + ['A','B','C','D','E'][q.correct] + '</strong>. ' + q.explanation;
     exp.style.display = 'block';
     document.getElementById('quizNext').style.display = 'block';
   }
