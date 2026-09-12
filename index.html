@@ -212,6 +212,7 @@
     .quiz-exp.correct{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
     .quiz-exp.wrong{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
     .quiz-next{margin-top:18px;padding:12px 24px;background:#2563eb;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;width:100%;transition:background .15s;font-family:inherit;display:none}
+    @keyframes _rqShake{0%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}100%{transform:translateX(0)}}
     .quiz-next:hover{background:#1d4ed8}
     .quiz-results{text-align:center;padding:16px 0}
     .results-emoji{font-size:52px;margin-bottom:12px}
@@ -2042,8 +2043,15 @@
     var revisitBadge = q._retryCount > 0
       ? ' <span style="font-size:11px;padding:2px 8px;background:#fef9c3;color:#854d0e;border-radius:20px;font-weight:700;margin-left:6px">🔁 Revisit</span>'
       : '';
+    var revisitBanner = q._retryCount > 0
+      ? '<div style="display:flex;align-items:center;gap:10px;background:#fef2f2;border:1.5px solid #fca5a5;border-radius:10px;padding:11px 14px;margin-bottom:14px;animation:_rqShake .35s ease">' +
+        '<span style="font-size:20px">❌</span>' +
+        '<div><div style="font-size:13px;font-weight:700;color:#b91c1c">You got this one wrong — let\'s nail it this time!</div>' +
+        '<div style="font-size:12px;color:#dc2626;margin-top:1px">Read it carefully before answering.</div></div></div>'
+      : '';
     let html = '<div class="quiz-progress">Question ' + (_qState.current+1) + ' of ' + n + revisitBadge + '</div>';
     html += timerHtml;
+    html += revisitBanner;
     if (q.img) html += '<img src="' + q.img + '" alt="Anatomy diagram" style="width:100%;max-width:520px;border-radius:10px;margin:0 auto 14px;display:block;border:1px solid #e2e8f0">';
     html += '<div class="quiz-q">' + q.q + '</div><div class="quiz-options">';
     q.options.forEach(function(opt,i) {
