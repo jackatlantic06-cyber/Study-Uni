@@ -1815,7 +1815,8 @@
     } else if (Array.isArray(bank)) {
       _qTopic = '';
       document.getElementById('quizSubtitle').textContent = 'Quick Quiz';
-      _qState = { questions: _shuffle(bank).slice(0,5).map(_shuffleOptions), current:0, score:0, answered:false, incomplete:0, times:[], wrongQs:[] };
+      var _fbQs = _shuffle(bank).slice(0,5).map(function(q){ return _shuffleOptions(q.type==='math'?q.gen():q); });
+      _qState = { questions: _fbQs, current:0, score:0, answered:false, incomplete:0, times:[], wrongQs:[], originalTotal: _fbQs.length };
       _renderQ();
     } else {
       _renderTopicPicker(bank);
@@ -1960,10 +1961,10 @@
     const topics = _qSelectedTopics.size > 0 ? Array.from(_qSelectedTopics) : (_qTopic ? [_qTopic] : []);
     const pool = [];
     topics.forEach(function(t) { ((bank[t])||[]).forEach(function(q){ pool.push(q); }); });
-    const selected = _shuffle(pool).slice(0, _qCount).map(function(q) { return q.type === 'fill' ? q : _shuffleOptions(q); });
+    const selected = _shuffle(pool).slice(0, _qCount).map(function(q) { return q.type === 'fill' ? q : _shuffleOptions(q.type === 'math' ? q.gen() : q); });
     _qTopic = topics.length === 1 ? topics[0] : 'Mixed: ' + topics.join(', ');
     document.getElementById('quizSubtitle').textContent = topics.length === 1 ? topics[0] : topics.length + ' topics';
-    _qState = { questions: selected, current:0, score:0, answered:false, incomplete:0, times:[], fillReviewed:0, wrongQs:[] };
+    _qState = { questions: selected, current:0, score:0, answered:false, incomplete:0, times:[], fillReviewed:0, wrongQs:[], originalTotal: selected.length };
     _renderQ();
     window.scrollTo(0, 0);
   }
@@ -1973,7 +1974,7 @@
     if (!wrongs.length) return;
     if (_qTimerInterval) { clearInterval(_qTimerInterval); _qTimerInterval = null; }
     const questions = wrongs.map(function(q) { return _shuffleOptions(q); });
-    _qState = { questions: questions, current:0, score:0, answered:false, incomplete:0, times:[], fillReviewed:0, wrongQs:[] };
+    _qState = { questions: questions, current:0, score:0, answered:false, incomplete:0, times:[], fillReviewed:0, wrongQs:[], originalTotal: questions.length };
     document.getElementById('quizSubtitle').textContent = 'Wrong answers — retry';
     _renderQ();
     window.scrollTo(0, 0);
@@ -1997,7 +1998,10 @@
       if (_qTimerSecs > 0) {
         fTimerHtml = '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><span id="quizTimerText" style="font-size:13px;font-weight:600;color:#64748b">&#9201; '+_qTimerSecs+'s</span></div><div style="height:5px;background:#e2e8f0;border-radius:3px;overflow:hidden"><div id="quizTimerFill" style="height:100%;background:#2563eb;width:100%;transition:width 1s linear;border-radius:3px"></div></div></div>';
       }
-      let fHtml = '<div class="quiz-progress">Question '+(_qState.current+1)+' of '+n+' <span style="font-size:11px;padding:2px 8px;background:#eff6ff;color:#2563eb;border-radius:20px;font-weight:700;margin-left:6px">Fill-in</span></div>';
+      var fRevisitBadge = q._retryCount > 0
+        ? ' <span style="font-size:11px;padding:2px 8px;background:#fef9c3;color:#854d0e;border-radius:20px;font-weight:700;margin-left:6px">🔁 Revisit</span>'
+        : '';
+      let fHtml = '<div class="quiz-progress">Question '+(_qState.current+1)+' of '+n+' <span style="font-size:11px;padding:2px 8px;background:#eff6ff;color:#2563eb;border-radius:20px;font-weight:700;margin-left:6px">Fill-in</span>'+fRevisitBadge+'</div>';
       fHtml += fTimerHtml;
       if (q.img) fHtml += '<img src="'+q.img+'" alt="Anatomy diagram" style="width:100%;max-width:520px;border-radius:10px;margin:0 auto 14px;display:block;border:1px solid #e2e8f0">';
       fHtml += '<div class="quiz-q">'+q.q+'</div><div style="margin:14px 0">';
@@ -2033,7 +2037,10 @@
         '<div id="quizTimerFill" style="height:100%;background:#2563eb;width:100%;transition:width 1s linear;border-radius:3px"></div>' +
         '</div></div>';
     }
-    let html = '<div class="quiz-progress">Question ' + (_qState.current+1) + ' of ' + n + '</div>';
+    var revisitBadge = q._retryCount > 0
+      ? ' <span style="font-size:11px;padding:2px 8px;background:#fef9c3;color:#854d0e;border-radius:20px;font-weight:700;margin-left:6px">🔁 Revisit</span>'
+      : '';
+    let html = '<div class="quiz-progress">Question ' + (_qState.current+1) + ' of ' + n + revisitBadge + '</div>';
     html += timerHtml;
     if (q.img) html += '<img src="' + q.img + '" alt="Anatomy diagram" style="width:100%;max-width:520px;border-radius:10px;margin:0 auto 14px;display:block;border:1px solid #e2e8f0">';
     html += '<div class="quiz-q">' + q.q + '</div><div class="quiz-options">';
@@ -2094,6 +2101,11 @@
     _qState.incomplete++;
     _qState.wrongQs.push(q);
     _qState.times.push(_qTimerSecs);
+    if ((q._retryCount || 0) < 2) {
+      var rqt = _shuffleOptions(Object.assign({}, q));
+      rqt._retryCount = (q._retryCount || 0) + 1;
+      _qState.questions.push(rqt);
+    }
     document.querySelectorAll('.quiz-opt').forEach(function(btn,i) {
       btn.disabled = true;
       if (i === q.correct) btn.classList.add('correct');
@@ -2116,8 +2128,16 @@
       if (i === q.correct) btn.classList.add('correct');
       else if (i === idx) btn.classList.add('wrong');
     });
-    if (idx === q.correct) _qState.score++;
-    else _qState.wrongQs.push(q);
+    if (idx === q.correct) {
+      _qState.score++;
+    } else {
+      _qState.wrongQs.push(q);
+      if ((q._retryCount || 0) < 2) {
+        var rq = _shuffleOptions(Object.assign({}, q));
+        rq._retryCount = (q._retryCount || 0) + 1;
+        _qState.questions.push(rq);
+      }
+    }
     const exp = document.getElementById('quizExp');
     exp.className = 'quiz-exp ' + (idx === q.correct ? 'correct' : 'wrong');
     exp.textContent = (idx === q.correct ? '✓ Correct! ' : '✗ Not quite. ') + q.explanation;
@@ -2135,7 +2155,8 @@
 
   function _showResults() {
     const fillCount = _qState.fillReviewed || 0;
-    const mcqTotal = _qState.questions.filter(function(q) { return q.type !== 'fill'; }).length;
+    const origQs = _qState.questions.slice(0, _qState.originalTotal || _qState.questions.length);
+    const mcqTotal = origQs.filter(function(q) { return q.type !== 'fill'; }).length;
     const score = _qState.score, incomplete = _qState.incomplete || 0;
     const times = _qState.times || [];
     const avgTime = times.length > 0 ? Math.round(times.reduce(function(a,b){return a+b;},0) / times.length) : null;
