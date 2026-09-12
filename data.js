@@ -2265,7 +2265,19 @@
     "Topic - Foundations and Financial Statements": [
       { q: "A business wants information about its profitability over the 12 months ended 31 December. Which statement should it examine most directly?", options: ["Statement of Financial Position", "Statement of Profit or Loss", "Statement of Cash Flows", "Trade receivables ledger"], correct: 1, explanation: "The Statement of Profit or Loss reports financial performance for a reporting period by matching income earned with expenses incurred. The SOFP shows position at a point in time; the cash flow statement shows cash movements; and the receivables ledger only covers amounts owed by customers." },
       { q: "A bank is assessing whether a company has enough assets to meet its liabilities at 31 December. Which statement is most relevant?", options: ["Statement of Profit or Loss", "Statement of Financial Position", "Sales day book", "Statement of Cash Flows for the following year"], correct: 1, explanation: "The Statement of Financial Position shows assets, liabilities and equity at the reporting date. The SOPL measures performance over a period; the sales day book only records credit sales; and a future cash-flow statement does not show the current accounting position." },
-      { q: "A business earned income of €226,000 and incurred expenses of €177,500 during the year. What profit should be reported?", options: ["€48,500", "€403,500", "€177,500", "€226,000"], correct: 0, explanation: "Profit = income − expenses = €226,000 − €177,500 = €48,500. €403,500 adds rather than subtracts; €177,500 is expenses only; €226,000 is income before expenses." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var income = p.int(150000, 400000, 1000);
+        var expenses = p.int(50000, income - 15000, 1000);
+        var profit = income - expenses;
+        var sum = income + expenses;
+        return {
+          q: "A business earned income of €" + p.fmt(income) + " and incurred expenses of €" + p.fmt(expenses) + " during the year. What profit should be reported?",
+          options: ["€" + p.fmt(profit), "€" + p.fmt(sum), "€" + p.fmt(expenses), "€" + p.fmt(income)],
+          correct: 0,
+          explanation: "Profit = income − expenses = €" + p.fmt(income) + " − €" + p.fmt(expenses) + " = €" + p.fmt(profit) + ". €" + p.fmt(sum) + " adds rather than subtracts; €" + p.fmt(expenses) + " is expenses only; €" + p.fmt(income) + " is income before expenses."
+        };
+      } },
       { q: "A company receives €20,000 in January for goods sold in December. Under accrual accounting, when is the income normally recognised?", options: ["In January, because that is when cash is received", "In December, because that is when the goods were sold", "Half in December and half in January", "Only when the customer receives an invoice"], correct: 1, explanation: "Accrual accounting recognises income when earned. The December sale belongs in December even if cash arrives in January. Splitting it has no basis in the scenario, and invoice timing does not override the period the income was earned." },
     ],
     "Topic - Accounting Equation and Classification": [
@@ -2837,9 +2849,44 @@
       { q: "A business has a degree of operating leverage of 5. Sales volume is expected to rise by 12%, with selling price and costs unchanged. What percentage change in operating profit is predicted?", options: ["12% increase", "17% increase", "60% increase", "5% increase"], correct: 2, explanation: "Predicted profit change = DOL × sales-volume change = 5 × 12% = 60%." },
       { q: "Two firms have equal revenue and equal operating profit. Firm A has higher fixed costs and lower variable costs than Firm B. Which is most likely?", options: ["Firm B must have the higher break-even point", "Firm A has lower operating leverage and lower profit sensitivity", "Both must have identical operating leverage", "Firm A has higher operating leverage and greater profit sensitivity"], correct: 3, explanation: "A more fixed-cost-heavy cost structure creates higher contribution and therefore higher DOL at the same profit level." },
       { q: "Which assumption is required for a simple multi-product CVP calculation?", options: ["The sales mix remains constant", "Closing stock is valued under ABC", "Fixed cost per unit remains constant", "Every product has the same selling price"], correct: 0, explanation: "A stable sales mix allows a weighted-average contribution to be calculated and applied to cover total fixed costs." },
-      { q: "A dress contributes €500 and a suit contributes €400. Expected sales mix is one dress to three suits. What is weighted-average contribution per item?", options: ["€400", "€475", "€450", "€425"], correct: 3, explanation: "Weighted average = (1/4 × €500) + (3/4 × €400) = €125 + €300 = €425." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var dress = p.int(4, 9) * 100;
+        var suit = p.int(2, 7) * 100;
+        if (suit === dress) { suit = suit >= 700 ? suit - 100 : suit + 100; }
+        var weighted = (dress + 3 * suit) / 4;
+        var simpleAvg = (dress + suit) / 2;
+        return {
+          q: "A dress contributes €" + p.fmt(dress) + " and a suit contributes €" + p.fmt(suit) + ". Expected sales mix is one dress to three suits. What is weighted-average contribution per item?",
+          options: ["€" + p.fmt(weighted), "€" + p.fmt(suit), "€" + p.fmt(simpleAvg), "€" + p.fmt(dress)],
+          correct: 0,
+          explanation: "Weighted average = (1/4 × €" + p.fmt(dress) + ") + (3/4 × €" + p.fmt(suit) + ") = €" + (dress/4) + " + €" + (3*suit/4) + " = €" + p.fmt(weighted) + "."
+        };
+      } },
       { q: "A company changes its sales mix toward the product with the lower unit contribution while fixed costs are unchanged. What happens to the break-even total unit volume?", options: ["It becomes equal to fixed costs", "It is unchanged in every case", "It generally falls", "It generally rises"], correct: 3, explanation: "The weighted-average contribution falls, so more composite units are required to cover fixed costs, raising the break-even point." },
-      { q: "A proposal generates €16,000 extra sales. The contribution margin ratio is 60%, and the proposal adds €10,000 fixed salary cost. What is the incremental profit effect?", options: ["€400 decrease", "€400 increase", "€6,000 increase", "€9,600 decrease"], correct: 0, explanation: "Incremental contribution = €16,000 × 60% = €9,600. Less €10,000 salary gives a net €400 decrease in profit." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var sales = p.pick([10000, 12000, 14000, 16000, 18000, 20000, 24000, 30000]);
+        var cmPct = p.pick([50, 60, 70]);
+        var contrib = sales * cmPct / 100;
+        var net = p.pick([-2000, -1500, -1000, -500, 500, 1000, 1500, 2000]);
+        var salary = contrib - net;
+        var absNet = Math.abs(net);
+        var dir = net >= 0 ? 'increase' : 'decrease';
+        var opp = net >= 0 ? 'decrease' : 'increase';
+        var salesMinusSalary = sales - salary;
+        return {
+          q: "A proposal generates €" + p.fmt(sales) + " extra sales. The contribution margin ratio is " + cmPct + "%, and the proposal adds €" + p.fmt(salary) + " fixed salary cost. What is the incremental profit effect?",
+          options: [
+            "€" + p.fmt(absNet) + " " + dir,
+            "€" + p.fmt(absNet) + " " + opp,
+            "€" + p.fmt(salesMinusSalary) + " increase",
+            "€" + p.fmt(contrib) + " decrease"
+          ],
+          correct: 0,
+          explanation: "Incremental contribution = €" + p.fmt(sales) + " × " + cmPct + "% = €" + p.fmt(contrib) + ". Less €" + p.fmt(salary) + " salary gives a net €" + p.fmt(absNet) + " " + dir + " in profit."
+        };
+      } },
       { q: "Selling price falls by 5% while variable cost per unit and fixed costs remain unchanged. Which immediate CVP effect is most accurate?", options: ["Unit contribution falls and break-even units rise", "Unit contribution rises and break-even units fall", "Contribution margin ratio rises while unit contribution falls", "Break-even units are unchanged because fixed costs are unchanged"], correct: 0, explanation: "A lower selling price reduces contribution per unit, so more units are needed to cover fixed costs — break-even rises." },
       { q: "At the break-even point:", options: ["Sales revenue equals variable cost only", "Operating profit equals total contribution", "Total contribution equals total fixed cost", "Margin of safety equals sales revenue"], correct: 2, explanation: "Break-even occurs when total contribution exactly covers fixed costs, leaving zero operating profit." },
     ],
@@ -3062,7 +3109,30 @@
       { q: "Which statement about differential costs is correct?", options: ["Only variable costs can be differential", "A sunk cost is always differential", "Differential cost means the same as opportunity cost", "A differential cost is any cost difference between alternatives"], correct: 3, explanation: "Differential costs may be fixed or variable; the defining feature is that they differ between the alternatives being compared." },
       { q: "Which statement distinguishes financial from management accounting most accurately?", options: ["Financial accounting is externally oriented and more regulated; management accounting is internally tailored", "Both must use identical reports and time periods", "Management accounting excludes non-financial data", "Financial accounting is future-only; management accounting is past-only"], correct: 0, explanation: "External financial reports follow prescribed rules for outside stakeholders; internal management reports are designed flexibly to support planning, control and decisions." },
       { q: "A firm's fixed costs increase but unit contribution and sales mix remain unchanged. What combination is expected?", options: ["Break-even is unchanged and operating leverage falls to zero", "Break-even rises and margin of safety falls at the same sales volume", "Break-even falls and margin of safety rises", "Contribution margin ratio rises automatically"], correct: 1, explanation: "Higher fixed costs require more contribution to break even; at the same sales volume, the safety cushion (margin of safety) narrows." },
-      { q: "A product has direct materials of €25, direct labour of €100 and allocated overhead of €47.10. What are prime cost and total unit cost?", options: ["Prime cost €125; total unit cost €172.10", "Prime cost €72.10; total unit cost €172.10", "Prime cost €147.10; total unit cost €172.10", "Prime cost €125; total unit cost €147.10"], correct: 0, explanation: "Prime cost = direct materials + direct labour = €25 + €100 = €125. Total unit cost adds overhead: €125 + €47.10 = €172.10." },
+      { type:'math', gen: function() {
+        var p = _mathQ;
+        var m = p.int(2, 10) * 5;
+        var l = p.int(5, 20) * 10;
+        var o = p.int(3, 16) * 5;
+        if (m === o) { o = o > 15 ? o - 5 : o + 5; }
+        if (m === l) { l = l + 10; }
+        var prime = m + l;
+        var total = prime + o;
+        var fakeP1 = m + o;
+        var fakeP2 = l + o;
+        var fakeT  = l + o;
+        return {
+          q: "A product has direct materials of €" + p.fmt(m) + ", direct labour of €" + p.fmt(l) + " and allocated overhead of €" + p.fmt(o) + ". What are prime cost and total unit cost?",
+          options: [
+            "Prime cost €" + p.fmt(prime) + "; total unit cost €" + p.fmt(total),
+            "Prime cost €" + p.fmt(fakeP1) + "; total unit cost €" + p.fmt(total),
+            "Prime cost €" + p.fmt(fakeP2) + "; total unit cost €" + p.fmt(total),
+            "Prime cost €" + p.fmt(prime) + "; total unit cost €" + p.fmt(fakeT)
+          ],
+          correct: 0,
+          explanation: "Prime cost = direct materials + direct labour = €" + p.fmt(m) + " + €" + p.fmt(l) + " = €" + p.fmt(prime) + ". Total unit cost adds overhead: €" + p.fmt(prime) + " + €" + p.fmt(o) + " = €" + p.fmt(total) + "."
+        };
+      } },
       { q: "Why should an MCQ about management accounting calculations include plausible numerical distractors?", options: ["It allows students to answer without subject knowledge", "It makes every option equally correct", "Each wrong option can reveal a specific setup or calculation error", "It removes the need for explanations"], correct: 2, explanation: "Diagnostic distractors map to common mistakes such as using selling price instead of contribution or reversing a ratio, helping students identify their specific error." },
       { q: "A company reports a high degree of operating leverage and a low margin of safety. What risk profile does this imply?", options: ["Fixed cost must be lower than every competitor's", "Variable cost must be zero", "Profit is highly sensitive to sales changes and losses are relatively close", "Profit is insensitive to sales and break-even is far below sales"], correct: 2, explanation: "High DOL means profit swings sharply with sales; low MOS means only a small sales decline separates the firm from break-even (or loss)." },
       { type:'math', gen: function() {
