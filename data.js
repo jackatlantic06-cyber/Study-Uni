@@ -593,7 +593,7 @@
           correct: 0,
           explanation: "Successful innovators gain temporary monopoly power — the reward that incentivises entrepreneurial risk-taking. This monopoly is eventually eroded by further innovation, but Schumpeter predicted ongoing monopoly tendencies." },
         { q: "Which is a key assumption of the Solow model?",
-          options: ["Technological progress is exogenous","Capital stock is fixed in the short run","Population growth rate is constant","All of the above"],
+          options: ["Technological progress is exogenous","Capital depreciates at a constant rate","Population growth rate is constant","All of the above"],
           correct: 3,
           explanation: "The basic Solow model assumes: technology is exogenous (outside the model), population grows at a constant rate, and capital depreciates at a constant rate." },
         { q: "Which would increase steady-state output per worker in the Solow model?",
@@ -1773,7 +1773,7 @@
 
     "Respiratory Physiology": [
       { q: "A patient with EMPHYSEMA (destruction of alveolar walls) is expected to have which pattern of pulmonary function test results?",
-        options: ["Reduced FEV1, normal FVC, increased FEV1/FVC ratio", "Reduced FEV1, reduced FVC, normal or increased FEV1/FVC ratio", "Reduced FEV1, increased FVC, reduced FEV1/FVC ratio", "Normal FEV1, reduced FVC, increased FEV1/FVC ratio", "Increased FEV1, normal FVC, normal FEV1/FVC ratio"],
+        options: ["Reduced FEV1, normal FVC, increased FEV1/FVC ratio", "Reduced FEV1, reduced FVC, normal or increased FEV1/FVC ratio", "Reduced FEV1, normal or increased FVC, reduced FEV1/FVC ratio", "Normal FEV1, reduced FVC, increased FEV1/FVC ratio", "Increased FEV1, normal FVC, normal FEV1/FVC ratio"],
         correct: 2,
         explanation: "EMPHYSEMA causes an OBSTRUCTIVE pattern (like asthma, chronic bronchitis): FEV1 is REDUCED (airflow obstruction), FVC is INCREASED or normal (air trapping - lungs hyperinflate), FEV1/FVC ratio is REDUCED (<0.7). In emphysema, destruction of alveolar walls means LOSS OF ELASTIC RECOIL and loss of radial traction on small airways - they COLLAPSE on forced expiration, air-trapping. This INCREASES residual volume (RV) and total lung capacity (TLC). RESTRICTIVE patterns (pulmonary fibrosis, chest wall disease): both FEV1 and FVC are REDUCED, but FEV1/FVC ratio is NORMAL or INCREASED. FEV1 is the volume exhaled in the FIRST SECOND of a forced expiration; FVC is the total volume exhaled forcefully. Normal FEV1/FVC is approximately 0.7-0.8." },
 
@@ -3629,7 +3629,7 @@
       { q: "Find the simple interest on €2,000 at 6% for 3 years.", options: ["€382.03", "€360.00", "€2,360.00", "€120.00"], correct: 1, explanation: "I = Prt = 2000 × 0.06 × 3 = €360." },
       { q: "Find the accumulated value of €2,000 at 6% simple interest for 3 years.", options: ["€360.00", "€2,180.00", "€2,360.00", "€2,382.03"], correct: 2, explanation: "A = P + I = 2000 + 360 = €2,360." },
       { q: "What is the compound-interest formula?", options: ["A = Pe^n", "A = P(1+i)^n", "A = P/i^n", "A = P(1+in)"], correct: 1, explanation: "The factor (1 + i) is applied n times to the principal." },
-      { q: "Find the future value of €5,000 for 3 years at 4% compounded annually.", options: ["€5,600.00", "€5,624.32", "€5,624.32", "€5,400.00"], correct: 1, explanation: "A = 5000(1.04)^3 = €5,624.32." },
+      { q: "Find the future value of €5,000 for 3 years at 4% compounded annually.", options: ["€5,600.00", "€5,624.32", "€5,408.00", "€5,400.00"], correct: 1, explanation: "A = 5000(1.04)^3 = €5,624.32. (€5,408 would be only 2 years; €5,600 is simple interest.)" },
       { q: "What present value grows to €10,000 in 4 years at 5% compounded annually?", options: ["€8,000.00", "€8,227.02", "€12,155.06", "€8,500.00"], correct: 1, explanation: "PV = 10000/(1.05)^4 = €8,227.02." },
       { q: "A nominal annual rate of 12% compounded monthly gives a monthly rate of:", options: ["0.12%", "12%", "1%", "6%"], correct: 2, explanation: "12%/12 = 1% per month." },
       { q: "Find the future value of €3,000 for 2 years at 8% compounded quarterly.", options: ["€3,480.00", "€3,240.00", "€3,514.98", "€3,499.20"], correct: 2, explanation: "Quarterly rate = 2%, n = 8 quarters: 3000(1.02)^8 = €3,514.98." },
