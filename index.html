@@ -1956,9 +1956,13 @@
     document.getElementById('quizSubtitle').textContent = label;
   }
 
+  function _renderTopicSetup(topic) {
+    _launchQuiz();
+  }
+
   function _launchQuiz() {
     const inp = document.getElementById('qTimerInput');
-    _qTimerSecs = (inp && inp.value && parseInt(inp.value) >= 10) ? parseInt(inp.value) : 0;
+    if (inp) _qTimerSecs = (inp.value && parseInt(inp.value) >= 10) ? parseInt(inp.value) : 0;
     const bank = QUIZ_BANK[_qCode] || {};
     // Pool questions from all selected topics
     const topics = _qSelectedTopics.size > 0 ? Array.from(_qSelectedTopics) : (_qTopic ? [_qTopic] : []);
