@@ -725,6 +725,7 @@
   <div class="nav-links" id="navLinks">
     <a href="#" onclick="showPage('home');closeMobileNav()" id="nl-home" class="active">Home</a>
     <a href="#" onclick="showPage('courses');closeMobileNav()" id="nl-courses">Courses</a>
+    <a href="#" onclick="showPage('quizzes');closeMobileNav()" id="nl-quizzes">Quiz ⚡</a>
     <a href="#" onclick="showPage('pricing');closeMobileNav()" id="nl-pricing">Pricing</a>
     <a href="#" onclick="showPage('ai');closeMobileNav()" id="nl-ai">StudyAI ✨</a>
     <a href="#" onclick="showPage('admin');closeMobileNav()" id="nl-admin" style="display:none">Admin</a>
@@ -739,8 +740,8 @@
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <h1>UCC Past Exam Papers &amp;<br><span>Study Resources.</span></h1>
-    <p>Past papers for 100+ UCC courses and modules — always free. Pro unlocks marking schemes, worked solutions and quiz practice.</p>
+    <h1>Study smarter for<br><span>UCC exams.</span></h1>
+    <p>Past papers for 100+ courses — always free. <strong>Pro</strong> unlocks marking schemes, MCQ quiz practice, and module discussions.</p>
     <div class="stats-bar" id="statsBar">
       <div class="stat-item"><span class="stat-num" id="statPapers">—</span><span class="stat-label">exam papers</span></div>
       <div class="stat-divider"></div>
@@ -1065,6 +1066,7 @@
     if (id === 'home') history.replaceState(null, '', '#home');
     else if (id === 'courses') history.replaceState(null, '', '#courses');
     else if (id === 'pricing') history.replaceState(null, '', '#pricing');
+    else if (id === 'quizzes') { history.replaceState(null, '', '#quizzes'); buildQuizBrowse(); }
     else if (id === 'ai') { history.replaceState(null, '', '#ai'); _loadMySets(); }
     else if (id === 'study') { /* no hash change for study */ }
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); _loadQuizProgress(); }
@@ -1122,7 +1124,20 @@
     renderStreak();
     renderTrending();
     const root = document.getElementById('categoriesRoot');
-    root.innerHTML = DEG_BUCKETS.map(b => {
+    const quizCount = totalQuizzes;
+    const featuredCards = `<div class="cat-card" style="border-color:#16a34a22" onclick="showPage('quizzes')">
+        <div class="cat-icon">⚡</div>
+        <h3>MCQ Quiz Practice</h3>
+        <p>Test yourself on past exam topics with instant feedback and explanations.</p>
+        <span class="cat-badge" style="background:#f0fdf4;color:#16a34a">${quizCount.toLocaleString()} questions available</span>
+      </div>
+      <div class="cat-card" style="border-color:#2563eb22" onclick="showPage('courses')">
+        <div class="cat-icon">💬</div>
+        <h3>Module Discussions</h3>
+        <p>Ask questions, share tips, and discuss modules with other UCC students.</p>
+        <span class="cat-badge">Go to your module → Discuss</span>
+      </div>`;
+    root.innerHTML = featuredCards + DEG_BUCKETS.map(b => {
       const courses = getCoursesForBucket(b.id);
       if (!courses.length) return '';
       const papers = courses.reduce((a,c) => a + countPapers(c), 0);
@@ -1134,6 +1149,41 @@
       </div>`;
     }).join('');
   }
+
+  // ─── QUIZ BROWSE PAGE ────────────────────────────────────────────────────
+  function buildQuizBrowse(filter) {
+    const grid = document.getElementById('quizBrowseGrid');
+    if (!grid) return;
+    const q = (filter || document.getElementById('quizBrowseSearch')?.value || '').toLowerCase();
+    const entries = [];
+    // Gather all modules from SCHOOLS with a quiz bank entry
+    SCHOOLS.forEach(s => s.courses.forEach(c => {
+      allModules(c).forEach(m => {
+        const bank = QUIZ_BANK[m.code];
+        if (!bank) return;
+        let count = 0;
+        if (Array.isArray(bank)) count = bank.length;
+        else Object.values(bank).forEach(arr => { count += arr.length; });
+        if (!count) return;
+        entries.push({ code: m.code, name: m.name, count, course: c.name });
+      });
+    }));
+    const filtered = q ? entries.filter(e =>
+      e.code.toLowerCase().includes(q) || e.name.toLowerCase().includes(q) || e.course.toLowerCase().includes(q)
+    ) : entries;
+    if (!filtered.length) {
+      grid.innerHTML = '<p style="color:var(--muted);font-size:14px;grid-column:1/-1">No modules found.</p>';
+      return;
+    }
+    grid.innerHTML = filtered.map(e => `
+      <div class="cat-card" onclick="openQuiz('${e.code.replace(/'/g,"\\'")}','${e.name.replace(/'/g,"\\'")}')">
+        <div style="font-family:monospace;font-weight:700;color:var(--accent);font-size:13px;margin-bottom:6px">${e.code}</div>
+        <h3 style="font-size:14px;font-weight:700;margin-bottom:4px;line-height:1.35">${e.name}</h3>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:10px">${e.course}</p>
+        <span class="cat-badge" style="background:#f0fdf4;color:#16a34a">${e.count} question${e.count!==1?'s':''}</span>
+      </div>`).join('');
+  }
+  function filterQuizBrowse(val) { buildQuizBrowse(val); }
 
   // ─── DEGREE BUCKET VIEW ──────────────────────────────────────────────────
   function buildDegBuckets() {
@@ -1666,7 +1716,7 @@
       </tr>`;
     }).join('');
     return `<table class="module-table">
-      <thead><tr><th>Code</th><th>Module</th><th>Credits</th><th>Papers</th><th>Predictions</th></tr></thead>
+      <thead><tr><th>Code</th><th>Module</th><th>Credits</th><th>Papers</th><th>Tools</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
   }
@@ -3675,7 +3725,7 @@
         }
       }
       // Handle other hash pages
-      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#account':'account', '#ai':'ai', '#admin':'admin', '#privacy':'privacy', '#terms':'terms', '#quiz':'courses' };
+      const pageMap = { '#home':'home', '#courses':'courses', '#pricing':'pricing', '#quizzes':'quizzes', '#account':'account', '#ai':'ai', '#admin':'admin', '#privacy':'privacy', '#terms':'terms', '#quiz':'courses', '#notes':'courses', '#papers':'courses', '#signup':'home', '#browse':'courses', '#start':'home' };
       if (pageMap[hash]) { showPage(pageMap[hash]); return true; }
       return false;
     }
@@ -4116,6 +4166,19 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
 </div>
 
 <!-- Quiz full page -->
+<div class="page" id="page-quizzes">
+  <div style="max-width:860px;margin:0 auto;padding:32px 20px 60px">
+    <div style="margin-bottom:28px">
+      <h1 style="font-size:28px;font-weight:800;margin-bottom:6px">MCQ Quiz Practice ⚡</h1>
+      <p style="color:var(--muted);font-size:14px">Pick a module below to start a quiz. Questions are written specifically for UCC exams.</p>
+    </div>
+    <input type="text" id="quizBrowseSearch" placeholder="Search module code or name…"
+      style="width:100%;padding:11px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;outline:none;font-family:inherit;background:var(--surface);color:var(--text);margin-bottom:22px"
+      oninput="filterQuizBrowse(this.value)"/>
+    <div id="quizBrowseGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px"></div>
+  </div>
+</div>
+
 <div class="page" id="page-quiz">
   <div class="quiz-page-inner">
     <button class="quiz-back-btn" onclick="closeQuiz()">← Back to Courses</button>
