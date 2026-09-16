@@ -1054,6 +1054,20 @@
 
   // ─── PAGE SWITCHING ──────────────────────────────────────────────────────
   function showPage(id) {
+    if (id === 'ai') {
+      requirePro(function() {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-ai').classList.add('active');
+        document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+        const nl2 = document.getElementById('nl-ai');
+        if (nl2) nl2.classList.add('active');
+        document.getElementById('navBack').style.display = 'none';
+        history.replaceState(null, '', '#ai');
+        _loadMySets();
+        window.scrollTo(0, 0);
+      });
+      return;
+    }
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -1067,7 +1081,6 @@
     else if (id === 'courses') history.replaceState(null, '', '#courses');
     else if (id === 'pricing') history.replaceState(null, '', '#pricing');
     else if (id === 'quizzes') { history.replaceState(null, '', '#quizzes'); buildQuizBrowse(); }
-    else if (id === 'ai') { history.replaceState(null, '', '#ai'); _loadMySets(); }
     else if (id === 'study') { /* no hash change for study */ }
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); _loadQuizProgress(); }
     else if (id === 'admin') { history.replaceState(null, '', '#admin'); loadAdminStats(); }
@@ -3783,6 +3796,7 @@
   var _modData = {};
 
   function togglePredict(code, btn) {
+    if (!_currentUser) { openAuthModal(); return; }
     var wrap = btn.closest('.pred-wrap');
     var panel = wrap.querySelector('.pred-panel');
     var isOpen = panel.classList.contains('open');
