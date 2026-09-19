@@ -182,6 +182,15 @@
     .pred-topic-name{font-size:12px;color:var(--text)}
     .pred-evidence{font-size:10px;font-weight:600;opacity:.75}
     .pred-note{font-size:11px;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px solid var(--border);line-height:1.5}
+    /* PREDICTIONS MODAL */
+    .pred-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .2s}
+    .pred-overlay.active{opacity:1;pointer-events:all}
+    .pred-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(520px,95vw);max-height:82vh;display:flex;flex-direction:column;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.2);z-index:1000;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;overflow:hidden}
+    .pred-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+    .pred-modal-hdr{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 24px 16px;border-bottom:1px solid #e2e8f0;flex-shrink:0}
+    .pred-modal-close{background:none;border:none;cursor:pointer;font-size:18px;color:#64748b;padding:4px 8px;border-radius:6px;line-height:1}
+    .pred-modal-close:hover{background:#f1f5f9}
+    .pred-modal-body{flex:1;overflow-y:auto;padding:20px 24px}
     /* MODEL ANSWER MODAL (small overlay) */
     .quiz-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .2s}
     .quiz-overlay.active{opacity:1;pointer-events:all}
@@ -362,6 +371,9 @@
   .dark .btn-predict{color:#c4b5fd;border-color:#7c3aed}.dark .btn-predict:hover,.dark .btn-predict.open{background:rgba(124,58,237,.15)}
   .dark .btn-discuss{color:#93c5fd;border-color:#2563eb}.dark .btn-discuss:hover{background:rgba(37,99,235,.15)}
   .dark .pred-panel{background:#1e293b;border-color:#334155}
+  .dark .pred-modal{background:#1e293b;color:#e2e8f0}
+  .dark .pred-modal-hdr{border-color:#334155}
+  .dark .pred-modal-close:hover{background:#334155}
   .dark .toggle-slider{background:#334155}
   .dark .year-note{background:#1c1917;border-color:#92400e;color:#fcd34d}
   .dark .pathway-card,.dark .deg-card,.dark .cat-card,.dark .course-btn{background:#1e293b;border-color:#334155}
@@ -3797,19 +3809,16 @@
 
   function togglePredict(code, btn) {
     if (!_currentUser) { openAuthModal(); return; }
-    var wrap = btn.closest('.pred-wrap');
-    var panel = wrap.querySelector('.pred-panel');
-    var isOpen = panel.classList.contains('open');
-    document.querySelectorAll('.pred-panel.open').forEach(function(p) { p.classList.remove('open'); });
-    document.querySelectorAll('.btn-predict.open').forEach(function(b) { b.classList.remove('open'); });
-    if (isOpen) return;
-    btn.classList.add('open');
-    panel.classList.add('open');
-    if (_predCache[code]) { _renderPred(panel, _predCache[code]); return; }
-    panel.innerHTML = '<div class="pred-loading">⏳ Analysing past papers…</div>';
+    var mod = _modData[code] || {};
+    var label = code + (mod.name ? ' · ' + mod.name : '');
+    document.getElementById('predModuleLabel').textContent = label;
+    var body = document.getElementById('predModalBody');
+    document.getElementById('predOverlay').classList.add('active');
+    document.getElementById('predModal').classList.add('active');
+    if (_predCache[code]) { _renderPred(body, _predCache[code]); return; }
+    body.innerHTML = '<div class="pred-loading">⏳ Analysing past papers…</div>';
     (async function() {
       try {
-        const mod = _modData[code] || {};
         const resp = await fetch('/api/predict', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -3818,15 +3827,20 @@
         const data = await resp.json();
         if (!resp.ok) throw new Error(data.error || 'Prediction failed');
         _predCache[code] = data;
-        _renderPred(panel, data);
+        _renderPred(body, data);
       } catch(e) {
-        panel.innerHTML = '<div class="pred-loading">⚠️ ' + e.message + '</div>';
+        body.innerHTML = '<div class="pred-loading">⚠️ ' + e.message + '</div>';
       }
     })();
   }
 
-  function _renderPred(panel, data) {
-    var html = '<div class="pred-hdr">📊 Predicted Topics</div>';
+  function closePredModal() {
+    document.getElementById('predOverlay').classList.remove('active');
+    document.getElementById('predModal').classList.remove('active');
+  }
+
+  function _renderPred(container, data) {
+    var html = '';
     if (data.based_on) {
       var icon = data.sources > 0 ? '📄' : '💡';
       html += '<div class="pred-source">' + icon + ' ' + data.based_on + '</div>';
@@ -3851,7 +3865,7 @@
       });
     });
     html += '<div class="pred-note">⚠️ AI predictions only — always study the full syllabus</div>';
-    panel.innerHTML = html;
+    container.innerHTML = html;
   }
 
   // ─── SAVED NOTES ─────────────────────────────────────────────────────────
@@ -4164,6 +4178,19 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
     </div>
   </div>
   <div class="disc-feed" id="discFeed"></div>
+</div>
+
+<!-- PREDICTIONS MODAL -->
+<div class="pred-overlay" id="predOverlay" onclick="if(event.target===this)closePredModal()"></div>
+<div class="pred-modal" id="predModal" role="dialog" aria-modal="true">
+  <div class="pred-modal-hdr">
+    <div>
+      <div style="font-size:17px;font-weight:800">📊 Predicted Topics</div>
+      <div id="predModuleLabel" style="font-size:12px;color:var(--muted);margin-top:2px"></div>
+    </div>
+    <button class="pred-modal-close" onclick="closePredModal()">✕</button>
+  </div>
+  <div class="pred-modal-body" id="predModalBody"></div>
 </div>
 
 <!-- Model answer modal (PDF list only) -->
