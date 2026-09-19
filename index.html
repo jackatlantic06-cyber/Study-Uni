@@ -374,6 +374,34 @@
   .dark .pred-modal{background:#1e293b;color:#e2e8f0}
   .dark .pred-modal-hdr{border-color:#334155}
   .dark .pred-modal-close:hover{background:#334155}
+  /* PLANNER */
+  .planner-page{max-width:680px;margin:0 auto;padding:32px 0 60px}
+  .planner-page h2{font-size:24px;font-weight:800;margin-bottom:4px}
+  .planner-subtitle{color:var(--muted);font-size:14px;margin-bottom:28px}
+  .planner-form{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:20px;margin-bottom:28px}
+  .planner-form-title{font-size:14px;font-weight:700;margin-bottom:14px}
+  .planner-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .planner-fields input,.planner-fields select,.planner-fields textarea{width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
+  .planner-fields input:focus,.planner-fields select:focus,.planner-fields textarea:focus{border-color:var(--accent)}
+  .planner-fields .full{grid-column:1/-1}
+  .planner-add-btn{margin-top:12px;padding:9px 20px;background:var(--accent);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
+  .planner-add-btn:hover{opacity:.88}
+  .planner-empty{text-align:center;padding:48px 0;color:var(--muted);font-size:14px}
+  .deadline-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px}
+  .deadline-badge{width:52px;height:52px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800}
+  .deadline-badge .days-num{font-size:18px;line-height:1}
+  .deadline-badge .days-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;opacity:.8}
+  .deadline-info{flex:1;min-width:0}
+  .deadline-title{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .deadline-meta{font-size:12px;color:var(--muted);margin-top:2px}
+  .deadline-type{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-right:6px}
+  .deadline-del{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px 6px;border-radius:6px;flex-shrink:0;transition:color .15s}
+  .deadline-del:hover{color:#ef4444}
+  .planner-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:20px 0 8px}
+  .dark .planner-form{background:#1e293b;border-color:#334155}
+  .dark .planner-fields input,.dark .planner-fields select,.dark .planner-fields textarea{background:#1e293b;border-color:#334155;color:#e2e8f0}
+  .dark .deadline-card{background:#1e293b;border-color:#334155}
+  @media(max-width:520px){.planner-fields{grid-template-columns:1fr}}
   .dark .toggle-slider{background:#334155}
   .dark .year-note{background:#1c1917;border-color:#92400e;color:#fcd34d}
   .dark .pathway-card,.dark .deg-card,.dark .cat-card,.dark .course-btn{background:#1e293b;border-color:#334155}
@@ -740,6 +768,7 @@
     <a href="#" onclick="showPage('quizzes');closeMobileNav()" id="nl-quizzes">Quiz ⚡</a>
     <a href="#" onclick="showPage('pricing');closeMobileNav()" id="nl-pricing">Pricing</a>
     <a href="#" onclick="showPage('ai');closeMobileNav()" id="nl-ai">StudyAI ✨</a>
+    <a href="#" onclick="showPage('planner');closeMobileNav()" id="nl-planner" style="display:none">Planner 📅</a>
     <a href="#" onclick="showPage('admin');closeMobileNav()" id="nl-admin" style="display:none">Admin</a>
   </div>
   <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
@@ -1096,6 +1125,7 @@
     else if (id === 'study') { /* no hash change for study */ }
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); _loadQuizProgress(); }
     else if (id === 'admin') { history.replaceState(null, '', '#admin'); loadAdminStats(); }
+    else if (id === 'planner') { history.replaceState(null, '', '#planner'); _plRender(); }
     else if (id === 'privacy') history.replaceState(null, '', '#privacy');
     else if (id === 'terms') history.replaceState(null, '', '#terms');
     window.scrollTo(0,0);
@@ -2687,6 +2717,9 @@
       btn.className = 'nav-auth-btn btn-signin-nav';
       btn.onclick = openAuthModal;
     }
+    // Show Planner link when logged in
+    const plannerLink = document.getElementById('nl-planner');
+    if (plannerLink) plannerLink.style.display = _currentUser ? '' : 'none';
     // Show Admin link only to owners
     const adminLink = document.getElementById('nl-admin');
     if (adminLink) {
@@ -3868,6 +3901,96 @@
     container.innerHTML = html;
   }
 
+  // ─── PLANNER ──────────────────────────────────────────────────────────────
+  function _plKey() { return 'pl_' + (_currentUser ? _currentUser.id : 'guest'); }
+  function _plLoad() { try { return JSON.parse(localStorage.getItem(_plKey()) || '[]'); } catch(e) { return []; } }
+  function _plSave(items) { try { localStorage.setItem(_plKey(), JSON.stringify(items)); } catch(e) {} }
+
+  function plannerAdd() {
+    var module = (document.getElementById('pl-module').value || '').trim().toUpperCase();
+    var title  = (document.getElementById('pl-title').value || '').trim();
+    var type   = document.getElementById('pl-type').value;
+    var date   = document.getElementById('pl-date').value;
+    var notes  = (document.getElementById('pl-notes').value || '').trim();
+    if (!title) { showToast('Please enter a title.'); return; }
+    if (!date)  { showToast('Please pick a date.'); return; }
+    var items = _plLoad();
+    items.push({ id: Date.now(), module: module, title: title, type: type, date: date, notes: notes });
+    _plSave(items);
+    document.getElementById('pl-module').value = '';
+    document.getElementById('pl-title').value = '';
+    document.getElementById('pl-date').value = '';
+    document.getElementById('pl-notes').value = '';
+    _plRender();
+  }
+
+  function plannerDelete(id) {
+    var items = _plLoad().filter(function(i) { return i.id !== id; });
+    _plSave(items);
+    _plRender();
+  }
+
+  function _plRender() {
+    var container = document.getElementById('plannerList');
+    if (!container) return;
+    var items = _plLoad();
+    if (!items.length) {
+      container.innerHTML = '<div class="planner-empty">No deadlines yet — add one above 🎉</div>';
+      return;
+    }
+    var now = new Date(); now.setHours(0,0,0,0);
+    items.sort(function(a,b) { return new Date(a.date) - new Date(b.date); });
+
+    var upcoming = items.filter(function(i) { return new Date(i.date) >= now; });
+    var overdue  = items.filter(function(i) { return new Date(i.date) < now; });
+
+    var typeColors = {
+      exam:       { bg:'#fee2e2', color:'#b91c1c' },
+      ca:         { bg:'#fef3c7', color:'#92400e' },
+      assignment: { bg:'#dbeafe', color:'#1d4ed8' },
+      project:    { bg:'#f3e8ff', color:'#7c3aed' },
+      other:      { bg:'#f1f5f9', color:'#475569' },
+    };
+    var typeLabels = { exam:'Exam', ca:'CA', assignment:'Assignment', project:'Project', other:'Other' };
+
+    function renderCard(item) {
+      var d = new Date(item.date); d.setHours(0,0,0,0);
+      var diff = Math.round((d - now) / 86400000);
+      var isOverdue = diff < 0;
+      var badgeBg, badgeColor;
+      if (isOverdue)    { badgeBg = '#fee2e2'; badgeColor = '#b91c1c'; }
+      else if (diff <= 7)  { badgeBg = '#fef3c7'; badgeColor = '#92400e'; }
+      else if (diff <= 14) { badgeBg = '#dbeafe'; badgeColor = '#1d4ed8'; }
+      else                 { badgeBg = '#dcfce7'; badgeColor = '#15803d'; }
+      var daysLabel = isOverdue ? Math.abs(diff) + '<br><span class="days-lbl">days ago</span>'
+                                : diff + '<br><span class="days-lbl">' + (diff === 1 ? 'day' : 'days') + '</span>';
+      var tc = typeColors[item.type] || typeColors.other;
+      var dateStr = new Date(item.date + 'T00:00:00').toLocaleDateString('en-IE', { day:'numeric', month:'short', year:'numeric' });
+      return '<div class="deadline-card">'
+        + '<div class="deadline-badge" style="background:' + badgeBg + ';color:' + badgeColor + '">'
+        + '<span class="days-num">' + daysLabel + '</span></div>'
+        + '<div class="deadline-info">'
+        + '<div class="deadline-title">' + (item.module ? '<span style="color:var(--accent)">' + item.module + '</span> · ' : '') + item.title + '</div>'
+        + '<div class="deadline-meta">'
+        + '<span class="deadline-type" style="background:' + tc.bg + ';color:' + tc.color + '">' + (typeLabels[item.type] || 'Other') + '</span>'
+        + dateStr + (item.notes ? ' · ' + item.notes : '')
+        + '</div></div>'
+        + '<button class="deadline-del" onclick="plannerDelete(' + item.id + ')" title="Remove">✕</button>'
+        + '</div>';
+    }
+
+    var html = '';
+    if (upcoming.length) {
+      html += '<div class="planner-section-label">Upcoming</div>';
+      html += upcoming.map(renderCard).join('');
+    }
+    if (overdue.length) {
+      html += '<div class="planner-section-label" style="color:#ef4444">Overdue</div>';
+      html += overdue.map(renderCard).join('');
+    }
+    container.innerHTML = html;
+  }
+
   // ─── SAVED NOTES ─────────────────────────────────────────────────────────
   function _snKey() { return 'sn_' + (_currentUser ? _currentUser.id : 'guest'); }
   function _snLoad() { try { return JSON.parse(localStorage.getItem(_snKey()) || '[]'); } catch(e) { return []; } }
@@ -4083,6 +4206,34 @@
     <p>Questions about these Terms: <a href="mailto:studyuni26@gmail.com">studyuni26@gmail.com</a></p>
 
     <p style="margin-top:32px"><a onclick="history.back();return false" href="#" style="color:var(--accent)">← Back</a></p>
+  </div>
+</div>
+
+<!-- PLANNER PAGE -->
+<div class="page" id="page-planner">
+  <div class="planner-page">
+    <h2>📅 My Planner</h2>
+    <p class="planner-subtitle">Track your upcoming exams, CAs and assignments in one place.</p>
+
+    <div class="planner-form">
+      <div class="planner-form-title">Add a deadline</div>
+      <div class="planner-fields">
+        <input id="pl-module" type="text" placeholder="Module code (e.g. AC1100)" maxlength="20">
+        <input id="pl-title" type="text" placeholder="Title (e.g. Mid-term exam)" maxlength="80">
+        <select id="pl-type">
+          <option value="exam">Exam</option>
+          <option value="ca">Continuous Assessment</option>
+          <option value="assignment">Assignment</option>
+          <option value="project">Project</option>
+          <option value="other">Other</option>
+        </select>
+        <input id="pl-date" type="date">
+        <input id="pl-notes" type="text" placeholder="Notes (optional)" maxlength="120" class="full">
+      </div>
+      <button class="planner-add-btn" onclick="plannerAdd()">Add deadline</button>
+    </div>
+
+    <div id="plannerList"></div>
   </div>
 </div>
 
