@@ -806,6 +806,7 @@
     <h3>⭐ My Modules</h3>
     <div id="myModulesGrid" class="course-grid"></div>
   </div>
+  <div id="homeDeadlinesWidget" style="display:none;margin-bottom:20px"></div>
   <div id="trendingSection" style="display:none;margin-bottom:8px;text-align:left">
     <h3 style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">🔥 Your Most Visited</h3>
     <div id="trendingGrid" class="course-grid"></div>
@@ -2720,6 +2721,7 @@
     // Show Planner link when logged in
     const plannerLink = document.getElementById('nl-planner');
     if (plannerLink) plannerLink.style.display = _currentUser ? '' : 'none';
+    _plRenderHome();
     // Show Admin link only to owners
     const adminLink = document.getElementById('nl-admin');
     if (adminLink) {
@@ -3922,12 +3924,14 @@
     document.getElementById('pl-date').value = '';
     document.getElementById('pl-notes').value = '';
     _plRender();
+    _plRenderHome();
   }
 
   function plannerDelete(id) {
     var items = _plLoad().filter(function(i) { return i.id !== id; });
     _plSave(items);
     _plRender();
+    _plRenderHome();
   }
 
   function _plRender() {
@@ -3989,6 +3993,46 @@
       html += overdue.map(renderCard).join('');
     }
     container.innerHTML = html;
+  }
+
+  function _plRenderHome() {
+    var widget = document.getElementById('homeDeadlinesWidget');
+    if (!widget) return;
+    if (!_currentUser) { widget.style.display = 'none'; return; }
+    var now = new Date(); now.setHours(0,0,0,0);
+    var upcoming = _plLoad()
+      .filter(function(i) { return new Date(i.date) >= now; })
+      .sort(function(a,b) { return new Date(a.date) - new Date(b.date); })
+      .slice(0, 3);
+    if (!upcoming.length) { widget.style.display = 'none'; return; }
+    var typeColors = {
+      exam:'#fee2e2|#b91c1c', ca:'#fef3c7|#92400e',
+      assignment:'#dbeafe|#1d4ed8', project:'#f3e8ff|#7c3aed', other:'#f1f5f9|#475569'
+    };
+    var typeLabels = { exam:'Exam', ca:'CA', assignment:'Assignment', project:'Project', other:'Other' };
+    var cards = upcoming.map(function(item) {
+      var d = new Date(item.date); d.setHours(0,0,0,0);
+      var diff = Math.round((d - now) / 86400000);
+      var badgeBg = diff <= 7 ? '#fee2e2' : diff <= 14 ? '#fef3c7' : '#dcfce7';
+      var badgeColor = diff <= 7 ? '#b91c1c' : diff <= 14 ? '#92400e' : '#15803d';
+      var tc = (typeColors[item.type] || typeColors.other).split('|');
+      var dateStr = new Date(item.date + 'T00:00:00').toLocaleDateString('en-IE',{day:'numeric',month:'short'});
+      return '<div style="display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;flex:1;min-width:160px;max-width:260px">'
+        + '<div style="width:44px;height:44px;border-radius:8px;background:' + badgeBg + ';color:' + badgeColor + ';display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:16px;line-height:1">'
+        + diff + '<span style="font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;opacity:.8">' + (diff === 1 ? 'day' : 'days') + '</span></div>'
+        + '<div style="min-width:0;flex:1">'
+        + '<div style="font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'
+        + (item.module ? '<span style="color:var(--accent)">' + item.module + '</span> · ' : '') + item.title + '</div>'
+        + '<div style="font-size:11px;color:var(--muted);margin-top:2px">'
+        + '<span style="display:inline-block;padding:1px 6px;border-radius:999px;background:' + tc[0] + ';color:' + tc[1] + ';font-size:9px;font-weight:700;text-transform:uppercase;margin-right:4px">' + (typeLabels[item.type]||'Other') + '</span>'
+        + dateStr + '</div></div></div>';
+    }).join('');
+    widget.style.display = 'block';
+    widget.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
+      + '<h3 style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:0">📅 Upcoming Deadlines</h3>'
+      + '<a href="#" onclick="showPage(\'planner\');return false" style="font-size:12px;color:var(--accent);font-weight:600;text-decoration:none">View all →</a>'
+      + '</div>'
+      + '<div style="display:flex;gap:10px;flex-wrap:wrap">' + cards + '</div>';
   }
 
   // ─── SAVED NOTES ─────────────────────────────────────────────────────────
