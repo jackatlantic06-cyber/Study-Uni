@@ -628,7 +628,10 @@
   .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
   .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .nl-mobile-auth{display:none}
   @media(max-width:680px){
+    #navAuthBtn{display:none!important}
+    .nl-mobile-auth{display:block}
     .nav-hamburger{display:flex}
     .nav-links{display:none;position:fixed;top:72px;left:0;right:0;bottom:0;background:var(--surface);flex-direction:column;padding:0;z-index:99;border-top:1px solid var(--border);overflow-y:auto;gap:0;margin-left:0}
     .nav-links.mobile-open{display:flex}
@@ -770,6 +773,7 @@
     <a href="#" onclick="showPage('ai');closeMobileNav()" id="nl-ai">StudyAI ✨</a>
     <a href="#" onclick="showPage('planner');closeMobileNav()" id="nl-planner" style="display:none">Planner 📅</a>
     <a href="#" onclick="showPage('admin');closeMobileNav()" id="nl-admin" style="display:none">Admin</a>
+    <a href="#" id="nl-mobile-auth" class="nl-mobile-auth" onclick="closeMobileNav()">Sign in</a>
   </div>
   <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
   <button class="nav-auth-btn btn-signin-nav" id="navAuthBtn" onclick="openAuthModal()" style="display:none">Sign in</button>
@@ -2717,6 +2721,17 @@
       btn.textContent = 'Sign in';
       btn.className = 'nav-auth-btn btn-signin-nav';
       btn.onclick = openAuthModal;
+    }
+    // Mobile menu auth link
+    var mobileAuth = document.getElementById('nl-mobile-auth');
+    if (mobileAuth) {
+      if (_currentUser) {
+        mobileAuth.textContent = '👤 ' + _currentUser.email.split('@')[0];
+        mobileAuth.onclick = function() { showPage('account'); closeMobileNav(); };
+      } else {
+        mobileAuth.textContent = 'Sign in';
+        mobileAuth.onclick = function() { openAuthModal(); closeMobileNav(); };
+      }
     }
     // Show Planner link when logged in
     const plannerLink = document.getElementById('nl-planner');
