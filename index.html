@@ -1742,7 +1742,7 @@
       const _hasNewMA = _maEntries && (Array.isArray(_maEntries) ? _maEntries.some(a => NEW_URLS.has(a.url)) : NEW_URLS.has(_maEntries));
       const _isFreeMA = FREE_PREVIEW_MA.indexOf(m.code) !== -1;
       const modelBtn = hasModelAnswer
-        ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">✦ Model Answer${_hasNewMA ? ' <span class="badge-new">New</span>' : ''}${_isFreeMA ? ' <span class="badge-free">Free</span>' : ''}</button>`
+        ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">📖 Model Answer${_hasNewMA ? ' <span class="badge-new">New</span>' : ''}${_isFreeMA ? ' <span class="badge-free">Free</span>' : ''}</button>`
         : '';
       const _qbEntry = QUIZ_BANK[m.code];
       const quizBtn = (_qbEntry && (Array.isArray(_qbEntry) ? _qbEntry.length > 0 : Object.keys(_qbEntry).length > 0))
@@ -3023,10 +3023,10 @@
 
   // ── FREE PREVIEW MODULES (most recent marking scheme always free) ────────
   const FREE_PREVIEW_MA = [
-    'AC1100','EC1207','IS1105',  // Year 1 Commerce
-    'AC2100','EC2100','MG2001',  // Year 2 Commerce
-    'AC3008','EC3100','MG3012',  // Year 3 Commerce
-    'AC4407','EC4100','MG4041'   // Year 4 Commerce
+    'AC1100','EC1207','EC1208',  // Year 1 Commerce
+    'AC2204','AC2205','EC2200',  // Year 2 Commerce
+    'AC3302','AC3303','EC3008',  // Year 3 Commerce
+    'AC4407','AC4408','AC4409'   // Year 4 Commerce
   ];
 
   // ── FREE TRIAL ────────────────────────────────────────────────────────────
