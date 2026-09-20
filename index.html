@@ -1751,7 +1751,7 @@
 
       let paperRows = '';
       if (regularPapers.length) {
-        paperRows = regularPapers.map(f => {
+        paperRows = regularPapers.map((f, _fi) => {
           const url = typeof f === 'object' ? f.url : f;
           const lbl = typeof f === 'object' ? f.label : labelFromFilename(f);
           const safeUrl = url.replace(/'/g,"\'");
@@ -1760,7 +1760,10 @@
           const vTick   = '<span class="viewed-tick">&#10003;</span>';
           const practiced = PRACTICED.has(url);
           const doneBtn = `<button class="done-btn${practiced?' done':''}" onclick="togglePracticed('${safeUrl}',this)">${practiced?'✓ Done':'Mark done'}</button>`;
-          return `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${doneBtn}${modelBtn}${quizBtn}</div>`;
+          // Only show Model Answer button on the first (most recent) row; others get nothing
+          const rowModelBtn = _fi === 0 ? modelBtn : '';
+          const rowQuizBtn  = _fi === 0 ? quizBtn  : '';
+          return `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${doneBtn}${rowModelBtn}${rowQuizBtn}</div>`;
         }).join('');
       } else {
         paperRows = `<div class="paper-row"><span class="no-papers">No papers yet</span>${modelBtn}${quizBtn}</div>`;
@@ -1910,13 +1913,25 @@
     }
     if (docs.length === 1) { window.open(docs[0].url, '_blank'); return; }
     document.getElementById('maCode').textContent = code;
+    // Identify the most recent paper (highest year in label) for free preview badge
+    var _isFPModal = FREE_PREVIEW_MA.indexOf(code) !== -1;
+    var _freeUrl = null;
+    if (_isFPModal) {
+      var _sorted = docs.slice().sort(function(a,b){
+        var ya=parseInt((a.label.match(/\d{4}/)||['0'])[0]);
+        var yb=parseInt((b.label.match(/\d{4}/)||['0'])[0]);
+        return yb-ya;
+      });
+      _freeUrl = _sorted[0].url;
+    }
     document.getElementById('maBody').innerHTML = docs.map(function(d) {
-      const newBadge = NEW_URLS.has(d.url) ? '<span class="badge-new">New</span>' : '';
+      const newBadge  = NEW_URLS.has(d.url) ? '<span class="badge-new">New</span>' : '';
+      const freeBadge = (_isFPModal && d.url === _freeUrl) ? '<span class="badge-free" style="margin-left:6px">Free</span>' : '';
       return '<a class="paper-chip" href="' + d.url + '" target="_blank" rel="noopener" ' +
              'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
              'margin-bottom:8px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;' +
              'font-weight:500;color:#0f172a;text-decoration:none">' +
-             '<span style="font-size:18px">&#128196;</span>' + d.label + newBadge + '</a>';
+             '<span style="font-size:18px">&#128196;</span>' + d.label + newBadge + freeBadge + '</a>';
     }).join('');
     document.getElementById('maOverlay').classList.add('active');
     document.getElementById('maModal').classList.add('active');
@@ -3008,7 +3023,7 @@
 
   // ── FREE PREVIEW MODULES (most recent marking scheme always free) ────────
   const FREE_PREVIEW_MA = [
-    'AC1100','EC1207','IS1100',  // Year 1 Commerce
+    'AC1100','EC1207','IS1105',  // Year 1 Commerce
     'AC2100','EC2100','MG2001',  // Year 2 Commerce
     'AC3008','EC3100','MG3012',  // Year 3 Commerce
     'AC4407','EC4100','MG4041'   // Year 4 Commerce
