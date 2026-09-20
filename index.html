@@ -429,6 +429,8 @@
   /* ── NEW BADGE ─────────────────────────────────────────────────────── */
   .badge-new{display:inline-block;background:#dcfce7;color:#15803d;border-radius:999px;padding:1px 6px;font-size:9px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.03em;text-transform:uppercase}
   .dark .badge-new{background:rgba(22,163,74,.25);color:#86efac}
+  .badge-free{display:inline-block;background:#eff6ff;color:#2563eb;border-radius:999px;padding:1px 6px;font-size:9px;font-weight:700;margin-left:4px;vertical-align:middle;letter-spacing:.03em;text-transform:uppercase}
+  .dark .badge-free{background:rgba(96,165,250,.2);color:#93c5fd}
   /* ── PROGRESS TRACKER ──────────────────────────────────────────── */
   .done-btn{background:none;border:1.5px solid var(--border);border-radius:999px;cursor:pointer;font-size:10px;font-weight:700;padding:2px 8px;color:var(--muted);transition:all .15s;font-family:inherit;white-space:nowrap;line-height:1.4}
   .done-btn:hover{border-color:#16a34a;color:#16a34a}
@@ -1738,8 +1740,9 @@
       const hasModelAnswer = !!MODEL_ANSWERS[m.code];
       const _maEntries = MODEL_ANSWERS[m.code];
       const _hasNewMA = _maEntries && (Array.isArray(_maEntries) ? _maEntries.some(a => NEW_URLS.has(a.url)) : NEW_URLS.has(_maEntries));
+      const _isFreeMA = FREE_PREVIEW_MA.indexOf(m.code) !== -1;
       const modelBtn = hasModelAnswer
-        ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">✦ Model Answer${_hasNewMA ? ' <span class="badge-new">New</span>' : ''}</button>`
+        ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">✦ Model Answer${_hasNewMA ? ' <span class="badge-new">New</span>' : ''}${_isFreeMA ? ' <span class="badge-free">Free</span>' : ''}</button>`
         : '';
       const _qbEntry = QUIZ_BANK[m.code];
       const quizBtn = (_qbEntry && (Array.isArray(_qbEntry) ? _qbEntry.length > 0 : Object.keys(_qbEntry).length > 0))
@@ -1890,6 +1893,21 @@
     const val = MODEL_ANSWERS[code];
     if (!val) return;
     const docs = Array.isArray(val) ? val : [{ label: 'Model Answer', url: val }];
+    // Free preview: logged-in free users on preview modules get only the most recent paper
+    if (FREE_PREVIEW_MA.indexOf(code) !== -1 && _currentUser && !_isSubscribed) {
+      const _ow = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+      const _pr = (window.SU_CONFIG && window.SU_CONFIG.PRO_EMAILS)   || [];
+      if (!_ow.includes(_currentUser.email) && !_pr.includes(_currentUser.email)) {
+        const sorted = docs.slice().sort(function(a,b){
+          var ya=parseInt((a.label.match(/\d{4}/)||['0'])[0]);
+          var yb=parseInt((b.label.match(/\d{4}/)||['0'])[0]);
+          return yb-ya;
+        });
+        window.open(sorted[0].url,'_blank');
+        _showTrialToast('🔓 Free preview — most recent paper · Upgrade to Pro for all years ✦');
+        return;
+      }
+    }
     if (docs.length === 1) { window.open(docs[0].url, '_blank'); return; }
     document.getElementById('maCode').textContent = code;
     document.getElementById('maBody').innerHTML = docs.map(function(d) {
@@ -2459,9 +2477,16 @@
       }
       _pendingAction = null; fn(); return;
     }
-    // ── Free trial: 1 quiz + 1 model answer for everyone ─────────────────
+    // ── Free preview modules — logged-in free users always get through ───
     const isQuiz = actionKey && actionKey.startsWith('quiz:');
     const isMS   = actionKey && actionKey.startsWith('modelAnswer:');
+    if (isMS) {
+      var _fpCode = actionKey.slice(12);
+      if (FREE_PREVIEW_MA.indexOf(_fpCode) !== -1) {
+        if (!_currentUser) { openAuthModal(); return; }
+        _pendingAction = null; fn(); return;
+      }
+    }
     if (isQuiz && TRIAL.quiz < 1) {
       TRIAL.quiz++; _saveTrial(); _pendingAction = null;
       _showTrialToast('Free trial quiz used — subscribe for unlimited access ⚡');
@@ -2980,6 +3005,14 @@
     './marking-schemes/AC2206_AC3302_Winter2023_Marking_Scheme.pdf',
     './marking-schemes/AC2206_AC3302_Autumn2021_Marking_Scheme.pdf',
   ]);
+
+  // ── FREE PREVIEW MODULES (most recent marking scheme always free) ────────
+  const FREE_PREVIEW_MA = [
+    'AC1100','EC1207','IS1100',  // Year 1 Commerce
+    'AC2100','EC2100','MG2001',  // Year 2 Commerce
+    'AC3008','EC3100','MG3012',  // Year 3 Commerce
+    'AC4407','EC4100','MG4041'   // Year 4 Commerce
+  ];
 
   // ── FREE TRIAL ────────────────────────────────────────────────────────────
   const TRIAL = (function() {
