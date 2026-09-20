@@ -1760,8 +1760,10 @@
           const vTick   = '<span class="viewed-tick">&#10003;</span>';
           const practiced = PRACTICED.has(url);
           const doneBtn = `<button class="done-btn${practiced?' done':''}" onclick="togglePracticed('${safeUrl}',this)">${practiced?'✓ Done':'Mark done'}</button>`;
-          // Only show Model Answer button on the first (most recent) row; others get nothing
-          const rowModelBtn = _fi === 0 ? modelBtn : '';
+          const rowFreeBA = _isFreeMA && _fi === 0 ? ' <span class="badge-free">Free</span>' : '';
+          const rowModelBtn = hasModelAnswer
+            ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">📖 Model Answer${_hasNewMA && _fi === 0 ? ' <span class="badge-new">New</span>' : ''}${rowFreeBA}</button>`
+            : '';
           const rowQuizBtn  = _fi === 0 ? quizBtn  : '';
           return `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${doneBtn}${rowModelBtn}${rowQuizBtn}</div>`;
         }).join('');
