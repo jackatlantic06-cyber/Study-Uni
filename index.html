@@ -1901,25 +1901,8 @@
     const val = MODEL_ANSWERS[code];
     if (!val) return;
     const docs = Array.isArray(val) ? val : [{ label: 'Model Answer', url: val }];
-    // Free preview: logged-in free users on preview modules get only the most recent paper
-    if (FREE_PREVIEW_MA.indexOf(code) !== -1 && _currentUser && !_isSubscribed) {
-      const _ow = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
-      const _pr = (window.SU_CONFIG && window.SU_CONFIG.PRO_EMAILS)   || [];
-      if (!_ow.includes(_currentUser.email) && !_pr.includes(_currentUser.email)) {
-        const sorted = docs.slice().sort(function(a,b){
-          var ya=parseInt((a.label.match(/\d{4}/)||['0'])[0]);
-          var yb=parseInt((b.label.match(/\d{4}/)||['0'])[0]);
-          return yb-ya;
-        });
-        window.open(sorted[0].url,'_blank');
-        _showTrialToast('🔓 Free preview — most recent paper · Upgrade to Pro for all years ✦');
-        return;
-      }
-    }
-    if (docs.length === 1) { window.open(docs[0].url, '_blank'); return; }
-    document.getElementById('maCode').textContent = code;
-    // Identify the most recent paper (highest year in label) for free preview badge
-    var _isFPModal = FREE_PREVIEW_MA.indexOf(code) !== -1;
+    // Determine free-preview context
+    const _isFPModal = FREE_PREVIEW_MA.indexOf(code) !== -1;
     var _freeUrl = null;
     if (_isFPModal) {
       var _sorted = docs.slice().sort(function(a,b){
@@ -1929,15 +1912,38 @@
       });
       _freeUrl = _sorted[0].url;
     }
+    const _ow = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+    const _pr = (window.SU_CONFIG && window.SU_CONFIG.PRO_EMAILS)   || [];
+    const _isFreeUser = _isFPModal && _currentUser && !_isSubscribed &&
+      !_ow.includes(_currentUser.email) && !_pr.includes(_currentUser.email);
+    // Single doc with no free-user restriction: open directly
+    if (docs.length === 1 && !_isFreeUser) { window.open(docs[0].url, '_blank'); return; }
+    // Build picker modal
+    document.getElementById('maCode').textContent = code;
     document.getElementById('maBody').innerHTML = docs.map(function(d) {
       const newBadge  = NEW_URLS.has(d.url) ? '<span class="badge-new">New</span>' : '';
-      const freeBadge = (_isFPModal && d.url === _freeUrl) ? '<span class="badge-free" style="margin-left:6px">Free</span>' : '';
+      const isFreeDoc = _isFPModal && d.url === _freeUrl;
+      const freeBadge = isFreeDoc ? '<span class="badge-free" style="margin-left:6px">Free</span>' : '';
+      if (_isFreeUser && !isFreeDoc) {
+        // Locked entry — clicking shows Pro modal
+        return '<div onclick="closeModelAnswer();openProModal()" ' +
+               'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
+               'margin-bottom:8px;border:1.5px solid var(--border);border-radius:10px;background:var(--surface);' +
+               'font-weight:500;color:var(--muted);cursor:pointer;user-select:none">' +
+               '<span style="font-size:18px">🔒</span>' + d.label + newBadge +
+               '<span style="margin-left:6px;display:inline-block;background:#fef3c7;color:#b45309;border-radius:999px;padding:1px 7px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">Pro</span></div>';
+      }
       return '<a class="paper-chip" href="' + d.url + '" target="_blank" rel="noopener" ' +
              'style="display:flex;align-items:center;gap:10px;padding:13px 16px;font-size:14px;' +
              'margin-bottom:8px;border:1.5px solid #e2e8f0;border-radius:10px;background:#fff;' +
              'font-weight:500;color:#0f172a;text-decoration:none">' +
              '<span style="font-size:18px">&#128196;</span>' + d.label + newBadge + freeBadge + '</a>';
     }).join('');
+    if (_isFreeUser) {
+      document.getElementById('maBody').insertAdjacentHTML('afterbegin',
+        '<p style="font-size:12px;color:var(--muted);margin-bottom:12px;text-align:center">' +
+        '🔓 Most recent paper free · <a href="#" onclick="closeModelAnswer();openProModal();return false" style="color:var(--accent);font-weight:600">Upgrade to Pro</a> for all years</p>');
+    }
     document.getElementById('maOverlay').classList.add('active');
     document.getElementById('maModal').classList.add('active');
   }
