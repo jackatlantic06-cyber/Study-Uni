@@ -86,6 +86,7 @@ module.exports = async (req, res) => {
     try {
       const { data: views } = await sb.from('course_views')
         .select('course_id')
+        .gt('created_at', weekAgo)
         .order('created_at', { ascending: false })
         .limit(2000);
       if (views && views.length > 0) {
