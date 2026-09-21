@@ -623,6 +623,7 @@
   .admin-refresh{padding:7px 16px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);background:none;font-family:inherit;transition:all .18s}
   .admin-refresh:hover{border-color:var(--accent);color:var(--accent)}
   .admin-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}
+  @media(max-width:640px){.admin-two-col{grid-template-columns:1fr!important}}
   .dark .admin-table th{background:#0f172a}
 
   /* ── MOBILE RESPONSIVE ─────────────────────────────────────────────────────── */
@@ -3731,6 +3732,7 @@
       }
       if (grid) grid.innerHTML = `
         <div class="admin-stat"><div class="admin-stat-num" id="asTotalUsers">—</div><div class="admin-stat-label">Total users</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asToday" style="color:#16a34a">—</div><div class="admin-stat-label">Sign-ups today</div></div>
         <div class="admin-stat"><div class="admin-stat-num" id="asWeekly">—</div><div class="admin-stat-label">New this week</div></div>
         <div class="admin-stat"><div class="admin-stat-num" id="asPro">—</div><div class="admin-stat-label">Pro subscribers</div></div>
         <div class="admin-stat"><div class="admin-stat-num" id="asFree">—</div><div class="admin-stat-label">Free users</div></div>
@@ -3738,6 +3740,7 @@
         <div class="admin-stat"><div class="admin-stat-num" id="asQuizzes">—</div><div class="admin-stat-label">Quizzes this week</div></div>`;
       const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
       set('asTotalUsers', (d.totalUsers||0).toLocaleString());
+      set('asToday',      '+' + (d.todaySignups||0));
       set('asWeekly',     '+' + (d.weeklySignups||0));
       set('asPro',        (d.proCount||0).toLocaleString());
       set('asFree',       (d.freeCount||0).toLocaleString());
@@ -3749,8 +3752,19 @@
         if (!d.topCourses || d.topCourses.length === 0) {
           courseBody.innerHTML = '<div class="admin-empty">No view data yet — tracking starts once the course_views table is created.</div>';
         } else {
-          courseBody.innerHTML = '<table class="admin-table"><thead><tr><th>#</th><th>Course ID</th><th>Views</th></tr></thead><tbody>' +
-            d.topCourses.map((c, i) => `<tr><td style="color:var(--muted)">${i+1}</td><td style="font-family:monospace;font-weight:600;color:var(--accent)">${c.id}</td><td>${c.count.toLocaleString()}</td></tr>`).join('') +
+          courseBody.innerHTML = '<table class="admin-table"><thead><tr><th>#</th><th>Course</th><th>Views</th></tr></thead><tbody>' +
+            d.topCourses.map((c, i) => `<tr><td style="color:var(--muted);font-weight:700">${i+1}</td><td style="font-family:monospace;font-weight:600;color:var(--accent)">${c.id}</td><td style="font-weight:700">${c.count.toLocaleString()}</td></tr>`).join('') +
+            '</tbody></table>';
+        }
+      }
+      // Most signed-up courses table
+      const signupBody = document.getElementById('adminSignupCoursesBody');
+      if (signupBody) {
+        if (!d.topSignupCourses || d.topSignupCourses.length === 0) {
+          signupBody.innerHTML = '<div class="admin-empty">No course data yet — users need to select a course on sign-up.</div>';
+        } else {
+          signupBody.innerHTML = '<table class="admin-table"><thead><tr><th>#</th><th>Course</th><th>Sign-ups</th></tr></thead><tbody>' +
+            d.topSignupCourses.map((c, i) => `<tr><td style="color:var(--muted);font-weight:700">${i+1}</td><td style="font-weight:600">${c.course}</td><td style="font-weight:700">${c.count.toLocaleString()}</td></tr>`).join('') +
             '</tbody></table>';
         }
       }
@@ -4362,17 +4376,24 @@
     </div>
     <div class="admin-grid" id="adminStatGrid">
       <div class="admin-stat"><div class="admin-stat-num" id="asTotalUsers">—</div><div class="admin-stat-label">Total users</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asToday" style="color:#16a34a">—</div><div class="admin-stat-label">Sign-ups today</div></div>
       <div class="admin-stat"><div class="admin-stat-num" id="asWeekly">—</div><div class="admin-stat-label">New this week</div></div>
       <div class="admin-stat"><div class="admin-stat-num" id="asPro">—</div><div class="admin-stat-label">Pro subscribers</div></div>
       <div class="admin-stat"><div class="admin-stat-num" id="asFree">—</div><div class="admin-stat-label">Free users</div></div>
       <div class="admin-stat"><div class="admin-stat-num" id="asConv">—</div><div class="admin-stat-label">Conversion rate</div></div>
       <div class="admin-stat"><div class="admin-stat-num" id="asQuizzes">—</div><div class="admin-stat-label">Quizzes this week</div></div>
     </div>
-    <div class="admin-section">
-      <div class="admin-section-hdr">🔥 Most Viewed Courses</div>
-      <div id="adminCourseBody"><div class="admin-empty">Click Refresh to load data.</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0" class="admin-two-col">
+      <div class="admin-section" style="margin-bottom:0">
+        <div class="admin-section-hdr">🔥 Most Viewed Courses</div>
+        <div id="adminCourseBody"><div class="admin-empty">Click Refresh to load data.</div></div>
+      </div>
+      <div class="admin-section" style="margin-bottom:0">
+        <div class="admin-section-hdr">🎓 Most Signed-Up Courses</div>
+        <div id="adminSignupCoursesBody"><div class="admin-empty">Click Refresh to load data.</div></div>
+      </div>
     </div>
-    <div class="admin-section">
+    <div class="admin-section" style="margin-top:16px">
       <div class="admin-section-hdr">📊 Quiz Activity (this week)</div>
       <div id="adminQuizBody"><div class="admin-empty">Click Refresh to load data.</div></div>
     </div>

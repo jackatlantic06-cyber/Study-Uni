@@ -23,6 +23,7 @@ module.exports = async (req, res) => {
 
   try {
     const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const todayStart = new Date(); todayStart.setUTCHours(0, 0, 0, 0);
 
     // All users (paginated — handles up to 10k)
     const { data: usersPage, error: listErr } = await sb.auth.admin.listUsers({ perPage: 10000 });
@@ -30,6 +31,7 @@ module.exports = async (req, res) => {
     const allUsers = (usersPage && usersPage.users) || [];
     const totalUsers = allUsers.length;
     const weeklySignups = allUsers.filter(u => u.created_at > weekAgo).length;
+    const todaySignups = allUsers.filter(u => new Date(u.created_at) >= todayStart).length;
 
     // Recent sign-ups (newest first, last 30)
     const recentUsers = allUsers
@@ -64,6 +66,17 @@ module.exports = async (req, res) => {
         created_at: u.created_at,
         last_sign_in: u.last_sign_in_at,
       }));
+
+    // Most signed-up courses (from user metadata)
+    const courseCounts = {};
+    allUsers.forEach(u => {
+      const course = u.user_metadata?.course;
+      if (course) courseCounts[course] = (courseCounts[course] || 0) + 1;
+    });
+    const topSignupCourses = Object.entries(courseCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([course, count]) => ({ course, count }));
 
     // Pro subscribers
     const proCount = proIdSet.size;
@@ -100,10 +113,12 @@ module.exports = async (req, res) => {
     return res.status(200).json({
       totalUsers,
       weeklySignups,
+      todaySignups,
       proCount: proCount || 0,
       freeCount: totalUsers - (proCount || 0),
       conversionRate: totalUsers > 0 ? ((proCount || 0) / totalUsers * 100).toFixed(1) : '0.0',
       topCourses,
+      topSignupCourses,
       quizStats,
       recentUsers,
       allMembers,
