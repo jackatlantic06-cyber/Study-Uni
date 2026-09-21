@@ -2507,11 +2507,6 @@
         _pendingAction = null; fn(); return;
       }
     }
-    if (isQuiz && TRIAL.quiz < 1) {
-      TRIAL.quiz++; _saveTrial(); _pendingAction = null;
-      _showTrialToast('Free trial quiz used — subscribe for unlimited access ⚡');
-      fn(); return;
-    }
     if (isMS && TRIAL.ms < 1) {
       TRIAL.ms++; _saveTrial(); _pendingAction = null;
       _showTrialToast('Free trial model answer used — subscribe for unlimited access ✦');
