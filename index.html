@@ -376,33 +376,90 @@
   .dark .pred-modal-hdr{border-color:#334155}
   .dark .pred-modal-close:hover{background:#334155}
   /* PLANNER */
-  .planner-page{max-width:680px;margin:0 auto;padding:32px 0 60px}
-  .planner-page h2{font-size:24px;font-weight:800;margin-bottom:4px}
-  .planner-subtitle{color:var(--muted);font-size:14px;margin-bottom:28px}
-  .planner-form{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:20px;margin-bottom:28px}
-  .planner-form-title{font-size:14px;font-weight:700;margin-bottom:14px}
+  .planner-page{max-width:1100px;margin:0 auto;padding:28px 0 60px}
+  .pl-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+  .pl-hdr h2{font-size:24px;font-weight:800;margin-bottom:2px}
+  .pl-sub{color:var(--muted);font-size:14px;margin:0}
+  .pl-tabs{display:flex;gap:4px;margin-bottom:22px;border-bottom:2px solid var(--border);padding-bottom:0}
+  .pl-tab{background:none;border:none;padding:10px 20px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:inherit;transition:all .15s;border-radius:6px 6px 0 0}
+  .pl-tab:hover{color:var(--text);background:var(--accent-light)}
+  .pl-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+  /* Deadline form */
+  .planner-form{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px}
+  .planner-form-title{font-size:13px;font-weight:700;margin-bottom:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
   .planner-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .planner-fields input,.planner-fields select,.planner-fields textarea{width:100%;box-sizing:border-box;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
-  .planner-fields input:focus,.planner-fields select:focus,.planner-fields textarea:focus{border-color:var(--accent)}
+  .planner-fields input:focus,.planner-fields select:focus{border-color:var(--accent)}
   .planner-fields .full{grid-column:1/-1}
-  .planner-add-btn{margin-top:12px;padding:9px 20px;background:var(--accent);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
+  .planner-add-btn{margin-top:12px;padding:9px 22px;background:var(--accent);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
   .planner-add-btn:hover{opacity:.88}
   .planner-empty{text-align:center;padding:48px 0;color:var(--muted);font-size:14px}
-  .deadline-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px}
+  /* Deadline cards */
+  .deadline-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:14px;transition:box-shadow .15s}
+  .deadline-card:hover{box-shadow:0 2px 12px rgba(37,99,235,.08)}
   .deadline-badge{width:52px;height:52px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800}
   .deadline-badge .days-num{font-size:18px;line-height:1}
   .deadline-badge .days-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;opacity:.8}
   .deadline-info{flex:1;min-width:0}
   .deadline-title{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .deadline-meta{font-size:12px;color:var(--muted);margin-top:2px}
-  .deadline-type{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-right:6px}
+  .deadline-meta{font-size:12px;color:var(--muted);margin-top:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .deadline-type{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
   .deadline-del{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:4px 6px;border-radius:6px;flex-shrink:0;transition:color .15s}
   .deadline-del:hover{color:#ef4444}
-  .planner-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:20px 0 8px}
-  .dark .planner-form{background:#1e293b;border-color:#334155}
-  .dark .planner-fields input,.dark .planner-fields select,.dark .planner-fields textarea{background:#1e293b;border-color:#334155;color:#e2e8f0}
-  .dark .deadline-card{background:#1e293b;border-color:#334155}
-  @media(max-width:520px){.planner-fields{grid-template-columns:1fr}}
+  .planner-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:18px 0 8px}
+  /* Study plan */
+  .sp-week-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:12px}
+  .sp-nav-btn{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text);font-family:inherit;transition:all .15s}
+  .sp-nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .sp-today-btn{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--accent-light);border:1px solid var(--accent);color:var(--accent);font-weight:700;cursor:pointer;font-family:inherit;margin-left:8px}
+  .sp-week-lbl{font-size:15px;font-weight:700}
+  .sp-progress-wrap{margin-bottom:16px}
+  .sp-progress-text{font-size:12px;color:var(--muted);margin-bottom:5px}
+  .sp-progress{background:var(--border);border-radius:999px;height:5px;overflow:hidden}
+  .sp-progress-fill{height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:999px;transition:width .4s}
+  .sp-add-form{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+  .sp-add-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:10px}
+  .sp-add-row{display:grid;grid-template-columns:1fr 1fr 1fr 70px auto;gap:8px;align-items:end}
+  .sp-add-row select,.sp-add-row input{padding:8px 11px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;transition:border-color .15s;width:100%;box-sizing:border-box}
+  .sp-add-row select:focus,.sp-add-row input:focus{border-color:var(--accent)}
+  .sp-add-btn{padding:9px 16px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .sp-week-grid{display:grid;grid-template-columns:repeat(7,minmax(130px,1fr));gap:8px;overflow-x:auto;padding-bottom:4px}
+  .sp-day-col{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .sp-day-hdr{padding:10px 12px 8px;border-bottom:1px solid var(--border)}
+  .sp-day-hdr.today{background:rgba(37,99,235,.07);border-bottom-color:rgba(37,99,235,.2)}
+  .sp-day-name{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+  .sp-day-date{font-size:20px;font-weight:800;line-height:1.1;margin-top:1px}
+  .sp-day-hdr.today .sp-day-date{color:var(--accent)}
+  .sp-day-prog{font-size:10px;color:var(--muted);margin-top:3px}
+  .sp-day-body{padding:8px;flex:1}
+  .sp-task{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:9px 9px 7px;margin-bottom:6px;transition:box-shadow .12s}
+  .sp-task:hover{box-shadow:0 1px 6px rgba(0,0,0,.07)}
+  .sp-task.done{opacity:.5}
+  .sp-task-top{display:flex;align-items:flex-start;gap:7px}
+  .sp-check{width:16px;height:16px;border-radius:50%;border:2px solid #cbd5e1;cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s;background:none}
+  .sp-check:hover{border-color:var(--accent)}
+  .sp-check.checked{background:var(--accent);border-color:var(--accent)}
+  .sp-check.checked::after{content:'✓';color:#fff;font-size:9px;font-weight:900}
+  .sp-task-body{flex:1;min-width:0}
+  .sp-task-mod{font-size:9px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+  .sp-task-lbl{font-size:12px;font-weight:600;line-height:1.3;margin-top:1px}
+  .done .sp-task-lbl{text-decoration:line-through;color:var(--muted)}
+  .sp-task-del{background:none;border:none;cursor:pointer;color:var(--muted);font-size:12px;padding:0;line-height:1;flex-shrink:0;opacity:0;transition:opacity .12s}
+  .sp-task:hover .sp-task-del{opacity:.7}
+  .sp-task-del:hover{opacity:1!important;color:#ef4444}
+  .sp-timer-row{display:flex;align-items:center;gap:5px;margin-top:6px}
+  .sp-timer-disp{font-family:monospace;font-size:12px;font-weight:700;color:var(--text);min-width:38px}
+  .sp-timer-disp.running{color:#2563eb}
+  .sp-tbtn{background:none;border:1px solid var(--border);border-radius:5px;padding:2px 7px;font-size:10px;font-weight:600;cursor:pointer;color:var(--muted);font-family:inherit;transition:all .12s}
+  .sp-tbtn:hover{border-color:var(--accent);color:var(--accent)}
+  .sp-tbtn.active{border-color:#ef4444;color:#ef4444}
+  .sp-day-add{margin:4px 8px 8px;padding:5px;background:none;border:1.5px dashed var(--border);border-radius:7px;font-size:11px;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .15s;text-align:center;width:calc(100% - 16px)}
+  .sp-day-add:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+  .dark .planner-form,.dark .sp-add-form{background:#1e293b;border-color:#334155}
+  .dark .planner-fields input,.dark .planner-fields select,.dark .sp-add-row input,.dark .sp-add-row select{background:#1e293b;border-color:#334155;color:#e2e8f0}
+  .dark .deadline-card,.dark .sp-day-col{background:#1e293b;border-color:#334155}
+  .dark .sp-task{background:#0f172a;border-color:#334155}
+  @media(max-width:520px){.planner-fields{grid-template-columns:1fr}.sp-add-row{grid-template-columns:1fr 1fr;}.sp-add-row select{grid-column:1/-1}}
   .dark .toggle-slider{background:#334155}
   .dark .year-note{background:#1c1917;border-color:#92400e;color:#fcd34d}
   .dark .pathway-card,.dark .deg-card,.dark .cat-card,.dark .course-btn{background:#1e293b;border-color:#334155}
@@ -4138,6 +4195,208 @@
       + '<div style="display:flex;gap:10px;flex-wrap:wrap">' + cards + '</div>';
   }
 
+  // ─── PLANNER TABS ────────────────────────────────────────────────────────
+  function _plTab(tab) {
+    document.getElementById('pl-deadlines-view').style.display = tab === 'deadlines' ? '' : 'none';
+    document.getElementById('pl-study-view').style.display     = tab === 'study'     ? '' : 'none';
+    document.querySelectorAll('.pl-tab').forEach(function(b){ b.classList.toggle('active', b.dataset.tab === tab); });
+    if (tab === 'study') _spRender();
+  }
+
+  // ─── STUDY PLAN ──────────────────────────────────────────────────────────
+  var _spWeekOffset = 0;
+  var _spTimer = null; // {id, remaining, interval}
+
+  function _spKey() { return 'sp_' + (_currentUser ? _currentUser.id : 'guest'); }
+  function _spLoad() { try { return JSON.parse(localStorage.getItem(_spKey()) || '[]'); } catch(e) { return []; } }
+  function _spSave(t) { try { localStorage.setItem(_spKey(), JSON.stringify(t)); } catch(e) {} }
+
+  function _spGetMonday(offset) {
+    var d = new Date(); d.setHours(0,0,0,0);
+    var dow = d.getDay(); // 0=Sun
+    d.setDate(d.getDate() + (dow === 0 ? -6 : 1 - dow) + (offset||0) * 7);
+    return d;
+  }
+  function _spDk(d) { return d.toISOString().slice(0,10); }
+
+  function _spPrevWeek() { _spWeekOffset--; _spRender(); }
+  function _spNextWeek() { _spWeekOffset++; _spRender(); }
+  function _spGoToday()  { _spWeekOffset = 0; _spRender(); }
+
+  function _spRender() {
+    var mon = _spGetMonday(_spWeekOffset);
+    var today = _spDk(new Date());
+    var days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    var weekDates = days.map(function(_,i){ var d=new Date(mon); d.setDate(d.getDate()+i); return d; });
+    var weekKeys  = weekDates.map(_spDk);
+
+    // Header
+    var fmt = function(d){ return d.toLocaleDateString('en-IE',{day:'numeric',month:'short'}); };
+    var lbl = document.getElementById('sp-week-label');
+    if (lbl) lbl.textContent = fmt(weekDates[0]) + ' – ' + fmt(weekDates[6]);
+
+    // Populate day selector
+    var sel = document.getElementById('sp-add-day');
+    if (sel) {
+      sel.innerHTML = '<option value="">Day…</option>';
+      days.forEach(function(name, i){
+        var opt = document.createElement('option');
+        opt.value = weekKeys[i];
+        opt.textContent = name + ' ' + fmt(weekDates[i]);
+        sel.appendChild(opt);
+      });
+    }
+
+    var all = _spLoad();
+    var weekTasks = all.filter(function(t){ return weekKeys.indexOf(t.dateKey) !== -1; });
+    var total = weekTasks.length, done = weekTasks.filter(function(t){ return t.done; }).length;
+    var pct = total > 0 ? Math.round(done/total*100) : 0;
+    var pt = document.getElementById('sp-progress-text');
+    var pf = document.getElementById('sp-progress-fill');
+    if (pt) pt.textContent = total > 0 ? done + ' of ' + total + ' tasks done this week (' + pct + '%)' : 'No tasks yet this week — add some below';
+    if (pf) pf.style.width = pct + '%';
+
+    var grid = document.getElementById('sp-week-grid');
+    if (!grid) return;
+    grid.innerHTML = days.map(function(day, i) {
+      var dk = weekKeys[i], date = weekDates[i];
+      var isToday = dk === today;
+      var tasks = all.filter(function(t){ return t.dateKey === dk; });
+      var dDone = tasks.filter(function(t){ return t.done; }).length;
+      return '<div class="sp-day-col">'
+        + '<div class="sp-day-hdr' + (isToday?' today':'') + '">'
+        + '<div class="sp-day-name">' + day + '</div>'
+        + '<div class="sp-day-date">' + date.getDate() + ' <span style="font-size:11px;font-weight:600">' + date.toLocaleDateString('en-IE',{month:'short'}) + '</span></div>'
+        + (tasks.length ? '<div class="sp-day-prog">' + dDone + '/' + tasks.length + ' done</div>' : '')
+        + '</div>'
+        + '<div class="sp-day-body">' + tasks.map(_spTaskHtml).join('') + '</div>'
+        + '<button class="sp-day-add" onclick="_spQuickAdd(\'' + dk + '\')">+ Add task</button>'
+        + '</div>';
+    }).join('');
+  }
+
+  function _spTaskHtml(t) {
+    var isRunning = _spTimer && _spTimer.id === t.id;
+    var rem = isRunning ? _spTimer.remaining : (t.duration||25)*60;
+    var ts = _spFmtTime(rem);
+    return '<div class="sp-task' + (t.done?' done':'') + '" id="spt-' + t.id + '">'
+      + '<div class="sp-task-top">'
+      + '<div class="sp-check' + (t.done?' checked':'') + '" onclick="_spToggle(' + t.id + ')"></div>'
+      + '<div class="sp-task-body">'
+      + (t.module ? '<div class="sp-task-mod">' + t.module + '</div>' : '')
+      + '<div class="sp-task-lbl">' + t.title + '</div>'
+      + '</div>'
+      + '<button class="sp-task-del" onclick="_spDelete(' + t.id + ')" title="Remove">✕</button>'
+      + '</div>'
+      + '<div class="sp-timer-row">'
+      + '<span class="sp-timer-disp' + (isRunning?' running':'') + '" id="spt-t-' + t.id + '">' + ts + '</span>'
+      + (isRunning
+        ? '<button class="sp-tbtn active" onclick="_spPauseTimer()">⏸</button>'
+          + '<button class="sp-tbtn" onclick="_spResetTimer(' + t.id + ',' + (t.duration||25) + ')">↺</button>'
+        : '<button class="sp-tbtn" onclick="_spStartTimer(' + t.id + ',' + rem + ')">▶</button>')
+      + '</div>'
+      + '</div>';
+  }
+
+  function _spFmtTime(secs) {
+    var m = Math.floor(secs/60), s = secs%60;
+    return (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }
+
+  function _spToggle(id) {
+    var tasks = _spLoad().map(function(t){ return t.id===id ? Object.assign({},t,{done:!t.done}) : t; });
+    _spSave(tasks); _spRender();
+  }
+
+  function _spDelete(id) {
+    if (_spTimer && _spTimer.id === id) _spStopTimer();
+    _spSave(_spLoad().filter(function(t){ return t.id!==id; })); _spRender();
+  }
+
+  function _spQuickAdd(dk) {
+    var sel = document.getElementById('sp-add-day');
+    if (sel) sel.value = dk;
+    var inp = document.getElementById('sp-add-task');
+    if (inp) { inp.scrollIntoView({behavior:'smooth',block:'nearest'}); inp.focus(); }
+  }
+
+  function _spAddTask() {
+    var module = (document.getElementById('sp-add-module').value||'').trim();
+    var title  = (document.getElementById('sp-add-task').value||'').trim();
+    var dk     = (document.getElementById('sp-add-day').value||'').trim();
+    var dur    = parseInt(document.getElementById('sp-add-dur').value||'25',10)||25;
+    if (!title) { showToast('Please enter a task description.'); return; }
+    if (!dk)    { showToast('Please pick a day.'); return; }
+    var tasks = _spLoad();
+    tasks.push({ id:Date.now(), dateKey:dk, module:module, title:title, duration:dur, done:false });
+    _spSave(tasks);
+    document.getElementById('sp-add-task').value = '';
+    document.getElementById('sp-add-module').value = '';
+    _spRender();
+  }
+
+  function _spStartTimer(id, remaining) {
+    _spStopTimer();
+    _spTimer = { id:id, remaining:remaining };
+    _spTimer.interval = setInterval(function(){
+      if (!_spTimer) return;
+      if (_spTimer.remaining <= 0) {
+        _spStopTimer(); _spRender();
+        _spBeep(); showToast('⏰ Timer done! Great work 💪');
+        return;
+      }
+      _spTimer.remaining--;
+      var el = document.getElementById('spt-t-'+id);
+      if (el) el.textContent = _spFmtTime(_spTimer.remaining);
+    }, 1000);
+    _spRender();
+  }
+
+  function _spPauseTimer() {
+    if (!_spTimer) return;
+    var saved = _spTimer.remaining;
+    var id = _spTimer.id;
+    clearInterval(_spTimer.interval);
+    _spTimer = null;
+    // Update card buttons inline without full re-render
+    var card = document.getElementById('spt-'+id);
+    if (card) {
+      var row = card.querySelector('.sp-timer-row');
+      if (row) row.innerHTML = '<span class="sp-timer-disp" id="spt-t-'+id+'">' + _spFmtTime(saved) + '</span>'
+        + '<button class="sp-tbtn" onclick="_spStartTimer('+id+','+saved+')">▶</button>'
+        + '<button class="sp-tbtn" onclick="_spResetTimer('+id+','+((saved/60|0)||25)+')">↺</button>';
+      var disp = card.querySelector('.sp-timer-disp');
+      if (disp) disp.classList.remove('running');
+    }
+  }
+
+  function _spResetTimer(id, dur) {
+    _spStopTimer();
+    var el = document.getElementById('spt-t-'+id);
+    if (el) el.textContent = _spFmtTime((dur||25)*60);
+    var card = document.getElementById('spt-'+id);
+    if (card) {
+      var row = card.querySelector('.sp-timer-row');
+      if (row) row.innerHTML = '<span class="sp-timer-disp" id="spt-t-'+id+'">' + _spFmtTime((dur||25)*60) + '</span>'
+        + '<button class="sp-tbtn" onclick="_spStartTimer('+id+','+(dur||25)*60+')">▶</button>';
+    }
+  }
+
+  function _spStopTimer() {
+    if (_spTimer) { clearInterval(_spTimer.interval); _spTimer = null; }
+  }
+
+  function _spBeep() {
+    try {
+      var ctx = new (window.AudioContext||window.webkitAudioContext)();
+      var osc = ctx.createOscillator(); var g = ctx.createGain();
+      osc.connect(g); g.connect(ctx.destination);
+      osc.frequency.value = 880; g.gain.setValueAtTime(.3,ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.6);
+      osc.start(); osc.stop(ctx.currentTime+.6);
+    } catch(e) {}
+  }
+
   // ─── SAVED NOTES ─────────────────────────────────────────────────────────
   function _snKey() { return 'sn_' + (_currentUser ? _currentUser.id : 'guest'); }
   function _snLoad() { try { return JSON.parse(localStorage.getItem(_snKey()) || '[]'); } catch(e) { return []; } }
@@ -4359,28 +4618,62 @@
 <!-- PLANNER PAGE -->
 <div class="page" id="page-planner">
   <div class="planner-page">
-    <h2>📅 My Planner</h2>
-    <p class="planner-subtitle">Track your upcoming exams, CAs and assignments in one place.</p>
-
-    <div class="planner-form">
-      <div class="planner-form-title">Add a deadline</div>
-      <div class="planner-fields">
-        <input id="pl-module" type="text" placeholder="Module code (e.g. AC1100)" maxlength="20">
-        <input id="pl-title" type="text" placeholder="Title (e.g. Mid-term exam)" maxlength="80">
-        <select id="pl-type">
-          <option value="exam">Exam</option>
-          <option value="ca">Continuous Assessment</option>
-          <option value="assignment">Assignment</option>
-          <option value="project">Project</option>
-          <option value="other">Other</option>
-        </select>
-        <input id="pl-date" type="date">
-        <input id="pl-notes" type="text" placeholder="Notes (optional)" maxlength="120" class="full">
-      </div>
-      <button class="planner-add-btn" onclick="plannerAdd()">Add deadline</button>
+    <div class="pl-hdr">
+      <div><h2>📅 My Planner</h2><p class="pl-sub">Deadlines & study schedule in one place.</p></div>
+    </div>
+    <div class="pl-tabs">
+      <button class="pl-tab active" data-tab="deadlines" onclick="_plTab('deadlines')">📋 Deadlines</button>
+      <button class="pl-tab" data-tab="study" onclick="_plTab('study')">📚 Study Plan</button>
     </div>
 
-    <div id="plannerList"></div>
+    <!-- ── Deadlines tab ── -->
+    <div id="pl-deadlines-view">
+      <div class="planner-form">
+        <div class="planner-form-title">Add a deadline</div>
+        <div class="planner-fields">
+          <input id="pl-module" type="text" placeholder="Module (e.g. AC1100)" maxlength="20">
+          <input id="pl-title" type="text" placeholder="Title (e.g. Mid-term exam)" maxlength="80">
+          <select id="pl-type">
+            <option value="exam">Exam</option>
+            <option value="ca">Continuous Assessment</option>
+            <option value="assignment">Assignment</option>
+            <option value="project">Project</option>
+            <option value="other">Other</option>
+          </select>
+          <input id="pl-date" type="date">
+          <input id="pl-notes" type="text" placeholder="Notes (optional)" maxlength="120" class="full">
+        </div>
+        <button class="planner-add-btn" onclick="plannerAdd()">Add deadline</button>
+      </div>
+      <div id="plannerList"></div>
+    </div>
+
+    <!-- ── Study Plan tab ── -->
+    <div id="pl-study-view" style="display:none">
+      <div class="sp-week-nav">
+        <button class="sp-nav-btn" onclick="_spPrevWeek()">← Prev</button>
+        <div style="text-align:center">
+          <div class="sp-week-lbl" id="sp-week-label">Loading…</div>
+          <button class="sp-today-btn" onclick="_spGoToday()">Today</button>
+        </div>
+        <button class="sp-nav-btn" onclick="_spNextWeek()">Next →</button>
+      </div>
+      <div class="sp-progress-wrap">
+        <div class="sp-progress-text" id="sp-progress-text">No tasks this week yet</div>
+        <div class="sp-progress"><div class="sp-progress-fill" id="sp-progress-fill" style="width:0%"></div></div>
+      </div>
+      <div class="sp-add-form">
+        <div class="sp-add-title">Add a study task</div>
+        <div class="sp-add-row">
+          <select id="sp-add-day"><option value="">Day…</option></select>
+          <input id="sp-add-module" type="text" placeholder="Module (e.g. AC1100)" maxlength="20">
+          <input id="sp-add-task" type="text" placeholder="Task description" maxlength="80" onkeydown="if(event.key==='Enter')_spAddTask()">
+          <input id="sp-add-dur" type="number" value="25" min="5" max="180" placeholder="Mins" title="Timer duration in minutes">
+          <button class="sp-add-btn" onclick="_spAddTask()">+ Add</button>
+        </div>
+      </div>
+      <div class="sp-week-grid" id="sp-week-grid"></div>
+    </div>
   </div>
 </div>
 
