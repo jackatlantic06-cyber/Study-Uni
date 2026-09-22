@@ -1,5 +1,30 @@
 const { createClient } = require('@supabase/supabase-js');
 
+function normaliseCourse(raw) {
+  if (!raw) return null;
+  const s = raw.trim().toLowerCase().replace(/[^a-z0-9 &]/g, ' ').replace(/\s+/g, ' ').trim();
+  if (/\b(bcomm?|b comm?|commerce|ck ?201)\b/.test(s))                    return 'Commerce (BCom) — CK201';
+  if (/\b(bfin|b ?sc ?finance|finance|ck ?203)\b/.test(s))                return 'Finance (BSc) — CK203';
+  if (/\b(bacc|b ?acc(ounting)?|ck ?204)\b/.test(s))                      return 'Accounting (BAcc) — CK204';
+  if (/\b(bis|business info|ck ?104)\b/.test(s))                          return 'Business Information Systems (BIS) — CK104';
+  if (/global.{0,10}bus|bus.{0,10}econ|ck ??114/.test(s))                return 'Global Business (BBus) — CK114';
+  if (/law.{0,6}(bus|business)|ck ?302/.test(s))                          return 'Law and Business — CK302';
+  if (/\b(bcl|law)\b/.test(s))                                            return 'Law (BCL) — CK301';
+  if (/comp.{0,6}sci|computer science|\bcs\b|ck ?401/.test(s))            return 'Computer Science (BSc) — CK401';
+  if (/data.{0,6}(sci|analy)|ck ?413/.test(s))                           return 'Data Science & Analytics — CK413';
+  if (/\b(mb|medicine|med)\b/.test(s))                                    return 'Medicine (MB) — CK701';
+  if (/pharm/.test(s))                                                     return 'Pharmacy (MPharm) — CK702';
+  if (/nurs/.test(s))                                                      return 'Nursing (BSc) — CK706';
+  if (/civil.{0,6}eng|ck ?110/.test(s))                                   return 'Civil Engineering — CK110';
+  if (/elec.{0,10}eng|ck ?111/.test(s))                                   return 'Electrical Engineering — CK111';
+  if (/mech.{0,6}eng|ck ?112/.test(s))                                    return 'Mechanical Engineering — CK112';
+  if (/chem.{0,6}(eng|process)|ck ?113/.test(s))                         return 'Chemical Engineering — CK113';
+  if (/psycho/.test(s))                                                    return 'Psychology (BSc) — CK107';
+  if (/\b(ba|arts)\b/.test(s) && !/business/.test(s))                     return 'Arts (BA) — CK101';
+  if (/\bsci(ence)?\b/.test(s) && !/comp|data|info|computer/.test(s))     return 'Science (BSc)';
+  // already canonical (from dropdown) — return as-is
+  return raw.trim();
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -68,10 +93,10 @@ module.exports = async (req, res) => {
         last_sign_in: u.last_sign_in_at,
       }));
 
-    // Most signed-up courses (from user metadata)
+    // Most signed-up courses (normalised to handle old free-text entries)
     const courseCounts = {};
     allUsers.forEach(u => {
-      const course = (u.user_metadata?.course || '').trim();
+      const course = normaliseCourse(u.user_metadata?.course);
       if (course) courseCounts[course] = (courseCounts[course] || 0) + 1;
     });
     const topSignupCourses = Object.entries(courseCounts)
