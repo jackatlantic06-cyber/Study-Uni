@@ -1191,7 +1191,7 @@
     else if (id === 'study') { /* no hash change for study */ }
     else if (id === 'account') { history.replaceState(null, '', '#account'); if(typeof _updateAccountPage==='function') _updateAccountPage(); _loadQuizProgress(); }
     else if (id === 'admin') { history.replaceState(null, '', '#admin'); loadAdminStats(); }
-    else if (id === 'planner') { history.replaceState(null, '', '#planner'); _plRender(); }
+    else if (id === 'planner') { history.replaceState(null, '', '#planner'); _plRender(); _spRender(); }
     else if (id === 'privacy') history.replaceState(null, '', '#privacy');
     else if (id === 'terms') history.replaceState(null, '', '#terms');
     window.scrollTo(0,0);
@@ -4622,12 +4622,12 @@
       <div><h2>📅 My Planner</h2><p class="pl-sub">Deadlines & study schedule in one place.</p></div>
     </div>
     <div class="pl-tabs">
-      <button class="pl-tab active" data-tab="deadlines" onclick="_plTab('deadlines')">📋 Deadlines</button>
-      <button class="pl-tab" data-tab="study" onclick="_plTab('study')">📚 Study Plan</button>
+      <button class="pl-tab" data-tab="deadlines" onclick="_plTab('deadlines')">📋 Deadlines</button>
+      <button class="pl-tab active" data-tab="study" onclick="_plTab('study')">📚 Study Plan</button>
     </div>
 
     <!-- ── Deadlines tab ── -->
-    <div id="pl-deadlines-view">
+    <div id="pl-deadlines-view" style="display:none">
       <div class="planner-form">
         <div class="planner-form-title">Add a deadline</div>
         <div class="planner-fields">
@@ -4649,7 +4649,7 @@
     </div>
 
     <!-- ── Study Plan tab ── -->
-    <div id="pl-study-view" style="display:none">
+    <div id="pl-study-view">
       <div class="sp-week-nav">
         <button class="sp-nav-btn" onclick="_spPrevWeek()">← Prev</button>
         <div style="text-align:center">
