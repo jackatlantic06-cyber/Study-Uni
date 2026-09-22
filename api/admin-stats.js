@@ -1,39 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
 
-// Normalise free-text course entries to a canonical display name
-function normaliseCourse(raw) {
-  if (!raw) return null;
-  const s = raw.trim().toLowerCase().replace(/[^a-z0-9 &]/g, ' ').replace(/\s+/g, ' ').trim();
-  // Commerce
-  if (/\b(bcomm?|b comm?|commerce|ck ?201)\b/.test(s)) return 'Commerce (BCom)';
-  // Finance
-  if (/\b(bfin|b ?sc ?finance|finance|ck ?203)\b/.test(s)) return 'Finance (BSc)';
-  // Accounting
-  if (/\b(bacc|b ?acc|accounting)\b/.test(s)) return 'Accounting (BAcc)';
-  // Law
-  if (/\b(bcl|law and bus|law ?& ?bus|law)\b/.test(s)) {
-    if (/bus/.test(s)) return 'Law & Business';
-    return 'Law (BCL)';
-  }
-  // Computer Science
-  if (/\b(cs|comp ?sci|computer science|ck ?401)\b/.test(s)) return 'Computer Science (BSc)';
-  // Business Information Systems
-  if (/\b(bis|business info|ck ?104)\b/.test(s)) return 'Business Info Systems (BIS)';
-  // Economics & Finance
-  if (/\b(econ.{0,10}fin|ck ?114)\b/.test(s)) return 'Economics & Finance';
-  // Economics
-  if (/\becon/.test(s)) return 'Economics';
-  // Engineering
-  if (/\beng(ineering)?\b/.test(s)) return 'Engineering';
-  // Medicine
-  if (/\b(med|medicine|mb)\b/.test(s)) return 'Medicine (MB)';
-  // Arts
-  if (/\b(ba|arts)\b/.test(s) && !/business/.test(s)) return 'Arts (BA)';
-  // Science
-  if (/\b(bsc|science)\b/.test(s) && !/computer|info|finance/.test(s)) return 'Science (BSc)';
-  // Fallback: title-case the original
-  return raw.trim().replace(/\b\w/g, c => c.toUpperCase());
-}
 
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -102,10 +68,10 @@ module.exports = async (req, res) => {
         last_sign_in: u.last_sign_in_at,
       }));
 
-    // Most signed-up courses (from user metadata, normalised)
+    // Most signed-up courses (from user metadata)
     const courseCounts = {};
     allUsers.forEach(u => {
-      const course = normaliseCourse(u.user_metadata?.course);
+      const course = (u.user_metadata?.course || '').trim();
       if (course) courseCounts[course] = (courseCounts[course] || 0) + 1;
     });
     const topSignupCourses = Object.entries(courseCounts)

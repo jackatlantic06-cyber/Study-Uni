@@ -2531,11 +2531,31 @@
   }
 
   // ── AUTH MODAL ─────────────────────────────────────────────────────────────
+  function _populateCourseSelect() {
+    const sel = document.getElementById('authCourse');
+    if (!sel || sel.options.length > 1) return; // already populated
+    const buckets = (typeof DEG_BUCKETS !== 'undefined') ? DEG_BUCKETS : [];
+    buckets.forEach(function(b) {
+      const courses = (typeof getCoursesForBucket === 'function') ? getCoursesForBucket(b.id) : [];
+      if (!courses.length) return;
+      const group = document.createElement('optgroup');
+      group.label = b.label + ' — ' + b.full;
+      courses.sort(function(a,c){ return a.name.localeCompare(c.name); }).forEach(function(c) {
+        const opt = document.createElement('option');
+        opt.value = c.name;
+        opt.textContent = c.name;
+        group.appendChild(opt);
+      });
+      sel.appendChild(group);
+    });
+  }
+
   function openAuthModal() {
     document.getElementById('authOverlay').classList.add('active');
     document.getElementById('authModal').classList.add('active');
     document.getElementById('authErr').textContent = '';
     document.getElementById('authSuccessMsg').style.display = 'none';
+    _populateCourseSelect();
     setTimeout(function() { const e = document.getElementById('authEmail'); if(e) e.focus(); }, 150);
   }
 
@@ -2589,7 +2609,7 @@
         const course      = document.getElementById('authCourse')?.value.trim() || '';
         const newsletter  = document.getElementById('authNewsletter')?.checked || false;
         if (!firstName || !lastName) { errEl.textContent = 'Please enter your first and last name'; btn.disabled=false; btn.textContent='Create account'; return; }
-        if (!course) { errEl.textContent = 'Please enter your course / degree'; btn.disabled=false; btn.textContent='Create account'; return; }
+        if (!course) { errEl.textContent = 'Please select your course / degree'; btn.disabled=false; btn.textContent='Create account'; return; }
         const conf = document.getElementById('authConfirm').value;
         if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters'; btn.disabled=false; btn.textContent='Create account'; return; }
         if (pass !== conf)   { errEl.textContent = 'Passwords do not match'; btn.disabled=false; btn.textContent='Create account'; return; }
@@ -4602,8 +4622,9 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
     </div>
     <div class="auth-field" style="margin-bottom:14px">
       <label>Course / Degree</label>
-      <input type="text" id="authCourse" placeholder="e.g. BCom, Medicine, Law, BSc Computer Science"
-             autocomplete="off" onkeydown="if(event.key==='Enter')submitAuth()"/>
+      <select id="authCourse" style="width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;background:var(--surface);color:var(--text);outline:none;font-family:inherit;cursor:pointer">
+        <option value="">— Select your course —</option>
+      </select>
     </div>
     <div style="margin-bottom:14px">
       <label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer;font-size:13px;color:#475569;font-weight:400;line-height:1.5">
