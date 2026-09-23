@@ -58,6 +58,26 @@ module.exports = async (req, res) => {
     return res.json({ post: { ...post, replies: [] } });
   }
 
+  if (action === 'notifs') {
+    const { data: notifs, error: nErr } = await sb
+      .from('notifications')
+      .select('id, type, module_code, post_id, read_at, created_at, preview')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(30);
+    if (nErr) return res.status(500).json({ error: nErr.message });
+    const unread = (notifs || []).filter(n => !n.read_at).length;
+    return res.json({ notifications: notifs || [], unread });
+  }
+
+  if (action === 'mark_read') {
+    await sb.from('notifications')
+      .update({ read_at: new Date().toISOString() })
+      .eq('user_id', user.id)
+      .is('read_at', null);
+    return res.json({ success: true });
+  }
+
   if (action === 'reply') {
     if (!postId || !content?.trim()) return res.status(400).json({ error: 'Missing params' });
     const { data: post } = await sb
@@ -73,6 +93,18 @@ module.exports = async (req, res) => {
       content: trimmed,
     }).select().single();
     if (error) return res.status(500).json({ error: error.message });
+    // In-app notification for post owner
+    if (post.user_id && post.user_id !== user.id) {
+      const preview = trimmed.length > 120 ? trimmed.slice(0, 120) + '…' : trimmed;
+      await sb.from('notifications').insert({
+        user_id: post.user_id,
+        type: 'reply',
+        post_id: postId,
+        reply_id: reply.id,
+        module_code: post.module_code,
+        preview,
+      }).then(() => {}).catch(() => {});
+    }
     if (post.user_email && post.user_email !== user.email && process.env.RESEND_API_KEY) {
       try {
         const resend = new Resend(process.env.RESEND_API_KEY);

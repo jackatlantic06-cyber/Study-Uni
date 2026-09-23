@@ -289,6 +289,21 @@
     .su-av.lg{width:60px;height:60px}
     .su-av.lg .su-av-text{font-size:20px;margin-top:10px}
     .su-av.lg::before{width:72px;height:50px;bottom:-20px}
+    /* NOTIFICATION BADGE */
+    .su-av-wrap{position:relative;display:inline-flex}
+    .su-av-badge{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:999px;background:#ef4444;color:#fff;font-size:10px;font-weight:800;display:none;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--bg,#fff);line-height:1;pointer-events:none;z-index:2}
+    /* NOTIFICATION ITEMS */
+    .notif-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border)}
+    .notif-item:last-child{border-bottom:none}
+    .notif-item.unread{background:var(--accent-light,#eff6ff);margin:0 -4px;padding:10px 4px;border-radius:8px;border-bottom-color:transparent;margin-bottom:4px}
+    .notif-dot{width:8px;height:8px;border-radius:50%;background:#ef4444;flex-shrink:0;margin-top:5px}
+    .notif-dot.read{background:transparent}
+    .notif-body{flex:1;min-width:0}
+    .notif-module{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:2px}
+    .notif-preview{font-size:13px;color:var(--text);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .notif-time{font-size:11px;color:var(--muted);margin-top:2px}
+    /* ANONYMOUS BANNER */
+    .disc-anon-banner{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--muted);line-height:1.4}
     /* HOME GREETING */
     .home-greeting{display:none;align-items:center;gap:14px;background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:20px}
     .home-greeting-body{flex:1;min-width:0}
@@ -898,7 +913,7 @@
 <div class="page active" id="page-home">
   <!-- Logged-in greeting strip -->
   <div class="home-greeting" id="homeGreeting">
-    <div class="su-av lg" id="homeAvatar"><div class="su-av-text" id="homeAvatarInitials">?</div></div>
+    <div id="homeAvatar" class="su-av-wrap"></div>
     <div class="home-greeting-body">
       <div class="home-greeting-name" id="homeGreetingName">Welcome back!</div>
       <div class="home-greeting-sub"><span id="homeGreetingPlan"></span> · <a onclick="showPage('account');return false">View profile →</a></div>
@@ -2908,7 +2923,7 @@
       const plan = _ow.includes(_currentUser.email) ? 'Owner' : (_isSubscribed || _pr.includes(_currentUser.email)) ? 'Pro' : 'Free';
 
       // Nav avatar button
-      btn.innerHTML = '<div class="su-av"><div class="su-av-text">' + initials + '</div></div>';
+      btn.innerHTML = '<div class="su-av-wrap"><div class="su-av"><div class="su-av-text">' + initials + '</div></div><span class="su-av-badge" id="navAvatarBadge"></span></div>';
       btn.className = 'nav-auth-btn btn-user-nav';
       btn.title = name + ' — ' + plan;
       btn.onclick = function() { showPage('account'); };
@@ -2917,7 +2932,10 @@
       var greeting = document.getElementById('homeGreeting');
       if (greeting) greeting.style.display = 'flex';
       var avEl = document.getElementById('homeAvatar');
-      if (avEl) avEl.querySelector('.su-av-text').textContent = initials;
+      if (avEl) {
+        avEl.innerHTML = '<div class="su-av lg"><div class="su-av-text">' + initials + '</div></div><span class="su-av-badge" id="homeAvatarBadge"></span>';
+        avEl.classList.add('su-av-wrap');
+      }
       var nameEl = document.getElementById('homeGreetingName');
       if (nameEl) nameEl.textContent = 'Hi, ' + (first || name.split(' ')[0]) + '! 👋';
       var planEl = document.getElementById('homeGreetingPlan');
@@ -2959,6 +2977,77 @@
       adminLink.style.display = (_currentUser && owners.includes(_currentUser.email)) ? '' : 'none';
     }
     _updatePricingPage();
+    if (_currentUser) _loadNotifications();
+  }
+
+  // ── NOTIFICATIONS ──────────────────────────────────────────────────────────
+  var _notifCache = [];
+
+  async function _loadNotifications() {
+    if (!_currentUser || !_sbClient) return;
+    try {
+      const { data: { session } } = await _sbClient.auth.getSession();
+      if (!session) return;
+      const r = await fetch('/api/discussion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'notifs', accessToken: session.access_token }),
+      });
+      const data = await r.json();
+      if (!r.ok) return;
+      _notifCache = data.notifications || [];
+      _setNotifBadge(data.unread || 0);
+    } catch(e) {}
+  }
+
+  function _setNotifBadge(count) {
+    ['navAvatarBadge', 'homeAvatarBadge'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (count > 0) {
+        el.textContent = count > 9 ? '9+' : String(count);
+        el.style.display = 'flex';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+  }
+
+  async function _markNotifsRead() {
+    if (!_currentUser || !_sbClient || !_notifCache.some(function(n){ return !n.read_at; })) return;
+    try {
+      const { data: { session } } = await _sbClient.auth.getSession();
+      if (!session) return;
+      await fetch('/api/discussion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'mark_read', accessToken: session.access_token }),
+      });
+      _notifCache = _notifCache.map(function(n){ return Object.assign({}, n, { read_at: n.read_at || new Date().toISOString() }); });
+      _setNotifBadge(0);
+    } catch(e) {}
+  }
+
+  function _renderNotifications() {
+    var el = document.getElementById('profileNotifList');
+    if (!el) return;
+    if (!_notifCache.length) {
+      el.innerHTML = '<div style="font-size:13px;color:var(--muted);padding:4px 0">No notifications yet — they appear here when someone replies to your discussion posts.</div>';
+      return;
+    }
+    el.innerHTML = _notifCache.slice(0, 15).map(function(n) {
+      var isUnread = !n.read_at;
+      var timeStr = _timeAgo ? _timeAgo(n.created_at) : '';
+      return '<div class="notif-item' + (isUnread ? ' unread' : '') + '">'
+        + '<div class="notif-dot' + (isUnread ? '' : ' read') + '"></div>'
+        + '<div class="notif-body">'
+        + '<div class="notif-module">💬 ' + (n.module_code || 'Discussion') + '</div>'
+        + '<div class="notif-preview">Someone replied to your post' + (n.preview ? ': "' + n.preview.slice(0,80) + '"' : '') + '</div>'
+        + '<div class="notif-time">' + timeStr + '</div>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+    _markNotifsRead();
   }
 
   // ── PRICING PAGE STATE ────────────────────────────────────────────────────────
@@ -3032,6 +3121,7 @@
     }
 
     _renderRecentCourses();
+    _renderNotifications();
   }
 
   // ── RECENT COURSES TRACKING ──────────────────────────────────────────────
@@ -3486,14 +3576,25 @@
     feed.innerHTML = posts.map(p => _renderDiscPost(p)).join('');
   }
 
+  function _discAnonColor(userId) {
+    const colors = ['#3b82f6','#8b5cf6','#ec4899','#f59e0b','#10b981','#ef4444','#06b6d4','#f97316'];
+    var h = 0;
+    for (var i = 0; i < (userId||'').length; i++) h = (h * 31 + (userId.charCodeAt(i)|0)) | 0;
+    return colors[Math.abs(h) % colors.length];
+  }
+  function _anonAvatar(userId, size) {
+    const color = _discAnonColor(userId);
+    return `<div class="disc-avatar" style="width:${size}px;height:${size}px;font-size:${Math.floor(size*0.43)}px;background:${color}">?</div>`;
+  }
+
   function _renderDiscPost(p) {
     const isOwn = p.user_id === _discCurrentUserId;
-    const name = p.user_name || p.user_email.split('@')[0];
+    const displayName = isOwn ? 'You' : 'Anonymous';
     const repliesHTML = p.replies && p.replies.length ? p.replies.map(r => _renderDiscReply(r)).join('') : '';
     return `<div class="disc-post" id="disc-post-${p.id}">
       <div class="disc-post-meta">
-        ${_discAvatar(name, 28)}
-        <span class="disc-post-author">${_esc(name)}</span>
+        ${_anonAvatar(p.user_id, 28)}
+        <span class="disc-post-author">${_esc(displayName)}</span>
         <span class="disc-post-time">${_timeAgo(p.created_at)}</span>
       </div>
       <div class="disc-post-content">${_esc(p.content)}</div>
@@ -3512,12 +3613,12 @@
 
   function _renderDiscReply(r) {
     const isOwn = r.user_id === _discCurrentUserId;
-    const name = r.user_name || r.user_email.split('@')[0];
+    const displayName = isOwn ? 'You' : 'Anonymous';
     return `<div class="disc-reply" id="disc-reply-${r.id}">
-      ${_discAvatar(name, 22)}
+      ${_anonAvatar(r.user_id, 22)}
       <div class="disc-reply-body">
         <div class="disc-reply-meta">
-          <span class="disc-reply-author">${_esc(name)}</span>
+          <span class="disc-reply-author">${_esc(displayName)}</span>
           <span class="disc-reply-time">${_timeAgo(r.created_at)}</span>
           <button class="disc-action-btn danger" onclick="_flagDisc('reply','${r.id}')" style="margin-left:4px;font-size:11px" title="Flag">🚩</button>
           ${isOwn ? `<button class="disc-action-btn danger" onclick="_deleteDisc('reply','${r.id}')" style="font-size:11px">🗑️</button>` : ''}
@@ -4923,7 +5024,24 @@ CREATE TABLE IF NOT EXISTS quiz_attempts (
 );
 ALTER TABLE quiz_attempts ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "insert_own" ON quiz_attempts FOR INSERT WITH CHECK (auth.uid() = user_id);
-CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_id);</pre>
+CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_id);
+
+-- Notifications (reply alerts)
+CREATE TABLE IF NOT EXISTS notifications (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  type TEXT NOT NULL DEFAULT 'reply',
+  post_id UUID,
+  reply_id UUID,
+  module_code TEXT,
+  preview TEXT,
+  read_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "read_own_notifs"   ON notifications FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "update_own_notifs" ON notifications FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "service_insert_notifs" ON notifications FOR INSERT WITH CHECK (true);</pre>
       </div>
     </div>
   </div>
@@ -4939,6 +5057,10 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
       <div id="discModuleLabel" style="font-size:12px;color:var(--muted);margin-top:2px"></div>
     </div>
     <button class="disc-close" onclick="closeDiscussion()">✕</button>
+  </div>
+  <div class="disc-anon-banner">
+    <span style="font-size:16px">🔒</span>
+    <span><strong>Anonymous discussion</strong> — your name is never shown to other students. Posts are visible to everyone in the module.</span>
   </div>
   <div class="disc-compose">
     <textarea id="discInput" rows="3" placeholder="Share a note, question, or resource for this module…" style="width:100%;box-sizing:border-box;border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;resize:none;background:var(--surface);color:var(--text);outline:none" oninput="document.getElementById('discCharCount').textContent=Math.min(this.value.length,2000)+' / 2000';document.getElementById('discPostBtn').disabled=!this.value.trim()"></textarea>
@@ -5050,6 +5172,14 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
         <span id="profileQuizMore" style="font-size:12px;color:var(--accent);cursor:pointer;font-weight:600;display:none" onclick="_toggleFullQuizHistory()">Show all</span>
       </div>
       <div id="acctQuizRecent"><div style="font-size:13px;color:var(--muted)">Loading…</div></div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="profile-card">
+      <div class="profile-card-hdr">
+        <span class="profile-card-title">🔔 Notifications</span>
+      </div>
+      <div id="profileNotifList"><div style="font-size:13px;color:var(--muted)">Loading…</div></div>
     </div>
 
     <!-- Subscription action -->
