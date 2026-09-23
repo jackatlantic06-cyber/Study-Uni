@@ -280,8 +280,22 @@
     .nav-auth-btn{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid transparent;font-family:inherit;transition:all .15s;white-space:nowrap}
     .btn-signin-nav{background:#2563eb;color:#fff;border-color:#2563eb}
     .btn-signin-nav:hover{background:#1d4ed8}
-    .btn-user-nav{background:#f1f5f9;color:#374151;border-color:#e2e8f0}
-    .btn-user-nav:hover{background:#e2e8f0}
+    .btn-user-nav{background:transparent;border-color:transparent;padding:4px}
+    .btn-user-nav:hover{background:var(--border)}
+    /* AVATAR WITH SHOULDERS */
+    .su-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(150deg,#3b82f6,#6d28d9);position:relative;overflow:hidden;display:flex;align-items:flex-start;justify-content:center;flex-shrink:0}
+    .su-av::before{content:'';position:absolute;bottom:-14px;width:46px;height:34px;background:rgba(255,255,255,.22);border-radius:50%}
+    .su-av-text{position:relative;z-index:1;font-size:13px;font-weight:800;color:#fff;margin-top:7px;letter-spacing:-.3px;line-height:1}
+    .su-av.lg{width:60px;height:60px}
+    .su-av.lg .su-av-text{font-size:20px;margin-top:10px}
+    .su-av.lg::before{width:72px;height:50px;bottom:-20px}
+    /* HOME GREETING */
+    .home-greeting{display:none;align-items:center;gap:14px;background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:20px}
+    .home-greeting-body{flex:1;min-width:0}
+    .home-greeting-name{font-size:16px;font-weight:700;color:var(--text);margin:0 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .home-greeting-sub{font-size:12px;color:var(--muted)}
+    .home-greeting-sub a{color:var(--accent);font-weight:600;cursor:pointer;text-decoration:none}
+    .home-greeting-sub a:hover{text-decoration:underline}
     /* TOAST */
     .su-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(70px);background:#0f172a;color:#fff;padding:12px 22px;border-radius:999px;font-size:14px;font-weight:500;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center}
     .su-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
@@ -779,8 +793,7 @@
   /* PROFILE PAGE */
   .profile-page{max-width:600px;margin:32px auto 60px;padding:0 16px}
   .profile-hero{display:flex;align-items:center;gap:20px;margin-bottom:28px;flex-wrap:wrap}
-  .profile-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;flex-shrink:0;letter-spacing:-.5px}
-  .profile-info{flex:1;min-width:0}
+.profile-info{flex:1;min-width:0}
   .profile-name{font-size:20px;font-weight:800;color:var(--text);margin:0 0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .profile-email{font-size:13px;color:var(--muted);margin:0 0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .profile-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -883,6 +896,14 @@
 
 <!-- HOME -->
 <div class="page active" id="page-home">
+  <!-- Logged-in greeting strip -->
+  <div class="home-greeting" id="homeGreeting">
+    <div class="su-av lg" id="homeAvatar"><div class="su-av-text" id="homeAvatarInitials">?</div></div>
+    <div class="home-greeting-body">
+      <div class="home-greeting-name" id="homeGreetingName">Welcome back!</div>
+      <div class="home-greeting-sub"><span id="homeGreetingPlan"></span> · <a onclick="showPage('account');return false">View profile →</a></div>
+    </div>
+  </div>
   <div class="hero">
     <h1>Study smarter for<br><span>UCC exams.</span></h1>
     <p>Past papers for 100+ courses — always free. <strong>Pro</strong> unlocks marking schemes, MCQ quiz practice, and module discussions.</p>
@@ -2877,19 +2898,50 @@
     if (!_sbClient) { btn.style.display = 'none'; return; }
     btn.style.display = '';
     if (_currentUser) {
-      btn.textContent = _currentUser.email.split('@')[0];
+      const meta   = _currentUser.user_metadata || {};
+      const first  = meta.first_name || '';
+      const last   = meta.last_name  || '';
+      const name   = [first, last].filter(Boolean).join(' ') || meta.full_name || _currentUser.email.split('@')[0];
+      const initials = ((first[0]||'') + (last[0]||'')).toUpperCase() || name.slice(0,2).toUpperCase();
+      const _ow  = (window.SU_CONFIG && window.SU_CONFIG.OWNER_EMAILS) || [];
+      const _pr  = (window.SU_CONFIG && window.SU_CONFIG.PRO_EMAILS)   || [];
+      const plan = _ow.includes(_currentUser.email) ? 'Owner' : (_isSubscribed || _pr.includes(_currentUser.email)) ? 'Pro' : 'Free';
+
+      // Nav avatar button
+      btn.innerHTML = '<div class="su-av"><div class="su-av-text">' + initials + '</div></div>';
       btn.className = 'nav-auth-btn btn-user-nav';
+      btn.title = name + ' — ' + plan;
       btn.onclick = function() { showPage('account'); };
+
+      // Home page greeting
+      var greeting = document.getElementById('homeGreeting');
+      if (greeting) greeting.style.display = 'flex';
+      var avEl = document.getElementById('homeAvatar');
+      if (avEl) avEl.querySelector('.su-av-text').textContent = initials;
+      var nameEl = document.getElementById('homeGreetingName');
+      if (nameEl) nameEl.textContent = 'Hi, ' + (first || name.split(' ')[0]) + '! 👋';
+      var planEl = document.getElementById('homeGreetingPlan');
+      if (planEl) {
+        planEl.textContent = plan + ' plan';
+        planEl.style.color = plan === 'Free' ? 'var(--muted)' : '#16a34a';
+        planEl.style.fontWeight = '600';
+      }
     } else {
-      btn.textContent = 'Sign in';
+      btn.innerHTML = 'Sign in';
       btn.className = 'nav-auth-btn btn-signin-nav';
+      btn.title = '';
       btn.onclick = openAuthModal;
+      var greeting = document.getElementById('homeGreeting');
+      if (greeting) greeting.style.display = 'none';
     }
     // Mobile menu auth link
     var mobileAuth = document.getElementById('nl-mobile-auth');
     if (mobileAuth) {
       if (_currentUser) {
-        mobileAuth.textContent = '👤 ' + _currentUser.email.split('@')[0];
+        const meta  = _currentUser.user_metadata || {};
+        const first = meta.first_name || '';
+        const name  = [first, meta.last_name||''].filter(Boolean).join(' ') || meta.full_name || _currentUser.email.split('@')[0];
+        mobileAuth.textContent = '👤 ' + name;
         mobileAuth.onclick = function() { showPage('account'); closeMobileNav(); };
       } else {
         mobileAuth.textContent = 'Sign in';
@@ -2937,7 +2989,7 @@
     const name  = [first, last].filter(Boolean).join(' ') || meta.full_name || _currentUser.email.split('@')[0];
     const initials = ((first[0]||'') + (last[0]||'')).toUpperCase() || name.slice(0,2).toUpperCase();
 
-    const avEl = document.getElementById('profileAvatar');
+    const avEl = document.getElementById('profileAvatarText');
     if (avEl) avEl.textContent = initials;
 
     const nameEl = document.getElementById('profileName');
@@ -4957,7 +5009,7 @@ CREATE POLICY "read_own"   ON quiz_attempts FOR SELECT USING (auth.uid() = user_
 
     <!-- Hero -->
     <div class="profile-hero">
-      <div class="profile-avatar" id="profileAvatar">?</div>
+      <div class="su-av lg" id="profileAvatar"><div class="su-av-text" id="profileAvatarText">?</div></div>
       <div class="profile-info">
         <div class="profile-name" id="profileName">—</div>
         <div class="profile-email" id="acctEmail"></div>
