@@ -2871,17 +2871,27 @@
 
   var _promoApplied = false;
   function _checkPromoCode(val) {
-    var code = (val || '').trim();
+    var code = (val === undefined)
+      ? ((document.getElementById('proPromoInput') || {}).value || '').trim()
+      : (val || '').trim();
     var banner = document.getElementById('proPromoBanner');
     var tag    = document.getElementById('proPromoTag');
     var msg    = document.getElementById('proPromoMsg');
     var inp    = document.getElementById('proPromoInput');
-    if (code.toLowerCase() === 'study-uni.ie') {
+    var validCode = code.toLowerCase() === 'study-uni.ie';
+    var isMonthly = _selectedPlan === 'monthly';
+    if (validCode && isMonthly) {
       _promoApplied = true;
       if (banner) banner.style.display = 'flex';
       if (tag)    tag.style.display    = '';
       if (msg)    { msg.textContent = '✓ Promo applied — first month free!'; msg.style.color = '#16a34a'; }
       if (inp)    inp.style.borderColor = '#16a34a';
+    } else if (validCode && !isMonthly) {
+      _promoApplied = false;
+      if (banner) banner.style.display = 'none';
+      if (tag)    tag.style.display    = 'none';
+      if (msg)    { msg.textContent = 'This promo is only valid on the Monthly plan.'; msg.style.color = '#f59e0b'; }
+      if (inp)    inp.style.borderColor = '#f59e0b';
     } else if (code.length > 0) {
       _promoApplied = false;
       if (banner) banner.style.display = 'none';
@@ -2913,6 +2923,9 @@
     });
     const btn = document.getElementById('proCheckoutBtn');
     if (btn) btn.textContent = `Subscribe now — ${_planMeta[plan].label}`;
+    // Re-validate promo code if one was entered
+    var inp = document.getElementById('proPromoInput');
+    if (inp && inp.value.trim()) _checkPromoCode();
   }
 
   async function startCheckout() {
