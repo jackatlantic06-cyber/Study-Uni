@@ -49,8 +49,14 @@ module.exports = async (req, res) => {
       await sb.from('subscriptions').upsert({ id: userId, email, stripe_customer_id: customerId });
     }
 
+    // Free-month promo — applies to monthly plan only, while PROMO_UNTIL env var is in the future
+    const isMonthly = selectedPrice === process.env.STRIPE_PRICE_MONTHLY;
+    const promoUntil = process.env.PROMO_UNTIL ? new Date(process.env.PROMO_UNTIL) : null;
+    const promoActive = isMonthly && promoUntil && Date.now() < promoUntil.getTime();
+    const trialDays = promoActive ? parseInt(process.env.PROMO_TRIAL_DAYS || '30', 10) : 0;
+
     const origin = req.headers.origin || 'https://www.study-uni.ie';
-    const session = await stripe.checkout.sessions.create({
+    const sessionParams = {
       customer: customerId,
       payment_method_types: ['card'],
       line_items: [{ price: selectedPrice, quantity: 1 }],
@@ -58,7 +64,11 @@ module.exports = async (req, res) => {
       metadata: { course_id: courseId || '' },
       success_url: `${origin}/api/activate-subscription?session_id={CHECKOUT_SESSION_ID}&user_id=${userId}`,
       cancel_url: `${origin}/?sub=cancel`,
-    });
+    };
+    if (trialDays > 0) {
+      sessionParams.subscription_data = { trial_period_days: trialDays };
+    }
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     res.json({ url: session.url });
 

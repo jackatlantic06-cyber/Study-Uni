@@ -2833,6 +2833,12 @@
   }
 
   // ── PRO MODAL ──────────────────────────────────────────────────────────────
+  function _isPromoActive() {
+    // Promo runs until PROMO_UNTIL env var date — frontend mirrors with same date
+    var until = new Date('2026-09-25T00:00:00Z'); // set to day after promo ends
+    return Date.now() < until.getTime();
+  }
+
   function openProModal() {
     _selectedCourse = null;
     var inp = document.getElementById('cpickInput');
@@ -2843,6 +2849,12 @@
     if (dd)  dd.classList.remove('open');
     _cpickLoadCourses();
     _cpickRenderDd('');
+    // Show promo banner if active
+    var promoOn = _isPromoActive();
+    var banner = document.getElementById('proPromoBanner');
+    var tag    = document.getElementById('proPromoTag');
+    if (banner) banner.style.display = promoOn ? 'flex' : 'none';
+    if (tag)    tag.style.display    = promoOn ? ''     : 'none';
     document.getElementById('proOverlay').classList.add('active');
     document.getElementById('proModal').classList.add('active');
   }
@@ -5292,13 +5304,20 @@ CREATE POLICY "service_insert_notifs" ON notifications FOR INSERT WITH CHECK (tr
   <button class="pro-close" onclick="closeProModal()">&#x2715;</button>
   <div class="pro-badge">&#x26A1; Study-Uni Pro</div>
   <div style="font-size:21px;font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:4px">Unlock marking schemes<br>&amp; practice quizzes</div>
-  <div style="color:#64748b;font-size:13px;margin-bottom:16px">Pick a plan &mdash; cancel anytime.</div>
+  <div style="color:#64748b;font-size:13px;margin-bottom:12px">Pick a plan &mdash; cancel anytime.</div>
+
+  <div id="proPromoBanner" style="display:none;align-items:center;gap:8px;background:#fef9c3;border:1.5px solid #fde047;border-radius:10px;padding:9px 13px;margin-bottom:14px;font-size:13px;color:#713f12">
+    <span style="font-size:16px">🎉</span>
+    <span><strong>Today only:</strong> first month completely free on the Monthly plan — no charge for 30 days.</span>
+  </div>
 
   <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:16px">
     <div class="plan-card selected" id="plan-monthly" onclick="selectPlan('monthly')">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div>
-          <div style="font-weight:700;font-size:14px;color:var(--text)">Monthly</div>
+          <div style="font-weight:700;font-size:14px;color:var(--text)">Monthly
+            <span id="proPromoTag" style="display:none" class="plan-save" style="background:#fef9c3;color:#713f12">1st month FREE</span>
+          </div>
           <div style="font-size:12px;color:var(--muted);margin-top:1px">Flexible &mdash; cancel anytime</div>
         </div>
         <div style="text-align:right;flex-shrink:0">
