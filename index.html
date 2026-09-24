@@ -2834,8 +2834,7 @@
 
   // ── PRO MODAL ──────────────────────────────────────────────────────────────
   function _isPromoActive() {
-    // Promo runs until PROMO_UNTIL env var date — frontend mirrors with same date
-    var until = new Date('2026-09-25T00:00:00Z'); // set to day after promo ends
+    var until = new Date('2026-10-02T00:00:00Z'); // promo ends 1 Oct inclusive
     return Date.now() < until.getTime();
   }
 
@@ -2849,12 +2848,18 @@
     if (dd)  dd.classList.remove('open');
     _cpickLoadCourses();
     _cpickRenderDd('');
-    // Show promo banner if active
+    // Show promo code entry row if promo is active; reset state
     var promoOn = _isPromoActive();
+    var row    = document.getElementById('proPromoRow');
     var banner = document.getElementById('proPromoBanner');
     var tag    = document.getElementById('proPromoTag');
-    if (banner) banner.style.display = promoOn ? 'flex' : 'none';
-    if (tag)    tag.style.display    = promoOn ? ''     : 'none';
+    var inp    = document.getElementById('proPromoInput');
+    var msg    = document.getElementById('proPromoMsg');
+    if (row)    row.style.display    = promoOn ? '' : 'none';
+    if (banner) banner.style.display = 'none';
+    if (tag)    tag.style.display    = 'none';
+    if (inp)    inp.value            = '';
+    if (msg)    msg.textContent      = '';
     document.getElementById('proOverlay').classList.add('active');
     document.getElementById('proModal').classList.add('active');
   }
@@ -2864,6 +2869,33 @@
     document.getElementById('proModal').classList.remove('active');
   }
 
+  var _promoApplied = false;
+  function _checkPromoCode(val) {
+    var code = (val || '').trim();
+    var banner = document.getElementById('proPromoBanner');
+    var tag    = document.getElementById('proPromoTag');
+    var msg    = document.getElementById('proPromoMsg');
+    var inp    = document.getElementById('proPromoInput');
+    if (code.toLowerCase() === 'study-uni.ie') {
+      _promoApplied = true;
+      if (banner) banner.style.display = 'flex';
+      if (tag)    tag.style.display    = '';
+      if (msg)    { msg.textContent = '✓ Promo applied — first month free!'; msg.style.color = '#16a34a'; }
+      if (inp)    inp.style.borderColor = '#16a34a';
+    } else if (code.length > 0) {
+      _promoApplied = false;
+      if (banner) banner.style.display = 'none';
+      if (tag)    tag.style.display    = 'none';
+      if (msg)    { msg.textContent = 'Invalid promo code.'; msg.style.color = '#dc2626'; }
+      if (inp)    inp.style.borderColor = '#dc2626';
+    } else {
+      _promoApplied = false;
+      if (banner) banner.style.display = 'none';
+      if (tag)    tag.style.display    = 'none';
+      if (msg)    msg.textContent = '';
+      if (inp)    inp.style.borderColor = '';
+    }
+  }
 
   // ── PLAN SELECTION ─────────────────────────────────────────────────────────
   const _planMeta = {
@@ -2906,7 +2938,7 @@
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: _currentUser.id, email: _currentUser.email, priceId, courseId: _selectedCourse.id }),
+        body: JSON.stringify({ userId: _currentUser.id, email: _currentUser.email, priceId, courseId: _selectedCourse.id, promoCode: _promoApplied ? 'Study-Uni.ie' : undefined }),
       });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; }
@@ -5306,9 +5338,19 @@ CREATE POLICY "service_insert_notifs" ON notifications FOR INSERT WITH CHECK (tr
   <div style="font-size:21px;font-weight:800;color:#0f172a;line-height:1.2;margin-bottom:4px">Unlock marking schemes<br>&amp; practice quizzes</div>
   <div style="color:#64748b;font-size:13px;margin-bottom:12px">Pick a plan &mdash; cancel anytime.</div>
 
+  <div id="proPromoRow" style="display:none;margin-bottom:14px">
+    <div style="display:flex;gap:8px">
+      <input id="proPromoInput" type="text" placeholder="Promo code" autocomplete="off"
+        style="flex:1;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none"
+        oninput="_checkPromoCode(this.value)" onkeydown="if(event.key==='Enter'){event.preventDefault();_checkPromoCode(this.value)}"/>
+      <button onclick="_checkPromoCode(document.getElementById('proPromoInput').value)"
+        style="padding:9px 14px;background:#2563eb;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Apply</button>
+    </div>
+    <div id="proPromoMsg" style="font-size:12px;margin-top:5px;min-height:16px"></div>
+  </div>
   <div id="proPromoBanner" style="display:none;align-items:center;gap:8px;background:#fef9c3;border:1.5px solid #fde047;border-radius:10px;padding:9px 13px;margin-bottom:14px;font-size:13px;color:#713f12">
     <span style="font-size:16px">🎉</span>
-    <span><strong>Today only:</strong> first month completely free on the Monthly plan — no charge for 30 days.</span>
+    <span><strong>Promo applied!</strong> First month completely free — no charge for 30 days.</span>
   </div>
 
   <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:16px">
