@@ -259,7 +259,7 @@
     /* PRO MODAL */
     .pro-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;opacity:0;pointer-events:none;transition:opacity .2s}
     .pro-overlay.active{opacity:1;pointer-events:all}
-    .pro-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(440px,95vw);background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:2001;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+    .pro-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(440px,95vw);max-height:90vh;overflow-y:auto;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:2001;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
     .pro-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
     .pro-badge{display:inline-block;background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 12px;font-size:12px;font-weight:700;margin-bottom:12px}
     .pro-features{list-style:none;margin:14px 0;display:flex;flex-direction:column;gap:8px;font-size:14px;padding:0}
