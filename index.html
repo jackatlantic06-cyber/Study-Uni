@@ -133,6 +133,8 @@
     .mod-code{font-family:monospace;font-weight:600;color:var(--accent);font-size:13px;white-space:nowrap}
     .papers-cell{display:flex;flex-direction:column;gap:5px}
     .paper-row{display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+    .ms-cell{display:flex;flex-direction:column;gap:5px;justify-content:flex-start}
+    .ms-empty{font-size:12px;color:var(--muted);font-style:italic}
     .paper-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--accent-light);color:var(--accent);border-radius:999px;font-size:11px;font-weight:600;cursor:pointer;text-decoration:none;transition:background .15s}
     .paper-chip:hover{background:#dbeafe}
     .paper-chip svg{width:10px;height:10px}
@@ -154,6 +156,7 @@
       .module-table td:nth-child(3){display:none}
       .module-table td:nth-child(4){padding-top:8px}
       .module-table td:nth-child(5){padding-top:6px}
+      .module-table td:nth-child(6){padding-top:6px}
       .paper-row{flex-wrap:wrap;gap:5px;align-items:center}
       .btn-model-answer,.btn-quiz{font-size:10px;padding:3px 8px}
       .pred-panel{right:auto;left:0;min-width:240px}
@@ -1130,7 +1133,7 @@
 </footer>
 
 <script src="config.js?v=3"></script>
-<script src="data.js?v=3"></script>
+<script src="data.js?v=4"></script>
 <script>
 
   let activeDegBucket = null;
@@ -1400,7 +1403,7 @@
   var _selectedUni = 'ucc';
 
   function _uniTabsHTML(activeId) {
-    return (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => !u.group && u.live).map(u => `
+    return (typeof UNIVERSITIES !== 'undefined' ? UNIVERSITIES : []).filter(u => !u.group).map(u => `
       <button class="uni-tab${u.id === activeId ? ' active' : ''}" onclick="selectUni('${u.id}')">
         <span class="uni-tab-icon">${u.icon}</span>
         <span class="uni-tab-body">
@@ -1507,21 +1510,24 @@
           const sid = c.schoolsCourseId || null;
           if (sid) {
             const sc = allSchoolCourses.find(x => x.id === sid);
-            const yrs = sc ? sc.years.length : null;
-            const n = sc ? countPapers(sc) : 0;
-            const caoTag = c.cao ? `<span style="font-size:11px;color:var(--muted);font-weight:500"> — ${c.cao}</span>` : '';
-            const freeRibbon = sid === 'commerce' ? '<span class="ribbon-free">Free</span>' : '';
-            return `<button class="course-btn" onclick="openCourse('${sid}')">
-              ${freeRibbon}
-              <div class="cb-name">${c.name}${caoTag}</div>
-              <div class="cb-meta">${yrs ? yrs + ' year' + (yrs !== 1 ? 's' : '') + ' · ' : ''}University College Dublin</div>
-              ${n > 0 ? `<span class="cb-papers">📄 ${n} papers</span>` : '<span class="cb-papers" style="background:var(--accent-soft,#eff6ff);color:var(--accent)">📚 Modules available</span>'}
-            </button>`;
+            const isPlaceholder = sc && allModules(sc).every(m => !m.code);
+            if (!isPlaceholder) {
+              const yrs = sc ? sc.years.length : null;
+              const n = sc ? countPapers(sc) : 0;
+              const caoTag = c.cao ? `<span style="font-size:11px;color:var(--muted);font-weight:500"> — ${c.cao}</span>` : '';
+              const freeRibbon = sid === 'commerce' ? '<span class="ribbon-free">Free</span>' : '';
+              return `<button class="course-btn" onclick="openCourse('${sid}')">
+                ${freeRibbon}
+                <div class="cb-name">${c.name}${caoTag}</div>
+                <div class="cb-meta">${yrs ? yrs + ' year' + (yrs !== 1 ? 's' : '') + ' · ' : ''}${uni.fullName}</div>
+                ${n > 0 ? `<span class="cb-papers">📄 ${n} papers</span>` : '<span class="cb-papers" style="background:var(--accent-soft,#eff6ff);color:var(--accent)">📚 Modules available</span>'}
+              </button>`;
+            }
           }
-          return `<button class="course-btn" onclick="window.open('${c.url}','_blank')" style="opacity:0.75">
+          return `<button class="course-btn" onclick="${c.url ? `window.open('${c.url}','_blank')` : ''}" style="opacity:0.75${!c.url ? ';cursor:default' : ''}">
             <div class="cb-name">${c.name}${c.cao ? ` <span style="font-size:11px;color:var(--muted);font-weight:500">— ${c.cao}</span>` : ''}</div>
-            <div class="cb-meta">University College Dublin</div>
-            <span class="cb-papers" style="background:transparent;border:1.5px solid var(--border);color:var(--muted)">UCD website ↗</span>
+            <div class="cb-meta">${uni.fullName}</div>
+            ${c.url ? `<span class="cb-papers" style="background:transparent;border:1.5px solid var(--border);color:var(--muted)">${uni.name} website ↗</span>` : ''}
           </button>`;
         }).join('')}
       </div>`;
@@ -1547,8 +1553,8 @@
       ['homeUCDView','coursesUCDView'].forEach(id => { const el = document.getElementById(id); if (el) { el.style.display = ''; el.innerHTML = placeholder; } });
       return;
     }
-    // Check if this uni has module-level school data (UCD always uses category tile view)
-    const hasSchoolData = uniId !== 'ucd' && SCHOOLS.some(s => (s.uni || 'ucc') === uniId);
+    // Only UCC uses the SCHOOLS-based drill-down view; all other unis use the tile view
+    const hasSchoolData = uniId === 'ucc';
     // Update all pickers
     ['homeUniPicker','coursesUniPicker'].forEach(id => {
       const el = document.getElementById(id);
@@ -1864,6 +1870,11 @@
 
   function renderModuleTable(mods, label) {
     if (!mods || !mods.length) return '';
+    // If every module in this section is a placeholder (no real module code), show a visit-dept banner
+    if (mods.every(m => !m.code)) {
+      const deptName = mods[0] && mods[0].name ? mods[0].name : 'See department for current module listings';
+      return `<div style="padding:16px 0 8px"><p style="color:var(--muted);font-style:italic;margin:0">${deptName}. <a href="https://www.tcd.ie/academicregistry/exams/past-papers/" target="_blank" rel="noopener" style="color:var(--accent)">View TCD past papers →</a></p></div>`;
+    }
     const rows = mods.map(m => {
       const papers = (m.files||[]);
       const isEmpty = papers.length === 0;
@@ -1886,8 +1897,9 @@
         : '';
 
       let paperRows = '';
+      let msRows = '';
       if (regularPapers.length) {
-        paperRows = regularPapers.map((f, _fi) => {
+        regularPapers.forEach((f, _fi) => {
           const url = typeof f === 'object' ? f.url : f;
           const lbl = typeof f === 'object' ? f.label : labelFromFilename(f);
           const safeUrl = url.replace(/'/g,"\'");
@@ -1896,18 +1908,22 @@
           const vTick   = '<span class="viewed-tick">&#10003;</span>';
           const practiced = PRACTICED.has(url);
           const doneBtn = `<button class="done-btn${practiced?' done':''}" onclick="togglePracticed('${safeUrl}',this)">${practiced?'✓ Done':'Mark done'}</button>`;
-          const rowFreeBA = _isFreeMA && _fi === 0 ? ' <span class="badge-free">Free</span>' : '';
-          const rowModelBtn = hasModelAnswer
-            ? `<button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">📖 Model Answer${_hasNewMA && _fi === 0 ? ' <span class="badge-new">New</span>' : ''}${rowFreeBA}</button>`
-            : '';
           const rowQuizBtn  = _fi === 0 ? quizBtn  : '';
-          return `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${doneBtn}${rowModelBtn}${rowQuizBtn}</div>`;
-        }).join('');
+          paperRows += `<div class="paper-row"><a class="paper-chip${vClass}" href="${url}" target="_blank" rel="noopener" onclick="markViewed('${safeUrl}',this)"><svg viewBox="0 0 10 12" fill="currentColor"><path d="M1 0h6l3 3v9H1V0zm6 0v3h3"/></svg>${lbl}${vTick}</a>${doneBtn}${rowQuizBtn}</div>`;
+          if (hasModelAnswer) {
+            const rowFreeBA = _isFreeMA && _fi === 0 ? ' <span class="badge-free">Free</span>' : '';
+            msRows += `<div class="paper-row"><button class="btn-model-answer" onclick="openModelAnswer('${esc(m.code)}')">📖 Model Answer${_hasNewMA && _fi === 0 ? ' <span class="badge-new">New</span>' : ''}${rowFreeBA}</button></div>`;
+          } else {
+            msRows += `<div class="paper-row"><span class="ms-empty">Coming soon</span></div>`;
+          }
+        });
       } else {
-        paperRows = `<div class="paper-row"><span class="no-papers">No papers yet</span>${modelBtn}${quizBtn}</div>`;
+        paperRows = `<div class="paper-row"><span class="no-papers">No papers yet</span>${quizBtn}</div>`;
+        msRows = hasModelAnswer ? `<div class="paper-row">${modelBtn}</div>` : `<div class="paper-row"><span class="ms-empty">Coming soon</span></div>`;
       }
       const notifyBtn = `<button class="notify-btn${NOTIFIED[m.code]?' notified':''}" data-code="${esc(m.code)}" onclick="openNotifModal('${esc(m.code)}','${esc(m.name)}')" title="Notify me when new content is added">🔔</button>`;
       const paperCell = `<div class="papers-cell">${paperRows}</div>`;
+      const msCell = `<div class="ms-cell">${msRows}</div>`;
       _modData[m.code] = { name: m.name, years: regularPapers.map(f => typeof f === 'object' ? f.label : labelFromFilename(f)) };
       const predictBtn = regularPapers.length ? `<div class="pred-wrap"><button class="btn-predict" onclick="togglePredict('${esc(m.code)}',this)">📊 Predict</button><div class="pred-panel"></div></div>` : '';
       const predictCell = `<div style="display:flex;flex-direction:column;align-items:flex-start;gap:6px">${predictBtn}<button class="btn-discuss" onclick="openDiscussion('${esc(m.code)}','${esc(m.name)}')">💬 Discuss</button></div>`;
@@ -1916,11 +1932,12 @@
         <td>${m.name}</td>
         <td style="text-align:center;color:var(--muted)">${m.credits || ''}</td>
         <td>${paperCell}</td>
+        <td>${msCell}</td>
         <td>${predictCell}</td>
       </tr>`;
     }).join('');
     return `<table class="module-table">
-      <thead><tr><th>Code</th><th>Module</th><th>Credits</th><th>Papers</th><th>Tools</th></tr></thead>
+      <thead><tr><th>Code</th><th>Module</th><th>Credits</th><th>Exam Paper</th><th>Marking Scheme</th><th>Tools</th></tr></thead>
       <tbody>${rows}</tbody>
     </table>`;
   }

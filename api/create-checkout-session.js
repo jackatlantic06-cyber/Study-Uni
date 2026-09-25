@@ -49,10 +49,13 @@ module.exports = async (req, res) => {
       await sb.from('subscriptions').upsert({ id: userId, email, stripe_customer_id: customerId });
     }
 
-    // Free-month promo — applies to monthly plan only, while PROMO_UNTIL env var is in the future
+    // Free-month promo — monthly only, valid code, within date window
+    const { promoCode } = req.body || {};
     const isMonthly = selectedPrice === process.env.STRIPE_PRICE_MONTHLY;
     const promoUntil = process.env.PROMO_UNTIL ? new Date(process.env.PROMO_UNTIL) : null;
-    const promoActive = isMonthly && promoUntil && Date.now() < promoUntil.getTime();
+    const validCode = process.env.PROMO_CODE && promoCode &&
+      promoCode.trim().toLowerCase() === process.env.PROMO_CODE.trim().toLowerCase();
+    const promoActive = isMonthly && validCode && promoUntil && Date.now() < promoUntil.getTime();
     const trialDays = promoActive ? parseInt(process.env.PROMO_TRIAL_DAYS || '30', 10) : 0;
 
     const origin = req.headers.origin || 'https://www.study-uni.ie';
