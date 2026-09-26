@@ -241,7 +241,7 @@
     /* AUTH MODAL */
     .auth-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;opacity:0;pointer-events:none;transition:opacity .2s}
     .auth-overlay.active{opacity:1;pointer-events:all}
-    .auth-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(420px,95vw);background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:2001;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+    .auth-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%) scale(.97);width:min(420px,95vw);max-height:90vh;overflow-y:auto;background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);z-index:2001;padding:32px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
     .auth-modal.active{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
     .auth-title{font-size:20px;font-weight:800;margin-bottom:4px;color:#0f172a}
     .auth-sub{font-size:13px;color:#64748b;margin-bottom:20px}
