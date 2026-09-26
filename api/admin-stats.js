@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
     // All users (paginated — handles up to 10k)
     const { data: usersPage, error: listErr } = await sb.auth.admin.listUsers({ perPage: 10000 });
     if (listErr) throw new Error(`listUsers: ${listErr.message}`);
-    const allUsers = (usersPage && usersPage.users) || [];
+    const allUsers = ((usersPage && usersPage.users) || []).filter(u => u.email_confirmed_at);
     const totalUsers = allUsers.length;
     const weeklySignups = allUsers.filter(u => u.created_at > weekAgo).length;
     const todaySignups = allUsers.filter(u => new Date(u.created_at) >= todayStart).length;
