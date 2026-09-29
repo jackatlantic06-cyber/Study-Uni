@@ -4161,7 +4161,12 @@
         <div class="admin-stat"><div class="admin-stat-num" id="asPro">—</div><div class="admin-stat-label">Pro subscribers</div></div>
         <div class="admin-stat"><div class="admin-stat-num" id="asFree">—</div><div class="admin-stat-label">Free users</div></div>
         <div class="admin-stat"><div class="admin-stat-num" id="asConv">—</div><div class="admin-stat-label">Conversion rate</div></div>
-        <div class="admin-stat"><div class="admin-stat-num" id="asQuizzes">—</div><div class="admin-stat-label">Quizzes this week</div></div>`;
+        <div class="admin-stat"><div class="admin-stat-num" id="asQuizzes">—</div><div class="admin-stat-label">Quizzes this week</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asYear1" style="color:#2563eb">—</div><div class="admin-stat-label">1st Year</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asYear2" style="color:#7c3aed">—</div><div class="admin-stat-label">2nd Year</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asYear3" style="color:#0891b2">—</div><div class="admin-stat-label">3rd Year</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asYear4" style="color:#d97706">—</div><div class="admin-stat-label">4th Year</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="asYearFinal" style="color:#dc2626">—</div><div class="admin-stat-label">Final Year</div></div>`;
       const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
       set('asTotalUsers', (d.totalUsers||0).toLocaleString());
       set('asToday',      '+' + (d.todaySignups||0));
@@ -4170,6 +4175,12 @@
       set('asFree',       (d.freeCount||0).toLocaleString());
       set('asConv',       (d.conversionRate||'0.0') + '%');
       set('asQuizzes',    (d.quizStats && d.quizStats.total ? d.quizStats.total + (d.quizStats.avgPct ? ' · avg ' + d.quizStats.avgPct + '%' : '') : '0'));
+      const yb = d.yearBreakdown || {};
+      set('asYear1',     (yb.year1     || 0).toLocaleString());
+      set('asYear2',     (yb.year2     || 0).toLocaleString());
+      set('asYear3',     (yb.year3     || 0).toLocaleString());
+      set('asYear4',     (yb.year4     || 0).toLocaleString());
+      set('asYearFinal', (yb.finalYear || 0).toLocaleString());
       // Most viewed courses table
       const courseBody = document.getElementById('adminCourseBody');
       if (courseBody) {
@@ -5042,6 +5053,11 @@
       <div class="admin-stat"><div class="admin-stat-num" id="asFree">—</div><div class="admin-stat-label">Free users</div></div>
       <div class="admin-stat"><div class="admin-stat-num" id="asConv">—</div><div class="admin-stat-label">Conversion rate</div></div>
       <div class="admin-stat"><div class="admin-stat-num" id="asQuizzes">—</div><div class="admin-stat-label">Quizzes this week</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asYear1" style="color:#2563eb">—</div><div class="admin-stat-label">1st Year</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asYear2" style="color:#7c3aed">—</div><div class="admin-stat-label">2nd Year</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asYear3" style="color:#0891b2">—</div><div class="admin-stat-label">3rd Year</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asYear4" style="color:#d97706">—</div><div class="admin-stat-label">4th Year</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="asYearFinal" style="color:#dc2626">—</div><div class="admin-stat-label">Final Year</div></div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0" class="admin-two-col">
       <div class="admin-section" style="margin-bottom:0">

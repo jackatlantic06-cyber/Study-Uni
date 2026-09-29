@@ -107,6 +107,19 @@ module.exports = async (req, res) => {
     // Pro subscribers
     const proCount = proIdSet.size;
 
+    // Year breakdown by UCC student number prefix
+    const yearBreakdown = { year1: 0, year2: 0, year3: 0, year4: 0, finalYear: 0 };
+    allUsers.forEach(u => {
+      const email = u.email || '';
+      if (!email.endsWith('@umail.ucc.ie')) return;
+      const prefix = email.substring(0, 3);
+      if      (prefix === '126') yearBreakdown.year1++;
+      else if (prefix === '125') yearBreakdown.year2++;
+      else if (prefix === '124') yearBreakdown.year3++;
+      else if (prefix === '123') yearBreakdown.year4++;
+      else                       yearBreakdown.finalYear++;
+    });
+
     // Most viewed courses — graceful if table doesn't exist
     let topCourses = [];
     try {
@@ -149,6 +162,7 @@ module.exports = async (req, res) => {
       quizStats,
       recentUsers,
       allMembers,
+      yearBreakdown,
     });
 
   } catch (err) {
