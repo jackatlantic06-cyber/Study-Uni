@@ -143,9 +143,26 @@ module.exports = async (req, res) => {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10)
       .map(([course, count]) => ({ course, count }));
+
+    const proMemberList = proUsers
+      .slice()
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      .map(u => {
+        const email = u.email || '';
+        const studentNumber = email.endsWith('@umail.ucc.ie') ? email.split('@')[0] : null;
+        return {
+          name: u.user_metadata?.full_name || [u.user_metadata?.first_name, u.user_metadata?.last_name].filter(Boolean).join(' ') || '',
+          email,
+          studentNumber,
+          course: u.user_metadata?.course || '',
+          joined: u.created_at,
+        };
+      });
+
     const proStats = {
       total: proCount, today: proToday, weekly: proWeekly,
       yearBreakdown: proYearBreakdown, topCourses: proTopCourses,
+      members: proMemberList,
     };
 
     // Most viewed courses — graceful if table doesn't exist

@@ -4196,6 +4196,22 @@
       set('psYear3',     (pyb.year3     || 0).toLocaleString());
       set('psYear4',     (pyb.year4     || 0).toLocaleString());
       set('psYearFinal', (pyb.finalYear || 0).toLocaleString());
+      const proMembersBody = document.getElementById('adminProMembersBody');
+      if (proMembersBody) {
+        if (!ps.members || ps.members.length === 0) {
+          proMembersBody.innerHTML = '<div class="admin-empty">No Pro subscribers yet.</div>';
+        } else {
+          proMembersBody.innerHTML = '<table class="admin-table"><thead><tr><th>Student No.</th><th>Name</th><th>Course</th><th>Joined</th></tr></thead><tbody>' +
+            ps.members.map(m => {
+              const sn = m.studentNumber || m.email;
+              const name = m.name || '—';
+              const course = m.course || '—';
+              const joined = m.joined ? new Date(m.joined).toLocaleDateString('en-IE', {day:'numeric',month:'short',year:'numeric'}) : '—';
+              return `<tr><td style="font-weight:700;font-family:monospace">${sn}</td><td>${name}</td><td style="color:var(--muted)">${course}</td><td style="color:var(--muted);font-size:12px">${joined}</td></tr>`;
+            }).join('') +
+            '</tbody></table>';
+        }
+      }
       const proCoursesBody = document.getElementById('adminProCoursesBody');
       if (proCoursesBody) {
         if (!ps.topCourses || ps.topCourses.length === 0) {
@@ -5183,6 +5199,10 @@ CREATE POLICY "service_insert_notifs" ON notifications FOR INSERT WITH CHECK (tr
         <div class="admin-stat"><div class="admin-stat-num" id="psYear3" style="color:#0891b2">—</div><div class="admin-stat-label">3rd Year</div></div>
         <div class="admin-stat"><div class="admin-stat-num" id="psYear4" style="color:#d97706">—</div><div class="admin-stat-label">4th Year</div></div>
         <div class="admin-stat"><div class="admin-stat-num" id="psYearFinal" style="color:#dc2626">—</div><div class="admin-stat-label">Final Year</div></div>
+      </div>
+      <div class="admin-section">
+        <div class="admin-section-hdr">⭐ Pro Subscriber List</div>
+        <div id="adminProMembersBody"><div class="admin-empty">Click Refresh to load data.</div></div>
       </div>
       <div class="admin-section">
         <div class="admin-section-hdr">⭐ Pro Subscribers by Course</div>
