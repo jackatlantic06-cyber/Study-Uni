@@ -186,6 +186,24 @@
       { label: "Marking Scheme — Winter 23/24", url: "./marking-schemes/FE3020_Winter2023_Paper1_Marking_Scheme.pdf" },
       { label: "Marking Scheme — Winter 22/23", url: "./marking-schemes/FE3020_Winter2022_Paper1_Marking_Scheme.pdf" },
     ],
+    "MA1001": [
+      { label: "Marking Scheme — Winter 25/26", url: "./marking-schemes/MA1001_Winter2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 24/25", url: "./marking-schemes/MA1001_Winter2024_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 23/24", url: "./marking-schemes/MA1001_Winter2023_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Winter 22/23", url: "./marking-schemes/MA1001_Winter2022_Marking_Scheme.pdf" },
+    ],
+    "MA1002": [
+      { label: "Marking Scheme — Summer 24/25", url: "./marking-schemes/MA1002_Summer2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/MA1002_Summer2024_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 22/23", url: "./marking-schemes/MA1002_Summer2023_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 21/22", url: "./marking-schemes/MA1002_Summer2022_Marking_Scheme.pdf" },
+    ],
+    "PY1010": [
+      { label: "Marking Scheme — Summer 24/25", url: "./marking-schemes/PY1010_Summer2025_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 23/24", url: "./marking-schemes/PY1010_Summer2024_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 22/23", url: "./marking-schemes/PY1010_Summer2023_Marking_Scheme.pdf" },
+      { label: "Marking Scheme — Summer 21/22", url: "./marking-schemes/PY1010_Summer2022_Marking_Scheme.pdf" },
+    ],
   };
 
   // Helpers for randomised math question generators
