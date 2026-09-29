@@ -120,6 +120,34 @@ module.exports = async (req, res) => {
       else                       yearBreakdown.finalYear++;
     });
 
+    // Pro subscriber breakdown
+    const proUsers = allUsers.filter(u => proIdSet.has(u.id));
+    const proToday  = proUsers.filter(u => new Date(u.created_at) >= todayStart).length;
+    const proWeekly = proUsers.filter(u => u.created_at > weekAgo).length;
+    const proYearBreakdown = { year1: 0, year2: 0, year3: 0, year4: 0, finalYear: 0 };
+    const proCourseCounts = {};
+    proUsers.forEach(u => {
+      const email = u.email || '';
+      if (email.endsWith('@umail.ucc.ie')) {
+        const prefix = email.substring(0, 3);
+        if      (prefix === '126') proYearBreakdown.year1++;
+        else if (prefix === '125') proYearBreakdown.year2++;
+        else if (prefix === '124') proYearBreakdown.year3++;
+        else if (prefix === '123') proYearBreakdown.year4++;
+        else                       proYearBreakdown.finalYear++;
+      }
+      const course = normaliseCourse(u.user_metadata?.course);
+      if (course) proCourseCounts[course] = (proCourseCounts[course] || 0) + 1;
+    });
+    const proTopCourses = Object.entries(proCourseCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([course, count]) => ({ course, count }));
+    const proStats = {
+      total: proCount, today: proToday, weekly: proWeekly,
+      yearBreakdown: proYearBreakdown, topCourses: proTopCourses,
+    };
+
     // Most viewed courses — graceful if table doesn't exist
     let topCourses = [];
     try {
@@ -163,6 +191,7 @@ module.exports = async (req, res) => {
       recentUsers,
       allMembers,
       yearBreakdown,
+      proStats,
     });
 
   } catch (err) {

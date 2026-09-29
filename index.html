@@ -696,6 +696,10 @@
 
   /* ── ADMIN DASHBOARD ───────────────────────────────────────────────────────── */
   .admin-page{max-width:900px;margin:0 auto}
+  .admin-tab-bar{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--border);padding-bottom:0}
+  .admin-tab{background:none;border:none;padding:10px 18px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;border-radius:8px 8px 0 0;transition:color .15s,border-color .15s;font-family:inherit}
+  .admin-tab:hover{color:var(--text)}
+  .admin-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
   .admin-hdr{margin-bottom:24px}
   .admin-hdr h1{font-size:24px;font-weight:800;margin-bottom:4px}
   .admin-hdr p{font-size:14px;color:var(--muted)}
@@ -4181,6 +4185,27 @@
       set('asYear3',     (yb.year3     || 0).toLocaleString());
       set('asYear4',     (yb.year4     || 0).toLocaleString());
       set('asYearFinal', (yb.finalYear || 0).toLocaleString());
+      // Pro tab stats
+      const ps = d.proStats || {};
+      const pyb = ps.yearBreakdown || {};
+      set('psTotal',     (ps.total   || 0).toLocaleString());
+      set('psToday',     '+' + (ps.today  || 0));
+      set('psWeekly',    '+' + (ps.weekly || 0));
+      set('psYear1',     (pyb.year1     || 0).toLocaleString());
+      set('psYear2',     (pyb.year2     || 0).toLocaleString());
+      set('psYear3',     (pyb.year3     || 0).toLocaleString());
+      set('psYear4',     (pyb.year4     || 0).toLocaleString());
+      set('psYearFinal', (pyb.finalYear || 0).toLocaleString());
+      const proCoursesBody = document.getElementById('adminProCoursesBody');
+      if (proCoursesBody) {
+        if (!ps.topCourses || ps.topCourses.length === 0) {
+          proCoursesBody.innerHTML = '<div class="admin-empty">No Pro subscribers yet.</div>';
+        } else {
+          proCoursesBody.innerHTML = '<table class="admin-table"><thead><tr><th>#</th><th>Course</th><th>Pro subs</th></tr></thead><tbody>' +
+            ps.topCourses.map((c, i) => `<tr><td style="color:var(--muted);font-weight:700">${i+1}</td><td style="font-weight:600">${c.course}</td><td style="font-weight:700;color:var(--accent)">${c.count.toLocaleString()}</td></tr>`).join('') +
+            '</tbody></table>';
+        }
+      }
       // Most viewed courses table
       const courseBody = document.getElementById('adminCourseBody');
       if (courseBody) {
@@ -4261,6 +4286,13 @@
     const list = window._adminMembers || [];
     const filtered = q ? list.filter(u => (u.name||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q) || (u.course||'').toLowerCase().includes(q)) : list;
     renderMembers(filtered);
+  }
+
+  function switchAdminTab(tab, btn) {
+    document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('adminTabAll').style.display  = tab === 'all' ? '' : 'none';
+    document.getElementById('adminTabPro').style.display  = tab === 'pro' ? '' : 'none';
   }
 
   // ─── INIT ─────────────────────────────────────────────────────────────────
@@ -5045,6 +5077,11 @@
       </div>
       <button class="admin-refresh" onclick="loadAdminStats()">↺ Refresh</button>
     </div>
+    <div class="admin-tab-bar">
+      <button class="admin-tab active" onclick="switchAdminTab('all',this)">📊 Overview</button>
+      <button class="admin-tab" onclick="switchAdminTab('pro',this)">⭐ Pro Subscribers</button>
+    </div>
+    <div id="adminTabAll">
     <div class="admin-grid" id="adminStatGrid">
       <div class="admin-stat"><div class="admin-stat-num" id="asTotalUsers">—</div><div class="admin-stat-label">Total users</div></div>
       <div class="admin-stat"><div class="admin-stat-num" id="asToday" style="color:#16a34a">—</div><div class="admin-stat-label">Sign-ups today</div></div>
@@ -5134,6 +5171,25 @@ CREATE POLICY "update_own_notifs" ON notifications FOR UPDATE USING (auth.uid() 
 CREATE POLICY "service_insert_notifs" ON notifications FOR INSERT WITH CHECK (true);</pre>
       </div>
     </div>
+    </div><!-- /adminTabAll -->
+
+    <div id="adminTabPro" style="display:none">
+      <div class="admin-grid">
+        <div class="admin-stat"><div class="admin-stat-num" id="psTotal" style="color:#f59e0b">—</div><div class="admin-stat-label">Total Pro</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="psToday" style="color:#16a34a">—</div><div class="admin-stat-label">Pro today</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="psWeekly">—</div><div class="admin-stat-label">Pro this week</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="psYear1" style="color:#2563eb">—</div><div class="admin-stat-label">1st Year</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="psYear2" style="color:#7c3aed">—</div><div class="admin-stat-label">2nd Year</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="psYear3" style="color:#0891b2">—</div><div class="admin-stat-label">3rd Year</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="psYear4" style="color:#d97706">—</div><div class="admin-stat-label">4th Year</div></div>
+        <div class="admin-stat"><div class="admin-stat-num" id="psYearFinal" style="color:#dc2626">—</div><div class="admin-stat-label">Final Year</div></div>
+      </div>
+      <div class="admin-section">
+        <div class="admin-section-hdr">⭐ Pro Subscribers by Course</div>
+        <div id="adminProCoursesBody"><div class="admin-empty">Click Refresh to load data.</div></div>
+      </div>
+    </div><!-- /adminTabPro -->
+
   </div>
 </div>
 
