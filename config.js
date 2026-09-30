@@ -9,7 +9,7 @@ window.SU_CONFIG = {
   STRIPE_PRICE_SEMESTER: 'price_1U8x0s5nRvQshm57rXkQVjPr',
   STRIPE_PRICE_ANNUAL:   'price_1Tpu0T5nRvQshm57nUxvSkV3',
   // Emails that bypass the paywall and the UCC-email restriction.
-  OWNER_EMAILS: ['jackatlantic06@gmail.com'],
+  OWNER_EMAILS: ['jackatlantic06@gmail.com', 'Tomcahillane@gmail.com'],
   // Non-UCC emails granted full Pro access (but not owner/admin privileges).
   PRO_EMAILS: ['tommyatlantic13@gmail.com', '125335891@umail.ucc.ie'],
 };
