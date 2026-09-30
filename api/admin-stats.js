@@ -79,6 +79,7 @@ module.exports = async (req, res) => {
       .map(s => s.id));
 
     const ownerEmails = (process.env.OWNER_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean);
+    const proEmails = (process.env.PRO_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean);
 
     // Full member list (newest first)
     const allMembers = allUsers
@@ -88,7 +89,7 @@ module.exports = async (req, res) => {
         email: u.email,
         name: u.user_metadata?.full_name || [u.user_metadata?.first_name, u.user_metadata?.last_name].filter(Boolean).join(' ') || '',
         course: u.user_metadata?.course || '',
-        plan: ownerEmails.includes(u.email) ? 'Owner' : proIdSet.has(u.id) ? 'Pro' : 'Free',
+        plan: ownerEmails.includes(u.email) ? 'Owner' : (proIdSet.has(u.id) || proEmails.includes(u.email)) ? 'Pro' : 'Free',
         created_at: u.created_at,
         last_sign_in: u.last_sign_in_at,
       }));
@@ -104,8 +105,9 @@ module.exports = async (req, res) => {
       .slice(0, 10)
       .map(([course, count]) => ({ course, count }));
 
-    // Pro subscribers
-    const proCount = proIdSet.size;
+    // Pro subscribers (subscriptions table + manually granted PRO_EMAILS)
+    const proUsers = allUsers.filter(u => proIdSet.has(u.id) || proEmails.includes(u.email));
+    const proCount = proUsers.length;
 
     // Year breakdown by UCC student number prefix
     const yearBreakdown = { year1: 0, year2: 0, year3: 0, year4: 0, finalYear: 0 };
@@ -121,7 +123,6 @@ module.exports = async (req, res) => {
     });
 
     // Pro subscriber breakdown
-    const proUsers = allUsers.filter(u => proIdSet.has(u.id));
     const proToday  = proUsers.filter(u => new Date(u.created_at) >= todayStart).length;
     const proWeekly = proUsers.filter(u => u.created_at > weekAgo).length;
     const proYearBreakdown = { year1: 0, year2: 0, year3: 0, year4: 0, finalYear: 0 };
