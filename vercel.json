@@ -4,5 +4,18 @@
       "path": "/api/weekly-email",
       "schedule": "0 9 * * 1"
     }
+  ],
+  "rewrites": [
+    { "source": "/marketing", "destination": "/marketing.html" }
+  ],
+  "headers": [
+    {
+      "source": "/marketing(.html)?",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Cache-Control", "value": "no-store" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    }
   ]
 }

@@ -1,4 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
+const marketing = require('../lib/marketing-api');
 
 function normaliseCourse(raw) {
   if (!raw) return null;
@@ -46,6 +47,11 @@ module.exports = async (req, res) => {
 
   const owners = (process.env.OWNER_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean);
   if (!owners.includes(user.email)) return res.status(403).json({ error: 'Not authorized' });
+
+  // Marketing dashboard actions (/marketing) — owner check above applies.
+  if (typeof action === 'string' && action.startsWith('mkt-')) {
+    return marketing.handle(sb, res, user.email, req.body);
+  }
 
   // Handle revoke action
   if (action === 'revoke') {
