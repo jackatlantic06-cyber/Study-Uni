@@ -76,6 +76,30 @@ module.exports = async (req, res) => {
     const weeklySignups = allUsers.filter(u => u.created_at > weekAgo).length;
     const todaySignups = allUsers.filter(u => new Date(u.created_at) >= todayStart).length;
 
+    // Sign-up sources (last 7 days), grouped by source / campaign / content.
+    // Counts every sign-up created this week, confirmed or not, so a post gets
+    // credit even if the student hasn't clicked the email link yet.
+    const signupSources = { since: weekAgo, total: 0, bySource: {}, rows: [] };
+    {
+      const srcGroups = {};
+      ((usersPage && usersPage.users) || [])
+        .filter(u => u.created_at > weekAgo)
+        .forEach(u => {
+          const s = (u.user_metadata && u.user_metadata.signup_source) || {};
+          const source   = s.source || 'direct';
+          const medium   = s.medium || null;
+          const campaign = s.campaign || null;
+          const content  = s.content || null;
+          const key = [source, medium, campaign, content].join('|');
+          if (!srcGroups[key]) srcGroups[key] = { source, medium, campaign, content, count: 0, confirmed: 0 };
+          srcGroups[key].count++;
+          if (u.email_confirmed_at) srcGroups[key].confirmed++;
+          signupSources.bySource[source] = (signupSources.bySource[source] || 0) + 1;
+          signupSources.total++;
+        });
+      signupSources.rows = Object.values(srcGroups).sort((a, b) => b.count - a.count);
+    }
+
     // Recent sign-ups (newest first, last 30)
     const recentUsers = allUsers
       .slice()
@@ -217,6 +241,7 @@ module.exports = async (req, res) => {
       totalUsers,
       weeklySignups,
       todaySignups,
+      signupSources,
       proCount: proCount || 0,
       freeCount: totalUsers - (proCount || 0),
       conversionRate: totalUsers > 0 ? ((proCount || 0) / totalUsers * 100).toFixed(1) : '0.0',

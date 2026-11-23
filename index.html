@@ -2922,7 +2922,7 @@
         const conf = document.getElementById('authConfirm').value;
         if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters'; btn.disabled=false; btn.textContent='Create account'; return; }
         if (pass !== conf)   { errEl.textContent = 'Passwords do not match'; btn.disabled=false; btn.textContent='Create account'; return; }
-        const { error } = await _sbClient.auth.signUp({ email, password: pass, options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName, course, newsletter_consent: newsletter } } });
+        const { error } = await _sbClient.auth.signUp({ email, password: pass, options: { data: { first_name: firstName, last_name: lastName, full_name: firstName + ' ' + lastName, course, newsletter_consent: newsletter, signup_source: _getSignupSource() } } });
         if (error) throw error;
         document.getElementById('authSuccessMsg').style.display = 'block';
         btn.textContent = '✓ Check your email';
@@ -4416,6 +4416,19 @@
             '</tbody></table>';
         }
       }
+      // Sign-up sources table
+      const srcBody = document.getElementById('adminSignupSourcesBody');
+      if (srcBody) {
+        const rows = (d.signupSources && d.signupSources.rows) || [];
+        if (rows.length === 0) {
+          srcBody.innerHTML = '<div class="admin-empty">No sign-ups in the last 7 days.</div>';
+        } else {
+          const esc = s => String(s == null ? '—' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+          srcBody.innerHTML = '<table class="admin-table"><thead><tr><th>Source</th><th>Campaign</th><th>Post</th><th>Sign-ups</th></tr></thead><tbody>' +
+            rows.map(r => `<tr><td style="font-weight:600">${esc(r.source)}</td><td>${esc(r.campaign)}</td><td style="font-family:monospace;font-size:12px">${esc(r.content)}</td><td style="font-weight:700">${r.count}</td></tr>`).join('') +
+            '</tbody></table>';
+        }
+      }
       // Quiz stats
       const quizBody = document.getElementById('adminQuizBody');
       if (quizBody) {
@@ -4481,6 +4494,55 @@
     btn.classList.add('active');
     document.getElementById('adminTabAll').style.display  = tab === 'all' ? '' : 'none';
     document.getElementById('adminTabPro').style.display  = tab === 'pro' ? '' : 'none';
+  }
+
+  // ─── SIGN-UP ATTRIBUTION ─────────────────────────────────────────────────
+  // Remembers where a visitor came from (utm_* link or referring site) so the
+  // sign-up can be credited to the post that brought them. First-party only:
+  // stored in this browser and sent with the user's own sign-up, nowhere else.
+  const _SRC_KEY = 'su_signup_source';
+  const _SRC_MAX_AGE_DAYS = 30;
+  function _srcClean(v) {
+    if (v == null) return null;
+    const s = String(v).trim().toLowerCase().replace(/[^a-z0-9_.:\-]/g, '').slice(0, 80);
+    return s || null;
+  }
+  (function _captureSignupSource() {
+    try {
+      const p = new URLSearchParams(window.location.search);
+      const utm = {
+        source:   _srcClean(p.get('utm_source')),
+        medium:   _srcClean(p.get('utm_medium')),
+        campaign: _srcClean(p.get('utm_campaign')),
+        content:  _srcClean(p.get('utm_content')),
+      };
+      if (utm.source || utm.medium || utm.campaign || utm.content) {
+        // A tracked link always wins (last click).
+        localStorage.setItem(_SRC_KEY, JSON.stringify(Object.assign(utm, { landed: new Date().toISOString() })));
+        return;
+      }
+      if (localStorage.getItem(_SRC_KEY)) return; // keep an earlier tracked visit
+      const ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : '';
+      if (ref && ref !== window.location.hostname.replace(/^www\./, '')) {
+        localStorage.setItem(_SRC_KEY, JSON.stringify({
+          source: _srcClean(ref), medium: 'referral', campaign: null, content: null,
+          referrer: _srcClean(ref), landed: new Date().toISOString(),
+        }));
+      }
+    } catch (e) {}
+  })();
+  function _getSignupSource() {
+    try {
+      const s = JSON.parse(localStorage.getItem(_SRC_KEY) || 'null');
+      if (!s || !s.landed) return null;
+      const ageDays = (Date.now() - new Date(s.landed).getTime()) / 86400000;
+      if (!(ageDays >= 0 && ageDays <= _SRC_MAX_AGE_DAYS)) return null;
+      return {
+        source: _srcClean(s.source), medium: _srcClean(s.medium),
+        campaign: _srcClean(s.campaign), content: _srcClean(s.content),
+        referrer: _srcClean(s.referrer), landed: s.landed,
+      };
+    } catch (e) { return null; }
   }
 
   // ─── INIT ─────────────────────────────────────────────────────────────────
@@ -5293,6 +5355,10 @@
         <div class="admin-section-hdr">🎓 Most Signed-Up Courses</div>
         <div id="adminSignupCoursesBody"><div class="admin-empty">Click Refresh to load data.</div></div>
       </div>
+    </div>
+    <div class="admin-section">
+      <div class="admin-section-hdr">📣 Sign-up Sources <span style="font-weight:400;font-size:11px;color:var(--muted)">(last 7 days)</span></div>
+      <div id="adminSignupSourcesBody"><div class="admin-empty">Click Refresh to load data.</div></div>
     </div>
     <div class="admin-section" style="margin-top:16px">
       <div class="admin-section-hdr">📊 Quiz Activity (this week)</div>
