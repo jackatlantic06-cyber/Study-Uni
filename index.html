@@ -4516,6 +4516,13 @@
         campaign: _srcClean(p.get('utm_campaign')),
         content:  _srcClean(p.get('utm_content')),
       };
+      // Short links (study-uni.ie/t/26w48t1) carry only the post key; the
+      // week and platform are encoded in it.
+      const k = utm.content && utm.content.match(/^(\d{2})w(\d{2})([ti])\d+$/);
+      if (k) {
+        if (!utm.campaign) utm.campaign = '20' + k[1] + '-w' + k[2];
+        if (!utm.source) utm.source = k[3] === 't' ? 'tiktok' : 'instagram';
+      }
       if (utm.source || utm.medium || utm.campaign || utm.content) {
         // A tracked link always wins (last click).
         localStorage.setItem(_SRC_KEY, JSON.stringify(Object.assign(utm, { landed: new Date().toISOString() })));

@@ -1,0 +1,17 @@
+{
+  "name": "study-uni-marketing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Weekly marketing jobs for Study-Uni (run on GitHub Actions)",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "research": "node jobs/research.js",
+    "create": "node jobs/create.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.13.0",
+    "@supabase/supabase-js": "^2.119.2"
+  }
+}
