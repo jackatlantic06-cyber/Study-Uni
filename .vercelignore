@@ -1,0 +1,5 @@
+# Not part of the website — keep these off the public deployment.
+# marketing/ holds the GitHub Actions jobs; marketing.html (the dashboard) is still deployed.
+marketing/
+supabase/
+.github/

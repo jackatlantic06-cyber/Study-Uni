@@ -1,12 +1,13 @@
 const { createClient } = require('@supabase/supabase-js');
+const marketing = require('../lib/marketing-api');
 
 function normaliseCourse(raw) {
   if (!raw) return null;
   const s = raw.trim().toLowerCase().replace(/[^a-z0-9 &]/g, ' ').replace(/\s+/g, ' ').trim();
   if (/\b(bcomm?|b comm?|commerce|ck ?201)\b/.test(s))                    return 'Commerce (BCom) — CK201';
+  if (/\b(bis|business info(rmation)?|ck ?104)\b/.test(s))                return 'Business Information Systems (BIS) — CK104';
   if (/\b(bfin|b ?sc ?finance|finance|ck ?203)\b/.test(s))                return 'Finance (BSc) — CK203';
   if (/\b(bacc|b ?acc(ounting)?|ck ?204)\b/.test(s))                      return 'Accounting (BAcc) — CK204';
-  if (/\b(bis|business info|ck ?104)\b/.test(s))                          return 'Business Information Systems (BIS) — CK104';
   if (/global.{0,10}bus|bus.{0,10}econ|ck ??114/.test(s))                return 'Global Business (BBus) — CK114';
   if (/law.{0,6}(bus|business)|ck ?302/.test(s))                          return 'Law and Business — CK302';
   if (/\b(bcl|law)\b/.test(s))                                            return 'Law (BCL) — CK301';
@@ -33,7 +34,7 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { accessToken } = req.body || {};
+  const { accessToken, action, email } = req.body || {};
   if (!accessToken) return res.status(401).json({ error: 'Not authenticated' });
 
   const sb = createClient(
@@ -47,6 +48,28 @@ module.exports = async (req, res) => {
   const owners = (process.env.OWNER_EMAILS || '').split(',').map(e => e.trim()).filter(Boolean);
   if (!owners.includes(user.email)) return res.status(403).json({ error: 'Not authorized' });
 
+  // Marketing dashboard actions (/marketing) — owner check above applies.
+  if (typeof action === 'string' && action.startsWith('mkt-')) {
+    return marketing.handle(sb, res, user.email, req.body);
+  }
+
+  // Handle revoke action
+  if (action === 'revoke') {
+    if (!email) return res.status(400).json({ error: 'Missing email' });
+    try {
+      const { data: { users: allU }, error: luErr } = await sb.auth.admin.listUsers({ perPage: 10000 });
+      if (luErr) throw new Error(`listUsers: ${luErr.message}`);
+      const target = (allU || []).find(u => u.email === email);
+      if (!target) return res.status(404).json({ error: `No user found with email ${email}` });
+      const { error: upErr } = await sb.from('subscriptions').update({ is_active: false }).eq('id', target.id);
+      if (upErr) throw new Error(`update: ${upErr.message}`);
+      return res.status(200).json({ ok: true, revoked: email });
+    } catch (err) {
+      console.error('admin-revoke error:', err.message);
+      return res.status(500).json({ error: err.message || 'Server error' });
+    }
+  }
+
   try {
     const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
     const todayStart = new Date(); todayStart.setUTCHours(0, 0, 0, 0);
@@ -58,6 +81,30 @@ module.exports = async (req, res) => {
     const totalUsers = allUsers.length;
     const weeklySignups = allUsers.filter(u => u.created_at > weekAgo).length;
     const todaySignups = allUsers.filter(u => new Date(u.created_at) >= todayStart).length;
+
+    // Sign-up sources (last 7 days), grouped by source / campaign / content.
+    // Counts every sign-up created this week, confirmed or not, so a post gets
+    // credit even if the student hasn't clicked the email link yet.
+    const signupSources = { since: weekAgo, total: 0, bySource: {}, rows: [] };
+    {
+      const srcGroups = {};
+      ((usersPage && usersPage.users) || [])
+        .filter(u => u.created_at > weekAgo)
+        .forEach(u => {
+          const s = (u.user_metadata && u.user_metadata.signup_source) || {};
+          const source   = s.source || 'direct';
+          const medium   = s.medium || null;
+          const campaign = s.campaign || null;
+          const content  = s.content || null;
+          const key = [source, medium, campaign, content].join('|');
+          if (!srcGroups[key]) srcGroups[key] = { source, medium, campaign, content, count: 0, confirmed: 0 };
+          srcGroups[key].count++;
+          if (u.email_confirmed_at) srcGroups[key].confirmed++;
+          signupSources.bySource[source] = (signupSources.bySource[source] || 0) + 1;
+          signupSources.total++;
+        });
+      signupSources.rows = Object.values(srcGroups).sort((a, b) => b.count - a.count);
+    }
 
     // Recent sign-ups (newest first, last 30)
     const recentUsers = allUsers
@@ -200,6 +247,7 @@ module.exports = async (req, res) => {
       totalUsers,
       weeklySignups,
       todaySignups,
+      signupSources,
       proCount: proCount || 0,
       freeCount: totalUsers - (proCount || 0),
       conversionRate: totalUsers > 0 ? ((proCount || 0) / totalUsers * 100).toFixed(1) : '0.0',

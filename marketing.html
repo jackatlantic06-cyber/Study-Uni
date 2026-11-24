@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <meta name="theme-color" content="#0f172a"/>
+  <title>Study-Uni Marketing</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    :root{
+      --navy:#0f172a;--navy2:#1e293b;--blue:#2563eb;--blue-d:#1d4ed8;--blue-l:#eff6ff;
+      --bg:#f1f5f9;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--muted:#64748b;
+      --green:#16a34a;--green-l:#f0fdf4;--amber:#d97706;--amber-l:#fffbeb;--red:#dc2626;--red-l:#fef2f2;
+      --radius:14px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    [hidden]{display:none!important}
+    html{-webkit-text-size-adjust:100%}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.45;padding-bottom:env(safe-area-inset-bottom)}
+    button,input,textarea,select{font:inherit;color:inherit}
+    button{cursor:pointer;border:0;background:none}
+    .wrap{max-width:640px;margin:0 auto;padding:0 16px}
+
+    header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:20}
+    .hdr{display:flex;align-items:center;gap:10px;height:56px}
+    .hdr h1{font-size:17px;font-weight:800;flex:1;letter-spacing:-.01em}
+    .hdr h1 span{color:#93c5fd;font-weight:600}
+    .icon-btn{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:#cbd5e1;font-size:18px}
+    .icon-btn:active{background:var(--navy2)}
+
+    .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:0 0 10px}
+    .tabs::-webkit-scrollbar{display:none}
+    .tab{flex:0 0 auto;padding:8px 12px;border-radius:999px;color:#cbd5e1;font-weight:600;font-size:14px;display:flex;gap:6px;align-items:center}
+    .tab[aria-selected="true"]{background:#fff;color:var(--navy)}
+    .badge{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--blue);color:#fff;font-size:12px;font-weight:700;display:inline-grid;place-items:center}
+    .badge.red{background:var(--red)}
+    .tab[aria-selected="true"] .badge{background:var(--blue)}
+
+    main.wrap{padding:16px 16px 40px}
+    section[hidden]{display:none}
+
+    .summary{background:linear-gradient(160deg,var(--navy) 0%,#1e3a8a 100%);color:#fff;border-radius:var(--radius);padding:16px;margin-bottom:16px}
+    .summary h2{font-size:13px;font-weight:600;color:#93c5fd;text-transform:uppercase;letter-spacing:.06em}
+    .summary .greet{font-size:20px;font-weight:800;margin:4px 0 12px;letter-spacing:-.01em}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .kpi{background:rgba(255,255,255,.08);border-radius:10px;padding:10px}
+    .kpi b{display:block;font-size:22px;font-weight:800;line-height:1.1}
+    .kpi small{font-size:11.5px;color:#cbd5e1;font-weight:500}
+    .kpi.alert b{color:#fca5a5}
+    .summary .note{margin-top:12px;font-size:13.5px;color:#e2e8f0}
+    .summary .note b{color:#fff}
+
+    .banner{border-radius:12px;padding:12px 14px;font-size:14px;margin-bottom:14px;background:var(--amber-l);color:#92400e;border:1px solid #fde68a}
+    .banner.err{background:var(--red-l);color:#991b1b;border-color:#fecaca}
+
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:14px;overflow:hidden}
+    .card-hd{display:flex;align-items:center;gap:8px;padding:12px 14px 0;flex-wrap:wrap}
+    .pill{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--blue-l);color:var(--blue-d)}
+    .pill.tt{background:#111;color:#fff}
+    .pill.ig{background:#fdf2f8;color:#be185d}
+    .pill.ok{background:var(--green-l);color:var(--green)}
+    .pill.warn{background:var(--amber-l);color:var(--amber)}
+    .pill.bad{background:var(--red-l);color:var(--red)}
+    .key{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--muted);margin-left:auto}
+    .card-bd{padding:12px 14px 14px}
+    .hook{font-weight:700;font-size:16px;margin-bottom:8px}
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+
+    .media{background:#000;display:flex;justify-content:center}
+    .media video{width:100%;max-height:70vh;aspect-ratio:9/16;object-fit:contain;background:#000}
+    .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:6px;background:var(--navy);padding:6px}
+    .slides img{flex:0 0 78%;max-width:78%;aspect-ratio:4/5;object-fit:cover;border-radius:8px;scroll-snap-align:center;background:#1e293b}
+    .nomedia{background:var(--navy2);color:#94a3b8;padding:28px 14px;text-align:center;font-size:13px}
+
+    label.lbl{display:block;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px}
+    textarea{width:100%;min-height:110px;border:1px solid var(--border);border-radius:10px;padding:10px;font-size:15px;resize:vertical;background:#fff}
+    textarea:focus,input:focus{outline:2px solid var(--blue);outline-offset:-1px}
+    input[type=datetime-local],input[type=text],input[type=email],input[type=password]{width:100%;border:1px solid var(--border);border-radius:10px;padding:11px 10px;font-size:16px;background:#fff}
+    .link{font-size:12.5px;word-break:break-all;color:var(--blue-d)}
+    .warns{margin-top:8px;font-size:13px;color:var(--amber)}
+    .warns li{margin-left:18px}
+    details{margin-top:10px;font-size:14px}
+    details summary{cursor:pointer;font-weight:600;color:var(--blue-d)}
+    details pre{white-space:pre-wrap;font-family:inherit;background:var(--bg);border-radius:10px;padding:10px;margin-top:6px;font-size:13.5px}
+
+    .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+    .btn{min-height:46px;border-radius:12px;font-weight:700;font-size:15px;padding:0 14px;display:flex;align-items:center;justify-content:center;gap:6px}
+    .btn.primary{background:var(--blue);color:#fff}
+    .btn.primary:active{background:var(--blue-d)}
+    .btn.ghost{background:var(--bg);color:var(--navy);border:1px solid var(--border)}
+    .btn.danger{background:var(--red-l);color:var(--red)}
+    .btn.full{grid-column:1/-1}
+    .btn[disabled]{opacity:.5;pointer-events:none}
+    .inline{grid-column:1/-1;display:none;gap:8px;flex-direction:column;background:var(--bg);border-radius:12px;padding:10px}
+    .inline.open{display:flex}
+
+    .row{display:flex;gap:10px;align-items:center;padding:12px 14px;border-top:1px solid var(--border)}
+    .row:first-child{border-top:0}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+    .stat{background:var(--bg);border-radius:10px;padding:8px 6px;text-align:center}
+    .stat b{display:block;font-size:17px;font-weight:800}
+    .stat small{font-size:11px;color:var(--muted);font-weight:600}
+    .stat.hl{background:var(--blue);color:#fff}
+    .stat.hl small{color:#dbeafe}
+
+    .empty{text-align:center;color:var(--muted);padding:28px 16px;font-size:14px}
+    h3.sec{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 2px 8px}
+    ul.list{padding-left:20px}
+    ul.list li{margin:4px 0}
+    blockquote{border-left:3px solid var(--border);padding-left:10px;margin:6px 0;color:var(--text)}
+
+    .gate{max-width:380px;margin:40px auto;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+    .gate h2{font-size:20px;margin-bottom:6px}
+    .gate .field{margin-top:12px}
+    .err{color:var(--red);font-size:14px;margin-top:10px;min-height:20px}
+
+    .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(120px);background:var(--navy);color:#fff;padding:12px 16px;border-radius:12px;font-weight:600;font-size:14px;transition:transform .25s;z-index:50;max-width:calc(100% - 32px)}
+    .toast.show{transform:translateX(-50%) translateY(0)}
+    .toast.err{background:var(--red)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="hdr">
+      <h1>Study-Uni <span>Marketing</span></h1>
+      <button class="icon-btn" id="refreshBtn" aria-label="Refresh" title="Refresh">↻</button>
+    </div>
+    <nav class="tabs" role="tablist" id="tabs" hidden>
+      <button class="tab" role="tab" data-tab="queue" aria-selected="true">Queue <span class="badge" id="bQueue" hidden></span></button>
+      <button class="tab" role="tab" data-tab="scheduled" aria-selected="false">Scheduled <span class="badge" id="bSched" hidden></span></button>
+      <button class="tab" role="tab" data-tab="results" aria-selected="false">Results</button>
+      <button class="tab" role="tab" data-tab="inbox" aria-selected="false">Inbox <span class="badge red" id="bInbox" hidden></span></button>
+      <button class="tab" role="tab" data-tab="brief" aria-selected="false">Brief</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+  <div class="empty">Loading…</div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="config.js?v=4"></script>
+<script>
+(function () {
+  'use strict';
+  const cfg = window.SU_CONFIG || {};
+  const sb = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+  const app = document.getElementById('app');
+  const tabsEl = document.getElementById('tabs');
+  let state = null;
+  let tab = (location.hash || '').replace('#', '') || 'queue';
+  const TZ = 'Europe/Dublin';
+
+  // ── helpers ──────────────────────────────────────────────────────────
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const safeUrl = u => { try { const x = new URL(u, location.href); return (x.protocol === 'https:' || x.protocol === 'http:') ? x.href : ''; } catch (e) { return ''; } };
+  const num = n => (n == null ? '—' : Number(n).toLocaleString('en-IE'));
+  const when = iso => iso ? new Date(iso).toLocaleString('en-IE', { timeZone: TZ, weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—';
+  function toast(msg, isErr) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = 'toast show' + (isErr ? ' err' : '');
+    clearTimeout(toast._t); toast._t = setTimeout(() => { t.className = 'toast'; }, 3200);
+  }
+  function platformPill(p) { return p === 'tiktok' ? '<span class="pill tt">TikTok</span>' : '<span class="pill ig">Instagram</span>'; }
+  function localInputValue(d) {
+    const pad = n => String(n).padStart(2, '0');
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+
+  async function api(action, extra) {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { renderGate(); throw new Error('Signed out'); }
+    const resp = await fetch('/api/admin-stats', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ accessToken: session.access_token, action }, extra || {})),
+    });
+    let body = {};
+    try { body = await resp.json(); } catch (e) {}
+    if (resp.status === 401) { renderGate('Your session expired — sign in again.'); throw new Error('Signed out'); }
+    if (resp.status === 403) { renderDenied(); throw new Error('Not an owner'); }
+    if (!resp.ok) throw new Error(body.error || ('Error ' + resp.status));
+    return body;
+  }
+
+  // ── auth gate ────────────────────────────────────────────────────────
+  function renderGate(msg) {
+    tabsEl.hidden = true;
+    app.innerHTML = `
+      <form class="gate" id="gate">
+        <h2>Sign in</h2>
+        <p class="muted small">Owners only. Use your Study-Uni account.</p>
+        <div class="field"><input type="email" id="gEmail" placeholder="Email" autocomplete="username" required></div>
+        <div class="field"><input type="password" id="gPass" placeholder="Password" autocomplete="current-password" required></div>
+        <div class="btns"><button class="btn primary full" type="submit">Sign in</button></div>
+        <div class="err" id="gErr">${esc(msg || '')}</div>
+      </form>`;
+    document.getElementById('gate').addEventListener('submit', async e => {
+      e.preventDefault();
+      const errEl = document.getElementById('gErr'); errEl.textContent = '';
+      const { error } = await sb.auth.signInWithPassword({
+        email: document.getElementById('gEmail').value.trim().toLowerCase(),
+        password: document.getElementById('gPass').value,
+      });
+      if (error) { errEl.textContent = error.message; return; }
+      load();
+    });
+  }
+  function renderDenied() {
+    tabsEl.hidden = true;
+    app.innerHTML = `<div class="gate"><h2>Not authorised</h2><p class="muted small" style="margin-top:6px">This page is only for Study-Uni owners.</p>
+      <div class="btns"><button class="btn ghost full" id="outBtn">Sign out</button></div></div>`;
+    document.getElementById('outBtn').onclick = async () => { await sb.auth.signOut(); renderGate(); };
+  }
+
+  // ── rendering ────────────────────────────────────────────────────────
+  function summaryHtml(d) {
+    const s = d.summary || {};
+    const hour = Number(new Date().toLocaleString('en-IE', { timeZone: TZ, hour: '2-digit', hour12: false }));
+    const greet = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+    const parts = [];
+    if (s.awaitingApproval) parts.push(`<b>${s.awaitingApproval}</b> post${s.awaitingApproval === 1 ? '' : 's'} waiting for you`);
+    if (s.goingOutToday) parts.push(`<b>${s.goingOutToday}</b> going out today`);
+    if (s.needsJack) parts.push(`<b>${s.needsJack}</b> comment${s.needsJack === 1 ? '' : 's'} need you`);
+    if (s.failed) parts.push(`<b>${s.failed}</b> failed to publish`);
+    const top = s.topPost ? `<div class="note">Best post (30 days): <b>${esc(s.topPost.hook || s.topPost.title || s.topPost.post_key)}</b> — ${num(s.topPost.signups)} sign-ups, ${num(s.topPost.stats && s.topPost.stats.views)} views</div>` : '';
+    return `<div class="summary">
+      <h2>Morning summary</h2>
+      <div class="greet">${greet}</div>
+      <div class="kpis">
+        <div class="kpi"><b>${num(s.signupsYesterday)}</b><small>Sign-ups yesterday</small></div>
+        <div class="kpi"><b>${num(s.signupsWeek)}</b><small>Sign-ups, 7 days</small></div>
+        <div class="kpi"><b>${num(s.signupsWeekFromPosts)}</b><small>From posts, 7 days</small></div>
+        <div class="kpi"><b>${num(s.awaitingApproval)}</b><small>To approve</small></div>
+        <div class="kpi"><b>${num(s.goingOutToday)}</b><small>Going out today</small></div>
+        <div class="kpi ${s.needsJack ? 'alert' : ''}"><b>${num(s.needsJack)}</b><small>Needs Jack</small></div>
+      </div>
+      <div class="note">${parts.length ? parts.join(' · ') : 'Nothing needs you right now.'}</div>
+      ${top}
+    </div>`;
+  }
+
+  function mediaHtml(p) {
+    const media = Array.isArray(p.media) ? p.media : [];
+    const vid = media.find(m => m.kind === 'video' && safeUrl(m.url));
+    const cover = media.find(m => m.kind === 'cover' && safeUrl(m.url));
+    if (vid) return `<div class="media"><video src="${esc(safeUrl(vid.url))}" ${cover ? `poster="${esc(safeUrl(cover.url))}"` : ''} controls playsinline preload="metadata"></video></div>`;
+    const imgs = media.filter(m => m.kind === 'image' && safeUrl(m.url));
+    if (imgs.length) return `<div class="slides">${imgs.map((m, i) => `<img src="${esc(safeUrl(m.url))}" alt="Slide ${i + 1}" loading="lazy">`).join('')}</div>`;
+    return '<div class="nomedia">No preview yet — media is still rendering.</div>';
+  }
+
+  function complianceHtml(p) {
+    const c = p.compliance || {};
+    const warns = [].concat(c.warnings || [], c.caption_warnings || []);
+    let pill = c.passed === true ? '<span class="pill ok">✓ Rules check passed</span>' : c.passed === false ? '<span class="pill bad">✕ Failed rules check</span>' : '<span class="pill warn">Not checked</span>';
+    if (p.ai_label) pill += ' <span class="pill">AI label on</span>';
+    return { pill, warns: warns.length ? `<ul class="warns">${warns.map(w => `<li>${esc(w)}</li>`).join('')}</ul>` : '' };
+  }
+
+  function scriptText(p) {
+    const s = p.script;
+    if (!s) return '';
+    if (typeof s === 'string') return s;
+    if (Array.isArray(s.scenes)) return s.scenes.map((x, i) => `${i + 1}. ${x.text || x.voiceover || ''}${x.onscreen ? '\n   On screen: ' + x.onscreen : ''}`).join('\n');
+    if (Array.isArray(s.slides)) return s.slides.map((x, i) => `Slide ${i + 1}: ${x.title || ''}${x.body ? ' — ' + x.body : ''}`).join('\n');
+    return JSON.stringify(s, null, 2);
+  }
+
+  function queueCard(p) {
+    const c = complianceHtml(p);
+    const canApprove = p.compliance && p.compliance.passed === true && Array.isArray(p.media) && p.media.length > 0;
+    const defaultTime = new Date(Date.now() + 3 * 3600000); defaultTime.setMinutes(0, 0, 0);
+    const script = scriptText(p);
+    return `<article class="card" data-id="${esc(p.id)}">
+      <div class="card-hd">${platformPill(p.platform)}<span class="pill">${p.format === 'carousel' ? 'Carousel' : ({ storybook: 'Cartoon', animated: 'Animated cartoon' }[(p.script && p.script.style) || ''] || 'Video')}</span>${p.is_demo ? '<span class="pill warn">Demo</span>' : ''}<span class="key">${esc(p.post_key)}</span></div>
+      <div class="card-bd" style="padding-bottom:10px">${p.hook ? `<div class="hook">${esc(p.hook)}</div>` : ''}<div>${c.pill}</div>${c.warns}${p.error ? `<div class="small" style="color:var(--red);margin-top:8px">${esc(p.error)}</div>` : ''}</div>
+      ${mediaHtml(p)}
+      <div class="card-bd">
+        <label class="lbl" for="cap-${esc(p.id)}">Caption</label>
+        <textarea id="cap-${esc(p.id)}" data-role="caption" maxlength="2200">${esc(p.caption)}</textarea>
+        ${p.link ? `<div class="link" style="margin-top:6px">${esc(p.link)}</div>` : ''}
+        ${script ? `<details><summary>Script</summary><pre>${esc(script)}</pre></details>` : ''}
+        <div class="btns">
+          <button class="btn primary" data-act="approve" ${canApprove ? '' : 'disabled'}>Approve now</button>
+          <button class="btn ghost" data-act="toggle-schedule" ${canApprove ? '' : 'disabled'}>Schedule…</button>
+          <div class="inline" data-role="schedule">
+            <label class="lbl" style="margin:0">Post at (your phone's time)</label>
+            <input type="datetime-local" data-role="when" value="${localInputValue(defaultTime)}">
+            <button class="btn primary" data-act="schedule">Confirm schedule</button>
+          </div>
+          <button class="btn ghost" data-act="save-caption">Save caption</button>
+          <button class="btn danger" data-act="toggle-reject">Reject</button>
+          <div class="inline" data-role="reject">
+            <input type="text" data-role="reason" placeholder="Why? (helps next week's posts)" maxlength="500">
+            <button class="btn danger" data-act="reject">Confirm reject</button>
+          </div>
+        </div>
+      </div>
+    </article>`;
+  }
+
+  function scheduledRow(p) {
+    return `<article class="card" data-id="${esc(p.id)}"><div class="card-bd">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${platformPill(p.platform)}<span class="pill ${p.status === 'publishing' ? 'ok' : 'warn'}">${p.status === 'publishing' ? 'Queued in Postiz' : 'Approved — waiting to send'}</span><span class="key">${esc(p.post_key)}</span></div>
+      <div class="hook" style="margin-top:8px">${esc(p.hook || p.title || p.post_key)}</div>
+      <div class="small muted">Goes out ${when(p.scheduled_for)} · approved by ${esc(p.approved_by || '—')}</div>
+      ${p.error ? `<div class="small" style="color:var(--red);margin-top:6px">${esc(p.error)}</div>` : ''}
+      <div class="btns"><button class="btn ghost full" data-act="unschedule">Unschedule (back to queue)</button></div>
+    </div></article>`;
+  }
+
+  function resultCard(p) {
+    const st = p.stats || {};
+    const link = safeUrl(p.release_url);
+    return `<article class="card"><div class="card-bd">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${platformPill(p.platform)}<span class="small muted">${when(p.published_at)}</span><span class="key">${esc(p.post_key)}</span></div>
+      <div class="hook" style="margin-top:8px">${esc(p.hook || p.title || p.post_key)}</div>
+      <div class="stats">
+        <div class="stat hl"><b>${num(p.signups)}</b><small>SIGN-UPS</small></div>
+        <div class="stat"><b>${num(st.views)}</b><small>Views</small></div>
+        <div class="stat"><b>${num(st.likes)}</b><small>Likes</small></div>
+        <div class="stat"><b>${num(st.comments)}</b><small>Comments</small></div>
+      </div>
+      ${link ? `<div style="margin-top:10px"><a class="link" href="${esc(link)}" target="_blank" rel="noopener">Open post ↗</a></div>` : ''}
+    </div></article>`;
+  }
+
+  function commentCard(c) {
+    const isDraft = c.status === 'draft';
+    return `<article class="card" data-cid="${esc(c.id)}"><div class="card-bd">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${platformPill(c.platform)}<span class="pill ${isDraft ? '' : 'bad'}">${isDraft ? 'Reply draft' : 'Needs Jack'}</span><span class="small muted" style="margin-left:auto">${when(c.commented_at || c.created_at)}</span></div>
+      <blockquote style="margin-top:10px"><b>${esc(c.author || 'someone')}</b>: ${esc(c.body)}</blockquote>
+      ${c.reply_draft ? `<label class="lbl">Suggested reply</label><textarea data-role="reply" style="min-height:80px">${esc(c.reply_draft)}</textarea>` : ''}
+      <div class="btns">
+        ${c.reply_draft ? '<button class="btn primary" data-act="copy">Copy reply</button>' : ''}
+        <button class="btn ghost" data-act="done" ${c.reply_draft ? '' : 'style="grid-column:1/2"'}>Done</button>
+        <button class="btn ghost ${c.reply_draft ? 'full' : ''}" data-act="ignore">Ignore</button>
+      </div>
+    </div></article>`;
+  }
+
+  function briefHtml(d) {
+    const b = d.brief, l = d.learning;
+    let h = '';
+    if (!b && !l) return '<div class="empty">No brief yet. The first one arrives after Monday’s research run.</div>';
+    if (b) {
+      const qs = Array.isArray(b.questions) ? b.questions : [];
+      const ds = Array.isArray(b.exam_dates) ? b.exam_dates : [];
+      const en = Array.isArray(b.engagement) ? b.engagement : [];
+      h += `<h3 class="sec">This week · ${esc(b.week)}</h3><div class="card"><div class="card-bd">
+        ${b.summary ? `<p>${esc(b.summary)}</p>` : ''}
+        ${qs.length ? `<label class="lbl">Top questions</label><ul class="list">${qs.map(q => `<li>${esc(q.question || q)}${q.source ? ` <span class="small muted">(${esc(q.source)})</span>` : ''}</li>`).join('')}</ul>` : ''}
+        ${ds.length ? `<label class="lbl">Upcoming dates</label><ul class="list">${ds.map(x => `<li>${esc(x.date || '')} — ${esc(x.label || x)}</li>`).join('')}</ul>` : ''}
+        ${en.length ? `<label class="lbl">What got engagement</label><ul class="list">${en.map(x => `<li>${esc(x.note || x)}</li>`).join('')}</ul>` : ''}
+      </div></div>`;
+    }
+    if (l) {
+      h += `<h3 class="sec">What worked · ${esc(l.week)}</h3><div class="card"><div class="card-bd"><p style="white-space:pre-wrap">${esc(l.summary)}</p></div></div>`;
+    }
+    return h;
+  }
+
+  function setBadge(id, n) { const el = document.getElementById(id); el.textContent = n; el.hidden = !n; }
+
+  function render() {
+    const d = state;
+    tabsEl.hidden = false;
+    document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === tab)));
+    if (d.setupNeeded) { app.innerHTML = `<div class="banner err">${esc(d.error)}</div>`; return; }
+    setBadge('bQueue', d.queue.length);
+    setBadge('bSched', d.upcoming.length);
+    setBadge('bInbox', d.comments.filter(c => c.status === 'needs_jack').length);
+
+    let body = '';
+    if (!d.publishingEnabled) body += '<div class="banner">Publishing isn’t connected yet. Approving only marks a post as approved; nothing goes out until Postiz is set up.</div>';
+    if (tab === 'queue') {
+      body += d.queue.length ? d.queue.map(queueCard).join('') : '<div class="empty">Queue is empty. New drafts arrive after Monday’s run.</div>';
+    } else if (tab === 'scheduled') {
+      body += d.upcoming.length ? d.upcoming.map(scheduledRow).join('') : '<div class="empty">Nothing scheduled.</div>';
+      if (d.failed.length) body += '<h3 class="sec">Failed</h3>' + d.failed.map(p => `<article class="card"><div class="card-bd">${platformPill(p.platform)} <span class="key">${esc(p.post_key)}</span><div class="hook" style="margin-top:8px">${esc(p.hook || p.post_key)}</div><div class="small" style="color:var(--red)">${esc(p.error || 'Unknown error')}</div></div></article>`).join('');
+    } else if (tab === 'results') {
+      const sorted = d.published.slice().sort((a, b) => (b.signups - a.signups) || (((b.stats && b.stats.views) || 0) - ((a.stats && a.stats.views) || 0)));
+      body += sorted.length ? '<p class="small muted" style="margin:0 2px 10px">Last 30 days, ranked by sign-ups, then views.</p>' + sorted.map(resultCard).join('') : '<div class="empty">No published posts yet.</div>';
+    } else if (tab === 'inbox') {
+      body += `<article class="card" id="ttHelper"><div class="card-bd">
+        <div style="display:flex;gap:8px;align-items:center">${platformPill('tiktok')}<b>Reply helper</b></div>
+        <p class="small muted" style="margin-top:6px">TikTok doesn't let apps read comments. Paste one here and get a reply to copy into TikTok.</p>
+        <textarea data-role="ttText" placeholder="Paste the TikTok comment…" style="min-height:70px;margin-top:8px"></textarea>
+        <div class="btns"><button class="btn primary full" data-act="tt-draft">Draft a reply</button></div>
+        <div data-role="ttOut"></div>
+      </div></article>`;
+      body += d.comments.length ? d.comments.map(commentCard).join('') : '<div class="empty">No comments need you.</div>';
+      if ((d.autoReplies || []).length) {
+        body += '<h3 class="sec">Auto-replied on Instagram (7 days)</h3>' + d.autoReplies.map(a => `<article class="card"><div class="card-bd">
+          <blockquote><b>${esc(a.author || 'someone')}</b>: ${esc(a.body)}</blockquote>
+          <div class="small" style="margin-top:6px"><b>Our reply:</b> ${esc(a.reply_draft)}</div>
+          <div class="small muted" style="margin-top:4px">${when(a.replied_at)}</div></div></article>`).join('');
+      }
+    } else if (tab === 'brief') {
+      body += briefHtml(d);
+    }
+    app.innerHTML = summaryHtml(d) + body;
+  }
+
+  // ── actions ──────────────────────────────────────────────────────────
+  function postizToast(r, okMsg) {
+    const p = r && r.postiz;
+    if (p && p.error) toast('Approved, but Postiz failed — it will retry within the hour. ' + p.error.slice(0, 120), true);
+    else toast(p && p.ok ? okMsg : okMsg.replace(/ — going out.*/, '') + (p && p.skipped && !state.publishingEnabled ? ' (not sent — Postiz not connected)' : ''));
+  }
+
+  async function run(btn, fn) {
+    btn.disabled = true;
+    try { await fn(); } catch (e) { if (e.message !== 'Signed out' && e.message !== 'Not an owner') toast(e.message, true); }
+    finally { btn.disabled = false; }
+  }
+
+  app.addEventListener('click', e => {
+    const btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    const card = btn.closest('[data-id],[data-cid]');
+    const id = card && card.dataset.id, cid = card && card.dataset.cid;
+    const act = btn.dataset.act;
+
+    if (act === 'toggle-schedule' || act === 'toggle-reject') {
+      const box = card.querySelector('[data-role="' + (act === 'toggle-schedule' ? 'schedule' : 'reject') + '"]');
+      box.classList.toggle('open');
+      return;
+    }
+    // An unsaved caption edit is saved (and rules-checked) before approving,
+    // so what you see in the box is what gets approved.
+    async function saveIfEdited() {
+      const box = card.querySelector('[data-role="caption"]');
+      const post = state.queue.find(p => p.id === id);
+      if (box && post && box.value.trim() !== String(post.caption || '').trim()) {
+        await api('mkt-caption', { postId: id, caption: box.value });
+      }
+    }
+    if (act === 'approve') return run(btn, async () => {
+      if (!confirm('Approve this post to go out as soon as possible?')) return;
+      await saveIfEdited();
+      const r = await api('mkt-approve', { postId: id }); postizToast(r, 'Approved — going out in a couple of minutes'); await load(true);
+    });
+    if (act === 'schedule') return run(btn, async () => {
+      const v = card.querySelector('[data-role="when"]').value;
+      if (!v) return toast('Pick a date and time', true);
+      const dt = new Date(v);
+      await saveIfEdited();
+      const r = await api('mkt-approve', { postId: id, scheduledFor: dt.toISOString() }); postizToast(r, 'Scheduled for ' + when(dt.toISOString())); await load(true);
+    });
+    if (act === 'save-caption') return run(btn, async () => {
+      const r = await api('mkt-caption', { postId: id, caption: card.querySelector('[data-role="caption"]').value });
+      toast(r.warnings && r.warnings.length ? 'Saved — check the warnings' : 'Caption saved'); await load(true);
+    });
+    if (act === 'reject') return run(btn, async () => {
+      await api('mkt-reject', { postId: id, reason: card.querySelector('[data-role="reason"]').value }); toast('Rejected'); await load(true);
+    });
+    if (act === 'unschedule') return run(btn, async () => {
+      await api('mkt-unschedule', { postId: id }); toast('Back in the queue'); await load(true);
+    });
+    if (act === 'copy') return run(btn, async () => {
+      const text = card.querySelector('[data-role="reply"]').value;
+      try { await navigator.clipboard.writeText(text); toast('Reply copied'); }
+      catch (err) { card.querySelector('[data-role="reply"]').select(); toast('Select and copy manually', true); }
+    });
+    if (act === 'tt-draft') return run(btn, async () => {
+      const box = document.getElementById('ttHelper');
+      const text = box.querySelector('[data-role="ttText"]').value.trim();
+      if (!text) return toast('Paste a comment first', true);
+      const out = box.querySelector('[data-role="ttOut"]');
+      out.innerHTML = '<p class="small muted" style="margin-top:10px">Thinking…</p>';
+      const r = await api('mkt-tiktok-comment', { text });
+      const label = { safe_question: 'Simple question', needs_jack: 'Needs you', spam: 'Spam — ignore', other: 'No reply needed' }[r.category] || r.category;
+      out.innerHTML = `<div style="margin-top:12px"><span class="pill ${r.category === 'needs_jack' ? 'bad' : r.category === 'safe_question' ? 'ok' : ''}">${esc(label)}</span>
+        <span class="small muted"> ${esc(r.reason || '')}</span></div>` +
+        (r.reply ? `<label class="lbl">Reply</label><textarea data-role="reply" style="min-height:70px">${esc(r.reply)}</textarea>
+        <div class="btns"><button class="btn primary full" data-act="tt-copy">Copy reply</button></div>` : '');
+    });
+    if (act === 'tt-copy') return run(btn, async () => {
+      const t = document.querySelector('#ttHelper [data-role="reply"]').value;
+      try { await navigator.clipboard.writeText(t); toast('Reply copied — paste it in TikTok'); } catch (e) { toast('Select and copy manually', true); }
+    });
+    if (act === 'done' || act === 'ignore') return run(btn, async () => {
+      await api('mkt-comment', { commentId: cid, status: act === 'done' ? 'done' : 'ignored' }); await load(true);
+    });
+  });
+
+  tabsEl.addEventListener('click', e => {
+    const t = e.target.closest('.tab'); if (!t) return;
+    tab = t.dataset.tab; history.replaceState(null, '', '#' + tab);
+    if (state) { render(); window.scrollTo(0, 0); }
+  });
+  document.getElementById('refreshBtn').addEventListener('click', () => load());
+
+  async function load(quiet) {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return renderGate();
+    if (!quiet && !state) app.innerHTML = '<div class="empty">Loading…</div>';
+    try {
+      state = await api('mkt-overview');
+      render();
+    } catch (e) {
+      if (e.message !== 'Signed out' && e.message !== 'Not an owner') app.innerHTML = `<div class="banner err">${esc(e.message)}</div>`;
+    }
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>
