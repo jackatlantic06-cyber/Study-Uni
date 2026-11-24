@@ -390,7 +390,20 @@
       const sorted = d.published.slice().sort((a, b) => (b.signups - a.signups) || (((b.stats && b.stats.views) || 0) - ((a.stats && a.stats.views) || 0)));
       body += sorted.length ? '<p class="small muted" style="margin:0 2px 10px">Last 30 days, ranked by sign-ups, then views.</p>' + sorted.map(resultCard).join('') : '<div class="empty">No published posts yet.</div>';
     } else if (tab === 'inbox') {
+      body += `<article class="card" id="ttHelper"><div class="card-bd">
+        <div style="display:flex;gap:8px;align-items:center">${platformPill('tiktok')}<b>Reply helper</b></div>
+        <p class="small muted" style="margin-top:6px">TikTok doesn't let apps read comments. Paste one here and get a reply to copy into TikTok.</p>
+        <textarea data-role="ttText" placeholder="Paste the TikTok comment…" style="min-height:70px;margin-top:8px"></textarea>
+        <div class="btns"><button class="btn primary full" data-act="tt-draft">Draft a reply</button></div>
+        <div data-role="ttOut"></div>
+      </div></article>`;
       body += d.comments.length ? d.comments.map(commentCard).join('') : '<div class="empty">No comments need you.</div>';
+      if ((d.autoReplies || []).length) {
+        body += '<h3 class="sec">Auto-replied on Instagram (7 days)</h3>' + d.autoReplies.map(a => `<article class="card"><div class="card-bd">
+          <blockquote><b>${esc(a.author || 'someone')}</b>: ${esc(a.body)}</blockquote>
+          <div class="small" style="margin-top:6px"><b>Our reply:</b> ${esc(a.reply_draft)}</div>
+          <div class="small muted" style="margin-top:4px">${when(a.replied_at)}</div></div></article>`).join('');
+      }
     } else if (tab === 'brief') {
       body += briefHtml(d);
     }
@@ -457,6 +470,23 @@
       const text = card.querySelector('[data-role="reply"]').value;
       try { await navigator.clipboard.writeText(text); toast('Reply copied'); }
       catch (err) { card.querySelector('[data-role="reply"]').select(); toast('Select and copy manually', true); }
+    });
+    if (act === 'tt-draft') return run(btn, async () => {
+      const box = document.getElementById('ttHelper');
+      const text = box.querySelector('[data-role="ttText"]').value.trim();
+      if (!text) return toast('Paste a comment first', true);
+      const out = box.querySelector('[data-role="ttOut"]');
+      out.innerHTML = '<p class="small muted" style="margin-top:10px">Thinking…</p>';
+      const r = await api('mkt-tiktok-comment', { text });
+      const label = { safe_question: 'Simple question', needs_jack: 'Needs you', spam: 'Spam — ignore', other: 'No reply needed' }[r.category] || r.category;
+      out.innerHTML = `<div style="margin-top:12px"><span class="pill ${r.category === 'needs_jack' ? 'bad' : r.category === 'safe_question' ? 'ok' : ''}">${esc(label)}</span>
+        <span class="small muted"> ${esc(r.reason || '')}</span></div>` +
+        (r.reply ? `<label class="lbl">Reply</label><textarea data-role="reply" style="min-height:70px">${esc(r.reply)}</textarea>
+        <div class="btns"><button class="btn primary full" data-act="tt-copy">Copy reply</button></div>` : '');
+    });
+    if (act === 'tt-copy') return run(btn, async () => {
+      const t = document.querySelector('#ttHelper [data-role="reply"]').value;
+      try { await navigator.clipboard.writeText(t); toast('Reply copied — paste it in TikTok'); } catch (e) { toast('Select and copy manually', true); }
     });
     if (act === 'done' || act === 'ignore') return run(btn, async () => {
       await api('mkt-comment', { commentId: cid, status: act === 'done' ? 'done' : 'ignored' }); await load(true);

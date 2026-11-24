@@ -28,5 +28,10 @@
     }
   },
 
-  "voiceSpeed": { "branded": 0.88, "dialogue": 0.93 }
+  "voiceSpeed": { "branded": 0.88, "dialogue": 0.93 },
+
+  "comments": {
+    "autoReply": true,
+    "maxAutoRepliesPerDay": 15
+  }
 }

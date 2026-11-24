@@ -89,6 +89,14 @@ function scriptFor(piece) {
   return { piece: piece.id, angle: piece.angle, slides: piece.slides.map(s => ({ title: s.headline, headline: s.headline, body: s.body })) };
 }
 
+// Well-covered modules (most courses, then most papers) for scripts to mention.
+function popularModules(n = 120) {
+  const idx = require('../lib/modules').buildIndex();
+  return Object.entries(idx).filter(([, e]) => e.papers >= 3)
+    .sort((a, b) => (b[1].courses.length - a[1].courses.length) || (b[1].papers - a[1].papers))
+    .slice(0, n).map(([c, e]) => `${c} — ${e.name} — ${e.papers}`).join('\n');
+}
+
 function withLink(text, short) { return String(text || '').split(LINK).join(short); }
 // Turn any study-uni.ie/t/<code> (or https:// / www. variants) into plain study-uni.ie.
 function plainSite(text) { return String(text || '').replace(/(https?:\/\/)?(www\.)?study-uni\.ie\/t\/[0-9a-z]+/gi, 'study-uni.ie'); }
@@ -118,6 +126,7 @@ async function main() {
       `Write exactly ${nV} BRANDED videos (in "videos"), ${nD} DIALOGUE videos with Abbey and Harry (in "dialogues"), and ${nC} carousels. Wherever the short link should appear (branded final scene, carousel last slide, every caption), write the literal placeholder ${LINK} — it is replaced with each post's own link. Dialogue lines never contain the placeholder; they say "study-uni dot ie".`,
       `Order "dialogues" so the ${mix.animatedVideos} that would gain most from real character movement (physical comedy, big reactions, handing over a phone) come FIRST — those get fully animated.`,
       `Cast (keep their look exactly; you only describe actions/expressions):\n${cast}`,
+      `If you name a module, use ONLY a code from this list (modules that really have past papers on study-uni.ie: code — name — number of papers). Never invent or guess module codes:\n${popularModules()}`,
       `<brief>\n${JSON.stringify({ summary: inputs.brief.summary, questions: inputs.brief.questions, pain_points: inputs.brief.pain_points, exam_dates: inputs.brief.exam_dates, angles: inputs.brief.angles, engagement: inputs.brief.engagement })}\n</brief>`,
       `<learnings>\n${inputs.learning ? inputs.learning.summary : 'No results yet — this is an early week. Test a variety of hooks and formats.'}\n</learnings>`,
       `<performance>\n${JSON.stringify(inputs.performance || [])}\nRecently rejected by the founder (avoid repeating): ${JSON.stringify(inputs.rejected || [])}\n</performance>`,

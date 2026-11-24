@@ -18,7 +18,22 @@ function allText(piece) {
   return parts.filter(Boolean).join('\n');
 }
 
-function ruleCheck(piece) { return checkText(allText(piece)); }
+// Module codes named in a post must exist on the site WITH past papers.
+let modIndex = null;
+function moduleProblems(text) {
+  if (!modIndex) { try { modIndex = require('./modules').buildIndex(); } catch (_) { modIndex = {}; } }
+  if (!Object.keys(modIndex).length) return [];
+  const { modulesIn } = require('../../lib/comments');
+  return modulesIn(text).filter(c => !(modIndex[c] && modIndex[c].papers > 0))
+    .map(c => `mentions ${c}, which has no past papers on study-uni.ie — use a module from the provided list`);
+}
+
+function ruleCheck(piece) {
+  const text = allText(piece);
+  const r = checkText(text);
+  const mods = moduleProblems(text);
+  return { passed: r.passed && !mods.length, blocked: [...r.blocked, ...mods], warnings: r.warnings };
+}
 
 const SCENE = { type: 'object', additionalProperties: false, required: ['onscreen', 'voiceover', 'visual'], properties: { onscreen: { type: 'string' }, voiceover: { type: 'string' }, visual: { type: 'string' } } };
 const SLIDE = { type: 'object', additionalProperties: false, required: ['headline', 'body'], properties: { headline: { type: 'string' }, body: { type: 'string' } } };
