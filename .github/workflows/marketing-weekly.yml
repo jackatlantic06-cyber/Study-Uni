@@ -34,6 +34,8 @@ jobs:
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
       REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}          # optional
       REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}  # optional
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      ELEVENLABS_VOICE_ID: ${{ vars.ELEVENLABS_VOICE_ID }}        # optional, repo variable
     steps:
       - name: Only run at 06:00 Irish time
         id: gate
@@ -64,3 +66,7 @@ jobs:
       - name: Create drafts
         if: steps.gate.outputs.go == 'true'
         run: node jobs/create.js ${{ inputs.force && '--force' || '' }}
+
+      - name: Render images, voiceover and videos
+        if: steps.gate.outputs.go == 'true'
+        run: node jobs/render.js

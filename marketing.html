@@ -250,7 +250,8 @@
   function mediaHtml(p) {
     const media = Array.isArray(p.media) ? p.media : [];
     const vid = media.find(m => m.kind === 'video' && safeUrl(m.url));
-    if (vid) return `<div class="media"><video src="${esc(safeUrl(vid.url))}" controls playsinline preload="metadata"></video></div>`;
+    const cover = media.find(m => m.kind === 'cover' && safeUrl(m.url));
+    if (vid) return `<div class="media"><video src="${esc(safeUrl(vid.url))}" ${cover ? `poster="${esc(safeUrl(cover.url))}"` : ''} controls playsinline preload="metadata"></video></div>`;
     const imgs = media.filter(m => m.kind === 'image' && safeUrl(m.url));
     if (imgs.length) return `<div class="slides">${imgs.map((m, i) => `<img src="${esc(safeUrl(m.url))}" alt="Slide ${i + 1}" loading="lazy">`).join('')}</div>`;
     return '<div class="nomedia">No preview yet — media is still rendering.</div>';
@@ -280,7 +281,7 @@
     const script = scriptText(p);
     return `<article class="card" data-id="${esc(p.id)}">
       <div class="card-hd">${platformPill(p.platform)}<span class="pill">${p.format === 'video' ? 'Video' : 'Carousel'}</span>${p.is_demo ? '<span class="pill warn">Demo</span>' : ''}<span class="key">${esc(p.post_key)}</span></div>
-      <div class="card-bd" style="padding-bottom:10px">${p.hook ? `<div class="hook">${esc(p.hook)}</div>` : ''}<div>${c.pill}</div>${c.warns}</div>
+      <div class="card-bd" style="padding-bottom:10px">${p.hook ? `<div class="hook">${esc(p.hook)}</div>` : ''}<div>${c.pill}</div>${c.warns}${p.error ? `<div class="small" style="color:var(--red);margin-top:8px">${esc(p.error)}</div>` : ''}</div>
       ${mediaHtml(p)}
       <div class="card-bd">
         <label class="lbl" for="cap-${esc(p.id)}">Caption</label>

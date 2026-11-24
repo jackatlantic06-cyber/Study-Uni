@@ -61,9 +61,9 @@ async function loadInputs(week) {
 
 function scriptFor(piece) {
   if (piece.format === 'video') {
-    return { duration_seconds: piece.duration_seconds, angle: piece.angle, scenes: piece.scenes.map(s => ({ text: s.voiceover, voiceover: s.voiceover, onscreen: s.onscreen, visual: s.visual })) };
+    return { piece: piece.id, duration_seconds: piece.duration_seconds, angle: piece.angle, scenes: piece.scenes.map(s => ({ text: s.voiceover, voiceover: s.voiceover, onscreen: s.onscreen, visual: s.visual })) };
   }
-  return { angle: piece.angle, slides: piece.slides.map(s => ({ title: s.headline, headline: s.headline, body: s.body })) };
+  return { piece: piece.id, angle: piece.angle, slides: piece.slides.map(s => ({ title: s.headline, headline: s.headline, body: s.body })) };
 }
 
 function withLink(text, short) { return String(text || '').split(LINK).join(short); }
