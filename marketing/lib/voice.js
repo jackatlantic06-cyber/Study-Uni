@@ -67,12 +67,13 @@ function estimateWords(text) {
 }
 
 // Returns { file, duration, words:[{word,start,end}], voice }
-async function speak(text, outFile) {
+// opts.voiceId: use a specific stock voice (e.g. a second character).
+async function speak(text, outFile, opts = {}) {
   if (!enabled()) {
     const words = estimateWords(text);
     return { file: null, duration: (words.length ? words[words.length - 1].end : 0) + 0.2, words, voice: 'silent (no ElevenLabs key)' };
   }
-  const v = await voiceId();
+  const v = opts.voiceId ? { id: opts.voiceId, name: opts.voiceName || opts.voiceId } : await voiceId();
   const res = await el(`/text-to-speech/${v.id}/with-timestamps?output_format=mp3_44100_128`, {
     method: 'POST',
     // speed < 1 slows delivery (ElevenLabs range 0.7–1.2).

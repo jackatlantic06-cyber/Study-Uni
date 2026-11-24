@@ -170,6 +170,21 @@ async function carouselSlide({ headline, body, highlight, emoji, index, total })
   );
 }
 
+// ── Transparent caption overlay for cartoon dialogue videos ──────────────
+// speaker chip + caption box (spoken word lit up) + brand + AI tag.
+async function captionOverlay({ speaker, color, caption }) {
+  return h('div', { width: 1080, height: 1920, fontFamily: 'Inter', position: 'relative' },
+    h('div', { position: 'absolute', left: 60, top: 170, alignItems: 'center', gap: 14, background: 'rgba(15,23,42,0.72)', padding: '12px 22px 12px 14px', borderRadius: 999 },
+      h('div', { width: 52, height: 52, borderRadius: 13, background: BRAND.blue, alignItems: 'center', justifyContent: 'center', color: BRAND.white, fontSize: 24, fontWeight: 800 }, 'SU'),
+      h('div', { fontSize: 32, fontWeight: 800, color: BRAND.white }, 'Study-Uni')),
+    h('div', { position: 'absolute', right: 150, top: 182, fontSize: 26, fontWeight: 700, color: BRAND.white, background: 'rgba(15,23,42,0.72)', padding: '10px 18px', borderRadius: 999 }, 'AI-generated'),
+    caption && caption.length ? h('div', { position: 'absolute', left: 90, top: 1260, width: SAFE_W, flexDirection: 'column', alignItems: 'center' },
+      speaker ? h('div', { background: color || BRAND.blue, color: BRAND.white, fontSize: 34, fontWeight: 800, padding: '8px 24px', borderRadius: 999, marginBottom: -14, zIndex: 2, boxShadow: '0 6px 16px rgba(0,0,0,0.3)' }, speaker) : null,
+      h('div', { flexWrap: 'wrap', justifyContent: 'center', columnGap: 2, rowGap: 6, background: 'rgba(255,255,255,0.97)', padding: '28px 30px 20px', borderRadius: 26, boxShadow: '0 14px 40px rgba(0,0,0,0.35)', maxWidth: SAFE_W },
+        caption.map(w => h('div', { fontSize: 54, fontWeight: 800, lineHeight: 1.2, color: w.active ? BRAND.white : BRAND.ink, background: w.active ? (color || BRAND.blue) : 'transparent', padding: '0 10px', borderRadius: 12 }, w.word)))) : null,
+  );
+}
+
 async function toPng(node, width, height) {
   const svg = await satori(node, { width, height, fonts: FONTS });
   return new Resvg(svg, { fitTo: { mode: 'width', value: width } }).render().asPng();
@@ -178,4 +193,6 @@ async function toPng(node, width, height) {
 const renderVideoFrame = async opts => toPng(await videoFrame(opts), 1080, 1920);
 const renderCarouselSlide = async opts => toPng(await carouselSlide(opts), 1080, 1350);
 
-module.exports = { renderVideoFrame, renderCarouselSlide, clean, BRAND };
+const renderCaptionOverlay = async opts => toPng(await captionOverlay(opts), 1080, 1920);
+
+module.exports = { renderVideoFrame, renderCarouselSlide, renderCaptionOverlay, clean, BRAND };
