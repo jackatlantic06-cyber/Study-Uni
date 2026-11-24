@@ -24,7 +24,7 @@ permissions:
 jobs:
   weekly:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 75
     defaults:
       run:
         working-directory: marketing
@@ -36,6 +36,7 @@ jobs:
       REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}  # optional
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ vars.ELEVENLABS_VOICE_ID }}        # optional, repo variable
+      FAL_KEY: ${{ secrets.FAL_KEY }}                             # cartoon scenes + animation
     steps:
       - name: Only run at 06:00 Irish time
         id: gate

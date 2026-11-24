@@ -3,8 +3,30 @@
   "corkSearch": "UCC OR exam OR exams OR \"past papers\" OR college",
   "competitorAccounts": [],
   "datesDomains": ["ucc.ie"],
-  "videosPerWeek": 5,
-  "carouselsPerWeek": 2,
+
+  "mix": {
+    "brandedVideos": 2,
+    "storybookVideos": 4,
+    "animatedVideos": 2,
+    "carousels": 2
+  },
   "videoPlatforms": ["tiktok", "instagram"],
-  "carouselPlatforms": ["instagram"]
+  "carouselPlatforms": ["instagram"],
+
+  "characters": {
+    "Abbey": {
+      "look": "Abbey: age 20, light freckles, auburn hair in a messy bun, round tortoiseshell glasses, oversized forest-green hoodie, light blue jeans, white trainers",
+      "voiceId": "pFZP5JQG7iQjIQuC4Bku",
+      "voiceName": "Lily",
+      "color": "#16a34a"
+    },
+    "Harry": {
+      "look": "Harry: age 20, dark brown curly hair, light stubble, navy quarter-zip jumper, grey joggers, plain canvas tote bag",
+      "voiceId": "IKne3meq5aSn9XLyUdCD",
+      "voiceName": "Charlie",
+      "color": "#2563eb"
+    }
+  },
+
+  "voiceSpeed": { "branded": 0.88, "dialogue": 0.93 }
 }

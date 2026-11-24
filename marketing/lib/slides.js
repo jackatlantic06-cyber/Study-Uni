@@ -57,9 +57,10 @@ function fit(text, sizes) {
 // On-screen links always show as plain "study-uni.ie" (tracking stays in captions).
 function splitLink(t) {
   const c = clean(t);
-  const m = c.match(/study-uni\.ie(\/t\/[0-9a-z]+)?/i);
-  if (!m) return { text: c, link: null };
-  return { text: c.replace(m[0], '').replace(/[:\-–—,]\s*$/, '').replace(/\s+([.!?])/g, '$1').trim(), link: 'study-uni.ie' };
+  const re = /study-uni\.ie(\/t\/[0-9a-z]+)?/gi;
+  if (!re.test(c)) return { text: c, link: null };
+  const text = c.replace(re, '').replace(/\s{2,}/g, ' ').replace(/[:\-–—,]\s*$/, '').replace(/\s+([.!?])/g, '$1').trim();
+  return { text, link: 'study-uni.ie' };
 }
 
 // Words as separate boxes so chosen ones can be highlighted.

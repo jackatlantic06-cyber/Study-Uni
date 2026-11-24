@@ -9,7 +9,7 @@ const { renderCaptionOverlay, renderVideoFrame } = require('./slides');
 const { chunks, FFMPEG } = require('./video');
 
 const FPS = 30;
-const PAD = 0.35;
+const PAD = 0.22; // short gap between lines keeps the back-and-forth snappy
 
 function run(args) {
   return new Promise((resolve, reject) => execFile(FFMPEG, ['-hide_banner', '-loglevel', 'error', '-y', ...args], { maxBuffer: 64 << 20 },
@@ -73,6 +73,8 @@ async function endCard(dir, out) {
 }
 
 async function buildDialogueVideo({ scenes, mode, workDir, outFile }) {
+  workDir = path.resolve(workDir); outFile = path.resolve(outFile);
+  scenes = scenes.map(s => ({ ...s, image: s.image && path.resolve(s.image), clip: s.clip && path.resolve(s.clip), audio: { ...s.audio, file: s.audio.file && path.resolve(s.audio.file) } }));
   fs.mkdirSync(workDir, { recursive: true });
   const parts = [];
   let total = 0;

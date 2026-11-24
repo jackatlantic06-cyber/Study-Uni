@@ -61,7 +61,7 @@ async function review(pieces, facts) {
     prompt: `<verified_dates>\n${JSON.stringify((facts && facts.dates) || [])}\n</verified_dates>\n` +
       'Each piece will show its own short link where {{LINK}} appears (e.g. study-uni.ie/t/26w48t1); treat {{LINK}} as that link.\n' +
       'Review each piece. Return one review per id.\n<pieces>\n' + JSON.stringify(pieces.map(p => ({
-      id: p.id, format: p.format, hook: p.hook, scenes: p.scenes, slides: p.slides, caption: p.caption,
+      id: p.id, format: p.format, style: p.style, setting: p.setting, hook: p.hook, scenes: p.scenes, slides: p.slides, caption: p.caption,
       deterministic_flags: ruleCheck(p).blocked,
     }))) + '\n</pieces>',
   });
@@ -81,15 +81,18 @@ function applyFix(piece, fixed) {
 async function checkAll(pieces, facts) {
   let current = pieces;
   let reviews = await review(current, facts);
-  const needsFix = current.filter(p => !(reviews[p.id] && reviews[p.id].passed) || !ruleCheck(p).passed);
-  if (needsFix.length) {
+  // Up to two rewrite rounds: apply the reviewer's fixes, review again.
+  for (let round = 2; round <= 3; round++) {
+    const needsFix = current.filter(p => !(reviews[p.id] && reviews[p.id].passed) || !ruleCheck(p).passed);
+    if (!needsFix.length) break;
     const fixedPieces = needsFix.map(p => applyFix(p, reviews[p.id] && reviews[p.id].fixed));
-    const second = await review(fixedPieces, facts);
+    const again = await review(fixedPieces, facts);
     current = current.map(p => {
       const f = fixedPieces.find(x => x.id === p.id);
       if (!f) return p;
-      reviews[p.id] = Object.assign({}, second[p.id], { first_issues: reviews[p.id] ? reviews[p.id].issues : [] });
-      return Object.assign(f, { _rounds: 2 });
+      const earlier = [...((reviews[p.id] && reviews[p.id].first_issues) || []), ...((reviews[p.id] && reviews[p.id].issues) || [])];
+      reviews[p.id] = Object.assign({}, again[p.id], { first_issues: earlier });
+      return Object.assign(f, { _rounds: round });
     });
   }
   const now = new Date().toISOString();

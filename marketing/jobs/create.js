@@ -20,9 +20,24 @@ const briefArg = process.argv.find(a => a.startsWith('--brief='));
 
 const SCENE = { type: 'object', additionalProperties: false, required: ['onscreen', 'voiceover', 'visual'], properties: { onscreen: { type: 'string' }, voiceover: { type: 'string' }, visual: { type: 'string', description: 'What the branded slide shows besides the text (icon, emoji, simple illustration idea, colour emphasis). No people.' } } };
 const SLIDE = { type: 'object', additionalProperties: false, required: ['headline', 'body'], properties: { headline: { type: 'string' }, body: { type: 'string' } } };
+const CHAR_NAMES = Object.keys(config.characters);
+const LINE = { type: 'object', additionalProperties: false, required: ['speaker', 'line', 'scene', 'motion'], properties: {
+  speaker: { type: 'string', enum: CHAR_NAMES },
+  line: { type: 'string', description: 'What they say (max ~14 words, written for the ear).' },
+  scene: { type: 'string', description: 'Cartoon scene for this line: what each character is doing, expressions, props. Same setting/time of day as the rest of the video. No readable text.' },
+  motion: { type: 'string', description: 'Short animation note: gestures, expressions, small camera move.' },
+} };
 const CONTENT_SCHEMA = {
-  type: 'object', additionalProperties: false, required: ['videos', 'carousels'],
+  type: 'object', additionalProperties: false, required: ['videos', 'dialogues', 'carousels'],
   properties: {
+    dialogues: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['title', 'angle', 'hook', 'setting', 'lines', 'caption'], properties: {
+      title: { type: 'string', description: 'Internal label, 2–5 words' },
+      angle: { type: 'string' },
+      hook: { type: 'string', description: 'Line 1, the hook' },
+      setting: { type: 'string', description: 'ONE setting + time of day used for every line, e.g. "university library at night, warm desk lamps"' },
+      lines: { type: 'array', items: LINE },
+      caption: { type: 'string', description: `Caption incl. the literal placeholder ${LINK} and hashtags` },
+    } } },
     videos: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['title', 'angle', 'hook', 'duration_seconds', 'scenes', 'caption'], properties: {
       title: { type: 'string', description: 'Internal label, 2–5 words' },
       angle: { type: 'string', description: 'Which brief question/date/learning this targets' },
@@ -60,8 +75,16 @@ async function loadInputs(week) {
 }
 
 function scriptFor(piece) {
+  if (piece.style === 'storybook' || piece.style === 'animated') {
+    const lines = piece.lines.map(l => ({ speaker: l.speaker, line: withLink(l.line, 'study-uni dot ie'), scene: l.scene, motion: l.motion }));
+    return {
+      piece: piece.id, style: piece.style, angle: piece.angle, setting: piece.setting, lines,
+      // for the dashboard's "Script" view
+      scenes: lines.map(l => ({ text: `${l.speaker}: ${l.line}`, onscreen: l.speaker, voiceover: l.line })),
+    };
+  }
   if (piece.format === 'video') {
-    return { piece: piece.id, duration_seconds: piece.duration_seconds, angle: piece.angle, scenes: piece.scenes.map(s => ({ text: s.voiceover, voiceover: s.voiceover, onscreen: s.onscreen, visual: s.visual })) };
+    return { piece: piece.id, style: 'branded', duration_seconds: piece.duration_seconds, angle: piece.angle, scenes: piece.scenes.map(s => ({ text: s.voiceover, voiceover: s.voiceover, onscreen: s.onscreen, visual: s.visual })) };
   }
   return { piece: piece.id, angle: piece.angle, slides: piece.slides.map(s => ({ title: s.headline, headline: s.headline, body: s.body })) };
 }
@@ -79,7 +102,9 @@ async function main() {
   }
 
   const inputs = await loadInputs(week);
-  const nV = config.videosPerWeek, nC = config.carouselsPerWeek;
+  const mix = config.mix;
+  const nV = mix.brandedVideos, nD = mix.storybookVideos + mix.animatedVideos, nC = mix.carousels;
+  const cast = Object.entries(config.characters).map(([n, c]) => `- ${c.look}`).join('\n');
 
   const content = await askJson({
     system: prompt('brand.md') + '\n\n' + prompt('create.md'),
@@ -88,18 +113,37 @@ async function main() {
     maxTokens: 32000,
     prompt: [
       `Week ${week}. Today (Irish time): ${dublinDate()}.`,
-      `Write exactly ${nV} videos and ${nC} carousels. Wherever the short link should appear (final scene/slide and caption), write the literal placeholder ${LINK} — it is replaced with each post's own link.`,
+      `Write exactly ${nV} BRANDED videos (in "videos"), ${nD} DIALOGUE videos with Abbey and Harry (in "dialogues"), and ${nC} carousels. Wherever the short link should appear (branded final scene, carousel last slide, every caption), write the literal placeholder ${LINK} — it is replaced with each post's own link. Dialogue lines never contain the placeholder; they say "study-uni dot ie".`,
+      `Order "dialogues" so the ${mix.animatedVideos} that would gain most from real character movement (physical comedy, big reactions, handing over a phone) come FIRST — those get fully animated.`,
+      `Cast (keep their look exactly; you only describe actions/expressions):\n${cast}`,
       `<brief>\n${JSON.stringify({ summary: inputs.brief.summary, questions: inputs.brief.questions, pain_points: inputs.brief.pain_points, exam_dates: inputs.brief.exam_dates, angles: inputs.brief.angles, engagement: inputs.brief.engagement })}\n</brief>`,
       `<learnings>\n${inputs.learning ? inputs.learning.summary : 'No results yet — this is an early week. Test a variety of hooks and formats.'}\n</learnings>`,
       `<performance>\n${JSON.stringify(inputs.performance || [])}\nRecently rejected by the founder (avoid repeating): ${JSON.stringify(inputs.rejected || [])}\n</performance>`,
     ].join('\n\n'),
   });
 
+  // Dialogues go through the same checks; their lines are shown to the
+  // reviewer as scenes (onscreen = speaker, voiceover = line, visual = scene).
+  const dialogues = content.dialogues.slice(0, nD).map((d, i) => ({
+    id: `d${i + 1}`, format: 'video', style: i < mix.animatedVideos ? 'animated' : 'storybook',
+    title: d.title, angle: d.angle, hook: d.hook, setting: d.setting, caption: d.caption,
+    motions: d.lines.map(l => l.motion),
+    scenes: d.lines.map(l => ({ onscreen: l.speaker, voiceover: l.line, visual: l.scene })),
+  }));
   let pieces = [
-    ...content.videos.slice(0, nV).map((v, i) => Object.assign(v, { id: `v${i + 1}`, format: 'video' })),
+    ...content.videos.slice(0, nV).map((v, i) => Object.assign(v, { id: `v${i + 1}`, format: 'video', style: 'branded' })),
+    ...dialogues,
     ...content.carousels.slice(0, nC).map((c, i) => Object.assign(c, { id: `c${i + 1}`, format: 'carousel' })),
   ];
   pieces = await checkAll(pieces, { dates: inputs.brief.exam_dates || [] });
+  // Turn reviewed dialogue scenes back into lines.
+  for (const p of pieces) {
+    if (p.style !== 'animated' && p.style !== 'storybook') continue;
+    p.lines = p.scenes.map((s, i) => ({
+      speaker: CHAR_NAMES.includes(s.onscreen) ? s.onscreen : CHAR_NAMES[i % CHAR_NAMES.length],
+      line: s.voiceover, scene: s.visual, motion: p.motions[i] || p.motions[p.motions.length - 1] || 'subtle natural motion',
+    }));
+  }
 
   // One post row per platform per piece, each with its own tracked link.
   const counters = { tiktok: 0, instagram: 0 };
@@ -125,8 +169,8 @@ async function main() {
       if (script.slides) script.slides.forEach(s => { s.title = fill(s.title); s.headline = fill(s.headline); s.body = fill(s.body); });
       let caption = fill(p.caption).trim();
       if (!caption.includes(short)) caption += `\n\n📚 ${short}`;
-      const aiLabel = p.format === 'video'; // AI voiceover → disclose
-      if (aiLabel) caption += '\n\n(AI voiceover)';
+      const aiLabel = p.format === 'video'; // AI voice / AI cartoon → disclose
+      if (aiLabel) caption += p.style === 'branded' ? '\n\n(AI voiceover)' : '\n\n(AI-generated video)';
       rows.push({
         post_key: key, week, platform, format: p.format,
         status: p.compliance.passed ? 'pending_review' : 'draft',

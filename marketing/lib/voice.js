@@ -68,6 +68,9 @@ function estimateWords(text) {
 
 // Returns { file, duration, words:[{word,start,end}], voice }
 // opts.voiceId: use a specific stock voice (e.g. a second character).
+// opts.previous / opts.next: surrounding lines, so tone and pacing carry on
+//   naturally from line to line (no "different voice" feel between scenes).
+// opts.speed: delivery speed (0.7–1.2).
 async function speak(text, outFile, opts = {}) {
   if (!enabled()) {
     const words = estimateWords(text);
@@ -76,8 +79,13 @@ async function speak(text, outFile, opts = {}) {
   const v = opts.voiceId ? { id: opts.voiceId, name: opts.voiceName || opts.voiceId } : await voiceId();
   const res = await el(`/text-to-speech/${v.id}/with-timestamps?output_format=mp3_44100_128`, {
     method: 'POST',
-    // speed < 1 slows delivery (ElevenLabs range 0.7–1.2).
-    body: JSON.stringify({ text, model_id: MODEL, voice_settings: { stability: 0.5, similarity_boost: 0.8, style: 0.2, use_speaker_boost: true, speed: SPEED } }),
+    // Same seed + higher stability + context = consistent voice all video.
+    body: JSON.stringify({
+      text, model_id: MODEL, seed: 4242,
+      ...(opts.previous ? { previous_text: opts.previous } : {}),
+      ...(opts.next ? { next_text: opts.next } : {}),
+      voice_settings: { stability: 0.6, similarity_boost: 0.85, style: 0.15, use_speaker_boost: true, speed: Math.min(1.2, Math.max(0.7, opts.speed || SPEED)) },
+    }),
   });
   usage.characters += text.length; usage.requests++;
   fs.writeFileSync(outFile, Buffer.from(res.audio_base64, 'base64'));
