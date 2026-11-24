@@ -53,13 +53,15 @@ const REVIEW_SCHEMA = {
   },
 };
 
-async function review(pieces) {
+async function review(pieces, facts) {
   const res = await askJson({
     system: brand + '\n\n' + rules,
     schema: REVIEW_SCHEMA,
     effort: 'medium',
-    prompt: 'Review each piece. Return one review per id.\n<pieces>\n' + JSON.stringify(pieces.map(p => ({
-      id: p.id, format: p.format, hook: p.hook, scenes: p.scenes, slides: p.slides, caption: p.caption, short_link: p.short_link,
+    prompt: `<verified_dates>\n${JSON.stringify((facts && facts.dates) || [])}\n</verified_dates>\n` +
+      'Each piece will show its own short link where {{LINK}} appears (e.g. study-uni.ie/t/26w48t1); treat {{LINK}} as that link.\n' +
+      'Review each piece. Return one review per id.\n<pieces>\n' + JSON.stringify(pieces.map(p => ({
+      id: p.id, format: p.format, hook: p.hook, scenes: p.scenes, slides: p.slides, caption: p.caption,
       deterministic_flags: ruleCheck(p).blocked,
     }))) + '\n</pieces>',
   });
@@ -76,13 +78,13 @@ function applyFix(piece, fixed) {
 }
 
 // Returns pieces with .compliance = {passed, blocked, issues, warnings, rounds, checked_at}
-async function checkAll(pieces) {
+async function checkAll(pieces, facts) {
   let current = pieces;
-  let reviews = await review(current);
+  let reviews = await review(current, facts);
   const needsFix = current.filter(p => !(reviews[p.id] && reviews[p.id].passed) || !ruleCheck(p).passed);
   if (needsFix.length) {
     const fixedPieces = needsFix.map(p => applyFix(p, reviews[p.id] && reviews[p.id].fixed));
-    const second = await review(fixedPieces);
+    const second = await review(fixedPieces, facts);
     current = current.map(p => {
       const f = fixedPieces.find(x => x.id === p.id);
       if (!f) return p;

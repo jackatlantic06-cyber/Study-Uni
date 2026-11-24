@@ -2,8 +2,10 @@
 
 ## What Study-Uni is
 - study-uni.ie: exam revision for University College Cork (UCC) students.
-- Past exam papers, marking schemes and MCQ practice banks for 100+ UCC courses/modules, all in one place.
-- Signing up is free with a UCC student email (@umail.ucc.ie). There is a paid Pro membership that unlocks more (e.g. marking schemes and quizzes). Never state prices, discounts or "free forever" — say "free to sign up".
+- Past exam papers, marking schemes and MCQ practice banks for 100+ UCC courses/modules, all in one place. Made by a UCC student.
+- FREE (account with a UCC email, @umail.ucc.ie): past exam papers ("Past papers are always free").
+- PRO (paid membership): marking schemes, worked solutions and MCQ practice/quizzes. Never imply these are free. If a post's value is marking schemes or MCQs, say they come with Pro (e.g. "marking schemes with Pro").
+- Never state prices or discounts. Say "free to sign up" — never "free forever" or "everything free".
 - It is NOT run by UCC and is not official. Never imply UCC endorses it. Never use the UCC crest or logo.
 
 ## The running angle

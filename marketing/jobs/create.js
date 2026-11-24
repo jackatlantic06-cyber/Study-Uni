@@ -99,8 +99,7 @@ async function main() {
     ...content.videos.slice(0, nV).map((v, i) => Object.assign(v, { id: `v${i + 1}`, format: 'video' })),
     ...content.carousels.slice(0, nC).map((c, i) => Object.assign(c, { id: `c${i + 1}`, format: 'carousel' })),
   ];
-  pieces.forEach(p => { p.short_link = 'study-uni.ie/t/' + LINK; });
-  pieces = await checkAll(pieces);
+  pieces = await checkAll(pieces, { dates: inputs.brief.exam_dates || [] });
 
   // One post row per platform per piece, each with its own tracked link.
   const counters = { tiktok: 0, instagram: 0 };

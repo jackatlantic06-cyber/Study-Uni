@@ -54,7 +54,11 @@ async function askJson({ system, prompt, schema, effort = 'medium', maxTokens = 
 
 // Free-text answer, optionally with Anthropic's web search tool.
 async function askText({ system, prompt, effort = 'medium', maxTokens = 8000, webSearch = null }) {
-  const tools = webSearch ? [{ type: 'web_search_20260209', name: 'web_search', max_uses: webSearch.maxUses || 5, ...(webSearch.allowedDomains ? { allowed_domains: webSearch.allowedDomains } : {}) }] : undefined;
+  const tools = webSearch ? [{
+    type: 'web_search_20260209', name: 'web_search', max_uses: webSearch.maxUses || 5,
+    ...(webSearch.allowedDomains ? { allowed_domains: webSearch.allowedDomains } : {}),
+    ...(webSearch.blockedDomains ? { blocked_domains: webSearch.blockedDomains } : {}),
+  }] : undefined;
   const msg = await send({
     max_tokens: maxTokens,
     system,
