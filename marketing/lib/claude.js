@@ -53,17 +53,23 @@ async function askJson({ system, prompt, schema, effort = 'medium', maxTokens = 
 }
 
 // Free-text answer, optionally with Anthropic's web search tool.
-async function askText({ system, prompt, effort = 'medium', maxTokens = 8000, webSearch = null }) {
-  const tools = webSearch ? [{
+// webFetch: lets Claude read specific pages whose URLs are in the prompt.
+async function askText({ system, prompt, effort = 'medium', maxTokens = 8000, webSearch = null, webFetch = null }) {
+  const tools = [];
+  if (webSearch) tools.push({
     type: 'web_search_20260209', name: 'web_search', max_uses: webSearch.maxUses || 5,
     ...(webSearch.allowedDomains ? { allowed_domains: webSearch.allowedDomains } : {}),
     ...(webSearch.blockedDomains ? { blocked_domains: webSearch.blockedDomains } : {}),
-  }] : undefined;
+  });
+  if (webFetch) tools.push({
+    type: 'web_fetch_20260209', name: 'web_fetch', max_uses: webFetch.maxUses || 5,
+    ...(webFetch.allowedDomains ? { allowed_domains: webFetch.allowedDomains } : {}),
+  });
   const msg = await send({
     max_tokens: maxTokens,
     system,
     output_config: { effort },
-    ...(tools ? { tools } : {}),
+    ...(tools.length ? { tools } : {}),
     messages: [{ role: 'user', content: prompt }],
   });
   return textOf(msg);
