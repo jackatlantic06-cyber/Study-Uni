@@ -17,8 +17,9 @@ async function loadToken(db) {
     state = { token: process.env.IG_ACCESS_TOKEN.trim(), refreshed_at: null };
   }
   // Refresh weekly (token must be at least 24h old; refreshed one lasts 60 days).
+  // Only Instagram Login tokens ("IG…") need this; system-user tokens never expire.
   const age = state.refreshed_at ? Date.now() - new Date(state.refreshed_at).getTime() : Infinity;
-  if (age > 7 * 86400e3) {
+  if (age > 7 * 86400e3 && /^IG/.test(state.token)) {
     try {
       const r = await fetch(`${GRAPH}/refresh_access_token?grant_type=ig_refresh_token&access_token=${encodeURIComponent(state.token)}`);
       const j = await r.json();
@@ -32,18 +33,39 @@ async function loadToken(db) {
   return state.token;
 }
 
+// Two token types work:
+//  - Instagram Login token ("IG…")  → graph.instagram.com, /me/...
+//  - System-user token from Meta's Unified Login (never expires)
+//      → graph.facebook.com, /{instagram-user-id}/... (IG_USER_ID)
+let host = null, igUserId = null;
+
 async function ig(db, path, { method = 'GET', params = {} } = {}) {
   const token = await loadToken(db);
   if (!token) throw new Error('No Instagram token (IG_ACCESS_TOKEN)');
+  if (!host) await detectHost(token);
+  path = path.replace(/^\/me(?=\/|$)/, host === 'fb' ? `/${igUserId}` : '/me');
+  const base = host === 'fb' ? 'https://graph.facebook.com/v22.0' : GRAPH;
   const q = new URLSearchParams({ ...params, access_token: token });
-  const url = `${GRAPH}${path}${method === 'GET' ? '?' + q : ''}`;
+  const url = `${base}${path}${method === 'GET' ? '?' + q : ''}`;
   const r = await fetch(url, method === 'GET' ? {} : { method, body: q });
   const j = await r.json();
   if (!r.ok || j.error) throw new Error(`Instagram ${path}: ${(j.error && j.error.message) || r.status}`);
   return j;
 }
 
-const me = db => ig(db, '/me', { params: { fields: 'user_id,username' } });
+async function detectHost(token) {
+  const r = await fetch(`${GRAPH}/me?fields=user_id,username&access_token=${encodeURIComponent(token)}`);
+  if (r.ok) { host = 'ig'; return; }
+  igUserId = process.env.IG_USER_ID || '17841433684687845';
+  host = 'fb';
+  if (state) state.refreshed_at = new Date().toISOString(); // system-user tokens don't need refreshing
+}
+
+async function me(db) {
+  if (!host) await detectHost(await loadToken(db));
+  const j = await ig(db, '/me', { params: { fields: host === 'fb' ? 'id,username' : 'user_id,username' } });
+  return { username: j.username, id: j.user_id || j.id };
+}
 
 async function recentMedia(db, days = 30) {
   const j = await ig(db, '/me/media', { params: { fields: 'id,permalink,timestamp,caption,comments_count', limit: '50' } });
