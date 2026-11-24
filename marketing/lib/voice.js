@@ -23,10 +23,19 @@ async function el(path, opts = {}) {
   return r.json();
 }
 
+// Stock voice used when the key isn't allowed to list voices (restricted keys
+// often only have Text to Speech access). "Charlie": young, conversational.
+const FALLBACK_VOICE = { id: 'IKne3meq5aSn9XLyUdCD', name: 'Charlie (default)' };
+
 async function voiceId() {
   if (chosenVoice) return chosenVoice;
   if (process.env.ELEVENLABS_VOICE_ID) return (chosenVoice = { id: process.env.ELEVENLABS_VOICE_ID, name: 'configured' });
-  const { voices } = await el('/voices');
+  let voices;
+  try { ({ voices } = await el('/voices')); }
+  catch (e) {
+    if (/ElevenLabs (401|403)/.test(e.message)) return (chosenVoice = FALLBACK_VOICE);
+    throw e;
+  }
   const premade = (voices || []).filter(v => v.category === 'premade');
   for (const name of PREFERRED) {
     const v = premade.find(x => (x.name || '').toLowerCase().startsWith(name.toLowerCase()));
