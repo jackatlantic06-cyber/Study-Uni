@@ -7,6 +7,7 @@ const fs = require('fs');
 
 const API = 'https://api.elevenlabs.io/v1';
 const MODEL = process.env.ELEVENLABS_MODEL || 'eleven_multilingual_v2';
+const SPEED = Math.min(1.2, Math.max(0.7, parseFloat(process.env.ELEVENLABS_SPEED || '0.88')));
 // Tried in order if ELEVENLABS_VOICE_ID isn't set: young, natural stock voices.
 const PREFERRED = ['Charlie', 'Liam', 'Will', 'Chris', 'Callum', 'Jessica', 'Laura', 'George'];
 
@@ -74,7 +75,8 @@ async function speak(text, outFile) {
   const v = await voiceId();
   const res = await el(`/text-to-speech/${v.id}/with-timestamps?output_format=mp3_44100_128`, {
     method: 'POST',
-    body: JSON.stringify({ text, model_id: MODEL, voice_settings: { stability: 0.45, similarity_boost: 0.8, style: 0.25, use_speaker_boost: true } }),
+    // speed < 1 slows delivery (ElevenLabs range 0.7–1.2).
+    body: JSON.stringify({ text, model_id: MODEL, voice_settings: { stability: 0.5, similarity_boost: 0.8, style: 0.2, use_speaker_boost: true, speed: SPEED } }),
   });
   usage.characters += text.length; usage.requests++;
   fs.writeFileSync(outFile, Buffer.from(res.audio_base64, 'base64'));

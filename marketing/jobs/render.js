@@ -14,6 +14,7 @@ const { flags } = require('../lib/env');
 const { renderCarouselSlide } = require('../lib/slides');
 const { buildVideo } = require('../lib/video');
 const voice = require('../lib/voice');
+const { enrich } = require('../lib/enrich');
 
 const BUCKET = 'marketing-media';
 const LOCAL = process.argv.includes('--local');
@@ -43,6 +44,7 @@ async function save(db, localFile, storagePath, contentType) {
 const voiceCache = new Map();
 async function voiceFor(pieceKey, scenes, dir) {
   if (voiceCache.has(pieceKey)) return voiceCache.get(pieceKey);
+  fs.mkdirSync(dir, { recursive: true });
   const audio = [];
   for (let i = 0; i < scenes.length; i++) {
     audio.push(await voice.speak(scenes[i].voiceover || scenes[i].text || '', path.join(dir, `vo-${i}.mp3`)));
@@ -51,12 +53,24 @@ async function voiceFor(pieceKey, scenes, dir) {
   return audio;
 }
 
+// Adds an emoji + highlighted words to each scene/slide (once; saved to the script).
+async function ensureStyle(db, post) {
+  const list = post.format === 'video' ? (post.script.scenes || []) : (post.script.slides || []);
+  if (!list.length || list.every(x => x.emoji !== undefined)) return;
+  const lines = list.map(x => post.format === 'video' ? x.onscreen : (x.headline || x.title));
+  const key = `${post.week}|${post.script.piece || post.title}|${post.format}`;
+  const styled = await enrich(lines, key);
+  list.forEach((x, i) => { x.emoji = styled[i].emoji; x.highlight = styled[i].highlight; });
+  if (!LOCAL) await db.from('mkt_posts').update({ script: post.script }).eq('id', post.id);
+}
+
 async function renderPost(db, post, tmp) {
   const dir = path.join(tmp, post.post_key);
   fs.mkdirSync(dir, { recursive: true });
   const base = `${post.week}/${post.post_key}`;
   const media = [];
 
+  await ensureStyle(db, post);
   if (post.format === 'video') {
     const scenes = (post.script && post.script.scenes) || [];
     if (!scenes.length) throw new Error('no scenes in script');
@@ -64,7 +78,7 @@ async function renderPost(db, post, tmp) {
     const audio = await voiceFor(pieceKey, scenes, path.join(tmp, 'vo-' + Buffer.from(pieceKey).toString('hex').slice(0, 24)));
     const out = path.join(dir, 'video.mp4');
     const res = await buildVideo({
-      scenes: scenes.map((s, i) => ({ onscreen: s.onscreen, audio: audio[i] })),
+      scenes: scenes.map((s, i) => ({ onscreen: s.onscreen, highlight: s.highlight, emoji: s.emoji, audio: audio[i] })),
       aiLabel: post.ai_label, workDir: path.join(dir, 'frames'), outFile: out,
     });
     const v = await save(db, out, `${base}/video.mp4`, 'video/mp4');
@@ -77,7 +91,7 @@ async function renderPost(db, post, tmp) {
     if (!slides.length) throw new Error('no slides in script');
     for (let i = 0; i < slides.length; i++) {
       const f = path.join(dir, `slide-${i + 1}.png`);
-      fs.writeFileSync(f, await renderCarouselSlide({ headline: slides[i].headline || slides[i].title, body: slides[i].body, index: i, total: slides.length }));
+      fs.writeFileSync(f, await renderCarouselSlide({ headline: slides[i].headline || slides[i].title, body: slides[i].body, highlight: slides[i].highlight, emoji: slides[i].emoji, index: i, total: slides.length }));
       const s = await save(db, f, `${base}/slide-${i + 1}.png`, 'image/png');
       media.push({ kind: 'image', path: s.path });
     }

@@ -18,8 +18,21 @@ function run(args) {
   });
 }
 
+// "study-uni dot ie" is spoken that way but shown as study-uni.ie.
+function mergeDomain(words) {
+  const out = [];
+  for (let i = 0; i < words.length; i++) {
+    const a = words[i], b = words[i + 1], c = words[i + 2];
+    if (/^study-?uni$/i.test(a.word) && b && /^dot$/i.test(b.word) && c && /^ie\b/i.test(c.word)) {
+      out.push({ word: 'study-uni.ie' + c.word.replace(/^ie/i, ''), start: a.start, end: c.end }); i += 2;
+    } else out.push(a);
+  }
+  return out;
+}
+
 // Group words into short caption chunks (≤4 words, ≤24 chars).
 function chunks(words) {
+  words = mergeDomain(words);
   const out = []; let cur = [];
   for (const w of words) {
     const text = cur.map(x => x.word).concat(w.word).join(' ');
@@ -28,11 +41,11 @@ function chunks(words) {
     if (/[.!?,]$/.test(w.word) && cur.length >= 2) { out.push(cur); cur = []; }
   }
   if (cur.length) out.push(cur);
-  return out.map(c => ({ text: c.map(x => x.word).join(' '), start: c[0].start, end: c[c.length - 1].end }));
+  return out.map(c => ({ words: c, text: c.map(x => x.word).join(' '), start: c[0].start, end: c[c.length - 1].end }));
 }
 
-const PAD = 0.3;       // pause after each scene
-const END_HOLD = 1.2;  // hold the last scene (CTA) a bit longer
+const PAD = 0.45;      // pause after each scene
+const END_HOLD = 1.6;  // hold the last scene (CTA) a bit longer
 
 // scenes: [{ onscreen, audio: {file, duration, words} }]
 async function buildVideo({ scenes, aiLabel, workDir, outFile }) {
@@ -45,14 +58,17 @@ async function buildVideo({ scenes, aiLabel, workDir, outFile }) {
     const sc = scenes[s];
     const dur = sc.audio.duration + (s === scenes.length - 1 ? END_HOLD : PAD);
     sceneDur.push(dur); total += dur;
+    // One frame per spoken word: the caption chunk stays, the current word lights up.
     const cs = chunks(sc.audio.words);
-    if (!cs.length) cs.push({ text: '', start: 0, end: dur });
-    for (let c = 0; c < cs.length; c++) {
-      const start = c === 0 ? 0 : cs[c].start;
-      const end = c === cs.length - 1 ? dur : cs[c + 1].start;
-      const png = path.join(workDir, `f${String(frameNo++).padStart(3, '0')}.png`);
-      fs.writeFileSync(png, await renderVideoFrame({ onscreen: sc.onscreen, caption: cs[c].text, index: s, total: scenes.length, aiLabel }));
-      concat.push({ png, dur: Math.max(0.1, end - start) });
+    const beats = [];
+    cs.forEach(c => c.words.forEach((w, wi) => beats.push({ at: w.start, caption: c.words.map((x, xi) => ({ word: x.word, active: xi === wi })) })));
+    if (!beats.length) beats.push({ at: 0, caption: [] });
+    for (let b = 0; b < beats.length; b++) {
+      const start = b === 0 ? 0 : beats[b].at;
+      const end = b === beats.length - 1 ? dur : beats[b + 1].at;
+      const png = path.join(workDir, `f${String(frameNo++).padStart(4, '0')}.png`);
+      fs.writeFileSync(png, await renderVideoFrame({ onscreen: sc.onscreen, highlight: sc.highlight, emoji: sc.emoji, caption: beats[b].caption, index: s, total: scenes.length, aiLabel }));
+      concat.push({ png, dur: Math.max(0.04, end - start) });
     }
   }
   const list = concat.map(f => `file '${f.png.replace(/\\/g, '/')}'\nduration ${f.dur.toFixed(3)}`).join('\n') + `\nfile '${concat[concat.length - 1].png.replace(/\\/g, '/')}'\n`;
