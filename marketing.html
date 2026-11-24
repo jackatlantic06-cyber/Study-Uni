@@ -309,10 +309,11 @@
 
   function scheduledRow(p) {
     return `<article class="card" data-id="${esc(p.id)}"><div class="card-bd">
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${platformPill(p.platform)}<span class="pill ${p.status === 'publishing' ? 'warn' : 'ok'}">${p.status === 'publishing' ? 'Publishing…' : 'Approved'}</span><span class="key">${esc(p.post_key)}</span></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${platformPill(p.platform)}<span class="pill ${p.status === 'publishing' ? 'ok' : 'warn'}">${p.status === 'publishing' ? 'Queued in Postiz' : 'Approved — waiting to send'}</span><span class="key">${esc(p.post_key)}</span></div>
       <div class="hook" style="margin-top:8px">${esc(p.hook || p.title || p.post_key)}</div>
       <div class="small muted">Goes out ${when(p.scheduled_for)} · approved by ${esc(p.approved_by || '—')}</div>
-      ${p.status === 'approved' ? '<div class="btns"><button class="btn ghost full" data-act="unschedule">Unschedule (back to queue)</button></div>' : ''}
+      ${p.error ? `<div class="small" style="color:var(--red);margin-top:6px">${esc(p.error)}</div>` : ''}
+      <div class="btns"><button class="btn ghost full" data-act="unschedule">Unschedule (back to queue)</button></div>
     </div></article>`;
   }
 
@@ -397,6 +398,12 @@
   }
 
   // ── actions ──────────────────────────────────────────────────────────
+  function postizToast(r, okMsg) {
+    const p = r && r.postiz;
+    if (p && p.error) toast('Approved, but Postiz failed — it will retry within the hour. ' + p.error.slice(0, 120), true);
+    else toast(p && p.ok ? okMsg : okMsg.replace(/ — going out.*/, '') + (p && p.skipped && !state.publishingEnabled ? ' (not sent — Postiz not connected)' : ''));
+  }
+
   async function run(btn, fn) {
     btn.disabled = true;
     try { await fn(); } catch (e) { if (e.message !== 'Signed out' && e.message !== 'Not an owner') toast(e.message, true); }
@@ -427,14 +434,14 @@
     if (act === 'approve') return run(btn, async () => {
       if (!confirm('Approve this post to go out as soon as possible?')) return;
       await saveIfEdited();
-      await api('mkt-approve', { postId: id }); toast('Approved'); await load(true);
+      const r = await api('mkt-approve', { postId: id }); postizToast(r, 'Approved — going out in a couple of minutes'); await load(true);
     });
     if (act === 'schedule') return run(btn, async () => {
       const v = card.querySelector('[data-role="when"]').value;
       if (!v) return toast('Pick a date and time', true);
       const dt = new Date(v);
       await saveIfEdited();
-      await api('mkt-approve', { postId: id, scheduledFor: dt.toISOString() }); toast('Scheduled for ' + when(dt.toISOString())); await load(true);
+      const r = await api('mkt-approve', { postId: id, scheduledFor: dt.toISOString() }); postizToast(r, 'Scheduled for ' + when(dt.toISOString())); await load(true);
     });
     if (act === 'save-caption') return run(btn, async () => {
       const r = await api('mkt-caption', { postId: id, caption: card.querySelector('[data-role="caption"]').value });

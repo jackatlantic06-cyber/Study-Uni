@@ -1,4 +1,7 @@
 {
+  "functions": {
+    "api/admin-stats.js": { "maxDuration": 60 }
+  },
   "crons": [
     {
       "path": "/api/weekly-email",

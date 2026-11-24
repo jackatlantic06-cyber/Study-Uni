@@ -1,0 +1,43 @@
+name: Marketing — hourly Postiz sync
+
+# Retries approved posts that didn't reach Postiz, marks posts published or
+# failed, and once a day (07:00 Irish time) saves views/likes/sign-ups.
+# Publishing itself happens in Postiz at each post's scheduled time; this job
+# never sends anything that an owner hasn't approved in the dashboard.
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+    inputs:
+      stats:
+        description: 'Also save stats now'
+        type: boolean
+        default: false
+
+concurrency:
+  group: marketing-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: marketing
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      POSTIZ_API_KEY: ${{ secrets.POSTIZ_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: marketing/package-lock.json
+      - run: npm ci --no-audit --no-fund --ignore-scripts
+      - run: node jobs/sync.js ${{ inputs.stats && '--stats' || '' }}
