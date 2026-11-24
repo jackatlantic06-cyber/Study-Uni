@@ -70,19 +70,25 @@ async function main() {
     }
   }
 
-  // 3. Daily stats snapshot for posts published in the last 30 days.
-  if (STATS) {
+  // 3. Stats: every hour for posts from the last 7 days (numbers move fast
+  //    early on); once a day (07:00 / --stats) for everything in 30 days.
+  //    A new snapshot is only saved when a number has changed.
+  {
+    const days = STATS ? 30 : 7;
     const { data: pubs } = await sb.from('mkt_posts').select('id, post_key, postiz_post_id')
-      .eq('status', 'published').gte('published_at', new Date(now - 30 * 86400e3).toISOString());
-    const signups = await signupsByPost();
+      .eq('status', 'published').not('postiz_post_id', 'is', null)
+      .gte('published_at', new Date(now - days * 86400e3).toISOString());
+    const signups = (pubs || []).length ? await signupsByPost() : {};
+    let saved = 0;
     for (const p of pubs || []) {
       let a = null;
-      try { a = await postiz.postAnalytics(p.postiz_post_id, 30); } catch (e) { console.warn(`  ${p.post_key}: analytics error ${e.message.slice(0, 100)}`); }
+      try { a = await postiz.postAnalytics(p.postiz_post_id, 30); } catch (e) { console.warn(`  ${p.post_key}: analytics error ${e.message.slice(0, 100)}`); continue; }
       if (a && a.missing) {
         await sb.from('mkt_posts').update({ error: 'Stats unavailable: the platform did not return a post ID — open the post in Postiz and use "connect"' }).eq('id', p.id);
+        continue;
       }
       const list = Array.isArray(a) ? a : [];
-      await sb.from('mkt_post_stats').insert({
+      const row = {
         post_id: p.id,
         views: metric(list, 'views', 'video views', 'plays', 'impressions', 'reach'),
         likes: metric(list, 'likes'),
@@ -90,9 +96,15 @@ async function main() {
         shares: metric(list, 'shares'),
         saves: metric(list, 'saves', 'saved'),
         signups: signups[p.post_key] || 0,
-      });
+      };
+      const { data: last } = await sb.from('mkt_post_stats').select('views, likes, comments, shares, saves, signups')
+        .eq('post_id', p.id).order('captured_at', { ascending: false }).limit(1);
+      const prev = last && last[0];
+      if (prev && ['views', 'likes', 'comments', 'shares', 'saves', 'signups'].every(k => (prev[k] ?? null) === (row[k] ?? null))) continue;
+      await sb.from('mkt_post_stats').insert(row);
+      saved++;
     }
-    console.log(`Stats saved for ${(pubs || []).length} published post(s).`);
+    console.log(`Stats: ${saved} updated of ${(pubs || []).length} post(s) from the last ${days} days.`);
   }
   console.log('Sync done.');
 }
