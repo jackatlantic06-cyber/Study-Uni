@@ -28,7 +28,7 @@ const ONLY = (process.argv.find(a => a.startsWith('--only=')) || '').split('=')[
 async function ensureBucket(db) {
   const { data } = await db.storage.getBucket(BUCKET);
   if (data) return;
-  const { error } = await db.storage.createBucket(BUCKET, { public: false, fileSizeLimit: '50MB', allowedMimeTypes: ['video/mp4', 'image/png'] });
+  const { error } = await db.storage.createBucket(BUCKET, { public: false, fileSizeLimit: '50MB', allowedMimeTypes: ['video/mp4', 'image/png', 'application/json'] });
   if (error && !/already exists/i.test(error.message)) throw new Error('createBucket: ' + error.message);
 }
 
