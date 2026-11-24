@@ -112,7 +112,10 @@ async function main() {
   }
 
   const inputs = await loadInputs(week);
-  const mix = config.mix;
+  // Sunday's learning step may have shifted the mix towards what performs.
+  const learnedMix = inputs.learning && inputs.learning.ranking && inputs.learning.ranking.mix;
+  const mix = Object.assign({}, config.mix, learnedMix || {});
+  console.log(`Mix: ${mix.brandedVideos} branded, ${mix.storybookVideos} cartoon, ${mix.animatedVideos} animated, ${mix.carousels} carousels${learnedMix ? ' (from last Sunday\'s results)' : ' (default)'}`);
   const nV = mix.brandedVideos, nD = mix.storybookVideos + mix.animatedVideos, nC = mix.carousels;
   const cast = Object.entries(config.characters).map(([n, c]) => `- ${c.look}`).join('\n');
 
