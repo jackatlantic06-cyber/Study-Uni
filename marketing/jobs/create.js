@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const { flags } = require('../lib/env');
 const { campaign, dublinDate } = require('../lib/time');
-const { postKey, trackedLink, shortLink } = require('../lib/links');
+const { postKey, trackedLink } = require('../lib/links');
 const { askJson, costReport } = require('../lib/claude');
 const { checkAll } = require('../lib/compliance');
 const config = require('../config.json');
@@ -90,6 +90,8 @@ function scriptFor(piece) {
 }
 
 function withLink(text, short) { return String(text || '').split(LINK).join(short); }
+// Turn any study-uni.ie/t/<code> (or https:// / www. variants) into plain study-uni.ie.
+function plainSite(text) { return String(text || '').replace(/(https?:\/\/)?(www\.)?study-uni\.ie\/t\/[0-9a-z]+/gi, 'study-uni.ie'); }
 
 async function main() {
   const week = campaign();
@@ -161,14 +163,15 @@ async function main() {
     const platforms = p.format === 'video' ? config.videoPlatforms : config.carouselPlatforms;
     for (const platform of platforms) {
       const key = postKey(now, platform, ++counters[platform]);
-      const short = shortLink(key);
-      const fill = s => withLink(s, short);
+      // Everything public says plain "study-uni.ie" (owner's choice). Per-post
+      // tracking stays in post.link (full UTM URL) for anywhere clickable.
+      const SITE_TEXT = 'study-uni.ie';
+      const fill = s => withLink(s, SITE_TEXT);
       const script = scriptFor(p);
-      // Spoken lines say the domain; the exact short link is shown on screen.
       if (script.scenes) script.scenes.forEach(s => { s.onscreen = fill(s.onscreen); s.voiceover = withLink(s.voiceover, 'study-uni dot ie'); s.text = s.voiceover; });
       if (script.slides) script.slides.forEach(s => { s.title = fill(s.title); s.headline = fill(s.headline); s.body = fill(s.body); });
-      let caption = fill(p.caption).trim();
-      if (!caption.includes(short)) caption += `\n\n📚 ${short}`;
+      let caption = plainSite(fill(p.caption)).trim();
+      if (!/study-uni\.ie/i.test(caption)) caption += `\n\n📚 ${SITE_TEXT}`;
       const aiLabel = p.format === 'video'; // AI voice / AI cartoon → disclose
       if (aiLabel) caption += p.style === 'branded' ? '\n\n(AI voiceover)' : '\n\n(AI-generated video)';
       rows.push({
