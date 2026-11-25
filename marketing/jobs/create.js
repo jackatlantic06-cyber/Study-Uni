@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const { flags } = require('../lib/env');
 const { campaign, dublinDate } = require('../lib/time');
+const { currentSeason } = require('../lib/season');
 const { postKey, trackedLink } = require('../lib/links');
 const { askJson, costReport } = require('../lib/claude');
 const { checkAll } = require('../lib/compliance');
@@ -97,6 +98,18 @@ function popularModules(n = 120) {
     .slice(0, n).map(([c, e]) => `${c} — ${e.name} — ${e.papers}`).join('\n');
 }
 
+const TOPUP = process.argv.includes('--topup');
+
+// Hooks/titles already queued or posted this week, so a top-up doesn't repeat them.
+async function existingHooks(week) {
+  if (flags.dryRun && !process.env.SUPABASE_SERVICE_ROLE_KEY) return [];
+  try {
+    const { db } = require('../lib/db');
+    const { data } = await db().from('mkt_posts').select('title, hook').eq('week', week).neq('status', 'rejected');
+    return [...new Set((data || []).map(r => `${r.title}: ${r.hook}`))].slice(0, 40);
+  } catch (_) { return []; }
+}
+
 function withLink(text, short) { return String(text || '').split(LINK).join(short); }
 // Turn any study-uni.ie/t/<code> (or https:// / www. variants) into plain study-uni.ie.
 function plainSite(text) { return String(text || '').replace(/(https?:\/\/)?(www\.)?study-uni\.ie\/t\/[0-9a-z]+/gi, 'study-uni.ie'); }
@@ -105,17 +118,31 @@ async function main() {
   const week = campaign();
   console.log(`Create for ${week}${flags.dryRun ? ' (dry run)' : ''}`);
 
+  // --topup: extra mid-week batch, only in a season that has one (exam season).
+  const season = currentSeason();
+  if (TOPUP && !(season && season.topUp)) { console.log('No top-up in the current season — nothing to do.'); return; }
+
   if (!flags.dryRun) {
     const { db } = require('../lib/db');
-    const { count } = await db().from('mkt_posts').select('id', { count: 'exact', head: true }).eq('week', week).eq('is_demo', false);
-    if (count && !flags.force) { console.log(`${count} posts already exist for ${week} — use --force to add more.`); return; }
+    if (TOPUP) {
+      const dayStart = new Date(); dayStart.setUTCHours(0, 0, 0, 0);
+      const { data: today } = await db().from('mkt_posts').select('script').eq('week', week).gte('created_at', dayStart.toISOString());
+      if ((today || []).some(r => r.script && r.script.batch === 'topup') && !flags.force) { console.log('A top-up batch was already made today.'); return; }
+    } else {
+      const { count } = await db().from('mkt_posts').select('id', { count: 'exact', head: true }).eq('week', week).eq('is_demo', false);
+      if (count && !flags.force) { console.log(`${count} posts already exist for ${week} — use --force to add more.`); return; }
+    }
   }
 
   const inputs = await loadInputs(week);
-  // Sunday's learning step may have shifted the mix towards what performs.
+  // Mix: season plan (exam season / Christmas) wins; otherwise Sunday's learned mix.
   const learnedMix = inputs.learning && inputs.learning.ranking && inputs.learning.ranking.mix;
-  const mix = Object.assign({}, config.mix, learnedMix || {});
-  console.log(`Mix: ${mix.brandedVideos} branded, ${mix.storybookVideos} cartoon, ${mix.animatedVideos} animated, ${mix.carousels} carousels${learnedMix ? ' (from last Sunday\'s results)' : ' (default)'}`);
+  const seasonMix = season && (TOPUP ? season.topUp.mix : season.mix);
+  const mix = Object.assign({}, config.mix, seasonMix || learnedMix || {});
+  const videoPlatforms = (TOPUP && season.topUp.videoPlatforms) || config.videoPlatforms;
+  console.log(`Mix${TOPUP ? ' (top-up)' : ''}: ${mix.brandedVideos} branded, ${mix.storybookVideos} cartoon, ${mix.animatedVideos} animated, ${mix.carousels} carousels → ${videoPlatforms.join(' + ')}` +
+    (seasonMix ? ` (${season.name})` : learnedMix ? " (from last Sunday's results)" : ' (default)'));
+  const alreadyThisWeek = await existingHooks(week);
   const nV = mix.brandedVideos, nD = mix.storybookVideos + mix.animatedVideos, nC = mix.carousels;
   const cast = Object.entries(config.characters).map(([n, c]) => `- ${c.look}`).join('\n');
 
@@ -129,6 +156,8 @@ async function main() {
       `Write exactly ${nV} BRANDED videos (in "videos"), ${nD} DIALOGUE videos with Abbey and Harry (in "dialogues"), and ${nC} carousels. Wherever the short link should appear (branded final scene, carousel last slide, every caption), write the literal placeholder ${LINK} — it is replaced with each post's own link. Dialogue lines never contain the placeholder; they say "study-uni dot ie".`,
       `Order "dialogues" so the ${mix.animatedVideos} that would gain most from real character movement (physical comedy, big reactions, handing over a phone) come FIRST — those get fully animated.`,
       `Cast (keep their look exactly; you only describe actions/expressions):\n${cast}`,
+      season ? `Season: ${season.name}. ${season.note}` : '',
+      alreadyThisWeek.length ? `Already made this week — do NOT repeat these angles or hooks:\n${alreadyThisWeek.map(h => '- ' + h).join('\n')}` : '',
       `If you name a module, use ONLY a code from this list (modules that really have past papers on study-uni.ie: code — name — number of papers). Never invent or guess module codes:\n${popularModules()}`,
       `<brief>\n${JSON.stringify({ summary: inputs.brief.summary, questions: inputs.brief.questions, pain_points: inputs.brief.pain_points, exam_dates: inputs.brief.exam_dates, angles: inputs.brief.angles, engagement: inputs.brief.engagement })}\n</brief>`,
       `<learnings>\n${inputs.learning ? inputs.learning.summary : 'No results yet — this is an early week. Test a variety of hooks and formats.'}\n</learnings>`,
@@ -172,14 +201,14 @@ async function main() {
   }
   const rows = [];
   for (const p of pieces) {
-    const platforms = p.format === 'video' ? config.videoPlatforms : config.carouselPlatforms;
+    const platforms = p.format === 'video' ? videoPlatforms : config.carouselPlatforms;
     for (const platform of platforms) {
       const key = postKey(now, platform, ++counters[platform]);
       // Everything public says plain "study-uni.ie" (owner's choice). Per-post
       // tracking stays in post.link (full UTM URL) for anywhere clickable.
       const SITE_TEXT = 'study-uni.ie';
       const fill = s => withLink(s, SITE_TEXT);
-      const script = scriptFor(p);
+      const script = Object.assign(scriptFor(p), { batch: TOPUP ? 'topup' : 'weekly' });
       if (script.scenes) script.scenes.forEach(s => { s.onscreen = fill(s.onscreen); s.voiceover = withLink(s.voiceover, 'study-uni dot ie'); s.text = s.voiceover; });
       if (script.slides) script.slides.forEach(s => { s.title = fill(s.title); s.headline = fill(s.headline); s.body = fill(s.body); });
       let caption = plainSite(fill(p.caption)).trim();
