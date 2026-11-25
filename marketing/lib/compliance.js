@@ -74,6 +74,9 @@ async function review(pieces, facts) {
     schema: REVIEW_SCHEMA,
     effort: 'medium',
     prompt: `<verified_dates>\n${JSON.stringify((facts && facts.dates) || [])}\n</verified_dates>\n` +
+      // An owner-commissioned one-off can change the cast/persona; every
+      // safety rule (1–5, 8, 10) and script quality still applies.
+      (facts && facts.ownerBrief ? `<owner_brief>\n${facts.ownerBrief}\nThis brief comes from the founder and overrides the default Abbey/Harry cast and any "no mascot" style preference. When fixing lines, keep the speakers and anything the brief requires.\n</owner_brief>\n` : '') +
       'Each piece will show its own short link where {{LINK}} appears (e.g. study-uni.ie/t/26w48t1); treat {{LINK}} as that link.\n' +
       'Review each piece. Return one review per id.\n<pieces>\n' + JSON.stringify(pieces.map(p => ({
       id: p.id, format: p.format, style: p.style, setting: p.setting, hook: p.hook, scenes: p.scenes, slides: p.slides, caption: p.caption,
