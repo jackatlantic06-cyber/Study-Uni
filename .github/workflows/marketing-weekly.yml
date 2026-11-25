@@ -1,16 +1,24 @@
 name: Marketing — weekly research + create
 
-# Monday 06:00 Irish time. GitHub cron is UTC only, so it fires at 05:00 and
-# 06:00 UTC and the first step skips whichever run isn't 06:00 in Dublin
-# (06:00 UTC in winter, 05:00 UTC in summer).
+# Monday 06:00 Irish time: research + the week's batch.
+# Thursday 06:00 Irish time: extra TikTok top-up batch, ONLY during a season
+# that has one (exam season, see marketing/config.json "seasons").
+# GitHub cron is UTC only, so each fires at 05:00 and 06:00 UTC and the first
+# step skips whichever run isn't 06:00 in Dublin.
 on:
   schedule:
     - cron: '0 5 * * 1'
     - cron: '0 6 * * 1'
+    - cron: '0 5 * * 4'
+    - cron: '0 6 * * 4'
   workflow_dispatch:
     inputs:
       force:
         description: 'Redo even if this week already has a brief/posts'
+        type: boolean
+        default: false
+      topup:
+        description: 'Run the exam-season top-up batch instead of the weekly one'
         type: boolean
         default: false
 
@@ -38,14 +46,18 @@ jobs:
       ELEVENLABS_VOICE_ID: ${{ vars.ELEVENLABS_VOICE_ID }}        # optional, repo variable
       FAL_KEY: ${{ secrets.FAL_KEY }}                             # cartoon scenes + animation
     steps:
-      - name: Only run at 06:00 Irish time
+      - name: Only run at 06:00 Irish time; Monday = weekly, Thursday = top-up
         id: gate
         working-directory: .
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; exit 0; fi
-          H=$(TZ=Europe/Dublin date +%H)
-          echo "Dublin hour: $H"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "go=true" >> "$GITHUB_OUTPUT"
+            echo "topup=${{ inputs.topup }}" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          H=$(TZ=Europe/Dublin date +%H); D=$(TZ=Europe/Dublin date +%u)
+          echo "Dublin hour: $H, weekday: $D"
           if [ "$H" = "06" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; else echo "go=false" >> "$GITHUB_OUTPUT"; fi
+          if [ "$D" = "4" ]; then echo "topup=true" >> "$GITHUB_OUTPUT"; else echo "topup=false" >> "$GITHUB_OUTPUT"; fi
 
       - uses: actions/checkout@v4
         if: steps.gate.outputs.go == 'true'
@@ -61,12 +73,12 @@ jobs:
         if: steps.gate.outputs.go == 'true'
 
       - name: Research
-        if: steps.gate.outputs.go == 'true'
+        if: steps.gate.outputs.go == 'true' && steps.gate.outputs.topup != 'true'
         run: node jobs/research.js ${{ inputs.force && '--force' || '' }}
 
       - name: Create drafts
         if: steps.gate.outputs.go == 'true'
-        run: node jobs/create.js ${{ inputs.force && '--force' || '' }}
+        run: node jobs/create.js ${{ steps.gate.outputs.topup == 'true' && '--topup' || '' }} ${{ inputs.force && '--force' || '' }}
 
       - name: Render images, voiceover and videos
         if: steps.gate.outputs.go == 'true'

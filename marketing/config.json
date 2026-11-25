@@ -13,6 +13,28 @@
   "videoPlatforms": ["tiktok", "instagram"],
   "carouselPlatforms": ["instagram"],
 
+  "seasons": [
+    {
+      "name": "Exam season",
+      "from": "2026-11-23",
+      "to": "2026-12-18",
+      "note": "Winter exams 7–18 Dec: students are revising and most likely to sign up — post a lot more, especially TikTok.",
+      "mix": { "brandedVideos": 5, "storybookVideos": 6, "animatedVideos": 2, "carousels": 2 },
+      "topUp": {
+        "days": ["Thu"],
+        "mix": { "brandedVideos": 4, "storybookVideos": 3, "animatedVideos": 0, "carousels": 0 },
+        "videoPlatforms": ["tiktok"]
+      }
+    },
+    {
+      "name": "Christmas break",
+      "from": "2026-12-19",
+      "to": "2027-01-10",
+      "note": "No lectures or exams until Semester 2 starts on 11 Jan — keep a light presence and save budget.",
+      "mix": { "brandedVideos": 2, "storybookVideos": 1, "animatedVideos": 0, "carousels": 1 }
+    }
+  ],
+
   "characters": {
     "Abbey": {
       "look": "Abbey: age 20, light freckles, auburn hair in a messy bun, round tortoiseshell glasses, oversized forest-green hoodie, light blue jeans, white trainers",
